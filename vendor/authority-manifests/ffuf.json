@@ -1,0 +1,1836 @@
+{
+  "target": "ffuf (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\ffuf)",
+  "origin": "https://github.com/ffuf/ffuf",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 144 个文本文件（源码 102、其余 42），识别 203 面（源码档 58、文档/示例 DOC_ 降权 104、其余文件 41；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "characterization_test.go:99",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "characterization_test.go:99  {name: \"basic\", args: []string{\"-u\", \"https://example.org/FUZZ\", \"-w\", \"/tmp/wl.txt\"}},\ncharacterization_test.go:101  {name: \"alias_cookie\", args: []string{\"-u\", \"https://example.org/FUZZ\", \"-w\", \"/tmp/wl.txt\", \"-cookie\", \"SESSION=abc\"}},\ncharacterization_test.go:102  {name: \"matchers_filters\", args: []string{\"-u\", \"https://example.org/FUZZ\", \"-w\", \"/tmp/wl.txt\", \"-mc\", \"200,301\", \"-fc\", \"404\", \"-fs\", \"42\", \"-ml\", \"5\"}},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "characterization_test.go:100",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/",
+      "evidence": "characterization_test.go:100  {name: \"alias_data_binary\", args: []string{\"-u\", \"https://example.org/\", \"-w\", \"/tmp/wl.txt\", \"-X\", \"POST\", \"-data-binary\", \"name=FUZZ\"}},\ncharacterization_test.go:110  {name: \"compat_data_alias\", args: []string{\"-u\", \"https://example.org/\", \"-w\", \"/tmp/wl.txt\", \"-data\", \"x=FUZZ\"}},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "characterization_test.go:103",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/W1/W2",
+      "evidence": "characterization_test.go:103  {name: \"multi_wordlist_pitchfork\", args: []string{\"-u\", \"https://example.org/W1/W2\", \"-w\", \"/tmp/a.txt:W1\", \"-w\", \"/tmp/b.txt:W2\", \"-mode\", \"pitchfork\"}},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "characterization_test.go:116",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "characterization_test.go:116  {name: \"many_flags\", args: []string{\"-u\", \"https://example.org/FUZZ\", \"-w\", \"/tmp/wl.txt\", \"-x\", \"http://127.0.0.1:8080\", \"-replay-proxy\", \"http://127.0.0.1:9090\", \"-sni\", \"example.com\", \"-timeout\", \"15\", \"-rate\", \"50\", \"-recursion\", \"-recu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "characterization_test.go:116",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9090",
+      "evidence": "characterization_test.go:116  {name: \"many_flags\", args: []string{\"-u\", \"https://example.org/FUZZ\", \"-w\", \"/tmp/wl.txt\", \"-x\", \"http://127.0.0.1:8080\", \"-replay-proxy\", \"http://127.0.0.1:9090\", \"-sni\", \"example.com\", \"-timeout\", \"15\", \"-rate\", \"50\", \"-recursion\", \"-recu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "help.go:98",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "help.go:98  fmt.Printf(\"    ffuf -w wordlist.txt -u https://example.org/FUZZ -mc all -fs 42 -c -v\\n\\n\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "help.go:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/",
+      "evidence": "help.go:101  fmt.Printf(\"    ffuf -w hosts.txt -u https://example.org/ -H \\\"Host: FUZZ\\\" -mc 200\\n\\n\")\nhelp.go:104  fmt.Printf(\"    ffuf -w entries.txt -u https://example.org/ -X POST -H \\\"Content-Type: application/json\\\" \\\\\\n\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "help.go:108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/?PARAM=VAL",
+      "evidence": "help.go:108  fmt.Printf(\"    ffuf -w params.txt:PARAM -w values.txt:VAL -u https://example.org/?PARAM=VAL -mr \\\"VAL\\\" -c\\n\\n\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "help.go:110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf",
+      "evidence": "help.go:110  fmt.Printf(\"  More information and examples: https://github.com/ffuf/ffuf\\n\\n\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/autocalibration_mutation_test.go:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost/FUZZ",
+      "evidence": "pkg/engine/autocalibration_mutation_test.go:33  Url:                    \"http://localhost/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/history_test.go:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "pkg/engine/history_test.go:19  opts.HTTP.URL = \"https://example.org/FUZZ\"\npkg/engine/history_test.go:103  opts.HTTP.URL = \"https://example.org/FUZZ\" // parse-time base\npkg/engine/history_test.go:117  opts.HTTP.URL = \"https://example.org/FUZZ\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/history_test.go:104",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/admin/FUZZ",
+      "evidence": "pkg/engine/history_test.go:104  conf := &ffuf.Config{Options: opts, Url: \"https://example.org/admin/FUZZ\"}\npkg/engine/history_test.go:107  if got.HTTP.URL != \"https://example.org/admin/FUZZ\" {\npkg/engine/history_test.go:108  t.Errorf(\"history URL = %q, want the recursed live URL %q\", got.HTTP.URL, \"https://example.org/admin/FUZZ\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/recursion_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/admin",
+      "evidence": "pkg/engine/recursion_test.go:12  resp := ffuf.Response{Request: &ffuf.Request{Url: \"http://x/admin\"}}\npkg/engine/recursion_test.go:31  resp := ffuf.Response{Request: &ffuf.Request{Url: \"http://x/admin\"}}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/recursion_test.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/admin/FUZZ",
+      "evidence": "pkg/engine/recursion_test.go:20  if job.Url != \"http://x/admin/FUZZ\" {\npkg/engine/recursion_test.go:21  t.Errorf(\"queued url = %q, want http://x/admin/FUZZ\", job.Url)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/recursion_test.go:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/file",
+      "evidence": "pkg/engine/recursion_test.go:47  resp := ffuf.Response{Request: &ffuf.Request{Url: \"http://x/file\"}, StatusCode: 200}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/recursion_test.go:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/dir",
+      "evidence": "pkg/engine/recursion_test.go:61  Request:    &ffuf.Request{Url: \"http://x/dir\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/recursion_test.go:63",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/dir/",
+      "evidence": "pkg/engine/recursion_test.go:63  Headers:    map[string][]string{\"Location\": {\"http://x/dir/\"}},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/engine/recursion_test.go:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/dir/FUZZ",
+      "evidence": "pkg/engine/recursion_test.go:71  if job.Url != \"http://x/dir/FUZZ\" {\npkg/engine/recursion_test.go:72  t.Errorf(\"queued url = %q, want http://x/dir/FUZZ\", job.Url)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/config_idempotency_test.go:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "pkg/ffuf/config_idempotency_test.go:15  opts.HTTP.URL = \"https://example.org/FUZZ\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/optionsparser.go:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "pkg/ffuf/optionsparser.go:42  ProxyURL          string   `json:\"proxy_url\" ffuf:\"x\" section:\"http\" usage:\"Proxy URL (SOCKS5 or HTTP). For example: http://127.0.0.1:8080 or socks5://127.0.0.1:8080\"`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/optionsparser_test.go:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/fooo/bar?test=§value§&order[§0§",
+      "evidence": "pkg/ffuf/optionsparser_test.go:17  Url:     \"https://example.com/fooo/bar?test=§value§&order[§0§]=§foo§\",\npkg/ffuf/optionsparser_test.go:28  Url:     \"https://example.com/fooo/bar?test=§value§&order[§0§]=§foo§\",\npkg/ffuf/optionsparser_test.go:50  Url:     \"https://example.com/fooo/bar?test=§value§&order[§0§]=§foo§\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/optionsparser_test.go:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/fooo/bar?test=§value§&order[0§",
+      "evidence": "pkg/ffuf/optionsparser_test.go:39  Url:     \"https://example.com/fooo/bar?test=§value§&order[0§]=§foo§\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/optionsparser_test.go:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "pkg/ffuf/optionsparser_test.go:93  configOptions.HTTP.ProxyURL = \"http://127.0.0.1:8080\"\npkg/ffuf/optionsparser_test.go:140  configOptions.HTTP.ReplayProxyURL = \"http://127.0.0.1:8080\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/optionsparser_test.go:100",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://127.0.0.1",
+      "evidence": "pkg/ffuf/optionsparser_test.go:100  configOptions.HTTP.ProxyURL = \"https://127.0.0.1\"\npkg/ffuf/optionsparser_test.go:147  configOptions.HTTP.ReplayProxyURL = \"https://127.0.0.1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/request_test.go:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/aaaa",
+      "evidence": "pkg/ffuf/request_test.go:16  expectedreq := Request{Method: \"POST\", Url: \"http://example.com/aaaa\", Headers: headers, Data: []byte(data)}\npkg/ffuf/request_test.go:17  config := Config{Method: \"POST\", Url: \"http://example.com/aaaa\", Headers: headers, Data: data}\npkg/ffuf/request_test.go:38  Url:      \"http://example.com/aaaa\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/request_test.go:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/aaaa?param=§lemony§",
+      "evidence": "pkg/ffuf/request_test.go:60  Url:     \"http://example.com/aaaa?param=§lemony§\",\npkg/ffuf/request_test.go:243  Url:     \"http://example.com/aaaa?param=§lemony§\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/request_test.go:78",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/aaaa?param=lemony",
+      "evidence": "pkg/ffuf/request_test.go:78  Url:     \"http://example.com/aaaa?param=lemony\",\npkg/ffuf/request_test.go:114  Url:     \"http://example.com/aaaa?param=lemony\",\npkg/ffuf/request_test.go:136  Url:     \"http://example.com/aaaa?param=lemony\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/ffuf/request_test.go:96",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/aaaa?param=FUZZ",
+      "evidence": "pkg/ffuf/request_test.go:96  Url:     \"http://example.com/aaaa?param=FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/audit_test.go:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/aaaa",
+      "evidence": "pkg/output/audit_test.go:58  expected := `{\"Type\":\"ffuf.Config\",\"Data\":{\"auditlog\":\"\",\"autocalibration\":false,\"autocalibration_keyword\":\"\",\"autocalibration_perhost\":false,\"autocalibration_strategies\":null,\"autocalibration_strings\":null,\"colors\":false,\"cmdline\":\"\",\"conf\npkg/output/audit_test.go:59  {\"Type\":\"ffuf.Request\",\"Data\":{\"Method\":\"POST\",\"Host\":\"\",\"Url\":\"http://example.com/aaaa\",\"Headers\":{\"Content-Type\":\"application/json\",\"baz\":\"wibble\",\"foo\":\"bar\"},\"Data\":\"eyJxdW90ZSI6IkknbGwgc3RpbGwgYmUgaGVyZSB0b21vcnJvdyB0byBoaWdoIGZpdmUgeW\npkg/output/audit_test.go:69  req := ffuf.Request{Method: \"POST\", Url: \"http://example.com/aaaa\", Headers: headers, Data: []byte(data)}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_csv_test.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://no.pe",
+      "evidence": "pkg/output/file_csv_test.go:20  RedirectLocation: \"http://no.pe\",\npkg/output/file_csv_test.go:32  \"http://no.pe\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_csv_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://as.df",
+      "evidence": "pkg/output/file_csv_test.go:21  Url:              \"http://as.df\",\npkg/output/file_csv_test.go:31  \"http://as.df\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_html.go:51",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fonts.googleapis.com/icon?family=Material+Icons",
+      "evidence": "pkg/output/file_html.go:51  href=\"https://fonts.googleapis.com/icon?family=Material+Icons\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_html.go:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
+      "evidence": "pkg/output/file_html.go:56  href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_html.go:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css",
+      "evidence": "pkg/output/file_html.go:61  href=\"https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_html.go:138",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://code.jquery.com/jquery-3.4.1.min.js",
+      "evidence": "pkg/output/file_html.go:138  <script src=\"https://code.jquery.com/jquery-3.4.1.min.js\" integrity=\"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=\" crossorigin=\"anonymous\"></script>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_html.go:139",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js",
+      "evidence": "pkg/output/file_html.go:139  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/file_html.go:140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js",
+      "evidence": "pkg/output/file_html.go:140  <script type=\"text/javascript\" charset=\"utf8\" src=\"https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js\"></script>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/stdout_pause_test.go:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example/%d",
+      "evidence": "pkg/output/stdout_pause_test.go:17  Url:   fmt.Sprintf(\"http://example/%d\", i),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/stdout_pause_test.go:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example/1",
+      "evidence": "pkg/output/stdout_pause_test.go:60  if !strings.Contains(out, \"http://example/1\") && !strings.Contains(out, \"Status: 200\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/output/stdout_race_test.go:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example/%d",
+      "evidence": "pkg/output/stdout_race_test.go:31  Url:   fmt.Sprintf(\"http://example/%d\", i),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/flightvars_test.go:196",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://attacker.example.invalid/steal",
+      "evidence": "pkg/runner/flightvars_test.go:196  w.Header().Set(\"X-Next\", \"http://attacker.example.invalid/steal\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/flightvars_test.go:215",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://unused",
+      "evidence": "pkg/runner/flightvars_test.go:215  r := newTestRunner(newTestConfig(\"http://unused\"))\npkg/runner/flightvars_test.go:241  r := newTestRunner(newTestConfig(\"http://unused\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://attacker.example.invalid/steal",
+      "evidence": "pkg/runner/preflight_destination_test.go:34  vars: map[string]string{\"NEXT\": \"http://attacker.example.invalid/steal\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://target.example.com/steal",
+      "evidence": "pkg/runner/preflight_destination_test.go:49  vars: map[string]string{\"NEXT\": \"http://target.example.com/steal\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target.example.com/FUZZ",
+      "evidence": "pkg/runner/preflight_destination_test.go:55  runner := destRunner(t, \"https://target.example.com/FUZZ\", false)\npkg/runner/preflight_destination_test.go:111  runner := destRunner(t, \"https://target.example.com/FUZZ\", false)\npkg/runner/preflight_destination_test.go:130  runner := destRunner(t, \"https://target.example.com/FUZZ\", true)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:79",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://login.example.com/token",
+      "evidence": "pkg/runner/preflight_destination_test.go:79  file:    \"POST https://login.example.com/token HTTP/1.1\\n\\n\",\npkg/runner/preflight_destination_test.go:81  wantURL: \"https://login.example.com/token\",\npkg/runner/preflight_destination_test.go:87  wantURL: \"https://login.example.com/token\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:93",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://target.example.com/api/abc123/profile",
+      "evidence": "pkg/runner/preflight_destination_test.go:93  wantURL: \"https://target.example.com/api/abc123/profile\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:99",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://target.example.com/api/profile",
+      "evidence": "pkg/runner/preflight_destination_test.go:99  wantURL: \"https://target.example.com/api/profile\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:105",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://target.example.com/api/login",
+      "evidence": "pkg/runner/preflight_destination_test.go:105  wantURL: \"https://target.example.com/api/login\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:128",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://login.example.com/oauth2/token",
+      "evidence": "pkg/runner/preflight_destination_test.go:128  vars := map[string]string{\"NEXT\": \"https://login.example.com/oauth2/token\"}\npkg/runner/preflight_destination_test.go:135  if got := req.URL.String(); got != \"https://login.example.com/oauth2/token\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_destination_test.go:148",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target.example.com/login",
+      "evidence": "pkg/runner/preflight_destination_test.go:148  if got := req.URL.String(); got != \"https://target.example.com/login\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_hardening_test.go:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://HOSTVAR/main",
+      "evidence": "pkg/runner/preflight_hardening_test.go:30  req := &ffuf.Request{Method: \"GET\", Url: \"http://HOSTVAR/main\", Headers: map[string]string{}}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_hardening_test.go:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x",
+      "evidence": "pkg/runner/preflight_hardening_test.go:44  r := newTestRunner(newTestConfig(\"http://x\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_hardening_test.go:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x/bbb?a=BBB",
+      "evidence": "pkg/runner/preflight_hardening_test.go:47  wantURL := \"http://x/bbb?a=BBB\" // TOKEN wins over TOK; AAA->BBB not rescanned to zzz"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_hardening_test.go:50",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://x/TOKEN?a=AAA",
+      "evidence": "pkg/runner/preflight_hardening_test.go:50  req := &ffuf.Request{Url: \"http://x/TOKEN?a=AAA\", Headers: map[string]string{\"X\": \"TOK\"}, Data: []byte(\"v=TOK\")}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_hardening_test.go:143",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/",
+      "evidence": "pkg/runner/preflight_hardening_test.go:143  r := newTestRunner(newTestConfig(\"http://example.com/\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_test.go:76",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://x/submit?token=CSRFTOKEN",
+      "evidence": "pkg/runner/preflight_test.go:76  Url:     \"http://x/submit?token=CSRFTOKEN\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/runner/preflight_test.go:81",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://x/submit?token=tok123",
+      "evidence": "pkg/runner/preflight_test.go:81  if req.Url != \"http://x/submit?token=tok123\" {"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CHANGELOG.md:196",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://datatables.net/",
+      "evidence": "CHANGELOG.md:196  - HTML output format got [DataTables](https://datatables.net/) support allowing realtime searches, sorting by column etc."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:15",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Contributing",
+      "evidence": "CONTRIBUTING.md:15  The [wiki Contributing section](https://github.com/ffuf/ffuf/wiki/Contributing)\nCONTRIBUTING.md:18  - [Overview and architecture](https://github.com/ffuf/ffuf/wiki/Contributing):"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:21",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Contributing-Testing",
+      "evidence": "CONTRIBUTING.md:21  - [Testing](https://github.com/ffuf/ffuf/wiki/Contributing-Testing): the test"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:24",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Contributing-Flags-and-Help",
+      "evidence": "CONTRIBUTING.md:24  - [Flags and help declaration](https://github.com/ffuf/ffuf/wiki/Contributing-Flags-and-Help):"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:47",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/security/policy",
+      "evidence": "CONTRIBUTING.md:47  [security policy](https://github.com/ffuf/ffuf/security/policy)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/adamtlangley",
+      "evidence": "CONTRIBUTORS.md:3  * [adamtlangley](https://github.com/adamtlangley)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/adilsoybali",
+      "evidence": "CONTRIBUTORS.md:4  * [adilsoybali](https://github.com/adilsoybali)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/averagesecurityguy",
+      "evidence": "CONTRIBUTORS.md:5  * [AverageSecurityGuy](https://github.com/averagesecurityguy)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bp0lr",
+      "evidence": "CONTRIBUTORS.md:6  * [bp0](https://github.com/bp0lr)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bjhulst",
+      "evidence": "CONTRIBUTORS.md:7  * [bjhulst](https://github.com/bjhulst)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:8",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://twitter.com/bsysop",
+      "evidence": "CONTRIBUTORS.md:8  * [bsysop](https://twitter.com/bsysop)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ccsplit",
+      "evidence": "CONTRIBUTORS.md:9  * [ccsplit](https://github.com/ccsplit)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/choket",
+      "evidence": "CONTRIBUTORS.md:10  * [choket](https://github.com/choket)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/codingo",
+      "evidence": "CONTRIBUTORS.md:11  * [codingo](https://github.com/codingo)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/c-sto",
+      "evidence": "CONTRIBUTORS.md:12  * [c_sto](https://github.com/c-sto)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Damian89",
+      "evidence": "CONTRIBUTORS.md:13  * [Damian89](https://github.com/Damian89)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Daviey",
+      "evidence": "CONTRIBUTORS.md:14  * [Daviey](https://github.com/Daviey)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:15",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/delic",
+      "evidence": "CONTRIBUTORS.md:15  * [delic](https://github.com/delic)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/denandz",
+      "evidence": "CONTRIBUTORS.md:16  * [denandz](https://github.com/denandz)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:17",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Ephex2",
+      "evidence": "CONTRIBUTORS.md:17  * [Ephex2](https://github.com/Ephex2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:18",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/erbbysam",
+      "evidence": "CONTRIBUTORS.md:18  * [erbbysam](https://github.com/erbbysam)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:19",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/eur0pa",
+      "evidence": "CONTRIBUTORS.md:19  * [eur0pa](https://github.com/eur0pa)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:20",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gserrg",
+      "evidence": "CONTRIBUTORS.md:20  * [gserrg](https://github.com/gserrg)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:21",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/fabiobauer",
+      "evidence": "CONTRIBUTORS.md:21  * [fabiobauer](https://github.com/fabiobauer)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:22",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/fang0654",
+      "evidence": "CONTRIBUTORS.md:22  * [fang0654](https://github.com/fang0654)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:23",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Gh0stlyKn1ght",
+      "evidence": "CONTRIBUTORS.md:23  * [Gh0stlyKn1ght](https://github.com/Gh0stlyKn1ght)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:24",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/haseobang",
+      "evidence": "CONTRIBUTORS.md:24  * [haseobang](https://github.com/haseobang)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:25",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Hazegard",
+      "evidence": "CONTRIBUTORS.md:25  * [Hazegard](https://github.com/Hazegard)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:26",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/helpermika",
+      "evidence": "CONTRIBUTORS.md:26  * [helpermika](https://github.com/helpermika)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:27",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/h1x-lnx",
+      "evidence": "CONTRIBUTORS.md:27  * [h1x](https://github.com/h1x-lnx)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:28",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Ice3man543",
+      "evidence": "CONTRIBUTORS.md:28  * [Ice3man543](https://github.com/Ice3man543)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:29",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/JamTookTheBait",
+      "evidence": "CONTRIBUTORS.md:29  * [JamTookTheBait](https://github.com/JamTookTheBait)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:30",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jimen0",
+      "evidence": "CONTRIBUTORS.md:30  * [jimen0](https://github.com/jimen0)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:31",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/joohoi",
+      "evidence": "CONTRIBUTORS.md:31  * [joohoi](https://github.com/joohoi)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:32",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/JoshuaMulliken",
+      "evidence": "CONTRIBUTORS.md:32  * [JoshuaMulliken](https://github.com/JoshuaMulliken)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:33",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jsgv",
+      "evidence": "CONTRIBUTORS.md:33  * [jsgv](https://github.com/jsgv)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:34",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/justinsteven",
+      "evidence": "CONTRIBUTORS.md:34  * [justinsteven](https://github.com/justinsteven)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jvesiluoma",
+      "evidence": "CONTRIBUTORS.md:35  * [jvesiluoma](https://github.com/jvesiluoma)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:36",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Kiblyn11",
+      "evidence": "CONTRIBUTORS.md:36  * [Kiblyn11](https://github.com/Kiblyn11)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:37",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/l4yton",
+      "evidence": "CONTRIBUTORS.md:37  * [l4yton](https://github.com/l4yton)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:38",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/lc",
+      "evidence": "CONTRIBUTORS.md:38  * [lc](https://github.com/lc)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:39",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mmadersbacher",
+      "evidence": "CONTRIBUTORS.md:39  * [mmadersbacher](https://github.com/mmadersbacher)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:40",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mprencipe",
+      "evidence": "CONTRIBUTORS.md:40  * [mprencipe](https://github.com/mprencipe)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:41",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/munzzyy",
+      "evidence": "CONTRIBUTORS.md:41  * [munzzyy](https://github.com/munzzyy)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:42",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://twitter.com/nnwakelam",
+      "evidence": "CONTRIBUTORS.md:42  * [nnwakelam](https://twitter.com/nnwakelam)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:43",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pwn.by/noraj",
+      "evidence": "CONTRIBUTORS.md:43  * [noraj](https://pwn.by/noraj)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:44",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/oh6hay",
+      "evidence": "CONTRIBUTORS.md:44  * [oh6hay](https://github.com/oh6hay)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:45",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/penguinxoxo",
+      "evidence": "CONTRIBUTORS.md:45  * [penguinxoxo](https://github.com/penguinxoxo)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:46",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/p0dalirius",
+      "evidence": "CONTRIBUTORS.md:46  * [p0dalirius](https://github.com/p0dalirius)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:47",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/putsi",
+      "evidence": "CONTRIBUTORS.md:47  * [putsi](https://github.com/putsi)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:48",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/SakiiR",
+      "evidence": "CONTRIBUTORS.md:48  * [SakiiR](https://github.com/SakiiR)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:49",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/seblw",
+      "evidence": "CONTRIBUTORS.md:49  * [seblw](https://github.com/seblw)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Serizao",
+      "evidence": "CONTRIBUTORS.md:50  * [Serizao](https://github.com/Serizao)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:51",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Shaked",
+      "evidence": "CONTRIBUTORS.md:51  * [Shaked](https://github.com/Shaked)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:52",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sitiom",
+      "evidence": "CONTRIBUTORS.md:52  * [sitiom](https://github.com/sitiom)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:53",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Skyehopper",
+      "evidence": "CONTRIBUTORS.md:53  * [Skyehopper](https://github.com/Skyehopper)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:54",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/SolomonSklash",
+      "evidence": "CONTRIBUTORS.md:54  * [SolomonSklash](https://github.com/SolomonSklash)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:55",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tomnomnom",
+      "evidence": "CONTRIBUTORS.md:55  * [TomNomNom](https://github.com/tomnomnom)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTORS.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/xfgusta",
+      "evidence": "CONTRIBUTORS.md:56  * [xfgusta](https://github.com/xfgusta)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#installation",
+      "evidence": "README.md:6  - [Installation](https://github.com/ffuf/ffuf#installation)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#example-usage",
+      "evidence": "README.md:7  - [Example usage](https://github.com/ffuf/ffuf#example-usage)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:8",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#typical-directory-discovery",
+      "evidence": "README.md:8  - [Content discovery](https://github.com/ffuf/ffuf#typical-directory-discovery)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#virtual-host-discovery-without-dns-records",
+      "evidence": "README.md:9  - [Vhost discovery](https://github.com/ffuf/ffuf#virtual-host-discovery-without-dns-records)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#get-parameter-fuzzing",
+      "evidence": "README.md:10  - [Parameter fuzzing](https://github.com/ffuf/ffuf#get-parameter-fuzzing)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#post-data-fuzzing",
+      "evidence": "README.md:11  - [POST data fuzzing](https://github.com/ffuf/ffuf#post-data-fuzzing)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#using-external-mutator-to-produce-test-cases",
+      "evidence": "README.md:12  - [Using external mutator](https://github.com/ffuf/ffuf#using-external-mutator-to-produce-test-cases)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#configuration-files",
+      "evidence": "README.md:13  - [Configuration files](https://github.com/ffuf/ffuf#configuration-files)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#usage",
+      "evidence": "README.md:14  - [Help](https://github.com/ffuf/ffuf#usage)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:15",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf#interactive-mode",
+      "evidence": "README.md:15  - [Interactive mode](https://github.com/ffuf/ffuf#interactive-mode)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:20",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/releases/latest",
+      "evidence": "README.md:20  - [Download](https://github.com/ffuf/ffuf/releases/latest) a prebuilt binary from [releases page](https://github.com/ffuf/ffuf/releases/latest), unpack and run!"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:23",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scoop.sh/",
+      "evidence": "README.md:23  - If you are on Windows with [Scoop](https://scoop.sh/), ffuf can be installed with: `scoop install ffuf`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:26",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/windows/package-manager/",
+      "evidence": "README.md:26  - If you are on Windows with [Winget](https://learn.microsoft.com/en-us/windows/package-manager/), ffuf can be installed with: `winget install ffuf.ffuf`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:29",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://brew.sh",
+      "evidence": "README.md:29  - If you are on macOS with [homebrew](https://brew.sh), ffuf can be installed with: `brew install ffuf`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf",
+      "evidence": "README.md:35  - `git clone https://github.com/ffuf/ffuf ; cd ffuf ; go get ; go build`\nREADME.md:260  More information and examples: https://github.com/ffuf/ffuf"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:45",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki",
+      "evidence": "README.md:45  available in the ffuf wiki at [https://github.com/ffuf/ffuf/wiki](https://github.com/ffuf/ffuf/wiki)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:48",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codingo.io/tools/ffuf/bounty/2020/09/17/everything-you-need-to-know-about-ffuf.html",
+      "evidence": "README.md:48  \"[Everything you need to know about FFUF](https://codingo.io/tools/ffuf/bounty/2020/09/17/everything-you-need-to-know-about-ffuf.html)\" by"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:49",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/codingo",
+      "evidence": "README.md:49  Michael Skelton ([@codingo](https://github.com/codingo))."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:51",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/adamtlangley/ffufme",
+      "evidence": "README.md:51  You can also practise your ffuf scans against a live host with different lessons and use cases either locally by using the docker container https://github.com/adamtlangley/ffufme or against the live hosted version at http://ffuf.me created "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:51",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ffuf.me",
+      "evidence": "README.md:51  You can also practise your ffuf scans against a live host with different lessons and use cases either locally by using the docker container https://github.com/adamtlangley/ffufme or against the live hosted version at http://ffuf.me created "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:51",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://twitter.com/adamtlangley",
+      "evidence": "README.md:51  You can also practise your ffuf scans against a live host with different lessons and use cases either locally by using the docker container https://github.com/adamtlangley/ffufme or against the live hosted version at http://ffuf.me created "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:55",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://asciinema.org/a/211350.png",
+      "evidence": "README.md:55  [![asciicast](https://asciinema.org/a/211350.png)](https://asciinema.org/a/211350)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:55",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://asciinema.org/a/211350",
+      "evidence": "README.md:55  [![asciicast](https://asciinema.org/a/211350.png)](https://asciinema.org/a/211350)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:60",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target/FUZZ",
+      "evidence": "README.md:60  ffuf -w /path/to/wordlist -u https://target/FUZZ\nREADME.md:100  ffuf -w /path/to/wordlist -u https://target/FUZZ -maxtime 60\nREADME.md:106  ffuf -w /path/to/wordlist -u https://target/FUZZ -maxtime-job 60 -recursion -recursion-depth 2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:65",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://asciinema.org/a/211360.png",
+      "evidence": "README.md:65  [![asciicast](https://asciinema.org/a/211360.png)](https://asciinema.org/a/211360)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:65",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://asciinema.org/a/211360",
+      "evidence": "README.md:65  [![asciicast](https://asciinema.org/a/211360.png)](https://asciinema.org/a/211360)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:70",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target",
+      "evidence": "README.md:70  ffuf -w /path/to/vhost/wordlist -u https://target -H \"Host: FUZZ\" -fs 4242"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:78",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target/script.php?FUZZ=test_value",
+      "evidence": "README.md:78  ffuf -w /path/to/paramnames.txt -u https://target/script.php?FUZZ=test_value -fs 4242"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:84",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target/script.php?valid_name=FUZZ",
+      "evidence": "README.md:84  ffuf -w /path/to/values.txt -u https://target/script.php?valid_name=FUZZ -fc 401"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:92",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target/login.php",
+      "evidence": "README.md:92  ffuf -w /path/to/postdata.txt -X POST -d \"username=admin\\&password=FUZZ\" -u https://target/login.php -fc 401"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:113",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com/akihe/radamsa",
+      "evidence": "README.md:113  For this example, we'll fuzz JSON data that's sent over POST. [Radamsa](https://gitlab.com/akihe/radamsa) is used as the mutator.\nREADME.md:121  It of course isn't very efficient to call the mutator for each payload, so we can also pre-generate the payloads, still using [Radamsa](https://gitlab.com/akihe/radamsa) as an example:"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:118",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ffuf.io.fi/FUZZ",
+      "evidence": "README.md:118  ffuf --input-cmd 'radamsa --seed $FFUF_NUM example1.txt example2.txt' -H \"Content-Type: application/json\" -X POST -u https://ffuf.io.fi/FUZZ -mc all -fc 400"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:130",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ffuf.io.fi/",
+      "evidence": "README.md:130  ffuf --input-cmd 'cat $FFUF_NUM.txt' -H \"Content-Type: application/json\" -X POST -u https://ffuf.io.fi/ -mc all -fc 400"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:138",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/blob/master/ffufrc.example",
+      "evidence": "README.md:138  [here](https://github.com/ffuf/ffuf/blob/master/ffufrc.example)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:141",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Configuration",
+      "evidence": "README.md:141  [https://github.com/ffuf/ffuf/wiki/Configuration](https://github.com/ffuf/ffuf/wiki/Configuration)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:180",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "README.md:180  -x                  Proxy URL (SOCKS5 or HTTP). For example: http://127.0.0.1:8080 or socks5://127.0.0.1:8080"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:248",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "README.md:248  ffuf -w wordlist.txt -u https://example.org/FUZZ -mc all -fs 42 -c -v"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:251",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/",
+      "evidence": "README.md:251  ffuf -w hosts.txt -u https://example.org/ -H \"Host: FUZZ\" -mc 200\nREADME.md:254  ffuf -w entries.txt -u https://example.org/ -X POST -H \"Content-Type: application/json\" \\"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:258",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/?PARAM=VAL",
+      "evidence": "README.md:258  ffuf -w params.txt:PARAM -w values.txt:VAL -u https://example.org/?PARAM=VAL -mr \"VAL\" -c"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:314",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Contributing",
+      "evidence": "README.md:314  [wiki's Contributing section](https://github.com/ffuf/ffuf/wiki/Contributing) for"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:319",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/blob/master/LICENSE",
+      "evidence": "README.md:319  ffuf is released under MIT license. See [LICENSE](https://github.com/ffuf/ffuf/blob/master/LICENSE)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "SECURITY.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/security",
+      "evidence": "SECURITY.md:10  [Security tab](https://github.com/ffuf/ffuf/security) and click"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "SECURITY.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/security/advisories/new",
+      "evidence": "SECURITY.md:12  [the advisory form](https://github.com/ffuf/ffuf/security/advisories/new)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ffufrc.example:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf",
+      "evidence": "ffufrc.example:2  # https://github.com/ffuf/ffuf"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ffufrc.example:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "ffufrc.example:16  proxyurl = \"http://127.0.0.1:8080\"\nffufrc.example:21  replayproxyurl = \"http://127.0.0.1:8080\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ffufrc.example:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "ffufrc.example:23  url = \"https://example.org/FUZZ\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/pull_request_template.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Contributing",
+      "evidence": ".github/pull_request_template.md:16  New to the codebase? The [wiki Contributing section](https://github.com/ffuf/ffuf/wiki/Contributing) covers the architecture, and the [Testing page](https://github.com/ffuf/ffuf/wiki/Contributing-Testing) covers the test layers."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/pull_request_template.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Contributing-Testing",
+      "evidence": ".github/pull_request_template.md:16  New to the codebase? The [wiki Contributing section](https://github.com/ffuf/ffuf/wiki/Contributing) covers the architecture, and the [Testing page](https://github.com/ffuf/ffuf/wiki/Contributing-Testing) covers the test layers."
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/bug_report.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki",
+      "evidence": ".github/ISSUE_TEMPLATE/bug_report.yml:8  Before filing, please skim the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags). Many \"it doesn't work\" reports turn out to be configuration questions the docs already answe"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/bug_report.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/CLI-flags",
+      "evidence": ".github/ISSUE_TEMPLATE/bug_report.yml:8  Before filing, please skim the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags). Many \"it doesn't work\" reports turn out to be configuration questions the docs already answe"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/bug_report.yml:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/security/policy",
+      "evidence": ".github/ISSUE_TEMPLATE/bug_report.yml:10  Found a security vulnerability in ffuf itself? Do not file it here. Report it privately through the [security policy](https://github.com/ffuf/ffuf/security/policy)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/config.yml:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki",
+      "evidence": ".github/ISSUE_TEMPLATE/config.yml:4  url: https://github.com/ffuf/ffuf/wiki"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request.yml:8  Please check the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags) first: ffuf may already do what you want. The [Input methods](https://github.com/ffuf/ffuf/wiki/Input-metho"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/CLI-flags",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request.yml:8  Please check the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags) first: ffuf may already do what you want. The [Input methods](https://github.com/ffuf/ffuf/wiki/Input-metho"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Input-methods",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request.yml:8  Please check the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags) first: ffuf may already do what you want. The [Input methods](https://github.com/ffuf/ffuf/wiki/Input-metho"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Recursion",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request.yml:8  Please check the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags) first: ffuf may already do what you want. The [Input methods](https://github.com/ffuf/ffuf/wiki/Input-metho"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Scraper",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request.yml:8  Please check the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags) first: ffuf may already do what you want. The [Input methods](https://github.com/ffuf/ffuf/wiki/Input-metho"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request.yml:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf/wiki/Autocalibration",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request.yml:8  Please check the [wiki](https://github.com/ffuf/ffuf/wiki) and the [CLI flag reference](https://github.com/ffuf/ffuf/wiki/CLI-flags) first: ffuf may already do what you want. The [Input methods](https://github.com/ffuf/ffuf/wiki/Input-metho"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/codeql-analysis.yml:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#overriding-automatic-language-detection",
+      "evidence": ".github/workflows/codeql-analysis.yml:29  # https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#overriding-automatic-language-detection"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/codeql-analysis.yml:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://git.io/JvXDl",
+      "evidence": ".github/workflows/codeql-analysis.yml:60  # 📚 https://git.io/JvXDl"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_acs_strategies.golden:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_acs_strategies.golden:13  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -acs advanced,greedy -acs custom\",\ntestdata/config_acs_strategies.golden:69  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_alias_cookie.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_alias_cookie.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -cookie SESSION=abc\",\ntestdata/config_alias_cookie.golden:69  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_alias_data_binary.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/",
+      "evidence": "testdata/config_alias_data_binary.golden:11  \"cmdline\": \"ffuf -u https://example.org/ -w /tmp/wl.txt -X POST -data-binary name=FUZZ\",\ntestdata/config_alias_data_binary.golden:67  \"url\": \"https://example.org/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_autocalibration.golden:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_autocalibration.golden:14  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -ac -acc custom1 -acc custom2\",\ntestdata/config_autocalibration.golden:70  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_basic.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_basic.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt\",\ntestdata/config_basic.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_compat_data_alias.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/",
+      "evidence": "testdata/config_compat_data_alias.golden:11  \"cmdline\": \"ffuf -u https://example.org/ -w /tmp/wl.txt -data x=FUZZ\",\ntestdata/config_compat_data_alias.golden:67  \"url\": \"https://example.org/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_config_ach_no_autoenable.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_config_ach_no_autoenable.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt\",\ntestdata/config_config_ach_no_autoenable.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_config_client_cert.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_config_client_cert.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt\",\ntestdata/config_config_client_cert.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_delay_range.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_delay_range.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -p 0.1-0.8\",\ntestdata/config_delay_range.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_encoders.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_encoders.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt:FUZZ -enc FUZZ:b64encode\",\ntestdata/config_encoders.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_error_missing_wordlist.golden:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_error_missing_wordlist.golden:14  \"cmdline\": \"ffuf -u https://example.org/FUZZ\",\ntestdata/config_error_missing_wordlist.golden:62  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_extensions.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_extensions.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -e .php,.bak\",\ntestdata/config_extensions.golden:70  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_headers_multi.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_headers_multi.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -H X-A: 1 -H X-B: 2\",\ntestdata/config_headers_multi.golden:70  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_many_flags.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_many_flags.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -x http://127.0.0.1:8080 -replay-proxy http://127.0.0.1:9090 -sni example.com -timeout 15 -rate 50 -recursion -recursion-depth 3 -recursion-strategy greedy -of json -od /tmp/out -m\ntestdata/config_many_flags.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_many_flags.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "testdata/config_many_flags.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -x http://127.0.0.1:8080 -replay-proxy http://127.0.0.1:9090 -sni example.com -timeout 15 -rate 50 -recursion -recursion-depth 3 -recursion-strategy greedy -of json -od /tmp/out -m\ntestdata/config_many_flags.golden:49  \"proxyurl\": \"http://127.0.0.1:8080\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_many_flags.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9090",
+      "evidence": "testdata/config_many_flags.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -x http://127.0.0.1:8080 -replay-proxy http://127.0.0.1:9090 -sni example.com -timeout 15 -rate 50 -recursion -recursion-depth 3 -recursion-strategy greedy -of json -od /tmp/out -m\ntestdata/config_many_flags.golden:56  \"replayproxyurl\": \"http://127.0.0.1:9090\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_matchers_filters.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_matchers_filters.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -mc 200,301 -fc 404 -fs 42 -ml 5\",\ntestdata/config_matchers_filters.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_multi_wordlist_pitchfork.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/W1/W2",
+      "evidence": "testdata/config_multi_wordlist_pitchfork.golden:11  \"cmdline\": \"ffuf -u https://example.org/W1/W2 -w /tmp/a.txt:W1 -w /tmp/b.txt:W2 -mode pitchfork\",\ntestdata/config_multi_wordlist_pitchfork.golden:74  \"url\": \"https://example.org/W1/W2\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_precedence_cli_overrides_file.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_precedence_cli_overrides_file.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt -t 5\",\ntestdata/config_precedence_cli_overrides_file.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_precedence_file_used.golden:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/config_precedence_file_used.golden:11  \"cmdline\": \"ffuf -u https://example.org/FUZZ -w /tmp/wl.txt\",\ntestdata/config_precedence_file_used.golden:67  \"url\": \"https://example.org/FUZZ\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/config_raw_request.golden:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/submit",
+      "evidence": "testdata/config_raw_request.golden:70  \"url\": \"https://example.org/submit\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/help.golden:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "testdata/help.golden:30  -x                   Proxy URL (SOCKS5 or HTTP). For example: http://127.0.0.1:8080 or socks5://127.0.0.1:8080"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/help.golden:99",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/FUZZ",
+      "evidence": "testdata/help.golden:99  ffuf -w wordlist.txt -u https://example.org/FUZZ -mc all -fs 42 -c -v"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/help.golden:102",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/",
+      "evidence": "testdata/help.golden:102  ffuf -w hosts.txt -u https://example.org/ -H \"Host: FUZZ\" -mc 200\ntestdata/help.golden:105  ffuf -w entries.txt -u https://example.org/ -X POST -H \"Content-Type: application/json\" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/help.golden:109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.org/?PARAM=VAL",
+      "evidence": "testdata/help.golden:109  ffuf -w params.txt:PARAM -w values.txt:VAL -u https://example.org/?PARAM=VAL -mr \"VAL\" -c"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "testdata/help.golden:111",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ffuf/ffuf",
+      "evidence": "testdata/help.golden:111  More information and examples: https://github.com/ffuf/ffuf"
+    }
+  ],
+  "reRooting": []
+}

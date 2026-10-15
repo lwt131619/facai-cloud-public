@@ -1,0 +1,2315 @@
+{
+  "target": "hashcat (初扫收录实例 C:\\Users\\user\\Hashcat)",
+  "origin": "本地路径 C:\\Users\\user\\Hashcat",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 2089 个文本文件（源码 73、其余 2016），识别 256 面（源码档 56、文档/示例 DOC_ 降权 98、其余文件 102；截断=False/True，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_testfiles.7z",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:15  \"14600\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_testfiles.7z\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha1_aes_cbc-essiv_128.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:16  \"29511\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha1_aes_cbc-essiv_128.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha1_serpent_cbc-plain64_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:17  \"29512\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha1_serpent_cbc-plain64_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha1_twofish_xts-plain64_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:18  \"29513\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha1_twofish_xts-plain64_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha256_aes_cbc-plain64_128.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:19  \"29521\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha256_aes_cbc-plain64_128.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha256_serpent_xts-plain64_512.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:20  \"29522\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha256_serpent_xts-plain64_512.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha256_twofish_cbc-essiv_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:21  \"29523\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha256_twofish_cbc-essiv_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha512_aes_cbc-plain64_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:22  \"29531\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha512_aes_cbc-plain64_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha512_serpent_cbc-essiv_128.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:23  \"29532\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha512_serpent_cbc-essiv_128.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_sha512_twofish_cbc-plain64_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:24  \"29533\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_sha512_twofish_cbc-plain64_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_ripemd160_aes_cbc-essiv_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:25  \"29541\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_ripemd160_aes_cbc-essiv_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_ripemd160_serpent_xts-plain64_256.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:26  \"29542\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_ripemd160_serpent_xts-plain64_256.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks_ripemd160_twofish_cbc-plain64_128.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:27  \"29543\": \"https://hashcat.net/misc/example_hashes/hashcat_luks_ripemd160_twofish_cbc-plain64_128.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/hashcat_luks2_argon2id_sha256_aes_xts-plain64_512.txt",
+      "evidence": ".github/workflows/hashcat-example-hashes_machine-readable2md.py:28  \"34100\": \"https://hashcat.net/misc/example_hashes/hashcat_luks2_argon2id_sha256_aes_xts-plain64_512.txt\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/hashcat-example-hashes_md2docuwiki.sh:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=example_hashes",
+      "evidence": ".github/workflows/hashcat-example-hashes_md2docuwiki.sh:6  # https://hashcat.net/wiki/doku.php?id=example_hashes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/sse2neon/.ci/common.sh:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/DLTcollab/toolchain-arm/raw/main",
+      "evidence": "deps/sse2neon/.ci/common.sh:2  ARM_MIRROR=https://github.com/DLTcollab/toolchain-arm/raw/main"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/sse2neon/.ci/cross-check.sh:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clang.llvm.org/docs/CrossCompilation.html",
+      "evidence": "deps/sse2neon/.ci/cross-check.sh:9  # https://clang.llvm.org/docs/CrossCompilation.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bisq2hashcat.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gurnec/btcrecover",
+      "evidence": "tools/bisq2hashcat.py:11  # See https://github.com/gurnec/btcrecover for details."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bisq2hashcat.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gurnec/btcrecover/blob/master/btcrecover/btcrpass.py",
+      "evidence": "tools/bisq2hashcat.py:15  # https://github.com/gurnec/btcrecover/blob/master/btcrecover/btcrpass.py"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bisq2hashcat.py:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Banaanhangwagen",
+      "evidence": "tools/bisq2hashcat.py:20  #   https://github.com/Banaanhangwagen"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bitlocker2hashcat.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/libyal/libbde/blob/main/documentation/BitLocker%20Drive%20Encryption%20(BDE",
+      "evidence": "tools/bitlocker2hashcat.py:6  # Refs: https://github.com/libyal/libbde/blob/main/documentation/BitLocker%20Drive%20Encryption%20(BDE)%20format.asciidoc#encryption_methods"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bitwarden2hashcat.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/willstruggle/john/blob/master/bitwarden2john.py",
+      "evidence": "tools/bitwarden2hashcat.py:7  # Based on bitwarden2john.py https://github.com/willstruggle/john/blob/master/bitwarden2john.py"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bitwarden2hashcat.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bitwarden.com/help/data-storage/#on-your-local-machine",
+      "evidence": "tools/bitwarden2hashcat.py:9  # Various data locations are documented here: https://bitwarden.com/help/data-storage/#on-your-local-machine"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/bitwarden2hashcat.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Greexter",
+      "evidence": "tools/bitwarden2hashcat.py:11  # Author: https://github.com/Greexter"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/cachedata2hashcat.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tijldeneut",
+      "evidence": "tools/cachedata2hashcat.py:10  # by https://github.com/tijldeneut and https://github.com/synacktiv"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/cachedata2hashcat.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/synacktiv",
+      "evidence": "tools/cachedata2hashcat.py:10  # by https://github.com/tijldeneut and https://github.com/synacktiv"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/cachedata2hashcat.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Banaanhangwagen",
+      "evidence": "tools/cachedata2hashcat.py:13  #   https://github.com/Banaanhangwagen"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/cachedata2hashcat.py:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Ctrl-Shift-Defeat",
+      "evidence": "tools/cachedata2hashcat.py:14  #   https://github.com/Ctrl-Shift-Defeat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_dependencies.sh:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cpanmin.us",
+      "evidence": "tools/install_dependencies.sh:95  elif wget -qO- http://cpanmin.us | perl - -l \"${HOME}/.perl5\" App::cpanminus local::lib > /dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_dependencies.sh:119",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pyenv.run",
+      "evidence": "tools/install_dependencies.sh:119  elif curl -sS https://pyenv.run | bash > /dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_dependencies.sh:156",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openwall/john",
+      "evidence": "tools/install_dependencies.sh:156  if ! git clone --depth 1 https://github.com/openwall/john \"${HOME}/john\" > /dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_dependencies.sh:191",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.rarlab.com/rar/rarlinux-x64-612.tar.gz",
+      "evidence": "tools/install_dependencies.sh:191  if ! curl -sSLo \"${tarball}\" https://www.rarlab.com/rar/rarlinux-x64-612.tar.gz; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_dependencies.sh:229",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.25.9/veracrypt-console-1.25.9-Ubuntu-23.04-amd64.deb",
+      "evidence": "tools/install_dependencies.sh:229  local url=\"https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.25.9/veracrypt-console-1.25.9-Ubuntu-23.04-amd64.deb\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_modules.sh:177",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/matrix/p5-Digest-BLAKE2.git",
+      "evidence": "tools/install_modules.sh:177  install_module \"https://github.com/matrix/p5-Digest-BLAKE2.git\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_modules.sh:179",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/matrix/digest-gost.git",
+      "evidence": "tools/install_modules.sh:179  install_module \"https://github.com/matrix/digest-gost.git\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_modules.sh:181",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/matrix/perl-Crypt-OpenSSL-EC.git",
+      "evidence": "tools/install_modules.sh:181  install_module \"https://github.com/matrix/perl-Crypt-OpenSSL-EC.git\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/install_modules.sh:183",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/matrix/Digest--MD6.git",
+      "evidence": "tools/install_modules.sh:183  install_module \"https://github.com/matrix/Digest--MD6.git\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/lastpass2hashcat.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.lastpass.com/help/where-is-my-lastpass-data-stored-on-my-computer-lp070008",
+      "evidence": "tools/lastpass2hashcat.py:11  Others: See https://support.lastpass.com/help/where-is-my-lastpass-data-stored-on-my-computer-lp070008"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/metamask2hashcat.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://metamask.zendesk.com/hc/en-us/articles/360018766351-How-to-use-the-Vault-Decryptor-with-the-MetaMask-Vault-Data",
+      "evidence": "tools/metamask2hashcat.py:10  # reference: https://metamask.zendesk.com/hc/en-us/articles/360018766351-How-to-use-the-Vault-Decryptor-with-the-MetaMask-Vault-Data"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/metamask2hashcat.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/3rdIteration/btcrecover/pull/346",
+      "evidence": "tools/metamask2hashcat.py:12  # reference: https://github.com/3rdIteration/btcrecover/pull/346"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/metamask2hashcat.py:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/3rdIteration/btcrecover/blob/master/btcrecover/btcrpass.py#L3096-L3103",
+      "evidence": "tools/metamask2hashcat.py:35  # taken from https://github.com/3rdIteration/btcrecover/blob/master/btcrecover/btcrpass.py#L3096-L3103"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/mozilla2hashcat.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/lclevy/firepwd",
+      "evidence": "tools/mozilla2hashcat.py:12  # This code is based on the tool \"firepwd\" (https://github.com/lclevy/firepwd (GPL-license)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/mozilla2hashcat.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Banaanhangwagen",
+      "evidence": "tools/mozilla2hashcat.py:18  #   https://github.com/Banaanhangwagen"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/mozilla2hashcat.py:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mneitsabes",
+      "evidence": "tools/mozilla2hashcat.py:19  #   https://github.com/mneitsabes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/rar32hashcat.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/php/pecl-file_formats-rar/master/technote.txt",
+      "evidence": "tools/rar32hashcat.py:10  # https://raw.githubusercontent.com/php/pecl-file_formats-rar/master/technote.txt"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/test.sh:445",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/${luks_tests",
+      "evidence": "tools/test.sh:445  luks_tests_url=\"https://hashcat.net/misc/example_hashes/${luks_tests}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/test.sh:506",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/misc/example_hashes/${luks2_tests",
+      "evidence": "tools/test.sh:506  luks2_tests_url=\"https://hashcat.net/misc/example_hashes/${luks2_tests}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/test.sh:3699",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-console-1.26.24-Ubuntu-24.04-amd64.deb",
+      "evidence": "tools/test.sh:3699  #   curl -LO https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-console-1.26.24-Ubuntu-24.04-amd64.deb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/test.sh:3705",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-20.04-amd64.deb",
+      "evidence": "tools/test.sh:3705  #   curl -LO https://launchpad.net/veracrypt/trunk/1.25.9/+download/veracrypt-console-1.25.9-Ubuntu-20.04-amd64.deb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/test.sh:5710",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.rarlab.com/rar/rarlinux-x64-612.tar.gz",
+      "evidence": "tools/test.sh:5710  #   curl -O https://www.rarlab.com/rar/rarlinux-x64-612.tar.gz"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tools/test_module_runner.py:35",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "IS_OPTIMIZED",
+      "rule": "os.environ.get",
+      "evidence": "tools/test_module_runner.py:35  IS_OPTIMIZED = os.environ.get(\"IS_OPTIMIZED\", \"1\") != \"0\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/truecrypt2hashcat.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=frequently_asked_questions#how_do_i_extract_the_hashes_from_truecrypt_volumes",
+      "evidence": "tools/truecrypt2hashcat.py:22  # see also https://hashcat.net/wiki/doku.php?id=frequently_asked_questions#how_do_i_extract_the_hashes_from_truecrypt_volumes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/veracrypt2hashcat.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=frequently_asked_questions#how_do_i_extract_the_hashes_from_veracrypt_volumes",
+      "evidence": "tools/veracrypt2hashcat.py:22  # see also https://hashcat.net/wiki/doku.php?id=frequently_asked_questions#how_do_i_extract_the_hashes_from_veracrypt_volumes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/vmwarevmx2hashcat.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/axcheron/pyvmx-cracker",
+      "evidence": "tools/vmwarevmx2hashcat.py:4  # Based on \"pyvmx-cracker\" (https://github.com/axcheron/pyvmx-cracker) (MIT license)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tools/test_modules/m01000.py:21",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "IS_OPTIMIZED",
+      "rule": "os.environ.get",
+      "evidence": "tools/test_modules/m01000.py:21  if os.environ.get(\"IS_OPTIMIZED\") == \"0\":"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tools/test_modules/m34100.sh:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com/cryptsetup/cryptsetup/-/blob/main/configure.ac?ref_type=heads#L787",
+      "evidence": "tools/test_modules/m34100.sh:17  ARGON_THREADS=(1 2 3 4) # max is 4 https://gitlab.com/cryptsetup/cryptsetup/-/blob/main/configure.ac?ref_type=heads#L787"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".appveyor.yml.old:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cygwin.mirror.constant.com",
+      "evidence": ".appveyor.yml.old:2  CYG_MIRROR: http://cygwin.mirror.constant.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".appveyor.yml.old:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cygwin.com/$env:CYG_SETUP",
+      "evidence": ".appveyor.yml.old:35  - ps: if (Test-Path Env:\\CYG_ROOT) { Start-FileDownload \"https://cygwin.com/$env:CYG_SETUP\" -FileName \"$env:CYG_SETUP\" }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".appveyor.yml.old:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/msys2/msys2/wiki/FAQ",
+      "evidence": ".appveyor.yml.old:37  # (temporary?) problem with msys/pacman/objc/ada (see https://github.com/msys2/msys2/wiki/FAQ)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".appveyor.yml.old:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pastebin.com/raw/e0y4Ky9U",
+      "evidence": ".appveyor.yml.old:40  #- if defined MSYSTEM (%BASH% -lc \"curl https://pastebin.com/raw/e0y4Ky9U | bash\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".editorconfig:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://editorconfig.org",
+      "evidence": ".editorconfig:3  # See http://editorconfig.org for a plugin to your editor!"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD.md:41",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pyenv.run",
+      "evidence": "BUILD.md:41  $ curl https://pyenv.run | bash"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD.md:78",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat.git",
+      "evidence": "BUILD.md:78  $ git clone https://github.com/hashcat/hashcat.git"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_Android.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/termux/termux-app/releases/latest",
+      "evidence": "BUILD_Android.md:13  - Termux app installed from [GitHub](https://github.com/termux/termux-app/releases/latest) or F-Droid"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_Android.md:87",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat.git",
+      "evidence": "BUILD_Android.md:87  git clone --depth 1 https://github.com/hashcat/hashcat.git"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_Android.md:100",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/issues/4579",
+      "evidence": "BUILD_Android.md:100  > If you encounter an `Illegal instruction` error, you may need to adjust the target architecture. This is a known issue for some ARM devices ([#4579](https://github.com/hashcat/hashcat/issues/4579))."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_CYGWIN.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.cygwin.com",
+      "evidence": "BUILD_CYGWIN.md:7  Go to https://www.cygwin.com , get the setup-x86_64 file and follow the instructions on the website."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_CYGWIN.md:25",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat.git",
+      "evidence": "BUILD_CYGWIN.md:25  $ git clone https://github.com/hashcat/hashcat.git"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_Docker.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hub.docker.com/r/gm4tr1x/hashcat-toolchain",
+      "evidence": "BUILD_Docker.md:16  This will create a Docker image based on Ubuntu 16.04 using hashcat-toolchain (https://hub.docker.com/r/gm4tr1x/hashcat-toolchain)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_MSYS2.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.msys2.org/",
+      "evidence": "BUILD_MSYS2.md:7  1. **Install MSYS2** from the [official website](https://www.msys2.org/) and follow steps 1-7."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_MSYS2.md:46",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat.git",
+      "evidence": "BUILD_MSYS2.md:46  git clone https://github.com/hashcat/hashcat.git ~/hashcat"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_WSL.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat",
+      "evidence": "BUILD_WSL.md:16  git clone https://github.com/hashcat/hashcat"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_WSL.md:17",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-python-3.12.11-1-any.pkg.tar.zst",
+      "evidence": "BUILD_WSL.md:17  wget https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-python-3.12.11-1-any.pkg.tar.zst"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_WSL.md:20",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sh.rustup.rs",
+      "evidence": "BUILD_WSL.md:20  curl 'https://sh.rustup.rs' -sSf > rustinstall.sh"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_macOS.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat",
+      "evidence": "BUILD_macOS.md:13  git clone https://github.com/hashcat/hashcat"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "BUILD_macOS.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-python-3.12.10-1-any.pkg.tar.zst",
+      "evidence": "BUILD_macOS.md:14  wget https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-python-3.12.10-1-any.pkg.tar.zst"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/issues",
+      "evidence": "CONTRIBUTING.md:11  If your patch fixes a bug, open an [issue](https://github.com/hashcat/hashcat/issues) for the bug first. If your patch aims to improve performance or optimize an algorithm, quantify the improvement, document the trade-offs, and back the cla"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:28",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Indent_style#Allman_style",
+      "evidence": "CONTRIBUTING.md:28  * [Allman braces](https://en.wikipedia.org/wiki/Indent_style#Allman_style). The opening brace goes on its own line, for functions and for `if`, `else`, `for`, `while` and `switch`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:164",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jsteube",
+      "evidence": "CONTRIBUTING.md:164  The [project lead](https://github.com/jsteube) has the ultimate authority in deciding whether to accept or reject a pull request. Do not be discouraged if your pull request is rejected."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:36",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/hashcat/",
+      "evidence": "README.md:36  Download the [latest release](https://hashcat.net/hashcat/) and unpack it where you want it. Use `7z x` when unpacking from the command line, so the full file paths stay intact."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg",
+      "evidence": "README.md:50  [![Build](https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg)](https://github.com/hashcat/hashcat/actions/workflows/build.yml) | [![BSD](https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg)](https://"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/actions/workflows/build.yml",
+      "evidence": "README.md:50  [![Build](https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg)](https://github.com/hashcat/hashcat/actions/workflows/build.yml) | [![BSD](https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg)](https://"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg",
+      "evidence": "README.md:50  [![Build](https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg)](https://github.com/hashcat/hashcat/actions/workflows/build.yml) | [![BSD](https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg)](https://"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/actions/workflows/bsd.yml",
+      "evidence": "README.md:50  [![Build](https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg)](https://github.com/hashcat/hashcat/actions/workflows/build.yml) | [![BSD](https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg)](https://"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/actions/workflows/rust.yml/badge.svg",
+      "evidence": "README.md:50  [![Build](https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg)](https://github.com/hashcat/hashcat/actions/workflows/build.yml) | [![BSD](https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg)](https://"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:50",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/actions/workflows/rust.yml",
+      "evidence": "README.md:50  [![Build](https://github.com/hashcat/hashcat/actions/workflows/build.yml/badge.svg)](https://github.com/hashcat/hashcat/actions/workflows/build.yml) | [![BSD](https://github.com/hashcat/hashcat/actions/workflows/bsd.yml/badge.svg)](https://"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/",
+      "evidence": "README.md:56  The [wiki](https://hashcat.net/wiki/) and the [FAQ](https://hashcat.net/wiki/doku.php?id=frequently_asked_questions) go further. The [forum](https://hashcat.net/forum/) holds years of answered questions. If you still need help from a real h"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=frequently_asked_questions",
+      "evidence": "README.md:56  The [wiki](https://hashcat.net/wiki/) and the [FAQ](https://hashcat.net/wiki/doku.php?id=frequently_asked_questions) go further. The [forum](https://hashcat.net/forum/) holds years of answered questions. If you still need help from a real h"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/forum/",
+      "evidence": "README.md:56  The [wiki](https://hashcat.net/wiki/) and the [FAQ](https://hashcat.net/wiki/doku.php?id=frequently_asked_questions) go further. The [forum](https://hashcat.net/forum/) holds years of answered questions. If you still need help from a real h"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.gg/HFS523HGBT",
+      "evidence": "README.md:56  The [wiki](https://hashcat.net/wiki/) and the [FAQ](https://hashcat.net/wiki/doku.php?id=frequently_asked_questions) go further. The [forum](https://hashcat.net/forum/) holds years of answered questions. If you still need help from a real h"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "RUNTIME_Docker.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html",
+      "evidence": "RUNTIME_Docker.md:10  To enable your docker deamon to support gpu passthrough go here https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "RUNTIME_Docker.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hub.docker.com/r/nvidia/cuda/tags",
+      "evidence": "RUNTIME_Docker.md:12  (The runtime stage in the dockerfile will use an offical nvidia image, make sure your host has at least the same cuda version or a newer version installed. If you wanna change the runtime version of cuda just have a search here https://hub."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "RUNTIME_Docker.md:18",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://rocm.docs.amd.com/projects/install-on-linux/en/latest/how-to/docker.html",
+      "evidence": "RUNTIME_Docker.md:18  For AMD go here https://rocm.docs.amd.com/projects/install-on-linux/en/latest/how-to/docker.html"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/bug_report.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/forum/",
+      "evidence": ".github/ISSUE_TEMPLATE/bug_report.md:11  For support, please use the hashcat forums https://hashcat.net/forum/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/bug_report.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=frequently_asked_questions",
+      "evidence": ".github/ISSUE_TEMPLATE/bug_report.md:14  Some items that might appear to be issues are not issues. Please review the hashcat FAQ https://hashcat.net/wiki/doku.php?id=frequently_asked_questions before submitting a bug report."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request_-_other.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/forum/",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request_-_other.md:11  For support, please use the hashcat forums https://hashcat.net/forum/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/feature_request_-_other.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=frequently_asked_questions",
+      "evidence": ".github/ISSUE_TEMPLATE/feature_request_-_other.md:14  Some items that might appear to be issues are not issues. Please review the hashcat FAQ https://hashcat.net/wiki/doku.php?id=frequently_asked_questions before submitting a bug report."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/other_issue.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/forum/",
+      "evidence": ".github/ISSUE_TEMPLATE/other_issue.md:11  For support, please use the hashcat forums https://hashcat.net/forum/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/ISSUE_TEMPLATE/other_issue.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hashcat.net/wiki/doku.php?id=frequently_asked_questions",
+      "evidence": ".github/ISSUE_TEMPLATE/other_issue.md:14  Some items that might appear to be issues are not issues. Please review the hashcat FAQ https://hashcat.net/wiki/doku.php?id=frequently_asked_questions before submitting a bug report."
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/bsd.yml:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/$(uname",
+      "evidence": ".github/workflows/bsd.yml:93  export PKG_PATH=\"https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/$(uname -m)/$(uname -r)/All\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:221",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/actions/checkout?tab=readme-ov-file#push-a-commit-using-the-built-in-token",
+      "evidence": ".github/workflows/build.yml:221  # https://github.com/actions/checkout?tab=readme-ov-file#push-a-commit-using-the-built-in-token"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:272",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-python-3.14.7-1-any.pkg.tar.zst",
+      "evidence": ".github/workflows/build.yml:272  wget https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-python-3.14.7-1-any.pkg.tar.zst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:277",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sh.rustup.rs",
+      "evidence": ".github/workflows/build.yml:277  curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_cipher_aes-gcm.cl:309",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Galois/Counter_Mode#/media/File:GCM-Galois_Counter_Mode_with_IV.svg",
+      "evidence": "OpenCL/inc_cipher_aes-gcm.cl:309  // the first ctr is used to compute the tag, only the second is used for decryption: https://en.wikipedia.org/wiki/Galois/Counter_Mode#/media/File:GCM-Galois_Counter_Mode_with_IV.svg"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_cipher_blowfish.cl:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.schneier.com/code/constants.txt",
+      "evidence": "OpenCL/inc_cipher_blowfish.cl:12  // http://www.schneier.com/code/constants.txt"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_cipher_camellia.cl:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.rfc-editor.org/rfc/rfc3713.txt",
+      "evidence": "OpenCL/inc_cipher_camellia.cl:9  * Encryption Algorithm\", https://www.rfc-editor.org/rfc/rfc3713.txt. Section 2.2 is the key"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_cipher_kuznyechik.cl:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mjosaarinen/kuznechik",
+      "evidence": "OpenCL/inc_cipher_kuznyechik.cl:9  *   https://github.com/mjosaarinen/kuznechik                     *"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_common.cl:3025",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/issues/3878",
+      "evidence": "OpenCL/inc_common.cl:3025  // https://github.com/hashcat/hashcat/issues/3878"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_common.cl:3246",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/109023/count-the-number-of-set-bits-in-a-32-bit-integer",
+      "evidence": "OpenCL/inc_common.cl:3246  // from https://stackoverflow.com/questions/109023/count-the-number-of-set-bits-in-a-32-bit-integer"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bitcoin-core/secp256k1/",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:13  * - secp256k1 by Pieter Wuille (https://github.com/bitcoin-core/secp256k1/, MIT)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hhanh00/secp256k1-cl/",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:14  * - secp256k1-cl by hhanh00 (https://github.com/hhanh00/secp256k1-cl/, MIT)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/masterzorag/ec_pure_c/",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:15  * - ec_pure_c by masterzorag (https://github.com/masterzorag/ec_pure_c/)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/leivaburto/ecc-gmp",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:16  * - ecc-gmp by leivaburto (https://github.com/leivaburto/ecc-gmp)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kmackay/micro-ecc/",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:17  * - micro-ecc by Ken MacKay (https://github.com/kmackay/micro-ecc/, BSD)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gist.github.com/nlitsme/c9031c7b9bf6bb009e5a",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:18  * - curve_example by willem (https://gist.github.com/nlitsme/c9031c7b9bf6bb009e5a)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ethereum/py_ecc/",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:19  * - py_ecc by Vitalik Buterin (https://github.com/ethereum/py_ecc/, MIT)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://eprint.iacr.org/2011/338.pdf",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:56  * http://eprint.iacr.org/2011/338.pdf"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:661",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.isys.uni-klu.ac.at/PDF/2001-0126-MT.pdf",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:661  * http://www.isys.uni-klu.ac.at/PDF/2001-0126-MT.pdf (p.354 or p.9 in that document)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_ecc_secp256k1.cl:1506",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.hyperelliptic.org/EFD/g1p/auto-shortw-jacobian-0.html",
+      "evidence": "OpenCL/inc_ecc_secp256k1.cl:1506  * (from https://www.hyperelliptic.org/EFD/g1p/auto-shortw-jacobian-0.html)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_radmin3_constants.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html",
+      "evidence": "OpenCL/inc_radmin3_constants.h:8  * https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/inc_types.h:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.nvidia.com/cuda/nvrtc/index.html#integer-size",
+      "evidence": "OpenCL/inc_types.h:48  // https://docs.nvidia.com/cuda/nvrtc/index.html#integer-size"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m01500_a3-pure.cl:332",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.openwall.com/john/",
+      "evidence": "OpenCL/m01500_a3-pure.cl:332  * John the Ripper password cracker: http://www.openwall.com/john/\nOpenCL/m01500_a3-pure.cl:913  * John the Ripper password cracker: http://www.openwall.com/john/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m01500_a3-pure.cl:341",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.rapid7.com",
+      "evidence": "OpenCL/m01500_a3-pure.cl:341  * The effort has been sponsored by Rapid7: http://www.rapid7.com\nOpenCL/m01500_a3-pure.cl:922  * The effort has been sponsored by Rapid7: http://www.rapid7.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m03000_a3-pure.cl:332",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.openwall.com/john/",
+      "evidence": "OpenCL/m03000_a3-pure.cl:332  * John the Ripper password cracker: http://www.openwall.com/john/\nOpenCL/m03000_a3-pure.cl:913  * John the Ripper password cracker: http://www.openwall.com/john/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m03000_a3-pure.cl:341",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.rapid7.com",
+      "evidence": "OpenCL/m03000_a3-pure.cl:341  * The effort has been sponsored by Rapid7: http://www.rapid7.com\nOpenCL/m03000_a3-pure.cl:922  * The effort has been sponsored by Rapid7: http://www.rapid7.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m14000_a3-pure.cl:332",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.openwall.com/john/",
+      "evidence": "OpenCL/m14000_a3-pure.cl:332  * John the Ripper password cracker: http://www.openwall.com/john/\nOpenCL/m14000_a3-pure.cl:913  * John the Ripper password cracker: http://www.openwall.com/john/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m14000_a3-pure.cl:341",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.rapid7.com",
+      "evidence": "OpenCL/m14000_a3-pure.cl:341  * The effort has been sponsored by Rapid7: http://www.rapid7.com\nOpenCL/m14000_a3-pure.cl:922  * The effort has been sponsored by Rapid7: http://www.rapid7.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a0-optimized.cl:412",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a0-optimized.cl:412  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst\nOpenCL/m16600_a0-optimized.cl:847  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a0-pure.cl:226",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a0-pure.cl:226  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst\nOpenCL/m16600_a0-pure.cl:467  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a1-optimized.cl:520",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a1-optimized.cl:520  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst\nOpenCL/m16600_a1-optimized.cl:1065  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a1-pure.cl:249",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a1-pure.cl:249  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst\nOpenCL/m16600_a1-pure.cl:515  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a3-optimized.cl:172",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a3-optimized.cl:172  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a3-pure.cl:235",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a3-pure.cl:235  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst\nOpenCL/m16600_a3-pure.cl:487  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m16600_a4-pure.cl:240",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst",
+      "evidence": "OpenCL/m16600_a4-pure.cl:240  // https://github.com/spesmilo/electrum-docs/blob/master/xpub_version_bytes.rst"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17050-pure.cl:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html#ocb-mode",
+      "evidence": "OpenCL/m17050-pure.cl:34  // https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html#ocb-mode"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17050-pure.cl:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Legrandin/pycryptodome/blob/2c3a8905a7929335a9b2763e18d6e9ed516b8a38/src/raw_ocb.c#L118",
+      "evidence": "OpenCL/m17050-pure.cl:35  // https://github.com/Legrandin/pycryptodome/blob/2c3a8905a7929335a9b2763e18d6e9ed516b8a38/src/raw_ocb.c#L118"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17200_a0-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17200_a0-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17200_a1-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17200_a1-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17200_a3-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17200_a3-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17200_a4-pure.cl:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17200_a4-pure.cl:89  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17210_a0-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17210_a0-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17210_a1-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17210_a1-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17210_a3-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17210_a3-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17210_a4-pure.cl:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17210_a4-pure.cl:89  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17220_a0-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17220_a0-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17220_a1-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17220_a1-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17220_a3-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17220_a3-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17220_a4-pure.cl:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17220_a4-pure.cl:89  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17225_a0-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17225_a0-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17225_a1-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17225_a1-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17225_a3-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17225_a3-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17225_a4-pure.cl:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17225_a4-pure.cl:89  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17230_a0-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17230_a0-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17230_a1-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17230_a1-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17230_a3-pure.cl:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17230_a3-pure.cl:84  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m17230_a4-pure.cl:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m17230_a4-pure.cl:89  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m19200-pure.cl:403",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/magnumripper/JohnTheRipper/blob/bleeding-jumbo/src/sha2.c#L578-L595",
+      "evidence": "OpenCL/m19200-pure.cl:403  // see https://github.com/magnumripper/JohnTheRipper/blob/bleeding-jumbo/src/sha2.c#L578-L595"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20500_a0-pure.cl:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20500_a0-pure.cl:60  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20500_a1-pure.cl:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20500_a1-pure.cl:60  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20500_a3-pure.cl:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20500_a3-pure.cl:60  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20500_a4-pure.cl:65",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20500_a4-pure.cl:65  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20510_a0-pure.cl:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20510_a0-pure.cl:60  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20510_a1-pure.cl:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20510_a1-pure.cl:60  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m20510_a3-pure.cl:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g=",
+      "evidence": "OpenCL/m20510_a3-pure.cl:60  Related publication: https://scitepress.org/PublicationsDetail.aspx?ID=KLPzPqStp5g="
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m21800-pure.cl:615",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://datatracker.ietf.org/doc/html/rfc7159",
+      "evidence": "OpenCL/m21800-pure.cl:615  // https://datatracker.ietf.org/doc/html/rfc7159"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m25400-pure.cl:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.archive.org/web/20220306152229/https://www.adobe.com/content/dam/acom/en/devnet/pdf/pdfs/pdf_reference_archives/PDFReference.pdf",
+      "evidence": "OpenCL/m25400-pure.cl:6  // https://web.archive.org/web/20220306152229/https://www.adobe.com/content/dam/acom/en/devnet/pdf/pdfs/pdf_reference_archives/PDFReference.pdf"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m26610-pure.cl:410",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashcat/hashcat/issues/4121",
+      "evidence": "OpenCL/m26610-pure.cl:410  // https://github.com/hashcat/hashcat/issues/4121"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m29200_a0-pure.cl:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html",
+      "evidence": "OpenCL/m29200_a0-pure.cl:8  * https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m29200_a1-pure.cl:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html",
+      "evidence": "OpenCL/m29200_a1-pure.cl:8  * https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "OpenCL/m29200_a3-pure.cl:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html",
+      "evidence": "OpenCL/m29200_a3-pure.cl:8  * https://www.synacktiv.com/publications/cracking-radmin-server-3-passwords.html"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/OpenCL-Headers/CODE_OF_CONDUCT.md:1",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.khronos.org/developers/code-of-conduct",
+      "evidence": "deps/OpenCL-Headers/CODE_OF_CONDUCT.md:1  A reminder that this issue tracker is managed by the Khronos Group. Interactions here should follow the Khronos Code of Conduct (https://www.khronos.org/developers/code-of-conduct), which prohibits aggressive or derogatory language. Please "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/LICENSE:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/",
+      "evidence": "deps/OpenCL-Headers/LICENSE:4  http://www.apache.org/licenses/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/LICENSE:196",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/LICENSE:196  http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/OpenCL-Headers/README.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/KhronosGroup/OpenCL-Headers",
+      "evidence": "deps/OpenCL-Headers/README.md:7  https://github.com/KhronosGroup/OpenCL-Headers"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/OpenCL-Headers/README.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/KhronosGroup/OpenCL-SDK",
+      "evidence": "deps/OpenCL-Headers/README.md:14  > While the OpenCL Headers can be built and installed in isolation, it is part of the [OpenCL SDK](https://github.com/KhronosGroup/OpenCL-SDK). If looking for streamlined build experience and a complete development package, refer to the SDK"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/OpenCL-Headers/README.md:19",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cmake.org",
+      "evidence": "deps/OpenCL-Headers/README.md:19  If CMake is not provided by your build system or OS package manager, please consult the [CMake website](https://cmake.org)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/OpenCL-Headers/README.md:147",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/KhronosGroup/OpenCL-SDK/blob/main/docs/RELEASE.md",
+      "evidence": "deps/OpenCL-Headers/README.md:147  For packaging instructions, see [RELEASE.md](https://github.com/KhronosGroup/OpenCL-SDK/blob/main/docs/RELEASE.md)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_d3d10.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_d3d10.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_d3d11.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_d3d11.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_dx9_media_sharing.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_dx9_media_sharing.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_dx9_media_sharing_intel.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_dx9_media_sharing_intel.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_egl.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_egl.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_ext.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_ext.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_ext_intel.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_ext_intel.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_function_types.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_function_types.h:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_gl.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_gl.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_gl_ext.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_gl_ext.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_half.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_half.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_icd.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_icd.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_layer.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_layer.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_platform.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_platform.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_platform.h:533",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://msdn.microsoft.com/en-us/library/373ak2y1%28VS.71%29.aspx",
+      "evidence": "deps/OpenCL-Headers/CL/cl_platform.h:533  /* http://msdn.microsoft.com/en-us/library/373ak2y1%28VS.71%29.aspx                                                 */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_va_api_media_sharing_intel.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_va_api_media_sharing_intel.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/cl_version.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/cl_version.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/OpenCL-Headers/CL/opencl.h:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/OpenCL-Headers/CL/opencl.h:8  *    http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/LICENSE:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://creativecommons.org/publicdomain/zero/1.0",
+      "evidence": "deps/phc-winner-argon2-20190702/LICENSE:10  - CC0 1.0 Universal : http://creativecommons.org/publicdomain/zero/1.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/LICENSE:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/phc-winner-argon2-20190702/LICENSE:11  - Apache 2.0        : http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/LICENSE:143",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/",
+      "evidence": "deps/phc-winner-argon2-20190702/LICENSE:143  http://www.apache.org/licenses/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/Makefile:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://creativecommons.org/publicdomain/zero/1.0",
+      "evidence": "deps/phc-winner-argon2-20190702/Makefile:11  # - CC0 1.0 Universal : http://creativecommons.org/publicdomain/zero/1.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/Makefile:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "deps/phc-winner-argon2-20190702/Makefile:12  # - Apache 2.0        : http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://travis-ci.org/P-H-C/phc-winner-argon2.svg?branch=master",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:3  [![Build Status](https://travis-ci.org/P-H-C/phc-winner-argon2.svg?branch=master)](https://travis-ci.org/P-H-C/phc-winner-argon2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://travis-ci.org/P-H-C/phc-winner-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:3  [![Build Status](https://travis-ci.org/P-H-C/phc-winner-argon2.svg?branch=master)](https://travis-ci.org/P-H-C/phc-winner-argon2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ci.appveyor.com/api/projects/status/8nfwuwq55sgfkele?svg=true",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:4  [![Build status](https://ci.appveyor.com/api/projects/status/8nfwuwq55sgfkele?svg=true)](https://ci.appveyor.com/project/P-H-C/phc-winner-argon2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ci.appveyor.com/project/P-H-C/phc-winner-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:4  [![Build status](https://ci.appveyor.com/api/projects/status/8nfwuwq55sgfkele?svg=true)](https://ci.appveyor.com/project/P-H-C/phc-winner-argon2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codecov.io/github/P-H-C/phc-winner-argon2/coverage.svg?branch=master",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:5  [![codecov.io](https://codecov.io/github/P-H-C/phc-winner-argon2/coverage.svg?branch=master)](https://codecov.io/github/P-H-C/phc-winner-argon2?branch=master)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codecov.io/github/P-H-C/phc-winner-argon2?branch=master",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:5  [![codecov.io](https://codecov.io/github/P-H-C/phc-winner-argon2/coverage.svg?branch=master)](https://codecov.io/github/P-H-C/phc-winner-argon2?branch=master)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://password-hashing.net",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:9  (PHC)](https://password-hashing.net)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:103",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Hash-based_message_authentication_code",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:103  https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:246",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/riverrun/argon2_elixir",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:246  * [Elixir](https://github.com/riverrun/argon2_elixir) by [@riverrun](https://github.com/riverrun)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:246",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/riverrun",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:246  * [Elixir](https://github.com/riverrun/argon2_elixir) by [@riverrun](https://github.com/riverrun)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:247",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ergenius/eargon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:247  * [Erlang](https://github.com/ergenius/eargon2) by [@ergenius](https://github.com/ergenius)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:247",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ergenius",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:247  * [Erlang](https://github.com/ergenius/eargon2) by [@ergenius](https://github.com/ergenius)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:248",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tvdburgt/go-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:248  * [Go](https://github.com/tvdburgt/go-argon2) by [@tvdburgt](https://github.com/tvdburgt)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:248",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tvdburgt",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:248  * [Go](https://github.com/tvdburgt/go-argon2) by [@tvdburgt](https://github.com/tvdburgt)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:249",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hackage.haskell.org/package/argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:249  * [Haskell](https://hackage.haskell.org/package/argon2) by [@hvr](https://github.com/hvr)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:249",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hvr",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:249  * [Haskell](https://hackage.haskell.org/package/argon2) by [@hvr](https://github.com/hvr)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:250",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ranisalt/node-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:250  * [JavaScript (native)](https://github.com/ranisalt/node-argon2), by [@ranisalt](https://github.com/ranisalt)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:250",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ranisalt",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:250  * [JavaScript (native)](https://github.com/ranisalt/node-argon2), by [@ranisalt](https://github.com/ranisalt)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:251",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jdconley/argon2themax",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:251  * [JavaScript (native)](https://github.com/jdconley/argon2themax), by [@jdconley](https://github.com/jdconley)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:251",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jdconley",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:251  * [JavaScript (native)](https://github.com/jdconley/argon2themax), by [@jdconley](https://github.com/jdconley)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:252",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cjlarose/argon2-ffi",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:252  * [JavaScript (ffi)](https://github.com/cjlarose/argon2-ffi), by [@cjlarose](https://github.com/cjlarose)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:252",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cjlarose",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:252  * [JavaScript (ffi)](https://github.com/cjlarose/argon2-ffi), by [@cjlarose](https://github.com/cjlarose)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:253",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/antelle/argon2-browser",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:253  * [JavaScript (browser)](https://github.com/antelle/argon2-browser), by [@antelle](https://github.com/antelle)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:253",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/antelle",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:253  * [JavaScript (browser)](https://github.com/antelle/argon2-browser), by [@antelle](https://github.com/antelle)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:254",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/phxql/argon2-jvm",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:254  * [JVM](https://github.com/phxql/argon2-jvm) by [@phXql](https://github.com/phxql)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:254",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/phxql",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:254  * [JVM](https://github.com/phxql/argon2-jvm) by [@phXql](https://github.com/phxql)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:255",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kosprov/jargon2-api",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:255  * [JVM (with keyed hashing)](https://github.com/kosprov/jargon2-api) by [@kosprov](https://github.com/kosprov)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:255",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kosprov",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:255  * [JVM (with keyed hashing)](https://github.com/kosprov/jargon2-api) by [@kosprov](https://github.com/kosprov)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:256",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/thibaultCha/lua-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:256  * [Lua (native)](https://github.com/thibaultCha/lua-argon2) by [@thibaultCha](https://github.com/thibaultCha)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:256",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/thibaultCha",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:256  * [Lua (native)](https://github.com/thibaultCha/lua-argon2) by [@thibaultCha](https://github.com/thibaultCha)\ndeps/phc-winner-argon2-20190702/README.md:257  * [Lua (ffi)](https://github.com/thibaultCha/lua-argon2-ffi) by [@thibaultCha](https://github.com/thibaultCha)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:257",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/thibaultCha/lua-argon2-ffi",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:257  * [Lua (ffi)](https://github.com/thibaultCha/lua-argon2-ffi) by [@thibaultCha](https://github.com/thibaultCha)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:258",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Khady/ocaml-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:258  * [OCaml](https://github.com/Khady/ocaml-argon2) by [@Khady](https://github.com/Khady)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:258",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Khady",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:258  * [OCaml](https://github.com/Khady/ocaml-argon2) by [@Khady](https://github.com/Khady)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:259",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.python.org/pypi/argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:259  * [Python (native)](https://pypi.python.org/pypi/argon2), by [@flamewow](https://github.com/flamewow)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:259",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/flamewow",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:259  * [Python (native)](https://pypi.python.org/pypi/argon2), by [@flamewow](https://github.com/flamewow)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:260",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.python.org/pypi/argon2_cffi",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:260  * [Python (ffi)](https://pypi.python.org/pypi/argon2_cffi), by [@hynek](https://github.com/hynek)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:260",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hynek",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:260  * [Python (ffi)](https://pypi.python.org/pypi/argon2_cffi), by [@hynek](https://github.com/hynek)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:261",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/thusoy/porridge",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:261  * [Python (ffi, with keyed hashing)](https://github.com/thusoy/porridge), by [@thusoy](https://github.com/thusoy)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:261",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/thusoy",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:261  * [Python (ffi, with keyed hashing)](https://github.com/thusoy/porridge), by [@thusoy](https://github.com/thusoy)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:262",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cran.r-project.org/package=argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:262  * [R](https://cran.r-project.org/package=argon2) by [@wrathematics](https://github.com/wrathematics)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:262",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wrathematics",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:262  * [R](https://cran.r-project.org/package=argon2) by [@wrathematics](https://github.com/wrathematics)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:263",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/technion/ruby-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:263  * [Ruby](https://github.com/technion/ruby-argon2) by [@technion](https://github.com/technion)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:263",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/technion",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:263  * [Ruby](https://github.com/technion/ruby-argon2) by [@technion](https://github.com/technion)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:264",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/quininer/argon2-rs",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:264  * [Rust](https://github.com/quininer/argon2-rs) by [@quininer](https://github.com/quininer)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:264",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/quininer",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:264  * [Rust](https://github.com/quininer/argon2-rs) by [@quininer](https://github.com/quininer)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:265",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/argonautica/",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:265  * [Rust](https://docs.rs/argonautica/) by [@bcmyers](https://github.com/bcmyers/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:265",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bcmyers/",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:265  * [Rust](https://docs.rs/argonautica/) by [@bcmyers](https://github.com/bcmyers/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:266",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kmaragon/Konscious.Security.Cryptography",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:266  * [C#/.NET CoreCLR](https://github.com/kmaragon/Konscious.Security.Cryptography) by [@kmaragon](https://github.com/kmaragon)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:266",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kmaragon",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:266  * [C#/.NET CoreCLR](https://github.com/kmaragon/Konscious.Security.Cryptography) by [@kmaragon](https://github.com/kmaragon)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:267",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Leont/crypt-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:267  * [Perl](https://github.com/Leont/crypt-argon2) by [@leont](https://github.com/Leont)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:267",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Leont",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:267  * [Perl](https://github.com/Leont/crypt-argon2) by [@leont](https://github.com/Leont)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:268",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Asmod4n/mruby-argon2",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:268  * [mruby](https://github.com/Asmod4n/mruby-argon2) by [@Asmod4n](https://github.com/Asmod4n)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:268",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Asmod4n",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:268  * [mruby](https://github.com/Asmod4n/mruby-argon2) by [@Asmod4n](https://github.com/Asmod4n)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:269",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ImKcat/CatCrypto",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:269  * [Swift](https://github.com/ImKcat/CatCrypto) by [@ImKcat](https://github.com/ImKcat)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "deps/phc-winner-argon2-20190702/README.md:269",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ImKcat",
+      "evidence": "deps/phc-winner-argon2-20190702/README.md:269  * [Swift](https://github.com/ImKcat/CatCrypto) by [@ImKcat](https://github.com/ImKcat)"
+    }
+  ],
+  "reRooting": []
+}

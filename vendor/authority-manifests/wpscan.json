@@ -1,0 +1,1809 @@
+{
+  "target": "wpscan (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\wpscan)",
+  "origin": "https://github.com/wpscanteam/wpscan",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 318 个文本文件（源码 318、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "app/controllers/core.rb:162",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://a.com",
+      "evidence": "app/controllers/core.rb:162  # http://a.com => https://a.com (or the opposite)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/controllers/core.rb:162",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://a.com",
+      "evidence": "app/controllers/core.rb:162  # http://a.com => https://a.com (or the opposite)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/controllers/vuln_api.rb:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/profile",
+      "evidence": "app/controllers/vuln_api.rb:34  'The WPScan API Token to display vulnerability data, available at https://wpscan.com/profile']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/interesting_findings/php_disabled.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1593",
+      "evidence": "app/finders/interesting_findings/php_disabled.rb:6  # See https://github.com/wpscanteam/wpscan/issues/1593"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/medias/attachment_brute_forcing.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/172",
+      "evidence": "app/finders/medias/attachment_brute_forcing.rb:6  # Medias Finder, see https://github.com/wpscanteam/wpscan/issues/172"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/timthumb_version/bad_request.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://code.google.com/p/timthumb/source/browse/trunk/timthumb.php#435",
+      "evidence": "app/finders/timthumb_version/bad_request.rb:7  # See https://code.google.com/p/timthumb/source/browse/trunk/timthumb.php#435"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/timthumbs/known_locations.rb:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/GabrielGil/TimThumb/blob/980c3d6a823477761570475e8b83d3e9fcd2d7ae/timthumb.php",
+      "evidence": "app/finders/timthumbs/known_locations.rb:8  # https://github.com/GabrielGil/TimThumb/blob/980c3d6a823477761570475e8b83d3e9fcd2d7ae/timthumb.php"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/oembed_api.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1049",
+      "evidence": "app/finders/users/oembed_api.rb:7  # https://github.com/wpscanteam/wpscan/issues/1049"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/rss_generator.rb:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1215",
+      "evidence": "app/finders/users/rss_generator.rb:25  # as they are considered invalid. See https://github.com/wpscanteam/wpscan/issues/1215"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/wp_json_api.rb:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1038",
+      "evidence": "app/finders/users/wp_json_api.rb:8  # Since 4.7 - Need more investigation as it seems WP 4.7.1 reduces the exposure, see https://github.com/wpscanteam/wpscan/issues/1038)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/wp_json_api.rb:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1285",
+      "evidence": "app/finders/users/wp_json_api.rb:9  # For the pagination, see https://github.com/wpscanteam/wpscan/issues/1285"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/wp_json_api.rb:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/",
+      "evidence": "app/finders/users/wp_json_api.rb:12  MAX_PER_PAGE = 100 # See https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/wp_json_api.rb:67",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.w.org/",
+      "evidence": "app/finders/users/wp_json_api.rb:67  target.in_scope_uris(target.homepage_res, \"//link[@rel='https://api.w.org/']/@href\").each do |uri|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/finders/users/yoast_seo_author_sitemap.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1228",
+      "evidence": "app/finders/users/yoast_seo_author_sitemap.rb:7  # See https://github.com/wpscanteam/wpscan/issues/1228"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/cli_no_color.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/WPScan/issues/56",
+      "evidence": "app/formatters/cli_no_color.rb:5  # Because Reason https://github.com/wpscanteam/WPScan/issues/56"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/sarif.rb:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/sarif-v2.1.0-os.html#_Toc34317419",
+      "evidence": "app/formatters/sarif.rb:17  #     (https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/sarif-v2.1.0-os.html#_Toc34317419)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/sarif.rb:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/sarif-v2.1.0-os.html#_Toc34317719",
+      "evidence": "app/formatters/sarif.rb:21  #     (https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/sarif-v2.1.0-os.html#_Toc34317719)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/sarif.rb:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning",
+      "evidence": "app/formatters/sarif.rb:24  # at https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/sarif.rb:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://json.schemastore.org/sarif-2.1.0.json",
+      "evidence": "app/formatters/sarif.rb:32  SARIF_SCHEMA  = 'https://json.schemastore.org/sarif-2.1.0.json'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/sarif.rb:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/wordpress-security-scanner",
+      "evidence": "app/formatters/sarif.rb:33  INFO_URI      = 'https://wpscan.com/wordpress-security-scanner'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/formatters/sarif.rb:273",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/vulnerability/#{wpvulndb",
+      "evidence": "app/formatters/sarif.rb:273  return \"https://wpscan.com/vulnerability/#{wpvulndb}\" if wpvulndb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/fantastico_fileslist.rb:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.archive.org/web/20140518040021/http://www.acunetix.com/vulnerabilities/fantastico-fileslist/",
+      "evidence": "app/models/fantastico_fileslist.rb:29  url: ['https://web.archive.org/web/20140518040021/http://www.acunetix.com/vulnerabilities/fantastico-fileslist/']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/422",
+      "evidence": "app/models/interesting_finding.rb:56  @references ||= { url: ['https://github.com/wpscanteam/wpscan/issues/422'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:67",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codex.wordpress.org/Debugging_in_WordPress",
+      "evidence": "app/models/interesting_finding.rb:67  @references ||= { url: ['https://codex.wordpress.org/Debugging_in_WordPress'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.exploit-db.com/ghdb/3981/",
+      "evidence": "app/models/interesting_finding.rb:74  @references ||= { url: ['https://www.exploit-db.com/ghdb/3981/'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:81",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codex.wordpress.org/Resetting_Your_Password#Using_the_Emergency_Password_Reset_Script",
+      "evidence": "app/models/interesting_finding.rb:81  url: ['https://codex.wordpress.org/Resetting_Your_Password#Using_the_Emergency_Password_Reset_Script']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.owasp.org/index.php/Full_Path_Disclosure",
+      "evidence": "app/models/interesting_finding.rb:93  @references ||= { url: ['https://www.owasp.org/index.php/Full_Path_Disclosure'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:105",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://codex.wordpress.org/Must_Use_Plugins",
+      "evidence": "app/models/interesting_finding.rb:105  @references ||= { url: ['http://codex.wordpress.org/Must_Use_Plugins'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:117",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://codex.wordpress.org/Glossary#Multisite",
+      "evidence": "app/models/interesting_finding.rb:117  @references ||= { url: ['http://codex.wordpress.org/Glossary#Multisite'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:168",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.iplocation.net/defend-wordpress-from-ddos",
+      "evidence": "app/models/interesting_finding.rb:168  'https://www.iplocation.net/defend-wordpress-from-ddos',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:169",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1299",
+      "evidence": "app/models/interesting_finding.rb:169  'https://github.com/wpscanteam/wpscan/issues/1299'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/interesting_finding.rb:184",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/1593",
+      "evidence": "app/models/interesting_finding.rb:184  url: ['https://github.com/wpscanteam/wpscan/issues/1593']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/plugin.rb:42",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug",
+      "evidence": "app/models/plugin.rb:42  \"https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=#{encoded_slug}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/search_replace_db_2.rb:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://interconnectit.com/products/search-and-replace-for-wordpress-databases/",
+      "evidence": "app/models/search_replace_db_2.rb:13  @references ||= { url: ['https://interconnectit.com/products/search-and-replace-for-wordpress-databases/'] }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/theme.rb:48",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.wordpress.org/themes/info/1.2/?action=theme_information",
+      "evidence": "app/models/theme.rb:48  'https://api.wordpress.org/themes/info/1.2/?action=theme_information' \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/timthumb.rb:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://seclists.org/fulldisclosure/2014/Jun/117",
+      "evidence": "app/models/timthumb.rb:54  url: ['http://seclists.org/fulldisclosure/2014/Jun/117', 'https://github.com/wpscanteam/wpscan/issues/519'],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/timthumb.rb:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues/519",
+      "evidence": "app/models/timthumb.rb:54  url: ['http://seclists.org/fulldisclosure/2014/Jun/117', 'https://github.com/wpscanteam/wpscan/issues/519'],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/timthumb.rb:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://#{default_allowed_domains.sample",
+      "evidence": "app/models/timthumb.rb:64  res = Browser.get(url, params: { webshot: 1, src: \"http://#{default_allowed_domains.sample}\" })"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/xml_rpc.rb:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://codex.wordpress.org/XML-RPC_Pingback_API",
+      "evidence": "app/models/xml_rpc.rb:82  url: ['http://codex.wordpress.org/XML-RPC_Pingback_API'],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "app/models/wp_item/wordpress_org_data.rb:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codex.wordpress.org/WordPress.org_API",
+      "evidence": "app/models/wp_item/wordpress_org_data.rb:28  # See https://codex.wordpress.org/WordPress.org_API"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan.rb:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/typhoeus/typhoeus/issues/439",
+      "evidence": "lib/wpscan.rb:29  require 'wpscan/typhoeus/hydra'    # https://github.com/typhoeus/typhoeus/issues/439"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan.rb:72",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/typhoeus/typhoeus/issues/562",
+      "evidence": "lib/wpscan.rb:72  # Avoid memory leak when using Hydra, see https://github.com/typhoeus/typhoeus/issues/562"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/opt_parse_validator/hacks.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/CMSScanner/issues/2",
+      "evidence": "lib/opt_parse_validator/hacks.rb:6  # See https://github.com/wpscanteam/CMSScanner/issues/2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/opt_parse_validator/opts/regexp.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ruby-doc.org/core-2.2.1/Regexp.html#method-c-new",
+      "evidence": "lib/opt_parse_validator/opts/regexp.rb:5  # See http://ruby-doc.org/core-2.2.1/Regexp.html#method-c-new for expected values in :options"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/browser.rb:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/wordpress-security-scanner",
+      "evidence": "lib/wpscan/browser.rb:32  @default_user_agent ||= \"WPScan v#{VERSION} (https://wpscan.com/wordpress-security-scanner)\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/browser.rb:53",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html",
+      "evidence": "lib/wpscan/browser.rb:53  # See http://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/controllers.rb:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://specifications.freedesktop.org/basedir/latest/",
+      "evidence": "lib/wpscan/controllers.rb:20  # https://specifications.freedesktop.org/basedir/latest/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/controllers.rb:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://no-color.org",
+      "evidence": "lib/wpscan/controllers.rb:48  # caller has set NO_COLOR (see https://no-color.org). Explicit"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/formatter.rb:105",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.ruby-doc.org/stdlib/libdoc/erb/rdoc/ERB.html",
+      "evidence": "lib/wpscan/formatter.rb:105  # See http://www.ruby-doc.org/stdlib/libdoc/erb/rdoc/ERB.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-#{cve",
+      "evidence": "lib/wpscan/references.rb:54  \"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-#{cve}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:69",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.exploit-db.com/exploits/#{id",
+      "evidence": "lib/wpscan/references.rb:69  \"https://www.exploit-db.com/exploits/#{id}/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.rapid7.com/db/modules/#{mod.sub(%r{^/",
+      "evidence": "lib/wpscan/references.rb:89  \"https://www.rapid7.com/db/modules/#{mod.sub(%r{^/}, '')}/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:104",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://packetstormsecurity.com/files/#{id",
+      "evidence": "lib/wpscan/references.rb:104  \"https://packetstormsecurity.com/files/#{id}/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:119",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.securityfocus.com/bid/#{id",
+      "evidence": "lib/wpscan/references.rb:119  \"https://www.securityfocus.com/bid/#{id}/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:129",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.youtube.com/watch?v=#{id",
+      "evidence": "lib/wpscan/references.rb:129  \"https://www.youtube.com/watch?v=#{id}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/references.rb:144",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/vulnerability/#{id",
+      "evidence": "lib/wpscan/references.rb:144  \"https://wpscan.com/vulnerability/#{id}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/db/updater.rb:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/pull/1455",
+      "evidence": "lib/wpscan/db/updater.rb:35  # Mainly there for Homebrew: https://github.com/wpscanteam/wpscan/pull/1455"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/db/updater.rb:130",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://#{host",
+      "evidence": "lib/wpscan/db/updater.rb:130  \"https://#{host}/#{filename}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/db/vuln_api.rb:26",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://wpscan.com/api/v4/",
+      "evidence": "lib/wpscan/db/vuln_api.rb:26  @uri ||= Addressable::URI.parse('https://wpscan.com/api/v4/')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/http.rb:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://status.wpscan.com/",
+      "evidence": "lib/wpscan/errors/http.rb:40  \"- Check our status page at https://status.wpscan.com/\\n  \" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/http.rb:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/contact/",
+      "evidence": "lib/wpscan/errors/http.rb:41  \"- Contact us via https://wpscan.com/contact/ (please include the Ray ID above if any)\\n  \" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/http.rb:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues",
+      "evidence": "lib/wpscan/errors/http.rb:42  '- Or open a GitHub issue at https://github.com/wpscanteam/wpscan/issues'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/update.rb:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://status.wpscan.com/",
+      "evidence": "lib/wpscan/errors/update.rb:25  \"- Check our status page at https://status.wpscan.com/\\n  \" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/update.rb:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/contact/",
+      "evidence": "lib/wpscan/errors/update.rb:26  \"- Contact us via https://wpscan.com/contact/ (please include the Ray ID above if any)\\n  \" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/update.rb:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wpscanteam/wpscan/issues",
+      "evidence": "lib/wpscan/errors/update.rb:27  '- Or open a GitHub issue at https://github.com/wpscanteam/wpscan/issues'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/vuln_api.rb:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wpscan.com/register",
+      "evidence": "lib/wpscan/errors/vuln_api.rb:24  'You can get a free API token with 25 daily requests by registering at https://wpscan.com/register. ' \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/errors/vuln_api.rb:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://status.wpscan.com/",
+      "evidence": "lib/wpscan/errors/vuln_api.rb:40  'Please check https://status.wpscan.com/ for service status.'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/finders/finder.rb:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jfelchner/ruby-progressbar/wiki/Options",
+      "evidence": "lib/wpscan/finders/finder.rb:36  # @param [ Hash ] opts See https://github.com/jfelchner/ruby-progressbar/wiki/Options"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/finders/finder/enumerator.rb:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/typhoeus/typhoeus/issues/408",
+      "evidence": "lib/wpscan/finders/finder/enumerator.rb:12  # See https://github.com/typhoeus/typhoeus/issues/408"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/wpscan/typhoeus/hydra.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/typhoeus/typhoeus/issues/439",
+      "evidence": "lib/wpscan/typhoeus/hydra.rb:5  # See https://github.com/typhoeus/typhoeus/issues/439"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/spec_helper.rb:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://betterspecs.org/",
+      "evidence": "spec/spec_helper.rb:11  # See http://betterspecs.org/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/spec_helper.rb:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bblimke/webmock/issues/552",
+      "evidence": "spec/spec_helper.rb:82  # TODO: remove when https://github.com/bblimke/webmock/issues/552 fixed"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/views_spec.rb:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/views_spec.rb:4  let(:target_url) { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/aliases_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/controllers/aliases_spec.rb:5  let(:target_url)     { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/authenticated_inventory_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/controllers/authenticated_inventory_spec.rb:5  let(:target_url)     { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/authenticated_inventory_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-json/wp/v2/plugins",
+      "evidence": "spec/app/controllers/authenticated_inventory_spec.rb:6  let(:plugins_url)    { 'http://wp.lab/wp-json/wp/v2/plugins' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/authenticated_inventory_spec.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-json/wp/v2/themes",
+      "evidence": "spec/app/controllers/authenticated_inventory_spec.rb:7  let(:themes_url)     { 'http://wp.lab/wp-json/wp/v2/themes' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/authenticated_inventory_spec.rb:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp",
+      "evidence": "spec/app/controllers/authenticated_inventory_spec.rb:36  stub_request(:get, %r{http://wp\\.lab/wp-content/themes/.*/style\\.css}).to_return(body: '')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/controllers/core_spec.rb:5  let(:target_url)     { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:193",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.wordpress.com",
+      "evidence": "spec/app/controllers/core_spec.rb:193  let(:target_url) { 'http://ex.wordpress.com' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:227",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://g.com/",
+      "evidence": "spec/app/controllers/core_spec.rb:227  let(:redirection) { 'http://g.com/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:247",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://g.com/blog/",
+      "evidence": "spec/app/controllers/core_spec.rb:247  let(:redirection) { 'http://g.com/blog/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:262",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://g.com/other",
+      "evidence": "spec/app/controllers/core_spec.rb:262  expect(core.target.in_scope?('http://g.com/other')).to be true"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:404",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.wordpress.com/",
+      "evidence": "spec/app/controllers/core_spec.rb:404  allow(WPScan).to receive(:command_line).and_return('--url http://ex.wordpress.com/')\nspec/app/controllers/core_spec.rb:419  command_line: '--url http://ex.wordpress.com/',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:563",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/?SAMLRequest=value",
+      "evidence": "spec/app/controllers/core_spec.rb:563  uri = Addressable::URI.parse('http://example.com/?SAMLRequest=value')\nspec/app/controllers/core_spec.rb:595  let(:effective_uri)      { Addressable::URI.parse('http://example.com/?SAMLRequest=value') }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:570",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/",
+      "evidence": "spec/app/controllers/core_spec.rb:570  uri = Addressable::URI.parse('http://example.com/')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:583",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://idp.example.com/login",
+      "evidence": "spec/app/controllers/core_spec.rb:583  uri = Addressable::URI.parse('http://idp.example.com/login')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:585",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://idp.example.com/sso?SAMLRequest=abc",
+      "evidence": "spec/app/controllers/core_spec.rb:585  response_headers: \"HTTP/1.1 302 Found\\r\\nLocation: http://idp.example.com/sso?SAMLRequest=abc\\r\\n\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/core_spec.rb:629",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/cached",
+      "evidence": "spec/app/controllers/core_spec.rb:629  core.target.instance_variable_set(:@homepage_url, 'http://example.com/cached')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/custom_directories_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/controllers/custom_directories_spec.rb:5  let(:target_url)     { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/enumeration_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/controllers/enumeration_spec.rb:5  let(:target_url)     { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/interesting_findings_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/",
+      "evidence": "spec/app/controllers/interesting_findings_spec.rb:5  let(:target_url)     { 'http://example.com/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/password_attack_spec.rb:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/controllers/password_attack_spec.rb:24  let(:target_url)     { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/vuln_api_spec.rb:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/controllers/vuln_api_spec.rb:5  let(:target_url)     { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/vuln_api_spec.rb:114",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://status.wpscan.com/",
+      "evidence": "spec/app/controllers/vuln_api_spec.rb:114  'Please check https://status.wpscan.com/ for service status.'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/controllers/wp_version_spec.rb:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/controllers/wp_version_spec.rb:26  let(:target_url)     { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/config_backups_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/config_backups_spec.rb:6  let(:url)                { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/db_exports_spec.rb:6  let(:url)            { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings_spec.rb:6  let(:url)       { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/main_theme_spec.rb:6  let(:url)            { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/medias_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/medias_spec.rb:6  let(:url)       { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugin_version_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugin_version_spec.rb:6  let(:target)             { WPScan::Target.new('http://wp.lab/') }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/plugins_spec.rb:6  let(:url)         { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/theme_version_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/theme_version_spec.rb:6  let(:target)            { WPScan::Target.new('http://wp.lab/') }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/themes_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/timthumb_version_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/timthumb.php",
+      "evidence": "spec/app/finders/timthumb_version_spec.rb:6  let(:url)                  { 'http://ex.lo/timthumb.php' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/timthumbs_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/timthumbs_spec.rb:6  let(:url)          { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/users_spec.rb:6  let(:url)      { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/wp_version_spec.rb:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/wp_version_spec.rb:9  let(:url)            { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/backup_folders/known_locations_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/backup_folders/known_locations_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/config_backups/known_filenames_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/config_backups/known_filenames_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:6  let(:url)        { 'http://ex.lo/aa/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/ex.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:17  http://ex.lo/aa/ex.sql"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/wordpress.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:18  http://ex.lo/aa/wordpress.sql"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/backup/ex.zip",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:19  http://ex.lo/aa/backup/ex.zip"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/backup/mysql.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:20  http://ex.lo/aa/backup/mysql.sql"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/backups/ex.sql.gz",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:21  http://ex.lo/aa/backups/ex.sql.gz"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/aa/backups/db_backup.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:22  http://ex.lo/aa/backups/db_backup.sql"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://#{sub_domain",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:28  let(:url) { \"https://#{sub_domain}.domain.tld\" }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://something.com.tr",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:37  let(:url) { 'https://something.com.tr' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://something.com.tr/something.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:40  expect(finder.potential_urls(opts).keys).to include 'https://something.com.tr/something.sql'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.something.com.tr",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:45  let(:url) { 'https://dev.something.com.tr' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.something.com.tr/something.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:49  'https://dev.something.com.tr/something.sql',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.something.com.tr/dev.something.sql",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:50  'https://dev.something.com.tr/dev.something.sql'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://098f6bcd4621d373cade4e832627b4f6.aa-bb-ccc-dd.domain-test.com",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:56  let(:url) { 'https://098f6bcd4621d373cade4e832627b4f6.aa-bb-ccc-dd.domain-test.com' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:67",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dc-2",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:67  let(:url) { 'http://dc-2' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/db_exports/known_locations_spec.rb:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.12",
+      "evidence": "spec/app/finders/db_exports/known_locations_spec.rb:75  let(:url) { 'http://192.168.1.12' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/backup_db_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/backup_db_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/debug_log_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/debug_log_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/duplicator_installer_log_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/duplicator_installer_log_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/emergency_pwd_reset_script_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/emergency_pwd_reset_script_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/fantastico_fileslist_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://e.org/",
+      "evidence": "spec/app/finders/interesting_findings/fantastico_fileslist_spec.rb:6  let(:url)        { 'http://e.org/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/full_path_disclosure_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/full_path_disclosure_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/headers_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://e.org/",
+      "evidence": "spec/app/finders/interesting_findings/headers_spec.rb:6  let(:url)        { 'http://e.org/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/mu_plugins_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/mu_plugins_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/mu_plugins_spec.rb:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-content/mu-plugins/",
+      "evidence": "spec/app/finders/interesting_findings/mu_plugins_spec.rb:61  let(:mu_plugins_url) { 'http://ex.lo/wp-content/mu-plugins/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/multisite_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/multisite_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/multisite_spec.rb:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-signup.php",
+      "evidence": "spec/app/finders/interesting_findings/multisite_spec.rb:10  let(:signup_url) { 'http://ex.lo/wp-signup.php' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/multisite_spec.rb:46",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-login.php?action=register",
+      "evidence": "spec/app/finders/interesting_findings/multisite_spec.rb:46  let(:headers) { { 'location' => 'http://ex.lo/wp-login.php?action=register' } }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/multisite_spec.rb:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-signup.php?foo=bar",
+      "evidence": "spec/app/finders/interesting_findings/multisite_spec.rb:55  let(:headers) { { 'location' => 'http://ex.lo/wp-signup.php?foo=bar' } }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/php_disabled_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/php_disabled_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/readme_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/readme_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/registration_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/registration_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/registration_spec.rb:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-login.php?action=register",
+      "evidence": "spec/app/finders/interesting_findings/registration_spec.rb:10  let(:register_url) { 'http://ex.lo/wp-login.php?action=register' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/robots_txt_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://e.org/",
+      "evidence": "spec/app/finders/interesting_findings/robots_txt_spec.rb:6  let(:url)        { 'http://e.org/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/search_replace_db_2_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://e.org/",
+      "evidence": "spec/app/finders/interesting_findings/search_replace_db_2_spec.rb:6  let(:url)        { 'http://e.org/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/tmm_db_migrate_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/tmm_db_migrate_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/tmm_db_migrate_spec.rb:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-content/uploads/tmm_db_migrate/tmm_db_migrate.zip",
+      "evidence": "spec/app/finders/interesting_findings/tmm_db_migrate_spec.rb:10  let(:zip_url) { 'http://ex.lo/wp-content/uploads/tmm_db_migrate/tmm_db_migrate.zip' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/upload_direcrory_listing_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/upload_direcrory_listing_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/upload_direcrory_listing_spec.rb:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/wp-content/uploads/",
+      "evidence": "spec/app/finders/interesting_findings/upload_direcrory_listing_spec.rb:11  let(:uploads_url) { 'http://ex.lo/wp-content/uploads/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/upload_sql_dump_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/upload_sql_dump_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/wp_cron_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/interesting_findings/wp_cron_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/xml_rpc_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://e.org/",
+      "evidence": "spec/app/finders/interesting_findings/xml_rpc_spec.rb:6  let(:url)         { 'http://e.org/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/xml_rpc_spec.rb:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.org/yolo",
+      "evidence": "spec/app/finders/interesting_findings/xml_rpc_spec.rb:48  let(:headers) { { 'X-Pingback' => 'http://ex.org/yolo' } }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/interesting_findings/xml_rpc_spec.rb:90",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://e.org/wp/xmlrpc.php",
+      "evidence": "spec/app/finders/interesting_findings/xml_rpc_spec.rb:90  let(:expected_url) { 'http://e.org/wp/xmlrpc.php' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/css_style_in_404_page_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/main_theme/css_style_in_404_page_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/css_style_in_homepage_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/main_theme/css_style_in_homepage_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/css_style_in_homepage_spec.rb:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-content/themes/twentyfifteen/style.css?ver=4.1.1",
+      "evidence": "spec/app/finders/main_theme/css_style_in_homepage_spec.rb:38  style_url: 'http://wp.lab/wp-content/themes/twentyfifteen/style.css?ver=4.1.1'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/css_style_in_homepage_spec.rb:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-content/themes/custom/style.css",
+      "evidence": "spec/app/finders/main_theme/css_style_in_homepage_spec.rb:52  style_url: 'http://wp.lab/wp-content/themes/custom/style.css'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/urls_in_404_page_spec.rb.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/main_theme/urls_in_404_page_spec.rb.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/urls_in_homepage_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/main_theme/urls_in_homepage_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/main_theme/woo_framework_meta_generator_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/main_theme/woo_framework_meta_generator_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/medias/attachment_brute_forcing_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/medias/attachment_brute_forcing_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/medias/attachment_brute_forcing_spec.rb:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex",
+      "evidence": "spec/app/finders/medias/attachment_brute_forcing_spec.rb:21  stub_request(:any, %r{http://ex\\.lo/wp-content/plugins/}).to_return(status: 404)\nspec/app/finders/medias/attachment_brute_forcing_spec.rb:22  stub_request(:any, %r{http://ex\\.lo/wp-content/themes/}).to_return(status: 404)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/passwords/wp_login_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/passwords/wp_login_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/passwords/xml_rpc_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/xmlrpc.php",
+      "evidence": "spec/app/finders/passwords/xml_rpc_spec.rb:6  let(:url)        { 'http://ex.lo/xmlrpc.php' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugin_version/readme_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugin_version/readme_spec.rb:6  let(:target)     { WPScan::Target.new('http://wp.lab/') }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/body_pattern_spec.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/body_pattern_spec.rb:7  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/comment_spec.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/comment_spec.rb:7  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/config_parser_spec.rb:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/config_parser_spec.rb:9  #  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/header_pattern_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/header_pattern_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/javascript_var_spec.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/javascript_var_spec.rb:7  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/known_locations_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/plugins/known_locations_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/query_parameter_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/query_parameter_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/urls_in_404_page_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wp.lab/",
+      "evidence": "spec/app/finders/plugins/urls_in_404_page_spec.rb:6  let(:url)        { 'https://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/urls_in_homepage_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wp.lab/",
+      "evidence": "spec/app/finders/plugins/urls_in_homepage_spec.rb:6  let(:url)        { 'https://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/wp_json_api_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/wp_json_api_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/wp_json_api_spec.rb:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-json/wp/v2/plugins",
+      "evidence": "spec/app/finders/plugins/wp_json_api_spec.rb:8  let(:api_url)    { 'http://wp.lab/wp-json/wp/v2/plugins' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/plugins/xpath_spec.rb:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/plugins/xpath_spec.rb:7  let(:url)          { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/theme_version/style_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/theme_version/style_spec.rb:6  let(:target)     { WPScan::Target.new('http://wp.lab/') }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/theme_version/woo_framework_meta_generator_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/theme_version/woo_framework_meta_generator_spec.rb:6  let(:target)     { WPScan::Target.new('http://wp.lab/') }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/known_locations_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/themes/known_locations_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/known_locations_spec.rb:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex",
+      "evidence": "spec/app/finders/themes/known_locations_spec.rb:22  stub_request(:any, %r{http://ex\\.lo/wp-content/plugins/}).to_return(status: 404)\nspec/app/finders/themes/known_locations_spec.rb:23  stub_request(:any, %r{http://ex\\.lo/wp-content/themes/}).to_return(status: 404)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/urls_in_404_page_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/themes/urls_in_404_page_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/urls_in_homepage_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/themes/urls_in_homepage_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/urls_in_homepage_spec.rb:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-content/themes/dl-1/style.css",
+      "evidence": "spec/app/finders/themes/urls_in_homepage_spec.rb:27  stub_request(:get, 'http://wp.lab/wp-content/themes/dl-1/style.css')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/urls_in_homepage_spec.rb:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-content/themes/dc-1/style.css",
+      "evidence": "spec/app/finders/themes/urls_in_homepage_spec.rb:29  stub_request(:get, 'http://wp.lab/wp-content/themes/dc-1/style.css')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/wp_json_api_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/themes/wp_json_api_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/wp_json_api_spec.rb:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-json/wp/v2/themes",
+      "evidence": "spec/app/finders/themes/wp_json_api_spec.rb:8  let(:api_url)    { 'http://wp.lab/wp-json/wp/v2/themes' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/themes/wp_json_api_spec.rb:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp",
+      "evidence": "spec/app/finders/themes/wp_json_api_spec.rb:17  stub_request(:get, %r{http://wp\\.lab/wp-content/themes/.*/style\\.css}).to_return(body: '')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/timthumb_version/bad_request_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/timthumb.php",
+      "evidence": "spec/app/finders/timthumb_version/bad_request_spec.rb:6  let(:url)        { 'http://ex.lo/timthumb.php' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/timthumbs/known_locations_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex.lo/",
+      "evidence": "spec/app/finders/timthumbs/known_locations_spec.rb:6  let(:url)        { 'http://ex.lo/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/timthumbs/known_locations_spec.rb:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ex",
+      "evidence": "spec/app/finders/timthumbs/known_locations_spec.rb:28  stub_request(:any, %r{http://ex\\.lo/wp-content/plugins/}).to_return(status: 404)\nspec/app/finders/timthumbs/known_locations_spec.rb:29  stub_request(:any, %r{http://ex\\.lo/wp-content/themes/}).to_return(status: 404)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/author_id_brute_forcing_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/users/author_id_brute_forcing_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/author_id_brute_forcing_spec.rb:152",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wp.lab/author/test/",
+      "evidence": "spec/app/finders/users/author_id_brute_forcing_spec.rb:152  body << '<a href=\"https://wp.lab/author/test/\">Link</a>'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/author_posts_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/users/author_posts_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/author_sitemap_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/users/author_sitemap_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/author_sitemap_spec.rb:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/wp-sitemap-users-1.xml",
+      "evidence": "spec/app/finders/users/author_sitemap_spec.rb:39  expect(users.first.interesting_entries).to eql ['http://wp.lab/wp-sitemap-users-1.xml']\nspec/app/finders/users/author_sitemap_spec.rb:43  expect(users.last.interesting_entries).to eql ['http://wp.lab/wp-sitemap-users-1.xml']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/login_error_messages_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/users/login_error_messages_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "spec/app/finders/users/oembed_api_spec.rb:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wp.lab/",
+      "evidence": "spec/app/finders/users/oembed_api_spec.rb:6  let(:url)        { 'http://wp.lab/' }"
+    }
+  ],
+  "reRooting": []
+}

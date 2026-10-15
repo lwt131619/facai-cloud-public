@@ -1,0 +1,33 @@
+{
+  "name": "facai-desktop",
+  "version": "1.0.0",
+  "description": "FACAI 任务工作台桌面客户端",
+  "main": "main.js",
+  "author": "Facai",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.facai.workstation",
+    "productName": "FACAI",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "icon.png"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "FACAI 任务工作台",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

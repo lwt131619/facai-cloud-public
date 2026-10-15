@@ -1,0 +1,450 @@
+{
+  "target": "ghauri-local (初扫收录实例 C:\\Users\\user\\opencode\\skills\\ghauri-venv)",
+  "origin": "本地路径 C:\\Users\\user\\opencode\\skills\\ghauri-venv",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 34 个文本文件（源码 27、其余 7），识别 49 面（源码档 30、文档/示例 DOC_ 降权 19、其余文件 0；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/__init__.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/__init__.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/ghauri.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/ghauri.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/ghauri.py:396",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{url",
+      "evidence": "ghauri/ghauri.py:396  url = f\"http://{url}\" if not url.startswith(\"//\") else f\"http:{url}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/banner.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/banner.py:8  Github  : https://github.com/r0oth3x49\nghauri/common/banner.py:48  string=\"https://github.com/r0oth3x49\", color=\"bright_white\", faint=True"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/colors.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/colors.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/config.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/config.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/lib.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/lib.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/lib.py:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.github.com/r0oth3x49/ghauri.git",
+      "evidence": "ghauri/common/lib.py:87  GIT_REPOSITORY = \"https://www.github.com/r0oth3x49/ghauri.git\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/lib.py:88",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/r0oth3x49/ghauri/releases/latest",
+      "evidence": "ghauri/common/lib.py:88  LATEST_VERSION = \"https://api.github.com/repos/r0oth3x49/ghauri/releases/latest\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/payloads.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/payloads.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/session.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/session.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/utils.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/common/utils.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/utils.py:94",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/4685217/parse-raw-http-headers",
+      "evidence": "ghauri/common/utils.py:94  # source: https://stackoverflow.com/questions/4685217/parse-raw-http-headers"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/utils.py:627",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/2442",
+      "evidence": "ghauri/common/utils.py:627  It compares those two ratios and they should be clearly distinct based on https://github.com/sqlmapproject/sqlmap/issues/2442"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/common/utils.py:1787",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.site.com/article.php?id=1",
+      "evidence": "ghauri/common/utils.py:1787  \"you've provided target URL without any GET parameters (e.g. 'http://www.site.com/article.php?id=1') and without providing any POST parameters through option '--data'\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/extract.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/core/extract.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/inject.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/core/inject.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/request.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/core/request.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/tests.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/core/tests.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/update.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/core/update.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "ghauri/core/update.py:85",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "ghauri/core/update.py:85  process = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/update.py:125",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://desktop.github.com/",
+      "evidence": "ghauri/core/update.py:125  infoMsg += \"purposes (https://desktop.github.com/) or just \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/core/update.py:127",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri",
+      "evidence": "ghauri/core/update.py:127  infoMsg += \"https://github.com/r0oth3x49/ghauri and install\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/dbms/fingerprint.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/dbms/fingerprint.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/extractor/__init__.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/extractor/__init__.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/extractor/advance.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/extractor/advance.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/extractor/common.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/extractor/common.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/logger/colored_logger.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/logger/colored_logger.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/scripts/ghauri.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49",
+      "evidence": "ghauri/scripts/ghauri.py:8  Github  : https://github.com/r0oth3x49"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ghauri/scripts/ghauri.py:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.site.com/vuln.php?id=1",
+      "evidence": "ghauri/scripts/ghauri.py:35  examples = \"%(prog)s -u http://www.site.com/vuln.php?id=1 --dbs\\n\\n\"\nghauri/scripts/ghauri.py:97  help=\"Target URL (e.g. 'http://www.site.com/vuln.php?id=1).\","
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:1",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/release-v1.4.3-brightgreen?style=flat-square",
+      "evidence": "README.md:1  [![GitHub release](https://img.shields.io/badge/release-v1.4.3-brightgreen?style=flat-square)](https://github.com/r0oth3x49/ghauri/releases/tag/1.4.3)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:1",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri/releases/tag/1.4.3",
+      "evidence": "README.md:1  [![GitHub release](https://img.shields.io/badge/release-v1.4.3-brightgreen?style=flat-square)](https://github.com/r0oth3x49/ghauri/releases/tag/1.4.3)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/github/stars/r0oth3x49/ghauri?style=flat-square",
+      "evidence": "README.md:2  [![GitHub stars](https://img.shields.io/github/stars/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/stargazers)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri/stargazers",
+      "evidence": "README.md:2  [![GitHub stars](https://img.shields.io/github/stars/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/stargazers)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/github/forks/r0oth3x49/ghauri?style=flat-square",
+      "evidence": "README.md:3  [![GitHub forks](https://img.shields.io/github/forks/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/network)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri/network",
+      "evidence": "README.md:3  [![GitHub forks](https://img.shields.io/github/forks/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/network)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/github/issues/r0oth3x49/ghauri?style=flat-square",
+      "evidence": "README.md:4  [![GitHub issues](https://img.shields.io/github/issues/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/issues)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri/issues",
+      "evidence": "README.md:4  [![GitHub issues](https://img.shields.io/github/issues/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/issues)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/github/license/r0oth3x49/ghauri?style=flat-square",
+      "evidence": "README.md:5  [![GitHub license](https://img.shields.io/github/license/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/blob/main/LICENSE)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri/blob/main/LICENSE",
+      "evidence": "README.md:5  [![GitHub license](https://img.shields.io/github/license/r0oth3x49/ghauri?style=flat-square)](https://github.com/r0oth3x49/ghauri/blob/main/LICENSE)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.buymeacoffee.com/r0oth3x49",
+      "evidence": "README.md:9  <a href=\"https://www.buymeacoffee.com/r0oth3x49\" target=\"_blank\"><img src=\"https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black\" alt=\"Buy Me A Coffee\"></a> <a href=\"https://ko-fi"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black",
+      "evidence": "README.md:9  <a href=\"https://www.buymeacoffee.com/r0oth3x49\" target=\"_blank\"><img src=\"https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black\" alt=\"Buy Me A Coffee\"></a> <a href=\"https://ko-fi"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ko-fi.com/r0oth3x49",
+      "evidence": "README.md:9  <a href=\"https://www.buymeacoffee.com/r0oth3x49\" target=\"_blank\"><img src=\"https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black\" alt=\"Buy Me A Coffee\"></a> <a href=\"https://ko-fi"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white",
+      "evidence": "README.md:9  <a href=\"https://www.buymeacoffee.com/r0oth3x49\" target=\"_blank\"><img src=\"https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black\" alt=\"Buy Me A Coffee\"></a> <a href=\"https://ko-fi"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:15",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://user-images.githubusercontent.com/11024397/193408429-418a75e0-a070-4491-9f92-5799b2509cdf.PNG",
+      "evidence": "README.md:15  ![ghauri-banner](https://user-images.githubusercontent.com/11024397/193408429-418a75e0-a070-4491-9f92-5799b2509cdf.PNG)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:31",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri/issues/119#issuecomment-1873049386",
+      "evidence": "README.md:31  - Follow this [installation guideline](https://github.com/r0oth3x49/ghauri/issues/119#issuecomment-1873049386) if facing an installation issue."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:37",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r0oth3x49/ghauri.git",
+      "evidence": "README.md:37  git clone https://github.com/r0oth3x49/ghauri.git"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:82",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pk.linkedin.com/in/r0oth3x49",
+      "evidence": "README.md:82  Author: Nasir khan (<a href=\"https://pk.linkedin.com/in/r0oth3x49\">r0ot h3x49</a>)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:102",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.site.com/vuln.php?id=1",
+      "evidence": "README.md:102  -u URL, --url URL   Target URL (e.g. 'http://www.site.com/vuln.php?id=1).\nREADME.md:181  ghauri -u http://www.site.com/vuln.php?id=1 --dbs"
+    }
+  ],
+  "reRooting": []
+}

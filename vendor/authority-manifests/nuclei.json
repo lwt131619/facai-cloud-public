@@ -1,0 +1,1809 @@
+{
+  "target": "nuclei (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\nuclei)",
+  "origin": "https://github.com/projectdiscovery/nuclei",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 269 个文本文件（源码 269、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "cmd/nuclei/main.go:552",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.nuclei.sh/getting-started/running",
+      "evidence": "cmd/nuclei/main.go:552  Additional documentation is available at: https://docs.nuclei.sh/getting-started/running"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cmd/nuclei/main_benchmark_test.go:204",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/projectdiscovery/nuclei/pull/6258",
+      "evidence": "cmd/nuclei/main_benchmark_test.go:204  // Case: https://github.com/projectdiscovery/nuclei/pull/6258"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cmd/tmc/main.go:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tm.nuclei.sh",
+      "evidence": "cmd/tmc/main.go:33  tmBaseUrlDefault = \"https://tm.nuclei.sh\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cmd/tmc/main.go:239",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/projectdiscovery/templateman/blob/main/templateman-rest-api/README.md#enhance-api",
+      "evidence": "cmd/tmc/main.go:239  // ref: https://github.com/projectdiscovery/templateman/blob/main/templateman-rest-api/README.md#enhance-api"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/advanced/advanced.go:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://honey.scanme.sh",
+      "evidence": "examples/advanced/advanced.go:49  err = ne.ExecuteNucleiWithOpts([]string{\"http://honey.scanme.sh\"}, nuclei.WithTemplateFilters(nuclei.TemplateFilters{Tags: []string{\"oast\"}}))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/simple/simple.go:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://honey.scanme.sh",
+      "evidence": "examples/simple/simple.go:18  ne.LoadTargets([]string{\"http://honey.scanme.sh\"}, false)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/with_speed_control/main.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://honey.scanme.sh",
+      "evidence": "examples/with_speed_control/main.go:20  ne.LoadTargets([]string{\"http://honey.scanme.sh\"}, false)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/fuzzplayground/server.go:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "internal/fuzzplayground/server.go:83  <li><a href=\"/request?url=https://example.com\">Request Page SSRF</a></li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/fuzzplayground/server.go:215",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://internal",
+      "evidence": "internal/fuzzplayground/server.go:215  resp, err := http.Get(\"http://internal.\" + host + \"/update?user=1337&pass=\" + password)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/runner/options.go:402",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/golang/go/issues/19895",
+      "evidence": "internal/runner/options.go:402  // disable standard logger (ref: https://github.com/golang/go/issues/19895)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/runner/options.go:473",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com",
+      "evidence": "internal/runner/options.go:473  options.GitLabServerURL = \"https://gitlab.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/server.go:156",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s",
+      "evidence": "internal/server/server.go:156  gologger.Info().Msgf(\"DAST Proxy: http://%s\", s.options.ProxyAddress)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/server_test.go:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "internal/server/server_test.go:52  request.Header.Set(\"Origin\", \"https://example.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/server_test.go:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app",
+      "evidence": "internal/server/server_test.go:75  []string{`^https://app\\.example\\.com/api/`},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/server_test.go:76",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://telemetry",
+      "evidence": "internal/server/server_test.go:76  []string{`^https://telemetry\\.example\\.com/`},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/server_test.go:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://staging",
+      "evidence": "internal/server/server_test.go:87  staging, err := scope.NewManager(nil, []string{`^https://staging\\.example\\.com:8443/`})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/server_test.go:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/",
+      "evidence": "internal/server/server_test.go:107  require.False(t, server.Submit(\"GET / HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n\", \"http://example.com/\"),\ninternal/server/server_test.go:116  request := httptest.NewRequest(http.MethodPost, \"/fuzz\", strings.NewReader(`{\"raw_http\":\"GET / HTTP/1.1\\r\\n\\r\\n\",\"url\":\"http://example.com/\"}`))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/proxy/proxy_test.go:178",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/upload",
+      "evidence": "internal/server/proxy/proxy_test.go:178  request, err := http.NewRequest(http.MethodPost, \"http://example.com/upload\", strings.NewReader(\"payload\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/proxy/proxy_test.go:192",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/login",
+      "evidence": "internal/server/proxy/proxy_test.go:192  request, err := http.NewRequest(http.MethodPost, \"http://example.com/login\", strings.NewReader(\"user=admin\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/proxy/proxy_test.go:206",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/",
+      "evidence": "internal/server/proxy/proxy_test.go:206  request, err := http.NewRequest(http.MethodGet, \"http://example.com/\", nil)\ninternal/server/proxy/proxy_test.go:208  request.RequestURI = \"http://example.com/\" // absolute form, as a proxy receives it\ninternal/server/proxy/proxy_test.go:223  request, err := http.NewRequest(http.MethodGet, \"http://example.com/\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/scope/scope_test.go:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://test.com/index.php/example",
+      "evidence": "internal/server/scope/scope_test.go:16  parsed, _ := urlutil.Parse(\"https://test.com/index.php/example\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/scope/scope_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://test.com/logout.php",
+      "evidence": "internal/server/scope/scope_test.go:21  parsed, _ = urlutil.Parse(\"https://test.com/logout.php\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/scope/scope_test.go:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app",
+      "evidence": "internal/server/scope/scope_test.go:31  []string{`^https://app\\.example\\.com/api/`},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/scope/scope_test.go:32",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://telemetry",
+      "evidence": "internal/server/scope/scope_test.go:32  []string{`^https://telemetry\\.example\\.com/`},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/scope/scope_test.go:36",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://telemetry.example.com/",
+      "evidence": "internal/server/scope/scope_test.go:36  excluded, err := url.Parse(\"https://telemetry.example.com/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/server/scope/scope_test.go:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.example.com/",
+      "evidence": "internal/server/scope/scope_test.go:41  unlisted, err := url.Parse(\"https://app.example.com/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/flow_test.go:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh",
+      "evidence": "internal/tests/integration/flow_test.go:66  results, err := testutils.RunNucleiTemplateAndGetResults(\"flow/iterate-one-value-flow.yaml\", \"https://scanme.sh\", suite.debug)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/fuzz_test.go:228",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh",
+      "evidence": "internal/tests/integration/fuzz_test.go:228  got, err := testutils.RunNucleiTemplateAndGetResults(filePath, ts.URL+\"?url=https://scanme.sh\", debug, \"-headless\", \"-fuzz\")\ninternal/tests/integration/fuzz_test.go:254  got, err := testutils.RunNucleiTemplateAndGetResults(filePath, ts.URL+\"?url=https://scanme.sh\", debug, \"-jsonl\", \"-fuzz\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/headless_test.go:212",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh",
+      "evidence": "internal/tests/integration/headless_test.go:212  results, err := testutils.RunNucleiTemplateAndGetResults(filePath, \"https://scanme.sh\", debug, \"-headless\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/http_test.go:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh",
+      "evidence": "internal/tests/integration/http_test.go:107  results, err := testutils.RunNucleiTemplateAndGetResults(filePath, \"https://scanme.sh\", debug)\ninternal/tests/integration/http_test.go:373  http.Redirect(w, r, \"https://scanme.sh\", http.StatusTemporaryRedirect)\ninternal/tests/integration/http_test.go:1419  results, err := testutils.RunNucleiBinaryAndGetCombinedOutput(debug, []string{\"-t\", filePath, \"-u\", \"https://scanme.sh\", \"-debug-req\"})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/http_test.go:1033",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:5431",
+      "evidence": "internal/tests/integration/http_test.go:1033  \"http://127.0.0.1:5431\": server.URL,\ninternal/tests/integration/http_test.go:1070  \"http://127.0.0.1:5431\": server.URL,\ninternal/tests/integration/http_test.go:1116  \"http://127.0.0.1:5431\": server.URL,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/template-path_test.go:65",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "internal/tests/integration/template-path_test.go:65  results, err := testutils.RunNucleiBinaryAndGetCombinedOutput(debug, []string{\"-t\", filePath, \"-target\", \"http://example.com\"})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/websocket_test.go:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://google.com",
+      "evidence": "internal/tests/integration/websocket_test.go:87  server := testutils.NewWebsocketServer(\"\", func(conn net.Conn) {}, func(origin string) bool { return origin == \"https://google.com\" })\ninternal/tests/integration/websocket_test.go:100  server := testutils.NewWebsocketServer(\"/test\", func(conn net.Conn) {}, func(origin string) bool { return origin == \"https://google.com\" })"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/whois_test.go:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "internal/tests/integration/whois_test.go:19  results, err := testutils.RunNucleiTemplateAndGetResults(filePath, \"https://example.com\", debug)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/workflow_test.go:195",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://scanme.sh",
+      "evidence": "internal/tests/integration/workflow_test.go:195  results, err := testutils.RunNucleiWorkflowAndGetResults(filePath, \"http://scanme.sh\", debug)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/integration/workflow_test.go:269",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/orgs/projectdiscovery/discussions/3766",
+      "evidence": "internal/tests/integration/workflow_test.go:269  // They will appear in brackets because of another bug: https://github.com/orgs/projectdiscovery/discussions/3766"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/testutils/integration.go:426",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pascal.bach.ch/2015/12/17/from-tcp-to-tls-in-go/",
+      "evidence": "internal/tests/testutils/integration.go:426  // keys taken from https://pascal.bach.ch/2015/12/17/from-tcp-to-tls-in-go/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "internal/tests/testutils/testutils.go:76",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://oast.fun",
+      "evidence": "internal/tests/testutils/testutils.go:76  InteractshURL:         \"https://oast.fun\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/example_test.go:114",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://go.dev/blog/examples",
+      "evidence": "lib/example_test.go:114  // this file only contains testtables examples https://go.dev/blog/examples"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/sdk_test.go:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://honey.scanme.sh",
+      "evidence": "lib/sdk_test.go:32  ne.LoadTargets([]string{\"http://honey.scanme.sh\"}, false)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/tests/sdk_test.go:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hashicorp/golang-lru/blob/770151e9c8cdfae1797826b7b74c33d6f103fbd8/expirable/expirable_lru.go#L79",
+      "evidence": "lib/tests/sdk_test.go:27  // see: https://github.com/hashicorp/golang-lru/blob/770151e9c8cdfae1797826b7b74c33d6f103fbd8/expirable/expirable_lru.go#L79"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/tests/sdk_test.go:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.projectdiscovery.io/public/nameserver-fingerprint.yaml",
+      "evidence": "lib/tests/sdk_test.go:86  RemoteTemplates: []string{\"https://cloud.projectdiscovery.io/public/nameserver-fingerprint.yaml\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/authprovider/file_test.go:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/authprovider/file_test.go:64  req, reqErr := http.NewRequest(http.MethodGet, \"https://example.com\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/authprovider/authx/cookie_context_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/authprovider/authx/cookie_context_test.go:12  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com\", nil)\npkg/authprovider/authx/cookie_context_test.go:33  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/authprovider/authx/dynamic_test.go:271",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/authprovider/authx/dynamic_test.go:271  req, err := http.NewRequest(http.MethodGet, \"https://example.com\", nil)\npkg/authprovider/authx/dynamic_test.go:293  req, err := http.NewRequest(http.MethodGet, \"https://example.com\", nil)\npkg/authprovider/authx/dynamic_test.go:707  req, _ := http.NewRequest(\"GET\", \"https://example.com\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/catalog/disk/catalog.go:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/golang/go/issues/44279",
+      "evidence": "pkg/catalog/disk/catalog.go:14  templatesFS        fs.FS // Due to issues with how Go has implemented fs.FS, we'll have to also implement normal os operations, as well.  See: https://github.com/golang/go/issues/44279"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/catalog/loader/ai_loader.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.projectdiscovery.io/v1/template/ai",
+      "evidence": "pkg/catalog/loader/ai_loader.go:21  aiTemplateGeneratorAPIEndpoint = \"https://api.projectdiscovery.io/v1/template/ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/catalog/loader/ai_loader.go:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.projectdiscovery.io/templates/%s",
+      "evidence": "pkg/catalog/loader/ai_loader.go:59  options.Logger.Info().Msgf(\"Generated template available at: https://cloud.projectdiscovery.io/templates/%s\", templateID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/catalog/loader/ai_loader.go:109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.projectdiscovery.io/",
+      "evidence": "pkg/catalog/loader/ai_loader.go:109  return \"\", \"\", errkit.Newf(\"PDCP API Key not configured, Create one for free at https://cloud.projectdiscovery.io/\")\npkg/catalog/loader/ai_loader.go:124  return \"\", \"\", errkit.Newf(\"Invalid API Key or API Key not configured, Create one for free at https://cloud.projectdiscovery.io/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/catalog/loader/loader.go:708",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/projectdiscovery/nuclei-templates/issues/11324",
+      "evidence": "pkg/catalog/loader/loader.go:708  // TODO: until https://github.com/projectdiscovery/nuclei-templates/issues/11324 is deployed"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/catalog/loader/loader_test.go:250",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/projectdiscovery/nuclei-templates/main/technologies/tech-detect.yaml",
+      "evidence": "pkg/catalog/loader/loader_test.go:250  TemplateURLs:             []string{\"https://raw.githubusercontent.com/projectdiscovery/nuclei-templates/main/technologies/tech-detect.yaml\"},\npkg/catalog/loader/loader_test.go:256  finalTemplates: []string{\"https://raw.githubusercontent.com/projectdiscovery/nuclei-templates/main/technologies/tech-detect.yaml\"},\npkg/catalog/loader/loader_test.go:264  TemplateURLs:             []string{\"https://raw.githubusercontent.com/projectdiscovery/nuclei-templates/main/technologies/tech-detect.yaml\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:112",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/core/executors_test.go:112  _, err := e.executeTemplateOnInput(context.Background(), tpl, &contextargs.MetaInput{Input: \"https://example.com\"})\npkg/core/executors_test.go:118  {TemplateID: \"template-id\", TemplatePath: \"http/example.yaml\", Target: \"https://example.com\", State: TemplateExecutionStarted},\npkg/core/executors_test.go:119  {TemplateID: \"template-id\", TemplatePath: \"http/example.yaml\", Target: \"https://example.com\", State: TemplateExecutionFinished},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:182",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/a",
+      "evidence": "pkg/core/executors_test.go:182  _, err := e.executeTemplateOnInput(context.Background(), tpl, &contextargs.MetaInput{Input: \"https://example.com/a\"})\npkg/core/executors_test.go:201  if _, err := e.executeTemplateOnInput(context.Background(), tpl, &contextargs.MetaInput{Input: \"https://example.com/a\"}); err != nil {\npkg/core/executors_test.go:220  Input:    \"https://example.com/a\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:186",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/b",
+      "evidence": "pkg/core/executors_test.go:186  ok, err := e.executeTemplateOnInput(context.Background(), tpl, &contextargs.MetaInput{Input: \"https://example.com/b\"})\npkg/core/executors_test.go:238  for _, raw := range []string{\"https://example.com/a\", \"https://example.com/b\"} {\npkg/core/executors_test.go:264  _, err := e.executeTemplateOnInput(context.Background(), tpl, &contextargs.MetaInput{Input: \"https://example.com/b\"})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:204",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/b?q=1",
+      "evidence": "pkg/core/executors_test.go:204  if _, err := e.executeTemplateOnInput(context.Background(), tpl, &contextargs.MetaInput{Input: \"https://example.com/b?q=1\"}); err != nil {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:295",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://other.test/a",
+      "evidence": "pkg/core/executors_test.go:295  {Input: \"https://other.test/a\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:296",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/a",
+      "evidence": "pkg/core/executors_test.go:296  {Input: \"http://example.com/a\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:297",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com:8443/a",
+      "evidence": "pkg/core/executors_test.go:297  {Input: \"https://example.com:8443/a\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/executors_test.go:318",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com:443/b",
+      "evidence": "pkg/core/executors_test.go:318  for _, raw := range []string{\"https://example.com/a\", \"https://example.com:443/b\"} {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/core/workflow_execute_test.go:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://test.com",
+      "evidence": "pkg/core/workflow_execute_test.go:29  input := contextargs.NewWithInput(context.Background(), \"https://test.com\")\npkg/core/workflow_execute_test.go:53  input := contextargs.NewWithInput(context.Background(), \"https://test.com\")\npkg/core/workflow_execute_test.go:58  require.Equal(t, \"https://test.com\", firstInput, \"could not get correct first input\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/fuzz_test.go:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:80",
+      "evidence": "pkg/fuzz/fuzz_test.go:39  result := rule.matchKeyOrValue(\"\", \"http://localhost:80\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/parts_frequency_test.go:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/users/55",
+      "evidence": "pkg/fuzz/parts_frequency_test.go:19  const target = \"https://example.com/users/55\"\npkg/fuzz/parts_frequency_test.go:52  const target = \"https://example.com/users/55\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/parts_test.go:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{{ssrf",
+      "evidence": "pkg/fuzz/parts_test.go:61  got, urls, err := rule.executeEvaluate(&ExecuteRuleInput{Values: values}, \"\", \"original\", \"https://{{ssrf}}\", urls)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/parts_test.go:140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://caller.example/a",
+      "evidence": "pkg/fuzz/parts_test.go:140  []string{\"https://caller.example/a\", \"https://shared.example\"},\npkg/fuzz/parts_test.go:145  \"https://caller.example/a\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/parts_test.go:140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://shared.example",
+      "evidence": "pkg/fuzz/parts_test.go:140  []string{\"https://caller.example/a\", \"https://shared.example\"},\npkg/fuzz/parts_test.go:141  []string{\"https://generated.example/b\", \"https://shared.example\"},\npkg/fuzz/parts_test.go:146  \"https://shared.example\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/parts_test.go:141",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://generated.example/b",
+      "evidence": "pkg/fuzz/parts_test.go:141  []string{\"https://generated.example/b\", \"https://shared.example\"},\npkg/fuzz/parts_test.go:147  \"https://generated.example/b\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/time/time_delay.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://groups.google.com/g/zaproxy-develop/c/KGSkNHlLtqk",
+      "evidence": "pkg/fuzz/analyzers/time/time_delay.go:20  // - https://groups.google.com/g/zaproxy-develop/c/KGSkNHlLtqk"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/time/time_delay.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/zaproxy/zap-extensions/pull/5053",
+      "evidence": "pkg/fuzz/analyzers/time/time_delay.go:21  // - https://github.com/zaproxy/zap-extensions/pull/5053"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/time/time_delay_test.go:519",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/?id=1",
+      "evidence": "pkg/fuzz/analyzers/time/time_delay_test.go:519  rawReq, _ := retryablehttp.NewRequest(\"GET\", \"http://example.com/?id=1\", nil)\npkg/fuzz/analyzers/time/time_delay_test.go:544  rawReq, _ := retryablehttp.NewRequest(\"GET\", \"http://example.com/?id=1\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/time/time_delay_test.go:571",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/",
+      "evidence": "pkg/fuzz/analyzers/time/time_delay_test.go:571  rawReq, _ := retryablehttp.NewRequest(\"GET\", \"http://example.com/\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/time/time_delay_test.go:593",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/?q=1",
+      "evidence": "pkg/fuzz/analyzers/time/time_delay_test.go:593  rawReq, _ := retryablehttp.NewRequest(\"GET\", \"http://example.com/?q=1\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/xss/analyzer_test.go:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/FUZZ1337MARKER",
+      "evidence": "pkg/fuzz/analyzers/xss/analyzer_test.go:57  body:     `<a href=\"https://example.com/FUZZ1337MARKER\">link</a>`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/xss/analyzer_test.go:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/desc/FUZZ1337MARKER",
+      "evidence": "pkg/fuzz/analyzers/xss/analyzer_test.go:82  body:     `<img longdesc=\"https://example.com/desc/FUZZ1337MARKER\">`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/xss/analyzer_test.go:184",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/xhtml",
+      "evidence": "pkg/fuzz/analyzers/xss/analyzer_test.go:184  body:     `<iframe src=\"data:application/xhtml+xml,<html xmlns='http://www.w3.org/1999/xhtml'><body>FUZZ1337MARKER</body></html>\">`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/analyzers/xss/analyzer_test.go:220",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tracker.example.com/FUZZ1337MARKER",
+      "evidence": "pkg/fuzz/analyzers/xss/analyzer_test.go:220  body:     `<a href=\"/\" ping=\"https://tracker.example.com/FUZZ1337MARKER\">click</a>`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/body_test.go:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/fuzz/component/body_test.go:18  req, err := retryablehttp.NewRequest(\"POST\", \"https://example.com\", strings.NewReader(`{\"foo\":\"bar\"}`))\npkg/fuzz/component/body_test.go:58  req, err := retryablehttp.NewRequest(\"POST\", \"https://example.com\", strings.NewReader(body))\npkg/fuzz/component/body_test.go:89  req, err := retryablehttp.NewRequest(\"POST\", \"https://example.com\", strings.NewReader(formData.Encode()))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/body_test.go:256",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/graphql",
+      "evidence": "pkg/fuzz/component/body_test.go:256  req, err := retryablehttp.NewRequest(\"POST\", \"https://example.com/graphql\", strings.NewReader(raw))\npkg/fuzz/component/body_test.go:287  req, err := retryablehttp.NewRequest(\"POST\", \"https://example.com/graphql\", strings.NewReader(raw))\npkg/fuzz/component/body_test.go:316  req, err := retryablehttp.NewRequest(\"POST\", \"https://example.com/graphql\", strings.NewReader(raw))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/cookie_test.go:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/fuzz/component/cookie_test.go:16  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com\", nil)\npkg/fuzz/component/cookie_test.go:55  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com\", nil)\npkg/fuzz/component/cookie_test.go:103  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/headers_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/fuzz/component/headers_test.go:12  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/path_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/testpath",
+      "evidence": "pkg/fuzz/component/path_test.go:12  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com/testpath\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/path_test.go:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/newpath",
+      "evidence": "pkg/fuzz/component/path_test.go:44  require.Equal(t, \"https://example.com/newpath\", rebuilt.String(), \"unexpected full URL\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/path_test.go:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/user/753/profile",
+      "evidence": "pkg/fuzz/component/path_test.go:49  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com/user/753/profile\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/path_test.go:88",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/user/55/profile",
+      "evidence": "pkg/fuzz/component/path_test.go:88  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com/user/55/profile\", nil)\npkg/fuzz/component/path_test.go:128  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com/user/55/profile\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/query_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com?foo=bar",
+      "evidence": "pkg/fuzz/component/query_test.go:12  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com?foo=bar\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/query_test.go:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com?foo=baz",
+      "evidence": "pkg/fuzz/component/query_test.go:45  require.Equal(t, \"https://example.com?foo=baz\", rebuilt.String(), \"unexpected url\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/component/query_test.go:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com?foo=a&foobar=b&foobar=c",
+      "evidence": "pkg/fuzz/component/query_test.go:49  req, err := retryablehttp.NewRequest(http.MethodGet, \"https://example.com?foo=a&foobar=b&foobar=c\", nil)\npkg/fuzz/component/query_test.go:66  require.Equal(t, \"https://example.com?foo=a&foobar=b&foobar=c\", rebuilt.String(), \"unexpected url\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/fuzz/stats/db_test.go:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080/login",
+      "evidence": "pkg/fuzz/stats/db_test.go:14  URL:           \"http://localhost:8080/login\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/transform_test.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://google.com",
+      "evidence": "pkg/input/transform_test.go:20  _ = hm.Set(\"google.com\", []byte(\"https://google.com\"))\npkg/input/transform_test.go:31  {\"https://google.com\", typeHostOnly, \"google.com\", \"\"},\npkg/input/transform_test.go:36  {\"google.com\", typeURL, \"https://google.com\", \"\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/transform_test.go:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://google.com:443",
+      "evidence": "pkg/input/transform_test.go:32  {\"https://google.com:443\", typeHostOnly, \"google.com\", \"\"},\npkg/input/transform_test.go:41  {\"https://google.com:443\", typeFilepath, \"\", \"\"},\npkg/input/transform_test.go:51  {\"https://google.com:443\", typeHostWithPort, \"google.com:443\", \"\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/burp/burp_test.go:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8087/scans",
+      "evidence": "pkg/input/formats/burp/burp_test.go:41  \"http://localhost:8087/scans\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/burp/burp_test.go:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://google.com/",
+      "evidence": "pkg/input/formats/burp/burp_test.go:42  \"http://google.com/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/",
+      "evidence": "pkg/input/formats/json/json_test.go:12  \"https://ginandjuice.shop/\",\npkg/input/formats/json/json_test.go:36  \"https://ginandjuice.shop/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/catalog/product?productId=1",
+      "evidence": "pkg/input/formats/json/json_test.go:13  \"https://ginandjuice.shop/catalog/product?productId=1\",\npkg/input/formats/json/json_test.go:20  \"https://ginandjuice.shop/catalog/product?productId=1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/resources/js/stockCheck.js",
+      "evidence": "pkg/input/formats/json/json_test.go:14  \"https://ginandjuice.shop/resources/js/stockCheck.js\",\npkg/input/formats/json/json_test.go:17  \"https://ginandjuice.shop/resources/js/stockCheck.js\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/resources/js/xmlStockCheckPayload.js",
+      "evidence": "pkg/input/formats/json/json_test.go:15  \"https://ginandjuice.shop/resources/js/xmlStockCheckPayload.js\",\npkg/input/formats/json/json_test.go:16  \"https://ginandjuice.shop/resources/js/xmlStockCheckPayload.js\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/catalog/product/stock",
+      "evidence": "pkg/input/formats/json/json_test.go:18  \"https://ginandjuice.shop/catalog/product/stock\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/catalog/cart",
+      "evidence": "pkg/input/formats/json/json_test.go:19  \"https://ginandjuice.shop/catalog/cart\",\npkg/input/formats/json/json_test.go:33  \"https://ginandjuice.shop/catalog/cart\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/catalog/subscribe",
+      "evidence": "pkg/input/formats/json/json_test.go:21  \"https://ginandjuice.shop/catalog/subscribe\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/blog",
+      "evidence": "pkg/input/formats/json/json_test.go:22  \"https://ginandjuice.shop/blog\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/blog/?search=dadad&back=%2Fblog%2F",
+      "evidence": "pkg/input/formats/json/json_test.go:23  \"https://ginandjuice.shop/blog/?search=dadad&back=%2Fblog%2F\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/logger",
+      "evidence": "pkg/input/formats/json/json_test.go:24  \"https://ginandjuice.shop/logger\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/blog/",
+      "evidence": "pkg/input/formats/json/json_test.go:25  \"https://ginandjuice.shop/blog/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/blog/post?postId=3",
+      "evidence": "pkg/input/formats/json/json_test.go:26  \"https://ginandjuice.shop/blog/post?postId=3\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/about",
+      "evidence": "pkg/input/formats/json/json_test.go:27  \"https://ginandjuice.shop/about\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/my-account",
+      "evidence": "pkg/input/formats/json/json_test.go:28  \"https://ginandjuice.shop/my-account\",\npkg/input/formats/json/json_test.go:32  \"https://ginandjuice.shop/my-account\",\npkg/input/formats/json/json_test.go:34  \"https://ginandjuice.shop/my-account\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/login",
+      "evidence": "pkg/input/formats/json/json_test.go:29  \"https://ginandjuice.shop/login\",\npkg/input/formats/json/json_test.go:30  \"https://ginandjuice.shop/login\",\npkg/input/formats/json/json_test.go:31  \"https://ginandjuice.shop/login\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/logout",
+      "evidence": "pkg/input/formats/json/json_test.go:35  \"https://ginandjuice.shop/logout\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/json/json_test.go:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/catalog",
+      "evidence": "pkg/input/formats/json/json_test.go:37  \"https://ginandjuice.shop/catalog\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/downloader_test.go:120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/spec.yaml",
+      "evidence": "pkg/input/formats/openapi/downloader_test.go:120  _, err = downloader.Download(\"http://example.com/spec.yaml\", tmpDir, nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/downloader_test.go:231",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://existing-server.com",
+      "evidence": "pkg/input/formats/openapi/downloader_test.go:231  \"url\": \"https://existing-server.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/danielgtaylor/apisprout/blob/master/example.go",
+      "evidence": "pkg/input/formats/openapi/examples.go:12  // From: https://github.com/danielgtaylor/apisprout/blob/master/example.go"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://json-schema.org/latest/json-schema-validation.html#rfc.section.7.3",
+      "evidence": "pkg/input/formats/openapi/examples.go:30  // http://json-schema.org/latest/json-schema-validation.html#rfc.section.7.3"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc3339",
+      "evidence": "pkg/input/formats/openapi/examples.go:34  // https://tools.ietf.org/html/rfc3339"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc2606#page-2",
+      "evidence": "pkg/input/formats/openapi/examples.go:44  // https://tools.ietf.org/html/rfc2606#page-2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc5737",
+      "evidence": "pkg/input/formats/openapi/examples.go:47  // https://tools.ietf.org/html/rfc5737"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc3849",
+      "evidence": "pkg/input/formats/openapi/examples.go:50  // https://tools.ietf.org/html/rfc3849"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:53",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc3986",
+      "evidence": "pkg/input/formats/openapi/examples.go:53  return \"https://tools.ietf.org/html/rfc3986\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc6570",
+      "evidence": "pkg/input/formats/openapi/examples.go:55  // https://tools.ietf.org/html/rfc6570"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/dictionary/{term:1",
+      "evidence": "pkg/input/formats/openapi/examples.go:56  return \"http://example.com/dictionary/{term:1}/{term}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc6901",
+      "evidence": "pkg/input/formats/openapi/examples.go:58  // https://tools.ietf.org/html/rfc6901"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/q/3296050/164268",
+      "evidence": "pkg/input/formats/openapi/examples.go:61  // https://stackoverflow.com/q/3296050/164268"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.ietf.org/rfc/rfc4122.txt",
+      "evidence": "pkg/input/formats/openapi/examples.go:64  // https://www.ietf.org/rfc/rfc4122.txt"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/examples.go:281",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#schemaObject",
+      "evidence": "pkg/input/formats/openapi/examples.go:281  // https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#schemaObject"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/openapi/openapi_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://hackthebox:5000",
+      "evidence": "pkg/input/formats/openapi/openapi_test.go:12  const baseURL = \"http://hackthebox:5000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:28",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/login",
+      "evidence": "pkg/input/formats/raw/raw_test.go:28  require.Equal(t, \"https://example.com/api/login\", got[0].URL.String())"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/one",
+      "evidence": "pkg/input/formats/raw/raw_test.go:47  require.Equal(t, \"https://example.com/one\", got[0].URL.String())"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/two",
+      "evidence": "pkg/input/formats/raw/raw_test.go:48  require.Equal(t, \"https://example.com/two\", got[1].URL.String())"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:57",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/users?id=1",
+      "evidence": "pkg/input/formats/raw/raw_test.go:57  require.Equal(t, \"https://example.com/api/users?id=1\", got[0].URL.String())"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:69",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/",
+      "evidence": "pkg/input/formats/raw/raw_test.go:69  {\"no port\", \"GET / HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n\", \"https://example.com/\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com:80/",
+      "evidence": "pkg/input/formats/raw/raw_test.go:70  {\"port 80\", \"GET / HTTP/1.1\\r\\nHost: example.com:80\\r\\n\\r\\n\", \"http://example.com:80/\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:18080/",
+      "evidence": "pkg/input/formats/raw/raw_test.go:71  {\"high port\", \"GET / HTTP/1.1\\r\\nHost: 127.0.0.1:18080\\r\\n\\r\\n\", \"http://127.0.0.1:18080/\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:72",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/p",
+      "evidence": "pkg/input/formats/raw/raw_test.go:72  {\"absolute target\", \"GET https://example.com/p HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n\", \"https://example.com/p\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/p",
+      "evidence": "pkg/input/formats/raw/raw_test.go:73  {\"absolute plain target\", \"GET http://example.com/p HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n\", \"http://example.com/p\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/raw/raw_test.go:99",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/valid",
+      "evidence": "pkg/input/formats/raw/raw_test.go:99  require.Equal(t, \"https://example.com/valid\", got[0].URL.String())"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/swagger/downloader_test.go:179",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/spec.xml",
+      "evidence": "pkg/input/formats/swagger/downloader_test.go:179  _, err = downloader.Download(\"http://example.com/spec.xml\", tmpDir, nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/swagger/swagger_test.go:37",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://localhost/v1/users",
+      "evidence": "pkg/input/formats/swagger/swagger_test.go:37  \"https://localhost/v1/users\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/swagger/swagger_test.go:38",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://localhost/v1/users/1?test=asc",
+      "evidence": "pkg/input/formats/swagger/swagger_test.go:38  \"https://localhost/v1/users/1?test=asc\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/yaml/multidoc_test.go:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/blog/post?postId=3&source=proxify",
+      "evidence": "pkg/input/formats/yaml/multidoc_test.go:19  \"https://ginandjuice.shop/blog/post?postId=3&source=proxify\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/formats/yaml/multidoc_test.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ginandjuice.shop/users/3",
+      "evidence": "pkg/input/formats/yaml/multidoc_test.go:20  \"https://ginandjuice.shop/users/3\",\npkg/input/formats/yaml/multidoc_test.go:60  \"https://ginandjuice.shop/users/3\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/1/profile",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:12  base := f.Pattern(\"http://acme.test/user/1/profile\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/2/profile",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:14  \"http://acme.test/user/2/profile\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/99999/profile",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:15  \"http://acme.test/user/99999/profile\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/o/3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:24  require.Contains(t, f.Pattern(\"http://acme.test/o/3f2504e0-4f89-11d3-9a0c-0305e82c3301\"), placeholderUUID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/a/d41d8cd98f00b204e9800998ecf8427e",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:25  require.Contains(t, f.Pattern(\"http://acme.test/a/d41d8cd98f00b204e9800998ecf8427e\"), placeholderHash)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/posts/2024-05-01",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:26  require.Contains(t, f.Pattern(\"http://acme.test/posts/2024-05-01\"), placeholderDate)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/posts/2024/05",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:28  require.Equal(t, \"acme.test/posts/{num}/{num}\", f.Pattern(\"http://acme.test/posts/2024/05\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/admin",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:33  require.NotEqual(t, f.Pattern(\"http://acme.test/admin\"), f.Pattern(\"http://acme.test/login\"),\npkg/input/normalize/fingerprint_test.go:80  require.True(t, f.Accept(\"http://acme.test/admin\"), \"a different pattern has its own budget\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/login",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:33  require.NotEqual(t, f.Pattern(\"http://acme.test/admin\"), f.Pattern(\"http://acme.test/login\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/search?q=admin&page=2",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:39  a := f.Pattern(\"http://acme.test/search?q=admin&page=2\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/search?page=9&q=root",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:40  b := f.Pattern(\"http://acme.test/search?page=9&q=root\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/search?q=admin",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:45  require.NotEqual(t, a, f.Pattern(\"http://acme.test/search?q=admin\"), \"a different parameter set is a different shape\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/blog/%s-post",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:54  f.Pattern(fmt.Sprintf(\"http://acme.test/blog/%s-post\", []string{\"alpha\", \"beta\", \"gamma\", \"delta\", \"epsilon\"}[i]))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/blog/zeta-post",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:56  require.Contains(t, f.Pattern(\"http://acme.test/blog/zeta-post\"), placeholderVar)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://other.test/blog/zeta-post",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:58  require.NotContains(t, f.Pattern(\"http://other.test/blog/zeta-post\"), placeholderVar)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/blog/one",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:64  require.Equal(t, \"acme.test/blog/one\", f.Pattern(\"http://acme.test/blog/one\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:65",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/blog/two",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:65  require.Equal(t, \"acme.test/blog/two\", f.Pattern(\"http://acme.test/blog/two\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/blog/three",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:66  require.Equal(t, \"acme.test/blog/{var}\", f.Pattern(\"http://acme.test/blog/three\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:69",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/admin/a",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:69  require.Equal(t, \"acme.test/admin/a\", f.Pattern(\"http://acme.test/admin/a\"))\npkg/input/normalize/fingerprint_test.go:71  require.True(t, f.Accept(\"http://acme.test/admin/a\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/admin/b",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:70  require.Equal(t, \"acme.test/admin/b\", f.Pattern(\"http://acme.test/admin/b\"))\npkg/input/normalize/fingerprint_test.go:72  require.True(t, f.Accept(\"http://acme.test/admin/b\"), \"a different parent still has its own cap\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:77",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/1",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:77  require.True(t, f.Accept(\"http://acme.test/user/1\"))\npkg/input/normalize/fingerprint_test.go:93  require.True(t, nilF.Accept(\"http://acme.test/user/1\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:78",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/2",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:78  require.True(t, f.Accept(\"http://acme.test/user/2\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:79",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/3",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:79  require.False(t, f.Accept(\"http://acme.test/user/3\"), \"past the cap the pattern is already covered\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/fingerprint_test.go:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/%d",
+      "evidence": "pkg/input/normalize/fingerprint_test.go:89  require.True(t, f.Accept(fmt.Sprintf(\"http://acme.test/user/%d\", i)))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:10  same := \"http://acme.test/page\"\npkg/input/normalize/normalize_test.go:12  \"http://acme.test/page\",\npkg/input/normalize/normalize_test.go:26  require.NotEqual(t, URL(\"http://acme.test/page\"), URL(\"http://acme.test/PAGE\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ACME.test/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:13  \"http://ACME.test/page\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test:80/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:15  \"http://acme.test:80/page\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page/",
+      "evidence": "pkg/input/normalize/normalize_test.go:16  \"http://acme.test/page/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page#section",
+      "evidence": "pkg/input/normalize/normalize_test.go:17  \"http://acme.test/page#section\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page?utm_source=news&utm_campaign=q4",
+      "evidence": "pkg/input/normalize/normalize_test.go:18  \"http://acme.test/page?utm_source=news&utm_campaign=q4\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/PAGE",
+      "evidence": "pkg/input/normalize/normalize_test.go:26  require.NotEqual(t, URL(\"http://acme.test/page\"), URL(\"http://acme.test/PAGE\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test:8080/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:28  require.NotEqual(t, URL(\"http://acme.test/page\"), URL(\"http://acme.test:8080/page\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://acme.test/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:30  require.NotEqual(t, URL(\"http://acme.test/page\"), URL(\"https://acme.test/page\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page?id=1",
+      "evidence": "pkg/input/normalize/normalize_test.go:32  require.NotEqual(t, URL(\"http://acme.test/page\"), URL(\"http://acme.test/page?id=1\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/search?q=admin&utm_source=news&page=2",
+      "evidence": "pkg/input/normalize/normalize_test.go:36  got := URL(\"http://acme.test/search?q=admin&utm_source=news&page=2\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test:443/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:44  require.Contains(t, URL(\"http://acme.test:443/page\"), \":443\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://acme.test:443/page",
+      "evidence": "pkg/input/normalize/normalize_test.go:45  require.NotContains(t, URL(\"https://acme.test:443/page\"), \":443\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/",
+      "evidence": "pkg/input/normalize/normalize_test.go:50  require.Equal(t, URL(\"http://acme.test/\"), URL(\"http://acme.test/\"))\npkg/input/normalize/normalize_test.go:51  require.NotEmpty(t, URL(\"http://acme.test/\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://[::1",
+      "evidence": "pkg/input/normalize/normalize_test.go:55  require.Equal(t, URL(\"http://[::1]:8080/page\"), URL(\"http://[::1]:8080/page/\"))\npkg/input/normalize/normalize_test.go:56  require.Contains(t, URL(\"http://[::1]:8080/page\"), \"[::1]:8080\")\npkg/input/normalize/normalize_test.go:58  require.NotContains(t, URL(\"http://[::1]:80/page\"), \":80\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "pkg/input/normalize/normalize_test.go:70  same := \"https://example.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:72",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/a",
+      "evidence": "pkg/input/normalize/normalize_test.go:72  \"https://example.com/a\",\npkg/input/normalize/normalize_test.go:78  require.NotEqual(t, Origin(\"https://example.com/a\"), Origin(\"http://example.com/a\"))\npkg/input/normalize/normalize_test.go:79  require.NotEqual(t, Origin(\"https://example.com/a\"), Origin(\"https://other.test/a\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://EXAMPLE.com/b?q=1#frag",
+      "evidence": "pkg/input/normalize/normalize_test.go:73  \"https://EXAMPLE.com/b?q=1#frag\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com:443/c",
+      "evidence": "pkg/input/normalize/normalize_test.go:74  \"https://example.com:443/c\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:78",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/a",
+      "evidence": "pkg/input/normalize/normalize_test.go:78  require.NotEqual(t, Origin(\"https://example.com/a\"), Origin(\"http://example.com/a\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:79",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://other.test/a",
+      "evidence": "pkg/input/normalize/normalize_test.go:79  require.NotEqual(t, Origin(\"https://example.com/a\"), Origin(\"https://other.test/a\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/normalize/normalize_test.go:80",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com:8443/a",
+      "evidence": "pkg/input/normalize/normalize_test.go:80  require.NotEqual(t, Origin(\"https://example.com/a\"), Origin(\"https://example.com:8443/a\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/1",
+      "evidence": "pkg/input/provider/list/hmap_test.go:35  add(\"http://acme.test/user/1\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ACME.test/user/1",
+      "evidence": "pkg/input/provider/list/hmap_test.go:36  add(\"http://ACME.test/user/1\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/user/2",
+      "evidence": "pkg/input/provider/list/hmap_test.go:37  add(\"http://acme.test/user/2\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/admin",
+      "evidence": "pkg/input/provider/list/hmap_test.go:38  add(\"http://acme.test/admin\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ACME.test/page/",
+      "evidence": "pkg/input/provider/list/hmap_test.go:60  add(\"http://ACME.test/page/\")\npkg/input/provider/list/hmap_test.go:70  require.Equal(t, []string{\"http://ACME.test/page/\"}, got)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page?utm_source=news",
+      "evidence": "pkg/input/provider/list/hmap_test.go:61  add(\"http://acme.test/page?utm_source=news\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ACME.test/page",
+      "evidence": "pkg/input/provider/list/hmap_test.go:82  for _, raw := range []string{\"http://ACME.test/page\", \"http://acme.test/page\"} {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://acme.test/page",
+      "evidence": "pkg/input/provider/list/hmap_test.go:82  for _, raw := range []string{\"http://ACME.test/page\", \"http://acme.test/page\"} {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:201",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh/",
+      "evidence": "pkg/input/provider/list/hmap_test.go:201  \"https://scanme.sh/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:202",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://scanme.sh",
+      "evidence": "pkg/input/provider/list/hmap_test.go:202  \"http://scanme.sh\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:203",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh:443/",
+      "evidence": "pkg/input/provider/list/hmap_test.go:203  \"https://scanme.sh:443/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:204",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scanme.sh:443/somepath",
+      "evidence": "pkg/input/provider/list/hmap_test.go:204  \"https://scanme.sh:443/somepath\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/provider/list/hmap_test.go:205",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://scanme.sh:80/?with=param",
+      "evidence": "pkg/input/provider/list/hmap_test.go:205  \"http://scanme.sh:80/?with=param\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/targetprofile/registry_test.go:100",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://a.com",
+      "evidence": "pkg/input/targetprofile/registry_test.go:100  tags := bindLine(t, r, `{\"target\": \"https://a.com\", \"tags\": [\"thinkphp\"]}`)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pkg/input/targetprofile/registry_test.go:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://b.com",
+      "evidence": "pkg/input/targetprofile/registry_test.go:101  commaTags := bindLine(t, r, `{\"target\": \"https://b.com\", \"tags\": \"tomcat, exposure\"}`)"
+    }
+  ],
+  "reRooting": []
+}

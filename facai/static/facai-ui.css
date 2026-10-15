@@ -1,0 +1,242 @@
+/* ==========================================================================
+   FACAI DESIGN SYSTEM — 设计令牌层（加法式，仅供选择接入的页面使用）
+   --------------------------------------------------------------------------
+   依据：
+   - docs/UNIFIED_UI_BASELINE.md §21（Desktop 与 Mobile 统一 Design System）
+                        §22（状态视觉语言统一：全平台只认 17 态唯一协议）
+                        §33（UI 反映真实执行，不制造执行感）
+   - 状态协议唯一来源：facai/intent.py UserTaskState（17 态）+ STATE_COPY 中文文案
+   - 色板同源：facai/static/showcase.html（:root 深海军蓝 + 青 accent + 金）
+
+   纪律（加法式改造）：
+   - 本文件只“新增”令牌与 .facai- 前缀组件类，不覆写任何既有页面的类名/id。
+   - 既有控制台（index.html）自带一份内联令牌，未链接本文件前完全不受影响；
+     接入方在自己的 <head> 里 <link rel="stylesheet" href="/static/facai-ui.css">
+     （同目录相对引用写 href="facai-ui.css" 亦可）。
+   - @keyframes 一律使用新命名（facai-breathe / facai-flow / facai-gold-pulse /
+     facai-blink / facai-rise），与 index.html 既有 facai-orbit、facai-edge-flow、
+     flow、pulse 等零重名，避免同文档引入时互相覆盖。
+   ========================================================================== */
+
+:root{
+  /* ── 1. 色板（与 showcase.html 同源：深海军蓝 + 青 accent + 金） ── */
+  --bg:#050b16;                       /* 页面底色 */
+  --bg2:#081226;                      /* 渐变第二色 / 面板深底 */
+  --bg-glow:#0b1c3f;                  /* 顶部辉光（radial 起点） */
+  --panel:rgba(13,27,54,.72);         /* 玻璃面板 */
+  --panel-2:rgba(8,18,38,.6);         /* 次级面板 / 卡片内嵌底 */
+  --line:rgba(56,189,248,.16);        /* 常规描边 */
+  --line-strong:rgba(56,189,248,.4);  /* 强调描边 / 输入框 */
+
+  --cyan:#22d3ee;                     /* 主 accent：进行中 */
+  --cyan2:#67e8f9;                    /* 亮青：强调文本 */
+  --gold:#f5c451;                     /* 金：等待 / 重规划 / 输出 */
+  --txt:#dbeafe;                      /* 正文 */
+  --txt-strong:#e0f2fe;               /* 标题 */
+  --mut:#64748b;                      /* 弱化说明 */
+  --ok:#34d399;                       /* 完成 / 健康 */
+  --err:#f87171;                      /* 失败（与 index.html --red 同值） */
+  --code:#93c5fd;                     /* 代码 / 技术详情文本 */
+
+  /* 品牌渐变 */
+  --grad-brand:linear-gradient(90deg,#e0f2fe,var(--cyan) 55%,var(--gold));  /* 标题字 */
+  --grad-flow:linear-gradient(90deg,var(--cyan),var(--gold));               /* 进度流动 */
+  --grad-btn:linear-gradient(135deg,var(--cyan),#3b82f6);                   /* 主按钮/徽标 */
+
+  /* ── 2. 字号阶梯 ── */
+  --font-ui:"Segoe UI",system-ui,-apple-system,"Microsoft YaHei",sans-serif;
+  --fs-2xs:11px;    /* 角标/时间戳 */
+  --fs-xs:12.5px;   /* 辅助说明 */
+  --fs-sm:13.5px;   /* 次要正文 */
+  --fs-md:14px;     /* 正文 */
+  --fs-lg:16px;     /* 小标题 */
+  --fs-xl:20px;     /* 区块标题 */
+  --fs-2xl:24px;    /* 页标题/大数字 */
+  --fs-hero:clamp(22px,6vw,30px);  /* 首屏问候语 */
+  --ls-wide:.12em;  /* LOGO 字距 */
+  --ls-caps:.22em;  /* 全大写小标签字距 */
+
+  /* ── 3. 间距 ── */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+  --sp-5:20px; --sp-6:24px; --sp-8:32px;
+
+  /* ── 4. 圆角 ── */
+  --r-sm:10px;    /* 输入框/小按钮 */
+  --r-md:14px;    /* 卡片 */
+  --r-lg:20px;    /* 面板 */
+  --r-xl:22px;    /* 大舞台/弹层 */
+  --r-full:999px; /* 圆点/胶囊 */
+
+  /* ── 5. 阴影 / 发光（Elevation） ── */
+  --elev-1:0 6px 22px rgba(2,8,20,.6);      /* 卡片 */
+  --elev-2:0 24px 80px rgba(2,8,20,.7);     /* 大面板/舞台（showcase .stage 同源） */
+  --elev-3:0 -12px 40px rgba(2,8,20,.65);   /* Bottom Sheet 上抛投影 */
+  --glow-cyan:0 0 18px rgba(34,211,238,.45);/* 青辉光（logo/进行中） */
+  --glow-gold:0 0 12px rgba(245,196,81,.6); /* 金辉光（等待/脉冲） */
+  --inset-hi:inset 0 1px 0 rgba(255,255,255,.05);
+
+  /* ── 6. 动效令牌（Motion） ── */
+  --dur-fast:150ms;   /* hover/按压反馈 */
+  --dur-slow:300ms;   /* 换页/弹层 */
+  --dur-breathe:1.6s; /* 呼吸周期（showcase .dot 同源） */
+  --dur-flow:1.5s;    /* 进度流动周期（index.html flow 同源） */
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+
+  /* ── 7. 状态色 17 态映射（§22；协议唯一来源 facai/intent.py UserTaskState）──
+     语义只分六组，全平台统一：
+     进行中=青呼吸  等待=金  就绪/完成=绿  重规划=金脉冲  部分完成=金  失败=红 */
+  --st-running:var(--cyan);  /* RECEIVED UNDERSTANDING EXPANDING PLANNING ROUTING EXECUTING VERIFYING */
+  --st-waiting:var(--gold);  /* NEEDS_CLARIFICATION WAITING_CONFIRMATION WAITING_PERMISSION WAITING_EXTERNAL */
+  --st-ready:var(--ok);      /* INTENT_READY MISSION_READY */
+  --st-done:var(--ok);       /* COMPLETED */
+  --st-replan:var(--gold);   /* REPLANNING —— 金色脉冲，与“等待金”靠动效区分 */
+  --st-partial:var(--gold);  /* PARTIAL */
+  --st-failed:var(--err);    /* FAILED */
+}
+
+/* ── 8. 17 态工具类：每类只设 --state-color 与呼吸/脉冲动效。
+   中文文案照抄 facai/intent.py STATE_COPY，UI 不得另造状态名。 ── */
+[class*="facai-state-"]{ --state-color:var(--cyan); }
+
+.facai-state-RECEIVED,               /* 收到了 */
+.facai-state-UNDERSTANDING,          /* 发财正在理解你的需求 */
+.facai-state-EXPANDING,              /* 正在把你的想法整理成完整任务 */
+.facai-state-PLANNING,               /* 正在想怎么完成 */
+.facai-state-ROUTING,                /* 正在安排最合适的方式 */
+.facai-state-EXECUTING,              /* 发财正在处理 */
+.facai-state-VERIFYING{              /* 发财正在检查结果 */
+  --state-color:var(--st-running);
+}
+.facai-state-NEEDS_CLARIFICATION,    /* 还需要你补充一点信息 */
+.facai-state-WAITING_CONFIRMATION,   /* 等你确认后开始 */
+.facai-state-WAITING_PERMISSION,     /* 需要你的允许 */
+.facai-state-WAITING_EXTERNAL{       /* 正在等待外部服务 */
+  --state-color:var(--st-waiting);
+}
+.facai-state-INTENT_READY,           /* 发财已经听懂了 */
+.facai-state-MISSION_READY{          /* 已经准备好了 */
+  --state-color:var(--st-ready);
+}
+.facai-state-EXECUTING .facai-dot,
+.facai-state-RUNNING-BREATHE{ animation:facai-breathe var(--dur-breathe) ease-in-out infinite; }
+
+.facai-state-COMPLETED{ --state-color:var(--st-done); }      /* 已完成 */
+.facai-state-PARTIAL{ --state-color:var(--st-partial); }     /* 已完成一部分 */
+.facai-state-FAILED{ --state-color:var(--st-failed); }       /* 当前任务没有完成 */
+
+.facai-state-REPLANNING{              /* 发财正在换一种办法 —— 金脉冲 */
+  --state-color:var(--st-replan);
+  animation:facai-gold-pulse 1.4s var(--ease-out) infinite;
+}
+
+/* ── 9. 共享组件原语（.facai- 前缀，双方均可复用；Mobile 为堆叠/Bottom Sheet 版） ── */
+
+/* 卡片 */
+.facai-card{
+  border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:var(--sp-4);box-shadow:var(--elev-1),var(--inset-hi);
+}
+
+/* 状态胶囊：配 .facai-state-* 使用 */
+.facai-pill{
+  display:inline-flex;align-items:center;gap:6px;border-radius:var(--r-full);
+  padding:3px 10px;font-size:var(--fs-2xs);white-space:nowrap;
+  color:var(--state-color,var(--cyan));
+  border:1px solid color-mix(in srgb,var(--state-color,var(--cyan)) 45%,transparent);
+  background:color-mix(in srgb,var(--state-color,var(--cyan)) 12%,transparent);
+}
+
+/* 状态圆点：进行中=青呼吸，其余常亮 */
+.facai-dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 8px;
+  background:var(--state-color,var(--cyan));
+  box-shadow:0 0 8px var(--state-color,var(--cyan));
+}
+.facai-dot.is-breathing{ animation:facai-breathe var(--dur-breathe) ease-in-out infinite; }
+
+/* 按钮 */
+.facai-btn{
+  font:inherit;border:0;border-radius:var(--r-sm);cursor:pointer;min-height:44px;
+  padding:0 var(--sp-4);font-weight:600;font-size:var(--fs-md);
+  background:var(--grad-btn);color:#04121f;
+  box-shadow:0 6px 18px rgba(34,211,238,.22);
+  transition:filter var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out);
+}
+.facai-btn:hover{ filter:brightness(1.08); }
+.facai-btn:active{ transform:translateY(1px); }
+.facai-btn-ghost{
+  background:rgba(80,140,200,.16);color:var(--txt);
+  border:1px solid var(--line-strong);box-shadow:none;
+}
+.facai-btn-danger{ background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff; }
+
+/* 进度条：填充走青→金流动渐变；宽度必须来自真实完成比例（§33） */
+.facai-progress{
+  position:relative;height:10px;border-radius:var(--r-full);overflow:hidden;
+  background:rgba(56,189,248,.14);border:1px solid var(--line);
+}
+.facai-progress-fill{
+  display:block;height:100%;border-radius:var(--r-full);
+  background:linear-gradient(90deg,var(--cyan),#60a5fa,#818cf8,var(--cyan));
+  background-size:220% 100%;
+  box-shadow:0 0 14px rgba(34,211,238,.55);
+}
+.facai-progress-fill.is-flowing{ animation:facai-flow var(--dur-flow) linear infinite; }
+
+/* 时间线条目 */
+.facai-timeline-item{
+  display:grid;grid-template-columns:auto 1fr;gap:var(--sp-3);
+  padding:var(--sp-2) 0;font-size:var(--fs-sm);line-height:1.6;
+}
+.facai-timeline-item time{
+  color:var(--mut);font-size:var(--fs-2xs);padding-top:2px;min-width:38px;
+  font-variant-numeric:tabular-nums;
+}
+
+/* 输入框 */
+.facai-input,textarea.facai-input{
+  width:100%;background:rgba(6,15,29,.78);color:var(--txt);
+  border:1px solid var(--line-strong);border-radius:var(--r-sm);
+  padding:var(--sp-3);font:inherit;min-width:0;
+}
+.facai-input::placeholder{ color:var(--mut); }
+
+/* Bottom Sheet（Mobile 授权/确认统一形态，基线 §23） */
+.facai-sheet{
+  border:1px solid var(--line);border-radius:var(--r-xl) var(--r-xl) 0 0;
+  background:linear-gradient(180deg,rgba(8,18,38,.96),rgba(5,11,22,.98));
+  box-shadow:var(--elev-3);padding:var(--sp-5) var(--sp-4) var(--sp-6);
+  animation:facai-rise var(--dur-slow) var(--ease-out);
+}
+
+/* ── 10. 动效关键帧（新命名，见文件头纪律） ── */
+@keyframes facai-breathe{           /* 青呼吸：进行中 */
+  0%,100%{ opacity:.35; }
+  50%{ opacity:1; }
+}
+@keyframes facai-flow{              /* 流动：进行中的进度条 */
+  to{ background-position:220% 0; }
+}
+@keyframes facai-gold-pulse{        /* 金脉冲：重规划 */
+  0%{ box-shadow:0 0 0 0 rgba(245,196,81,.45); }
+  70%{ box-shadow:0 0 0 12px rgba(245,196,81,0); }
+  100%{ box-shadow:0 0 0 0 rgba(245,196,81,0); }
+}
+@keyframes facai-blink{             /* 在线圆点 */
+  50%{ opacity:.35; }
+}
+@keyframes facai-rise{              /* Bottom Sheet / 换页入场 */
+  from{ opacity:0;transform:translateY(14px); }
+  to{ opacity:1;transform:none; }
+}
+
+/* ── 11. 动效尊重系统“减少动态效果”偏好（与控制台既有行为一致，
+       Playwright 验收统一 emulate reduced_motion=reduce） ── */
+@media (prefers-reduced-motion: reduce){
+  [class^="facai-"],[class*=" facai-"],
+  [class*="facai-state-"]{
+    animation:none !important;
+    transition:none !important;
+  }
+}

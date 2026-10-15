@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>发财 · 指挥中心</title>
+<link rel="stylesheet" href="/static/facai-ui.css">
+<style>
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--font-ui);
+       font-size:var(--fs-md);min-height:100vh;
+       background-image:radial-gradient(1200px 500px at 50% -10%,var(--bg-glow),transparent);}
+  .topbar{display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-4);
+          border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5;}
+  .brand{font-size:var(--fs-xl);font-weight:700;white-space:nowrap;
+         background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .conn{display:flex;align-items:center;gap:6px;font-size:var(--fs-2xs);color:var(--mut);white-space:nowrap;}
+  .conn .dot{width:8px;height:8px;border-radius:50%;background:var(--mut);}
+  .conn.live .dot{background:var(--ok);box-shadow:var(--glow-ok,0 0 8px var(--ok));}
+  .conn.down .dot{background:var(--err);}
+  .quick{display:flex;gap:var(--sp-2);flex:1;max-width:520px;margin-left:auto;}
+  .quick .facai-input{flex:1;}
+  .grid{display:grid;grid-template-columns:minmax(300px,1.2fr) minmax(280px,1fr);
+        gap:var(--sp-3);padding:var(--sp-3) var(--sp-4) 96px;max-width:1280px;margin:0 auto;}
+  @media (max-width:880px){.grid{grid-template-columns:1fr;}}
+  .grid h2{margin:0 0 var(--sp-2);font-size:var(--fs-sm);color:var(--mut);font-weight:600;
+           letter-spacing:.08em;}
+  .mission{padding:var(--sp-3);border-radius:var(--r-md);background:var(--panel);
+           border:1px solid var(--line);margin-bottom:var(--sp-2);cursor:pointer;}
+  .mission:hover{border-color:var(--cyan);}
+  .mission .row1{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2);}
+  .mission .title{font-weight:600;color:var(--txt-strong);overflow:hidden;
+                  text-overflow:ellipsis;white-space:nowrap;}
+  .chip{font-size:var(--fs-2xs);padding:2px 8px;border-radius:var(--r-full);
+        border:1px solid var(--line);white-space:nowrap;}
+  .chip.RUNNING{color:var(--cyan);border-color:var(--cyan);box-shadow:var(--glow-cyan);}
+  .chip.DONE{color:var(--ok);border-color:var(--ok);}
+  .chip.GATE{color:var(--gold);border-color:var(--gold);box-shadow:var(--glow-gold);}
+  .chip.FAILED{color:var(--err);border-color:var(--err);}
+  .chip.WAITING{color:var(--mut);}
+  .bar{height:6px;border-radius:var(--r-full);background:var(--panel-2);
+       margin-top:var(--sp-2);overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:var(--r-full);
+         background:var(--grad-brand);transition:width var(--dur-slow);}
+  .bar i.gate{background:var(--gold);}
+  .meta{margin-top:var(--sp-1);font-size:var(--fs-2xs);color:var(--mut);}
+  .feedwrap{position:sticky;top:72px;align-self:start;max-height:calc(100vh - 96px);
+            display:flex;flex-direction:column;}
+  #feed{overflow-y:auto;min-height:200px;}
+  .evt{display:flex;gap:var(--sp-2);padding:6px 8px;border-radius:var(--r-sm);
+       font-size:var(--fs-xs);line-height:1.5;align-items:baseline;}
+  .evt:nth-child(odd){background:var(--panel);}
+  .evt time{color:var(--mut);font-size:var(--fs-2xs);white-space:nowrap;}
+  .evt .etype{color:var(--cyan2);font-weight:600;white-space:nowrap;}
+  .evt.gate-evt .etype{color:var(--gold);}
+  .evt.done-evt .etype{color:var(--ok);}
+  .evt .gist{color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .evt[data-mission]{cursor:pointer;}
+  .evt[data-mission]:hover{background:var(--panel-2);}
+  .empty{color:var(--mut);font-size:var(--fs-sm);text-align:center;padding:var(--sp-6) 0;}
+  .detail{position:fixed;inset:0 0 0 auto;width:min(680px,100%);background:var(--bg2);
+          border-left:1px solid var(--line-strong);box-shadow:var(--elev-3);
+          transform:translateX(102%);transition:transform var(--dur-slow);
+          z-index:8;overflow-y:auto;padding:var(--sp-4);}
+  .detail.show{transform:translateX(0);}
+  .detail .close{float:right;}
+  .detail h3{margin:var(--sp-2) 0;font-size:var(--fs-lg);color:var(--txt-strong);}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2);margin:var(--sp-2) 0;}
+  @media (max-width:640px){.duo{grid-template-columns:1fr;}}
+  .duo .cell{padding:var(--sp-2) var(--sp-3);border-radius:var(--r-md);
+             background:var(--panel);border:1px solid var(--line);
+             font-size:var(--fs-xs);line-height:1.7;max-height:180px;overflow-y:auto;}
+  .duo .cell b{display:block;color:var(--mut);font-size:var(--fs-2xs);
+               margin-bottom:4px;letter-spacing:.08em;}
+  .duo .cell.prof{border-color:var(--cyan);}
+  .dstage{position:relative;padding:var(--sp-3);border-radius:var(--r-md);
+          background:var(--panel);border:1px solid var(--line);margin-bottom:var(--sp-2);}
+  .dstage .head{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2);}
+  .dstage .label{font-weight:600;color:var(--txt-strong);}
+  .dstage .agents{margin-top:var(--sp-2);font-size:var(--fs-xs);color:var(--mut);line-height:1.7;}
+  .dstage .agents b{color:var(--cyan2);font-weight:600;}
+  .gate{margin-top:var(--sp-3);padding:var(--sp-3);border-radius:var(--r-md);
+        background:var(--panel-2);border:1px solid var(--gold);}
+  .gate .q{color:var(--gold);font-size:var(--fs-sm);margin-bottom:var(--sp-2);}
+  .gate .opts{display:flex;flex-direction:column;gap:var(--sp-2);}
+  .gate .custom{margin-top:var(--sp-2);display:flex;gap:var(--sp-2);}
+  .arts{margin-top:var(--sp-3);}
+  .arts .art{font-size:var(--fs-xs);color:var(--txt);padding:6px 8px;
+             border-radius:var(--r-sm);background:var(--panel);margin-bottom:4px;}
+  .toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);
+         padding:8px 14px;border-radius:var(--r-full);background:var(--bg2);
+         border:1px solid var(--line-strong);color:var(--txt-strong);
+         font-size:var(--fs-xs);opacity:0;transition:opacity var(--dur-slow);z-index:9;}
+  .toast.show{opacity:1;}
+  .regbtn{white-space:nowrap;}
+  .regdrawer{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--bg2);
+             border-left:1px solid var(--line-strong);box-shadow:var(--elev-3);
+             transform:translateX(102%);transition:transform var(--dur-slow);
+             z-index:9;overflow-y:auto;padding:var(--sp-4);}
+  .regdrawer.show{transform:translateX(0);}
+  .regdrawer h3{margin:var(--sp-3) 0 var(--sp-2);font-size:var(--fs-sm);color:var(--mut);}
+  .regdrawer .item{padding:6px 8px;font-size:var(--fs-xs);border-radius:var(--r-sm);
+                   background:var(--panel);margin-bottom:4px;color:var(--txt);}
+  .pool{padding:8px 10px;border-radius:var(--r-sm);background:var(--panel);
+        margin-bottom:6px;font-size:var(--fs-xs);}
+  .pool .prow{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2);}
+  .pool .pname{font-weight:600;color:var(--txt-strong);}
+  .pool .pbar{height:5px;border-radius:var(--r-full);background:var(--panel-2);
+              margin-top:5px;overflow:hidden;}
+  .pool .pbar i{display:block;height:100%;background:var(--ok);transition:width var(--dur-slow);}
+  .pool.low .pbar i{background:var(--gold);}
+  .pool.empty .pbar i{background:var(--err);}
+  .pool .ptag{font-size:var(--fs-2xs);color:var(--mut);white-space:nowrap;}
+  .pool .ptag.cold{color:var(--err);}
+  .pool .ctl{display:flex;gap:4px;margin-top:5px;}
+  .pool .ctl .facai-btn{padding:2px 8px;font-size:var(--fs-2xs);}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">FACAI · 指挥中心</div>
+  <div id="conn" class="conn"><span class="dot"></span><span id="connText">连接中…</span></div>
+  <div class="quick">
+    <input id="plain" class="facai-input" placeholder="一句话，说清楚你要什么…">
+    <button id="go" class="facai-btn">开工</button>
+    <button id="reg" class="facai-btn regbtn">能力库</button>
+  </div>
+</header>
+
+<main class="grid">
+  <section>
+    <h2>任务 · MISSION CENTER</h2>
+    <div id="missionList"></div>
+    <div id="missionEmpty" class="empty">还没有流水线。一句话开工，看见它逐级流转。</div>
+  </section>
+  <section class="feedwrap">
+    <h2>实时事件流 · LIVE</h2>
+    <div id="feed"><div class="empty">等待事件…</div></div>
+  </section>
+</main>
+
+<aside id="detail" class="detail"></aside>
+<aside id="regdrawer" class="regdrawer"></aside>
+<div id="toast" class="toast"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let csrf = null;
+let es = null;
+let lastSeq = parseInt(localStorage.getItem("cc_seq") || "0", 10) || 0;
+let missionMap = {};          // mission_id -> pipeline row
+let detailPipeline = null;    // 当前展开的流水线 id
+
+function toast(text){
+  const el = $("toast"); el.textContent = text; el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 2200);
+}
+function esc(t){
+  const d = document.createElement("div");
+  d.textContent = String(t == null ? "" : t);
+  return d.innerHTML;
+}
+async function api(path, options){
+  const headers = Object.assign({"Content-Type":"application/json"},
+                                csrf ? {"X-CSRF-Token": csrf} : {});
+  const res = await fetch(path, Object.assign({credentials:"same-origin", headers}, options));
+  if (res.status === 401) { location.href = "/login?next=" + encodeURIComponent("/command-center"); throw new Error("未登录"); }
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body.detail || res.statusText);
+  return body;
+}
+
+/* ---------- 连接状态 ---------- */
+function setConn(state){
+  const el = $("conn");
+  el.classList.toggle("live", state === "live");
+  el.classList.toggle("down", state === "down");
+  $("connText").textContent = state === "live" ? "LIVE" :
+                              state === "down" ? "重连中…" : "连接中…";
+}
+
+/* ---------- 实时事件流 ---------- */
+const seen = new Set();
+function appendEvent(ev){
+  if (ev.sequence == null || seen.has(ev.sequence)) return;
+  seen.add(ev.sequence);
+  if (ev.sequence > lastSeq){ lastSeq = ev.sequence; localStorage.setItem("cc_seq", String(lastSeq)); }
+  const feed = $("feed");
+  const blank = feed.querySelector(".empty"); if (blank) blank.remove();
+  const item = document.createElement("div");
+  const type = ev.type || "";
+  item.className = "evt" +
+    (/GATE/.test(type) ? " gate-evt" : "") +
+    (/StepCompleted|VerificationPassed|DeploymentFinished|SkillAdmitted/.test(type) ? " done-evt" : "");
+  const missionId = ev.mission_id || "";
+  if (missionMap[missionId]) item.dataset.mission = missionId;
+  const t = (ev.occurred_at || "").replace("T", " ").slice(5, 16);
+  const payload = ev.payload || {};
+  const gist = payload.stage || payload.choice_label || payload.status || payload.title || "";
+  item.innerHTML = `<time>${esc(t)}</time>` +
+    `<span class="etype">${esc(type)}</span>` +
+    `<span class="gist">${esc(gist)}${missionMap[missionId] ? " · " + esc(missionMap[missionId].title) : ""}</span>`;
+  if (missionMap[missionId]) item.onclick = () => openDetail(missionMap[missionId].id);
+  feed.prepend(item);
+  while (feed.children.length > 300) feed.lastChild.remove();
+  if (/GATE|StepCompleted|StepFailed|MissionCreated/.test(type)) refreshMissions();
+  if (detailPipeline && ev.mission_id &&
+      missionMap[ev.mission_id] && missionMap[ev.mission_id].id === detailPipeline) {
+    if (/GATE|StepCompleted|StepFailed|FEEDBACK/.test(type)) renderDetail(detailPipeline, false);
+  }
+}
+function openStream(){
+  if (es) es.close();
+  es = new EventSource(`/api/v1/events/stream?after=${lastSeq}`);
+  es.onopen = () => setConn("live");
+  es.onmessage = (e) => { try { appendEvent(JSON.parse(e.data)); } catch (_) {} };
+  es.onerror = () => { setConn("down"); es.close(); es = null;
+                       setTimeout(openStream, 2500); };   // 手动重连携带最新游标，不重放旧帧
+}
+
+/* ---------- 任务列表 ---------- */
+function displayStatus(snap){
+  if (snap.open_gates && snap.open_gates.length) return {label:"等你一句话", cls:"GATE"};
+  const s = snap.mission_status;
+  if (s === "DONE") return {label:"已完成", cls:"DONE"};
+  if (s === "FAILED") return {label:"失败", cls:"FAILED"};
+  if (s === "CANCELLED") return {label:"已取消", cls:"FAILED"};
+  if (s === "RUNNING") return {label:"执行中", cls:"RUNNING"};
+  return {label:"准备中", cls:"WAITING"};
+}
+function progressOf(snap){
+  const stages = Object.values(snap.stages || {});
+  const done = stages.filter(s => s.status === "DONE").length;
+  return {done, total: stages.length};
+}
+async function refreshMissions(){
+  let rows;
+  try { rows = (await api("/api/v1/conversion/console")).pipelines; }
+  catch (err) { if (String(err.message) !== "未登录") toast(err.message); return; }
+  missionMap = {};
+  rows.forEach(r => { missionMap[r.mission_id] = r; });
+  $("missionEmpty").style.display = rows.length ? "none" : "";
+  const list = $("missionList"); list.textContent = "";
+  await Promise.all(rows.slice(0, 30).map(async (row) => {
+    let snap;
+    try { snap = await api("/api/v1/conversion/console/" + row.id); }
+    catch (_) { return; }
+    const st = displayStatus(snap);
+    const p = progressOf(snap);
+    const card = document.createElement("div");
+    card.className = "mission";
+    card.onclick = () => openDetail(row.id);
+    card.innerHTML =
+      `<div class="row1"><div class="title">${esc(row.title)}</div>` +
+      `<span class="chip ${st.cls}">${esc(st.label)}</span></div>` +
+      `<div class="bar"><i class="${st.cls === "GATE" ? "gate" : ""}" ` +
+      `style="width:${p.total ? Math.round(p.done / p.total * 100) : 0}%"></i></div>` +
+      `<div class="meta">${p.done}/${p.total} 阶段 · ${esc((row.created_at || "").slice(5, 16))}</div>`;
+    list.appendChild(card);
+  }));
+}
+
+/* ---------- 详情抽屉 ---------- */
+async function renderDetail(pipelineId, slide = true){
+  detailPipeline = pipelineId;
+  let snap, proof;
+  try {
+    snap = await api("/api/v1/conversion/console/" + pipelineId);
+    proof = await api(`/api/v1/missions/${snap.mission_id}/proof`).catch(() => ({}));
+  } catch (err) { toast(err.message); return; }
+  const box = $("detail");
+  let html = `<button class="facai-btn close" onclick="closeDetail()">收起</button>` +
+    `<h3>${esc(snap.title)}</h3>` +
+    `<div class="duo">` +
+      `<div class="cell"><b>原话（不弱化传达）</b>${esc(snap.original_input)}</div>` +
+      `<div class="cell prof"><b>专业提示词</b>${esc(snap.professional_prompt)}</div>` +
+    `</div>`;
+  (snap.stage_order || []).forEach((label) => {
+    const stage = (snap.stages || {})[label] || {};
+    const asg = stage.assignment || {};
+    const tree = asg.assignment || asg || {};
+    const primary = tree.primary;
+    const fallbacks = tree.fallbacks || [];
+    const status = stage.gate_id ? "GATE" : (stage.status || "WAITING");
+    const copy = {WAITING:"排队中", RUNNING:"执行中", GATE:"等你一句话",
+                  DONE:"已完成", FAILED:"失败", BLOCKED:"受阻",
+                  CANCELLED:"已取消"}[status] || status;
+    html += `<div class="dstage"><div class="head">` +
+      `<div class="label">${esc(label)}</div>` +
+      `<span class="chip ${esc(status)}">${esc(copy)}</span></div>`;
+    if (primary) {
+      html += `<div class="agents">首选 <b>${esc(primary.name)}</b>` +
+        (fallbacks.length ? ` · 后备 ${esc(fallbacks.map(f => f.name).join(" → "))}` : "") +
+        (primary.reasons && primary.reasons.length ? ` · ${esc(primary.reasons.join("；"))}` : "") +
+        `</div>`;
+    }
+    html += `</div>`;
+  });
+  (snap.open_gates || []).forEach((gate) => {
+    html += `<div class="gate"><div class="q">${esc(gate.question)}</div><div class="opts">` +
+      (gate.options || []).map((o, i) =>
+        `<button class="facai-btn" data-gate="${esc(gate.id)}" data-choice="${i}">${esc(o.label)}</button>`
+      ).join("") +
+      `</div><div class="custom">` +
+      `<input class="facai-input" id="custom-${esc(gate.id)}" placeholder="或者自己说…">` +
+      `<button class="facai-btn" data-gate="${esc(gate.id)}" data-custom="1">下达</button>` +
+      `</div></div>`;
+  });
+  const arts = (proof.artifacts || []);
+  if (arts.length) {
+    html += `<div class="arts"><h3 style="font-size:var(--fs-sm);color:var(--mut)">产出物</h3>` +
+      arts.map(a => `<div class="art">${esc(a.name || a.title || a.path || "artifact")}</div>`).join("") +
+      `</div>`;
+  }
+  box.innerHTML = html;
+  box.querySelectorAll("button[data-gate]").forEach(btn => {
+    btn.onclick = () => resolveGate(pipelineId, btn.dataset.gate,
+                                    btn.dataset.custom ? null : parseInt(btn.dataset.choice, 10),
+                                    btn.dataset.custom ? $(`custom-${btn.dataset.gate}`).value.trim() : null);
+  });
+  if (slide) box.classList.add("show");
+}
+function closeDetail(){ $("detail").classList.remove("show"); detailPipeline = null; }
+window.closeDetail = closeDetail;
+
+async function resolveGate(pipelineId, gateId, choice, custom){
+  const body = {choice: choice == null ? 0 : choice};
+  if (custom) body.custom_answer = custom;
+  try {
+    const out = await api(`/api/v1/conversion/console/${pipelineId}/gates/${gateId}/resolve`,
+                          {method:"POST", body: JSON.stringify(body)});
+    toast(out.resume === "RESUMED" ? "已下达，继续流转" :
+          out.resume === "RESUME_DEFERRED" ? "裁决已记录，环节完成后续接" : "裁决已记录");
+    renderDetail(pipelineId, false);
+    refreshMissions();
+  } catch (err) { toast(err.message); }
+}
+
+/* ---------- 一句话开工 ---------- */
+async function startPipeline(){
+  const text = $("plain").value.trim();
+  if (!text) { toast("先说一句话"); return; }
+  try {
+    const created = await api("/api/v1/conversion/console",
+                              {method:"POST", body: JSON.stringify({text})});
+    $("plain").value = "";
+    toast("流水线已开工");
+    await refreshMissions();
+    openDetail(created.id);
+  } catch (err) { toast(err.message); }
+}
+
+/* ---------- 能力库抽屉 + 模型矩阵 ---------- */
+function poolRow(id, p){
+  const used = p.minute_used, limit = p.minute_limit;
+  const pct = Math.max(0, Math.min(100, Math.round(100 * (limit - used) / Math.max(1, limit))));
+  const cls = p.paused ? "empty" : (p.cooling || pct <= 10 ? "low" : (pct <= 30 ? "low" : ""));
+  const tag = p.paused ? "已暂停" : p.cooling ? `冷却 ${p.cooldown_remaining}s` :
+              `分钟 ${used}/${limit} · 并发 ${p.inflight}/${p.concurrency_limit}`;
+  return `<div class="pool ${cls}">` +
+    `<div class="prow"><span class="pname">${esc(id)}</span>` +
+    `<span class="ptag ${p.paused || p.cooling ? (p.paused ? "" : "cold") : ""}">${esc(tag)}</span></div>` +
+    `<div class="pbar"><i style="width:${pct}%"></i></div>` +
+    `<div class="ctl">` +
+    `<button class="facai-btn" data-act="pause" data-m="${esc(id)}" data-v="${p.paused ? "false" : "true"}">${p.paused ? "恢复" : "暂停"}</button>` +
+    `<button class="facai-btn" data-act="boost" data-m="${esc(id)}">权重+1</button>` +
+    `</div></div>`;
+}
+async function openRegistry(){
+  const box = $("regdrawer");
+  box.classList.add("show");
+  box.innerHTML = `<button class="facai-btn close" onclick="document.getElementById('regdrawer').classList.remove('show')">收起</button>` +
+                  `<div class="empty">读取中…</div>`;
+  const [skills, cases, matrix] = await Promise.all([
+    api("/api/v1/registries/skills").catch(() => ({})),
+    api("/api/v1/registries/cases").catch(() => ({})),
+    api("/api/v1/modelmatrix").catch(() => null),
+  ]);
+  const section = (title, entries, nameOf) => {
+    const keys = Object.keys(entries || {});
+    return `<h3>${esc(title)} · ${keys.length}</h3>` +
+      (keys.length ? keys.map(k =>
+        `<div class="item">${esc(nameOf(entries[k]) || k)}</div>`).join("")
+        : `<div class="item">（空）</div>`);
+  };
+  let matrixHtml = "";
+  if (matrix && matrix.pools) {
+    const order = matrix.route_order || Object.keys(matrix.pools);
+    matrixHtml = `<h3>模型矩阵 · ${order.length} 池（路由顺序自上而下）</h3>` +
+      order.map(id => matrix.pools[id] ? poolRow(id, matrix.pools[id]) : "").join("");
+  }
+  box.innerHTML =
+    `<button class="facai-btn close" onclick="document.getElementById('regdrawer').classList.remove('show')">收起</button>` +
+    matrixHtml +
+    section("技能 SKILLS", skills, v => v.name) +
+    section("案例 CASES", cases, v => v.title);
+  box.querySelectorAll("button[data-act]").forEach(btn => {
+    btn.onclick = async () => {
+      const m = btn.dataset.m;
+      try {
+        if (btn.dataset.act === "pause") {
+          await api(`/api/v1/modelmatrix/${m}/pause`,
+                    {method:"PUT", body: JSON.stringify({paused: btn.dataset.v === "true"})});
+        } else {
+          const cur = matrix.pools[m].weight || 1;
+          await api(`/api/v1/modelmatrix/${m}/weight`,
+                    {method:"PUT", body: JSON.stringify({weight: cur + 1})});
+        }
+        openRegistry();
+      } catch (err) { toast(err.message); }
+    };
+  });
+}
+
+/* ---------- 启动 ---------- */
+(async function boot(){
+  try {
+    const s = await api("/api/v1/auth/session");
+    csrf = s.csrf_token || null;
+  } catch (_) {}
+  await refreshMissions();
+  // 断线续传：从上次游标回放，再开实时流
+  try {
+    const back = await api(`/api/v1/events?after=${lastSeq}`);
+    (back.events || []).slice(-200).forEach(appendEvent);
+  } catch (_) {}
+  openStream();
+  setInterval(refreshMissions, 15000);
+  $("go").onclick = startPipeline;
+  $("plain").addEventListener("keydown", (e) => { if (e.key === "Enter") startPipeline(); });
+  $("reg").onclick = openRegistry;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+[Unit]
+Description=Facai TRON USDT chain sync (persistent billing reconciliation)
+Documentation=file:///opt/facai-cloud/docs/DEPLOYMENT.md
+After=network-online.target facai-cloud.service
+Wants=network-online.target
+# Never give up restarting: the billing side must stay in sync with the chain.
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=facai
+Group=facai
+WorkingDirectory=/opt/facai-cloud
+# Same classified env as the app: FACAI_DATA_DIR + the wallet address + the
+# relay/chain provider files. No secret ever on a command line.
+EnvironmentFile=/etc/facai-cloud/facai.env
+EnvironmentFile=-/etc/facai-cloud/providers/*.env
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+ExecStart=/opt/facai-cloud/.venv/bin/python -m facai.ops.tron_sync --interval 30
+# 24/7 persistence: the billing side must stay in sync with the chain, so the
+# daemon restarts on any exit, no matter how it died.
+Restart=always
+RestartSec=3
+
+# Hardening: unprivileged user, may only write the data dir.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/facai-cloud/data
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

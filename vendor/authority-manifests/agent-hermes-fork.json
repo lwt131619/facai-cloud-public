@@ -1,0 +1,1908 @@
+{
+  "target": "agent-hermes-fork (初扫收录实例 G:\\军团源码库\\Hermes)",
+  "origin": "本地路径 G:\\军团源码库\\Hermes",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 264 个文本文件（源码 264、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "CONFIG",
+      "where": "src/batch_runner.py:190",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_ENV",
+      "rule": "os.getenv",
+      "evidence": "src/batch_runner.py:190  env_type = os.getenv(\"TERMINAL_ENV\", \"local\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/batch_runner.py:872",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "src/batch_runner.py:872  base_url: str = \"https://openrouter.ai/api/v1\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_QUIET",
+      "rule": "os.environ[]",
+      "evidence": "src/cli.py:29  os.environ[\"HERMES_QUIET\"] = \"1\"  # suppress our modules' startup chatter"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:445",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DEFER_AGENT_STARTUP",
+      "rule": "os.environ.get",
+      "evidence": "src/cli.py:445  if os.environ.get(\"HERMES_DEFER_AGENT_STARTUP\") != \"1\":"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:448",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_ACCEPT_HOOKS",
+      "rule": "os.environ.get",
+      "evidence": "src/cli.py:448  _accept_hooks = os.environ.get(\"HERMES_ACCEPT_HOOKS\", \"\").lower() in {\"1\", \"true\", \"yes\", \"on\"}"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1085",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_ENV",
+      "rule": "os.getenv",
+      "evidence": "src/cli.py:1085  terminal_env = os.getenv(\"TERMINAL_ENV\", \"local\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1086",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_CWD",
+      "rule": "os.getenv",
+      "evidence": "src/cli.py:1086  terminal_cwd = os.getenv(\"TERMINAL_CWD\", os.getcwd())\nsrc/cli.py:1653  os.environ[\"TERMINAL_CWD\"] = info[\"path\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1087",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_TIMEOUT",
+      "rule": "os.getenv",
+      "evidence": "src/cli.py:1087  terminal_timeout = os.getenv(\"TERMINAL_TIMEOUT\", \"60\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1114",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_SSH_USER",
+      "rule": "os.getenv",
+      "evidence": "src/cli.py:1114  f\"{os.getenv('TERMINAL_SSH_USER', _unset)}@{os.getenv('TERMINAL_SSH_HOST', _unset)}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1114",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_SSH_HOST",
+      "rule": "os.getenv",
+      "evidence": "src/cli.py:1114  f\"{os.getenv('TERMINAL_SSH_USER', _unset)}@{os.getenv('TERMINAL_SSH_HOST', _unset)}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1115",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_SSH_PORT",
+      "rule": "os.getenv",
+      "evidence": "src/cli.py:1115  f\":{os.getenv('TERMINAL_SSH_PORT', '22')}\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/cli.py:1274",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/cli.py:1274  result = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/cli.py:1738",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_INTERACTIVE",
+      "rule": "os.environ[]",
+      "evidence": "src/cli.py:1738  os.environ[\"HERMES_INTERACTIVE\"] = \"1\"  # terminal_tool: interactive sudo prompts with timeout"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_bootstrap.py:445",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_PYTHON_SRC_ROOT",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_bootstrap.py:445  root = src_root or os.environ.get(\"HERMES_PYTHON_SRC_ROOT\") or os.path.dirname("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/hermes_bootstrap.py:548",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "src/hermes_bootstrap.py:548  raise RelaunchExit(subprocess.call(_command))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/hermes_bootstrap.py:549",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "os.execv",
+      "evidence": "src/hermes_bootstrap.py:549  os.execv(str(_launch_python), _command)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:53",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DATA_DIR_SUFFIX",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:53  suffix = os.environ.get(\"HERMES_DATA_DIR_SUFFIX\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:55",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LOCALAPPDATA",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:55  local_appdata = os.environ.get(\"LOCALAPPDATA\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:69",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SUDO_USER",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:69  sudo_user = os.environ.get(\"SUDO_USER\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:116",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_HOME",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:116  if not os.environ.get(\"HERMES_HOME\", \"\").strip():\nsrc/hermes_constants.py:168  val = os.environ.get(\"HERMES_HOME\", \"\").strip()\nsrc/hermes_constants.py:180  ``os.environ[\"HERMES_HOME\"]`` for legacy readers (Hermes WebUI) otherwise makes every turn's own"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/hermes_constants.py:451",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/hermes_constants.py:451  return subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:521",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PATH",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:521  directories = [d for d in os.environ.get(\"PATH\", \"\").split(os.pathsep) if d]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:793",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_MANAGED",
+      "rule": "os.getenv",
+      "evidence": "src/hermes_constants.py:793  marker = os.getenv(\"HERMES_MANAGED\", \"\").strip().lower() or None"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:815",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_CONTAINER",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:815  if os.environ.get(\"HERMES_CONTAINER\") or os.environ.get(\"HERMES_SKIP_CHMOD\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:815",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SKIP_CHMOD",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:815  if os.environ.get(\"HERMES_CONTAINER\") or os.environ.get(\"HERMES_SKIP_CHMOD\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_constants.py:877",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_HOME_MODE",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_constants.py:877  explicit_mode = os.environ.get(\"HERMES_HOME_MODE\", \"\").strip()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_constants.py:1233",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "src/hermes_constants.py:1233  OPENROUTER_BASE_URL = \"https://openrouter.ai/api/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_constants.py:1276",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://ai-gateway.vercel.sh/v1",
+      "evidence": "src/hermes_constants.py:1276  AI_GATEWAY_BASE_URL = \"https://ai-gateway.vercel.sh/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_constants.py:1379",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hermes-agent.nousresearch.com",
+      "evidence": "src/hermes_constants.py:1379  \"If that also fails, reinstall: https://hermes-agent.nousresearch.com\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/hermes_constants_scratch.py:158",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/hermes_constants_scratch.py:158  subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_state_errors.py:202",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hermes-agent.nousresearch.com/docs/user-guide/session-storage-recovery",
+      "evidence": "src/hermes_state_errors.py:202  STORAGE_RECOVERY_DOCS_URL = \"https://hermes-agent.nousresearch.com/docs/user-guide/session-storage-recovery\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_state_fts.py:102",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_FTS5_CJK_SO",
+      "rule": "os.getenv",
+      "evidence": "src/hermes_state_fts.py:102  env = os.getenv(\"HERMES_FTS5_CJK_SO\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_state_guard.py:33",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LOCALAPPDATA",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_state_guard.py:33  base = os.environ.get(\"LOCALAPPDATA\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_state_guard.py:57",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PYTEST_CURRENT_TEST",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_state_guard.py:57  os.environ.get(\"PYTEST_CURRENT_TEST\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_state_guard.py:58",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PYTEST_VERSION",
+      "rule": "os.environ.get",
+      "evidence": "src/hermes_state_guard.py:58  or os.environ.get(\"PYTEST_VERSION\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_state_wal.py:133",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlite.org/wal.html#walresetbug",
+      "evidence": "src/hermes_state_wal.py:133  3.44.6). Pre-WAL libraries are safe. https://sqlite.org/wal.html#walresetbug\"\"\"\nsrc/hermes_state_wal.py:262  builds (https://sqlite.org/wal.html#walresetbug) never enable WAL on non-WAL files; an already-WAL DB keeps WAL\nsrc/hermes_state_wal.py:495  \"(https://sqlite.org/wal.html#walresetbug) — %s. Upgrade to SQLite 3.51.3+ (or backports 3.50.7 / 3.44.6); \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_state_wal.py:510",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.sqlite.org/wal.html",
+      "evidence": "src/hermes_state_wal.py:510  \"https://www.sqlite.org/wal.html for details. This message fires once per process per database.\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/hermes_time.py:75",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_TIMEZONE",
+      "rule": "os.getenv",
+      "evidence": "src/hermes_time.py:75  return os.getenv(\"HERMES_TIMEZONE\", \"\").strip()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/hermes_yaml.py:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://h",
+      "evidence": "src/hermes_yaml.py:32  documents the pure parser accepts (``[{url: http://h}]``), so a C rejection is re-read pure."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/mcp_serve.py:45",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_HOME",
+      "rule": "os.environ.get",
+      "evidence": "src/mcp_serve.py:45  return Path(os.environ.get(\"HERMES_HOME\", Path.home() / \".hermes\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/mini_swe_runner.py:97",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "src/mini_swe_runner.py:97  _OPENROUTER_URL = \"https://openrouter.ai/api/v1\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/mini_swe_runner.py:153",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/mini_swe_runner.py:153  return OpenAI(base_url=base_url or _OPENROUTER_URL, api_key=api_key or os.getenv(\nsrc/mini_swe_runner.py:161  client = OpenAI(base_url=_OPENROUTER_URL, api_key=os.getenv(\"OPENROUTER_API_KEY\", \"\"))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "src/mini_swe_runner.py:154",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "src/mini_swe_runner.py:154  \"OPENROUTER_API_KEY\", os.getenv(\"ANTHROPIC_API_KEY\", os.getenv(\"OPENAI_API_KEY\", \"\"))))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "src/mini_swe_runner.py:154",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "src/mini_swe_runner.py:154  \"OPENROUTER_API_KEY\", os.getenv(\"ANTHROPIC_API_KEY\", os.getenv(\"OPENAI_API_KEY\", \"\"))))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "src/mini_swe_runner.py:161",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "src/mini_swe_runner.py:161  client = OpenAI(base_url=_OPENROUTER_URL, api_key=os.getenv(\"OPENROUTER_API_KEY\", \"\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/model_tools.py:277",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TASK",
+      "rule": "os.environ.get",
+      "evidence": "src/model_tools.py:277  bool(os.environ.get(\"HERMES_KANBAN_TASK\")), bool(skip_tool_search_assembly),\nsrc/model_tools.py:322  if (os.environ.get(\"HERMES_KANBAN_TASK\") and not _is_delegated_child_context()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/run_agent.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:30000/v1",
+      "evidence": "src/run_agent.py:5  agent = AIAgent(base_url=\"http://localhost:30000/v1\", model=\"claude-opus-4-20250514\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/run_agent.py:48",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_ENV",
+      "rule": "os.environ.get",
+      "evidence": "src/run_agent.py:48  if source not in CLI_FAMILY_SOURCES or (os.environ.get(\"TERMINAL_ENV\") or \"local\").strip().lower() not in (\"\", \"local\"):"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/run_agent.py:561",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/run_agent.py:561  \"\"\"True when a base URL targets Azure OpenAI (standard client, but NO Responses API support).\"\"\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/run_agent.py:586",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_API_CALL_STALE_TIMEOUT",
+      "rule": "os.getenv",
+      "evidence": "src/run_agent.py:586  env_timeout = os.getenv(\"HERMES_API_CALL_STALE_TIMEOUT\")\nsrc/run_agent.py:623  or os.getenv(\"HERMES_API_CALL_STALE_TIMEOUT\") is not None)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/run_agent.py:1519",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "src/run_agent.py:1519  base_url (str): Base URL for the model API. Defaults to https://openrouter.ai/api/v1"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/setup.py:34",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_NIX_BUILD",
+      "rule": "os.environ.get",
+      "evidence": "src/setup.py:34  _IN_NIX_BUILD = os.environ.get(\"HERMES_NIX_BUILD\") == \"1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/setup.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hermes-agent.nousresearch.com/docs/getting-started/installation",
+      "evidence": "src/setup.py:39  \"See: https://hermes-agent.nousresearch.com/docs/getting-started/installation\\n\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/trajectory_compressor.py:324",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/trajectory_compressor.py:324  self.client = OpenAI(api_key=api_key, base_url=_to_openai_base_url(self.config.base_url))\nsrc/trajectory_compressor.py:337  self.async_client = AsyncOpenAI(api_key=self._async_client_api_key, base_url=_to_openai_base_url(self.config.base_url))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/utils.py:738",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com.example/v1",
+      "evidence": "src/utils.py:738  ``https://api.openai.com.example/v1`` or ``https://proxy.test/api.openai.com/v1`` would"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/utils.py:738",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://proxy.test/api.openai.com/v1",
+      "evidence": "src/utils.py:738  ``https://api.openai.com.example/v1`` or ``https://proxy.test/api.openai.com/v1`` would"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/utils.py:760",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://h",
+      "evidence": "src/utils.py:760  Origin, not just host: ``https://h`` vs ``http://h`` and two ports on one host are different\nsrc/utils.py:762  alone would authorise an HTTPS→HTTP downgrade. Port defaults to 443/80 so ``https://h``"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/utils.py:760",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://h",
+      "evidence": "src/utils.py:760  Origin, not just host: ``https://h`` vs ``http://h`` and two ports on one host are different"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/utils.py:763",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://h:443",
+      "evidence": "src/utils.py:763  equals ``https://h:443``."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/.cache/desktop-inputs/packager/builder/icons@1.2.1/icons-bundle-39vp2/icon-tool.js:689",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DEBUG",
+      "rule": "process.env",
+      "evidence": "src/.cache/desktop-inputs/packager/builder/icons@1.2.1/icons-bundle-39vp2/icon-tool.js:689  const spec = process.env.DEBUG;"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/.github/actions/setup-pm/prune/index.mjs:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "src/.github/actions/setup-pm/prune/index.mjs:1  import { spawnSync } from 'node:child_process'"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/.github/scripts/run-workspace-checks.mjs:19",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "src/.github/scripts/run-workspace-checks.mjs:19  import { execFileSync, spawn } from 'node:child_process'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/.github/scripts/run-workspace-checks.mjs:22",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_ACTIONS",
+      "rule": "process.env",
+      "evidence": "src/.github/scripts/run-workspace-checks.mjs:22  const IS_CI = Boolean(process.env.GITHUB_ACTIONS)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/acp_adapter/entry.py:210",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_ACP_SKIP_CONFIGURED_MCP",
+      "rule": "os.environ.get",
+      "evidence": "src/acp_adapter/entry.py:210  if os.environ.get(\"HERMES_ACP_SKIP_CONFIGURED_MCP\", \"\").strip() != \"1\":"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/acp_adapter/server.py:800",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SESSION_ID",
+      "rule": "os.environ.get",
+      "evidence": "src/acp_adapter/server.py:800  stack.callback(_restore_env, \"HERMES_SESSION_ID\", os.environ.get(\"HERMES_SESSION_ID\"))\nsrc/acp_adapter/server.py:801  os.environ[\"HERMES_SESSION_ID\"] = session_id"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/account_usage.py:319",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://chatgpt.com/backend-api/codex",
+      "evidence": "src/agent/account_usage.py:319  normalized = (base_url or \"\").strip().rstrip(\"/\") or \"https://chatgpt.com/backend-api/codex\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/account_usage.py:647",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/api/oauth/usage",
+      "evidence": "src/agent/account_usage.py:647  payload = _get_json(\"https://api.anthropic.com/api/oauth/usage\", headers, timeout=15.0)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/activity_tracking.py:74",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TASK",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/activity_tracking.py:74  if os.environ.get(\"HERMES_KANBAN_TASK\"):"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/agent_init.py:481",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/agent/agent_init.py:481  # Responses surface) or Azure OpenAI (gpt-5.x on /chat/completions only). Provider"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/agent_init.py:1210",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SESSION_ID",
+      "rule": "os.environ[]",
+      "evidence": "src/agent/agent_init.py:1210  os.environ[\"HERMES_SESSION_ID\"] = session_id"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/agent_runtime_helpers.py:1173",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/agent/agent_runtime_helpers.py:1173  # after a fallback must recreate the facade, not call OpenAI() with an empty api_key. Use the shared\nsrc/agent/agent_runtime_helpers.py:2126  client = process_bootstrap.OpenAI(**client_kwargs)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/agent_runtime_helpers.py:2198",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "src/agent/agent_runtime_helpers.py:2198  base_url = \"https://api.openai.com/v1\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/anthropic_adapter.py:288",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/anthropic_adapter.py:288  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_adapter.py:362",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hermes-agent.nousresearch.com",
+      "evidence": "src/agent/anthropic_adapter.py:362  \"HTTP-Referer\": \"https://hermes-agent.nousresearch.com\", \"X-Title\": \"Hermes Agent\","
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/anthropic_adapter.py:418",
+      "what": "初扫：anthropic SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via anthropic，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "anthropic",
+      "inferred": true,
+      "evidence": "src/agent/anthropic_adapter.py:418  \"\"\"``sdk.Anthropic(**kwargs)`` with ``headers`` attached, sending exactly ONE credential.\nsrc/agent/anthropic_adapter.py:439  return sdk.Anthropic(**kwargs)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_credentials.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.claude.com/v1/oauth/token",
+      "evidence": "src/agent/anthropic_credentials.py:39  \"https://platform.claude.com/v1/oauth/token\", \"https://console.anthropic.com/v1/oauth/token\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_credentials.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://console.anthropic.com/v1/oauth/token",
+      "evidence": "src/agent/anthropic_credentials.py:39  \"https://platform.claude.com/v1/oauth/token\", \"https://console.anthropic.com/v1/oauth/token\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_credentials.py:44",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://console.anthropic.com/oauth/code/callback",
+      "evidence": "src/agent/anthropic_credentials.py:44  _OAUTH_REDIRECT_URI = \"https://console.anthropic.com/oauth/code/callback\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/anthropic_credentials.py:265",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/anthropic_credentials.py:265  result = subprocess.run(\nsrc/agent/anthropic_credentials.py:294  result = subprocess.run(\nsrc/agent/anthropic_credentials.py:598  result = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/anthropic_credentials.py:341",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_CONFIG_DIR",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/anthropic_credentials.py:341  override = os.environ.get(\"CLAUDE_CONFIG_DIR\", \"\").strip()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_credentials.py:764",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://claude.ai/oauth/authorize?{urlencode(params",
+      "evidence": "src/agent/anthropic_credentials.py:764  auth_url = f\"https://claude.ai/oauth/authorize?{urlencode(params)}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_endpoints.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.minimax.io/anthropic",
+      "evidence": "src/agent/anthropic_endpoints.py:15  _MINIMAX_ANTHROPIC_PREFIXES = (\"https://api.minimax.io/anthropic\", \"https://api.minimaxi.com/anthropic\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_endpoints.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.minimaxi.com/anthropic",
+      "evidence": "src/agent/anthropic_endpoints.py:15  _MINIMAX_ANTHROPIC_PREFIXES = (\"https://api.minimax.io/anthropic\", \"https://api.minimaxi.com/anthropic\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/anthropic_endpoints.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.kimi.com/coding",
+      "evidence": "src/agent/anthropic_endpoints.py:37  return _normalized_lower(base_url).startswith(\"https://api.kimi.com/coding\")"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/anthropic_endpoints.py:150",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/agent/anthropic_endpoints.py:150  (``*.services.ai.azure.*``) and legacy Azure OpenAI (``*.openai.azure.*``) hosts; opts them"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/api_error_summary.py:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://grok.com/?_s=usage",
+      "evidence": "src/agent/api_error_summary.py:56  \"quota is exhausted. Check https://grok.com/?_s=usage to see \"\nsrc/agent/api_error_summary.py:119  that, keep the raw text, point at https://grok.com/?_s=usage. Idempotent: a substring unique to the"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/api_request_hooks.py:53",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_PLUGIN_PAYLOAD_MAX_CHARS",
+      "rule": "os.getenv",
+      "evidence": "src/agent/api_request_hooks.py:53  raw = os.getenv(\"HERMES_PLUGIN_PAYLOAD_MAX_CHARS\", \"50000\")"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/auxiliary_client.py:196",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/agent/auxiliary_client.py:196  return OpenAI(api_key=api_key, base_url=base_url, **kwargs)\nsrc/agent/auxiliary_client.py:4760  return AsyncOpenAI(**async_kwargs), model\nsrc/agent/auxiliary_client.py:4836  client = OpenAI(**client_kwargs)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_client.py:870",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hermes-agent.nousresearch.com",
+      "evidence": "src/agent/auxiliary_client.py:870  \"HTTP-Referer\": \"https://hermes-agent.nousresearch.com\",\nsrc/agent/auxiliary_client.py:938  \"HTTP-Referer\": \"https://hermes-agent.nousresearch.com\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/auxiliary_client.py:910",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_OPENROUTER_CACHE",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/auxiliary_client.py:910  env_cache = os.environ.get(\"HERMES_OPENROUTER_CACHE\", \"\").strip().lower()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/auxiliary_client.py:914",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_OPENROUTER_CACHE_TTL",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/auxiliary_client.py:914  env_ttl = os.environ.get(\"HERMES_OPENROUTER_CACHE_TTL\", \"\").strip()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_client.py:961",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://inference-api.nousresearch.com/v1",
+      "evidence": "src/agent/auxiliary_client.py:961  _NOUS_DEFAULT_BASE_URL = \"https://inference-api.nousresearch.com/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_client.py:962",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com",
+      "evidence": "src/agent/auxiliary_client.py:962  _ANTHROPIC_DEFAULT_BASE_URL = \"https://api.anthropic.com\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "src/agent/auxiliary_client.py:1109",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_NOUS_MIN_KEY_TTL_SECONDS",
+      "rule": "os.getenv",
+      "evidence": "src/agent/auxiliary_client.py:1109  return max(60, int(os.getenv(\"HERMES_NOUS_MIN_KEY_TTL_SECONDS\", \"1800\")))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_client.py:1882",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bedrock-runtime.{region",
+      "evidence": "src/agent/auxiliary_client.py:1882  self.base_url = f\"https://bedrock-runtime.{region}.amazonaws.com\"\nsrc/agent/auxiliary_client.py:4839  base_url = f\"https://bedrock-runtime.{region}.amazonaws.com\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/auxiliary_client.py:4547",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_BASE_URL",
+      "rule": "os.getenv",
+      "evidence": "src/agent/auxiliary_client.py:4547  _env_base = os.getenv(\"OPENAI_BASE_URL\", \"\").strip()"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/auxiliary_client.py:4934",
+      "what": "初扫：anthropic SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via anthropic，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "anthropic",
+      "inferred": true,
+      "evidence": "src/agent/auxiliary_client.py:4934  explicit api_mode — api.openai.com + codex model. Anthropic (Messages): ``api_mode=anthropic_messages``,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_client.py:5685",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://open.bigmodel.cn/api/paas/v4",
+      "evidence": "src/agent/auxiliary_client.py:5685  _ZAI_OPENAI_VISION_URLS = (\"https://open.bigmodel.cn/api/paas/v4\", \"https://api.z.ai/api/paas/v4\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_client.py:5685",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.z.ai/api/paas/v4",
+      "evidence": "src/agent/auxiliary_client.py:5685  _ZAI_OPENAI_VISION_URLS = (\"https://open.bigmodel.cn/api/paas/v4\", \"https://api.z.ai/api/paas/v4\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/auxiliary_structured_output.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api-docs.deepseek.com/guides/json_mode",
+      "evidence": "src/agent/auxiliary_structured_output.py:6  ``json_object`` — https://api-docs.deepseek.com/guides/json_mode — and answers ``json_schema`` with"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/azure_identity_adapter.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://learn.microsoft.com/azure/ai-foundry/foundry-models/how-to/configure-entra-id",
+      "evidence": "src/agent/azure_identity_adapter.py:9  Reference: https://learn.microsoft.com/azure/ai-foundry/foundry-models/how-to/configure-entra-id"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/azure_identity_adapter.py:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ai.azure.com/.default",
+      "evidence": "src/agent/azure_identity_adapter.py:27  SCOPE_AI_AZURE_DEFAULT = \"https://ai.azure.com/.default\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/azure_identity_adapter.py:182",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/agent/azure_identity_adapter.py:182  \"\"\"Zero-arg callable minting a fresh Entra bearer JWT — pass as ``OpenAI(api_key=...)``. Scope precedence:"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/background_review.py:775",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SESSION_SOURCE",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/background_review.py:775  \"platform\": agent.platform or os.environ.get(\"HERMES_SESSION_SOURCE\", \"cli\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/bedrock_adapter.py:208",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bedrock-mantle.{resolved",
+      "evidence": "src/agent/bedrock_adapter.py:208  return f\"https://bedrock-mantle.{resolved}.api.aws/openai/v1\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "src/agent/bedrock_adapter.py:240",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AWS_BEARER_TOKEN_BEDROCK",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/bedrock_adapter.py:240  return (os.environ.get(\"AWS_BEARER_TOKEN_BEDROCK\", \"\") or \"\").strip()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/bedrock_adapter.py:1198",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-6.html",
+      "evidence": "src/agent/bedrock_adapter.py:1198  # https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-6.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.openai.com/settings/organization/billing",
+      "evidence": "src/agent/billing_links.py:45  _Provider(\"OpenAI\", \"https://platform.openai.com/settings/organization/billing\", (\"openai\",), (\"api.openai.com\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:46",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.anthropic.com/settings/billing",
+      "evidence": "src/agent/billing_links.py:46  _Provider(\"Anthropic\", \"https://console.anthropic.com/settings/billing\", (\"anthropic\",), (\"api.anthropic.com\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/settings/credits",
+      "evidence": "src/agent/billing_links.py:47  _Provider(\"OpenRouter\", \"https://openrouter.ai/settings/credits\", (\"openrouter\",), (\"openrouter.ai\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.x.ai/team/default/billing",
+      "evidence": "src/agent/billing_links.py:48  _Provider(\"xAI\", \"https://console.x.ai/team/default/billing\", (\"xai\", \"xai-oauth\"), (\"api.x.ai\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.deepseek.com/top_up",
+      "evidence": "src/agent/billing_links.py:49  _Provider(\"DeepSeek\", \"https://platform.deepseek.com/top_up\", (\"deepseek\",), (\"api.deepseek.com\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.groq.com/settings/billing",
+      "evidence": "src/agent/billing_links.py:50  _Provider(\"Groq\", \"https://console.groq.com/settings/billing\", (\"groq\",), (\"api.groq.com\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:51",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.mistral.ai/billing",
+      "evidence": "src/agent/billing_links.py:51  _Provider(\"Mistral\", \"https://console.mistral.ai/billing\", (\"mistral\",), (\"api.mistral.ai\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:52",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.together.ai/settings/billing",
+      "evidence": "src/agent/billing_links.py:52  _Provider(\"Together AI\", \"https://api.together.ai/settings/billing\", (\"together\",), (\"api.together.ai\", \"api.together.xyz\")),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:53",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fireworks.ai/account/billing",
+      "evidence": "src/agent/billing_links.py:53  _Provider(\"Fireworks AI\", \"https://fireworks.ai/account/billing\", (\"fireworks\",), (\"fireworks.ai\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:54",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://www.perplexity.ai/settings/api",
+      "evidence": "src/agent/billing_links.py:54  _Provider(\"Perplexity\", \"https://www.perplexity.ai/settings/api\", (\"perplexity\",), (\"perplexity.ai\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aistudio.google.com/app/billing",
+      "evidence": "src/agent/billing_links.py:55  _Provider(\"Google AI\", \"https://aistudio.google.com/app/billing\", (\"google\", \"gemini\"), (\"generativelanguage.googleapis.com\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashboard.cohere.com/billing",
+      "evidence": "src/agent/billing_links.py:56  _Provider(\"Cohere\", \"https://dashboard.cohere.com/billing\", (\"cohere\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.moonshot.ai/console/pay",
+      "evidence": "src/agent/billing_links.py:57  _Provider(\"Moonshot AI\", \"https://platform.moonshot.ai/console/pay\", (\"moonshot\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://build.nvidia.com/settings/billing",
+      "evidence": "src/agent/billing_links.py:58  _Provider(\"NVIDIA\", \"https://build.nvidia.com/settings/billing\", (\"nvidia\",)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_links.py:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://portal.nousresearch.com/billing",
+      "evidence": "src/agent/billing_links.py:75  return \"https://portal.nousresearch.com/billing\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/billing_usage.py:189",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DEV_CREDITS_FIXTURE",
+      "rule": "os.getenv",
+      "evidence": "src/agent/billing_usage.py:189  name = (os.getenv(\"HERMES_DEV_CREDITS_FIXTURE\") or \"\").strip().lower()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/billing_view.py:309",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DEV_BILLING_FIXTURE",
+      "rule": "os.getenv",
+      "evidence": "src/agent/billing_view.py:309  name = (os.getenv(\"HERMES_DEV_BILLING_FIXTURE\") or \"\").strip().lower()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/billing_view.py:320",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://portal.nousresearch.com/billing?topup=open",
+      "evidence": "src/agent/billing_view.py:320  charge_presets=(Decimal(\"10\"), Decimal(\"25\"), Decimal(\"50\")), portal_url=\"https://portal.nousresearch.com/billing?topup=open\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/chat_completion_helpers.py:1242",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_CODEX_TTFB_STRICT",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/chat_completion_helpers.py:1242  strict = os.environ.get(\"HERMES_CODEX_TTFB_STRICT\", \"\").strip().lower() in {\"1\", \"true\", \"yes\", \"on\"}"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/chat_completion_helpers.py:2430",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AGENT_BROWSER_HEADED",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/chat_completion_helpers.py:2430  return bool(os.environ.get(\"AGENT_BROWSER_HEADED\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/codex_headers.py:16",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://chatgpt.com/backend-api/codex",
+      "evidence": "src/agent/codex_headers.py:16  CODEX_AUX_BASE_URL = \"https://chatgpt.com/backend-api/codex\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/codex_headers.py:72",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/auth",
+      "evidence": "src/agent/codex_headers.py:72  auth = json.loads(base64.urlsafe_b64decode(payload_b64)).get(\"https://api.openai.com/auth\", {})"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/coding_context.py:418",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/coding_context.py:418  bounds post-kill cleanup on Windows — plain ``subprocess.run(timeout=...)`` deadlocked"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/command_token_source.py:53",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/command_token_source.py:53  completed = subprocess.run("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/context_references.py:400",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "src/agent/context_references.py:400  proc = subprocess.Popen("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/conversation_compression.py:1615",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SESSION_ID",
+      "rule": "os.environ[]",
+      "evidence": "src/agent/conversation_compression.py:1615  os.environ[\"HERMES_SESSION_ID\"] = session_id"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/conversation_loop.py:554",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://claude.ai/settings/usage",
+      "evidence": "src/agent/conversation_loop.py:554  \"If https://claude.ai/settings/usage still shows quota remaining, this is probably NOT \"\nsrc/agent/conversation_loop.py:559  \"at https://claude.ai/settings/usage\",\nsrc/agent/conversation_loop.py:568  \"Options: wait for the billing cycle to reset, or add extra usage at https://claude.ai/settings/usage\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/copilot_acp_client.py:76",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_COPILOT_ACP_COMMAND",
+      "rule": "os.getenv",
+      "evidence": "src/agent/copilot_acp_client.py:76  return os.getenv(\"HERMES_COPILOT_ACP_COMMAND\", \"\").strip() or os.getenv(\"COPILOT_CLI_PATH\", \"\").strip() or \"copilot\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/copilot_acp_client.py:76",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "COPILOT_CLI_PATH",
+      "rule": "os.getenv",
+      "evidence": "src/agent/copilot_acp_client.py:76  return os.getenv(\"HERMES_COPILOT_ACP_COMMAND\", \"\").strip() or os.getenv(\"COPILOT_CLI_PATH\", \"\").strip() or \"copilot\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/copilot_acp_client.py:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_COPILOT_ACP_ARGS",
+      "rule": "os.getenv",
+      "evidence": "src/agent/copilot_acp_client.py:80  return shlex.split(os.getenv(\"HERMES_COPILOT_ACP_ARGS\", \"\").strip()) or [\"--acp\", \"--stdio\"]"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/copilot_acp_client.py:93",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/copilot_acp_client.py:93  probe = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/copilot_acp_client.py:113",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOME",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/copilot_acp_client.py:113  if home := os.environ.get(\"HOME\", \"\").strip():"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/copilot_acp_client.py:302",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "src/agent/copilot_acp_client.py:302  self._active_processes: set[subprocess.Popen[str]] = set()\nsrc/agent/copilot_acp_client.py:306  def _terminate_process(proc: subprocess.Popen[str]) -> None:\nsrc/agent/copilot_acp_client.py:314  def _release_process(self, proc: subprocess.Popen[str]) -> None:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/credential_pool.py:338",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/auth",
+      "evidence": "src/agent/credential_pool.py:338  auth_claims = claims.get(\"https://api.openai.com/auth\") if isinstance(claims, dict) else None"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/credential_pool.py:776",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PYTEST_CURRENT_TEST",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/credential_pool.py:776  if os.environ.get(\"PYTEST_CURRENT_TEST\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/credential_pool.py:777",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOME",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/credential_pool.py:777  real_home_env = os.environ.get(\"HOME\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/credits_tracker.py:341",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DEV_CREDITS_FIXTURE",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/credits_tracker.py:341  name = os.environ.get(\"HERMES_DEV_CREDITS_FIXTURE\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/credits_tracker.py:342",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DEV_CREDITS",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/credits_tracker.py:342  if not name or not is_truthy_value(os.environ.get(\"HERMES_DEV_CREDITS\")):"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/deadline.py:432",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/deadline.py:432  proc = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/delegation_context.py:93",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TASK",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/delegation_context.py:93  return bool((os.environ.get(\"HERMES_KANBAN_TASK\") or \"\").strip())\nsrc/agent/delegation_context.py:104  return (os.environ.get(\"HERMES_KANBAN_TASK\") or \"\").strip()\nsrc/agent/delegation_context.py:181  if not (is_delegated_child_process_context() or os.environ.get(\"HERMES_KANBAN_TASK\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/delegation_context.py:155",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_DB",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/delegation_context.py:155  pinned = os.environ.get(\"HERMES_KANBAN_DB\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/display.py:924",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SPINNER_PAUSE",
+      "rule": "os.getenv",
+      "evidence": "src/agent/display.py:924  if os.getenv(\"HERMES_SPINNER_PAUSE\"):"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/error_classifier.py:134",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "src/agent/error_classifier.py:134  # OpenAI (and OpenAI-compatible aggregators) spend/usage-limit family:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/fast_mode.py:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
+      "evidence": "src/agent/fast_mode.py:21  # capacity for the model (https://platform.claude.com/docs/en/build-with-claude/fast-mode)."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/file_safety.py:225",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_WRITE_SAFE_ROOT",
+      "rule": "os.getenv",
+      "evidence": "src/agent/file_safety.py:225  for path in filter(None, os.getenv(\"HERMES_WRITE_SAFE_ROOT\", \"\").split(os.pathsep)):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta",
+      "evidence": "src/agent/gemini_native_adapter.py:32  DEFAULT_GEMINI_BASE_URL = \"https://generativelanguage.googleapis.com/v1beta\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aiplatform.googleapis.com/v1beta1/publishers/google",
+      "evidence": "src/agent/gemini_native_adapter.py:38  VERTEX_EXPRESS_BASE_URL = \"https://aiplatform.googleapis.com/v1beta1/publishers/google\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aistudio.google.com/apikey",
+      "evidence": "src/agent/gemini_native_adapter.py:48  \"regenerate the key in a billing-enabled project: https://aistudio.google.com/apikey\"\nsrc/agent/gemini_native_adapter.py:69  \"\\n\\nIf this 'AQ.' key came from Google AI Studio (https://aistudio.google.com/apikey), it only works \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:53",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aistudio.google.com/api-keys",
+      "evidence": "src/agent/gemini_native_adapter.py:53  \"September 2026. Open https://aistudio.google.com/api-keys, check the key's type and status, and create a \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/api-key",
+      "evidence": "src/agent/gemini_native_adapter.py:57  \"the .env value. Details: https://ai.google.dev/gemini-api/docs/api-key\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aiplatform.googleapis.com/v1beta1",
+      "evidence": "src/agent/gemini_native_adapter.py:66  \"https://aiplatform.googleapis.com/v1beta1.\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aistudio.google.com/app/apikey",
+      "evidence": "src/agent/gemini_native_adapter.py:89  \"environment / ~/.hermes/.env (get one at https://aistudio.google.com/app/apikey), or run `hermes setup` to \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/gemini_native_adapter.py:130",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000/gemini",
+      "evidence": "src/agent/gemini_native_adapter.py:130  proxy root like ``http://localhost:4000/gemini``) that way; our request builders expect"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/i18n.py:78",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_BUNDLED_LOCALES",
+      "rule": "os.getenv",
+      "evidence": "src/agent/i18n.py:78  override = os.getenv(\"HERMES_BUNDLED_LOCALES\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/i18n.py:212",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_LANGUAGE",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/i18n.py:212  env_lang = os.environ.get(\"HERMES_LANGUAGE\")  # unscoped default-profile path: environ IS its own value"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/image_routing.py:79",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x/a.png",
+      "evidence": "src/agent/image_routing.py:79  # Trailing punctuation is almost certainly prose (\"see https://x/a.png.\")."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/image_routing.py:312",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:11434/v1",
+      "evidence": "src/agent/image_routing.py:312  base_url = \"http://localhost:11434/v1\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_stop.py:37",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_STOP_NUDGE",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_stop.py:37  if (os.environ.get(\"HERMES_KANBAN_STOP_NUDGE\") or \"\").strip().lower() in {\"0\", \"false\", \"no\", \"off\"}:"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_stop.py:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TASK",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_stop.py:80  tid = (task_id or os.environ.get(\"HERMES_KANBAN_TASK\") or \"\").strip() or \"this task\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_turn_recovery.py:91",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TASK",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_turn_recovery.py:91  task_id = (os.environ.get(\"HERMES_KANBAN_TASK\") or \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_turn_recovery.py:109",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TURN_RECOVERY",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_turn_recovery.py:109  raw = (os.environ.get(\"HERMES_KANBAN_TURN_RECOVERY\") or \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_turn_recovery.py:174",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_DB",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_turn_recovery.py:174  pinned = (os.environ.get(\"HERMES_KANBAN_DB\") or \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_turn_recovery.py:214",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_RUN_ID",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_turn_recovery.py:214  run_id_env = (os.environ.get(\"HERMES_KANBAN_RUN_ID\") or \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/kanban_turn_recovery.py:215",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_CLAIM_LOCK",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/kanban_turn_recovery.py:215  lock_env = (os.environ.get(\"HERMES_KANBAN_CLAIM_LOCK\") or \"\").strip()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:313",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "evidence": "src/agent/model_metadata.py:313  # https://api-docs.deepseek.com/zh-cn/quick_start/pricing"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:320",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://help.aliyun.com/zh/model-studio/developer-reference/",
+      "evidence": "src/agent/model_metadata.py:320  # Qwen — https://help.aliyun.com/zh/model-studio/developer-reference/ (3.8-max/flash"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:324",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.minimax.io/docs/api-reference/text-chat-openai",
+      "evidence": "src/agent/model_metadata.py:324  # MiniMax — M3 is 1M; M2.x is 204,800. https://platform.minimax.io/docs/api-reference/text-chat-openai"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:399",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
+      "evidence": "src/agent/model_metadata.py:399  # Claude models that accept ``speed: \"fast\"`` (https://platform.claude.com/docs/en/build-with-claude/fast-mode)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:607",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://host[:443",
+      "evidence": "src/agent/model_metadata.py:607  # Only canonical https://host[:443]/path with no credentials/query/fragment."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:711",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost",
+      "evidence": "src/agent/model_metadata.py:711  connect timeout on IPv4-only servers). Scheme-anchored so ``?upstream=http://localhost`` is untouched.\"\"\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "src/agent/model_metadata.py:1363",
+      "what": "初扫：anthropic SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via anthropic，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "anthropic",
+      "inferred": true,
+      "evidence": "src/agent/model_metadata.py:1363  # DashScope, Anthropic (available_tokens / \"maximum allowed number of output tokens\"), OpenRouter/Nous,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:1799",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://chatgpt.com/backend-api/codex/models",
+      "evidence": "src/agent/model_metadata.py:1799  CODEX_MODELS_CATALOG_ENDPOINT = \"https://chatgpt.com/backend-api/codex/models\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:2314",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.novita.ai/openai/v1",
+      "evidence": "src/agent/model_metadata.py:2314  ctx = _resolve_endpoint_context_length(model, base_url or \"https://api.novita.ai/openai/v1\", api_key=api_key)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/model_metadata.py:2327",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com",
+      "evidence": "src/agent/model_metadata.py:2327  ctx = _query_anthropic_context_length(model, base_url or \"https://api.anthropic.com\", api_key)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/models_dev.py:27",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://models.dev/api.json",
+      "evidence": "src/agent/models_dev.py:27  MODELS_DEV_URL = \"https://models.dev/api.json\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/models_dev.py:645",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api-docs.deepseek.com/guides/vision",
+      "evidence": "src/agent/models_dev.py:645  # Native DeepSeek V4.1-Flash is multimodal (https://api-docs.deepseek.com/guides/vision)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/prompt_builder.py:176",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hermes-agent.nousresearch.com/docs",
+      "evidence": "src/agent/prompt_builder.py:176  \"tools, or capabilities, the documentation at https://hermes-agent.nousresearch.com/docs is your \"\nsrc/agent/prompt_builder.py:186  \"tools, or capabilities, the documentation at https://hermes-agent.nousresearch.com/docs is the \""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/prompt_builder.py:1139",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_ENVIRONMENT_HINT",
+      "rule": "os.getenv",
+      "evidence": "src/agent/prompt_builder.py:1139  return (os.getenv(\"HERMES_ENVIRONMENT_HINT\") or \"\").strip() or str("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/prompt_builder.py:1320",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_PLATFORM",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/prompt_builder.py:1320  platform = os.environ.get(\"HERMES_PLATFORM\") or os.environ.get(\"HERMES_SESSION_PLATFORM\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/prompt_builder.py:1320",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_SESSION_PLATFORM",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/prompt_builder.py:1320  platform = os.environ.get(\"HERMES_PLATFORM\") or os.environ.get(\"HERMES_SESSION_PLATFORM\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/rate_limit_credits.py:98",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_DEV_CREDITS",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/rate_limit_credits.py:98  dev = is_truthy_value(os.environ.get(\"HERMES_DEV_CREDITS\"))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "src/agent/redact.py:97",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_REDACT_SECRETS",
+      "rule": "os.getenv",
+      "evidence": "src/agent/redact.py:97  _REDACT_ENABLED = os.getenv(\"HERMES_REDACT_SECRETS\", \"true\").lower() in {\"1\", \"true\", \"yes\", \"on\"}"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/redact.py:255",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "X",
+      "rule": "process.env",
+      "evidence": "src/agent/redact.py:255  # Programmatic env lookups (``os.getenv(...)``, ``process.env.X``, ``$ENV{X}``)\nsrc/agent/redact.py:395  # snippets in prose/log contexts (issue #2852): ``KEY=os.getenv('X')``.\nsrc/agent/redact.py:396  # Same programmatic-env-lookup exception as _redact_env above (issue #2852): \"apiKey\": \"os.getenv('X')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "src/agent/redact.py:527",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://PASSWORD@github.com/",
+      "evidence": "src/agent/redact.py:527  # https://PASSWORD@github.com/...``): unambiguously a secret, since round-trip\nsrc/agent/redact.py:532  # This is the ``git remote set-url origin https://PASSWORD@github.com/...`` shape from issue #6396 — a"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/runtime_cwd.py:72",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERMINAL_CWD",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/runtime_cwd.py:72  return os.environ.get(\"TERMINAL_CWD\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/secret_scope.py:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_HOME",
+      "rule": "os.environ[]",
+      "evidence": "src/agent/secret_scope.py:47  launched with, not against whatever a host later mirrors into ``os.environ[\"HERMES_HOME\"]``."
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/shell_hooks.py:339",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "src/agent/shell_hooks.py:339  proc = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/shell_hooks.py:624",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_ACCEPT_HOOKS",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/shell_hooks.py:624  if accept_hooks_arg or os.environ.get(\"HERMES_ACCEPT_HOOKS\", \"\").strip().lower() in _TRUTHY:"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/skill_bundles.py:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_BUNDLES_DIR",
+      "rule": "os.environ.get",
+      "evidence": "src/agent/skill_bundles.py:29  override = os.environ.get(\"HERMES_BUNDLES_DIR\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/skill_commands.py:195",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_PLATFORM",
+      "rule": "os.getenv",
+      "evidence": "src/agent/skill_commands.py:195  resolved_platform = os.getenv(\"HERMES_PLATFORM\") or get_session_env(\"HERMES_SESSION_PLATFORM\")\nsrc/agent/skill_commands.py:197  resolved_platform = os.getenv(\"HERMES_PLATFORM\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "src/agent/skill_preprocessing.py:59",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "src/agent/skill_preprocessing.py:59  completed = subprocess.run(\nsrc/agent/skill_preprocessing.py:76  # subprocess.run uses to clean up a timed-out shell; report the timeout."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/skill_utils.py:120",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_TASK",
+      "rule": "os.getenv",
+      "evidence": "src/agent/skill_utils.py:120  if os.getenv(\"HERMES_KANBAN_TASK\") or os.getenv(\"HERMES_KANBAN_BOARD\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "src/agent/skill_utils.py:120",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HERMES_KANBAN_BOARD",
+      "rule": "os.getenv",
+      "evidence": "src/agent/skill_utils.py:120  if os.getenv(\"HERMES_KANBAN_TASK\") or os.getenv(\"HERMES_KANBAN_BOARD\"):"
+    }
+  ],
+  "reRooting": []
+}

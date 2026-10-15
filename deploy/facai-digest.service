@@ -1,0 +1,25 @@
+[Unit]
+Description=Facai daily GitHub digest (collect, register, push to WeChat)
+After=network-online.target facai-cloud.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=facai
+Group=facai
+WorkingDirectory=/opt/facai-cloud
+# Provider credentials (wechat.env) come from the same classified env files the
+# service uses; the app env adds FACAI_DATA_DIR. No secret on a command line.
+EnvironmentFile=/etc/facai-cloud/facai.env
+EnvironmentFile=-/etc/facai-cloud/providers/*.env
+ExecStart=/opt/facai-cloud/.venv/bin/python -m facai.ops.github_digest
+# A degraded upstream (e.g. WeChat 524) is an honest failure; the next timer
+# run tries again. No auto-retry storm.
+
+# Hardening: this unit parses untrusted RSS/GitHub content, so it runs with the
+# same lockdown as the service: unprivileged user, read-only filesystem except
+# the data dir (registry writes, media/{video,providers} state).
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/facai-cloud/data

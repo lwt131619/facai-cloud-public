@@ -1,0 +1,1252 @@
+{
+  "schema": "facai.capability-graph/1",
+  "source": "gobuster",
+  "license": "Apache-2.0",
+  "method": "facai/ops/ingest.py 启发式初扫：先扫源码扩展名文件、扫完且配额未满才扫其余文件（文档/示例命中 kind 加 DOC_ 前缀、URL 引用单列 DOC_REFERENCE，不挤占源码配额）；正则扫 https?:// 常量 / os.getenv|os.environ|process.env 键 / subprocess|child_process 调用点 / 已知 SDK 客户端构造（OpenAI(/Anthropic(/httpx auth/requests.Session auth → INFERRED_CREDENTIAL），逐条 file:line 证据，每档上限 200 面；能力候选按面种推导，未做人工 Capability Miner 比对——本文件是骨架，逐条 verdict 与 remote_removal 待复核。permissions 节照 Dify 插件 manifest 模式：六族 capability action 全枚举、deny-by-default，只有运行时面带 file:line 证据的族才 allowed=true。",
+  "summary": "初扫 54 面（REMOTE_PROVIDER=4，DOC_REFERENCE=21）；能力候选 1 条 / 外部依赖 19 个主机；diff: new=1 already_owned=0 external_dependency=19；权限声明 allowed=2/6（deny-by-default）。骨架待人工补全。",
+  "permissions": {
+    "schema": "facai.permissions/1",
+    "declared": [
+      "network.*",
+      "provider.invoke"
+    ],
+    "denied": [
+      "shell.exec",
+      "filesystem.write",
+      "docker.run",
+      "secret.request"
+    ],
+    "entries": [
+      {
+        "action": "shell.exec",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "filesystem.write",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "network.*",
+        "allowed": true,
+        "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+        "resources": [
+          "%s",
+          "%s.s3.amazonaws.com",
+          "aka.ms",
+          "cloud.google.com",
+          "containers.dev",
+          "developers.google.com",
+          "docs.aws.amazon.com",
+          "gist.github.com",
+          "github.com",
+          "go.dev",
+          "golang.org",
+          "goreleaser.com",
+          "help.github.com",
+          "localhost",
+          "lucideer.com",
+          "raw.githubusercontent.com",
+          "stackoverflow.com",
+          "storage.googleapis.com",
+          "www.apache.org"
+        ],
+        "evidence": "cli/options.go:154"
+      },
+      {
+        "action": "docker.run",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "secret.request",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "provider.invoke",
+        "allowed": true,
+        "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+        "resources": [
+          "cloud.google.com",
+          "docs.aws.amazon.com",
+          "storage.googleapis.com"
+        ],
+        "evidence": "gobustergcs/gobustersgcs.go:89"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "model.invoke",
+      "name": "远端模型/推送调用面（初扫推导候选，须 re-root 至 Facai Model Router）",
+      "level": "L0_REFERENCE",
+      "provider": "ModelProvider",
+      "verdict": "new",
+      "evidence": "gobustergcs/gobustersgcs.go:89",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "%s",
+            "%s.s3.amazonaws.com",
+            "aka.ms",
+            "cloud.google.com",
+            "containers.dev",
+            "developers.google.com",
+            "docs.aws.amazon.com",
+            "gist.github.com",
+            "github.com",
+            "go.dev",
+            "golang.org",
+            "goreleaser.com",
+            "help.github.com",
+            "localhost",
+            "lucideer.com",
+            "raw.githubusercontent.com",
+            "stackoverflow.com",
+            "storage.googleapis.com",
+            "www.apache.org"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": true,
+          "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+          "resources": [
+            "cloud.google.com",
+            "docs.aws.amazon.com",
+            "storage.googleapis.com"
+          ],
+          "evidence": "gobustergcs/gobustersgcs.go:89"
+        }
+      ]
+    },
+    {
+      "id": "vendor._s",
+      "name": "外部依赖 %s（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "cli/options.go:154",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "%s"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.golang_org",
+      "name": "外部依赖 golang.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "cli/dns/dns.go:52",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "golang.org"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.github_com",
+      "name": "外部依赖 github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "cli/vhost/vhost.go:80",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "github.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.cloud_google_com",
+      "name": "外部依赖 cloud.google.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "gobustergcs/gobustersgcs.go:66",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "cloud.google.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.storage_googleapis_com",
+      "name": "外部依赖 storage.googleapis.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "gobustergcs/gobustersgcs.go:89",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "storage.googleapis.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.docs_aws_amazon_com",
+      "name": "外部依赖 docs.aws.amazon.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "gobustergcs/gobustersgcs.go:302",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "docs.aws.amazon.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor._s_s3_amazonaws_com",
+      "name": "外部依赖 %s.s3.amazonaws.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "gobusters3/gobusters3.go:88",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "%s.s3.amazonaws.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.stackoverflow_com",
+      "name": "外部依赖 stackoverflow.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "libgobuster/http.go:198",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "stackoverflow.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.lucideer_com",
+      "name": "外部依赖 lucideer.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "libgobuster/useragents.go:2494",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "lucideer.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.gist_github_com",
+      "name": "外部依赖 gist.github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".golangci.yml:1",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "gist.github.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.developers_google_com",
+      "name": "外部依赖 developers.google.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".golangci.yml:75",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "developers.google.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.go_dev",
+      "name": "外部依赖 go.dev（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".golangci.yml:85",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "go.dev"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.goreleaser_com",
+      "name": "外部依赖 goreleaser.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".goreleaser.yaml:2",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "goreleaser.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_apache_org",
+      "name": "外部依赖 www.apache.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "LICENSE:4",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.apache.org"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.raw_githubusercontent_com",
+      "name": "外部依赖 raw.githubusercontent.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "Taskfile.yml:62",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "raw.githubusercontent.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.aka_ms",
+      "name": "外部依赖 aka.ms（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".devcontainer/devcontainer.json:1",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "aka.ms"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.containers_dev",
+      "name": "外部依赖 containers.dev（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".devcontainer/devcontainer.json:6",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "containers.dev"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.help_github_com",
+      "name": "外部依赖 help.github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": ".github/dependabot.yml:4",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "help.github.com"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.localhost",
+      "name": "外部依赖 localhost（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "vhs/gobuster_dir.tape:67",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "localhost"
+          ],
+          "evidence": "cli/options.go:154"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    }
+  ]
+}

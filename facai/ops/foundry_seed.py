@@ -1,0 +1,103 @@
+"""Seed the FACAI CAPABILITY REGISTRY with evidence-backed entries.
+
+One-time (idempotent) bootstrap for docs/CAPABILITY_REGISTRY.json: every
+entry cites a real artifact — the facai-desktop patch, a fresh vendor clone,
+or a local source tree inventoried by the authority-surface retrieval.
+Levels follow the absorption doctrine (§十五): L0 reference reads through
+L4 native ownership; L3/L4 require a known license (enforced by the
+registry). Re-run anytime: ``python -m facai.ops.foundry_seed <out.json>``.
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+from ..capabilities import (
+    L0_REFERENCE,
+    L2_ADAPTED,
+    L3_FORKED,
+    L4_FACAI_NATIVE,
+    Capability,
+    CapabilityRegistry,
+)
+
+
+def seed() -> CapabilityRegistry:
+    reg = CapabilityRegistry()
+    entries = [
+        # --- facai-desktop (hermes-desktop v0.7.7 fork, MIT, patch preserved) ---
+        Capability(id="desktop.local_authority_root", name="桌面端本地权限根（isRemoteOnlyMode 恒 false，25 处降级汇聚点一行解锁）",
+                   level=L3_FORKED, provider="CapabilityProvider", source="hermes-desktop@2ed8907+facai-changes.patch",
+                   license="MIT", note="产物 facai-desktop-0.7.7-portable.exe；连接逻辑 isRemoteMode 原样保留"),
+        Capability(id="desktop.reproxy_local_injection", name="本地注入通道（ReProxy 9900 内置预设，推理端点 localhost:9900/v1）",
+                   level=L2_ADAPTED, provider="ModelProvider", source="facai-changes.patch",
+                   license="MIT"),
+        Capability(id="desktop.brand_independent", name="品牌独立与上游脱钩（appId/更新源/图标基座/上游域名清除）",
+                   level=L4_FACAI_NATIVE, provider="CapabilityProvider", source="facai-changes.patch",
+                   license="MIT", note="上游残留扫描四项全清"),
+        Capability(id="desktop.facai_cloud_backend", name="云后端指向 facai（whstapp.lol）",
+                   level=L2_ADAPTED, provider="CapabilityProvider", source="facai-changes.patch", license="MIT"),
+        # --- goose (block/goose, fresh clone 591edd4) ---
+        Capability(id="goose.planning", name="Planner/agent 循环与工具选择", level=L0_REFERENCE,
+                   provider="AgentProvider", source="block/goose@591edd4", license="Apache-2.0"),
+        Capability(id="goose.permission_modes", name="审批模式体系（auto/approve/smart_approve/chat + permission.yaml）",
+                   level=L0_REFERENCE, provider="CapabilityProvider", source="block/goose@591edd4", license="Apache-2.0"),
+        Capability(id="goose.mcp_extensions", name="MCP/stdio 扩展管理与 OSV 预检", level=L0_REFERENCE,
+                   provider="ToolProvider", source="block/goose@591edd4", license="Apache-2.0"),
+        Capability(id="goose.skills_system", name="Skills 系统与技能元数据", level=L0_REFERENCE,
+                   provider="CapabilityProvider", source="block/goose@591edd4", license="Apache-2.0"),
+        # --- opencode (sst/opencode, fresh clone 907b3bc) ---
+        Capability(id="opencode.provider_baseurl_config", name="provider options.baseURL 配置化（改根本地 GLM 的现成闸门）",
+                   level=L0_REFERENCE, provider="ModelProvider", source="sst/opencode@907b3bc", license="MIT"),
+        Capability(id="opencode.lsp_tooling", name="LSP 工具链自动装配与本地 bin 缓存", level=L0_REFERENCE,
+                   provider="ToolProvider", source="sst/opencode@907b3bc", license="MIT"),
+        Capability(id="opencode.session_permission_ask", name="Permission.ask 统一副作用收口点（shell/edit/write 前置）",
+                   level=L0_REFERENCE, provider="CapabilityProvider", source="sst/opencode@907b3bc", license="MIT"),
+        # --- hermes (local D:/hermes-agent, MIT) ---
+        Capability(id="hermes.soul_policy", name="SOUL.md 本地身份与边界层", level=L0_REFERENCE,
+                   provider="CapabilityProvider", source="D:/hermes-agent", license="MIT"),
+        Capability(id="hermes.approval_modes", name="危险命令审批三档 + 受保护指令文件闸", level=L0_REFERENCE,
+                   provider="CapabilityProvider", source="D:/hermes-agent", license="MIT"),
+        # --- autoclaw (closed product, bridged) ---
+        Capability(id="autoclaw.im_bridge", name="IM 出站收口（runtime.sqlite durable outbox 桥）", level=L2_ADAPTED,
+                   provider="ToolProvider", source="autoclaw-relay-bridge", license="UNKNOWN"),
+        # --- zcode (closed host, T3): absorb the observable formats only ---
+        Capability(id="zcode.skill_format", name="SKILL.md 技能格式（可解析、可跨平台复用）", level=L0_REFERENCE,
+                   provider="CapabilityProvider", source="zcode-install", license="UNKNOWN",
+                   note="闭源宿主 T3：只收录可观测格式与协议，不虚构源码"),
+        Capability(id="zcode.workflow_dwf", name="动态工作流脚本格式（类型化 ask/phase/world.run）", level=L0_REFERENCE,
+                   provider="CapabilityProvider", source="zcode-install", license="UNKNOWN"),
+    ]
+    for cap in entries:
+        reg.register(cap)
+    return reg
+
+
+def dump(out: Path) -> dict:
+    reg = seed()
+    payload = {
+        "schema": "facai.capability-registry/1",
+        "entries": [
+            {"id": c.id, "name": c.name, "level": c.level, "provider": c.provider,
+             "source": c.source, "license": c.license, "note": c.note}
+            for c in (reg.get(i) for i in reg.ids())
+        ],
+        "native_coverage": reg.native_coverage(),
+    }
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return payload
+
+
+def main(argv: list[str]) -> int:
+    if len(argv) != 1:
+        print("usage: python -m facai.ops.foundry_seed <out.json>")
+        return 2
+    payload = dump(Path(argv[0]))
+    print(f"capabilities: {payload['native_coverage']['total']}  "
+          f"native(L4): {payload['native_coverage']['native']}  out: {argv[0]}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

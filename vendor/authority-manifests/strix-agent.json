@@ -1,0 +1,1837 @@
+{
+  "target": "strix-agent (初扫收录实例 C:\\Users\\user\\opencode\\skills\\strix-bin)",
+  "origin": "本地路径 C:\\Users\\user\\opencode\\skills\\strix-bin",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 278 个文本文件（源码 278、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "containers/docker-entrypoint.sh:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.caido.io/app/guides/domain_allowlist",
+      "evidence": "containers/docker-entrypoint.sh:32  # See https://docs.caido.io/app/guides/domain_allowlist"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "containers/docker-entrypoint.sh:62",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:${CAIDO_PORT",
+      "evidence": "containers/docker-entrypoint.sh:62  if curl -s -o /dev/null -w \"%{http_code}\" http://localhost:${CAIDO_PORT}/graphql/ | grep -qE \"^(200|400)$\"; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "containers/docker-entrypoint.sh:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${CAIDO_PORT",
+      "evidence": "containers/docker-entrypoint.sh:85  export http_proxy=http://127.0.0.1:${CAIDO_PORT}\ncontainers/docker-entrypoint.sh:86  export https_proxy=http://127.0.0.1:${CAIDO_PORT}\ncontainers/docker-entrypoint.sh:87  export HTTP_PROXY=http://127.0.0.1:${CAIDO_PORT}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/build.sh:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.astral.sh/uv/getting-started/installation/",
+      "evidence": "scripts/build.sh:38  echo \"Please install uv first: https://docs.astral.sh/uv/getting-started/installation/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:77",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/$REPO/releases/latest",
+      "evidence": "scripts/install.sh:77  specific_version=$(curl -s \"https://api.github.com/repos/$REPO/releases/latest\" | sed -n 's/.*\"tag_name\": *\"v\\([^\"]*\\)\".*/\\1/p')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/$REPO/releases/download/v${specific_version",
+      "evidence": "scripts/install.sh:87  url=\"https://github.com/$REPO/releases/download/v${specific_version}/$filename\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:182",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.docker.com/get-docker/",
+      "evidence": "scripts/install.sh:182  echo -e \"${MUTED}Please install Docker: ${NC}https://docs.docker.com/get-docker/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:343",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com${NC",
+      "evidence": "scripts/install.sh:343  echo -e \"     ${MUTED}strix --target https://example.com${NC}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:345",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai",
+      "evidence": "scripts/install.sh:345  echo -e \"${MUTED}For more information visit ${NC}https://strix.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:346",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.strix.ai/llm-providers/overview",
+      "evidence": "scripts/install.sh:346  echo -e \"${MUTED}Supported models ${NC}https://docs.strix.ai/llm-providers/overview\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:347",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.gg/strix-ai",
+      "evidence": "scripts/install.sh:347  echo -e \"${MUTED}Join our community ${NC}https://discord.gg/strix-ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:349",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "scripts/install.sh:349  echo -e \"${MUTED}Run a pentest in Strix Cloud ${NC}https://app.strix.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/install.sh:350",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/demo",
+      "evidence": "scripts/install.sh:350  echo -e \"${MUTED}Enterprise ${NC}https://strix.ai/demo\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "scripts/tui_sidecar_hook.py:38",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "scripts/tui_sidecar_hook.py:38  subprocess.run(  # noqa: S603 - fixed build command using the resolved Go binary"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "scripts/tui_sidecar_hook.py:55",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_WHEEL_PLATFORM_TAG",
+      "rule": "os.environ.get",
+      "evidence": "scripts/tui_sidecar_hook.py:55  platform_tag = os.environ.get(\"STRIX_WHEEL_PLATFORM_TAG\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/codex.py:42",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://auth.openai.com/oauth/authorize",
+      "evidence": "strix/config/codex.py:42  AUTHORIZE_URL = \"https://auth.openai.com/oauth/authorize\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/codex.py:43",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://auth.openai.com/oauth/token",
+      "evidence": "strix/config/codex.py:43  TOKEN_URL = \"https://auth.openai.com/oauth/token\"  # noqa: S105  # nosec B105 - URL, not a secret"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/codex.py:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{CALLBACK_HOST",
+      "evidence": "strix/config/codex.py:47  REDIRECT_URI = f\"http://{CALLBACK_HOST}:{CALLBACK_PORT}{CALLBACK_PATH}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/codex.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://chatgpt.com/backend-api/codex",
+      "evidence": "strix/config/codex.py:50  CODEX_BASE_URL = \"https://chatgpt.com/backend-api/codex\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/codex.py:52",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/auth",
+      "evidence": "strix/config/codex.py:52  _ACCOUNT_CLAIM = \"https://api.openai.com/auth\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "strix/config/codex.py:373",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "strix/config/codex.py:373  return AsyncOpenAI("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/config/models.py:650",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_BASE_URL",
+      "rule": "os.environ[]",
+      "evidence": "strix/config/models.py:650  os.environ[\"OPENAI_BASE_URL\"] = llm.api_base"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/models.py:793",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai",
+      "evidence": "strix/config/models.py:793  \"HTTP-Referer\": \"https://strix.ai\","
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "strix/config/models.py:849",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "strix/config/models.py:849  client = AsyncOpenAI("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/config/settings.py:197",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "strix/config/settings.py:197  app_url: str = Field(default=\"https://app.strix.ai\", alias=\"STRIX_APP_URL\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/auth_cli.py:300",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "strix/interface/auth_cli.py:300  text.append(\"strix --target https://example.com\", style=\"bold cyan\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/auth_cli.py:393",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai",
+      "evidence": "strix/interface/auth_cli.py:393  <a class=\"topbar\" href=\"https://strix.ai\" target=\"_blank\" rel=\"noopener\"\nstrix/interface/auth_cli.py:408  <a href=\"https://strix.ai\" target=\"_blank\" rel=\"noopener\">strix.ai</a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/auth_cli.py:410",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.strix.ai",
+      "evidence": "strix/interface/auth_cli.py:410  <a href=\"https://docs.strix.ai\" target=\"_blank\" rel=\"noopener\">docs</a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/auth_cli.py:412",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.gg/strix-ai",
+      "evidence": "strix/interface/auth_cli.py:412  <a href=\"https://discord.gg/strix-ai\" target=\"_blank\" rel=\"noopener\">community</a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "strix/interface/cli_args.py:61  strix --target https://example.com\nstrix/interface/cli_args.py:85  strix --target https://github.com/user/repo --target https://example.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/user/repo",
+      "evidence": "strix/interface/cli_args.py:64  strix --target https://github.com/user/repo\nstrix/interface/cli_args.py:85  strix --target https://github.com/user/repo --target https://example.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:71",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.example.com",
+      "evidence": "strix/interface/cli_args.py:71  strix --target ./openapi.yaml --target https://api.example.com\nstrix/interface/cli_args.py:75  strix --target postman://<collection-uuid> --target https://api.example.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://staging.example.com",
+      "evidence": "strix/interface/cli_args.py:86  strix --target ./my-project --target https://staging.example.com --target https://prod.example.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://prod.example.com",
+      "evidence": "strix/interface/cli_args.py:86  strix --target ./my-project --target https://staging.example.com --target https://prod.example.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:96",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.com",
+      "evidence": "strix/interface/cli_args.py:96  strix --target https://app.com --instruction-file /path/to/detailed_instructions.md\nstrix/interface/cli_args.py:100  strix --target https://app.com --workspace-file ./openapi.yaml:specs/openapi.yaml"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "strix/interface/cli_args.py:107  Run a pentest in Strix Cloud     https://app.strix.ai"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cli_args.py:108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/demo",
+      "evidence": "strix/interface/cli_args.py:108  Try Strix Enterprise             https://strix.ai/demo"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/cli_args.py:310",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_MCP_CONFIG",
+      "rule": "os.environ[]",
+      "evidence": "strix/interface/cli_args.py:310  os.environ[\"STRIX_MCP_CONFIG\"] = str(mcp_config_path)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/cli_args.py:314",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_MCP_ONLY",
+      "rule": "os.environ[]",
+      "evidence": "strix/interface/cli_args.py:314  os.environ[\"STRIX_MCP_ONLY\"] = \",\".join(args.mcp_server)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/cli_args.py:316",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_MCP_EXCLUDE",
+      "rule": "os.environ[]",
+      "evidence": "strix/interface/cli_args.py:316  os.environ[\"STRIX_MCP_EXCLUDE\"] = \",\".join(args.mcp_exclude)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/environment.py:130",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:11434",
+      "evidence": "strix/interface/environment.py:130  \"export LLM_API_BASE='http://localhost:11434'  \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/platform_cli.py:651",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.app.strix.ai",
+      "evidence": "strix/interface/platform_cli.py:651  \"See https://docs.app.strix.ai for the API reference.[/]\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/update_check.py:49",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_NO_UPDATE_CHECK",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/update_check.py:49  return bool(os.environ.get(\"STRIX_NO_UPDATE_CHECK\")) or any("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/update_check.py:101",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/{GITHUB_REPO",
+      "evidence": "strix/interface/update_check.py:101  f\"https://api.github.com/repos/{GITHUB_REPO}/releases/latest\",\nstrix/interface/update_check.py:123  f\"https://api.github.com/repos/{GITHUB_REPO}/releases/tags/v{version}\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/update_check.py:108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org/pypi/{PYPI_PACKAGE",
+      "evidence": "strix/interface/update_check.py:108  f\"https://pypi.org/pypi/{PYPI_PACKAGE}/json\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/update_check.py:224",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "strix/interface/update_check.py:224  result = subprocess.run(command, check=False)  # noqa: S603"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/update_check.py:294",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "os.execve",
+      "evidence": "strix/interface/update_check.py:294  os.execve(sys.executable, sys.argv, restart_env())  # noqa: S606  # nosec B606"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/update_check.py:319",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/{GITHUB_REPO",
+      "evidence": "strix/interface/update_check.py:319  url = f\"https://github.com/{GITHUB_REPO}/releases/download/v{version}/{filename}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/update_check.py:420",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/install",
+      "evidence": "strix/interface/update_check.py:420  \"[#60a5fa]curl -sSL https://strix.ai/install | bash[/]\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/utils.py:585",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "strix/interface/utils.py:585  return subprocess.run(  # noqa: S603\nstrix/interface/utils.py:596  return subprocess.run(  # noqa: S603\nstrix/interface/utils.py:1577  subprocess.run(  # noqa: S603"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/utils.py:1205",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{target",
+      "evidence": "strix/interface/utils.py:1205  full_url = f\"https://{target}\"\nstrix/interface/utils.py:1213  return \"web_application\", {\"target_url\": f\"https://{target}\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/utils.py:1219",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://host/org/repo",
+      "evidence": "strix/interface/utils.py:1219  \"- A Git repository URL (https://host/org/repo or git@host:org/repo.git)\\n\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cloud/__init__.py:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.app.strix.ai",
+      "evidence": "strix/interface/cloud/__init__.py:45  API reference: https://docs.app.strix.ai\"\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cloud/billing.py:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org",
+      "evidence": "strix/interface/cloud/billing.py:52  _NPM_REGISTRY = \"https://registry.npmjs.org\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/cloud/billing.py:341",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "strix/interface/cloud/billing.py:341  process = subprocess.run(  # noqa: S603\nstrix/interface/cloud/billing.py:385  return subprocess.run(  # noqa: S603\nstrix/interface/cloud/billing.py:589  return subprocess.run(  # noqa: S603"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/cloud/billing.py:574",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MPPX_ACCOUNT",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/billing.py:574  return bool(os.environ.get(\"MPPX_ACCOUNT\") or os.environ.get(\"MPPX_STRIPE_SECRET_KEY\"))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "strix/interface/cloud/billing.py:574",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MPPX_STRIPE_SECRET_KEY",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/billing.py:574  return bool(os.environ.get(\"MPPX_ACCOUNT\") or os.environ.get(\"MPPX_STRIPE_SECRET_KEY\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cloud/billing.py:628",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://link.com/agents",
+      "evidence": "strix/interface/cloud/billing.py:628  \"https://link.com/agents. For a browser checkout instead, run \""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/cloud/http.py:79",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_WORKSPACE_ID",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/http.py:79  explicit_workspace = workspace_id or os.environ.get(\"STRIX_WORKSPACE_ID\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "strix/interface/cloud/http.py:82",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_API_TOKEN",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/http.py:82  elif not token_override and not os.environ.get(\"STRIX_API_TOKEN\"):\nstrix/interface/cloud/http.py:109  if explicitly_configured or _token_override_active or os.environ.get(\"STRIX_API_TOKEN\"):\nstrix/interface/cloud/http.py:124  token = override or os.environ.get(\"STRIX_API_TOKEN\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/interface/cloud/http.py:106",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_APP_URL",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/http.py:106  explicitly_configured = bool(os.environ.get(\"STRIX_APP_URL\")) or \"app_url\" in getattr("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cloud/payment_proxy.py:282",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:{server.server_port",
+      "evidence": "strix/interface/cloud/payment_proxy.py:282  yield f\"http://127.0.0.1:{server.server_port}{path}\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "strix/interface/cloud/session.py:51",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_API_TOKEN",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/session.py:51  external = args.token is not None or bool(os.environ.get(\"STRIX_API_TOKEN\", \"\").strip())"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/cloud/source_upload.py:386",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "strix/interface/cloud/source_upload.py:386  process = subprocess.Popen(  # noqa: S603  # nosec B603"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/cloud/source_upload.py:519",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "strix/interface/cloud/source_upload.py:519  result = subprocess.run(  # noqa: S603  # nosec B603"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/cloud/spec.py:114",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com",
+      "evidence": "strix/interface/cloud/spec.py:114  P(\"instance_url\", help=\"GitLab base URL, for example https://gitlab.com.\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "strix/interface/cloud/workspaces.py:101",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_API_TOKEN",
+      "rule": "os.environ.get",
+      "evidence": "strix/interface/cloud/workspaces.py:101  external_token = args.token is not None or bool(os.environ.get(\"STRIX_API_TOKEN\", \"\").strip())"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/tui/runtime.py:442",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "strix/interface/tui/runtime.py:442  process: asyncio.subprocess.Process | subprocess.Popen[bytes] | None = None"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/interface/tui/sidecar.py:102",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "strix/interface/tui/sidecar.py:102  process: asyncio.subprocess.Process | subprocess.Popen[bytes],\nstrix/interface/tui/sidecar.py:110  process: asyncio.subprocess.Process | subprocess.Popen[bytes] | None,\nstrix/interface/tui/sidecar.py:129  ) -> tuple[asyncio.subprocess.Process | subprocess.Popen[bytes], socket.socket]:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/app/model_test.go:320",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "strix/interface/tui/internal/app/model_test.go:320  Targets:      []string{\"/workspace/source\", \"https://example.com\"},\nstrix/interface/tui/internal/app/model_test.go:335  \"https://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/app/model_test.go:875",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:43123/?token=abcdefghijklmnopqrstuvwxyz0123456789",
+      "evidence": "strix/interface/tui/internal/app/model_test.go:875  url := \"http://127.0.0.1:43123/?token=abcdefghijklmnopqrstuvwxyz0123456789\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/app/model_test.go:1332",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "evidence": "strix/interface/tui/internal/app/model_test.go:1332  \"while calling https://openrouter.ai/api/v1/chat/completions: HTTPSConnectionPool\" +"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/app/selection_test.go:142",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x",
+      "evidence": "strix/interface/tui/internal/app/selection_test.go:142  in := \"✓ Done\\n  🐞 SQL injection found\\n────────\\n>_ curl -s http://x\\nplain line\"\nstrix/interface/tui/internal/app/selection_test.go:143  want := \"  SQL injection found\\ncurl -s http://x\\nplain line\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/app/setup_log_test.go:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "strix/interface/tui/internal/app/setup_log_test.go:30  m.setupMsg(\"\\u2713 Added target: https://example.com\", render.Col(green))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/app/setup_prompt_test.go:244",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://juice-shop.example.com",
+      "evidence": "strix/interface/tui/internal/app/setup_prompt_test.go:244  _, cmd := model.submit(\"https://juice-shop.example.com hit the coupon endpoint\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/render/coverage_test.go:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.example.com",
+      "evidence": "strix/interface/tui/internal/render/coverage_test.go:101  map[string]any{\"target\": \"https://app.example.com\"},\nstrix/interface/tui/internal/render/coverage_test.go:116  \"Threat Model\", \"https://app.example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/render/coverage_test.go:203",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target/files/uuid",
+      "evidence": "strix/interface/tui/internal/render/coverage_test.go:203  \"poc_script_code\": \"curl -X PATCH https://target/files/uuid\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/render/image_kitty.go:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sw.kovidgoyal.net/kitty/graphics-protocol/",
+      "evidence": "strix/interface/tui/internal/render/image_kitty.go:16  // placeholders (https://sw.kovidgoyal.net/kitty/graphics-protocol/): the image"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/tui/internal/render/render_test.go:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.test",
+      "evidence": "strix/interface/tui/internal/render/render_test.go:93  map[string]any{\"title\": \"SQL injection in login\", \"target\": \"https://x.test\"},\nstrix/interface/tui/internal/render/render_test.go:128  \"id\": \"VULN-1\", \"title\": \"SQLi\", \"severity\": \"high\", \"target\": \"https://x.test\",\nstrix/interface/tui/internal/render/render_test.go:131  []string{\"report read\", \"HIGH\", \"VULN-1\", \"SQLi\", \"https://x.test\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/server.py:598",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{host",
+      "evidence": "strix/interface/viewer/server.py:598  url = f\"http://{host}:{bound_port}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/App.tsx:293",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "strix/interface/viewer/frontend/src/App.tsx:293  href={ctaUrl(\"https://app.strix.ai\", \"logo\")}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/components/Sidebar.tsx:195",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "strix/interface/viewer/frontend/src/components/Sidebar.tsx:195  href={ctaUrl(\"https://app.strix.ai\", \"logo\")}\nstrix/interface/viewer/frontend/src/components/Sidebar.tsx:216  href={ctaUrl(\"https://app.strix.ai\", \"logo\")}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/cta.ts:3",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.strix.ai/api/auth/signup",
+      "evidence": "strix/interface/viewer/frontend/src/lib/cta.ts:3  export const SIGNUP_URL = \"https://app.strix.ai/api/auth/signup\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/cta.ts:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/demo",
+      "evidence": "strix/interface/viewer/frontend/src/lib/cta.ts:4  export const DEMO_URL = \"https://strix.ai/demo\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/cta.ts:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/pricing",
+      "evidence": "strix/interface/viewer/frontend/src/lib/cta.ts:5  export const PRICING_URL = \"https://strix.ai/pricing\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/target-utils.ts:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/${slug",
+      "evidence": "strix/interface/viewer/frontend/src/lib/target-utils.ts:14  return { display: slug, href: `https://github.com/${slug}`, provider: \"github\" };"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/target-utils.ts:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com/${slug",
+      "evidence": "strix/interface/viewer/frontend/src/lib/target-utils.ts:23  return { display: slug, href: `https://gitlab.com/${slug}`, provider: \"gitlab\" };"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/target-utils.ts:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bitbucket.org/${slug",
+      "evidence": "strix/interface/viewer/frontend/src/lib/target-utils.ts:32  return { display: slug, href: `https://bitbucket.org/${slug}`, provider: \"bitbucket\" };"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/target-utils.ts:46",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://${target",
+      "evidence": "strix/interface/viewer/frontend/src/lib/target-utils.ts:46  return { display: target, href: `https://${target}`, provider: null };"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/frontend/src/lib/utils.ts:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://${urlWithProtocol",
+      "evidence": "strix/interface/viewer/frontend/src/lib/utils.ts:24  urlWithProtocol = `https://${urlWithProtocol}`;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://react.dev/errors/",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:33  */var ay;function Bk(){if(ay)return Tn;ay=1;var e=Oo();function t(h){var f=\"https://react.dev/errors/\"+h;if(1<arguments.length){f+=\"?args[]=\"+encodeURIComponent(arguments[1]);for(var p=2;p<arguments.length;p++)f+=\"&args[]=\"+encodeURICompone\nstrix/interface/viewer/static/assets/index-DbPDzbcJ.js:41  */var ly;function Uk(){if(ly)return Kl;ly=1;var e=Ik(),t=Oo(),r=z_();function a(n){var i=\"https://react.dev/errors/\"+n;if(1<arguments.length){i+=\"?args[]=\"+encodeURIComponent(arguments[1]);for(var l=2;l<arguments.length;l++)i+=\"&args[]=\"+en"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:48  `+u.stack}}var Xt=Object.prototype.hasOwnProperty,Ft=e.unstable_scheduleCallback,Kt=e.unstable_cancelCallback,Yn=e.unstable_shouldYield,Nn=e.unstable_requestPaint,ct=e.unstable_now,It=e.unstable_getCurrentPriorityLevel,ue=e.unstable_Immedia\nstrix/interface/viewer/static/assets/index-DbPDzbcJ.js:49  `).replace(tk,\"\")}function v0(n,i){return i=y0(i),y0(n)===i}function Et(n,i,l,u,x,v){switch(l){case\"children\":typeof u==\"string\"?i===\"body\"||i===\"textarea\"&&u===\"\"||qe(n,u):(typeof u==\"number\"||typeof u==\"bigint\")&&i!==\"body\"&&qe(n,\"\"+u);br\nstrix/interface/viewer/static/assets/index-DbPDzbcJ.js:74  */var Fk={xmlns:\"http://www.w3.org/2000/svg\",width:24,height:24,viewBox:\"0 0 24 24\",fill:\"none\",stroke:\"currentColor\",strokeWidth:2,strokeLinecap:\"round\",strokeLinejoin:\"round\"};/**"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1998/Math/MathML",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:48  `+u.stack}}var Xt=Object.prototype.hasOwnProperty,Ft=e.unstable_scheduleCallback,Kt=e.unstable_cancelCallback,Yn=e.unstable_shouldYield,Nn=e.unstable_requestPaint,ct=e.unstable_now,It=e.unstable_getCurrentPriorityLevel,ue=e.unstable_Immedia\nstrix/interface/viewer/static/assets/index-DbPDzbcJ.js:49  `).replace(tk,\"\")}function v0(n,i){return i=y0(i),y0(n)===i}function Et(n,i,l,u,x,v){switch(l){case\"children\":typeof u==\"string\"?i===\"body\"||i===\"textarea\"&&u===\"\"||qe(n,u):(typeof u==\"number\"||typeof u==\"bigint\")&&i!==\"body\"&&qe(n,\"\"+u);br"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/xlink",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:49  `).replace(tk,\"\")}function v0(n,i){return i=y0(i),y0(n)===i}function Et(n,i,l,u,x,v){switch(l){case\"children\":typeof u==\"string\"?i===\"body\"||i===\"textarea\"&&u===\"\"||qe(n,u):(typeof u==\"number\"||typeof u==\"bigint\")&&i!==\"body\"&&qe(n,\"\"+u);br\nstrix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/XML/1998/namespace",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:49  `).replace(tk,\"\")}function v0(n,i){return i=y0(i),y0(n)===i}function Et(n,i,l,u,x,v){switch(l){case\"children\":typeof u==\"string\"?i===\"body\"||i===\"textarea\"&&u===\"\"||qe(n,u):(typeof u==\"number\"||typeof u==\"bigint\")&&i!==\"body\"&&qe(n,\"\"+u);br\nstrix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:424",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.strix.ai/api/auth/signup",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:424  */const BT=[[\"path\",{d:\"M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z\",key:\"1xq2db\"}]],UT=Ce(\"zap\",BT),HT={open:{label:\"Open\",colo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:424",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/demo",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:424  */const BT=[[\"path\",{d:\"M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z\",key:\"1xq2db\"}]],UT=Ce(\"zap\",BT),HT={open:{label:\"Open\",colo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:424",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai/pricing",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:424  */const BT=[[\"path\",{d:\"M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z\",key:\"1xq2db\"}]],UT=Ce(\"zap\",BT),HT={open:{label:\"Open\",colo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:425",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/syntax-tree/hast-util-to-jsx-runtime",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:425  `,f=\"/\",p=\"*\",g=\"\",b=\"comment\",y=\"declaration\";function _(S,w){if(typeof S!=\"string\")throw new TypeError(\"First argument must be a string\");if(!S)return[];w=w||{};var C=1,E=1;function A(k){var $=k.match(t);$&&(C+=$.length);var O=k.lastIndex"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:437",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/remarkjs/react-markdown/blob/main/changelog.md",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:437  `},s),o}function SR(e,t){return e&&\"run\"in e?async function(r,a){const s=Gy(r,{file:a,...t});await e.run(s,a)}:function(r,a){return Gy(r,{file:a,...e||t})}}function Vy(e){if(e)throw e}var kh,Yy;function kR(){if(Yy)return kh;Yy=1;var e=Objec"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:453",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/highlightjs/highlight.js/issues/2277",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:453  https://github.com/highlightjs/highlight.js/issues/2277`),Ht=ye,ft=Le),Qe===void 0&&(Qe=!0);const gn={code:ft,language:Ht};Jr(\"before:highlight\",gn);const Rn=gn.result?gn.result:vr(gn.language,gn.code,Qe);return Rn.code=gn.code,Jr(\"after:hi"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:454",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/highlightjs/highlight.js/wiki/security",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:454  `,1;if(al>1e5&&al>Re.index*3)throw new Error(\"potential infinite loop, way more iterations than matches\");return xt+=Ye,Ye.length}const dn=bn(ye);if(!dn)throw ct(gt.replace(\"{}\",ye)),new Error('Unknown language: \"'+ye+'\"');const ya=Zt(dn);l"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/${s",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com/${s",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bitbucket.org/${s",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://${e",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/xhtml",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/xmlns/",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:466  `:f!==\"text\"?rD(S,f):S.replace(/&/g,\"&amp;\").replace(/</g,\"&lt;\").replace(/>/g,\"&gt;\");let C=\"\",E=\"\";return N.removed?C=String(g++):(N.added||(C=String(g++)),E=String(b++)),{highlighted:w,added:!!N.added,removed:!!N.removed,leftNo:C,rightNo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:482",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://reactflow.dev?utm_source=attribution",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:482  */var k1;function QI(){if(k1)return Mm;k1=1;var e=Oo(),t=ZI();function r(f,p){return f===p&&(f!==0||1/f===1/p)||f!==f&&p!==p}var a=typeof Object.is==\"function\"?Object.is:r,s=t.useSyncExternalStore,o=e.useRef,c=e.useEffect,d=e.useMemo,h=e.us"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:510",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "strix/interface/viewer/static/assets/index-DbPDzbcJ.js:510  `)}function tU({args:e,result:t}){const r=e.action??\"\",a=e.code??e.script??\"\",s=t;let o=null;s&&typeof s==\"object\"?o=typeof s.stdout==\"string\"?s.stdout:null:typeof s==\"string\"&&(o=s);const c=r===\"new_session\"?\"new session\":r===\"close\"?\"clos"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/report/sarif.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://json.schemastore.org/sarif-2.1.0.json",
+      "evidence": "strix/report/sarif.py:8  schema at https://json.schemastore.org/sarif-2.1.0.json in tests.\nstrix/report/sarif.py:63  SARIF_SCHEMA = \"https://json.schemastore.org/sarif-2.1.0.json\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/report/sarif.py:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.ai",
+      "evidence": "strix/report/sarif.py:66  TOOL_INFORMATION_URI = \"https://strix.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/report/sarif.py:1109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cwe.mitre.org/data/definitions/{rule_id.removeprefix(",
+      "evidence": "strix/report/sarif.py:1109  return f\"https://cwe.mitre.org/data/definitions/{rule_id.removeprefix('CWE-')}.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/report/state.py:142",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://host/owner/repo",
+      "evidence": "strix/report/state.py:142  # https://host/owner/repo"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/report/state.py:164",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "strix/report/state.py:164  result = subprocess.run(  # noqa: S603"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:72",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_SANDBOX_MEM_LIMIT",
+      "rule": "os.environ.get",
+      "evidence": "strix/runtime/docker_client.py:72  mem_limit = os.environ.get(\"STRIX_SANDBOX_MEM_LIMIT\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:76",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_SANDBOX_SHM_SIZE",
+      "rule": "os.environ.get",
+      "evidence": "strix/runtime/docker_client.py:76  shm_size = os.environ.get(\"STRIX_SANDBOX_SHM_SIZE\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_SANDBOX_CPUS",
+      "rule": "os.environ.get",
+      "evidence": "strix/runtime/docker_client.py:80  cpus = os.environ.get(\"STRIX_SANDBOX_CPUS\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:87",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_SANDBOX_PIDS_LIMIT",
+      "rule": "os.environ.get",
+      "evidence": "strix/runtime/docker_client.py:87  pids_limit = os.environ.get(\"STRIX_SANDBOX_PIDS_LIMIT\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:103",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_SANDBOX_LOG_MAX_SIZE",
+      "rule": "os.environ.get",
+      "evidence": "strix/runtime/docker_client.py:103  max_size = os.environ.get(\"STRIX_SANDBOX_LOG_MAX_SIZE\", \"50m\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:106",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_SANDBOX_LOG_MAX_FILE",
+      "rule": "os.environ.get",
+      "evidence": "strix/runtime/docker_client.py:106  max_file = os.environ.get(\"STRIX_SANDBOX_LOG_MAX_FILE\", \"3\").strip() or \"3\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:114",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_RUN_ID",
+      "rule": "os.getenv",
+      "evidence": "strix/runtime/docker_client.py:114  run_id = os.getenv(\"STRIX_RUN_ID\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/runtime/docker_client.py:121",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_RUN_TYPE",
+      "rule": "os.getenv",
+      "evidence": "strix/runtime/docker_client.py:121  run_type = os.getenv(\"STRIX_RUN_TYPE\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/runtime/session_manager.py:304",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:{_CONTAINER_CAIDO_PORT",
+      "evidence": "strix/runtime/session_manager.py:304  container_caido_url = f\"http://127.0.0.1:{_CONTAINER_CAIDO_PORT}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/telemetry/logging.py:138",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_DEBUG",
+      "rule": "os.environ.get",
+      "evidence": "strix/telemetry/logging.py:138  debug = (os.environ.get(\"STRIX_DEBUG\") or \"\").strip().lower() in {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/telemetry/posthog.py:26",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com",
+      "evidence": "strix/telemetry/posthog.py:26  _POSTHOG_HOST = \"https://us.i.posthog.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/telemetry/scarf.py:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.gateway.scarf.sh",
+      "evidence": "strix/telemetry/scarf.py:29  _SCARF_ENDPOINT = \"https://strix.gateway.scarf.sh\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/finish/tool.py:277",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.acme.example",
+      "evidence": "strix/tools/finish/tool.py:277  **Scope:** `https://app.acme.example`, `.../api/v1/`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/proxy/caido_api.py:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:48080",
+      "evidence": "strix/tools/proxy/caido_api.py:41  _DEFAULT_CAIDO_URL = \"http://127.0.0.1:48080\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "strix/tools/proxy/caido_api.py:57",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_CAIDO_URL",
+      "rule": "os.environ.get",
+      "evidence": "strix/tools/proxy/caido_api.py:57  return os.environ.get(\"STRIX_CAIDO_URL\", _DEFAULT_CAIDO_URL).rstrip(\"/\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "strix/tools/threat_model/tools.py:63",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "strix/tools/threat_model/tools.py:63  result = subprocess.run(  # noqa: S603"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/threat_model/tools.py:115",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/org/repo",
+      "evidence": "strix/tools/threat_model/tools.py:115  ``git@github.com:org/repo.git``, ``https://github.com/org/repo``,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/threat_model/tools.py:128",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{scp_style[",
+      "evidence": "strix/tools/threat_model/tools.py:128  candidate = f\"https://{scp_style['host']}/{scp_style['path'].lstrip('/')}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/threat_model/tools.py:134",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{candidate.split(",
+      "evidence": "strix/tools/threat_model/tools.py:134  candidate = f\"https://{candidate.split('://', 1)[1]}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/threat_model/tools.py:509",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.example.com",
+      "evidence": "strix/tools/threat_model/tools.py:509  (``https://app.example.com``), or a repository path\nstrix/tools/threat_model/tools.py:577  (``https://app.example.com``), or a repository path"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/web_search/tool.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.perplexity.ai/chat/completions",
+      "evidence": "strix/tools/web_search/tool.py:50  url = \"https://api.perplexity.ai/chat/completions\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/web_search/tool.py:122",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.exa.ai/search",
+      "evidence": "strix/tools/web_search/tool.py:122  \"https://api.exa.ai/search\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/tools/web_search/tool.py:146",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.exa.ai/contents",
+      "evidence": "strix/tools/web_search/tool.py:146  body = _exa_post(api_key, \"https://api.exa.ai/contents\", {\"urls\": urls, \"text\": True})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "strix/utils/api_spec.py:234",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.getpostman.com",
+      "evidence": "strix/utils/api_spec.py:234  POSTMAN_API_BASE = \"https://api.getpostman.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{region",
+      "evidence": "tests/test_api_spec.py:35  - url: https://{region}.api.shop.test/{ver}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://petstore.test/pets",
+      "evidence": "tests/test_api_spec.py:64  \"request\": {\"method\": \"GET\", \"url\": {\"raw\": \"https://petstore.test/pets\"}},\ntests/test_api_spec.py:70  \"request\": {\"method\": \"POST\", \"url\": \"https://petstore.test/pets\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:143",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://eu.api.shop.test/v1",
+      "evidence": "tests/test_api_spec.py:143  assert spec_base_urls(raw) == [\"https://eu.api.shop.test/v1\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:153",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://legacy.test/api",
+      "evidence": "tests/test_api_spec.py:153  assert spec_base_urls(SWAGGER_JSON) == [\"https://legacy.test/api\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:161",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://petstore.test",
+      "evidence": "tests/test_api_spec.py:161  assert spec_base_urls(POSTMAN_JSON) == [\"https://petstore.test\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:173",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.vars.test",
+      "evidence": "tests/test_api_spec.py:173  \"variable\": [{\"key\": \"baseUrl\", \"value\": \"https://api.vars.test\"}],\ntests/test_api_spec.py:188  assert spec_base_urls(POSTMAN_WITH_VARS) == [\"https://api.vars.test\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec.py:199",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.env.test",
+      "evidence": "tests/test_api_spec.py:199  extra_variables={\"baseUrl\": \"https://api.env.test\"},\ntests/test_api_spec.py:201  assert resolved == [\"https://api.env.test\"]\ntests/test_api_spec.py:262  {\"key\": \"baseUrl\", \"value\": \"https://api.env.test\", \"enabled\": True},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_api_spec_targets.py:20",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.shop.test/v1",
+      "evidence": "tests/test_api_spec_targets.py:20  \"servers\": [{\"url\": \"https://api.shop.test/v1\"}],\ntests/test_api_spec_targets.py:95  assert target[\"details\"][\"base_urls\"] == [\"https://api.shop.test/v1\"]\ntests/test_api_spec_targets.py:141  assert \"https://api.shop.test/v1\" in task"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_caido_bootstrap.py:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://host",
+      "evidence": "tests/test_caido_bootstrap.py:66  host_url=\"http://host\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_caido_bootstrap.py:67",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://container",
+      "evidence": "tests/test_caido_bootstrap.py:67  container_url=\"http://container\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cli_mcp_config.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://test.com/",
+      "evidence": "tests/test_cli_mcp_config.py:39  sys, \"argv\", [\"strix\", \"-t\", \"https://test.com/\", \"-n\", \"--mcp-config\", str(config)]\ntests/test_cli_mcp_config.py:55  sys, \"argv\", [\"strix\", \"-t\", \"https://test.com/\", \"-n\", \"--mcp-config\", str(missing)]\ntests/test_cli_mcp_config.py:74  \"https://test.com/\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/test_cli_mcp_config.py:45",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_MCP_CONFIG",
+      "rule": "os.environ[]",
+      "evidence": "tests/test_cli_mcp_config.py:45  assert os.environ[\"STRIX_MCP_CONFIG\"] == str(config)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/test_cli_mcp_config.py:87",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_MCP_ONLY",
+      "rule": "os.environ[]",
+      "evidence": "tests/test_cli_mcp_config.py:87  assert os.environ[\"STRIX_MCP_ONLY\"] == \"a,b\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/test_cli_mcp_config.py:88",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "STRIX_MCP_EXCLUDE",
+      "rule": "os.environ[]",
+      "evidence": "tests/test_cli_mcp_config.py:88  assert os.environ[\"STRIX_MCP_EXCLUDE\"] == \"c\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cli_target_list.py:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://test1.com/",
+      "evidence": "tests/test_cli_target_list.py:34  \"https://test1.com/\\n\\nhttp://test2.com:5789/\\n\",\ntests/test_cli_target_list.py:43  \"https://test1.com/\",\ntests/test_cli_target_list.py:61  [\"strix\", \"-t\", \"https://test1.com/\", \"--target-list\", str(target_list)],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cli_target_list.py:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://test2.com:5789/",
+      "evidence": "tests/test_cli_target_list.py:34  \"https://test1.com/\\n\\nhttp://test2.com:5789/\\n\",\ntests/test_cli_target_list.py:44  \"http://test2.com:5789/\",\ntests/test_cli_target_list.py:56  target_list.write_text(\"http://test2.com:5789/\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:377",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gitlab.com",
+      "evidence": "tests/test_cloud_cli.py:377  \"https://gitlab.com\",\ntests/test_cloud_cli.py:387  \"instance_url\": \"https://gitlab.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:549",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "tests/test_cloud_cli.py:549  argv = [\"scans\", \"start\", \"--domain-ids\", \"d1\", \"--app-url\", \"https://app.strix.ai\"]\ntests/test_cloud_cli.py:592  argv = [\"scans\", \"start\", \"--domain-ids\", \"d1\", \"--json\", \"--app-url\", \"https://app.strix.ai\"]\ntests/test_cloud_cli.py:625  lambda: {\"api_token\": \"stored-secret\", \"app_url\": \"https://app.strix.ai\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:555",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai/settings/billing",
+      "evidence": "tests/test_cloud_cli.py:555  assert \"https://app.strix.ai/settings/billing\" in output\ntests/test_cloud_cli.py:562  hint = \"Buy credits at https://app.strix.ai/settings/billing. Then retry this request.\"\ntests/test_cloud_cli.py:567  \"topup_url\": \"https://app.strix.ai/settings/billing\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:621",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://attacker.example",
+      "evidence": "tests/test_cloud_cli.py:621  monkeypatch.setattr(http, \"_app_url_override\", \"https://attacker.example\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:657",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://preview.strix.ai",
+      "evidence": "tests/test_cloud_cli.py:657  monkeypatch.setattr(http, \"_app_url_override\", \"https://preview.strix.ai\")\ntests/test_cloud_cli.py:661  lambda: {\"api_token\": \"stored-secret\", \"app_url\": \"https://preview.strix.ai\"},\ntests/test_cloud_cli.py:681  monkeypatch.setattr(http, \"_app_url_override\", \"https://preview.strix.ai\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:673",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://preview.strix.ai/api/v1/billing/credits",
+      "evidence": "tests/test_cloud_cli.py:673  assert seen[\"url\"] == \"https://preview.strix.ai/api/v1/billing/credits\"\ntests/test_cloud_cli.py:698  assert seen[\"url\"] == \"https://preview.strix.ai/api/v1/billing/credits\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:890",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://malicious.invalid",
+      "evidence": "tests/test_cloud_cli.py:890  (tmp_path / \".npmrc\").write_text(\"registry=https://malicious.invalid\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:913",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1",
+      "evidence": "tests/test_cloud_cli.py:913  argument for argument in command if argument.startswith(\"http://127.0.0.1:\")\ntests/test_cloud_cli.py:1148  argument for argument in command if argument.startswith(\"http://127.0.0.1:\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:943",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org",
+      "evidence": "tests/test_cloud_cli.py:943  assert \"--registry=https://registry.npmjs.org\" in commands[0]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:1500",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test/",
+      "evidence": "tests/test_cloud_cli.py:1500  [\"credits\", \"--app-url\", \"https://example.test/\", \"--timeout\", \"7\", \"--json\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:1503",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.test/api/v1/billing/credits",
+      "evidence": "tests/test_cloud_cli.py:1503  assert seen[\"url\"] == \"https://example.test/api/v1/billing/credits\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:1523",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pay.test/session",
+      "evidence": "tests/test_cloud_cli.py:1523  return FakeResponse(status_code=200, payload={\"checkout_url\": \"https://pay.test/session\"})\ntests/test_cloud_cli.py:1531  assert \"https://pay.test/session\" in capsys.readouterr().out"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:1637",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.test/app",
+      "evidence": "tests/test_cloud_cli.py:1637  lambda *_a, **_k: FakeResponse(status_code=200, payload={\"url\": \"https://github.test/app\"}),\ntests/test_cloud_cli.py:1648  assert \"https://github.test/app\" in capsys.readouterr().out"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:2321",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://staging.example.com/login",
+      "evidence": "tests/test_cloud_cli.py:2321  \"login_url\": \"https://staging.example.com/login\",\ntests/test_cloud_cli.py:2761  \"login_url\": \"https://staging.example.com/login\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:2737",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/login",
+      "evidence": "tests/test_cloud_cli.py:2737  \"login_url\": \"https://example.com/login\",\ntests/test_cloud_cli.py:2750  \"login_url\": \"https://example.com/login\",\ntests/test_cloud_cli.py:3473  \"login_url\": \"https://example.com/login\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:2906",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/hook",
+      "evidence": "tests/test_cloud_cli.py:2906  \"url\": \"https://example.com/hook\",\ntests/test_cloud_cli.py:2916  (\"https://example.com/hook\", \"scan.completed\", \"product\", \"webhook-id\"),\ntests/test_cloud_cli.py:3107  \"url\": \"https://example.com/hook\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:3199",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "tests/test_cloud_cli.py:3199  \"url\": \"https://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli.py:3431",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/example/app/pull/42",
+      "evidence": "tests/test_cloud_cli.py:3431  \"fix_pr_url\": \"https://github.com/example/app/pull/42\",\ntests/test_cloud_cli.py:3448  \"https://github.com/example/app/pull/42\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/usestrix/strix",
+      "evidence": "tests/test_cloud_cli_runtime.py:95  \"url\": \"https://github.com/usestrix/strix\",\ntests/test_cloud_cli_runtime.py:120  \"https://github.com/usestrix/strix @ feature\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://staging.example.test",
+      "evidence": "tests/test_cloud_cli_runtime.py:109  \"urls\": [\"https://staging.example.test\"],\ntests/test_cloud_cli_runtime.py:121  \"https://staging.example.test\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:144",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test/search",
+      "evidence": "tests/test_cloud_cli_runtime.py:144  \"target\": \"https://example.test/search\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:252",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test/hook",
+      "evidence": "tests/test_cloud_cli_runtime.py:252  \"url\": \"https://example.test/hook\",\ntests/test_cloud_cli_runtime.py:262  assert \"https://example.test/hook\" in output"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:797",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.example.test",
+      "evidence": "tests/test_cloud_cli_runtime.py:797  \"app_url\": \"https://app.example.test\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:871",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test/device",
+      "evidence": "tests/test_cloud_cli_runtime.py:871  \"verification_uri\": \"https://example.test/device\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:903",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test",
+      "evidence": "tests/test_cloud_cli_runtime.py:903  monkeypatch.setattr(platform_cli, \"_app_url\", lambda: \"https://example.test\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:924",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://auth.example-workos.com/device?code=ABCD",
+      "evidence": "tests/test_cloud_cli_runtime.py:924  \"verification_uri\": \"https://auth.example-workos.com/device?code=ABCD\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:940",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://preview.strix.ai",
+      "evidence": "tests/test_cloud_cli_runtime.py:940  monkeypatch.setattr(platform_cli, \"_app_url\", lambda: \"https://preview.strix.ai\")\ntests/test_cloud_cli_runtime.py:949  assert record[\"app_url\"] == \"https://preview.strix.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1010",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://project.supabase.co/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1010  \"http://project.supabase.co/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1011",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://127.0.0.1/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1011  \"https://127.0.0.1/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1012",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://10.0.0.1/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1012  \"https://10.0.0.1/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1013",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.strix.ai@127.0.0.1/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1013  \"https://app.strix.ai@127.0.0.1/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1014",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://evil.example/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1014  \"https://evil.example/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1015",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://project.supabase.co.evil/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1015  \"https://project.supabase.co.evil/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1016",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://project.supabase.co/not-storage/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1016  \"https://project.supabase.co/not-storage/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1024",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.strix.ai",
+      "evidence": "tests/test_cloud_cli_runtime.py:1024  monkeypatch.setattr(http, \"_app_url_override\", \"https://app.strix.ai\")\ntests/test_cloud_cli_runtime.py:1039  \"https://app.strix.ai\",\ntests/test_cloud_cli_runtime.py:1085  monkeypatch.setattr(http, \"_app_url_override\", \"https://app.strix.ai\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1040",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://project-ref.supabase.co/storage/v1/object/upload/sign/bucket/file?token=signed%2Fvalue",
+      "evidence": "tests/test_cloud_cli_runtime.py:1040  \"https://project-ref.supabase.co/storage/v1/object/upload/sign/bucket/file?token=signed%2Fvalue\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1043",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://strix.corp.internal",
+      "evidence": "tests/test_cloud_cli_runtime.py:1043  \"https://strix.corp.internal\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1044",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://strix.corp.internal/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1044  \"https://strix.corp.internal/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1047",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:3000",
+      "evidence": "tests/test_cloud_cli_runtime.py:1047  \"http://127.0.0.1:3000\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1048",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:3000/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1048  \"http://127.0.0.1:3000/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1078",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://169.254.169.254/latest/meta-data",
+      "evidence": "tests/test_cloud_cli_runtime.py:1078  response.headers[\"location\"] = \"http://169.254.169.254/latest/meta-data\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_cli_runtime.py:1090",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://project-ref.supabase.co/storage/v1/object/upload/sign/bucket/file",
+      "evidence": "tests/test_cloud_cli_runtime.py:1090  \"https://project-ref.supabase.co/storage/v1/object/upload/sign/bucket/file\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_payment_proxy.py:58",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.example.test/api/v1/billing/topup",
+      "evidence": "tests/test_cloud_payment_proxy.py:58  upstream_url=\"https://app.example.test/api/v1/billing/topup\",\ntests/test_cloud_payment_proxy.py:87  upstream_url=\"https://app.example.test/api/v1/billing/topup\",\ntests/test_cloud_payment_proxy.py:131  upstream_url=\"https://app.example.test/api/v1/billing/topup\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/test_cloud_session.py:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.example.test",
+      "evidence": "tests/test_cloud_session.py:49  \"app_url\": \"https://app.example.test\",\ntests/test_cloud_session.py:65  \"app_url\": \"https://app.example.test\",\ntests/test_cloud_session.py:79  \"app_url\": \"https://app.example.test\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tests/test_cloud_source_upload.py:48",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "tests/test_cloud_source_upload.py:48  subprocess.run([git, \"init\", \"-q\", str(tmp_path)], check=True)  # noqa: S603\ntests/test_cloud_source_upload.py:53  subprocess.run(  # noqa: S603"
+    }
+  ],
+  "reRooting": []
+}

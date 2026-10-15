@@ -1,0 +1,2385 @@
+{
+  "schema": "facai.capability-graph/1",
+  "source": "agent-aider-fork",
+  "license": "Apache-2.0",
+  "method": "facai/ops/ingest.py 启发式初扫：先扫源码扩展名文件、扫完且配额未满才扫其余文件（文档/示例命中 kind 加 DOC_ 前缀、URL 引用单列 DOC_REFERENCE，不挤占源码配额）；正则扫 https?:// 常量 / os.getenv|os.environ|process.env 键 / subprocess|child_process 调用点 / 已知 SDK 客户端构造（OpenAI(/Anthropic(/httpx auth/requests.Session auth → INFERRED_CREDENTIAL），逐条 file:line 证据，每档上限 200 面；能力候选按面种推导，未做人工 Capability Miner 比对——本文件是骨架，逐条 verdict 与 remote_removal 待复核。permissions 节照 Dify 插件 manifest 模式：六族 capability action 全枚举、deny-by-default，只有运行时面带 file:line 证据的族才 allowed=true。",
+  "summary": "初扫 395 面（REMOTE_PROVIDER=44，DOC_REFERENCE=180）；能力候选 3 条 / 外部依赖 36 个主机；diff: new=3 already_owned=0 external_dependency=36；权限声明 allowed=4/6（deny-by-default）。骨架待人工补全。",
+  "permissions": {
+    "schema": "facai.permissions/1",
+    "declared": [
+      "shell.exec",
+      "network.*",
+      "secret.request",
+      "provider.invoke"
+    ],
+    "denied": [
+      "filesystem.write",
+      "docker.run"
+    ],
+    "entries": [
+      {
+        "action": "shell.exec",
+        "allowed": true,
+        "scope": "子进程/shell 调用点（吸收后经 Facai Broker 收口）",
+        "resources": [],
+        "evidence": "aider/commands.py:974"
+      },
+      {
+        "action": "filesystem.write",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "network.*",
+        "allowed": true,
+        "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+        "resources": [
+          "127.0.0.1",
+          "ai.google.dev",
+          "aider.chat",
+          "api.github.com",
+          "api.pepy.tech",
+          "cdn.jsdelivr.net",
+          "cloud.google.com",
+          "docs.python.org",
+          "download.docker.com",
+          "download.pytorch.org",
+          "example.com",
+          "example1.com",
+          "example2.com",
+          "ffmpeg.org",
+          "fishshell.com",
+          "github.com",
+          "http://",
+          "https://",
+          "img.shields.io",
+          "localhost",
+          "networkx.org",
+          "openrouter.ai",
+          "opensource.org",
+          "pygments.org",
+          "pypi.org",
+          "raw.githubusercontent.com",
+          "rubygems.org",
+          "self-signed.badssl.com",
+          "subdomain.example.com",
+          "tree-sitter.github.io",
+          "us.i.posthog.com",
+          "user",
+          "www.conventionalcommits.org",
+          "www.example.com",
+          "www.googleapis.com",
+          "www.w3.org"
+        ],
+        "evidence": "aider/analytics.py:57"
+      },
+      {
+        "action": "docker.run",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "secret.request",
+        "allowed": true,
+        "scope": "凭据读取面（吸收后一律经 Facai Secret Broker 下发）",
+        "resources": [
+          "TOKENIZERS_PARALLELISM"
+        ],
+        "evidence": "aider/help.py:138"
+      },
+      {
+        "action": "provider.invoke",
+        "allowed": true,
+        "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+        "resources": [
+          "127.0.0.1",
+          "ai.google.dev",
+          "aider.chat",
+          "api.github.com",
+          "api.pepy.tech",
+          "github.com",
+          "img.shields.io",
+          "openrouter.ai",
+          "pypi.org",
+          "us.i.posthog.com",
+          "www.conventionalcommits.org"
+        ],
+        "evidence": "aider/analytics.py:57"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "shell.exec",
+      "name": "子进程/shell 执行面（初扫推导候选，待 Capability Miner 人工复核）",
+      "level": "L0_REFERENCE",
+      "provider": "ExecutionProvider",
+      "verdict": "new",
+      "evidence": "aider/commands.py:974",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": true,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": true,
+          "scope": "子进程/shell 调用点（吸收后经 Facai Broker 收口）",
+          "resources": [],
+          "evidence": "aider/commands.py:974"
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "secret.request",
+      "name": "凭据获取面（初扫推导候选，吸收后一律走 Secret Broker）",
+      "level": "L0_REFERENCE",
+      "provider": "CapabilityProvider",
+      "verdict": "new",
+      "evidence": "aider/help.py:138",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": true,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": true,
+          "scope": "凭据读取面（吸收后一律经 Facai Secret Broker 下发）",
+          "resources": [
+            "TOKENIZERS_PARALLELISM"
+          ],
+          "evidence": "aider/help.py:138"
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "model.invoke",
+      "name": "远端模型/推送调用面（初扫推导候选，须 re-root 至 Facai Model Router）",
+      "level": "L0_REFERENCE",
+      "provider": "ModelProvider",
+      "verdict": "new",
+      "evidence": "aider/analytics.py:57",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "127.0.0.1",
+            "ai.google.dev",
+            "aider.chat",
+            "api.github.com",
+            "api.pepy.tech",
+            "cdn.jsdelivr.net",
+            "cloud.google.com",
+            "docs.python.org",
+            "download.docker.com",
+            "download.pytorch.org",
+            "example.com",
+            "example1.com",
+            "example2.com",
+            "ffmpeg.org",
+            "fishshell.com",
+            "github.com",
+            "http://",
+            "https://",
+            "img.shields.io",
+            "localhost",
+            "networkx.org",
+            "openrouter.ai",
+            "opensource.org",
+            "pygments.org",
+            "pypi.org",
+            "raw.githubusercontent.com",
+            "rubygems.org",
+            "self-signed.badssl.com",
+            "subdomain.example.com",
+            "tree-sitter.github.io",
+            "us.i.posthog.com",
+            "user",
+            "www.conventionalcommits.org",
+            "www.example.com",
+            "www.googleapis.com",
+            "www.w3.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": true,
+          "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+          "resources": [
+            "127.0.0.1",
+            "ai.google.dev",
+            "aider.chat",
+            "api.github.com",
+            "api.pepy.tech",
+            "github.com",
+            "img.shields.io",
+            "openrouter.ai",
+            "pypi.org",
+            "us.i.posthog.com",
+            "www.conventionalcommits.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        }
+      ]
+    },
+    {
+      "id": "vendor.us_i_posthog_com",
+      "name": "外部依赖 us.i.posthog.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/analytics.py:57",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "us.i.posthog.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.github_com",
+      "name": "外部依赖 github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/analytics.py:209",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "github.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.pygments_org",
+      "name": "外部依赖 pygments.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/args.py:392",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "pygments.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.aider_chat",
+      "name": "外部依赖 aider.chat（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/args_formatter.py:101",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "aider.chat"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.docs_python_org",
+      "name": "外部依赖 docs.python.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/dump.py:15",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "docs.python.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.https_",
+      "name": "外部依赖 https://（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/gui.py:477",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "https://"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.download_pytorch_org",
+      "name": "外部依赖 download.pytorch.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/help.py:22",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "download.pytorch.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.raw_githubusercontent_com",
+      "name": "外部依赖 raw.githubusercontent.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/models.py:163",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "raw.githubusercontent.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.openrouter_ai",
+      "name": "外部依赖 openrouter.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/models.py:279",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "openrouter.ai"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_github_com",
+      "name": "外部依赖 api.github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/models.py:965",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.github.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.127_0_0_1",
+      "name": "外部依赖 127.0.0.1（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/onboarding.py:31",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "127.0.0.1"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.localhost",
+      "name": "外部依赖 localhost（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/onboarding.py:223",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "localhost"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_conventionalcommits_org",
+      "name": "外部依赖 www.conventionalcommits.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/prompts.py:7",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.conventionalcommits.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.networkx_org",
+      "name": "外部依赖 networkx.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/repomap.py:382",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "networkx.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.pypi_org",
+      "name": "外部依赖 pypi.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/versioncheck.py:78",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "pypi.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.http_",
+      "name": "外部依赖 http://（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/coders/help_prompts.py:15",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "http://"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.opensource_org",
+      "name": "外部依赖 opensource.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/website/install.sh:5",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "opensource.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.fishshell_com",
+      "name": "外部依赖 fishshell.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/website/install.sh:1329",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "fishshell.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.cdn_jsdelivr_net",
+      "name": "外部依赖 cdn.jsdelivr.net（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/website/_includes/code-in-json-benchmark.js:14",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "cdn.jsdelivr.net"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.download_docker_com",
+      "name": "外部依赖 download.docker.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "benchmark/install-docker-ubuntu.sh:22",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "download.docker.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_w3_org",
+      "name": "外部依赖 www.w3.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "scripts/30k-image.py:152",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.w3.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_googleapis_com",
+      "name": "外部依赖 www.googleapis.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "scripts/homepage.py:106",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.googleapis.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_pepy_tech",
+      "name": "外部依赖 api.pepy.tech（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "scripts/homepage.py:172",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.pepy.tech"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.img_shields_io",
+      "name": "外部依赖 img.shields.io（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "scripts/homepage.py:286",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "img.shields.io"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.ffmpeg_org",
+      "name": "外部依赖 ffmpeg.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "scripts/recording_audio.py:213",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ffmpeg.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.example_com",
+      "name": "外部依赖 example.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/basic/test_coder.py:875",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "example.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_example_com",
+      "name": "外部依赖 www.example.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/basic/test_coder.py:876",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.example.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.subdomain_example_com",
+      "name": "外部依赖 subdomain.example.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/basic/test_coder.py:878",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "subdomain.example.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.user",
+      "name": "外部依赖 user（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/basic/test_coder.py:892",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "user"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.example1_com",
+      "name": "外部依赖 example1.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/basic/test_coder.py:919",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "example1.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.example2_com",
+      "name": "外部依赖 example2.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/basic/test_coder.py:919",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "example2.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.self_signed_badssl_com",
+      "name": "外部依赖 self-signed.badssl.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "tests/scrape/test_scrape.py:24",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "self-signed.badssl.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.tree_sitter_github_io",
+      "name": "外部依赖 tree-sitter.github.io（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/queries/tree-sitter-language-pack/commonlisp-tags.scm:113",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "tree-sitter.github.io"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.cloud_google_com",
+      "name": "外部依赖 cloud.google.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/resources/model-metadata.json:221",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "cloud.google.com"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.ai_google_dev",
+      "name": "外部依赖 ai.google.dev（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/resources/model-metadata.json:540",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ai.google.dev"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.rubygems_org",
+      "name": "外部依赖 rubygems.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "aider/website/Gemfile:1",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "Apache-2.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "rubygems.org"
+          ],
+          "evidence": "aider/analytics.py:57"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3781 @@
+{
+  "schema": "facai.capability-graph/1",
+  "source": "sqlmap-1109",
+  "license": "GPL-3.0",
+  "method": "facai/ops/ingest.py 启发式初扫：先扫源码扩展名文件、扫完且配额未满才扫其余文件（文档/示例命中 kind 加 DOC_ 前缀、URL 引用单列 DOC_REFERENCE，不挤占源码配额）；正则扫 https?:// 常量 / os.getenv|os.environ|process.env 键 / subprocess|child_process 调用点 / 已知 SDK 客户端构造（OpenAI(/Anthropic(/httpx auth/requests.Session auth → INFERRED_CREDENTIAL），逐条 file:line 证据，每档上限 200 面；能力候选按面种推导，未做人工 Capability Miner 比对——本文件是骨架，逐条 verdict 与 remote_removal 待复核。permissions 节照 Dify 插件 manifest 模式：六族 capability action 全枚举、deny-by-default，只有运行时面带 file:line 证据的族才 allowed=true。",
+  "summary": "初扫 200 面（REMOTE_PROVIDER=2，DOC_REFERENCE=0）；能力候选 2 条 / 外部依赖 61 个主机；diff: new=2 already_owned=0 external_dependency=61；权限声明 allowed=3/6（deny-by-default）。骨架待人工补全。",
+  "permissions": {
+    "schema": "facai.permissions/1",
+    "declared": [
+      "shell.exec",
+      "network.*",
+      "provider.invoke"
+    ],
+    "denied": [
+      "filesystem.write",
+      "docker.run",
+      "secret.request"
+    ],
+    "entries": [
+      {
+        "action": "shell.exec",
+        "allowed": true,
+        "scope": "子进程/shell 调用点（吸收后经 Facai Broker 收口）",
+        "resources": [],
+        "evidence": "extra/beep/beep.py:41"
+      },
+      {
+        "action": "filesystem.write",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "network.*",
+        "allowed": true,
+        "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+        "resources": [
+          "%s",
+          "[",
+          "api.github.com",
+          "asciinema.org",
+          "blog.elsdoerfer.name",
+          "blog.oneortheother.info",
+          "boredzo.org",
+          "bugs.python.org",
+          "code.activestate.com",
+          "coding.derkeiler.com",
+          "dev.mysql.com",
+          "docs.microsoft.com",
+          "docs.python.org",
+          "en.wikipedia.org",
+          "example.com",
+          "example.org",
+          "github.com",
+          "host",
+          "img.shields.io",
+          "lists.gnu.org",
+          "perldoc.perl.org",
+          "ptspts.blogspot.hr",
+          "pureinfotech.com",
+          "pypi.python.org",
+          "python3porting.com",
+          "qiita.com",
+          "raw.github.com",
+          "raw.githubusercontent.com",
+          "rst.ninjs.org",
+          "seclists.org",
+          "sqlmap.org",
+          "stackoverflow.com",
+          "svn.python.org",
+          "tools.ietf.org",
+          "web.archive.org",
+          "www",
+          "www.answers.com",
+          "www.example.com",
+          "www.frontbase.com",
+          "www.gnu.org",
+          "www.goldb.org",
+          "www.gossamer-threads.com",
+          "www.hashbangcode.com",
+          "www.kunxi.org",
+          "www.muppetlabs.com",
+          "www.peterbe.com",
+          "www.postgresqltutorial.com",
+          "www.py2exe.org",
+          "www.python.org",
+          "www.site.com",
+          "www.target.com",
+          "www.target2.com",
+          "www.test.com",
+          "www.thegeekstuff.com",
+          "www.ubuntuupdates.org",
+          "www.w3.org",
+          "www.wisec.it",
+          "www.xn--uuraj-gxa24d.com",
+          "www.youtube.com",
+          "x.com",
+          "xmlns.com"
+        ],
+        "evidence": "sqlmap.py:4"
+      },
+      {
+        "action": "docker.run",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "secret.request",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "provider.invoke",
+        "allowed": true,
+        "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+        "resources": [
+          "api.github.com"
+        ],
+        "evidence": "lib/core/common.py:4218"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "shell.exec",
+      "name": "子进程/shell 执行面（初扫推导候选，待 Capability Miner 人工复核）",
+      "level": "L0_REFERENCE",
+      "provider": "ExecutionProvider",
+      "verdict": "new",
+      "evidence": "extra/beep/beep.py:41",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": true,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": true,
+          "scope": "子进程/shell 调用点（吸收后经 Facai Broker 收口）",
+          "resources": [],
+          "evidence": "extra/beep/beep.py:41"
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "model.invoke",
+      "name": "远端模型/推送调用面（初扫推导候选，须 re-root 至 Facai Model Router）",
+      "level": "L0_REFERENCE",
+      "provider": "ModelProvider",
+      "verdict": "new",
+      "evidence": "lib/core/common.py:4218",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "%s",
+            "[",
+            "api.github.com",
+            "asciinema.org",
+            "blog.elsdoerfer.name",
+            "blog.oneortheother.info",
+            "boredzo.org",
+            "bugs.python.org",
+            "code.activestate.com",
+            "coding.derkeiler.com",
+            "dev.mysql.com",
+            "docs.microsoft.com",
+            "docs.python.org",
+            "en.wikipedia.org",
+            "example.com",
+            "example.org",
+            "github.com",
+            "host",
+            "img.shields.io",
+            "lists.gnu.org",
+            "perldoc.perl.org",
+            "ptspts.blogspot.hr",
+            "pureinfotech.com",
+            "pypi.python.org",
+            "python3porting.com",
+            "qiita.com",
+            "raw.github.com",
+            "raw.githubusercontent.com",
+            "rst.ninjs.org",
+            "seclists.org",
+            "sqlmap.org",
+            "stackoverflow.com",
+            "svn.python.org",
+            "tools.ietf.org",
+            "web.archive.org",
+            "www",
+            "www.answers.com",
+            "www.example.com",
+            "www.frontbase.com",
+            "www.gnu.org",
+            "www.goldb.org",
+            "www.gossamer-threads.com",
+            "www.hashbangcode.com",
+            "www.kunxi.org",
+            "www.muppetlabs.com",
+            "www.peterbe.com",
+            "www.postgresqltutorial.com",
+            "www.py2exe.org",
+            "www.python.org",
+            "www.site.com",
+            "www.target.com",
+            "www.target2.com",
+            "www.test.com",
+            "www.thegeekstuff.com",
+            "www.ubuntuupdates.org",
+            "www.w3.org",
+            "www.wisec.it",
+            "www.xn--uuraj-gxa24d.com",
+            "www.youtube.com",
+            "x.com",
+            "xmlns.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": true,
+          "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+          "resources": [
+            "api.github.com"
+          ],
+          "evidence": "lib/core/common.py:4218"
+        }
+      ]
+    },
+    {
+      "id": "vendor.sqlmap_org",
+      "name": "外部依赖 sqlmap.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:4",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "sqlmap.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.github_com",
+      "name": "外部依赖 github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:16",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "github.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.docs_python_org",
+      "name": "外部依赖 docs.python.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:22",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "docs.python.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor._s",
+      "name": "外部依赖 %s（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:252",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "%s"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.qiita_com",
+      "name": "外部依赖 qiita.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:392",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "qiita.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.bugs_python_org",
+      "name": "外部依赖 bugs.python.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:404",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "bugs.python.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.stackoverflow_com",
+      "name": "外部依赖 stackoverflow.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "sqlmap.py:564",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "stackoverflow.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.lists_gnu_org",
+      "name": "外部依赖 lists.gnu.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/beep/beep.py:39",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "lists.gnu.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.host",
+      "name": "外部依赖 host（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/dbwire/__init__.py:57",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "host"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_gnu_org",
+      "name": "外部依赖 www.gnu.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/icmpsh/__init__.py:20",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.gnu.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.pypi_python_org",
+      "name": "外部依赖 pypi.python.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:48",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "pypi.python.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.raw_github_com",
+      "name": "外部依赖 raw.github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:105",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "raw.github.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_python_org",
+      "name": "外部依赖 www.python.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:133",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.python.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.asciinema_org",
+      "name": "外部依赖 asciinema.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:151",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "asciinema.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.x_com",
+      "name": "外部依赖 x.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:170",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "x.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_youtube_com",
+      "name": "外部依赖 www.youtube.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:171",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.youtube.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.img_shields_io",
+      "name": "外部依赖 img.shields.io（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:174",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "img.shields.io"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.raw_githubusercontent_com",
+      "name": "外部依赖 raw.githubusercontent.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:177",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "raw.githubusercontent.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.rst_ninjs_org",
+      "name": "外部依赖 rst.ninjs.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/pypi.sh:182",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "rst.ninjs.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_thegeekstuff_com",
+      "name": "外部依赖 www.thegeekstuff.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/strip.sh:3",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.thegeekstuff.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_muppetlabs_com",
+      "name": "外部依赖 www.muppetlabs.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/strip.sh:4",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.muppetlabs.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.ptspts_blogspot_hr",
+      "name": "外部依赖 ptspts.blogspot.hr（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/strip.sh:5",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ptspts.blogspot.hr"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_ubuntuupdates_org",
+      "name": "外部依赖 www.ubuntuupdates.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/shutils/strip.sh:8",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.ubuntuupdates.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.example_org",
+      "name": "外部依赖 example.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/vulnserver/vulnserver.py:361",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "example.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.xmlns_com",
+      "name": "外部依赖 xmlns.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/vulnserver/vulnserver.py:361",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "xmlns.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_w3_org",
+      "name": "外部依赖 www.w3.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "extra/vulnserver/vulnserver.py:610",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.w3.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.seclists_org",
+      "name": "外部依赖 seclists.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/controller/checks.py:1568",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "seclists.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_wisec_it",
+      "name": "外部依赖 www.wisec.it（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/controller/checks.py:1662",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.wisec.it"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.web_archive_org",
+      "name": "外部依赖 web.archive.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/agent.py:1250",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "web.archive.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_gossamer_threads_com",
+      "name": "外部依赖 www.gossamer-threads.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:1210",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.gossamer-threads.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.pureinfotech_com",
+      "name": "外部依赖 pureinfotech.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:1617",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "pureinfotech.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_py2exe_org",
+      "name": "外部依赖 www.py2exe.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:1650",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.py2exe.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_test_com",
+      "name": "外部依赖 www.test.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:1783",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.test.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_goldb_org",
+      "name": "外部依赖 www.goldb.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:2645",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.goldb.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.coding_derkeiler_com",
+      "name": "外部依赖 coding.derkeiler.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:2823",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "coding.derkeiler.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.boredzo_org",
+      "name": "外部依赖 boredzo.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:2837",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "boredzo.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_answers_com",
+      "name": "外部依赖 www.answers.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:2965",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.answers.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.dev_mysql_com",
+      "name": "外部依赖 dev.mysql.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4080",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "dev.mysql.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.docs_microsoft_com",
+      "name": "外部依赖 docs.microsoft.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4084",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "docs.microsoft.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_postgresqltutorial_com",
+      "name": "外部依赖 www.postgresqltutorial.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4087",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.postgresqltutorial.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_github_com",
+      "name": "外部依赖 api.github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4218",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.github.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_peterbe_com",
+      "name": "外部依赖 www.peterbe.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4489",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.peterbe.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_frontbase_com",
+      "name": "外部依赖 www.frontbase.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4539",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.frontbase.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.tools_ietf_org",
+      "name": "外部依赖 tools.ietf.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4730",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "tools.ietf.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.blog_elsdoerfer_name",
+      "name": "外部依赖 blog.elsdoerfer.name（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4836",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "blog.elsdoerfer.name"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www",
+      "name": "外部依赖 www（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4838",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_xn_uuraj_gxa24d_com",
+      "name": "外部依赖 www.xn--uuraj-gxa24d.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4839",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.xn--uuraj-gxa24d.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_site_com",
+      "name": "外部依赖 www.site.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:4930",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.site.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_target_com",
+      "name": "外部依赖 www.target.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:5064",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.target.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_target2_com",
+      "name": "外部依赖 www.target2.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:5066",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.target2.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor._",
+      "name": "外部依赖 [（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:5098",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "["
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.blog_oneortheother_info",
+      "name": "外部依赖 blog.oneortheother.info（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:5149",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "blog.oneortheother.info"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_hashbangcode_com",
+      "name": "外部依赖 www.hashbangcode.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:5393",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.hashbangcode.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_example_com",
+      "name": "外部依赖 www.example.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/common.py:5620",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.example.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.svn_python_org",
+      "name": "外部依赖 svn.python.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/compat.py:24",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "svn.python.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.python3porting_com",
+      "name": "外部依赖 python3porting.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/compat.py:225",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "python3porting.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.code_activestate_com",
+      "name": "外部依赖 code.activestate.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/compat.py:240",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "code.activestate.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.en_wikipedia_org",
+      "name": "外部依赖 en.wikipedia.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/convert.py:427",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "en.wikipedia.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.perldoc_perl_org",
+      "name": "外部依赖 perldoc.perl.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/convert.py:428",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "perldoc.perl.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.example_com",
+      "name": "外部依赖 example.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/convert.py:619",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "example.com"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_kunxi_org",
+      "name": "外部依赖 www.kunxi.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "lib/core/datatype.py:118",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "GPL-3.0",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.kunxi.org"
+          ],
+          "evidence": "sqlmap.py:4"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    }
+  ]
+}

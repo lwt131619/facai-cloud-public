@@ -1,0 +1,1462 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050b16">
+  <meta name="description" content="FACAI 随身遥控器：真登录、真下单、真进度、真绑渠道。Desktop 是总控台，Mobile 是遥控器。">
+  <title>FACAI · 发财遥控器</title>
+  <!-- PWA：真机安装复用根 manifest（/manifest.webmanifest 已由 facai/api.py 挂载，
+       图标 /static/icon-192.png、/static/icon-512.png，Service Worker /sw.js）。
+       本页已接真实接口，激活安装引用：
+  -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <!-- 设计令牌层：同目录 facai-ui.css（服务路径 /static/facai-ui.css，基线 §21） -->
+  <link rel="stylesheet" href="facai-ui.css">
+  <style>
+    /* ── 页面级样式（布局壳；令牌一律取自 facai-ui.css） ── */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      background:radial-gradient(1200px 700px at 70% -10%,var(--bg-glow) 0%,var(--bg) 55%) fixed,var(--bg);
+      color:var(--txt);font-family:var(--font-ui);
+      display:flex;align-items:center;justify-content:center;gap:var(--sp-6);
+    }
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+    button:disabled{opacity:.5;cursor:default}
+
+    /* ── 桌面演示壳：>480px 时呈现 480 宽手机框 + 跳转栏；≤480px 真机全屏 ── */
+    .demo-side{display:none}
+    .phone{
+      width:100%;height:100dvh;display:flex;flex-direction:column;overflow:hidden;
+      background:var(--bg);
+    }
+    @media (min-width:481px){
+      body{padding:var(--sp-6)}
+      .phone{
+        width:480px;max-width:100%;height:min(860px,calc(100dvh - 48px));
+        border:1px solid var(--line-strong);border-radius:36px;
+        box-shadow:var(--elev-2),var(--glow-cyan);
+      }
+      .demo-side{
+        display:flex;flex-direction:column;gap:var(--sp-2);width:190px;
+        border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);
+        backdrop-filter:blur(10px);padding:var(--sp-4);align-self:center;
+      }
+      .demo-side h2{font-size:var(--fs-2xs);letter-spacing:var(--ls-caps);color:var(--mut);font-weight:600;margin-bottom:var(--sp-1)}
+      .demo-side p{font-size:var(--fs-2xs);color:var(--mut);line-height:1.7;margin-bottom:var(--sp-2)}
+      .demo-side button{
+        text-align:left;font-size:var(--fs-xs);color:var(--cyan2);
+        border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px;
+        transition:border-color var(--dur-fast) var(--ease-out);
+      }
+      .demo-side button:hover{border-color:var(--line-strong)}
+    }
+
+    .app{flex:1;min-height:0;display:flex;flex-direction:column}
+    .screens{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+      padding:var(--sp-4) var(--sp-4) calc(var(--sp-6) + env(safe-area-inset-bottom))}
+    .screen{display:none}
+    .screen.active{display:flex;flex-direction:column;gap:var(--sp-4);
+      animation:facai-rise var(--dur-slow) var(--ease-out)}
+
+    /* 顶栏 */
+    .topbar{display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-1) 0}
+    .topbar .mark{width:34px;height:34px;border-radius:9px;background:var(--grad-btn);
+      display:grid;place-items:center;box-shadow:var(--glow-cyan);flex:0 0 34px}
+    .topbar .mark svg{width:22px;height:22px}
+    .topbar b{font-size:var(--fs-lg);letter-spacing:var(--ls-wide)}
+    .topbar .online{display:inline-flex;align-items:center;gap:6px;margin-left:auto;
+      font-size:var(--fs-2xs);color:var(--cyan2);border:1px solid var(--line);border-radius:var(--r-full);
+      padding:5px 11px;background:rgba(34,211,238,.06)}
+    .topbar .online .facai-dot{width:7px;height:7px;flex-basis:7px;animation:facai-blink var(--dur-breathe) infinite}
+    .topbar .back{font-size:var(--fs-lg);color:var(--cyan2);padding:4px 8px 4px 0}
+
+    h1{font-size:var(--fs-hero);font-weight:800;letter-spacing:.04em;text-align:center;margin:var(--sp-4) 0;
+      background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .sec-title{font-size:var(--fs-xs);letter-spacing:var(--ls-caps);color:var(--mut);font-weight:600;
+      margin:var(--sp-2) var(--sp-1) 0}
+
+    /* 输入卡 */
+    .input-card{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);
+      backdrop-filter:blur(10px);padding:var(--sp-4);box-shadow:var(--elev-1),var(--inset-hi)}
+    .input-card textarea{width:100%;min-height:88px;resize:none;border:0;outline:none;
+      background:rgba(6,15,29,.78);border:1px solid var(--line-strong);border-radius:var(--r-sm);
+      color:var(--txt);font:inherit;font-size:var(--fs-md);padding:var(--sp-3);line-height:1.6}
+    .input-card textarea::placeholder{color:var(--mut)}
+    .input-row{display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-3)}
+    .input-row .tool{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+      font-size:18px;border:1px solid var(--line);background:var(--panel-2)}
+    .input-row .send{margin-left:auto;width:48px;height:48px;border-radius:50%;
+      background:var(--grad-btn);color:#04121f;font-size:18px;box-shadow:var(--glow-cyan);
+      display:grid;place-items:center}
+
+    /* 正在工作 / 最近完成 */
+    .mission-item{display:block;width:100%;text-align:left;border:1px solid var(--line);
+      border-radius:var(--r-md);background:var(--panel-2);padding:var(--sp-3) var(--sp-4);
+      transition:border-color var(--dur-fast) var(--ease-out)}
+    .mission-item + .mission-item{margin-top:var(--sp-2)}
+    .mission-item:hover{border-color:var(--line-strong)}
+    .mission-item .row1{display:flex;align-items:center;gap:var(--sp-2)}
+    .mission-item .name{font-size:var(--fs-md);font-weight:600}
+    .mission-item .pct{margin-left:auto;font-size:var(--fs-sm);color:var(--cyan2);font-variant-numeric:tabular-nums}
+    .mission-item .now{font-size:var(--fs-xs);color:var(--mut);margin-top:6px}
+    .mission-item .facai-progress{height:6px;margin-top:var(--sp-2)}
+    .done-item{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-md);
+      border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel-2);
+      padding:var(--sp-3) var(--sp-4)}
+    .done-item + .done-item{margin-top:var(--sp-2)}
+    .done-item .tick{color:var(--ok)}
+    .done-item .fail-mark{color:var(--gold)}
+
+    /* 通用卡 */
+    .card{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);
+      backdrop-filter:blur(10px);padding:var(--sp-4);box-shadow:var(--elev-1),var(--inset-hi)}
+    .card .k{font-size:var(--fs-2xs);letter-spacing:var(--ls-caps);color:var(--mut);font-weight:600}
+    .card .quote{font-size:var(--fs-md);line-height:1.7;margin:6px 0 var(--sp-3);
+      border-left:2px solid var(--line-strong);padding-left:var(--sp-3);color:var(--txt)}
+    .card h3{font-size:var(--fs-lg);display:flex;align-items:center;gap:var(--sp-2)}
+    /* 表单（登录/注册与渠道绑定共用一套输入口径；凭据框保持 type=password） */
+    .bind-form label{display:block;font-size:var(--fs-2xs);letter-spacing:var(--ls-caps);
+      color:var(--mut);font-weight:600;margin:var(--sp-3) 0 4px}
+    .bind-form input{width:100%;box-sizing:border-box;font:inherit;font-size:var(--fs-sm);
+      color:var(--txt);background:var(--panel-2);border:1px solid var(--line);
+      border-radius:var(--r-md);padding:var(--sp-3);outline:none}
+    .bind-form input:focus{border-color:var(--cyan2)}
+    .bind-form button{margin-top:var(--sp-3)}
+    .card h3 .facai-dot{width:10px;height:10px;flex-basis:10px}
+    /* 表单错误/状态行：失败必须如实透出（不打假成功） */
+    .form-error{color:#fca5a5;font-size:var(--fs-xs);line-height:1.7;margin-top:var(--sp-2);
+      min-height:0;word-break:break-all}
+
+    /* 渠道绑定状态行（真实绑定态：已绑定/未绑定 + 接收 ID + 绑定时间 + 解绑） */
+    .ch-state{display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap;
+      margin-top:var(--sp-3);padding-top:var(--sp-2)}
+    .ch-state .facai-pill.on{color:var(--ok);border-color:rgba(52,211,153,.4)}
+    .ch-meta{font-size:var(--fs-2xs);color:var(--mut);word-break:break-all}
+    .ch-unbind{margin-left:auto;font-size:var(--fs-2xs);color:var(--gold);
+      border:1px solid var(--line);border-radius:var(--r-full);padding:4px 11px}
+    .ch-unbind:hover{border-color:var(--line-strong)}
+
+    .btn-row{display:flex;gap:var(--sp-2);margin-top:var(--sp-4)}
+    .btn-row .facai-btn{flex:1}
+    .link-btn{display:block;width:100%;text-align:center;margin-top:var(--sp-3);
+      color:var(--mut);font-size:var(--fs-sm);padding:10px}
+    .link-btn:hover{color:var(--cyan2)}
+
+    /* Mission Preview 步骤（演示分镜保留） */
+    .steps{list-style:none;display:grid;gap:var(--sp-2);margin-top:var(--sp-3)}
+    .steps li{display:flex;align-items:center;gap:var(--sp-3);font-size:var(--fs-md);
+      border:1px solid var(--line);border-radius:var(--r-sm);background:var(--panel-2);padding:10px var(--sp-3)}
+    .steps .no{font-size:var(--fs-2xs);color:var(--mut);letter-spacing:.2em;font-variant-numeric:tabular-nums}
+    .auto-add{margin-top:var(--sp-3);border-top:1px dashed var(--line);padding-top:var(--sp-3);
+      display:grid;gap:6px;font-size:var(--fs-sm);color:var(--gold)}
+    .expect{margin-top:var(--sp-3);font-size:var(--fs-sm);color:var(--mut);line-height:1.7}
+
+    /* TaskMonitor（真实进度：数值全部来自后端 /missions/{id}） */
+    .ring-wrap{display:flex;flex-direction:column;align-items:center;padding:var(--sp-2) 0 var(--sp-3)}
+    .ring{position:relative;width:168px;height:168px}
+    .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .ring .track{fill:none;stroke:rgba(56,189,248,.14);stroke-width:10}
+    .ring .fill{fill:none;stroke:url(#ring-grad);stroke-width:10;stroke-linecap:round;
+      stroke-dasharray:100;stroke-dashoffset:100; /* 由 JS 按后端真实 progress 写入：offset = 100 - pct */
+      filter:drop-shadow(0 0 8px rgba(34,211,238,.55))}
+    .ring .num{position:absolute;inset:0;display:grid;place-items:center;
+      font-size:var(--fs-2xl);font-weight:800;color:var(--txt-strong);font-variant-numeric:tabular-nums}
+    .doing{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-md);margin-top:var(--sp-2)}
+    .doing b{color:var(--cyan2)}
+    .checklist{list-style:none;display:grid;gap:var(--sp-2);margin-top:var(--sp-3);font-size:var(--fs-md)}
+    .checklist li{display:flex;gap:var(--sp-2);align-items:center}
+    .checklist .done{color:var(--ok)}
+    .checklist .doing{color:var(--cyan)}
+    .checklist .fail{color:var(--gold)}
+    .checklist .todo{color:var(--mut)}
+    .ops-count{margin-top:var(--sp-3);font-size:var(--fs-sm);color:var(--mut)}
+    .ops-count b{color:var(--txt)}
+    .monitor-meta{font-size:var(--fs-2xs);color:var(--mut);padding:0 var(--sp-1);word-break:break-all}
+
+    /* Timeline（真实事件流） */
+    .tl{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);
+      padding:var(--sp-3) var(--sp-4)}
+    .tl .facai-timeline-item + .facai-timeline-item{border-top:1px dashed rgba(56,189,248,.1)}
+    .tl .what{display:flex;gap:var(--sp-2);align-items:baseline;word-break:break-all}
+    .tl .ok{color:var(--ok)}
+    .tl .warn{color:var(--gold)}
+    .tl .run{color:var(--cyan)}
+
+    /* ApprovalSheet / Replan / Result（演示分镜保留，接口未接线，按演示标注） */
+    .sheet-slot{margin-top:auto}
+    .sheet .kv{display:grid;grid-template-columns:auto 1fr;gap:6px var(--sp-3);
+      margin:var(--sp-3) 0;font-size:var(--fs-md)}
+    .sheet .kv dt{color:var(--mut)}
+    .sheet .kv dd{color:var(--txt)}
+    .tech{margin-top:var(--sp-3);border-top:1px dashed var(--line);padding-top:var(--sp-3)}
+    .tech summary{color:var(--mut);font-size:var(--fs-sm);cursor:pointer;list-style:none}
+    .tech summary:hover{color:var(--cyan2)}
+    .tech pre{margin-top:var(--sp-2);background:rgba(4,10,24,.9);border:1px solid var(--line);
+      border-radius:var(--r-sm);padding:var(--sp-3);font-size:var(--fs-2xs);line-height:1.8;
+      color:var(--code);overflow:auto;white-space:pre-wrap;word-break:break-all}
+    .replan-card{border-color:rgba(245,196,81,.4);animation:facai-gold-pulse 1.4s var(--ease-out) infinite}
+    .replan-card h3{color:var(--gold)}
+    .result-hero{text-align:center;padding:var(--sp-4) 0 var(--sp-2)}
+    .result-hero .big{width:64px;height:64px;margin:0 auto var(--sp-2);border-radius:50%;
+      display:grid;place-items:center;font-size:30px;color:#04121f;background:var(--ok);
+      box-shadow:0 0 24px rgba(52,211,153,.5)}
+    .result-hero h2{font-size:var(--fs-2xl);color:var(--txt-strong)}
+    .result-hero p{color:var(--mut);font-size:var(--fs-sm);margin-top:6px}
+    .verify{list-style:none;display:grid;gap:var(--sp-2);font-size:var(--fs-md)}
+    .verify li{color:var(--ok);display:flex;gap:var(--sp-2)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2);margin-top:var(--sp-3)}
+    .stats div{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--panel-2);
+      text-align:center;padding:var(--sp-3) 4px}
+    .stats b{display:block;font-size:var(--fs-xl);color:var(--cyan2);font-variant-numeric:tabular-nums}
+    .stats small{font-size:var(--fs-2xs);color:var(--mut)}
+    .needyou{margin-top:var(--sp-3);font-size:var(--fs-sm);color:var(--mut)}
+    .needyou b{color:var(--ok)}
+
+    /* 文件占位页 */
+    .stub{color:var(--mut);font-size:var(--fs-sm);line-height:1.8;text-align:center;padding:var(--sp-6) var(--sp-4)}
+
+    /* 底部导航（基线 §24：首页 任务 发财 文件 我的，中央发财=自然语言入口） */
+    .bottomnav{
+      display:grid;grid-template-columns:repeat(5,1fr);align-items:end;
+      border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(6,14,27,.94),rgba(5,11,22,.98));
+      backdrop-filter:blur(16px);padding:var(--sp-2) var(--sp-2) calc(var(--sp-2) + env(safe-area-inset-bottom));
+    }
+    .bottomnav .nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;
+      font-size:var(--fs-2xs);color:var(--mut);padding:6px 0;min-height:44px;justify-content:center}
+    .bottomnav .nav-btn .ico{font-size:18px;line-height:1}
+    .bottomnav .nav-btn[aria-current="page"]{color:var(--cyan2)}
+    .bottomnav .nav-facai{position:relative}
+    .bottomnav .nav-facai .fab{
+      width:54px;height:54px;border-radius:50%;transform:translateY(-14px);
+      background:var(--grad-btn);box-shadow:var(--glow-cyan);display:grid;place-items:center;
+      font-size:20px;font-weight:800;color:#04121f;border:2px solid rgba(224,242,254,.35)}
+    .bottomnav .nav-facai .lbl{display:block;transform:translateY(-10px)}
+
+    /* Toast（只用于轻提示；成败与否一律如实文案） */
+    .toast{position:absolute;left:50%;bottom:96px;translate:-50% 0;max-width:86%;
+      background:rgba(8,18,38,.96);border:1px solid var(--line-strong);border-radius:var(--r-full);
+      color:var(--txt);font-size:var(--fs-xs);padding:10px 18px;opacity:0;pointer-events:none;
+      transition:opacity var(--dur-slow) var(--ease-out);z-index:9;text-align:center}
+    .toast.show{opacity:1}
+    .phone{position:relative}
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation:none !important;transition:none !important}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 桌面演示壳跳转栏（仅 >480px 显示；真机隐藏）。
+       ①④⑤ 为真实功能视图；②③⑥⑦⑧ 为保留下来的交互演示分镜（均已标注）。 -->
+  <aside class="demo-side" aria-label="页面跳转">
+    <h2>FACAI MOBILE</h2>
+    <p>已接真实接口：登录 / 下单 / 进度 / 渠道绑定。②③⑥⑦⑧ 为演示分镜（标注「演示分镜」）。Desktop=总控台，Mobile=遥控器（基线 §10/§27）。</p>
+    <button onclick="facaiGo('screen-home')">① 首页（真实）</button>
+    <button onclick="facaiGo('screen-intent')">② 听懂了（演示分镜）</button>
+    <button onclick="facaiGo('screen-preview')">③ 计划预览（演示分镜）</button>
+    <button onclick="facaiGo('screen-monitor')">④ 任务监控（真实）</button>
+    <button onclick="facaiGo('screen-timeline')">⑤ 任务过程（真实）</button>
+    <button onclick="facaiGo('screen-approval')">⑥ 授权（演示分镜）</button>
+    <button onclick="facaiGo('screen-replan')">⑦ 重新规划（演示分镜）</button>
+    <button onclick="facaiGo('screen-result')">⑧ 完成（演示分镜）</button>
+  </aside>
+
+  <div class="phone">
+    <div class="app">
+      <main class="screens" id="screens">
+
+        <!-- ══ 登录 / 注册（真实：POST /api/v1/auth/login | /register）══ -->
+        <section class="screen" id="screen-login" aria-label="登录">
+          <div class="topbar">
+            <b>登录</b>
+            <span class="online"><span class="facai-dot"></span>未登录</span>
+          </div>
+          <div class="card">
+            <h3 id="login-title">登录 FACAI</h3>
+            <form class="bind-form" id="login-form">
+              <label for="login-username">用户名</label>
+              <input id="login-username" autocomplete="username" placeholder="3-32 位字母/数字/下划线/连字符">
+              <label for="login-password">密码</label>
+              <input id="login-password" type="password" autocomplete="current-password">
+              <button type="submit" class="facai-btn" id="login-submit">登录</button>
+            </form>
+            <p class="form-error" id="login-error" role="alert"></p>
+            <button type="button" class="link-btn" id="login-toggle">没有账号？注册新账号</button>
+            <p class="expect">注册规则：用户名 3-32 位字母/数字/下划线/连字符；密码至少 8 位，不能是纯数字、连续/重复字符或常见弱口令。注册即登录。</p>
+            <p class="stub">复杂控制在 Desktop 总控台：充值、完整配置都在电脑端完成</p>
+          </div>
+        </section>
+
+        <!-- ══ 首页（真实：下单 + 任务列表来自 GET /api/v1/missions）══ -->
+        <section class="screen active" id="screen-home" aria-label="首页">
+          <div class="topbar">
+            <span class="mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><g fill="none" stroke="#eaf6ff" stroke-width="2.2" stroke-linecap="round"><circle cx="16" cy="7" r="2.6"/><path d="M16 9.6V25M9.5 14h13M5.5 19.5c0 5 4.7 8.5 10.5 8.5s10.5-3.5 10.5-8.5"/></g></svg>
+            </span>
+            <b>发财</b>
+            <button type="button" class="online" id="home-session-chip" onclick="facaiSessionChip()"><span class="facai-dot"></span>未登录</button>
+          </div>
+
+          <h1>今天想让我做什么？</h1>
+
+          <div class="input-card">
+            <textarea id="wish" placeholder="直接告诉发财…"
+              aria-label="用大白话告诉发财你想做什么"></textarea>
+            <div class="input-row">
+              <button class="tool" type="button" title="语音输入（占位，待接）" onclick="facaiToast('占位：语音输入待接')">🎙</button>
+              <button class="tool" type="button" title="添加附件（占位，待接）" onclick="facaiToast('占位：附件上传待接')">📎</button>
+              <button class="send" type="button" title="发送并创建真实任务" onclick="facaiSend()">➤</button>
+            </div>
+          </div>
+          <!-- 下单失败如实显示在这里（402 余额、422 校验、网络失败等） -->
+          <p class="form-error" id="home-status" role="alert"></p>
+
+          <p class="sec-title">正在工作</p>
+          <div id="home-active">
+            <p class="stub">正在检查登录状态…</p>
+          </div>
+
+          <p class="sec-title">最近完成</p>
+          <div id="home-done"></div>
+        </section>
+
+        <!-- ══ 任务 Tab（真实列表：GET /api/v1/missions）══ -->
+        <section class="screen" id="screen-tasks" aria-label="任务列表">
+          <div class="topbar"><b>任务</b></div>
+          <div id="tasks-list">
+            <p class="stub">正在检查登录状态…</p>
+          </div>
+        </section>
+
+        <!-- ══ 文件 Tab（产物中心入口占位，口径如实）══ -->
+        <section class="screen" id="screen-files" aria-label="文件">
+          <div class="topbar"><b>文件</b></div>
+          <p class="stub">产物中心待接 /api/v1/artifacts<br>（当前未展示任何演示文件；任务产物先在 Desktop 总控台查看）</p>
+        </section>
+
+        <!-- ══ 我的（真实会话 + 真实渠道绑定）══ -->
+        <section class="screen" id="screen-me" aria-label="我的">
+          <div class="topbar"><b>我的</b></div>
+          <div class="card" id="me-card">
+            <h3><span class="facai-dot" style="--state-color:var(--st-ready)"></span><span id="me-username">未登录</span></h3>
+            <p class="expect" id="me-note">未登录：登录后这里显示你的账号与会话状态。</p>
+            <div class="btn-row">
+              <button class="facai-btn" id="me-login-btn" onclick="facaiGo('screen-login')">登录 / 注册</button>
+              <button class="facai-btn facai-btn-danger" id="me-logout-btn" hidden>退出登录</button>
+            </div>
+            <p class="expect">FACAI REMOTE CONTROL —— 手机是随身遥控器：<br>下任务 · 看进度 · 补充要求 · 授权 · 处理异常 · 查看结果 · 打开成品。<br>复杂控制与配置在电脑总控台完成。</p>
+          </div>
+          <!-- ══ 我的通知渠道（与 Desktop 总控台「我的通知渠道」面板同口径；真实接线）══
+               以下端点全部已接线（同源 cookie 会话 + X-CSRF-Token 写保护）：
+               PUT    /api/v1/my/channels/telegram   {bot_token, chat_id}
+               PUT    /api/v1/my/channels/line       {access_token, channel_secret, user_id}
+               GET    /api/v1/my/channels            渲染 bound/chat_id/created_at
+               DELETE /api/v1/my/channels/telegram   解绑（通知回落站点渠道）
+               DELETE /api/v1/my/channels/line       解绑
+               （discord / slack 同构，见 CHANNEL_PATHS）凭据框保持 type=password。 -->
+          <div class="card">
+            <h3>我的通知渠道 <span class="k">真实绑定</span></h3>
+            <p class="expect" id="channels-note" style="margin-top:var(--sp-2)"></p>
+
+            <div class="ch-state">
+              <span class="facai-pill" data-channel-bound="telegram">未绑定</span>
+              <span class="ch-meta" data-channel-meta="telegram"></span>
+              <button type="button" class="ch-unbind" data-test-channel="telegram" hidden style="margin-left:0">测试推送</button>
+              <button type="button" class="ch-unbind" data-unbind-channel="telegram" hidden>解绑</button>
+            </div>
+            <form class="bind-form" id="mobile-channel-binding-form" data-channel-form="telegram">
+              <label for="m-tg-bot-token">Telegram Bot Token</label>
+              <input id="m-tg-bot-token" type="password" autocomplete="off" placeholder="123456:ABC-DEF…">
+              <label for="m-tg-chat-id">Telegram Chat ID</label>
+              <input id="m-tg-chat-id" autocomplete="off" placeholder="556677 / @mychannel">
+              <button type="submit" class="facai-btn">绑定 Telegram</button>
+              <p class="form-error" data-channel-error="telegram" role="alert"></p>
+            </form>
+
+            <div class="ch-state">
+              <span class="facai-pill" data-channel-bound="line">未绑定</span>
+              <span class="ch-meta" data-channel-meta="line"></span>
+              <button type="button" class="ch-unbind" data-test-channel="line" hidden style="margin-left:0">测试推送</button>
+              <button type="button" class="ch-unbind" data-unbind-channel="line" hidden>解绑</button>
+            </div>
+            <form class="bind-form" data-channel-form="line">
+              <label for="m-line-access-token">LINE Channel Access Token</label>
+              <input id="m-line-access-token" type="password" autocomplete="off">
+              <label for="m-line-channel-secret">LINE Channel Secret</label>
+              <input id="m-line-channel-secret" type="password" autocomplete="off">
+              <label for="m-line-user-id">LINE User ID（U 开头）</label>
+              <input id="m-line-user-id" autocomplete="off" placeholder="U4af9989…">
+              <button type="submit" class="facai-btn facai-btn-ghost">绑定 LINE</button>
+              <p class="form-error" data-channel-error="line" role="alert"></p>
+            </form>
+
+            <div class="ch-state">
+              <span class="facai-pill" data-channel-bound="discord">未绑定</span>
+              <span class="ch-meta" data-channel-meta="discord"></span>
+              <button type="button" class="ch-unbind" data-test-channel="discord" hidden style="margin-left:0">测试推送</button>
+              <button type="button" class="ch-unbind" data-unbind-channel="discord" hidden>解绑</button>
+            </div>
+            <form class="bind-form" data-channel-form="discord">
+              <label for="m-discord-bot-token">Discord Bot Token</label>
+              <input id="m-discord-bot-token" type="password" autocomplete="off">
+              <label for="m-discord-channel-id">Discord 频道 ID</label>
+              <input id="m-discord-channel-id" autocomplete="off" placeholder="987654321098765432">
+              <button type="submit" class="facai-btn facai-btn-ghost">绑定 Discord</button>
+              <p class="form-error" data-channel-error="discord" role="alert"></p>
+            </form>
+
+            <div class="ch-state">
+              <span class="facai-pill" data-channel-bound="slack">未绑定</span>
+              <span class="ch-meta" data-channel-meta="slack"></span>
+              <button type="button" class="ch-unbind" data-test-channel="slack" hidden style="margin-left:0">测试推送</button>
+              <button type="button" class="ch-unbind" data-unbind-channel="slack" hidden>解绑</button>
+            </div>
+            <form class="bind-form" data-channel-form="slack">
+              <label for="m-slack-bot-token">Slack Bot Token（xoxb- 开头）</label>
+              <input id="m-slack-bot-token" type="password" autocomplete="off">
+              <label for="m-slack-channel-id">Slack 频道 ID（C 开头）</label>
+              <input id="m-slack-channel-id" autocomplete="off" placeholder="C0123456789">
+              <button type="submit" class="facai-btn facai-btn-ghost">绑定 Slack</button>
+              <p class="form-error" data-channel-error="slack" role="alert"></p>
+            </form>
+
+            <p class="stub" style="padding:var(--sp-3) 0 0">凭据加密存储、永不下发；完整绑定/解绑在 Desktop 总控台「我的通知渠道」面板</p>
+          </div>
+          <p class="stub">FACAI Mobile · 已接真实接口：登录 / 下单 / 进度 / 渠道绑定<br>UI 反映真实执行，不制造执行感（基线 §33）</p>
+        </section>
+
+        <!-- ══ IntentCard（演示分镜；真实下单已直达监控）══ -->
+        <section class="screen" id="screen-intent" aria-label="发财听懂了（演示分镜）">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-home')" aria-label="返回">←</button>
+            <span class="facai-pill facai-state-INTENT_READY">✓ 发财听懂了（演示分镜）</span>
+          </div>
+          <div class="card">
+            <p class="k">你的原话</p>
+            <p class="quote">做一个购物网站。</p>
+            <p class="k">你的目标</p>
+            <p class="quote">创建一个自己的购物网站。</p>
+            <p class="facai-pill facai-state-INTENT_READY" style="margin-top:4px">✓ 目标清楚</p>
+          </div>
+          <div class="btn-row">
+            <button class="facai-btn" onclick="facaiGo('screen-preview')">继续</button>
+            <button class="facai-btn facai-btn-ghost" onclick="facaiAmend()">修改理解</button>
+          </div>
+          <p class="stub">演示分镜：真实下单不经过本页 —— 回首页输入一句话即真下单直达监控。<br>完整 Intent 投影见 Desktop 专业/开发者视图（facai/intent.py）</p>
+        </section>
+
+        <!-- ══ MissionPreview（演示分镜）══ -->
+        <section class="screen" id="screen-preview" aria-label="发财准备这样做（演示分镜）">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-intent')" aria-label="返回">←</button>
+            <span class="facai-pill facai-state-MISSION_READY">已经准备好了（演示分镜）</span>
+          </div>
+          <div class="card">
+            <h3>发财准备这样做</h3>
+            <ol class="steps">
+              <li><span class="no">01</span>确定网站结构</li>
+              <li><span class="no">02</span>创建前端</li>
+              <li><span class="no">03</span>创建后端</li>
+              <li><span class="no">04</span>商品系统</li>
+              <li><span class="no">05</span>用户系统</li>
+              <li><span class="no">06</span>管理页面</li>
+              <li><span class="no">07</span>测试</li>
+              <li><span class="no">08</span>部署</li>
+              <li><span class="no">09</span>域名</li>
+              <li><span class="no">10</span>最终检查</li>
+            </ol>
+            <div class="auto-add">
+              <span>发财自动补充</span>
+              <span>+ 数据存储</span>
+              <span>+ 错误处理</span>
+              <span>+ 手机适配</span>
+            </div>
+            <p class="expect"><b style="color:var(--txt)">预计结果</b><br>一个可以实际打开使用的购物网站</p>
+          </div>
+          <div class="btn-row">
+            <button class="facai-btn" onclick="facaiStart()">开始工作</button>
+            <button class="facai-btn facai-btn-ghost" onclick="facaiToast('演示分镜：计划编辑请在 Desktop 总控台进行')">修改计划</button>
+          </div>
+          <p class="stub">演示分镜：真实任务的阶段计划由后端规划，直接看「任务监控」</p>
+        </section>
+
+        <!-- ══ TaskMonitor（真实：GET /api/v1/missions/{id}，4 秒轮询 + SSE 加速）══ -->
+        <section class="screen" id="screen-monitor" aria-label="任务执行监控">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-home')" aria-label="返回首页">←</button>
+            <b id="monitor-title" style="font-size:var(--fs-md)">任务监控</b>
+            <span class="facai-pill" id="monitor-pill" style="margin-left:auto">
+              <span class="facai-dot" id="monitor-dot"></span><span id="monitor-status">—</span></span>
+          </div>
+
+          <p class="monitor-meta" id="monitor-id">在任务列表或下单后进入监控，这里显示任务短编号与真实进度。</p>
+
+          <div class="card" id="monitor-body" hidden>
+            <div class="ring-wrap">
+              <div class="ring" role="progressbar" id="monitor-ring" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="任务总进度 0%">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#f5c451"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="track" cx="60" cy="60" r="52" pathLength="100"/>
+                  <circle class="fill" id="ring-fill" cx="60" cy="60" r="52" pathLength="100"/>
+                </svg>
+                <span class="num" id="ring-num">0%</span>
+              </div>
+              <p class="doing"><span class="facai-dot"></span><span id="monitor-doing-text">等待任务开始</span></p>
+              <span class="facai-progress" style="width:100%;margin-top:var(--sp-3)" role="progressbar" id="monitor-bar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="任务总进度 0%">
+                <span class="facai-progress-fill" id="monitor-bar-fill" style="width:0%"></span></span>
+            </div>
+
+            <ul class="checklist" id="monitor-steps"></ul>
+            <p class="ops-count" id="monitor-count"></p>
+          </div>
+
+          <p class="form-error" id="monitor-error" role="alert"></p>
+          <p class="expect" id="monitor-note" hidden></p>
+
+          <div class="btn-row" id="monitor-actions" hidden>
+            <button class="facai-btn" id="monitor-timeline-btn" onclick="facaiGo('screen-timeline')">查看过程</button>
+            <button class="facai-btn facai-btn-ghost" id="monitor-refresh" onclick="facaiRefreshMonitor()">刷新进度</button>
+          </div>
+          <p class="stub">进度来自后端真实完成阶段数：每 4 秒自动轮询，服务端事件流可用时同步加速；不造假进度。</p>
+        </section>
+
+        <!-- ══ Timeline（真实事件流：GET /api/v1/missions/{id}/events）══ -->
+        <section class="screen" id="screen-timeline" aria-label="任务过程">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-monitor')" aria-label="返回监控">←</button>
+            <b style="font-size:var(--fs-md)">任务过程</b>
+          </div>
+          <div class="tl" id="timeline-list">
+            <p class="stub">在任务监控打开任务后，这里按真实事件流逐条渲染。</p>
+          </div>
+          <p class="stub">事件来自 GET /api/v1/missions/{id}/events，时间与内容如实展示。</p>
+        </section>
+
+        <!-- ══ ApprovalSheet（演示分镜；真实授权由任务事件驱动，接口待接）══ -->
+        <section class="screen" id="screen-approval" aria-label="需要你的允许（演示分镜）">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-monitor')" aria-label="返回">←</button>
+            <span class="facai-pill facai-state-WAITING_PERMISSION">
+              <span class="facai-dot"></span>需要你的允许（演示分镜）</span>
+          </div>
+          <div class="sheet-slot"></div>
+          <div class="facai-sheet sheet">
+            <h3 style="font-size:var(--fs-xl)">需要你的允许</h3>
+            <p class="expect" style="margin-top:var(--sp-2)">为了继续部署网站，发财需要操作服务器。</p>
+            <dl class="kv">
+              <dt>用于</dt><dd>当前部署任务</dd>
+              <dt>范围</dt><dd>本次任务</dd>
+            </dl>
+            <div class="btn-row" style="margin-top:var(--sp-3)">
+              <button class="facai-btn" onclick="facaiDecide(true)">允许</button>
+              <button class="facai-btn facai-btn-danger" onclick="facaiDecide(false)">不允许</button>
+            </div>
+            <details class="tech">
+              <summary>查看技术详情</summary>
+              <!-- 演示分镜数据：真实实现展示 Action IR / CapabilityGrant 摘要（facai/authority.py），
+                   授权词表 ALLOW / DENY 见 facai/authority.py:59-60；授权接口待接，本页不做假授权。 -->
+              <pre>action  = server.operate        (演示数据)
+target  = shop-prod-01 : 22
+grant   = CapabilityGrant(scope="deploy", ttl="本次任务")
+state   = WAITING_PERMISSION</pre>
+            </details>
+          </div>
+        </section>
+
+        <!-- ══ ReplanCard（演示分镜）══ -->
+        <section class="screen" id="screen-replan" aria-label="发财换了一个办法（演示分镜）">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-monitor')" aria-label="返回">←</button>
+            <span class="facai-pill facai-state-REPLANNING">
+              <span class="facai-dot" style="--state-color:var(--st-replan)"></span>REPLANNING（演示分镜）</span>
+          </div>
+          <div class="card replan-card">
+            <h3>发财换了一个办法</h3>
+            <p class="expect" style="margin-top:var(--sp-2)">原来的部署方式遇到问题。</p>
+            <p class="expect">发财发现：<br><b style="color:var(--txt)">服务器端口已经被占用。</b></p>
+            <div class="auto-add">
+              <span>已经调整</span>
+              <span>✓ 更换可用端口</span>
+              <span>✓ 更新配置</span>
+              <span>✓ 重新启动</span>
+            </div>
+            <p class="expect">任务正在继续。</p>
+          </div>
+          <div class="btn-row">
+            <button class="facai-btn" onclick="facaiGo('screen-monitor')">知道了</button>
+          </div>
+          <p class="stub">演示分镜：真实的重新规划会以任务事件形式出现在「任务过程」里</p>
+        </section>
+
+        <!-- ══ ResultScreen（演示分镜）══ -->
+        <section class="screen" id="screen-result" aria-label="完成（演示分镜）">
+          <div class="topbar">
+            <button class="back" onclick="facaiGo('screen-home')" aria-label="返回首页">←</button>
+            <span class="facai-pill facai-state-COMPLETED">✓ 已完成（演示分镜）</span>
+          </div>
+          <div class="result-hero">
+            <div class="big" aria-hidden="true">✓</div>
+            <h2>完成</h2>
+            <p>网站已经上线</p>
+          </div>
+          <div class="card">
+            <ul class="verify">
+              <li><span>✓</span>服务正常</li>
+              <li><span>✓</span>域名正常</li>
+              <li><span>✓</span>HTTPS 正常</li>
+              <li><span>✓</span>手机访问正常</li>
+            </ul>
+            <p class="k" style="margin-top:var(--sp-4)">发财完成</p>
+            <div class="stats">
+              <div><b>18</b><small>个步骤</small></div>
+              <div><b>52</b><small>个操作</small></div>
+              <div><b>2</b><small>个问题自动解决</small></div>
+            </div>
+            <p class="needyou">你还需要 <b>0 项</b></p>
+          </div>
+          <div class="btn-row">
+            <button class="facai-btn" onclick="facaiToast('演示分镜：真实成品链接在任务完成后于监控页与 Desktop 提供')">打开网站</button>
+          </div>
+          <button class="link-btn" onclick="facaiGo('screen-timeline')">查看完整报告</button>
+          <p class="stub">演示分镜：真实完成状态以「任务监控」里的后端状态为准</p>
+        </section>
+
+      </main>
+
+      <!-- 底部导航（基线 §24：首页/任务/发财/文件/我的；中央发财=主要自然语言入口） -->
+      <nav class="bottomnav" aria-label="底部导航">
+        <button class="nav-btn" data-nav="screen-home" aria-current="page" onclick="facaiNav(this)">
+          <span class="ico">⌂</span>首页</button>
+        <button class="nav-btn" data-nav="screen-tasks" onclick="facaiNav(this)">
+          <span class="ico">≣</span>任务</button>
+        <button class="nav-btn nav-facai" onclick="facaiFab()" aria-label="发财：说一句话下单">
+          <span class="fab" aria-hidden="true">发</span><span class="lbl">发财</span></button>
+        <button class="nav-btn" data-nav="screen-files" onclick="facaiNav(this)">
+          <span class="ico">▤</span>文件</button>
+        <button class="nav-btn" data-nav="screen-me" onclick="facaiNav(this)">
+          <span class="ico">◉</span>我的</button>
+      </nav>
+
+      <div class="toast" id="facai-toast" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+<script>
+/* FACAI Mobile · 真实接口版（自静态原型升级）。
+   真实能力：登录/注册、一句话下单（POST /api/v1/missions/auto）、
+   任务监控（GET /api/v1/missions/{id} 轮询 + /stream SSE 加速）、
+   渠道绑定（GET/PUT/DELETE /api/v1/my/channels/*）。
+   口径：UI 反映真实执行，不制造执行感（基线 §33）——
+   未登录不展示演示数据；请求失败如实透出；进度全部来自后端。
+   ②③⑥⑦⑧ 保留为演示分镜，均已标注「演示分镜」。 */
+(function () {
+  'use strict';
+
+  /* ── 接口层：同源 cookie 会话 + X-CSRF-Token 写保护 ─────────────────
+     请求统一走 apiRequest → fetch；credentials:'same-origin' 让会话 cookie
+     自动携带。 */
+
+
+  var state = {
+    user: null,          // 已登录用户名（会话探测 / 登录 / 注册成功后写入）
+    csrf: null,          // 登录响应里的 csrf_token，仅存内存，写请求带 X-CSRF-Token
+    mustChange: false,   // 管理员下发的临时密码标记，如实展示
+    registerMode: false,
+    missionId: null,     // 监控中的任务
+    pollTimer: null,     // 4 秒轮询
+    eventSource: null    // SSE 加速通道
+  };
+
+  var STATUS_LABELS = { WAITING: '待执行', RUNNING: '执行中',
+                        COMPLETED: '已完成', FAILED: '失败' };
+  var PILL_CLASSES = { WAITING: 'facai-pill facai-state-MISSION_READY',
+                       RUNNING: 'facai-pill facai-state-EXECUTING',
+                       COMPLETED: 'facai-pill facai-state-COMPLETED',
+                       FAILED: 'facai-pill facai-state-REPLANNING' };
+  var CHANNEL_LABELS = { telegram: 'Telegram', line: 'LINE',
+                         discord: 'Discord', slack: 'Slack' };
+  var CHANNEL_PATHS = {
+    telegram: '/api/v1/my/channels/telegram',
+    line: '/api/v1/my/channels/line',
+    discord: '/api/v1/my/channels/discord',
+    slack: '/api/v1/my/channels/slack'
+  };
+
+  /* ── 小工具 ── */
+  function qs(selector) { return document.querySelector(selector); }
+  function val(id) {
+    var node = document.getElementById(id);
+    return node ? node.value.trim() : '';
+  }
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) { node.className = cls; }
+    if (text !== undefined && text !== null) { node.textContent = String(text); }
+    return node;
+  }
+  function shortId(id) { return (id || '').slice(0, 8); }
+  function stepLabel(mission) {
+    var steps = mission && mission.steps || [];
+    for (var i = 0; i < steps.length; i++) {
+      if (steps[i].status !== 'COMPLETED') { return steps[i].label; }
+    }
+    return null;
+  }
+  function isTerminal(mission) {
+    return mission && (mission.status === 'COMPLETED' || mission.status === 'FAILED');
+  }
+
+  /* ── 请求层：所有响应归一为 {ok,status,data,detail}，失败如实上抛 ── */
+  function apiRequest(method, path, body) {
+    var headers = { 'Content-Type': 'application/json' };
+    if (state.csrf && method !== 'GET') { headers['X-CSRF-Token'] = state.csrf; }
+    return fetch(path, {
+      method: method,
+      credentials: 'same-origin',
+      headers: headers,
+      body: body === undefined ? undefined : JSON.stringify(body)
+    }).then(function (response) {
+      return response.text().then(function (text) {
+        var data = null;
+        if (text) { try { data = JSON.parse(text); } catch (_) { data = null; } }
+        return { ok: response.ok, status: response.status, data: data,
+                 detail: (data && data.detail) ? String(data.detail)
+                                               : (response.statusText || '请求失败') };
+      });
+    });
+  }
+
+  /* 会话失效：清状态、回登录页、如实提示（不假装成功） */
+  function handle401(res) {
+    if (res.status !== 401) { return false; }
+    var expired = !!state.user;
+    state.user = null; state.csrf = null; state.mustChange = false;
+    stopMonitor(); renderSessionUI();
+    facaiGo('screen-login');
+    loginError(expired ? '登录已过期，请重新登录' : '请先登录');
+    return true;
+  }
+
+  /* ── 会话 UI（未登录能看什么、登录后能看什么，如实区分）── */
+  function renderSessionUI() {
+    var chip = document.getElementById('home-session-chip');
+    chip.textContent = '';
+    chip.appendChild(el('span', 'facai-dot'));
+    chip.appendChild(document.createTextNode(state.user || '未登录'));
+    document.getElementById('me-username').textContent = state.user || '未登录';
+    document.getElementById('me-login-btn').hidden = !!state.user;
+    document.getElementById('me-logout-btn').hidden = !state.user;
+    var note = document.getElementById('me-note');
+    if (state.user) {
+      note.textContent = '已登录：' + state.user +
+        (state.mustChange ? '（当前为管理员下发的临时密码，请尽快在 Desktop 总控台修改）'
+                          : '（会话保存在本机，退出登录即失效）');
+    } else {
+      note.textContent = '未登录：登录后这里显示你的账号与会话状态。';
+    }
+    var channelsNote = document.getElementById('channels-note');
+    channelsNote.textContent = state.user
+      ? '绑定你自己的 Bot：进度通知会优先推到你的渠道；绑定状态实时读取自后端。'
+      : '未登录：绑定/解绑需要先登录，登录后这里读取你的真实绑定状态。';
+  }
+
+  function renderLoggedOutHome() {
+    var active = document.getElementById('home-active');
+    active.textContent = '';
+    active.appendChild(el('p', 'stub', '未登录：不展示演示数据。登录后显示你的真实任务。'));
+    var loginBtn = el('button', 'facai-btn', '登录 / 注册');
+    loginBtn.type = 'button';
+    loginBtn.addEventListener('click', function () { facaiGo('screen-login'); });
+    active.appendChild(loginBtn);
+    document.getElementById('home-done').textContent = '';
+    var tasks = document.getElementById('tasks-list');
+    tasks.textContent = '';
+    tasks.appendChild(el('p', 'stub', '未登录：任务列表在你登录后展示真实数据。'));
+  }
+
+  /* ── 登录 / 注册 / 退出 ── */
+  function loginError(msg) {
+    document.getElementById('login-error').textContent = msg || '';
+  }
+
+  function setRegisterMode(on) {
+    state.registerMode = on;
+    document.getElementById('login-title').textContent = on ? '注册新账号' : '登录 FACAI';
+    document.getElementById('login-submit').textContent = on ? '注册并登录' : '登录';
+    document.getElementById('login-toggle').textContent = on ? '已有账号？去登录' : '没有账号？注册新账号';
+    document.getElementById('login-password').setAttribute('autocomplete', on ? 'new-password' : 'current-password');
+    loginError('');
+  }
+
+  function handleAuthSubmit(event) {
+    event.preventDefault();
+    var username = val('login-username');
+    var password = val('login-password');
+    if (!username || !password) { loginError('请输入用户名和密码'); return; }
+    var path = state.registerMode ? '/api/v1/auth/register' : '/api/v1/auth/login';
+    var submit = document.getElementById('login-submit');
+    submit.disabled = true;
+    loginError(state.registerMode ? '注册中…' : '登录中…');
+    apiRequest('POST', path, { username: username, password: password }).then(function (res) {
+      if (res.ok && res.data && (res.data.csrf_token || res.data.authenticated === true)) {
+        state.user = res.data.username || username;
+        state.csrf = res.data.csrf_token || null;
+        state.mustChange = !!res.data.must_change_password;
+        document.getElementById('login-password').value = '';
+        loginError('');
+        enterApp();
+        facaiToast(state.registerMode ? '注册成功，已登录' : '登录成功');
+      } else if (res.ok && res.data && res.data.registered) {
+        setRegisterMode(false);
+        loginError('注册成功，请登录');
+      } else if (res.status === 401) {
+        loginError('用户名或密码不正确');
+      } else if (res.status === 429) {
+        loginError('失败次数过多，请几分钟后再试');
+      } else {
+        loginError((res.detail || '请求失败') + '（' + res.status + '）');
+      }
+    }).catch(function () {
+      loginError('网络请求失败，请检查网络后重试');
+    }).then(function () { submit.disabled = false; });
+  }
+
+  function facaiLogout() {
+    apiRequest('POST', '/api/v1/auth/logout').then(function () {
+      state.user = null; state.csrf = null; state.mustChange = false;
+      stopMonitor(); renderSessionUI(); renderLoggedOutHome();
+      facaiGo('screen-login');
+      facaiToast('已退出登录');
+    }).catch(function () { facaiToast('退出请求失败，请重试'); });
+  }
+
+  function enterApp() {
+    renderSessionUI();
+    facaiGo('screen-home');
+  }
+
+  /* ── 任务列表（GET /api/v1/missions，登录后真实数据）── */
+  function homeStatus(msg) {
+    document.getElementById('home-status').textContent = msg || '';
+  }
+
+  function loadMissions() {
+    if (!state.user) { renderLoggedOutHome(); return Promise.resolve(); }
+    return apiRequest('GET', '/api/v1/missions').then(function (res) {
+      if (handle401(res)) { return; }
+      if (!res.ok || !res.data) {
+        homeStatus('任务列表加载失败：' + (res.detail || res.status));
+        return;
+      }
+      homeStatus('');
+      renderMissionList(res.data);
+    }).catch(function () {
+      homeStatus('暂时连不上服务器，重新进入本页即可重试');
+    });
+  }
+
+  function missionItem(mission) {
+    var pct = typeof mission.progress === 'number' ? mission.progress : 0;
+    var btn = el('button', 'mission-item');
+    btn.type = 'button';
+    var row1 = el('span', 'row1');
+    row1.appendChild(el('span', 'facai-dot'));
+    row1.appendChild(el('span', 'name', mission.title || '未命名任务'));
+    row1.appendChild(el('span', 'pct', pct + '%'));
+    btn.appendChild(row1);
+    var current = stepLabel(mission);
+    var nowText;
+    if (current) {
+      nowText = (mission.status === 'RUNNING' ? '正在 ' : '下一阶段 ') + current;
+    } else {
+      nowText = STATUS_LABELS[mission.status] || mission.status || '';
+    }
+    btn.appendChild(el('span', 'now', nowText));
+    var bar = el('span', 'facai-progress');
+    bar.setAttribute('role', 'progressbar');
+    bar.setAttribute('aria-valuenow', String(pct));
+    bar.setAttribute('aria-valuemin', '0');
+    bar.setAttribute('aria-valuemax', '100');
+    bar.setAttribute('aria-label', (mission.title || '任务') + ' 总进度 ' + pct + '%');
+    var fill = el('span', 'facai-progress-fill');
+    fill.style.width = pct + '%';
+    bar.appendChild(fill);
+    btn.appendChild(bar);
+    btn.addEventListener('click', function () { facaiOpenMission(mission.id); });
+    return btn;
+  }
+
+  function doneItem(mission) {
+    var failed = mission.status === 'FAILED';
+    var row = el('div', 'done-item');
+    row.appendChild(el('span', failed ? 'fail-mark' : 'tick', failed ? '!' : '✓'));
+    row.appendChild(document.createTextNode(
+      (mission.title || '未命名任务') + (failed ? '（失败）' : '')));
+    return row;
+  }
+
+  function renderMissionList(missions) {
+    var active = [];
+    var finished = [];
+    (missions || []).forEach(function (m) {
+      if (m.status === 'WAITING' || m.status === 'RUNNING') { active.push(m); }
+      else { finished.push(m); }
+    });
+    var activeBox = document.getElementById('home-active');
+    activeBox.textContent = '';
+    if (active.length) {
+      active.forEach(function (m) { activeBox.appendChild(missionItem(m)); });
+    } else {
+      activeBox.appendChild(el('p', 'stub', '没有进行中的任务：在上方输入一句话即可下单'));
+    }
+    var doneBox = document.getElementById('home-done');
+    doneBox.textContent = '';
+    if (finished.length) {
+      finished.forEach(function (m) { doneBox.appendChild(doneItem(m)); });
+    } else {
+      doneBox.appendChild(el('p', 'stub', '还没有已完成的任务'));
+    }
+    var tasks = document.getElementById('tasks-list');
+    tasks.textContent = '';
+    if ((missions || []).length) {
+      missions.forEach(function (m) { tasks.appendChild(missionItem(m)); });
+    } else {
+      tasks.appendChild(el('p', 'stub', '还没有任务：回首页说一句话开工'));
+    }
+  }
+
+  /* ── 下单：一句话直达（POST /api/v1/missions/auto {original_input}）── */
+  function facaiSend() {
+    var wish = document.getElementById('wish');
+    var text = wish ? wish.value.trim() : '';
+    if (!text) { facaiToast('先告诉发财你想做什么'); return; }
+    if (!state.user) {
+      facaiToast('请先登录，登录后即可真下单');
+      facaiGo('screen-login');
+      return;
+    }
+    var send = qs('.input-row .send');
+    send.disabled = true;
+    homeStatus('');
+    apiRequest('POST', '/api/v1/missions/auto', { original_input: text }).then(function (res) {
+      if (handle401(res)) { return; }
+      if (res.status === 402) {
+        homeStatus((res.detail || '余额不足') + ' —— 充值在 Desktop 总控台 /billing');
+        return;
+      }
+      if (!res.ok || !res.data || !res.data.id) {
+        homeStatus('下单失败：' + (res.detail || res.status));
+        return;
+      }
+      wish.value = '';
+      facaiToast('任务已创建：' + shortId(res.data.id));
+      openMonitor(res.data, res.data.dispatch);
+    }).catch(function () {
+      homeStatus('网络请求失败，请重试');
+    }).then(function () { send.disabled = false; });
+  }
+
+  /* ── 任务监控：进度全部来自后端，4 秒轮询 + SSE 加速，不造假进度 ── */
+  function monitorError(msg) {
+    document.getElementById('monitor-error').textContent = msg || '';
+  }
+
+  function setMonitorNote(dispatch) {
+    var note = document.getElementById('monitor-note');
+    if (dispatch && dispatch.status === 'DEFERRED') {
+      note.hidden = false;
+      note.textContent = '任务已创建，暂未派发执行：' + (dispatch.reason || '缺少执行绑定') +
+        '。Agent / 模型 / 运行时绑定在 Desktop 总控台配置。';
+    } else if (dispatch && dispatch.status === 'QUEUED') {
+      note.hidden = false;
+      note.textContent = '已进入执行队列' +
+        (dispatch.job_ids ? '（' + dispatch.job_ids.length + ' 个阶段任务）' : '') + '。';
+    } else {
+      note.hidden = true;
+      note.textContent = '';
+    }
+  }
+
+  function openMonitor(mission, dispatch) {
+    state.missionId = mission.id;
+    renderMonitor(mission);
+    setMonitorNote(dispatch);
+    facaiGo('screen-monitor');
+    if (!isTerminal(mission)) { startMonitorLoop(); }
+  }
+
+  function facaiOpenMission(id) {
+    apiRequest('GET', '/api/v1/missions/' + id).then(function (res) {
+      if (handle401(res)) { return; }
+      if (!res.ok || !res.data) { facaiToast('任务加载失败：' + (res.detail || res.status)); return; }
+      openMonitor(res.data, null);
+    }).catch(function () { facaiToast('网络请求失败，请重试'); });
+  }
+
+  function renderMonitor(mission) {
+    document.getElementById('monitor-body').hidden = false;
+    document.getElementById('monitor-actions').hidden = false;
+    document.getElementById('monitor-title').textContent = mission.title || '未命名任务';
+    document.getElementById('monitor-id').textContent =
+      '任务短编号 ' + shortId(mission.id) +
+      ' · 状态 ' + (STATUS_LABELS[mission.status] || mission.status || '未知');
+    var pct = typeof mission.progress === 'number' ? mission.progress : 0;
+    var ring = document.getElementById('monitor-ring');
+    ring.setAttribute('aria-valuenow', String(pct));
+    ring.setAttribute('aria-label', (mission.title || '任务') + ' 总进度 ' + pct + '%');
+    document.getElementById('ring-num').textContent = pct + '%';
+    document.getElementById('ring-fill').style.strokeDashoffset = String(100 - pct);
+    var bar = document.getElementById('monitor-bar');
+    bar.setAttribute('aria-valuenow', String(pct));
+    bar.setAttribute('aria-label', (mission.title || '任务') + ' 总进度 ' + pct + '%');
+    document.getElementById('monitor-bar-fill').style.width = pct + '%';
+    var pill = document.getElementById('monitor-pill');
+    pill.className = PILL_CLASSES[mission.status] || 'facai-pill';
+    document.getElementById('monitor-status').textContent =
+      STATUS_LABELS[mission.status] || mission.status || '未知';
+
+    var steps = mission.steps || [];
+    var doingText;
+    var running = null;
+    var next = null;
+    steps.forEach(function (step) {
+      if (step.status === 'RUNNING' && !running) { running = step; }
+      if (step.status !== 'COMPLETED' && !next) { next = step; }
+    });
+    if (running) {
+      doingText = '发财正在 ' + running.label + '（' + (running.progress || 0) + '%）';
+    } else if (mission.status === 'COMPLETED') {
+      doingText = '全部阶段已完成';
+    } else if (mission.status === 'FAILED') {
+      doingText = '任务失败：可在「任务过程」查看详情';
+    } else if (next) {
+      doingText = '下一阶段：' + next.label;
+    } else {
+      doingText = '等待任务开始';
+    }
+    document.getElementById('monitor-doing-text').textContent = doingText;
+
+    var list = document.getElementById('monitor-steps');
+    list.textContent = '';
+    steps.forEach(function (step) {
+      var li = document.createElement('li');
+      var done = step.status === 'COMPLETED';
+      var failed = step.status === 'FAILED';
+      var runningStep = step.status === 'RUNNING';
+      li.appendChild(el('span',
+        done ? 'done' : (failed ? 'fail' : (runningStep ? 'doing' : 'todo')),
+        done ? '✓' : (failed ? '!' : (runningStep ? '●' : '○'))));
+      var label = step.label +
+        (runningStep ? '（' + (step.progress || 0) + '%）' : '') +
+        (failed ? '（失败）' : '');
+      li.appendChild(document.createTextNode(label));
+      list.appendChild(li);
+    });
+
+    var doneCount = steps.filter(function (step) { return step.status === 'COMPLETED'; }).length;
+    var count = document.getElementById('monitor-count');
+    count.textContent = '';
+    count.appendChild(document.createTextNode('已完成 '));
+    count.appendChild(el('b', null, doneCount));
+    count.appendChild(document.createTextNode(' / 共 ' + steps.length + ' 个阶段'));
+
+    monitorError('');
+    if (isTerminal(mission)) { stopMonitor(); }
+  }
+
+  function pollMonitor() {
+    if (!state.missionId || !state.user) { return; }
+    apiRequest('GET', '/api/v1/missions/' + state.missionId).then(function (res) {
+      if (res.status === 401) { stopMonitor(); handle401(res); return; }
+      if (!res.ok || !res.data) {
+        monitorError('进度刷新失败：' + (res.detail || res.status) + '，将继续重试');
+        return;
+      }
+      renderMonitor(res.data);
+    }).catch(function () {
+      monitorError('暂时连不上服务器，将继续重试');
+    });
+  }
+
+  function startMonitorLoop() {
+    stopMonitor();
+    state.pollTimer = setInterval(pollMonitor, 4000);
+    tryOpenStream();
+  }
+
+  function stopMonitor() {
+    if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; }
+    if (state.eventSource) { state.eventSource.close(); state.eventSource = null; }
+  }
+
+  /* SSE 加速：同源 EventSource 自动带会话 cookie；失败即关闭退回轮询 */
+  function tryOpenStream() {
+    if (!window.EventSource || !state.missionId || state.eventSource) { return; }
+    try {
+      var source = new EventSource('/api/v1/missions/' + state.missionId + '/stream');
+      state.eventSource = source;
+      source.addEventListener('mission', function (ev) {
+        try {
+          var mission = JSON.parse(ev.data);
+          if (mission && mission.id === state.missionId) { renderMonitor(mission); }
+        } catch (_) { /* 单条坏事件忽略，轮询兜底 */ }
+      });
+      source.onerror = function () {
+        source.close();
+        if (state.eventSource === source) { state.eventSource = null; }
+      };
+    } catch (_) { /* 无 SSE 条件时保持 4 秒轮询 */ }
+  }
+
+  /* ── 任务过程：真实事件流 ── */
+  /* 内部事件词表（含收录引擎状态词）不直接暴露给客户，客户面统一中文 */
+  var EVENT_ZH = {STEP_RUNNING:'开始工作',STEP_COMPLETED:'阶段完成',STEP_FAILED:'阶段失败',STEP_BLOCKED:'依赖阻塞',STEP_UNBLOCKED:'依赖解除',OPENCODE_STARTED:'执行开始',OPENCODE_COMPLETED:'执行完成',OPENCODE_FAILED:'执行失败',OPENCODE_TIMEOUT:'执行超时',OUTPUT:'实时输出',ERROR:'错误输出',JOB_QUEUED:'进入队列',JOB_STARTED:'队列开始',JOB_COMPLETED:'队列完成',JOB_FAILED:'队列失败',JOB_BLOCKED:'队列阻塞',JOB_RETRIED:'队列重试',JOB_PAUSED:'队列暂停',JOB_RESUMED:'队列恢复'};
+  function loadTimeline() {
+    var list = document.getElementById('timeline-list');
+    list.textContent = '';
+    if (!state.user) {
+      list.appendChild(el('p', 'stub', '登录后，这里显示监控任务的真实事件流。'));
+      return;
+    }
+    if (!state.missionId) {
+      list.appendChild(el('p', 'stub', '先在任务监控打开一个任务，再回来看真实过程。'));
+      return;
+    }
+    apiRequest('GET', '/api/v1/missions/' + state.missionId + '/events').then(function (res) {
+      if (handle401(res)) { return; }
+      list.textContent = '';
+      if (!res.ok || !res.data) {
+        list.appendChild(el('p', 'stub', '事件加载失败：' + (res.detail || res.status)));
+        return;
+      }
+      if (!res.data.length) {
+        list.appendChild(el('p', 'stub', '还没有事件：任务尚未开始产生真实动作。'));
+        return;
+      }
+      res.data.forEach(function (ev) {
+        var payload = ev.payload;
+        if (typeof payload === 'string') {
+          try { payload = JSON.parse(payload); } catch (_) { payload = {}; }
+        }
+        var item = el('div', 'facai-timeline-item');
+        var time = el('time', null, (ev.occurred_at || '').slice(11, 16) || '--:--');
+        var good = /COMPLETED$/.test(ev.type);
+        var bad = /ERROR|FAILED/.test(ev.type);
+        var what = el('span', 'what');
+        what.appendChild(el('span', good ? 'ok' : (bad ? 'warn' : 'run'),
+          good ? '✓' : (bad ? '!' : '●')));
+        var text = EVENT_ZH[ev.type] || ev.type;
+        if (payload && payload.line) { text += ' · ' + payload.line; }
+        else if (payload && payload.reason) { text += ' · ' + payload.reason; }
+        what.appendChild(document.createTextNode(text));
+        item.appendChild(time);
+        item.appendChild(what);
+        list.appendChild(item);
+      });
+    }).catch(function () {
+      list.textContent = '';
+      list.appendChild(el('p', 'stub', '暂时连不上服务器，稍后重试。'));
+    });
+  }
+
+  /* ── 渠道绑定：GET/PUT/DELETE /api/v1/my/channels/*（真实）── */
+  function channelError(channel, msg) {
+    var node = qs('[data-channel-error="' + channel + '"]');
+    if (node) { node.textContent = msg || ''; }
+  }
+
+  function renderChannelStates(data) {
+    ['telegram', 'line', 'discord', 'slack'].forEach(function (channel) {
+      var info = (data && data[channel]) || { bound: false };
+      var pill = qs('[data-channel-bound="' + channel + '"]');
+      pill.textContent = info.bound ? '已绑定' : '未绑定';
+      pill.classList.toggle('on', !!info.bound);
+      var meta = qs('[data-channel-meta="' + channel + '"]');
+      meta.textContent = info.bound
+        ? '接收 ' + (info.chat_id || '') + ' · 绑定于 ' + (info.created_at || '').slice(0, 10)
+        : '';
+      var unbind = qs('[data-unbind-channel="' + channel + '"]');
+      if (unbind) { unbind.hidden = !info.bound; }
+      var test = qs('[data-test-channel="' + channel + '"]');
+      if (test) { test.hidden = !info.bound; }
+    });
+  }
+
+  function loadMyChannels() {
+    if (!state.user) { renderChannelStates(null); return Promise.resolve(); }
+    return apiRequest('GET', '/api/v1/my/channels').then(function (res) {
+      if (handle401(res)) { return; }
+      if (!res.ok || !res.data) {
+        facaiToast('渠道状态加载失败：' + (res.detail || res.status));
+        return;
+      }
+      renderChannelStates(res.data);
+    }).catch(function () { facaiToast('暂时连不上服务器，渠道状态未刷新'); });
+  }
+
+  function bindPayload(channel) {
+    if (channel === 'telegram') {
+      return { bot_token: val('m-tg-bot-token'), chat_id: val('m-tg-chat-id') };
+    }
+    if (channel === 'line') {
+      return { access_token: val('m-line-access-token'),
+               channel_secret: val('m-line-channel-secret'),
+               user_id: val('m-line-user-id') };
+    }
+    if (channel === 'discord') {
+      return { bot_token: val('m-discord-bot-token'), chat_id: val('m-discord-channel-id') };
+    }
+    return { bot_token: val('m-slack-bot-token'), chat_id: val('m-slack-channel-id') };
+  }
+
+  function clearChannelInputs(channel) {
+    var ids = {
+      telegram: ['m-tg-bot-token', 'm-tg-chat-id'],
+      line: ['m-line-access-token', 'm-line-channel-secret', 'm-line-user-id'],
+      discord: ['m-discord-bot-token', 'm-discord-channel-id'],
+      slack: ['m-slack-bot-token', 'm-slack-channel-id']
+    };
+    (ids[channel] || []).forEach(function (id) {
+      var node = document.getElementById(id);
+      if (node) { node.value = ''; }
+    });
+  }
+
+  function handleBind(channel, event) {
+    event.preventDefault();
+    if (!state.user) {
+      channelError(channel, '请先登录，再绑定你自己的渠道');
+      facaiGo('screen-login');
+      return;
+    }
+    var payload = bindPayload(channel);
+    var keys = Object.keys(payload);
+    for (var i = 0; i < keys.length; i++) {
+      if (!payload[keys[i]]) {
+        channelError(channel, '请先填写完整的凭据');
+        return;
+      }
+    }
+    channelError(channel, '绑定中…');
+    apiRequest('PUT', CHANNEL_PATHS[channel], payload).then(function (res) {
+      if (handle401(res)) { return; }
+      if (!res.ok) {
+        channelError(channel, '绑定失败：' + (res.detail || res.status));
+        return;
+      }
+      channelError(channel, '');
+      clearChannelInputs(channel);
+      facaiToast(CHANNEL_LABELS[channel] + ' 已绑定：进度将优先推到你的渠道');
+      loadMyChannels();
+    }).catch(function () {
+      channelError(channel, '网络请求失败，请重试');
+    });
+  }
+
+  function handleUnbind(channel) {
+    if (!state.user) {
+      facaiToast('请先登录，再管理你的渠道');
+      facaiGo('screen-login');
+      return;
+    }
+    apiRequest('DELETE', CHANNEL_PATHS[channel]).then(function (res) {
+      if (handle401(res)) { return; }
+      if (!res.ok && res.status !== 404) {
+        facaiToast('解绑失败：' + (res.detail || res.status));
+        return;
+      }
+      facaiToast(CHANNEL_LABELS[channel] + ' 已解绑，通知回落站点渠道');
+      loadMyChannels();
+    }).catch(function () { facaiToast('网络请求失败，请重试'); });
+  }
+
+  /* ── 测试推送：POST /api/v1/my/channels/{channel}/test（真实）──
+     结果如实内联透出：DELIVERED 只能来自上游确认；失败显示稳定错误码的
+     中文释义（AUTH_FAILED / RATE_LIMITED / …），不打假成功。 */
+  var TEST_ERROR_LABELS = {
+    AUTH_FAILED: '凭据无效（上游拒绝认证），请重新绑定',
+    RATE_LIMITED: '上游限流，请稍后再试',
+    TEXT_TOO_LONG: '推送文本超长',
+    TIMEOUT: '上游超时，请稍后再试',
+    TRANSPORT_ERROR: '网络不通，请稍后再试',
+    INVALID_UPSTREAM_RESPONSE: '上游响应异常',
+    UPSTREAM_REJECTED: '上游拒绝（接收 ID 可能不对）',
+    BINDING_UNUSABLE: '绑定凭据不可用，请重新绑定',
+    SEND_FAILED: '发送失败，请稍后再试'
+  };
+
+  function handleTestPush(channel) {
+    if (!state.user) {
+      channelError(channel, '请先登录，再测试你的渠道');
+      facaiGo('screen-login');
+      return;
+    }
+    channelError(channel, '测试推送中…');
+    apiRequest('POST', CHANNEL_PATHS[channel] + '/test').then(function (res) {
+      if (handle401(res)) { return; }
+      if (!res.ok) {
+        channelError(channel, '测试推送失败：' + (res.detail || res.status));
+        return;
+      }
+      var code = res.data && res.data.error;
+      if (res.data && res.data.status === 'DELIVERED') {
+        channelError(channel, '');
+        facaiToast(CHANNEL_LABELS[channel] + ' 测试推送已送达：链路正常');
+      } else {
+        channelError(channel, CHANNEL_LABELS[channel] + ' 测试推送失败：' +
+                     (TEST_ERROR_LABELS[code] || code || '未知原因'));
+      }
+    }).catch(function () {
+      channelError(channel, '测试推送失败：网络请求失败，请重试');
+    });
+  }
+
+  /* ── 切页与底部导航 ── */
+  var NAV_TABS = { 'screen-home': '首页', 'screen-tasks': '任务',
+                   'screen-files': '文件', 'screen-me': '我的' };
+
+  function facaiGo(id) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) {
+      screens[i].classList.toggle('active', screens[i].id === id);
+    }
+    var navBtns = document.querySelectorAll('.bottomnav .nav-btn[data-nav]');
+    for (var j = 0; j < navBtns.length; j++) {
+      if (navBtns[j].getAttribute('data-nav') === id) {
+        navBtns[j].setAttribute('aria-current', 'page');
+      } else {
+        navBtns[j].removeAttribute('aria-current');
+      }
+    }
+    /* 离开监控即停轮询；进入真实数据视图时按需刷新 */
+    if (id !== 'screen-monitor') { stopMonitor(); }
+    if (id === 'screen-timeline') { loadTimeline(); }
+    if ((id === 'screen-home' || id === 'screen-tasks') && state.user) { loadMissions(); }
+    if (id === 'screen-me' && state.user) { loadMyChannels(); }
+    document.getElementById('screens').scrollTop = 0;
+  }
+
+  function facaiNav(btn) { facaiGo(btn.getAttribute('data-nav')); }
+
+  /* 中央「发财」：回首页并聚焦输入框 —— 手机端主要自然语言入口（基线 §24） */
+  function facaiFab() {
+    facaiGo('screen-home');
+    var wish = document.getElementById('wish');
+    if (wish) { wish.focus(); }
+  }
+
+  function facaiSessionChip() {
+    facaiGo(state.user ? 'screen-me' : 'screen-login');
+  }
+
+  /* 演示分镜交互（接口未接线，如实提示，不做假动作） */
+  function facaiAmend() {
+    facaiGo('screen-home');
+    facaiToast('原话已保留，可以直接改写');
+  }
+
+  function facaiStart() {
+    facaiToast('演示分镜到此为止：回首页输入一句话即可真下单');
+  }
+
+  /* 授权裁决：词表与 facai/authority.py 的 ALLOW / DENY 一致；接口待接，不做假授权 */
+  function facaiDecide(allow) {
+    facaiToast('演示分镜：真实授权请求会在任务需要时出现' +
+      (allow ? '（ALLOW）' : '（DENY）'));
+  }
+
+  var toastTimer = null;
+  function facaiToast(msg) {
+    var toast = document.getElementById('facai-toast');
+    if (!toast) { return; }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    if (toastTimer) { clearTimeout(toastTimer); }
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2600);
+  }
+
+  /* ── 启动：探测会话（cookie 同源自动携带），如实分流登录/应用 ── */
+  function wireEvents() {
+    document.getElementById('login-form').addEventListener('submit', handleAuthSubmit);
+    document.getElementById('login-toggle').addEventListener('click', function () {
+      setRegisterMode(!state.registerMode);
+    });
+    document.getElementById('me-logout-btn').addEventListener('click', facaiLogout);
+    var forms = document.querySelectorAll('[data-channel-form]');
+    for (var i = 0; i < forms.length; i++) {
+      (function (form) {
+        var channel = form.getAttribute('data-channel-form');
+        form.addEventListener('submit', function (event) { handleBind(channel, event); });
+      })(forms[i]);
+    }
+    var unbinds = document.querySelectorAll('[data-unbind-channel]');
+    for (var j = 0; j < unbinds.length; j++) {
+      (function (btn) {
+        var channel = btn.getAttribute('data-unbind-channel');
+        btn.addEventListener('click', function () { handleUnbind(channel); });
+      })(unbinds[j]);
+    }
+    var tests = document.querySelectorAll('[data-test-channel]');
+    for (var k = 0; k < tests.length; k++) {
+      (function (btn) {
+        var channel = btn.getAttribute('data-test-channel');
+        btn.addEventListener('click', function () { handleTestPush(channel); });
+      })(tests[k]);
+    }
+  }
+
+  function boot() {
+    wireEvents();
+    if (!window.fetch) {
+      facaiGo('screen-login');
+      loginError('当前浏览器不支持本页所需的请求能力，请更换现代浏览器');
+      return;
+    }
+    apiRequest('GET', '/api/v1/auth/session').then(function (res) {
+      if (res.ok && res.data && res.data.authenticated) {
+        state.user = res.data.username || null;
+        state.csrf = res.data.csrf_token || null;
+        state.mustChange = !!res.data.must_change_password;
+        enterApp();
+      } else {
+        renderSessionUI();
+        renderLoggedOutHome();
+        facaiGo('screen-login');
+      }
+    }).catch(function () {
+      renderSessionUI();
+      facaiGo('screen-login');
+      loginError('暂时连不上服务器，请稍后刷新重试');
+    });
+  }
+
+  boot();
+
+  /* 供自动化测试与调试使用的最小出口 */
+  window.facaiGo = facaiGo;
+  window.facaiNav = facaiNav;
+  window.facaiFab = facaiFab;
+  window.facaiSend = facaiSend;
+  window.facaiAmend = facaiAmend;
+  window.facaiStart = facaiStart;
+  window.facaiDecide = facaiDecide;
+  window.facaiToast = facaiToast;
+  window.facaiSessionChip = facaiSessionChip;
+  window.facaiLogout = facaiLogout;
+  window.facaiOpenMission = facaiOpenMission;
+  window.facaiRefreshMonitor = pollMonitor;
+  window.facaiCloseMonitor = stopMonitor;
+  window.facaiCurrentMissionId = function () { return state.missionId; };
+  window.facaiCsrf = function () { return state.csrf; };
+})();
+</script>
+</body>
+</html>

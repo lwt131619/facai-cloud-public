@@ -1,0 +1,3304 @@
+{
+  "schema": "facai.capability-graph/1",
+  "source": "agent-hermes-fork",
+  "license": "UNKNOWN",
+  "method": "facai/ops/ingest.py 启发式初扫：先扫源码扩展名文件、扫完且配额未满才扫其余文件（文档/示例命中 kind 加 DOC_ 前缀、URL 引用单列 DOC_REFERENCE，不挤占源码配额）；正则扫 https?:// 常量 / os.getenv|os.environ|process.env 键 / subprocess|child_process 调用点 / 已知 SDK 客户端构造（OpenAI(/Anthropic(/httpx auth/requests.Session auth → INFERRED_CREDENTIAL），逐条 file:line 证据，每档上限 200 面；能力候选按面种推导，未做人工 Capability Miner 比对——本文件是骨架，逐条 verdict 与 remote_removal 待复核。permissions 节照 Dify 插件 manifest 模式：六族 capability action 全枚举、deny-by-default，只有运行时面带 file:line 证据的族才 allowed=true。",
+  "summary": "初扫 200 面（REMOTE_PROVIDER=41，DOC_REFERENCE=0）；能力候选 3 条 / 外部依赖 51 个主机；diff: new=3 already_owned=0 external_dependency=51；权限声明 allowed=4/6（deny-by-default）。骨架待人工补全。",
+  "permissions": {
+    "schema": "facai.permissions/1",
+    "declared": [
+      "shell.exec",
+      "network.*",
+      "secret.request",
+      "provider.invoke"
+    ],
+    "denied": [
+      "filesystem.write",
+      "docker.run"
+    ],
+    "entries": [
+      {
+        "action": "shell.exec",
+        "allowed": true,
+        "scope": "子进程/shell 调用点（吸收后经 Facai Broker 收口）",
+        "resources": [],
+        "evidence": "src/cli.py:1274"
+      },
+      {
+        "action": "filesystem.write",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "network.*",
+        "allowed": true,
+        "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+        "resources": [
+          "ai-gateway.vercel.sh",
+          "ai.azure.com",
+          "ai.google.dev",
+          "aiplatform.googleapis.com",
+          "aistudio.google.com",
+          "api-docs.deepseek.com",
+          "api.anthropic.com",
+          "api.kimi.com",
+          "api.minimax.io",
+          "api.minimaxi.com",
+          "api.novita.ai",
+          "api.openai.com",
+          "api.openai.com.example",
+          "api.together.ai",
+          "api.z.ai",
+          "bedrock-mantle.{resolved",
+          "bedrock-runtime.{region",
+          "build.nvidia.com",
+          "chatgpt.com",
+          "claude.ai",
+          "console.anthropic.com",
+          "console.groq.com",
+          "console.mistral.ai",
+          "console.x.ai",
+          "dashboard.cohere.com",
+          "docs.aws.amazon.com",
+          "fireworks.ai",
+          "generativelanguage.googleapis.com",
+          "grok.com",
+          "h",
+          "help.aliyun.com",
+          "hermes-agent.nousresearch.com",
+          "host[",
+          "inference-api.nousresearch.com",
+          "learn.microsoft.com",
+          "localhost",
+          "models.dev",
+          "open.bigmodel.cn",
+          "openrouter.ai",
+          "password@github.com",
+          "platform.claude.com",
+          "platform.deepseek.com",
+          "platform.minimax.io",
+          "platform.moonshot.ai",
+          "platform.openai.com",
+          "portal.nousresearch.com",
+          "proxy.test",
+          "sqlite.org",
+          "www.perplexity.ai",
+          "www.sqlite.org",
+          "x"
+        ],
+        "evidence": "src/batch_runner.py:872"
+      },
+      {
+        "action": "docker.run",
+        "allowed": false,
+        "scope": "初扫无该族运行时面（deny-by-default）",
+        "resources": [],
+        "evidence": ""
+      },
+      {
+        "action": "secret.request",
+        "allowed": true,
+        "scope": "凭据读取面（吸收后一律经 Facai Secret Broker 下发）",
+        "resources": [
+          "openai"
+        ],
+        "evidence": "src/mini_swe_runner.py:153"
+      },
+      {
+        "action": "provider.invoke",
+        "allowed": true,
+        "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+        "resources": [
+          "ai-gateway.vercel.sh",
+          "ai.google.dev",
+          "aistudio.google.com",
+          "api-docs.deepseek.com",
+          "api.anthropic.com",
+          "api.kimi.com",
+          "api.minimax.io",
+          "api.minimaxi.com",
+          "api.novita.ai",
+          "api.openai.com",
+          "api.openai.com.example",
+          "api.together.ai",
+          "api.z.ai",
+          "chatgpt.com",
+          "claude.ai",
+          "console.anthropic.com",
+          "docs.aws.amazon.com",
+          "help.aliyun.com",
+          "inference-api.nousresearch.com",
+          "learn.microsoft.com",
+          "localhost",
+          "models.dev",
+          "open.bigmodel.cn",
+          "openrouter.ai",
+          "platform.claude.com",
+          "platform.minimax.io",
+          "proxy.test",
+          "www.perplexity.ai"
+        ],
+        "evidence": "src/batch_runner.py:872"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "shell.exec",
+      "name": "子进程/shell 执行面（初扫推导候选，待 Capability Miner 人工复核）",
+      "level": "L0_REFERENCE",
+      "provider": "ExecutionProvider",
+      "verdict": "new",
+      "evidence": "src/cli.py:1274",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": true,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": true,
+          "scope": "子进程/shell 调用点（吸收后经 Facai Broker 收口）",
+          "resources": [],
+          "evidence": "src/cli.py:1274"
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "secret.request",
+      "name": "凭据获取面（初扫推导候选，吸收后一律走 Secret Broker）",
+      "level": "L0_REFERENCE",
+      "provider": "CapabilityProvider",
+      "verdict": "new",
+      "evidence": "src/mini_swe_runner.py:153",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": true,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": true,
+          "scope": "凭据读取面（吸收后一律经 Facai Secret Broker 下发）",
+          "resources": [
+            "openai"
+          ],
+          "evidence": "src/mini_swe_runner.py:153"
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "model.invoke",
+      "name": "远端模型/推送调用面（初扫推导候选，须 re-root 至 Facai Model Router）",
+      "level": "L0_REFERENCE",
+      "provider": "ModelProvider",
+      "verdict": "new",
+      "evidence": "src/batch_runner.py:872",
+      "remote_removal": "初扫不产生 reRoot 提案——待人工按先验清单格式补",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ai-gateway.vercel.sh",
+            "ai.azure.com",
+            "ai.google.dev",
+            "aiplatform.googleapis.com",
+            "aistudio.google.com",
+            "api-docs.deepseek.com",
+            "api.anthropic.com",
+            "api.kimi.com",
+            "api.minimax.io",
+            "api.minimaxi.com",
+            "api.novita.ai",
+            "api.openai.com",
+            "api.openai.com.example",
+            "api.together.ai",
+            "api.z.ai",
+            "bedrock-mantle.{resolved",
+            "bedrock-runtime.{region",
+            "build.nvidia.com",
+            "chatgpt.com",
+            "claude.ai",
+            "console.anthropic.com",
+            "console.groq.com",
+            "console.mistral.ai",
+            "console.x.ai",
+            "dashboard.cohere.com",
+            "docs.aws.amazon.com",
+            "fireworks.ai",
+            "generativelanguage.googleapis.com",
+            "grok.com",
+            "h",
+            "help.aliyun.com",
+            "hermes-agent.nousresearch.com",
+            "host[",
+            "inference-api.nousresearch.com",
+            "learn.microsoft.com",
+            "localhost",
+            "models.dev",
+            "open.bigmodel.cn",
+            "openrouter.ai",
+            "password@github.com",
+            "platform.claude.com",
+            "platform.deepseek.com",
+            "platform.minimax.io",
+            "platform.moonshot.ai",
+            "platform.openai.com",
+            "portal.nousresearch.com",
+            "proxy.test",
+            "sqlite.org",
+            "www.perplexity.ai",
+            "www.sqlite.org",
+            "x"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": true,
+          "scope": "远端模型/推送 provider 调用（须改根至 Facai Model Router）",
+          "resources": [
+            "ai-gateway.vercel.sh",
+            "ai.google.dev",
+            "aistudio.google.com",
+            "api-docs.deepseek.com",
+            "api.anthropic.com",
+            "api.kimi.com",
+            "api.minimax.io",
+            "api.minimaxi.com",
+            "api.novita.ai",
+            "api.openai.com",
+            "api.openai.com.example",
+            "api.together.ai",
+            "api.z.ai",
+            "chatgpt.com",
+            "claude.ai",
+            "console.anthropic.com",
+            "docs.aws.amazon.com",
+            "help.aliyun.com",
+            "inference-api.nousresearch.com",
+            "learn.microsoft.com",
+            "localhost",
+            "models.dev",
+            "open.bigmodel.cn",
+            "openrouter.ai",
+            "platform.claude.com",
+            "platform.minimax.io",
+            "proxy.test",
+            "www.perplexity.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        }
+      ]
+    },
+    {
+      "id": "vendor.openrouter_ai",
+      "name": "外部依赖 openrouter.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/batch_runner.py:872",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "openrouter.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.ai_gateway_vercel_sh",
+      "name": "外部依赖 ai-gateway.vercel.sh（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/hermes_constants.py:1276",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ai-gateway.vercel.sh"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.hermes_agent_nousresearch_com",
+      "name": "外部依赖 hermes-agent.nousresearch.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/hermes_constants.py:1379",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "hermes-agent.nousresearch.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.sqlite_org",
+      "name": "外部依赖 sqlite.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/hermes_state_wal.py:133",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "sqlite.org"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_sqlite_org",
+      "name": "外部依赖 www.sqlite.org（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/hermes_state_wal.py:510",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.sqlite.org"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.h",
+      "name": "外部依赖 h（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/hermes_yaml.py:32",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "h"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.localhost",
+      "name": "外部依赖 localhost（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/run_agent.py:5",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "localhost"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_openai_com_example",
+      "name": "外部依赖 api.openai.com.example（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/utils.py:738",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.openai.com.example"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.proxy_test",
+      "name": "外部依赖 proxy.test（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/utils.py:738",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "proxy.test"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.chatgpt_com",
+      "name": "外部依赖 chatgpt.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/account_usage.py:319",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "chatgpt.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_anthropic_com",
+      "name": "外部依赖 api.anthropic.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/account_usage.py:647",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.anthropic.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_openai_com",
+      "name": "外部依赖 api.openai.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/agent_runtime_helpers.py:2198",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.openai.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.platform_claude_com",
+      "name": "外部依赖 platform.claude.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/anthropic_credentials.py:39",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "platform.claude.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.console_anthropic_com",
+      "name": "外部依赖 console.anthropic.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/anthropic_credentials.py:39",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "console.anthropic.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.claude_ai",
+      "name": "外部依赖 claude.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/anthropic_credentials.py:764",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "claude.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_minimax_io",
+      "name": "外部依赖 api.minimax.io（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/anthropic_endpoints.py:15",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.minimax.io"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_minimaxi_com",
+      "name": "外部依赖 api.minimaxi.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/anthropic_endpoints.py:15",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.minimaxi.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_kimi_com",
+      "name": "外部依赖 api.kimi.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/anthropic_endpoints.py:37",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.kimi.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.grok_com",
+      "name": "外部依赖 grok.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/api_error_summary.py:56",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "grok.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.inference_api_nousresearch_com",
+      "name": "外部依赖 inference-api.nousresearch.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/auxiliary_client.py:961",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "inference-api.nousresearch.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.bedrock_runtime_region",
+      "name": "外部依赖 bedrock-runtime.{region（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/auxiliary_client.py:1882",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "bedrock-runtime.{region"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.open_bigmodel_cn",
+      "name": "外部依赖 open.bigmodel.cn（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/auxiliary_client.py:5685",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "open.bigmodel.cn"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_z_ai",
+      "name": "外部依赖 api.z.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/auxiliary_client.py:5685",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.z.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_docs_deepseek_com",
+      "name": "外部依赖 api-docs.deepseek.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/auxiliary_structured_output.py:6",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api-docs.deepseek.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.learn_microsoft_com",
+      "name": "外部依赖 learn.microsoft.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/azure_identity_adapter.py:9",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "learn.microsoft.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.ai_azure_com",
+      "name": "外部依赖 ai.azure.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/azure_identity_adapter.py:27",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ai.azure.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.bedrock_mantle_resolved",
+      "name": "外部依赖 bedrock-mantle.{resolved（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/bedrock_adapter.py:208",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "bedrock-mantle.{resolved"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.docs_aws_amazon_com",
+      "name": "外部依赖 docs.aws.amazon.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/bedrock_adapter.py:1198",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "docs.aws.amazon.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.platform_openai_com",
+      "name": "外部依赖 platform.openai.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:45",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "platform.openai.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.console_x_ai",
+      "name": "外部依赖 console.x.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:48",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "console.x.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.platform_deepseek_com",
+      "name": "外部依赖 platform.deepseek.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:49",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "platform.deepseek.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.console_groq_com",
+      "name": "外部依赖 console.groq.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:50",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "console.groq.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.console_mistral_ai",
+      "name": "外部依赖 console.mistral.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:51",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "console.mistral.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_together_ai",
+      "name": "外部依赖 api.together.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:52",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.together.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.fireworks_ai",
+      "name": "外部依赖 fireworks.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:53",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "fireworks.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.www_perplexity_ai",
+      "name": "外部依赖 www.perplexity.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:54",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "www.perplexity.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.aistudio_google_com",
+      "name": "外部依赖 aistudio.google.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:55",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "aistudio.google.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.dashboard_cohere_com",
+      "name": "外部依赖 dashboard.cohere.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:56",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "dashboard.cohere.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.platform_moonshot_ai",
+      "name": "外部依赖 platform.moonshot.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:57",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "platform.moonshot.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.build_nvidia_com",
+      "name": "外部依赖 build.nvidia.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:58",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "build.nvidia.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.portal_nousresearch_com",
+      "name": "外部依赖 portal.nousresearch.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/billing_links.py:75",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "portal.nousresearch.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.generativelanguage_googleapis_com",
+      "name": "外部依赖 generativelanguage.googleapis.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/gemini_native_adapter.py:32",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "generativelanguage.googleapis.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.aiplatform_googleapis_com",
+      "name": "外部依赖 aiplatform.googleapis.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/gemini_native_adapter.py:38",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "aiplatform.googleapis.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.ai_google_dev",
+      "name": "外部依赖 ai.google.dev（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/gemini_native_adapter.py:57",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "ai.google.dev"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.x",
+      "name": "外部依赖 x（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/image_routing.py:79",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "x"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.help_aliyun_com",
+      "name": "外部依赖 help.aliyun.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/model_metadata.py:320",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "help.aliyun.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.platform_minimax_io",
+      "name": "外部依赖 platform.minimax.io（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/model_metadata.py:324",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "platform.minimax.io"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.host_",
+      "name": "外部依赖 host[（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/model_metadata.py:607",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "host["
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.api_novita_ai",
+      "name": "外部依赖 api.novita.ai（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/model_metadata.py:2314",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "api.novita.ai"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.models_dev",
+      "name": "外部依赖 models.dev（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/models_dev.py:27",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "models.dev"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": "vendor.password_github_com",
+      "name": "外部依赖 password@github.com（初扫依赖候选，非能力）",
+      "level": "L0_REFERENCE",
+      "provider": "ToolProvider",
+      "verdict": "dependency",
+      "evidence": "src/agent/redact.py:527",
+      "remote_removal": "待人工判定是否可自托管/内网化",
+      "native_candidate": false,
+      "license": "UNKNOWN",
+      "permissions": [
+        {
+          "action": "shell.exec",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "filesystem.write",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "network.*",
+          "allowed": true,
+          "scope": "运行时硬编码端点（按主机圈定；REMOTE_PROVIDER 者为远端裁决点，待人工复核改根）",
+          "resources": [
+            "password@github.com"
+          ],
+          "evidence": "src/batch_runner.py:872"
+        },
+        {
+          "action": "docker.run",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "secret.request",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        },
+        {
+          "action": "provider.invoke",
+          "allowed": false,
+          "scope": "本条目未声明该族（deny-by-default）",
+          "resources": [],
+          "evidence": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>发财 · 转换操作台</title>
+<link rel="stylesheet" href="/static/facai-ui.css">
+<style>
+  /* 页面级补充：只加本页需要的布局，不覆写设计令牌（加法式纪律） */
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--font-ui);
+       font-size:var(--fs-md);min-height:100vh;
+       background-image:radial-gradient(1200px 500px at 50% -10%,var(--bg-glow),transparent);}
+  .wrap{max-width:560px;margin:0 auto;padding:var(--sp-4) var(--sp-3) 96px;}
+  header.top{display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-2) 0 var(--sp-3);}
+  header.top .logo{font-size:var(--fs-xl);font-weight:700;
+    background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  header.top .sub{font-size:var(--fs-xs);color:var(--mut);}
+  .stage-input{display:flex;gap:var(--sp-2);}
+  .stage-input .facai-input{flex:1;}
+  .pipe{display:flex;flex-direction:column;gap:var(--sp-2);margin-top:var(--sp-4);}
+  .stage{position:relative;padding:var(--sp-3);border-radius:var(--r-md);
+         background:var(--panel);border:1px solid var(--line);}
+  .stage .head{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2);}
+  .stage .label{font-weight:600;color:var(--txt-strong);}
+  .stage .agents{margin-top:var(--sp-2);font-size:var(--fs-xs);color:var(--mut);line-height:1.7;}
+  .stage .agents b{color:var(--cyan2);font-weight:600;}
+  .st{font-size:var(--fs-2xs);padding:2px 8px;border-radius:var(--r-full);
+      border:1px solid var(--line);white-space:nowrap;}
+  .st-WAITING{color:var(--mut);}
+  .st-RUNNING{color:var(--cyan);border-color:var(--cyan);box-shadow:var(--glow-cyan);}
+  .st-DONE{color:var(--ok);border-color:var(--ok);}
+  .st-FAILED,.st-BLOCKED{color:var(--err);border-color:var(--err);}
+  .st-GATE{color:var(--gold);border-color:var(--gold);box-shadow:var(--glow-gold);}
+  .gate{margin-top:var(--sp-3);padding:var(--sp-3);border-radius:var(--r-md);
+        background:var(--panel-2);border:1px solid var(--gold);}
+  .gate .q{color:var(--gold);font-size:var(--fs-sm);margin-bottom:var(--sp-2);}
+  .gate .opts{display:flex;flex-direction:column;gap:var(--sp-2);}
+  .gate .custom{margin-top:var(--sp-2);}
+  .brief{margin-top:var(--sp-3);font-size:var(--fs-xs);color:var(--mut);line-height:1.8;}
+  .brief b{color:var(--txt-strong);font-weight:600;}
+  .toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);
+         padding:8px 14px;border-radius:var(--r-full);background:var(--bg2);
+         border:1px solid var(--line-strong);color:var(--txt-strong);
+         font-size:var(--fs-xs);opacity:0;transition:opacity var(--dur-slow);z-index:9;}
+  .toast.show{opacity:1;}
+  .empty{margin-top:var(--sp-8);text-align:center;color:var(--mut);font-size:var(--fs-sm);}
+  .sheet{position:fixed;inset:auto 0 0 0;max-width:560px;margin:0 auto;
+         padding:var(--sp-4);border-radius:var(--r-xl) var(--r-xl) 0 0;
+         background:var(--bg2);box-shadow:var(--elev-3);display:none;z-index:8;}
+  .sheet.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">发财 · 转换操作台</div>
+    <div class="sub">大白话进 · 流水线出</div>
+  </header>
+
+  <div class="stage-input">
+    <input id="plain" class="facai-input" placeholder="一句话，说清楚你要什么…">
+    <button id="go" class="facai-btn">开工</button>
+  </div>
+  <div id="analysis" class="brief"></div>
+
+  <div id="pipe" class="pipe"></div>
+  <div id="empty" class="empty">还没有流水线。输入一句话，看见它逐级流转。</div>
+</div>
+
+<div id="sheet" class="sheet"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let pipelineId = localStorage.getItem("uv_pipeline") || "";
+let timer = null;
+let es = null;
+
+function toast(text){
+  const el = $("toast"); el.textContent = text; el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+async function api(path, options){
+  const res = await fetch(path, Object.assign({headers:{"Content-Type":"application/json"}}, options));
+  if (res.status === 401) { location.href = "/login"; throw new Error("未登录"); }
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body.detail || res.statusText);
+  return body;
+}
+
+function esc(text){
+  const div = document.createElement("div");
+  div.textContent = String(text == null ? "" : text);
+  return div.innerHTML;
+}
+
+function planPreview(){
+  const text = $("plain").value.trim();
+  if (!text) { toast("先说一句话"); return; }
+  api("/api/v1/conversion/plan", {method:"POST", body:JSON.stringify({text})})
+    .then((plan) => {
+      const a = plan.analysis || {};
+      const envs = (a.environments || []).join(" / ");
+      const fams = (a.tool_families || []).map(f => f.family).join("、") || "无特殊工具";
+      const primary = plan.assignment_tree && plan.assignment_tree[0]
+        && plan.assignment_tree[0].assignment.primary;
+      $("analysis").innerHTML =
+        `<b>专业提示词已生成</b>（${esc(plan.plan_source)}）· 环境：${esc(envs)} · ` +
+        `工具：${esc(fams)} · 风险：${esc(a.risk)}<br>` +
+        (primary ? `首选执行：<b>${esc(primary.name)}</b>（${esc(primary.reasons.join("；"))}）` : "");
+    })
+    .catch((err) => toast(err.message));
+}
+
+async function startPipeline(){
+  const text = $("plain").value.trim();
+  if (!text) { toast("先说一句话"); return; }
+  try {
+    const created = await api("/api/v1/conversion/console",
+      {method:"POST", body:JSON.stringify({text})});
+    pipelineId = created.id;
+    localStorage.setItem("uv_pipeline", pipelineId);
+    $("analysis").textContent = "";
+    toast("流水线已开工");
+    render(created);
+    poll();
+  } catch (err) { toast(err.message); }
+}
+
+async function refresh(){
+  if (!pipelineId) return;
+  try { render(await api("/api/v1/conversion/console/" + pipelineId)); }
+  catch (err) { if (String(err.message).includes("not found")) { pipelineId = ""; localStorage.removeItem("uv_pipeline"); if (es) { es.close(); es = null; } clearInterval(timer); } }
+}
+
+function watch(){
+  // Push-driven updates: every mission event SSE'd here triggers one refresh,
+  // so stage transitions light up in ~1s. Fixed 15s polling stays as fallback
+  // for environments where EventSource cannot connect.
+  if (es) { es.close(); es = null; }
+  clearInterval(timer);
+  if (!pipelineId || typeof EventSource === "undefined") { timer = setInterval(refresh, 4000); return; }
+  es = new EventSource("/api/v1/conversion/console/" + pipelineId + "/stream");
+  es.onmessage = refresh;
+  es.onerror = () => { es.close(); es = null; timer = setInterval(refresh, 4000); };
+  timer = setInterval(refresh, 15000);
+}
+
+function poll(){
+  watch();
+}
+
+function render(view){
+  $("empty").style.display = "none";
+  const pipe = $("pipe"); pipe.textContent = "";
+  (view.stage_order || []).forEach((label) => {
+    const stage = (view.stages || {})[label] || {};
+    const asg = stage.assignment || {};
+    const primary = (asg.assignment || asg || {}).primary;
+    const fallbacks = ((asg.assignment || asg || {}).fallbacks) || [];
+    const status = stage.gate_id ? "GATE" : (stage.status || "WAITING");
+    const card = document.createElement("div");
+    card.className = "stage";
+    const statusCopy = {WAITING:"排队中", RUNNING:"执行中", GATE:"等你一句话",
+                        DONE:"已完成", FAILED:"失败", BLOCKED:"受阻", CANCELLED:"已取消"}[status] || status;
+    let html = `<div class="head"><div class="label">${esc(label)}</div>` +
+      `<div class="st st-${esc(status)}">${esc(statusCopy)}</div></div>`;
+    if (primary) {
+      html += `<div class="agents">首选 <b>${esc(primary.name)}</b>` +
+        (fallbacks.length ? ` · 后备 ${esc(fallbacks.map(f => f.name).join(" → "))}` : "") +
+        ` · 复核 平台核</div>`;
+    }
+    if (status === "GATE") html += `<div class="agents" style="color:var(--gold)">Agent 有问题反馈上来了，点开裁决 →</div>`;
+    card.innerHTML = html;
+    if (stage.gate_id) {
+      const gateBtn = document.createElement("button");
+      gateBtn.className = "facai-btn facai-btn-ghost";
+      gateBtn.textContent = "处理反馈";
+      gateBtn.style.marginTop = "8px";
+      gateBtn.onclick = () => openGate(view, stage.gate_id);
+      card.appendChild(gateBtn);
+    }
+    pipe.appendChild(card);
+  });
+  const open = (view.open_gates || [])[0];
+  if (open) sheetGate(view, open);
+}
+
+function openGate(view, gateId){
+  const gate = (view.gates || {})[gateId];
+  if (gate) sheetGate(view, gate);
+}
+
+function sheetGate(view, gate){
+  const sheet = $("sheet");
+  let html = `<div class="gate"><div class="q">【${esc(gate.kind_label)}】${esc(gate.question)}</div><div class="opts">`;
+  gate.options.forEach((opt) => {
+    html += `<button class="facai-btn facai-btn-ghost" data-idx="${opt.index}">${esc(opt.label)}</button>`;
+  });
+  html += `</div><div class="custom"><input id="custom" class="facai-input" placeholder="（可选）自己补一句话">` +
+    `<button id="send-custom" class="facai-btn" style="margin-top:8px">补充并继续</button></div></div>`;
+  sheet.innerHTML = html;
+  sheet.classList.add("show");
+  sheet.querySelectorAll("[data-idx]").forEach((btn) => {
+    btn.onclick = () => resolve(gate, Number(btn.dataset.idx), "");
+  });
+  sheet.querySelector("#send-custom").onclick = () => {
+    resolve(gate, 0, sheet.querySelector("#custom").value);
+  };
+}
+
+async function resolve(gate, choice, custom){
+  try {
+    const out = await api(`/api/v1/conversion/console/${pipelineId}/gates/${gate.id}/resolve`,
+      {method:"POST", body:JSON.stringify({choice, custom_answer:custom})});
+    $("sheet").classList.remove("show");
+    toast(out.resume === "RESUMED" ? "已下达，继续流转" :
+          out.resume === "RESUME_DEFERRED" ? "裁决已记录，环节完成后续接" :
+          "裁决已记录");
+    refresh();
+  } catch (err) { toast(err.message); }
+}
+
+$("go").onclick = startPipeline;
+$("plain").addEventListener("keydown", (e) => { if (e.key === "Enter") startPipeline(); });
+
+let debounce = null;
+$("plain").addEventListener("input", () => {
+  clearTimeout(debounce);
+  debounce = setTimeout(planPreview, 600);
+});
+
+if (pipelineId) { refresh(); poll(); }
+</script>
+</body>
+</html>

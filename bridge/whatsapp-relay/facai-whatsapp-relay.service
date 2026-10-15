@@ -1,0 +1,27 @@
+[Unit]
+Description=Facai WhatsApp relay bridge (Baileys -> Facai relay channel)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/facai-whatsapp-relay
+# The shared secret is injected from the same file Facai's own service reads,
+# so the value lives in exactly one place on the server.
+EnvironmentFile=/etc/facai-cloud/providers/relay.env
+Environment=FACAI_BASE_URL=https://whstapp.lol
+Environment=WA_AUTH_DIR=/opt/facai-whatsapp-relay/wa-auth
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node index.mjs
+Restart=always
+RestartSec=3
+# 24/7: restart on any exit, no matter how it died
+StartLimitIntervalSec=0
+# hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/facai-whatsapp-relay
+
+[Install]
+WantedBy=multi-user.target

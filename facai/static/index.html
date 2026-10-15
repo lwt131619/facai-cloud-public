@@ -1,0 +1,2242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050b16">
+  <meta name="description" content="FACAI 任务工作台：说一句需求，Agent 船队自动开工。大白话下单、多模型并行、真实进度与账单。">
+  <title>Facai · Mission Control</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23050b16'/%3E%3Cg fill='none' stroke='%2322d3ee' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='16' cy='7' r='2.6'/%3E%3Cpath d='M16 9.6V25M9.5 14h13M5.5 19.5c0 5 4.7 8.5 10.5 8.5s10.5-3.5 10.5-8.5'/%3E%3C/g%3E%3C/svg%3E">
+  <!-- 设计令牌层（基线 §21/§22，facai-ui.css 由令牌集群维护）：必须先于下方内联样式
+       引入——同名令牌（--bg/--panel/--line/--cyan 等）以内联值为准，页面视觉零漂移；
+       .facai-* 组件类与 facai-breathe 等新关键帧按需渐进接入，不改任何既有类名结构。 -->
+  <link rel="stylesheet" href="/static/facai-ui.css">
+  <style>
+    :root{--bg:#050b16;--panel:rgba(17,31,52,.72);--panel2:rgba(25,44,70,.6);--line:rgba(88,140,196,.26);--line2:rgba(126,190,246,.5);--text:#e9f2fd;--muted:#9db2ce;--cyan:#22d3ee;--blue:#3b82f6;--green:#4ade80;--amber:#fcd34d;--red:#f87171;--brandgrad:linear-gradient(120deg,#67e8f9,#38bdf8 45%,#6366f1)}
+    :root{font-family:Inter,"Microsoft YaHei",system-ui,sans-serif;color:var(--text)}
+    html{background:radial-gradient(1200px 700px at 78% -12%,rgba(34,211,238,.14),transparent 60%),radial-gradient(900px 620px at 6% 112%,rgba(59,130,246,.2),transparent 62%),linear-gradient(180deg,#050b16,#04070f)}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:transparent}
+    .bg-decor{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .bg-decor .grid{position:absolute;inset:-1px;background-image:linear-gradient(rgba(80,150,220,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(80,150,220,.07) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(115% 85% at 50% 0%,#000 0%,transparent 72%);mask-image:radial-gradient(115% 85% at 50% 0%,#000 0%,transparent 72%)}
+    .bg-decor .ripple{position:absolute;left:50%;bottom:-42vmin;width:140vmin;height:140vmin;transform:translateX(-50%);border-radius:50%;background:repeating-radial-gradient(circle,rgba(34,211,238,.12) 0 2px,transparent 2px 66px);opacity:.55}
+    .bg-decor .glow{position:absolute;top:-30vmin;left:50%;width:110vmin;height:72vmin;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(34,211,238,.2),transparent 70%);filter:blur(26px)}
+    header{padding:11px 3vw;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px 14px;flex-wrap:wrap;position:sticky;top:0;background:linear-gradient(180deg,rgba(6,14,27,.94),rgba(6,14,27,.72));backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);z-index:5}
+    .brand{display:flex;align-items:center;gap:11px;min-width:0}
+    .brand-mark{display:inline-flex;width:38px;height:38px;flex:0 0 38px;filter:drop-shadow(0 0 10px rgba(34,211,238,.45))}
+    .brand-mark svg{width:100%;height:100%}
+    h1{font-size:1.1rem;margin:0;letter-spacing:.04em}h2{font-size:1rem;margin:22px 0 10px}h3{font-size:.9rem;margin:0 0 8px}small,.muted{color:var(--muted)}
+    .brand-sub{color:var(--cyan);text-shadow:0 0 12px rgba(34,211,238,.5)}
+    header .sub{font-size:.78rem;color:var(--muted);margin-top:3px}
+    main{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);gap:18px;padding:18px 3vw;align-items:start}
+    .capability-band{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:10px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(120deg,rgba(34,211,238,.08),rgba(59,130,246,.1) 55%,rgba(99,102,241,.08));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    .cap-line strong{font-size:.95rem;letter-spacing:.02em}
+    .cap-line .muted{font-size:.8rem;margin-left:10px}
+    .cap-chips{display:flex;flex-wrap:wrap;gap:7px}
+    .cap-chip{font-size:.74rem;color:var(--text);background:rgba(6,15,29,.55);border:1px solid var(--line);border-radius:999px;padding:4px 11px;white-space:nowrap}
+    .cap-chip:hover{border-color:var(--cyan);box-shadow:0 0 12px rgba(34,211,238,.25)}
+    @media (max-width:760px){.cap-line .muted{display:block;margin:4px 0 0}}
+    .panel{background:linear-gradient(180deg,rgba(20,35,58,.72),rgba(11,22,38,.66));border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0;backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%);box-shadow:0 10px 30px rgba(2,8,20,.45),inset 0 1px 0 rgba(255,255,255,.04)}
+    label{display:block;font-size:.82rem;color:var(--muted);margin-top:6px}
+    input,select,textarea{display:block;width:100%;background:rgba(6,15,29,.78);color:var(--text);border:1px solid var(--line2);border-radius:10px;padding:9px;margin:4px 0 10px;font:inherit;min-width:0}
+    textarea{min-height:74px;resize:vertical;line-height:1.5}pre{font:inherit;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+    button{font:inherit;background:var(--brandgrad);border:0;color:#04121f;font-weight:600;padding:9px 13px;border-radius:10px;cursor:pointer;min-height:38px;box-shadow:0 6px 18px rgba(34,211,238,.22)}
+    button:hover{filter:brightness(1.08)}button.ghost{background:rgba(80,140,200,.16);color:var(--text);border:1px solid var(--line2);box-shadow:none}button.danger{background:linear-gradient(120deg,#ef4444,#b91c1c);color:#fff}button:disabled{opacity:.5;cursor:default}
+    button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,.stage:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+    .list{display:grid;gap:8px}.row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+    .card{background:linear-gradient(180deg,rgba(24,42,68,.66),rgba(12,24,42,.62));border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;color:inherit;width:100%;transition:border-color .15s ease,transform .15s ease}
+    .card:hover{border-color:var(--line2);transform:translateY(-1px)}.card.active{border-color:rgba(34,211,238,.7);box-shadow:0 0 0 1px rgba(34,211,238,.4) inset}
+    .pill{font-size:.72rem;background:rgba(80,140,200,.16);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+    .pill.WAITING,.pill.QUEUED,.pill.PAUSED{background:rgba(250,204,21,.14);color:var(--amber);border-color:rgba(250,204,21,.35)}
+    .pill.RUNNING{background:rgba(34,211,238,.16);color:#a5f3fc;border-color:rgba(34,211,238,.45)}
+    .pill.COMPLETED{background:rgba(74,222,128,.14);color:#86efac;border-color:rgba(74,222,128,.34)}
+    .pill.FAILED,.pill.CANCELLED{background:rgba(248,113,113,.15);color:#fca5a5;border-color:rgba(248,113,113,.36)}
+    .pill.BLOCKED{background:rgba(251,146,60,.14);color:#fdba74;border-color:rgba(251,146,60,.4)}
+    .bar{position:relative;background:rgba(4,12,24,.82);border:1px solid var(--line);border-radius:999px;height:12px;overflow:hidden;margin:10px 0}.bar span{display:block;background:linear-gradient(90deg,#22d3ee,#38bdf8 55%,#6366f1);height:100%;border-radius:999px;box-shadow:0 0 14px rgba(34,211,238,.55);transition:width .35s ease}
+    .bar.run span{background:linear-gradient(90deg,#22d3ee,#60a5fa,#818cf8,#22d3ee);background-size:220% 100%;animation:flow 1.5s linear infinite}
+    @keyframes flow{to{background-position:220% 0}}
+    .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);margin-right:6px;vertical-align:middle;animation:pulse 1.4s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+    .mission-bar{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px}
+    .mission-bar .field{flex:1 1 220px;min-width:0;margin:0}
+    .mission-bar select{margin:0}
+    .overview{background:linear-gradient(180deg,rgba(22,40,66,.72),rgba(11,23,41,.66));border:1px solid var(--line);border-radius:14px;padding:16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+    .overview .big{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+    .overview .pct{font-size:1.9rem;font-weight:800;line-height:1.05;color:#67e8f9}
+    @supports ((-webkit-background-clip:text) or (background-clip:text)){.overview .pct{background:var(--brandgrad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}}
+    .overview .now{text-align:right;min-width:0}
+    .overview .now .label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
+    .current-stage{font-weight:600;overflow-wrap:anywhere}
+    .pipeline{display:grid;gap:10px;padding:8px 2px 14px}
+    .metrics-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:12px 0 2px}
+    .metric-tile{display:grid;gap:2px;background:linear-gradient(180deg,rgba(26,45,72,.65),rgba(12,25,44,.6));border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+    .metric-tile small{color:var(--muted);font-size:.72rem;letter-spacing:.06em}
+    .metric-tile strong{font-size:1.18rem;line-height:1.2}
+    .metric-tile .muted{font-size:.72rem}
+    .pipeline-rail{display:grid;gap:8px}
+    .pipeline-rail .rail-steps{position:relative;display:grid;gap:8px;padding-left:4px}
+    .pipeline-rail .rail-steps::before{content:"";position:absolute;left:24px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,rgba(103,232,249,.55),rgba(59,130,246,.28));border-radius:2px}
+    .pipeline-rail .stage{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:12px 14px;border-radius:12px}
+    .pipeline-rail .stage::before{display:none}
+    .pipeline-rail .stage .node{position:relative;z-index:1;width:34px;height:34px;margin:0}
+    .pipeline-rail .rail-main{display:grid;gap:4px;min-width:0}
+    .pipeline-rail .rail-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .pipeline-rail .rail-title b{font-size:.95rem}
+    .pipeline-rail .rail-metrics{font-size:.78rem;overflow-wrap:anywhere}
+    .pipeline-rail .stage-progress{grid-column:2;width:100%}
+    .pipeline-rail .rail-chevron{color:var(--muted);font-size:1.15rem}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .stage{position:relative;text-align:left;background:linear-gradient(180deg,rgba(26,45,72,.7),rgba(12,25,44,.7));border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;color:inherit}
+    .stage::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:14px 0 0 14px;background:var(--line2)}
+    .stage.active{border-color:rgba(34,211,238,.75);box-shadow:0 0 0 1px rgba(34,211,238,.5) inset,0 0 22px rgba(34,211,238,.18)}
+    .stage.here{border-color:rgba(34,211,238,.9)}
+    .stage.COMPLETED::before{background:linear-gradient(180deg,#86efac,#22c55e)}
+    .stage.FAILED{border-color:rgba(248,113,113,.7)}.stage.FAILED::before{background:linear-gradient(180deg,#fca5a5,#dc2626)}
+    .stage.BLOCKED{border-color:rgba(251,146,60,.65)}.stage.BLOCKED::before{background:linear-gradient(180deg,#fdba74,#ea580c)}
+    .stage.RUNNING{border-color:rgba(34,211,238,.8)}.stage.RUNNING::before{background:linear-gradient(180deg,#a5f3fc,#3b82f6,#a5f3fc);background-size:100% 200%;animation:facai-indicator-flow 2s linear infinite;box-shadow:0 0 12px rgba(34,211,238,.7)}
+    .stage.WAITING::before,.stage.QUEUED::before,.stage.PAUSED::before{background:linear-gradient(180deg,#fde68a,#f59e0b)}
+    .stage .node-row{display:flex;align-items:center;gap:8px;min-height:26px}
+    .stage .node{position:relative;display:grid;place-items:center;width:26px;height:26px;flex:0 0 26px;border:1px solid var(--line2);border-radius:50%;background:#0a1b30;color:#c8e7ff;font-size:.68rem;font-weight:800}
+    .stage.COMPLETED .node{color:#052313;background:#86efac;border-color:#4ade80}
+    .stage.RUNNING .node{color:#04212a;background:#67e8f9;border-color:#22d3ee}
+    .stage.FAILED .node{color:#2b0808;background:#fca5a5;border-color:#f87171}
+    .stage.BLOCKED .node{color:#351707;background:#fdba74;border-color:#fb923c}
+    /* Mechanical ring-orbit: only actually-RUNNING nodes turn; completed/waiting stay still. */
+    .stage.RUNNING .node::before,.stage.RUNNING .node::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+    .stage.RUNNING .node::before{inset:-5px;border:2px solid transparent;border-top-color:#a5f3fc;border-right-color:rgba(59,130,246,.65);animation:facai-orbit 3.2s linear infinite}
+    .stage.RUNNING .node::after{inset:-1px;border:1px dashed rgba(103,232,249,.5);animation:facai-orbit-rev 6.4s linear infinite}
+    @keyframes facai-orbit{to{transform:rotate(360deg)}}
+    @keyframes facai-orbit-rev{to{transform:rotate(-360deg)}}
+    /* Mechanical multi-threaded workflow: active stages spin, progress bars flow, containers pulse */
+    .stage.RUNNING{animation:facai-stage-active 8s ease-in-out infinite}
+    .stage.RUNNING .bar.run span{animation:facai-flow-dynamic 2.5s ease-in-out infinite}
+    .stage.RUNNING .stage-progress span{animation:facai-progress-pulse 3s ease-in-out infinite}
+    .stage.RUNNING .node{animation:facai-node-throb 4s ease-in-out infinite}
+    @keyframes facai-stage-active{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(34,211,238,0))}50%{transform:scale(1.015);filter:drop-shadow(0 0 8px rgba(34,211,238,.45))}}
+    @keyframes facai-flow-dynamic{0%,100%{filter:brightness(1);transform:translateX(-5%);}50%{filter:brightness(1.2);transform:translateX(5%)}
+    }
+    @keyframes facai-progress-pulse{0%,100%{opacity:.85;transform:scaleY(.98)}50%{opacity:1;transform:scaleY(1.02)}
+    }
+    @keyframes facai-node-throb{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(34,211,238,0))}50%{transform:scale(1.08);filter:drop-shadow(0 0 12px rgba(34,211,238,.55))}}
+    /* Subtle turning visual details: status-dependent animations only for RUNNING states */
+    .stage.RUNNING .pill{animation:facai-pill-breathe 4s ease-in-out infinite}
+    @keyframes facai-pill-breathe{0%,100%{opacity:.9;transform:scale(.98)}50%{opacity:1;transform:scale(1.02)}
+    }
+    .parallel-chip{display:inline-flex;align-items:center;gap:4px;font-size:.66rem;letter-spacing:.03em;color:#a5f3fc;border:1px solid rgba(34,211,238,.4);border-radius:999px;padding:1px 7px;background:rgba(34,211,238,.12);white-space:nowrap}
+    .parallel-chip::before{content:"";width:5px;height:5px;border-radius:50%;background:#67e8f9;box-shadow:0 0 6px #22d3ee}
+    .stage .idx{font-size:.68rem;letter-spacing:.04em;color:var(--muted)}
+    .stage .label{font-weight:600;margin:7px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .stage .meta{display:flex;justify-content:space-between;gap:6px;align-items:center;font-size:.72rem;color:var(--muted);margin-top:8px}
+    .stage-progress{height:5px;border-radius:999px;background:rgba(4,12,24,.82);border:1px solid rgba(126,190,246,.18);overflow:hidden;margin-top:9px}
+    .stage-progress span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#22d3ee,#38bdf8 55%,#6366f1)}
+    .stage.COMPLETED .stage-progress span{background:linear-gradient(90deg,#4ade80,#86efac)}
+    .stage.FAILED .stage-progress span{background:linear-gradient(90deg,#ef4444,#fca5a5)}
+    .pipeline-overview{width:100%;display:flex;align-items:center;gap:9px;min-height:46px}
+    .pipeline-overview .node{display:inline-grid;place-items:center;width:24px;height:24px;border:1px solid var(--line2);border-radius:50%;font-size:.7rem}
+    .pipeline-overview .overview-progress{margin-left:auto;color:var(--muted);font-size:.75rem}
+    .pipeline-graph{position:relative;overflow:auto;padding:4px 2px 10px}
+    .pipeline-canvas{position:relative;display:grid;align-items:start;gap:18px 42px;width:100%}
+    .pipeline-canvas>.workflow-edges{position:absolute;inset:0;z-index:0;overflow:visible;pointer-events:none}
+    .workflow-edges path{fill:none;stroke:rgba(126,190,246,.58);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .workflow-edges path.complete{stroke:rgba(74,222,128,.72)}
+    .workflow-edges path.failed{stroke:rgba(248,113,113,.75)}
+    .workflow-edges path.running{stroke:var(--cyan);stroke-dasharray:4 4;animation:facai-edge-flow 1s linear infinite;opacity:.9}
+    @keyframes facai-edge-flow{to{stroke-dashoffset:-8}}
+    @keyframes facai-indicator-flow{0%{background-position:0 0}100%{background-position:0 100%}}
+    .workflow-step{z-index:1;min-width:0;min-height:116px;grid-column:var(--step-col);grid-row:var(--step-row)}
+    .workflow-step .stage-deps{margin-top:8px;color:var(--muted);font-size:.69rem;line-height:1.4;overflow-wrap:anywhere}
+    .workflow-step .stage-error{margin-top:7px;padding:5px 7px;border-radius:7px;background:rgba(248,113,113,.12);color:#fecaca;font-size:.7rem;line-height:1.35;overflow-wrap:anywhere}
+    .workflow-step .stage-event{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:4px 6px;margin-top:7px;padding-top:6px;border-top:1px solid rgba(126,190,246,.12);font-size:.68rem;line-height:1.35;overflow-wrap:anywhere}
+    .workflow-step .stage-event .event-kind{color:#a5d9f3;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .workflow-step .stage-event .event-detail{grid-column:1/-1;color:var(--muted);min-width:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .workflow-step .stage-event time{color:#7990ad;font-size:.63rem;white-space:nowrap}
+    .stage-billing{margin-top:7px;padding-top:6px;border-top:1px solid rgba(126,190,246,.12);color:#aebed4;font-size:.66rem;line-height:1.45;overflow-wrap:anywhere}
+    .billing-panel{display:grid;gap:9px;margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(6,15,29,.38)}
+    .billing-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .billing-head h3{margin:0;font-size:.95rem}
+    .billing-multiplier{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:.78rem}
+    .billing-multiplier[hidden]{display:none} /* 倍率输入是站长内部件：对所有视图隐藏 */
+    .billing-multiplier input{width:82px;min-height:38px;padding:6px 8px}
+    .billing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .billing-metric{min-width:0;padding:8px;border-radius:8px;background:rgba(20,35,58,.5)}
+    .billing-metric strong,.billing-metric small{display:block;overflow-wrap:anywhere}
+    .billing-metric strong{font-size:.72rem;color:var(--muted);font-weight:500}
+    .billing-metric small{margin-top:4px;font-size:.82rem;color:var(--text)}
+    .billing-note{color:var(--muted);font-size:.7rem;line-height:1.45}
+    .recon-wrap{overflow-x:auto}
+    .recon-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.73rem}
+    .recon-table th,.recon-table td{text-align:left;padding:5px 7px;border-bottom:1px solid rgba(126,190,246,.14);vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
+    .recon-table th{color:var(--muted);font-weight:500;white-space:nowrap}
+    .recon-table tbody tr:last-child td{border-bottom:0}
+    .daily-progress{margin:0 0 14px;padding:0;border:1px solid var(--line);border-radius:14px;background:rgba(6,15,29,.38);overflow:hidden}
+    .daily-progress>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px}
+    .daily-progress>summary::-webkit-details-marker{display:none}
+    .daily-progress>summary .daily-chevron{color:var(--muted);transition:transform .15s}
+    .daily-progress[open]>summary .daily-chevron{transform:rotate(90deg)}
+    .daily-progress .daily-body{padding:0 12px 12px}
+    .daily-progress h2{font-size:.95rem;margin:0}
+    .daily-progress-note{color:var(--muted);font-size:.7rem;line-height:1.45;margin:6px 0 9px}
+    .daily-provider{padding:9px 11px;background:linear-gradient(180deg,rgba(24,42,68,.5),rgba(12,24,42,.5));border:1px solid var(--line);border-radius:11px}
+    .daily-provider small{display:block;color:var(--muted);font-size:.71rem;line-height:1.45;overflow-wrap:anywhere}
+    .daily-provider .bar{margin:8px 0 6px}
+    .daily-blocker{color:#fdba74}
+    @media(max-width:600px){.billing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.billing-multiplier{width:100%;justify-content:space-between}}
+    .workflow-step.BLOCKED .stage-event .event-kind{color:#fdba74}
+    .workflow-step.FAILED .stage-event .event-kind{color:#fca5a5}
+    .event{border-left:2px solid #5b8fdc;padding:7px 10px;margin:5px 0;color:#c9d5e9;overflow-wrap:anywhere;white-space:pre-wrap;font-size:.82rem;background:rgba(6,15,29,.4);border-radius:0 8px 8px 0}
+    .event.MODEL_REFUSED,.event.MODEL_FAILED,.event.MODEL_TIMEOUT,.event.MODEL_RATE_LIMITED,.event.MODEL_AUTH_FAILED,.event.MODEL_TRANSPORT_FAILED,.event.MODEL_TOOL_FAILED,.event.MODEL_RESOURCE_UNAVAILABLE,.event.ERROR{background:rgba(248,113,113,.08);border-left-color:var(--red)}
+    .event.MODEL_COMPLETED{border-left-color:var(--green)}
+    .event .tag{display:inline-block;background:rgba(80,140,200,.18);border-radius:6px;padding:1px 6px;margin-right:6px;font-size:.7rem}
+    .timeline{max-height:360px;overflow:auto}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+    .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.actions button{padding:7px 11px;font-size:.8rem;min-height:40px}
+    #error{color:#fca5a5;min-height:0;margin:10px 0 0;font-size:.85rem}#error:empty{display:none}
+    .empty{color:#9db2ce;font-size:.85rem}
+    details.secondary{border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,rgba(20,35,58,.6),rgba(11,22,38,.55));margin-top:12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+    details.secondary>summary{cursor:pointer;list-style:none;padding:11px 13px;font-weight:600;display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:44px}
+    details.secondary>summary::-webkit-details-marker{display:none}
+    details.secondary>summary::after{content:"展开";font-size:.72rem;color:var(--muted);font-weight:400}
+    details.secondary[open]>summary::after{content:"收起"}
+    details.secondary .body{padding:2px 13px 13px}
+    @media(prefers-reduced-motion:reduce){.bar span{transition:none}.bar.run span{animation:none}.live-dot{animation:none!important}.stage.RUNNING .node::before,.stage.RUNNING .node::after{animation:none}.stage.RUNNING{animation:none}.stage.RUNNING .bar.run span{animation:none}.stage.RUNNING .stage-progress span{animation:none}.stage.RUNNING .node{animation:none}.stage.RUNNING .pill{animation:none}.stage.RUNNING::before{animation:none}.workflow-edges path.running{animation:none;stroke-dasharray:none}}
+    @media(max-width:900px){
+      main{grid-template-columns:1fr;gap:14px;padding:14px 16px}
+      main .detail-col{order:1}main .side-col{order:2}
+      header{padding:10px 16px}.grid2{grid-template-columns:1fr}
+      .pipeline{width:100%;min-width:0}
+      .pipeline-graph{width:100%;min-width:0;overflow:hidden;padding-left:0;padding-right:0}
+      .pipeline-canvas{display:flex;flex-direction:column;gap:16px;width:100%;min-width:0!important;grid-template-columns:1fr!important}
+      .workflow-step{flex:0 0 auto;width:100%;min-width:0;min-height:0;order:var(--step-order)}
+      .overview .now{text-align:left}
+      input,select,textarea{font-size:16px}button{min-height:44px}
+    }
+    @media(max-width:480px){header{gap:8px}header .row{width:100%;justify-content:space-between}}
+    /* ── WeChat QR modal ───────────────────────────────────────────────── */
+    #wechat-dialog{border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,rgba(20,35,58,.97),rgba(11,22,38,.97));color:var(--text);padding:0;width:min(92vw,400px);max-width:400px;box-shadow:0 24px 64px rgba(2,8,20,.7),0 0 0 1px rgba(34,211,238,.18);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+    #wechat-dialog::backdrop{background:rgba(2,7,18,.72);backdrop-filter:blur(4px)}
+    .wqdlg-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0;gap:10px}
+    .wqdlg-header h3{margin:0;font-size:.95rem;background:var(--brandgrad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .wqdlg-close{display:grid;place-items:center;width:32px;height:32px;min-height:32px;padding:0;border-radius:50%;background:rgba(80,140,200,.15);border:1px solid var(--line2);color:var(--muted);font-size:1.1rem;line-height:1;box-shadow:none;flex:0 0 32px}
+    .wqdlg-close:hover{background:rgba(248,113,113,.18);border-color:rgba(248,113,113,.5);color:#fca5a5;filter:none}
+    .wqdlg-body{padding:14px 18px 18px;text-align:center}
+    .wqdlg-status{font-size:.85rem;color:var(--muted);min-height:1.4em;margin:0 0 10px;transition:color .2s}
+    .wqdlg-status.error{color:var(--red)}
+    .wqdlg-status.ok{color:var(--green)}
+    .wqdlg-spinner{display:flex;justify-content:center;align-items:center;height:100px;margin:8px 0}
+    .wqdlg-spinner svg{width:48px;height:48px;animation:wq-spin 1s linear infinite}
+    @keyframes wq-spin{to{transform:rotate(360deg)}}
+    .wqdlg-qr-wrap{display:none;margin:6px auto 10px;max-width:260px}
+    .wqdlg-qr-wrap img{display:block;width:100%;height:auto;border-radius:10px;border:2px solid var(--line2)}
+    .wqdlg-qr-text{text-align:left;font-size:.78rem}
+    @media(max-width:480px){#wechat-dialog{width:96vw;border-radius:14px}.wqdlg-body{padding:10px 12px 14px}}
+  </style>
+<style>
+/* ===== v1.2 visual layer: aurora glass + micro-interactions (pure CSS, no selector changes) ===== */
+html{background:
+ radial-gradient(1100px 700px at 82% -8%,rgba(34,211,238,.15),transparent 60%),
+ radial-gradient(900px 620px at 4% 108%,rgba(99,102,241,.18),transparent 62%),
+ radial-gradient(700px 500px at 50% 122%,rgba(56,189,248,.10),transparent 60%),
+ linear-gradient(180deg,#050b16,#04070f)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:repeating-linear-gradient(0deg,rgba(80,150,220,.05) 0 1px,transparent 1px 44px),
+ repeating-linear-gradient(90deg,rgba(80,150,220,.05) 0 1px,transparent 1px 44px);
+ -webkit-mask-image:radial-gradient(120% 92% at 50% 0%,#000,transparent 76%);
+ mask-image:radial-gradient(120% 92% at 50% 0%,#000,transparent 76%)}
+button,.ghost,.stage,.metric-tile,details.secondary,.daily-progress,.row{transition:transform .16s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,border-color .18s ease,filter .18s ease}
+button:hover,.ghost:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(34,211,238,.22),inset 0 0 0 1px rgba(34,211,238,.35);filter:saturate(1.12) brightness(1.07)}
+button:active,.ghost:active,.stage:active{transform:translateY(0) scale(.97)}
+.stage:hover{transform:translateY(-2px);border-color:rgba(34,211,238,.6);box-shadow:0 12px 32px rgba(2,8,20,.6),0 0 20px rgba(34,211,238,.16)}
+.stage.here{box-shadow:0 0 0 1px rgba(34,211,238,.8) inset,0 0 26px rgba(34,211,238,.22)}
+.metric-tile{backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%)}
+.metric-tile:hover{transform:translateY(-2px);border-color:rgba(103,232,249,.55);box-shadow:0 10px 28px rgba(2,8,20,.55),0 0 18px rgba(34,211,238,.14)}
+.metric-tile strong{background:linear-gradient(115deg,#e9f2fd,#67e8f9 55%,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stage-progress{position:relative;overflow:hidden}
+.stage-progress span{background:linear-gradient(90deg,#22d3ee,#3b82f6,#818cf8,#22d3ee);background-size:200% 100%;animation:facai-shimmer 2.4s linear infinite}
+@keyframes facai-shimmer{to{background-position:-200% 0}}
+.bar span{background:linear-gradient(90deg,#22d3ee,#6366f1,#22d3ee);background-size:200% 100%;animation:facai-shimmer 2.8s linear infinite}
+details.secondary{overflow:hidden}
+details.secondary>summary{transition:color .15s,padding-left .15s}
+details.secondary>summary:hover{color:#a5f3fc;padding-left:4px}
+details.secondary[open]>.body{animation:facai-open .2s ease}
+@keyframes facai-open{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.pipeline-rail .rail-steps::before{box-shadow:0 0 12px rgba(34,211,238,.35)}
+h1{background:linear-gradient(115deg,#e9f2fd 30%,#67e8f9 70%,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:rgba(6,15,29,.5)}
+::-webkit-scrollbar-thumb{background:rgba(34,211,238,.28);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:rgba(34,211,238,.45)}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* ===== 客户视图：隐藏工作站术语，只留大白话能懂的部分 ===== */
+body.client-view #detail details[data-key="inspector"],
+body.client-view #detail details[data-key="binding"],
+body.client-view #detail details[data-key="artifacts"],
+body.client-view #detail details[data-key="prompt"],
+body.client-view #attribution,
+body.client-view #detail .metrics-strip{display:none}
+/* ===== 客户视图：隐藏工作站术语，只留大白话能懂的部分 ===== */
+body.client-view #detail details[data-key="inspector"],
+body.client-view #detail details[data-key="binding"],
+body.client-view #detail details[data-key="artifacts"],
+body.client-view #detail details[data-key="prompt"],
+body.client-view #attribution,
+body.client-view #detail .metrics-strip{display:none}
+.client-brief{position:relative;display:grid;gap:18px;margin:0 0 20px}
+.client-brief::before{content:"";position:absolute;left:29px;top:34px;bottom:34px;width:2px;
+ background:linear-gradient(180deg,#67e8f9,#6366f1);box-shadow:0 0 12px rgba(34,211,238,.4);border-radius:2px}
+.client-brief .cb-row{position:relative;background:linear-gradient(180deg,rgba(22,38,62,.72),rgba(11,22,38,.55));
+ border:1px solid rgba(88,140,196,.35);border-radius:16px;padding:16px 18px 14px 62px;
+ backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+ box-shadow:0 10px 30px rgba(2,8,20,.45)}
+.client-brief .cb-row::before{counter-increment:cb-step;content:counter(cb-step);
+ position:absolute;left:18px;top:16px;width:24px;height:24px;border-radius:50%;
+ background:var(--brandgrad);color:#04121f;font-weight:700;display:flex;align-items:center;justify-content:center;
+ font-size:.8rem;box-shadow:0 0 14px rgba(34,211,238,.5)}
+.client-brief{counter-reset:cb-step}
+.client-brief .cb-tag{display:inline-block;font-size:.72rem;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px;text-transform:uppercase}
+.client-brief blockquote{margin:0;font-size:1.02rem;line-height:1.75;white-space:pre-wrap;word-break:break-word;color:#f2f8ff}
+.client-brief .cb-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.client-brief .cb-step{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.8rem;color:var(--muted);background:rgba(6,15,29,.5);transition:transform .15s,box-shadow .15s,border-color .15s}
+.client-brief .cb-step:hover{transform:translateY(-1px)}
+.client-brief .cb-step.done{color:#bbf7d0;border-color:rgba(134,239,172,.45);background:rgba(20,60,35,.35);box-shadow:0 0 10px rgba(134,239,172,.12)}
+.client-brief .cb-step.done::before{content:"✓";font-weight:700}
+.client-brief .cb-step.run{color:#67e8f9;border-color:rgba(34,211,238,.6);box-shadow:0 0 12px rgba(34,211,238,.25)}
+.client-brief .cb-step.run::before{content:"▶";font-size:.7rem}
+</style>
+<style>
+/* ===== v1.3 modernization layer: design tokens + pipeline strip + skeleton ===== */
+:root{
+  /* Token layer: single source of truth for the modernized console surface.
+     Deep navy base + cyan accent; showcase gold is reserved for the delivery
+     moment so "delivered" reads the same across pages. */
+  --navy-900:#050b16;--navy-800:#081226;--navy-700:#0b1c3f;
+  --surface-glass:rgba(13,27,54,.72);--surface-glass-deep:rgba(6,14,28,.66);
+  --line-soft:rgba(56,189,248,.16);
+  --gold:#f5c451;
+  --ink-hi:#f2f8ff;--ink-mid:#c9d5e9;--ink-low:#9db2ce;
+  --radius-sm:10px;--radius-md:14px;--radius-lg:18px;--radius-xl:22px;
+  --shadow-e1:0 8px 24px rgba(2,8,20,.45);
+  --shadow-e2:0 14px 40px rgba(2,8,20,.6);
+  --shadow-e3:0 24px 64px rgba(2,8,20,.72);
+  --speed-fast:.15s;--speed-med:.25s}
+body{line-height:1.55}
+/* Surfaces ride the token scale: glass blur, radius steps, shadow elevation */
+.panel,details.secondary{border-radius:var(--radius-lg);box-shadow:var(--shadow-e1),inset 0 1px 0 rgba(255,255,255,.05)}
+.card{border-radius:var(--radius-md)}
+.card:hover{box-shadow:var(--shadow-e2)}
+#wechat-dialog{box-shadow:var(--shadow-e3),0 0 0 1px rgba(34,211,238,.18)}
+.metric-tile,.billing-panel,.overview{backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%)}
+/* Type hierarchy: supporting text stays a quiet step behind headings */
+small,.muted{letter-spacing:.01em}
+/* Group rhythm: an accent tick marks each section heading for scanability */
+h2{position:relative;padding-left:14px}
+h2::before{content:"";position:absolute;left:0;top:.34em;width:6px;height:.9em;border-radius:3px;background:var(--brandgrad);box-shadow:0 0 8px rgba(34,211,238,.45)}
+/* Status pill micro-lift: mirrors card hover without stealing focus */
+.pill{transition:transform var(--speed-fast) ease,box-shadow var(--speed-fast) ease}
+.pill:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(2,8,20,.4)}
+/* Skeleton placeholder: layout-locked shimmer kept dim for dark surfaces */
+.skel{display:grid;gap:8px;padding:2px 0}
+.skel span{height:12px;border-radius:6px;background:linear-gradient(90deg,rgba(126,190,246,.1),rgba(126,190,246,.22),rgba(126,190,246,.1));background-size:200% 100%;animation:facai-skel 1.6s linear infinite}
+.skel span:nth-child(2){width:76%}
+.skel span:nth-child(3){width:52%}
+@keyframes facai-skel{to{background-position:-200% 0}}
+/* Mission pipeline strip: five nodes 渠道→编译→授权→执行→交付.
+   Only the active node animates; done stays still — GitLab-style stoplight. */
+.pipeline-strip{margin:12px 3vw 0;padding:10px 16px;border:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(120deg,rgba(10,22,42,.72),var(--surface-glass-deep));backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%);box-shadow:var(--shadow-e1);overflow-x:auto;transition:border-color var(--speed-med) ease,box-shadow var(--speed-med) ease}
+.pipeline-strip[data-state="done"]{border-color:rgba(74,222,128,.35);box-shadow:0 0 24px rgba(74,222,128,.1),var(--shadow-e1)}
+.pipeline-strip[data-state="failed"]{border-color:rgba(248,113,113,.4)}
+.ps-track{display:flex;align-items:center;gap:14px;min-width:max-content}
+.ps-label{font-size:.7rem;letter-spacing:.16em;color:var(--ink-low);white-space:nowrap;text-transform:uppercase;transition:color var(--speed-med) ease}
+.pipeline-strip[data-state="live"] .ps-label{color:#67e8f9;text-shadow:0 0 12px rgba(34,211,238,.4)}
+.ps-nodes{display:flex;align-items:center;margin:0;padding:0;list-style:none}
+.ps-node{position:relative;display:flex;align-items:center;gap:7px;padding:0 18px 0 10px;font-size:.78rem;color:var(--ink-mid);white-space:nowrap}
+.ps-node+.ps-node::before{content:"";position:absolute;left:-14px;top:50%;width:28px;height:2px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(126,190,246,.18),rgba(126,190,246,.4));border-radius:2px;transition:background var(--speed-med) ease}
+.ps-node.done+.ps-node::before{background:linear-gradient(90deg,rgba(74,222,128,.5),rgba(74,222,128,.7))}
+.ps-node.active+.ps-node::before{background:linear-gradient(90deg,#22d3ee,#6366f1,#22d3ee);background-size:200% 100%;animation:facai-skel 1.6s linear infinite}
+.ps-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:rgba(126,190,246,.22);border:1px solid rgba(126,190,246,.4);transition:background var(--speed-med) ease,box-shadow var(--speed-med) ease}
+.ps-node::after{font-size:.68rem;color:var(--ink-low)}
+.ps-node.done .ps-dot{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(74,222,128,.55)}
+.ps-node.done::after{content:"✓";color:#86efac}
+.ps-node.done{color:var(--ink-hi)}
+.ps-node.active .ps-dot{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 10px rgba(34,211,238,.75);animation:ps-breathe 1.5s ease-in-out infinite}
+.ps-node.active::after{content:"●";color:#67e8f9}
+.ps-node.active{color:var(--ink-hi)}
+.ps-node.failed .ps-dot{background:var(--red);border-color:var(--red);box-shadow:0 0 10px rgba(248,113,113,.7)}
+.ps-node.failed::after{content:"✕";color:#fca5a5}
+.ps-node.failed{color:#fecaca}
+/* Delivery node keeps the showcase gold pulse: it is the settlement moment */
+.ps-node[data-node="deliver"].done .ps-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(245,196,81,.7)}
+.ps-node[data-node="deliver"].done::after{content:"✓";color:var(--gold)}
+.ps-node[data-node="deliver"].done{color:var(--gold)}
+@keyframes ps-breathe{0%,100%{opacity:.55}50%{opacity:1}}
+/* Mobile order: on the bare console (no mission open) account safety + recharge
+   lead the column (audit UX-12); once a mission is rendered — deep links, task
+   cards — the detail column leads again so the mission progress bar stays on the
+   first phone screen. Modal close meets the 44px touch minimum. */
+@media(max-width:900px){
+  main .side-col{order:1}main .detail-col{order:2}
+  body.mission-open main .detail-col{order:1}body.mission-open main .side-col{order:2}
+  aside.side-col{display:flex;flex-direction:column}
+  aside.side-col>#error{order:-4}
+  aside.side-col>#account-panel{order:-3}
+  aside.side-col>#recharge-panel{order:-2}
+  .wqdlg-close{width:44px;height:44px;min-height:44px;flex-basis:44px}
+  .pipeline-strip{margin:10px 16px 0;padding:9px 12px}
+  .ps-track{gap:10px}
+  .ps-node{padding:0 12px 0 8px;font-size:.74rem}
+}
+</style>
+<style>
+/* ===== v1.4 指挥台化层（基线 §8 三视图 / §9 多任务中心）：纯加法，不动既有类名与规则 ===== */
+/* 顶栏三视图切换：简单=默认现状；专业=额外 DAG 明细；开发者=再展开事件原始 JSON */
+.view-switch{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);border-radius:999px;background:rgba(6,15,29,.55)}
+.view-btn{min-height:30px;padding:4px 12px;font-size:.78rem;border-radius:999px;box-shadow:none;background:transparent;color:var(--muted);border:0}
+.view-btn:hover{filter:none;transform:none;box-shadow:none;color:var(--text);background:rgba(80,140,200,.16)}
+.view-btn[aria-pressed="true"]{background:var(--brandgrad);color:#04121f;font-weight:700}
+.view-btn[aria-pressed="true"]:hover{filter:brightness(1.06);background:var(--brandgrad)}
+/* §9 三段计数头：ACTIVE 青 / WAITING 金 / COMPLETED 绿，与既有 pill 状态色同语言 */
+.mission-count-head{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.mc-seg{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;letter-spacing:.08em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:rgba(6,15,29,.5)}
+.mc-seg b{font-size:.92rem;line-height:1;color:var(--text)}
+.mc-active{border-color:rgba(34,211,238,.45)}.mc-active b{color:#67e8f9;text-shadow:0 0 10px rgba(34,211,238,.5)}
+.mc-waiting{border-color:rgba(250,204,21,.4)}.mc-waiting b{color:var(--amber)}
+.mc-completed{border-color:rgba(74,222,128,.4)}.mc-completed b{color:#86efac}
+/* §9 任务卡当前动作行：文案由真实 status/steps 推导，RUNNING 才有呼吸点 */
+.mission-action{display:flex;align-items:center;gap:7px;margin:7px 0 2px;font-size:.8rem;min-width:0}
+.mission-action span:last-child{overflow-wrap:anywhere}
+.mission-action .live-dot{flex:0 0 8px;margin:0}
+/* §9 Developer 模式 Worker 分配行：复用已打开 Mission 的 jobs（lease_owner=真实领取者） */
+.worker-rows{display:grid;gap:4px;margin-top:8px;padding:7px 9px;border:1px dashed rgba(126,190,246,.32);border-radius:9px;background:rgba(4,12,24,.45);text-align:left}
+.worker-rows .worker-head{font-size:.64rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.worker-row{display:flex;align-items:center;gap:8px;font-size:.72rem;color:var(--muted);flex-wrap:wrap;min-width:0}
+.worker-row .worker-owner{color:#a5d9f3;font-weight:600;white-space:nowrap}
+.worker-row .worker-task{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.worker-row .pill{font-size:.64rem;padding:1px 8px}
+/* §8 专业视图 DAG 明细表：窄屏容器内横向滚动，绝不允许撑破页面 */
+.dag-wrap{overflow-x:auto}
+.dag-table{width:100%;border-collapse:collapse;table-layout:auto;font-size:.75rem}
+.dag-table th,.dag-table td{text-align:left;padding:5px 8px;border-bottom:1px solid rgba(126,190,246,.14);vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
+.dag-table th{color:var(--muted);font-weight:500;white-space:nowrap}
+.dag-table tbody tr:last-child td{border-bottom:0}
+.dag-table td .pill{font-size:.64rem;padding:1px 8px}
+/* 事件原始 JSON 属工作站术语：客户视图与检查器同策略隐藏 */
+body.client-view #detail details[data-key="raw-events"]{display:none}
+@media(max-width:600px){.view-switch{width:100%;justify-content:center}}
+/* 协助模式知情横幅：金色边框 = 「有人在你的账号里协助」。常驻、不可关闭，
+   直到会话被结束或到期 —— 客户侧知情是硬要求，缺失 assist 时绝不渲染。 */
+.assist-banner{margin:10px 3vw 0;padding:10px 14px;border:1px solid #d4af37;border-radius:12px;background:linear-gradient(120deg,rgba(212,175,55,.16),rgba(252,211,77,.07));box-shadow:0 0 18px rgba(212,175,55,.22);color:#fde68a;font-size:.85rem;line-height:1.5}
+.assist-banner .assist-audit{display:block;font-size:.75rem;color:#d4af37;margin-top:2px}
+</style>
+</head>
+<body>
+  <div class="bg-decor" aria-hidden="true"><span class="glow"></span><span class="grid"></span><span class="ripple"></span></div>
+  <!-- 协助模式（可见可审）：数据来自 /auth/session 的 assist 字段，boot() 渲染 -->
+  <div id="assist-banner" class="assist-banner" hidden role="status" aria-live="polite"></div>
+  <header>
+    <div class="brand">
+      <span class="brand-mark" role="img" aria-label="Facai 船锚标识">
+        <svg viewBox="0 0 48 48" focusable="false" aria-hidden="true">
+          <defs><linearGradient id="facaiMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#3b82f6"/>
+          </linearGradient></defs>
+          <circle cx="24" cy="24" r="21" fill="none" stroke="url(#facaiMark)" stroke-width="2" opacity=".5"/>
+          <g fill="none" stroke="url(#facaiMark)" stroke-width="2.6" stroke-linecap="round">
+            <circle cx="24" cy="10.5" r="3.5"/>
+            <path d="M24 14v23"/><path d="M15 21h18"/>
+            <path d="M10.5 29.5c0 7 6 11.5 13.5 11.5s13.5-4.5 13.5-11.5"/>
+          </g>
+        </svg>
+      </span>
+      <div><h1>FACAI <span class="brand-sub">· MISSION CONTROL</span></h1><div class="sub">实时进度 · 当前阶段 · 真实流水线（无模拟进度）</div></div>
+    </div>
+    <div class="row" style="gap:10px"><span id="active-count" class="pill">0 个进行中</span><div class="view-switch" id="view-switch" role="group" aria-label="视图模式：简单 / 专业 / 开发者。切换只改变同一 Mission 的投影，不新建任务、不重新拉取数据"><button type="button" class="view-btn" data-view="simple" aria-pressed="true">简单</button><button type="button" class="view-btn" data-view="pro" aria-pressed="false">专业</button><button type="button" class="view-btn" data-view="dev" aria-pressed="false">开发者</button></div><span id="health" class="pill" role="status" aria-live="polite">检查中</span><span id="user" class="pill">会话</span><button id="logout" class="ghost" type="button">退出登录</button></div>
+  </header>
+  <!-- Mission pipeline strip: five nodes driven by the open mission's real status (see trailing script) -->
+  <section class="pipeline-strip" id="pipeline-strip" data-state="idle" aria-label="任务流水线：渠道 → 编译 → 授权 → 执行 → 交付">
+    <div class="ps-track">
+      <span class="ps-label" id="ps-label" aria-live="polite">任务流水线</span>
+      <ol class="ps-nodes">
+        <li class="ps-node pending" data-node="channel"><span class="ps-dot" aria-hidden="true"></span>渠道</li>
+        <li class="ps-node pending" data-node="compile"><span class="ps-dot" aria-hidden="true"></span>编译</li>
+        <li class="ps-node pending" data-node="authorize"><span class="ps-dot" aria-hidden="true"></span>授权</li>
+        <li class="ps-node pending" data-node="execute"><span class="ps-dot" aria-hidden="true"></span>执行</li>
+        <li class="ps-node pending" data-node="deliver"><span class="ps-dot" aria-hidden="true"></span>交付</li>
+      </ol>
+    </div>
+  </section>
+  <main>
+    <div class="capability-band" id="capability-band">
+      <div class="cap-line"><strong>说一句话，Agent 船队自动开工</strong><span class="muted">大白话下单 → 自动拆解 → 多模型并行 → 真实交付</span></div>
+      <div class="cap-chips">
+        <!-- 渠道是站长私人接入（客户访问渠道接口一律 403）：客户视图在 boot() 里
+             把这条 chips 换成网页/API 下单文案，避免注册客户被「随时派活」误导。 -->
+        <span class="cap-chip" id="cap-channel-chip">📱 微信 / Telegram / WhatsApp / LINE 随时派活</span>
+        <span class="cap-chip">🧩 一句话自动拆成阶段任务</span>
+        <span class="cap-chip">⚡ 多模型并行 · 自动重试</span>
+        <span class="cap-chip">🔒 自带模型 · 密钥加密</span>
+        <span class="cap-chip">💰 USDT 充值 · 预算限额</span>
+        <span class="cap-chip">🌐 24/7 无人值守 · 断链自愈</span>
+      </div>
+    </div>
+    <aside class="panel side-col">
+      <p id="error" role="alert" aria-live="assertive"></p>
+      <details class="daily-progress" id="daily-progress-panel">
+        <summary aria-labelledby="daily-progress-title"><span class="row"><h2 id="daily-progress-title">今日开发进度 <span class="muted" id="daily-progress-date"></span></h2><span id="daily-progress-active" class="muted" role="status" aria-live="polite"></span><span class="daily-chevron" aria-hidden="true">›</span></span></summary>
+        <div class="daily-body">
+        <p class="daily-progress-note" id="daily-progress-note"></p>
+        <div id="daily-progress-list" class="list" aria-label="今日开发进度"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+      <div id="billing-summary-slot" aria-live="polite"><p class="empty">账单加载中…</p></div>
+      <h2 style="margin-top:12px">任务列表 <span id="count" class="muted"></span></h2>
+      <!-- 基线 §9 多任务中心：三段计数头，数字由 refresh() 从 /missions 真实 status 统计 -->
+      <div id="mission-count-head" class="mission-count-head" role="group" aria-label="任务状态计数：ACTIVE / WAITING / COMPLETED"></div>
+      <div id="missions" class="list" aria-label="Mission 列表"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+
+      <details class="secondary" id="create-panel">
+        <summary>＋ 创建新 Mission</summary>
+        <div class="body">
+          <form id="create-form">
+            <label for="create-title">名称</label><input id="create-title" name="title" maxlength="200" required placeholder="例如：开发库存管理应用">
+            <label for="create-mode">创建模式</label><select id="create-mode" name="mode">
+              <option value="auto">全自动：一句原话，自动拆解阶段并派发执行</option>
+              <option value="manual">手动：自己指定流水线步骤</option>
+            </select>
+            <label for="create-input">你的原话（逐字保留）</label><textarea id="create-input" name="original_input" required placeholder="完整保留原始要求"></textarea>
+            <label for="create-steps">流水线步骤，每行一个（仅手动模式生效）</label><textarea id="create-steps" name="steps">规划
+开发
+测试
+交付</textarea>
+            <button type="submit">创建任务</button>
+          </form>
+        </div>
+      </details>
+
+      <details class="secondary" id="registry-panel">
+        <summary>模型与能力注册</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">四类 Registry 各自独立：Agent / Model / Skill / Runtime。凭据只保存环境变量名。</p>
+          <form id="model-form">
+            <label for="model-key">模型 ID</label><input id="model-key" name="key" required placeholder="deepseek-flash">
+            <div class="grid2"><label for="model-provider">提供方</label><input id="model-provider" name="provider" required placeholder="DeepSeek">
+            <label for="model-name">上游模型名</label><input id="model-name" name="model" required placeholder="deepseek-flash"></div>
+            <label for="model-endpoint">OpenAI 兼容 Endpoint</label><input id="model-endpoint" name="endpoint" required placeholder="https://api.deepseek.com">
+            <label for="model-env">API Key 环境变量名</label><input id="model-env" name="api_key_env" placeholder="DEEPSEEK_API_KEY">
+            <button type="submit" class="ghost">注册模型</button>
+          </form>
+          <details style="margin:10px 0"><summary style="cursor:pointer;font-size:.82rem;color:var(--muted)">导入 Skill（SKILL.md，登记即可用的能力）</summary>
+            <label for="skill-import-url">来源 URL（https）</label><input id="skill-import-url" placeholder="https://github.com/owner/repo">
+            <label for="skill-import-text">SKILL.md 内容</label><textarea id="skill-import-text" placeholder="粘贴 SKILL.md 全文（含 frontmatter）" style="min-height:90px"></textarea>
+            <button type="button" class="ghost" id="skill-import-btn">解析并登记为可用能力</button>
+            <span id="skill-import-state" class="muted" style="font-size:.78rem"></span>
+          </details>
+          <div id="registries" class="list"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="account-panel">
+        <summary>账户与安全（修改密码）</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">修改你登录本平台的密码。新密码至少 8 位，且不能是连续数字、重复字符或常见弱口令；管理员账号密码由环境变量管理，不在此处修改。</p>
+          <form id="change-password-form">
+            <label for="pw-current">当前密码</label><input id="pw-current" type="password" autocomplete="current-password" required>
+            <label for="pw-new">新密码（至少 8 位）</label><input id="pw-new" type="password" minlength="8" autocomplete="new-password" required>
+            <label for="pw-confirm">确认新密码</label><input id="pw-confirm" type="password" minlength="8" autocomplete="new-password" required>
+            <button type="submit" class="ghost">修改密码</button>
+            <span id="change-password-state" class="muted" style="font-size:.78rem"></span>
+          </form>
+          <div id="admin-reset-box" style="margin-top:12px;display:none">
+            <p class="muted" style="margin:0 0 8px;font-size:.78rem">站长重置某个注册账号的密码（弱口令会强制该账号下次登录改密）。</p>
+            <form id="admin-reset-form">
+              <div class="grid2"><label for="ar-user">用户名</label><input id="ar-user" required placeholder="要重置的用户名">
+              <label for="ar-pass">新密码</label><input id="ar-pass" type="text" required placeholder="临时密码"></div>
+              <button type="submit" class="ghost">重置密码</button>
+              <span id="admin-reset-state" class="muted" style="font-size:.78rem"></span>
+            </form>
+          </div>
+        </div>
+      </details>
+
+      <details class="secondary" id="api-keys-panel">
+        <summary>我的 API（自动化访问密钥）</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">把你的脚本接到平台：密钥只放行任务、作业、产物和自己的账单接口，超出范围的请求返回 403；明文只在生成时显示一次，可随时吊销。</p>
+          <button type="button" class="ghost" id="api-key-create">生成新的 API Key</button>
+          <span id="api-key-state" class="muted" style="font-size:.78rem"></span>
+          <div id="api-key-secret" style="display:none;margin-top:8px"></div>
+          <div id="api-keys" class="list" style="margin-top:8px"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="my-channels-panel">
+        <summary>我的通知渠道（进度推送到你自己的 Bot）</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">绑定你自己创建的 Bot（Telegram 用你在 BotFather 创建的，LINE 用你官方号的 Channel 凭据），任务进度推送到你自己的渠道。凭据加密存储、永不下发、只在推送时解密；解绑后回落站点渠道。</p>
+          <div class="card" style="cursor:default" data-channel-row="telegram">
+            <div class="row"><strong>Telegram</strong><span class="pill WAITING" data-channel-bound="telegram">加载中…</span></div>
+            <small class="muted" data-channel-meta="telegram"></small>
+            <form id="my-channel-telegram-form">
+              <div class="grid2"><label for="tg-bot-token">Bot Token（BotFather 下发，形如 123456:ABC-DEF…）</label><input id="tg-bot-token" type="password" required placeholder="123456:ABC-DEF…" autocomplete="off"></div>
+              <div class="grid2"><label for="tg-chat-id">Chat ID（接收进度的会话，群聊为负数或 @频道名）</label><input id="tg-chat-id" required placeholder="556677 / -1009988776655 / @mychannel" autocomplete="off"></div>
+              <button type="submit" class="ghost">绑定 Telegram</button>
+              <button type="button" class="ghost" data-test-channel="telegram" hidden>测试推送</button>
+              <button type="button" class="ghost" data-unbind-channel="telegram" hidden>解绑</button>
+              <span id="my-channel-telegram-state" class="muted" style="font-size:.78rem"></span>
+            </form>
+          </div>
+          <div class="card" style="cursor:default;margin-top:8px" data-channel-row="line">
+            <div class="row"><strong>LINE</strong><span class="pill WAITING" data-channel-bound="line">加载中…</span></div>
+            <small class="muted" data-channel-meta="line"></small>
+            <form id="my-channel-line-form">
+              <div class="grid2"><label for="line-access-token">Channel Access Token（LINE Developers 控制台）</label><input id="line-access-token" type="password" required autocomplete="off"></div>
+              <div class="grid2"><label for="line-channel-secret">Channel Secret</label><input id="line-channel-secret" type="password" required autocomplete="off"></div>
+              <div class="grid2"><label for="line-user-id">User ID（U + 32 位十六进制，webhook 里的 source.userId）</label><input id="line-user-id" required placeholder="U4af9989d1241dd7f6f8f6d2f8b1e9c0a" autocomplete="off"></div>
+              <button type="submit" class="ghost">绑定 LINE</button>
+              <button type="button" class="ghost" data-test-channel="line" hidden>测试推送</button>
+              <button type="button" class="ghost" data-unbind-channel="line" hidden>解绑</button>
+              <span id="my-channel-line-state" class="muted" style="font-size:.78rem"></span>
+            </form>
+          </div>
+          <div class="card" style="cursor:default;margin-top:8px" data-channel-row="discord">
+            <div class="row"><strong>Discord</strong><span class="pill WAITING" data-channel-bound="discord">加载中…</span></div>
+            <small class="muted" data-channel-meta="discord"></small>
+            <form id="my-channel-discord-form">
+              <div class="grid2"><label for="discord-bot-token">Bot Token（Discord Developer Portal → Bot 页复制）</label><input id="discord-bot-token" type="password" required autocomplete="off"></div>
+              <div class="grid2"><label for="discord-channel-id">频道 ID（开发者模式 → 右键频道 → 复制频道 ID）</label><input id="discord-channel-id" required placeholder="987654321098765432" autocomplete="off"></div>
+              <button type="submit" class="ghost">绑定 Discord</button>
+              <button type="button" class="ghost" data-test-channel="discord" hidden>测试推送</button>
+              <button type="button" class="ghost" data-unbind-channel="discord" hidden>解绑</button>
+              <span id="my-channel-discord-state" class="muted" style="font-size:.78rem"></span>
+            </form>
+          </div>
+          <div class="card" style="cursor:default;margin-top:8px" data-channel-row="slack">
+            <div class="row"><strong>Slack</strong><span class="pill WAITING" data-channel-bound="slack">加载中…</span></div>
+            <small class="muted" data-channel-meta="slack"></small>
+            <form id="my-channel-slack-form">
+              <div class="grid2"><label for="slack-bot-token">Bot User OAuth Token（api.slack.com → OAuth & Permissions，xoxb- 开头）</label><input id="slack-bot-token" type="password" required placeholder="xoxb-…" autocomplete="off"></div>
+              <div class="grid2"><label for="slack-channel-id">频道 ID（频道详情里的 C 开头 ID）</label><input id="slack-channel-id" required placeholder="C0123456789" autocomplete="off"></div>
+              <button type="submit" class="ghost">绑定 Slack</button>
+              <button type="button" class="ghost" data-test-channel="slack" hidden>测试推送</button>
+              <button type="button" class="ghost" data-unbind-channel="slack" hidden>解绑</button>
+              <span id="my-channel-slack-state" class="muted" style="font-size:.78rem"></span>
+            </form>
+          </div>
+        </div>
+      </details>
+
+      <details class="secondary" id="my-models-panel">
+        <summary>我的模型（客户端自带模型与密钥）</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">使用你自己的模型与 API Key：密钥加密存储、永不下发、只在调用时解密注入。你的任务优先使用你的模型。</p>
+          <form id="my-model-form">
+            <div class="grid2"><label for="my-model-name">名称</label><input id="my-model-name" required placeholder="我的 deepseek">
+            <label for="my-model-model">上游模型名</label><input id="my-model-model" required placeholder="deepseek-chat"></div>
+            <label for="my-model-endpoint">OpenAI 兼容 Endpoint（https）</label><input id="my-model-endpoint" required placeholder="https://api.deepseek.com">
+            <label for="my-model-key">API Key（仅提交一次，不回显）</label><input id="my-model-key" type="password" required placeholder="sk-...">
+            <button type="submit" class="ghost">保存我的模型</button>
+            <span id="my-model-state" class="muted" style="font-size:.78rem"></span>
+          </form>
+          <div id="my-models" class="list"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="recharge-panel">
+        <summary>USDT 充值（TRC20 · 单笔 $100 起）</summary>
+        <div class="body" id="recharge-body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">转账后一般 5 分钟内到账确认。到账后由管理员为你的账号叠加月度额度。</p>
+          <div class="metric-tile" style="margin-bottom:8px"><small>收款地址（TRC20 冷钱包）</small><strong id="recharge-addr" style="font-size:.8rem;word-break:break-all">加载中…</strong><div style="margin-top:6px"><button type="button" class="ghost" id="recharge-copy" style="min-height:30px;padding:4px 10px;font-size:.75rem">复制地址</button></div></div>
+          <form id="recharge-form">
+            <label for="recharge-amount">充值金额（USDT，单笔最低 100）</label>
+            <input id="recharge-amount" type="number" min="100" step="1" value="100" required>
+            <label for="recharge-txid">已转账？粘贴 txid（可选，附上后自动核对该笔链上付款）</label>
+            <input id="recharge-txid" maxlength="128" placeholder="TRC20 交易哈希（钱包转账记录里复制）">
+            <button type="submit" class="ghost">发起充值请求</button>
+            <span id="recharge-state" class="muted" style="font-size:.78rem"></span>
+            <span id="recharge-tx-state" class="muted" style="font-size:.78rem"></span>
+          </form>
+          <div id="recharge-mine" class="list" style="margin-top:8px"></div>
+          <div id="recharge-admin" style="margin-top:8px"></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="reconciliation-panel">
+        <summary>充值对账（管理员） <button type="button" class="ghost" id="refresh-recon">刷新</button></summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">账本（已核准充值）与链上（已匹配到账）逐笔核对：差额不为零，或下方任一张表非空，都代表钱和账对不上，需要人工处理。</p>
+          <p class="muted" id="recon-sync" style="margin:0 0 8px;font-size:.78rem">⛓ 链上监控：加载中…</p>
+          <div class="billing-grid" id="recon-summary" aria-label="对账汇总"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+          <p class="muted" id="recon-ignored" style="margin:8px 0 0;font-size:.75rem"></p>
+          <h3 style="margin:14px 0 6px">已入账但无链上凭证 <span class="muted" id="recon-without-count"></span></h3>
+          <div class="recon-wrap" id="recon-without"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+          <h3 style="margin:14px 0 6px">到账但无人认领 <span class="muted" id="recon-unmatched-count"></span></h3>
+          <div class="recon-wrap" id="recon-unmatched"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="members-panel">
+        <summary>会员管理（管理员） <button type="button" class="ghost" id="refresh-members">刷新</button></summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">全部注册会员的余额（资金池）、本月消费与绑定渠道。充值叠加进余额（与充值核准同语义）；冻结把余额置 0，立即拒绝其全部新任务；解冻需输入恢复后的额度。</p>
+          <div id="members-body" aria-label="会员列表"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+          <span id="members-state" class="muted" style="font-size:.75rem"></span>
+        </div>
+      </details>
+
+      <details class="secondary" id="artifacts-panel">
+        <summary>产物中心（测试与执行产物归档）</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">所有后端执行与测试产出的日志、报告、代码产物，按任务归档、最新在前，点击查看内容。</p>
+          <div id="artifacts-center" class="list"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="ops-brief-panel">
+        <summary>运维日报（24 小时站点报告）</summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">机器生成的晨会：过去 24 小时的吞吐、自愈重试、花费与卡点，全部来自真实账本。</p>
+          <div class="metrics-strip" id="ops-brief" style="margin:0 0 6px"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="channel-panel">
+        <summary>消息渠道接收入口 <button type="button" class="ghost channel-refresh" id="refresh-channels">刷新状态</button></summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">渠道凭据只从分类环境文件读取，控制台不接收密钥；未配置时安全显示未配置，不会伪装已接通。</p>
+          <div class="channel-tools"><span id="channels-updated" class="muted">尚未刷新</span></div>
+          <div class="channel-tools"><button type="button" class="ghost" id="wechat-login" aria-haspopup="dialog">个人微信扫码授权</button><button type="button" class="ghost" id="wechat-unbind" hidden>解除授权重新扫码</button><span id="wechat-login-status" class="muted"></span><span id="wechat-unbind-status" class="muted"></span></div>
+          <div id="channels" class="list"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+          <h3 style="margin:14px 0 6px">消息收件箱 <span class="muted">原话逐字保留</span></h3>
+          <div id="inbox" class="list" aria-label="消息收件箱"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+
+      <details class="secondary" id="n8n-panel">
+        <summary>n8n 自动化集成 <button type="button" class="ghost" id="refresh-n8n">刷新状态</button></summary>
+        <div class="body">
+          <p class="muted" style="margin:0 0 8px;font-size:.8rem">n8n 凭据只从分类环境文件读取，控制台不接收也不显示密钥或 Webhook URL；未配置时安全返回 CONFIG_REQUIRED，不会伪装已连接。</p>
+          <div id="n8n-status" class="list" aria-label="n8n 配置状态"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+          <h3 style="margin:14px 0 6px">最近投递 <span class="muted">真实结果</span></h3>
+          <div id="n8n-deliveries" class="list" aria-label="n8n 最近投递"><div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div></div>
+        </div>
+      </details>
+    </aside>
+
+    <section class="panel detail-col">
+      <div class="mission-bar">
+        <div class="field">
+          <label for="mission-picker">选择 Mission（可通过链接 ?mission=ID 直达）</label>
+          <select id="mission-picker"><option value="">选择 Mission…</option></select>
+        </div>
+      </div>
+      <p id="sse-status" class="muted" role="status" aria-live="polite" style="display:none;margin:6px 0 0;font-size:.8rem"></p>
+      <div id="detail"><p class="empty">选择一个任务查看真实流水线与阶段输出。</p></div>
+    </section>
+  </main>
+  <!-- WeChat QR authorization modal -->
+  <dialog id="wechat-dialog" aria-labelledby="wqdlg-title" aria-modal="true">
+    <div class="wqdlg-header">
+      <h3 id="wqdlg-title">个人微信扫码授权</h3>
+      <button class="wqdlg-close" id="wqdlg-close" type="button" aria-label="关闭">✕</button>
+    </div>
+    <div class="wqdlg-body">
+      <p class="wqdlg-status" id="wqdlg-status" role="status" aria-live="polite">正在申请二维码…</p>
+      <div class="wqdlg-spinner" id="wqdlg-spinner" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="20" stroke="rgba(34,211,238,.2)" stroke-width="4"/>
+          <path d="M44 24a20 20 0 0 0-20-20" stroke="url(#wqSpinGrad)" stroke-width="4" stroke-linecap="round"/>
+          <defs><linearGradient id="wqSpinGrad" x1="24" y1="4" x2="44" y2="24" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#22d3ee"/><stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+          </linearGradient></defs>
+        </svg>
+      </div>
+      <div class="wqdlg-qr-wrap" id="wqdlg-qr-wrap"></div>
+      <div class="wqdlg-qr-text" id="wqdlg-qr-text"></div>
+    </div>
+  </dialog>
+  <script>
+    const api='/api/v1'; let selected=null, source=null, currentStage=null, current=null, csrfToken=null, workflowResizeBound=false;
+    const STATUS_ZH={WAITING:'等待',QUEUED:'排队',RUNNING:'进行中',PAUSED:'已暂停',COMPLETED:'已完成',FAILED:'失败',BLOCKED:'卡住',CANCELLED:'已取消',PREPARED:'已准备',RECEIVED:'已接收',DISPATCHED:'已派发',CONVERSION_FAILED:'转换失败',SENT:'已发送'};
+    const statusLabel=v=>STATUS_ZH[v]||v;
+    const statusPill=v=>`<span class="pill ${escapeHtml(v)}" title="${escapeHtml(v)}">${escapeHtml(statusLabel(v))}</span>`;
+    const STEP_STATUS_ZH={WAITING:'等待中',QUEUED:'排队中',RUNNING:'工作中',BLOCKED:'卡住',FAILED:'失败',COMPLETED:'已完成',CANCELLED:'已取消',PAUSED:'已暂停'};
+    const stepStatusLabel=v=>STEP_STATUS_ZH[v]||statusLabel(v);
+    const stepStatusPill=v=>`<span class="pill ${escapeHtml(v)}" title="${escapeHtml(v)}">${escapeHtml(stepStatusLabel(v))}</span>`;
+    const STEP_EVENT_ZH={STEP_RUNNING:'开始工作',STEP_COMPLETED:'阶段完成',STEP_FAILED:'阶段失败',STEP_BLOCKED:'依赖阻塞',STEP_UNBLOCKED:'依赖解除',OPENCODE_STARTED:'执行开始',OPENCODE_COMPLETED:'执行完成',OPENCODE_FAILED:'执行失败',OPENCODE_TIMEOUT:'执行超时',OUTPUT:'实时输出',ERROR:'错误输出',JOB_QUEUED:'进入队列',JOB_STARTED:'队列开始',JOB_COMPLETED:'队列完成',JOB_FAILED:'队列失败',JOB_BLOCKED:'队列阻塞',JOB_RETRIED:'队列重试',JOB_PAUSED:'队列暂停',JOB_RESUMED:'队列恢复'};
+    const CALL_RESULT_TYPES=new Set(['OPENCODE_COMPLETED','OPENCODE_FAILED','OPENCODE_TIMEOUT']);
+    const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    // Single source of truth for the bar: always a whole 0-100 integer so the
+    // fill width, aria-valuenow and the visible label can never disagree.
+    const progressPct=v=>{const n=Math.round(Number(v));return Number.isFinite(n)?Math.max(0,Math.min(100,n)):0};
+    function billingMultiplier(){
+      const fallback=10; // 站长定价基准：估算按 10 倍展示（倍率输入已隐藏）
+      try{const raw=localStorage.getItem('facai.billingMultiplier');if(raw===null)return fallback;const value=Number(raw);return Number.isFinite(value)&&value>=0&&value<=10000?value:fallback}
+      catch(_){return fallback}
+    }
+    function tokenValue(value){
+      if(Number.isFinite(Number(value))&&value!==null&&value!==''&&Number(value)>=0)return Number(value);
+      if(!value||typeof value!=='object')return null;
+      for(const key of ['total','total_tokens'])if(Number.isFinite(Number(value[key]))&&value[key]!=null)return Number(value[key]);
+      const input=Number(value.input_tokens??value.input),output=Number(value.output_tokens??value.output);
+      return Number.isFinite(input)&&Number.isFinite(output)?input+output:null;
+    }
+    function usageFields(payload){
+      const usage=payload.usage&&typeof payload.usage==='object'?payload.usage:{};
+      const tokenData=payload.tokens&&typeof payload.tokens==='object'?payload.tokens:{};
+      const pick=(...values)=>{for(const value of values)if(value!==undefined&&value!==null&&value!==''&&Number.isFinite(Number(value))&&Number(value)>=0)return Number(value);return null};
+      const input=pick(payload.input_tokens,usage.input_tokens,tokenData.input_tokens,tokenData.input);
+      const output=pick(payload.output_tokens,usage.output_tokens,tokenData.output_tokens,tokenData.output);
+      const total=pick(tokenValue(payload.tokens),payload.total_tokens,usage.total_tokens,usage.totalTokens);
+      return {input,output,total:total??(input!=null&&output!=null?input+output:null)};
+    }
+    function callResultEvent(event){return event.type?.startsWith('MODEL_')||CALL_RESULT_TYPES.has(event.type)}
+    function formatMoney(amount,currency='USD'){
+      try{return new Intl.NumberFormat(undefined,{style:'currency',currency,minimumFractionDigits:2,maximumFractionDigits:4}).format(amount)}
+      catch(_){return `${Number(amount).toFixed(4)} ${currency}`}
+    }
+    function billingMetrics(events,stepId=null){
+      const inScope=stepId?events.filter(event=>event.step_id===stepId):events;
+      const calls=inScope.filter(callResultEvent);
+      const ledgerUsage=events.filter(event=>event.type==='COST_RECORDED'&&tokenValue(event.payload?.tokens)!=null);
+      const totalEvents=stepId?calls:(ledgerUsage.length?ledgerUsage:calls);
+      let input=0,output=0,total=0,inputSeen=false,outputSeen=false,totalSeen=false;
+      for(const event of calls){
+        const usage=usageFields(event.payload||{});
+        if(usage.input!=null){input+=usage.input;inputSeen=true}
+        if(usage.output!=null){output+=usage.output;outputSeen=true}
+      }
+      for(const event of totalEvents){
+        const usage=usageFields(event.payload||{});
+        if(usage.total!=null){total+=usage.total;totalSeen=true}
+      }
+      if(!totalSeen&&inputSeen&&outputSeen){total=input+output;totalSeen=true}
+      let costEvents;
+      if(stepId){costEvents=calls.filter(event=>event.payload&&(event.payload.cost!=null||event.payload.amount!=null))}
+      else {
+        const ledger=events.filter(event=>event.type==='COST_RECORDED'&&event.payload&&(event.payload.amount!=null||event.payload.cost!=null));
+        costEvents=ledger.length?ledger:calls.filter(event=>event.payload&&(event.payload.cost!=null||event.payload.amount!=null));
+      }
+      const costs=new Map();
+      for(const event of costEvents){const payload=event.payload||{},currency=String(payload.currency||'USD').toUpperCase();
+        const amount=Number(payload.amount??payload.cost);if(!Number.isFinite(amount)||amount<0)continue;
+        costs.set(currency,(costs.get(currency)||0)+amount)}
+      return {calls:calls.length,input:inputSeen?input:null,output:outputSeen?output:null,total:totalSeen?total:null,costs:[...costs.entries()].map(([currency,amount])=>({currency,amount}))};
+    }
+    function costAmounts(metrics,multiplier){
+      if(!metrics.costs.length)return '<span>未报告</span>';
+      return metrics.costs.map(cost=>`<span data-base="${cost.amount}" data-currency="${escapeHtml(cost.currency)}">${escapeHtml(formatMoney(cost.amount*multiplier,cost.currency))}</span>`).join(' · ');
+    }
+    function billingLine(metrics){
+      const tokens=metrics.total==null?'未提供':Math.round(metrics.total).toLocaleString();
+      const input=metrics.input==null?'未提供':Math.round(metrics.input).toLocaleString();
+      const output=metrics.output==null?'未提供':Math.round(metrics.output).toLocaleString();
+      const cost=metrics.costs.length?metrics.costs.map(c=>formatMoney(c.amount,c.currency)).join(' · '):'未报告';
+      const priced=outputPrice(metrics);
+      return `调用 ${metrics.calls} 次 · 输入 ${input} · 输出 ${output} · Token ${tokens} · 已记录成本 ${cost}`+(priced!=null?` · 输出计价 ${formatMoney(priced)}`:'');
+    }
+    let MY_BILLING=null;
+    async function loadMyBilling(){
+      try{MY_BILLING=await request('/billing/me');renderMyBillingSlot();if(current)rerender()}
+      catch(_){MY_BILLING=null;renderMyBillingSlot()}
+    }
+    function renderMyBillingSlot(){
+      // 常驻渲染：余额/额度固定在任务列表上方，新用户没有任何任务也看得到
+      const slot=document.querySelector('#billing-summary-slot');if(!slot)return;
+      slot.innerHTML=billingSummary()||'<p class="empty">账单暂不可用，刷新页面重试</p>';
+    }
+    function billingSummary(variant){
+      if(!MY_BILLING)return '';
+      const spend=MY_BILLING.spend||{},limit=MY_BILLING.monthly_limit_usd;
+      const cost=Number(spend.cost_usd||0),tok=Number(spend.total_tokens||0);
+      const limitText=limit>0?formatMoney(limit):'不限';
+      const remain=limit>0?Math.max(0,limit-cost):null;
+      // Frozen operator price list and its estimate, both from /billing/me:
+      // the panel never derives a rate of its own.
+      const pricing=MY_BILLING.pricing||{},estimate=MY_BILLING.estimated_cost;
+      const priceLine=pricing.input_per_mtok_usd!=null&&pricing.output_per_mtok_usd!=null?`输入 $${pricing.input_per_mtok_usd}/1M · 输出 $${pricing.output_per_mtok_usd}/1M`:'未提供';
+      const estimateLine=estimate?`${formatMoney(estimate.usd)}${estimate.conservative?' · 保守估算':''}`:'暂无 token';
+      // 该面板会同时渲染进侧栏与 #detail 两处：标题 id 必须按落点区分，
+      // 否则同一页面出现重复 id，DOM 查询与 aria-labelledby 都会错配。
+      const titleId=variant?`my-billing-title-${variant}`:'my-billing-title';
+      return `<section class="billing-panel my-billing" aria-labelledby="${titleId}"><div class="billing-head"><h3 id="${titleId}">我的账单（本月）</h3><span class="muted">${limit>0?(remain<=0?'已达上限，新建任务被拦截':'剩余 '+formatMoney(remain)):'未设上限'}</span></div>
+        <div class="billing-grid"><div class="billing-metric"><strong>本月消耗</strong><small>${formatMoney(cost)}</small></div>
+        <div class="billing-metric"><strong>Token 合计</strong><small>${tok.toLocaleString()}</small></div>
+        <div class="billing-metric"><strong>任务数</strong><small>${Number(spend.missions||0)}</small></div>
+        <div class="billing-metric"><strong>月度上限</strong><small>${limitText}</small></div>
+        <div class="billing-metric"><strong>计价单价</strong><small class="billing-rate">${priceLine}</small></div>
+        <div class="billing-metric"><strong>估算费用</strong><small class="estimated-cost">${estimateLine}</small></div></div>
+        <small class="billing-note">估算费用按运营方定价对上游真实上报的 token 计算；只报了合计 token、没有输入/输出分列的行按输出价保守估算并标注「保守估算」。已记录成本仍以账本为准，估算不替代账单。</small></section>`;
+    }
+    function billingPanel(){
+      const metrics=billingMetrics(current.events),multiplier=billingMultiplier();
+      const input=metrics.input==null?'未提供':Math.round(metrics.input).toLocaleString();
+      const output=metrics.output==null?'未提供':Math.round(metrics.output).toLocaleString();
+      const tokens=metrics.total==null?'未提供':Math.round(metrics.total).toLocaleString();
+      const recorded=metrics.costs.length?metrics.costs.map(c=>`<span>${escapeHtml(formatMoney(c.amount,c.currency))}</span>`).join(' · '):'未报告';
+      const priced=outputPrice(metrics);
+      const pricedHtml=priced!=null?`<span>${escapeHtml(formatMoney(priced))}</span>`:'<span>未提供输出 token</span>';
+      return `<section class="billing-panel" aria-labelledby="billing-title"><div class="billing-head"><h3 id="billing-title">工作量与费用</h3><label class="billing-multiplier" for="billing-multiplier" hidden>估算倍率<input id="billing-multiplier" type="number" min="0" max="10000" step="0.1" value="${multiplier}" aria-describedby="billing-note"></label></div>
+        <div class="billing-grid"><div class="billing-metric"><strong>调用次数</strong><small>${metrics.calls}</small></div><div class="billing-metric"><strong>输入 Token</strong><small>${input}</small></div><div class="billing-metric"><strong>输出 Token</strong><small>${output}</small></div><div class="billing-metric"><strong>Token 合计</strong><small>${tokens}</small></div><div class="billing-metric"><strong>已记录成本</strong><small>${recorded}</small></div><div class="billing-metric"><strong>倍率估算</strong><small class="estimated-cost">${costAmounts(metrics,multiplier)}</small></div><div class="billing-metric"><strong>输出计价（$${OUTPUT_RATE==null?'—':OUTPUT_RATE}/百万输出）</strong><small>${pricedHtml}</small></div></div>
+        <small class="billing-note" id="billing-note">输出计价 = 输出 token ÷ 1,000,000 × 负责人费率（默认 $400/百万输出）；已记录成本来自上游真实上报；没有记录时显示“未报告”，不会虚构账单。</small></section>`;
+    }
+    let OUTPUT_RATE=null; // USD per million output tokens, from /pricing (owner-set)
+    function outputPrice(metrics){
+      if(OUTPUT_RATE==null||metrics.output==null)return null;
+      return metrics.output*OUTPUT_RATE/1000000;
+    }
+    async function request(path,options={}){const headers={'Content-Type':'application/json'};if(csrfToken)headers['X-CSRF-Token']=csrfToken;const r=await fetch(api+path,{credentials:'same-origin',...options,headers:{...headers,...(options.headers||{})}});if(r.status===401){location='/login?'+new URLSearchParams({next:location.pathname+location.search}).toString();throw new Error('会话已过期，请重新登录')}let data=null;try{data=await r.json()}catch(_){}if(!r.ok)throw new Error((data&&data.detail)||r.statusText);return data}
+    const err=e=>{document.querySelector('#error').textContent=e.message};
+
+    function renderRegistry(kind,label,entries,formatter){
+      const ids=Object.keys(entries);
+      if(!ids.length)return '';
+      return `<h3 style="margin-top:12px">${escapeHtml(label)} <span class="muted">(${ids.length})</span></h3>`+ids.map(id=>{
+        const v=entries[id]||{};const detail=formatter?formatter(v):Object.entries(v).filter(([k])=>k!=='api_key').slice(0,3).map(([k,val])=>k+'='+String(val)).join(' · ');
+        const probe=kind==='models'?`<div class="actions"><button type="button" class="ghost" data-test-model="${escapeHtml(id)}">测试连接</button><span class="muted test-result" role="status" aria-live="polite"></span></div>`:'';
+        return `<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(id)}</strong>${v.provider?`<span class="pill">${escapeHtml(v.provider)}</span>`:''}</div><small>${escapeHtml(detail||'')}</small>${probe}</div>`;
+      }).join('');
+    }
+    async function loadRegistries(){
+      try{
+        const [agents,models,skills,runtimes]=await Promise.all([
+          request('/registries/agents'),request('/registries/models'),request('/registries/skills'),request('/registries/runtimes')]);
+        const html=[
+          renderRegistry('models','模型 Model',models,v=>[v.model,v.endpoint,'key='+(v.api_key_env||'无')].filter(Boolean).join(' · ')),
+          renderRegistry('agents','Agent',agents),
+          renderRegistry('skills','Skill',skills),
+          renderRegistry('runtimes','Runtime',runtimes),
+        ].join('');
+        document.querySelector('#registries').innerHTML=html||'<p class="empty">没有已注册能力</p>';
+      }catch(e){
+        err(e);
+        // 骨架屏的失败态（对齐 loadApiKeys）：不替换的话请求失败后骨架永远转圈，
+        // 且面板内没有任何重试入口，用户只能整页刷新。
+        const box=document.querySelector('#registries');
+        if(box){
+          box.innerHTML='<p class="empty">注册能力加载失败 <button type="button" class="ghost" data-retry-registries>点击重试</button></p>';
+          box.querySelector('[data-retry-registries]')?.addEventListener('click',()=>{
+            box.innerHTML='<div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div>';
+            loadRegistries();
+          });
+        }
+      }
+    }
+    async function loadMyModels(){
+      const box=document.querySelector('#my-models');if(!box)return;
+      try{
+        const rows=await request('/my/models');
+        box.innerHTML=rows.length?rows.map(m=>`<div class="row"><strong>${escapeHtml(m.name)}</strong><span class="muted">${escapeHtml(m.model)} · ${escapeHtml(m.endpoint)} · key ${escapeHtml(m.api_key_masked)}</span><span style="flex:1"></span><button class="ghost" data-test="${escapeHtml(m.id)}">测试</button><button class="ghost" data-del="${escapeHtml(m.id)}">删除</button></div>`).join(''):'<p class="empty">尚未登记自有模型，你的任务将使用共享模型</p>';
+        box.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{try{await request('/my/models/'+b.dataset.del,{method:'DELETE'});await loadMyModels()}catch(e){err(e)}});
+        box.querySelectorAll('[data-test]').forEach(b=>b.onclick=async()=>{
+          b.disabled=true;const state=document.querySelector('#my-model-state');
+          try{const r=await request(`/my/models/${b.dataset.test}/test`,{method:'POST'});if(state)state.textContent=`测试：${r.status} ${r.label||''}`}catch(e){if(state)state.textContent=`测试失败：${e.message}`}b.disabled=false});
+      }catch(e){box.innerHTML='<p class="empty">自有模型加载失败</p>'}
+    }
+    async function loadApiKeys(){
+      const box=document.querySelector('#api-keys');if(!box)return;
+      try{
+        const rows=await request('/my/keys');
+        box.innerHTML=rows.length?rows.map(k=>`<div class="row"><code>${escapeHtml(k.prefix)}…</code><span class="muted">创建 ${escapeHtml(k.created_at||'')}${k.last_used_at?' · 最近使用 '+escapeHtml(k.last_used_at):''}${k.revoked_at?' · 已吊销':''}</span><span style="flex:1"></span>${k.revoked_at?'':`<button class="ghost" data-revoke-key="${escapeHtml(k.id)}">吊销</button>`}</div>`).join(''):'<p class="empty">还没有 API Key</p>';
+        box.querySelectorAll('[data-revoke-key]').forEach(b=>b.onclick=async()=>{try{await request('/my/keys/'+b.dataset.revokeKey,{method:'DELETE'});await loadApiKeys()}catch(e){err(e)}});
+      }catch(e){box.innerHTML='<p class="empty">API Key 加载失败</p>'}
+    }
+    // 我的通知渠道：绑定状态一行一条（pill=绑定态，meta 行=接收 ID+绑定时间）。
+    // 渲染全部走 textContent（chat_id/created_at 是用户可控输入，不进 innerHTML）。
+    async function loadMyChannels(){
+      const channelNames=['telegram','line','discord','slack'];
+      const rows=Object.fromEntries(channelNames.map(c=>[c,document.querySelector(`[data-channel-row="${c}"]`)]));
+      if(channelNames.every(c=>!rows[c]))return;
+      let channels=null;
+      try{channels=await request('/my/channels')}catch(_){channels=null}
+      for(const channel of channelNames){
+        const v=channels&&channels[channel];
+        const pill=document.querySelector(`[data-channel-bound="${channel}"]`);
+        const meta=document.querySelector(`[data-channel-meta="${channel}"]`);
+        const unbind=document.querySelector(`[data-unbind-channel="${channel}"]`);
+        const test=document.querySelector(`[data-test-channel="${channel}"]`);
+        if(pill){pill.className='pill '+(v&&v.bound?'COMPLETED':'WAITING');pill.textContent=v?(v.bound?'已绑定':'未绑定'):'状态不可用'}
+        if(meta)meta.textContent=v&&v.bound?`接收 ID ${v.chat_id||'-'} · 绑定于 ${v.created_at||'-'}`:'';
+        if(unbind)unbind.hidden=!(v&&v.bound);
+        if(test)test.hidden=!(v&&v.bound);
+      }
+    }
+    const bindMyChannel=(form,endpoint,payload,state)=>{
+      if(!form)return;
+      form.onsubmit=async e=>{
+        e.preventDefault();
+        if(state){state.textContent='提交中…';state.style.color=''}
+        try{
+          await request(endpoint,{method:'PUT',body:JSON.stringify(payload())});
+          form.reset();
+          if(state){state.textContent='已绑定，进度将推送到你的渠道';state.style.color='var(--green)'}
+          await loadMyChannels();
+        }catch(e2){if(state){state.textContent='绑定失败：'+e2.message;state.style.color='var(--red)'}}
+      };
+    };
+    bindMyChannel(document.querySelector('#my-channel-telegram-form'),'/my/channels/telegram',
+      ()=>({bot_token:document.querySelector('#tg-bot-token').value.trim(),
+            chat_id:document.querySelector('#tg-chat-id').value.trim()}),
+      document.querySelector('#my-channel-telegram-state'));
+    bindMyChannel(document.querySelector('#my-channel-line-form'),'/my/channels/line',
+      ()=>({access_token:document.querySelector('#line-access-token').value.trim(),
+            channel_secret:document.querySelector('#line-channel-secret').value.trim(),
+            user_id:document.querySelector('#line-user-id').value.trim()}),
+      document.querySelector('#my-channel-line-state'));
+    bindMyChannel(document.querySelector('#my-channel-discord-form'),'/my/channels/discord',
+      ()=>({bot_token:document.querySelector('#discord-bot-token').value.trim(),
+            chat_id:document.querySelector('#discord-channel-id').value.trim()}),
+      document.querySelector('#my-channel-discord-state'));
+    bindMyChannel(document.querySelector('#my-channel-slack-form'),'/my/channels/slack',
+      ()=>({bot_token:document.querySelector('#slack-bot-token').value.trim(),
+            chat_id:document.querySelector('#slack-channel-id').value.trim()}),
+      document.querySelector('#my-channel-slack-state'));
+    document.querySelectorAll('[data-unbind-channel]').forEach(b=>b.onclick=async()=>{
+      try{await request('/my/channels/'+b.dataset.unbindChannel,{method:'DELETE'});await loadMyChannels()}catch(e){err(e)}
+    });
+    // 测试推送：真发一条到客户自己的 bot，结果如实内联（DELIVERED 只来自上游确认；
+    // 失败透出稳定错误码的中文释义，不打假成功、不回显凭据）。
+    const TEST_ERR={AUTH_FAILED:'凭据无效（上游拒绝认证），请重新绑定',RATE_LIMITED:'上游限流，请稍后再试',
+      TEXT_TOO_LONG:'推送文本超长',TIMEOUT:'上游超时，请稍后再试',TRANSPORT_ERROR:'网络不通，请稍后再试',
+      INVALID_UPSTREAM_RESPONSE:'上游响应异常',UPSTREAM_REJECTED:'上游拒绝（接收 ID 可能不对）',
+      BINDING_UNUSABLE:'绑定凭据不可用，请重新绑定',SEND_FAILED:'发送失败，请稍后再试'};
+    document.querySelectorAll('[data-test-channel]').forEach(b=>b.onclick=async()=>{
+      const channel=b.dataset.testChannel,state=document.querySelector('#my-channel-'+channel+'-state');
+      if(state){state.textContent='测试推送中…';state.style.color=''}
+      try{
+        const r=await request('/my/channels/'+channel+'/test',{method:'POST'});
+        if(state){if(r.status==='DELIVERED'){state.textContent='测试推送已送达：链路正常 ✅';state.style.color='var(--green)'}
+        else{state.textContent='测试推送失败：'+(TEST_ERR[r.error]||r.error||'未知原因');state.style.color='var(--red)'}}
+      }catch(e){if(state){state.textContent='测试推送失败：'+e.message;state.style.color='var(--red)'}}
+    });
+    document.querySelector('#api-key-create')?.addEventListener('click',async()=>{
+      const state=document.querySelector('#api-key-state');const box=document.querySelector('#api-key-secret');
+      if(state){state.textContent='生成中…';state.style.color=''}
+      try{
+        const r=await request('/my/keys',{method:'POST'});
+        if(box){
+          box.innerHTML=`<div class="metric-tile"><small>新密钥（只显示这一次，请立即复制保存）</small><strong style="font-size:.78rem;word-break:break-all">${escapeHtml(r.api_key)}</strong><div style="margin-top:6px"><button type="button" class="ghost" id="api-key-copy" style="min-height:30px;padding:4px 10px;font-size:.75rem">复制密钥</button></div></div>`;
+          box.style.display='block';
+          const copy=document.querySelector('#api-key-copy');
+          if(copy)copy.onclick=async()=>{
+            try{await navigator.clipboard.writeText(r.api_key)}
+            catch(_){const ta=document.createElement('textarea');ta.value=r.api_key;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
+            copy.textContent='已复制 ✓';setTimeout(()=>{copy.textContent='复制密钥'},1800);
+          };
+        }
+        if(state){state.textContent='已生成（明文只显示这一次）';state.style.color='var(--green)'}
+        await loadApiKeys();
+      }catch(e2){if(state){state.textContent='生成失败：'+e2.message;state.style.color='var(--red)'}}
+    });
+    async function loadArtifactsCenter(){
+      const box=document.querySelector('#artifacts-center');if(!box)return;
+      try{
+        const rows=await request('/artifacts?limit=60');
+        box.innerHTML=rows.length?rows.map(a=>`<div class="row"><strong>${escapeHtml(a.name)}</strong><span class="muted">${escapeHtml(a.title||'')} · ${escapeHtml(a.created_at||'')}</span><span style="flex:1"></span><button class="ghost" data-art="${escapeHtml(a.mission_id)}|${escapeHtml(a.id)}">查看</button></div>`).join(''):'<p class="empty">暂无产物</p>';
+        box.querySelectorAll('[data-art]').forEach(b=>b.onclick=async()=>{
+          const [mid,aid]=b.dataset.art.split('|');
+          try{const a=await request(`/missions/${mid}/artifacts/${aid}`);
+            box.querySelector('.empty')?.remove();
+            const pre=document.createElement('pre');pre.className='muted';pre.style.whiteSpace='pre-wrap';
+            const tail=a.truncated?String.fromCharCode(10)+'…（已截断）':'';
+            pre.textContent=(a.content||'').slice(0,4000)+tail;
+            b.after(pre);b.disabled=true;
+          }catch(e){err(e)}
+        });
+      }catch(e){box.innerHTML='<p class="empty">产物加载失败</p>'}
+    }
+    let rechargeTimer=null;let rechargeMatchTimer=null;
+    async function loadRecharge(){
+      const body=document.querySelector('#recharge-body');if(!body)return;
+      let cfg;try{cfg=await request('/billing/recharge/config')}catch(e){body.innerHTML='<p class="empty">充值通道未开启</p>';return}
+      if(!cfg.enabled){body.innerHTML='<p class="empty">充值通道未开启</p>';return}
+      const addr=document.querySelector('#recharge-addr');
+      addr.textContent=cfg.address;
+      const copyBtn=document.querySelector('#recharge-copy');
+      if(copyBtn)copyBtn.onclick=async()=>{
+        try{await navigator.clipboard.writeText(cfg.address);copyBtn.textContent='已复制 ✓';
+          setTimeout(()=>{copyBtn.textContent='复制地址'},1800)}catch(_){
+          const ta=document.createElement('textarea');ta.value=cfg.address;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+          copyBtn.textContent='已复制 ✓';setTimeout(()=>{copyBtn.textContent='复制地址'},1800)}
+      };
+      document.querySelector('#recharge-form').onsubmit=async e=>{
+        e.preventDefault();const state=document.querySelector('#recharge-state');
+        const txState=document.querySelector('#recharge-tx-state');
+        const txField=document.querySelector('#recharge-txid');
+        const txid=(txField?txField.value:'').trim();
+        if(txState)txState.textContent='';
+        try{
+          const r=await request('/billing/recharge',{method:'POST',body:JSON.stringify({amount_usd:Number(document.querySelector('#recharge-amount').value)})});
+          if(state)state.textContent=`请求已创建，请在 ${new Date(r.expires_at).toLocaleTimeString('zh-CN',{hour12:false})} 前完成转账`;
+          startCountdown(r);
+          if(txid){
+            // 付款自证归属：把 txid 挂到刚创建的充值单上，链上同步后自动核销
+            try{
+              await request(`/billing/recharges/${r.id}/tx`,{method:'POST',body:JSON.stringify({txid})});
+              if(txState)txState.textContent='已提交，链上检测中（同步约 30 秒，检出后自动入账）';
+              if(txField)txField.value='';
+            }catch(e2){if(txState)txState.textContent='txid 提交失败：'+e2.message}
+          }
+          await renderMine();
+        }catch(e2){if(state)state.textContent='创建失败：'+e2.message}
+      };
+      await renderMine();
+      // 管理员待审核块：优先用服务端 is_admin 判定；旧后端无该字段时回退用户名比较
+      try{const sess=await request('/auth/session');const admin=typeof sess.is_admin==='boolean'?sess.is_admin:sess.username==='admin';if(admin)await renderAdminPending()}catch(_){}
+    }
+    // 充值状态中文映射：PENDING→检测中 / APPROVED→已到账 / REJECTED→已驳回
+    const RECHARGE_STATUS_ZH={PENDING:'检测中',APPROVED:'已到账',REJECTED:'已驳回',EXPIRED:'已过期'};
+    const rechargeStatusLabel=v=>RECHARGE_STATUS_ZH[v]||v;
+    // 已就地提示过「已到账」的充值单，避免每轮轮询重复刷新账单
+    const RECHARGE_CREDITED_SEEN=new Set();
+    async function pollRechargeMatch(){
+      // 实时时效：已附 txid 且未终态的充值单，每 10s 查一次链上是否检出（同步周期 ~30s）
+      const box=document.querySelector('#recharge-mine');if(!box)return;
+      const nodes=box.querySelectorAll('[data-rid][data-txid="1"]');
+      let credited=false;
+      for(const node of nodes){
+        try{
+          const m=await request(`/billing/recharges/${node.dataset.rid}/match`);
+          const line=node.querySelector('.match-line');if(!line)continue;
+          if(!m.txid_attached){line.textContent='';continue}
+          if(m.recharge_status==='APPROVED'){
+            // 管理员核准：就地「已到账 $X」，并让余额/账单立即跟上
+            if(!RECHARGE_CREDITED_SEEN.has(node.dataset.rid)){RECHARGE_CREDITED_SEEN.add(node.dataset.rid);credited=true}
+            line.textContent=`✅ 已到账 ${m.amount_usd} USDT，额度已更新`;
+            line.style.color='var(--green)';
+          }else if(m.chain_seen){
+            line.textContent='⛓ 链上已检测到 ✓ 等待管理员审核';
+            line.style.color='var(--green)';
+          }else if(m.recharge_status==='PENDING'){
+            line.textContent='⛓ 链上未检出（等待同步，一般 ≤1 分钟）';
+            line.style.color='';
+          }else{
+            line.textContent='已驳回，如有疑问请联系管理员';
+            line.style.color='';
+          }
+        }catch(_){/* 单行失败不打断其余行 */}
+      }
+      if(credited){await loadMyBilling();await renderMine()}
+    }
+    function startCountdown(r){
+      if(rechargeTimer)clearInterval(rechargeTimer);
+      const el=document.querySelector('#recharge-state');
+      rechargeTimer=setInterval(()=>{
+        const left=Math.max(0,Math.round((new Date(r.expires_at)-Date.now())/1000));
+        if(el)el.textContent=`充值 ${r.amount_usd} USDT · 剩余 ${Math.floor(left/60)}分${String(left%60).padStart(2,'0')}秒 · 请转账至上方地址并填入 txid`;
+        if(left<=0){clearInterval(rechargeTimer);if(el)el.textContent='窗口已过期，请重新发起';renderMine()}
+      },1000);
+    }
+    async function renderMine(){
+      const box=document.querySelector('#recharge-mine');if(!box)return;
+      if(rechargeMatchTimer){clearInterval(rechargeMatchTimer);rechargeMatchTimer=null}
+      try{
+        const rows=await request('/billing/recharges/mine');
+        const now=Date.now();
+        let credited=false;
+        box.innerHTML=rows.length?rows.slice(0,5).map(r=>{
+          const expired=r.status==='PENDING'&&new Date(r.expires_at||0)<new Date(now);
+          // 状态中文化：检测中 / 已到账 / 已驳回
+          const label=expired?'已过期（未附 txid）':rechargeStatusLabel(r.status);
+          if(r.status==='APPROVED'&&!RECHARGE_CREDITED_SEEN.has(r.id)){RECHARGE_CREDITED_SEEN.add(r.id);credited=true}
+          // 只有「已附 txid 且未终态」的行才输出 data-txid 属性：存在性选择器
+          // （[data-rid][data-txid="1"]）只命中这些行，轮询才会在全部到账后自然停止；
+          // 无条件输出空属性会让每张已到账/已驳回的单也被轮询且永不停止。
+          const matchPending=!!(r.txid&&r.status==='PENDING');
+          const matchLine=matchPending
+            ?`<span class="match-line muted" style="font-size:.72rem">⛓ 检测中…</span>`:'';
+          const creditedLine=r.status==='APPROVED'
+            ?`<span class="match-line" style="font-size:.72rem;color:var(--green)">✅ 已到账 ${r.amount_usd} USDT，额度已更新</span>`:'';
+          // 待付且未附 txid 的单：行内直接补 txid，付款后可自证这笔转账
+          const attach=(r.status==='PENDING'&&!r.txid&&!expired)
+            ?`<span class="tx-attach" style="display:flex;gap:6px;margin-top:6px"><input class="txid-input" maxlength="128" placeholder="粘贴 txid 自证这笔付款" style="flex:1;min-width:0;min-height:30px"><button class="ghost" data-attach="${escapeHtml(r.id)}" style="min-height:30px;padding:4px 10px;font-size:.75rem">提交 txid</button></span>`:'';
+          return `<div class="row" data-rid="${escapeHtml(r.id)}"${matchPending?' data-txid="1"':''}><strong>${escapeHtml(label)}</strong><span class="muted">${r.amount_usd} USDT · ${new Date(r.created_at).toLocaleString('zh-CN',{hour12:false})}${r.txid?' · txid '+escapeHtml(String(r.txid).slice(0,12))+'…':''}</span>${matchLine}${creditedLine}${attach}</div>`;
+        }).join(''):'<p class="empty">暂无充值记录</p>';
+        box.querySelectorAll('[data-attach]').forEach(b=>b.onclick=async()=>{
+          const input=b.closest('.tx-attach')&&b.closest('.tx-attach').querySelector('.txid-input');
+          const txid=(input?input.value:'').trim();
+          if(!txid){b.textContent='请先粘贴 txid';return}
+          b.disabled=true;
+          try{
+            await request(`/billing/recharges/${b.dataset.attach}/tx`,{method:'POST',body:JSON.stringify({txid})});
+            const el=document.querySelector('#recharge-tx-state');
+            if(el)el.textContent='已提交，链上检测中';
+            await renderMine();
+          }catch(e){b.disabled=false;b.textContent='提交失败：'+e.message}
+        });
+        const hasPending=box.querySelectorAll('[data-rid][data-txid="1"]').length>0;
+        if(hasPending){pollRechargeMatch();rechargeMatchTimer=setInterval(pollRechargeMatch,10000)}
+        // 状态变为已到账：立即拉一次账单，余额/额度就地更新
+        if(credited)await loadMyBilling();
+      }catch(e){box.innerHTML='<p class="empty">记录加载失败</p>'}
+    }
+    async function renderAdminPending(){
+      const box=document.querySelector('#recharge-admin');if(!box)return;
+      try{
+        const rows=await request('/billing/recharges?status=PENDING');
+        box.innerHTML=rows.length?`<details class="secondary" open><summary style="cursor:pointer;color:var(--muted);font-size:.8rem">待审核（${rows.length}）</summary>${rows.map(r=>`<div class="row"><strong>${escapeHtml(r.username)}</strong><span class="muted">${r.amount_usd} USDT${r.txid?' · txid '+escapeHtml(String(r.txid).slice(0,12))+'…':''}</span><span style="flex:1"></span><button class="ghost" data-ap="${escapeHtml(r.id)}">通过</button><button class="ghost" data-rj="${escapeHtml(r.id)}">驳回</button></div>`).join('')}</details>`:'';
+        box.querySelectorAll('[data-ap]').forEach(b=>b.onclick=async()=>{try{const r=await request('/billing/recharges/'+b.dataset.ap+'/approve',{method:'POST'});await renderAdminPending();if(box)box.insertAdjacentHTML('afterbegin',`<p class="empty">已通过：${escapeHtml(r.username)} 额度升至 ${r.monthly_limit_usd} USDT</p>`)}catch(e){err(e)}});
+        box.querySelectorAll('[data-rj]').forEach(b=>b.onclick=async()=>{try{await request('/billing/recharges/'+b.dataset.rj+'/reject',{method:'POST'});await renderAdminPending()}catch(e){err(e)}});
+      }catch(e){}
+    }
+    // 会员分管面板（管理员）：全部注册会员的余额/本月消费/绑定渠道，加每行
+    // 充值/冻结/解冻内联动作。动作只做编排——全部落到 /api/v1/admin/members*，
+    // 端点自身 require_admin_owner；金额一律 prompt 式输入，本地先校验再提交。
+    const memberStatus=m=>{
+      if(m.must_change_password)return{cls:'pill BLOCKED',label:'需改密'};
+      if(m.monthly_limit_usd==null)return{cls:'pill WAITING',label:'未充值'};
+      if(m.monthly_limit_usd<=0)return{cls:'pill FAILED',label:'已冻结'};
+      return{cls:'pill COMPLETED',label:'正常'};
+    };
+    function memberAmount(username,action){
+      const v=window.prompt(`对 ${username} 执行「${action}」：输入金额（USD，必须大于 0）`);
+      if(v==null)return null;
+      const amount=Number(v);
+      if(!isFinite(amount)||amount<=0){return{bad:true}}
+      return{amount};
+    }
+    async function loadMembers(){
+      const box=document.querySelector('#members-body');if(!box)return;
+      const state=document.querySelector('#members-state');
+      try{
+        const rows=await request('/admin/members');
+        box.innerHTML=rows.length?`<table class="recon-table"><thead><tr><th>用户名</th><th>余额</th><th>本月消费</th><th>绑定渠道</th><th>状态</th><th>操作</th></tr></thead><tbody>${rows.map(m=>{
+          const st=memberStatus(m);
+          const frozen=m.monthly_limit_usd!=null&&m.monthly_limit_usd<=0;
+          const u=encodeURIComponent(m.username);
+          return `<tr><td><strong>${escapeHtml(m.username)}</strong><br><span class="muted" style="font-size:.68rem">key ${m.api_keys} · ${escapeHtml((m.created_at||'').slice(0,10))}</span></td>`+
+            `<td>${m.monthly_limit_usd==null?'—':formatMoney(m.monthly_limit_usd)}</td>`+
+            `<td>${formatMoney(m.spend_usd)}</td>`+
+            `<td>${m.channels}<br><span class="muted" style="font-size:.68rem">Bot ${m.channel_bindings} · 宿主 ${m.host_bindings}</span></td>`+
+            `<td><span class="${st.cls}">${st.label}</span></td>`+
+            `<td style="white-space:nowrap"><button class="ghost" data-m-top="${u}">充值</button>`+
+            (frozen?`<button class="ghost" data-m-un="${u}">解冻</button>`
+                   :`<button class="ghost" data-m-fr="${u}">冻结</button>`)+`</td></tr>`;
+        }).join('')}</tbody></table>`:'<p class="empty">暂无注册会员</p>';
+        const act=async(url,body,okMsg)=>{
+          if(state)state.textContent='提交中…';
+          try{
+            const r=await request(url,{method:'POST',body:JSON.stringify(body)});
+            if(state){state.textContent=okMsg(r);state.style.color='var(--green)'}
+            await loadMembers();
+          }catch(e){if(state){state.textContent='操作失败：'+e.message;state.style.color='var(--red)'}}
+        };
+        box.querySelectorAll('[data-m-top]').forEach(b=>b.onclick=()=>{
+          const r=memberAmount(b.dataset.mTop,'充值');
+          if(!r)return;
+          if(r.bad){err(new Error('金额必须是大于 0 的数字'));return}
+          act(`/admin/members/${b.dataset.mTop}/top-up`,{amount_usd:r.amount},
+              x=>`已为 ${x.username} 充值，余额现为 ${formatMoney(x.monthly_limit_usd)}`);
+        });
+        box.querySelectorAll('[data-m-fr]').forEach(b=>b.onclick=()=>{
+          if(!window.confirm(`冻结 ${b.dataset.mFr}？其未用完的余额将归零，所有新任务立即被拒绝。`))return;
+          act(`/admin/members/${b.dataset.mFr}/freeze`,{},x=>`已冻结 ${x.username}`);
+        });
+        box.querySelectorAll('[data-m-un]').forEach(b=>b.onclick=()=>{
+          const r=memberAmount(b.dataset.mUn,'解冻（恢复额度）');
+          if(!r)return;
+          if(r.bad){err(new Error('金额必须是大于 0 的数字'));return}
+          act(`/admin/members/${b.dataset.mUn}/unfreeze`,{amount_usd:r.amount},
+              x=>`${x.username} 已解冻，余额恢复为 ${formatMoney(x.monthly_limit_usd)}`);
+        });
+      }catch(e){box.innerHTML='<p class="empty">会员列表加载失败</p>'}
+    }
+    async function loadOpsBrief(){
+      const box=document.querySelector('#ops-brief');if(!box)return;
+      try{
+        const b=await request('/ops/brief');
+        const successRate=(b.jobs_completed+b.jobs_failed)>0?Math.round(100*b.jobs_completed/(b.jobs_completed+b.jobs_failed)):null;
+        const tile=(label,value,extra='')=>`<div class="metric-tile"><small>${label}</small><strong>${value}</strong>${extra?`<span class="muted">${extra}</span>`:''}</div>`;
+        box.innerHTML=[
+          tile('新建任务',b.missions_created,`完成 ${b.missions_completed} · 失败 ${b.missions_failed}`),
+          tile('阶段执行',`${b.jobs_completed} ✓`,`${b.jobs_failed} 失败${successRate!=null?` · 成功率 ${successRate}%`:''}`),
+          tile('自愈重试',b.retries_selfhealed+' 次','瞬时故障自动恢复'),
+          tile('Token 消耗',b.tokens.toLocaleString(),`成本 ${b.cost_usd.toFixed(4)} USD`),
+          tile('渠道进出',`${b.channel_inbound} 入`,`${b.replies_outbound} 出`),
+          tile('卡点',b.stuck_running?`${b.stuck_running} 个租约过期`:'无','超过租约未回收的执行'),
+        ].join('');
+      }catch(e){box.innerHTML='<p class="empty">日报加载失败</p>'}
+    }
+    // 充值对账：仅管理员。账本与链上逐笔核对，任何未对上账目都显式列出，绝不静默。
+    function reconTile(label,value,extra=''){
+      return `<div class="billing-metric"><strong>${label}</strong><small>${value}</small>${extra?`<span class="muted" style="display:block;font-size:.7rem">${extra}</span>`:''}</div>`;
+    }
+    async function loadReconciliation(){
+      const withoutBox=document.querySelector('#recon-without');if(!withoutBox)return;
+      const unmatchedBox=document.querySelector('#recon-unmatched');
+      const summary=document.querySelector('#recon-summary');
+      try{
+        const r=await request('/billing/reconciliation');
+        if(summary)summary.innerHTML=[
+          reconTile('已入账合计',formatMoney(r.approved_total),`${r.approved_count} 笔已核准`),
+          reconTile('链上已匹配',formatMoney(r.matched_total),`${r.matched_count} 笔已匹配`),
+          reconTile('差额 Δ',formatMoney(r.delta),r.delta===0?'账实相符':'存在未对上账目'),
+        ].join('');
+        // 链上监控实时性：上次巡检时间 + 本轮新增（无数据时整体省略）
+        const syncLine=document.querySelector('#recon-sync');
+        if(syncLine){
+          if(r.sync&&r.sync.last_round_at){
+            const t=new Date(r.sync.last_round_at).toLocaleTimeString('zh-CN',{hour12:false});
+            syncLine.textContent=`⛓ 链上监控：上次巡检 ${t}${r.sync.last_round_new_transfers!=null?` · 本轮新增 ${r.sync.last_round_new_transfers} 笔`:''}${r.sync.lookback_days!=null?` · 回看 ${r.sync.lookback_days} 天`:''}`;
+            syncLine.style.color='';
+          }else{syncLine.textContent='⛓ 链上监控：等待首轮巡检…'}
+        }
+        if(r.ignored_count!=null){
+          const ig=document.querySelector('#recon-ignored');
+          if(ig)ig.textContent=r.ignored_count?`已标记平台外入账 ${r.ignored_count} 笔（合计 ${formatMoney(r.ignored_total_usd)}），不计入对账`:'';
+        }
+        const without=r.approved_without_chain||[];
+        withoutBox.innerHTML=without.length?`<table class="recon-table"><thead><tr><th>用户</th><th>金额</th><th>凭证</th><th>审核</th></tr></thead><tbody>${without.map(x=>`<tr><td>${escapeHtml(x.username||'-')}</td><td>${escapeHtml(formatMoney(x.amount_usd))}</td><td>#${escapeHtml(String(x.id))}${x.txid?' · '+escapeHtml(String(x.txid).slice(0,16))+'…':' · 无 txid'}</td><td>${escapeHtml(x.decided_by||'-')}<br>${escapeHtml(x.decided_at||'')}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">无</p>';
+        const unmatched=r.unmatched_transfers||[];
+        if(unmatchedBox)unmatchedBox.innerHTML=unmatched.length?`<table class="recon-table"><thead><tr><th>金额</th><th>txid / 来源</th><th>区块时间</th></tr></thead><tbody>${unmatched.map(x=>`<tr><td>${escapeHtml(formatMoney(x.amount_usd))}</td><td>${escapeHtml(String(x.txid||'').slice(0,16))}…<br><span class="muted">${escapeHtml(String(x.from_address||'').slice(0,12))}…</span></td><td>${x.block_ts!=null?escapeHtml(String(x.block_ts)):'-'}<br>${escapeHtml(x.created_at||'')}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">无</p>';
+        const wc=document.querySelector('#recon-without-count');if(wc)wc.textContent=without.length?`(${without.length})`:'';
+        const uc=document.querySelector('#recon-unmatched-count');if(uc)uc.textContent=unmatched.length?`(${unmatched.length})`:'';
+      }catch(e){
+        if(summary)summary.innerHTML='<p class="empty">对账数据不可用</p>';
+        withoutBox.innerHTML='';if(unmatchedBox)unmatchedBox.innerHTML='';
+      }
+    }
+    document.querySelector('#my-model-form').onsubmit=async e=>{
+      e.preventDefault();const state=document.querySelector('#my-model-state');
+      try{
+        await request('/my/models',{method:'POST',body:JSON.stringify({
+          name:document.querySelector('#my-model-name').value.trim(),
+          endpoint:document.querySelector('#my-model-endpoint').value.trim(),
+          model:document.querySelector('#my-model-model').value.trim(),
+          api_key:document.querySelector('#my-model-key').value})});
+        e.target.reset();if(state)state.textContent='已保存（密钥加密入库，不会回显）';
+        await loadMyModels();
+      }catch(e2){if(state)state.textContent='保存失败：'+e2.message}
+    };
+    document.querySelector('#skill-import-btn')?.addEventListener('click',async()=>{
+      const btn=document.querySelector('#skill-import-btn'),state=document.querySelector('#skill-import-state');
+      btn.disabled=true;state.textContent='解析中…';
+      try{
+        const r=await request('/skills/import',{method:'POST',body:JSON.stringify({
+          content:document.querySelector('#skill-import-text').value,
+          source_url:document.querySelector('#skill-import-url').value||null})});
+        state.textContent=`已登记 ${r.id}（${({pending:'待审核',approved:'可用',rejected:'已驳回'}[r.review_status])||r.review_status}）${r.warnings&&r.warnings.length?' · 警告 '+r.warnings.length+' 条':''}`;
+        document.querySelector('#skill-import-text').value='';
+        await loadRegistries();
+      }catch(e){state.textContent='导入失败：'+e.message}
+      finally{btn.disabled=false}
+    });
+    // Connectivity testing is operator-triggered only: nothing is requested on load.
+    document.querySelector('#registries').onclick=async ev=>{
+      const btn=ev.target.closest('button[data-test-model]');if(!btn)return;
+      const result=btn.closest('.card').querySelector('.test-result');
+      btn.disabled=true;if(result)result.textContent='测试中…';
+      try{
+        const r=await request('/registries/models/'+encodeURIComponent(btn.dataset.testModel)+'/test',{method:'POST'});
+        const u=r.usage;const tokens=u&&u.total_tokens!=null?` · tokens ${Math.round(u.total_tokens).toLocaleString()}`:(u?' · tokens 未报告':'');
+        if(result)result.textContent=(r.ok?'连接成功':'连接失败')+` · ${r.label||r.status||''} · ${r.latency_ms}ms${tokens}`;
+      }catch(e){if(result)result.textContent='测试失败：'+e.message;err(e)}
+      finally{btn.disabled=false}
+    };
+    const CHANNEL_ZH={CONFIGURED:'已配置',UNCONFIGURED:'未配置',UNIMPLEMENTED:'接口预留'};
+    // 渠道显示名与固定说明。LINE 卡仅展示 configured/state（与 Telegram 卡同一
+    // 通用渲染路径）：扫码/绑定流程待 LINE 官方号 token 到位后再补，卡片不会
+    // 伪装已接通。
+    const CHANNEL_LABEL={line:'LINE',telegram:'Telegram',whatsapp:'WhatsApp',wechat:'个人微信',relay:'自定义中继'};
+    const CHANNEL_NOTE={line:'仅展示配置状态；绑定流程待 LINE 官方号 token 到位后开通。'};
+    function renderChannels(entries){
+      const ids=Object.keys(entries);if(!ids.length)return '<p class="empty">没有渠道</p>';
+      return ids.map(id=>{const v=entries[id]||{};const cls=v.state==='CONFIGURED'?'COMPLETED':(v.state==='UNIMPLEMENTED'?'PAUSED':'WAITING');
+        const missing=(v.missing||[]).length?`缺少：${escapeHtml(v.missing.join('、'))}`:escapeHtml(v.detail||'');
+        const note=CHANNEL_NOTE[id]?`<small class="muted" data-channel-note="${escapeHtml(id)}">${escapeHtml(CHANNEL_NOTE[id])}</small>`:'';
+        return `<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(CHANNEL_LABEL[id]||id)}</strong><span class="pill ${cls}">${escapeHtml(CHANNEL_ZH[v.state]||v.state||'')}</span></div><small>${missing}</small>${note}</div>`;}).join('');
+    }
+    function renderInbox(messages){
+      const inbound=messages.filter(m=>m.direction==='INBOUND');
+      if(!inbound.length)return '<p class="empty">暂无入站消息</p>';
+      return inbound.map(m=>{const cls=m.status==='DISPATCHED'?'COMPLETED':(m.status==='CONVERSION_FAILED'?'FAILED':'WAITING');
+        const link=m.mission_id?`<button class="ghost" data-open="${escapeHtml(m.mission_id)}">查看 Mission</button>`:'';
+        const action=m.mission_id?'':`<button data-dispatch="${escapeHtml(m.id)}" data-channel="${escapeHtml(m.channel)}">转换·建 Mission·入队</button>`;
+        return `<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(m.channel)}</strong><span class="pill ${cls}">${escapeHtml(statusLabel(m.status)||m.status)}</span></div>
+          <small>${escapeHtml(m.sender||'未知发送者')} · ${escapeHtml(new Date(m.created_at).toLocaleString())}</small>
+          <pre class="event">${escapeHtml(m.text)}</pre>
+          <div class="actions">${link}${action}</div></div>`;}).join('');
+    }
+    async function loadChannels(){
+      const stamp=document.querySelector('#channels-updated');
+      try{const channels=await request('/channels');document.querySelector('#channels').innerHTML=renderChannels(channels);if(stamp)stamp.textContent=`最近刷新：${new Date().toLocaleTimeString()}`;
+        // 凭据失效的死角：configured 时 POST /login 短路 AUTHORIZED，没有重扫码入口。
+        // 只有微信真的处于 CONFIGURED 才需要解除授权按钮；未配置时扫码按钮本就可用。
+        const unbindBtn=document.querySelector('#wechat-unbind');
+        if(unbindBtn)unbindBtn.hidden=!((channels.wechat||{}).state==='CONFIGURED');}
+      catch(e){document.querySelector('#channels').innerHTML='<p class="empty">渠道状态不可用</p>';if(stamp)stamp.textContent='刷新失败，请重试'}
+    }
+    (()=>{
+      // WeChat QR modal state
+      let _wqAbort=false; // set true when dialog closes mid-poll
+      let _wqAttempt=0; // prevents a closed, slow request from taking over a newer attempt
+      const dlg=document.querySelector('#wechat-dialog');
+      const dlgStatus=document.querySelector('#wqdlg-status');
+      const dlgSpinner=document.querySelector('#wqdlg-spinner');
+      const dlgQrWrap=document.querySelector('#wqdlg-qr-wrap');
+      const dlgQrText=document.querySelector('#wqdlg-qr-text');
+      const dlgClose=document.querySelector('#wqdlg-close');
+      const loginBtn=document.querySelector('#wechat-login');
+      const loginBtnStatus=document.querySelector('#wechat-login-status');
+
+      function wqSetStatus(msg,cls){
+        dlgStatus.textContent=msg;
+        dlgStatus.className='wqdlg-status'+(cls?' '+cls:'');
+      }
+      function wqShowSpinner(visible){
+        dlgSpinner.style.display=visible?'flex':'none';
+        dlgSpinner.setAttribute('aria-hidden',visible?'true':'true');
+      }
+      function wqShowQr(image){
+        dlgQrWrap.innerHTML='';dlgQrText.innerHTML='';
+        if(/^https:\/\//i.test(image)){
+          const img=document.createElement('img');
+          img.alt='微信授权二维码';img.src=image;
+          dlgQrWrap.appendChild(img);dlgQrWrap.style.display='block';
+        }else if(/^data:image\/(png|jpeg|svg\+xml);base64,[A-Za-z0-9+/=]+$/i.test(image)){
+          const img=document.createElement('img');
+          img.alt='微信授权二维码';img.src=image;
+          dlgQrWrap.appendChild(img);dlgQrWrap.style.display='block';
+        }else{
+          const pre=document.createElement('pre');pre.className='event';pre.textContent=image;
+          dlgQrText.appendChild(pre);dlgQrText.style.display='block';
+        }
+      }
+      function wqReset(){
+        wqSetStatus('正在申请二维码…','');
+        wqShowSpinner(true);
+        dlgQrWrap.style.display='none';dlgQrWrap.innerHTML='';
+        dlgQrText.style.display='none';dlgQrText.innerHTML='';
+      }
+      function wqClose(msg,cls){
+        _wqAbort=true;_wqAttempt++;
+        if(msg){loginBtnStatus.textContent=msg;loginBtnStatus.className='muted'+(cls?' '+cls:'')}
+        if(dlg.open)dlg.close();
+        loginBtn.disabled=false;
+      }
+
+      // Close via ✕ button or Escape (native dialog behaviour)
+      dlgClose.addEventListener('click',()=>wqClose('已取消'));
+      dlg.addEventListener('cancel',()=>{_wqAbort=true;_wqAttempt++;loginBtn.disabled=false;loginBtnStatus.textContent='已取消'});
+      // When dialog closes for any reason, ensure abort is set
+      dlg.addEventListener('close',()=>{_wqAbort=true;_wqAttempt++;loginBtn.disabled=false});
+
+      loginBtn?.addEventListener('click',async()=>{
+        loginBtn.disabled=true;
+        loginBtnStatus.textContent='';
+        _wqAbort=false;
+        const attempt=++_wqAttempt;
+        wqReset();
+        // Open modal immediately — user gets instant feedback
+        dlg.showModal();
+        try{
+          const started=await request('/channels/wechat/login',{method:'POST'});
+          if(_wqAbort||attempt!==_wqAttempt)return;
+          if(started.state==='AUTHORIZED'){
+            wqSetStatus('个人微信已授权','ok');
+            wqShowSpinner(false);
+            loginBtnStatus.textContent='个人微信已授权';
+            await loadChannels();
+            setTimeout(()=>{if(dlg.open)dlg.close()},1200);
+            return;
+          }
+          if(started.state!=='WAITING_FOR_SCAN'||!started.qr_image){
+            wqSetStatus(started.error||'二维码申请失败','error');
+            wqShowSpinner(false);
+            return; // dialog stays open showing error; user can close
+          }
+          wqShowSpinner(false);
+          wqShowQr(started.qr_image);
+          wqSetStatus('请用个人微信扫码');
+          // Polling loop
+          for(let i=0;i<120;i++){
+            await new Promise(resolve=>setTimeout(resolve,2500));
+            if(_wqAbort||attempt!==_wqAttempt)return;
+            let state;
+            try{state=await request('/channels/wechat/login')}catch(pollErr){
+              if(_wqAbort||attempt!==_wqAttempt)return;
+              wqSetStatus('网络错误：'+(pollErr.message||'请求失败'),'error');
+              return;
+            }
+            if(_wqAbort||attempt!==_wqAttempt)return;
+            if(state.state==='AUTHORIZED'){
+              wqSetStatus('授权成功 ✓','ok');
+              wqShowSpinner(false);
+              loginBtnStatus.textContent='个人微信已授权';
+              await loadChannels();
+              setTimeout(()=>{if(dlg.open)dlg.close()},1200);
+              return;
+            }
+            if(state.state==='need_verifycode'){
+              // Use dialog status area to ask for code instead of window.prompt
+              // (falls back to prompt for brevity; no new API call)
+              const code=window.prompt('请填写微信手机上显示的验证码');
+              if(_wqAbort||attempt!==_wqAttempt)return;
+              if(code===null){wqClose('已取消验证码输入');return}
+              await request('/channels/wechat/login/verify',{method:'POST',body:JSON.stringify({code:code.trim()})});
+              wqSetStatus('验证码已提交，继续确认…');
+              continue;
+            }
+            if(state.state==='expired'){wqSetStatus('二维码已过期，请关闭后重新申请','error');return}
+            if(state.state==='verify_code_blocked'){wqSetStatus('验证码验证被限制，请关闭后重新扫码','error');return}
+            if(state.state==='binded_redirect'){wqSetStatus('此微信账号已绑定其他客户端','error');return}
+            if(state.state==='FAILED'){wqSetStatus('授权失败：'+(state.error||'未知错误'),'error');return}
+            wqSetStatus(state.state==='scaned'?'已扫码，等待手机确认…':'等待扫码…');
+          }
+          wqSetStatus('等待超时，请关闭后重新申请二维码','error');
+        }catch(error){
+          if(_wqAbort||attempt!==_wqAttempt)return;
+          wqSetStatus(error.message||'授权请求失败','error');
+          wqShowSpinner(false);
+        }
+        // Note: loginBtn.disabled restored by wqClose or by dialog close event
+      });
+      // 解除授权重新扫码：渠道面板仅站长可见（boot() 对非管理员整体移除面板），
+      // 按钮随之天然 admin-only。确认后调 unbind 端点，再复用既有扫码流程。
+      // /etc 副本提示写进独立状态行，不被扫码弹窗的登录状态覆盖。
+      document.querySelector('#wechat-unbind')?.addEventListener('click',async e=>{
+        const btn=e.currentTarget;
+        if(!window.confirm('解除当前个人微信授权？将删除数据侧凭据文件并清除进程内凭据，然后重新弹出扫码。'))return;
+        btn.disabled=true;
+        const unbindStatus=document.querySelector('#wechat-unbind-status');
+        try{
+          const r=await request('/channels/wechat/unbind',{method:'POST'});
+          if(unbindStatus)unbindStatus.textContent=r.note||(r.credential_file_removed?'已解除授权':'无本地凭据，已重置状态');
+          await loadChannels();
+          loginBtn.click();
+        }catch(error){
+          if(unbindStatus)unbindStatus.textContent='解除失败：'+(error.message||'请求失败');
+        }finally{btn.disabled=false}
+      });
+    })();
+    async function loadInbox(){
+      try{const messages=await request('/inbox');document.querySelector('#inbox').innerHTML=renderInbox(messages)}
+      catch(e){document.querySelector('#inbox').innerHTML='<p class="empty">收件箱不可用</p>'}
+    }
+    const N8N_ZH={CONFIGURED:'已配置',CONFIG_REQUIRED:'未配置（CONFIG_REQUIRED）'};
+    function renderN8n(s){
+      if(!s)return '<p class="empty">n8n 状态不可用</p>';
+      const cls=s.state==='CONFIGURED'?'COMPLETED':'WAITING';
+      const missing=(s.missing||[]).length?`缺少：${escapeHtml(s.missing.join('、'))}`:escapeHtml(s.detail||'');
+      const summary=s.summary||{};const keys=Object.keys(summary);
+      const counts=keys.length?`<small>投递统计：${keys.map(k=>escapeHtml(k)+' '+Number(summary[k])).join(' · ')}</small>`:'';
+      return `<div class="card" style="cursor:default"><div class="row"><strong>n8n</strong><span class="pill ${cls}">${escapeHtml(N8N_ZH[s.state]||s.state||'')}</span></div><small>${missing}</small>${counts}</div>`;
+    }
+    function renderN8nDeliveries(rows){
+      if(!rows||!rows.length)return '<p class="empty">暂无投递记录</p>';
+      return rows.map(d=>{const cls=d.status==='SENT'?'COMPLETED':(d.status==='FAILED'?'FAILED':'WAITING');
+        const detail=[d.event_type,d.attempts?('尝试 '+d.attempts):'',d.error||'',d.http_status?('HTTP '+d.http_status):'','任务 '+(d.mission_id||'-')].filter(Boolean).map(x=>escapeHtml(x)).join(' · ');
+        return `<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(d.event_type||'事件')}</strong><span class="pill ${cls}">${escapeHtml(d.status)}</span></div><small>${detail}</small><small>${escapeHtml(new Date(d.created_at).toLocaleString())}</small></div>`;}).join('');
+    }
+    async function loadN8n(){
+      try{const s=await request('/n8n');document.querySelector('#n8n-status').innerHTML=renderN8n(s);document.querySelector('#n8n-deliveries').innerHTML=renderN8nDeliveries(s.recent)}
+      catch(e){const st=document.querySelector('#n8n-status');if(st)st.innerHTML='<p class="empty">n8n 状态不可用</p>';const dl=document.querySelector('#n8n-deliveries');if(dl)dl.innerHTML=''}
+    }
+    document.querySelector('#refresh-n8n')?.addEventListener('click',e=>{e.preventDefault();const b=e.currentTarget;b.disabled=true;loadN8n().finally(()=>{b.disabled=false})});
+    document.querySelector('#refresh-channels')?.addEventListener('click',e=>{e.preventDefault();const b=e.currentTarget;b.disabled=true;Promise.all([loadChannels(),loadInbox()]).finally(()=>{b.disabled=false})});
+    document.querySelector('#refresh-recon')?.addEventListener('click',e=>{e.preventDefault();const b=e.currentTarget;b.disabled=true;loadReconciliation().finally(()=>{b.disabled=false})});
+    document.querySelector('#refresh-members')?.addEventListener('click',e=>{e.preventDefault();const b=e.currentTarget;b.disabled=true;loadMembers().finally(()=>{b.disabled=false})});
+    document.querySelector('#inbox')?.addEventListener('click',async ev=>{
+      const open=ev.target.closest('button[data-open]');
+      if(open){await openMission(open.dataset.open);return}
+      const btn=ev.target.closest('button[data-dispatch]');
+      if(!btn)return;btn.disabled=true;
+      try{const mission=await request(`/channels/${btn.dataset.channel}/messages/${btn.dataset.dispatch}/dispatch`,{method:'POST'});
+        await loadInbox();await refresh();await openMission(mission.id)}
+      catch(e){err(e);btn.disabled=false}
+    });
+    setInterval(()=>{loadChannels();loadInbox();loadN8n()},30000);
+    function missionParam(){return new URLSearchParams(location.search).get('mission')}
+    function setMissionParam(id){const u=new URL(location.href);if(id)u.searchParams.set('mission',id);else u.searchParams.delete('mission');history.replaceState({},'',u.pathname+u.search)}
+    function updatePicker(list){
+      const sel=document.querySelector('#mission-picker');if(!sel)return;
+      const val=selected||'';
+      sel.innerHTML='<option value="">选择 Mission…</option>'+list.map(m=>`<option value="${escapeHtml(m.id)}" ${m.id===val?'selected':''}>${escapeHtml(m.title)} · ${progressPct(m.progress)}%</option>`).join('');
+    }
+    // ── 指挥台化（基线 §8 三层视图 / §9 多任务中心，加法式） ──────────────────
+    // §8：三视图只改同一 Mission 的投影（Projection）——不新建任务、不重拉数据，
+    // 切换只走 rerender()（用已加载的 current 重新渲染）。
+    let uiView='simple';
+    try{const savedView=localStorage.getItem('facai.uiView');if(savedView==='simple'||savedView==='pro'||savedView==='dev')uiView=savedView}catch(_){}
+    function setView(v){
+      if(v!=='simple'&&v!=='pro'&&v!=='dev')return;
+      uiView=v;
+      try{localStorage.setItem('facai.uiView',v)}catch(_){}
+      document.querySelectorAll('#view-switch .view-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));
+      if(current)rerender();
+    }
+    document.querySelectorAll('#view-switch .view-btn').forEach(b=>{
+      b.addEventListener('click',()=>setView(b.dataset.view));
+      b.setAttribute('aria-pressed',String(b.dataset.view===uiView));
+    });
+    // §9：三段计数头。数字直接统计 /missions 列表里每个 Mission 已持久化的 status。
+    function renderMissionCountHead(list){
+      const head=document.querySelector('#mission-count-head');if(!head)return;
+      const active=list.filter(m=>m.status==='RUNNING').length;
+      const waiting=list.filter(m=>['WAITING','QUEUED','PAUSED','BLOCKED'].includes(m.status)).length;
+      const completed=list.filter(m=>m.status==='COMPLETED').length;
+      head.innerHTML=`<span class="mc-seg mc-active" title="RUNNING"><b>${active}</b> ACTIVE</span><span class="mc-seg mc-waiting" title="WAITING / QUEUED / PAUSED / BLOCKED"><b>${waiting}</b> WAITING</span><span class="mc-seg mc-completed" title="COMPLETED"><b>${completed}</b> COMPLETED</span>`;
+    }
+    // §9：任务卡「当前动作行」。文案只从该 Mission 已持久化的 status/steps 推导，
+    // 绝不生成编造的执行叙事；没有 RUNNING 就没有呼吸点。
+    function missionAction(m){
+      const steps=Array.isArray(m.steps)?m.steps:[];
+      if(!steps.length)return '<span class="muted">尚未拆解阶段</span>';
+      const running=steps.filter(s=>s.status==='RUNNING');
+      const failed=steps.find(s=>s.status==='FAILED');
+      const blocked=steps.find(s=>s.status==='BLOCKED');
+      const next=steps.find(s=>s.status!=='COMPLETED');
+      const done=steps.filter(s=>s.status==='COMPLETED').length;
+      let text;
+      if(running.length>1)text=`并行执行 ${running.length} 个阶段 · 正在 ${running[0].label}`;
+      else if(running.length===1)text=`正在 ${running[0].label}`;
+      else if(failed)text=`失败于 ${failed.label}`;
+      else if(blocked)text=`${blocked.label} 被依赖阻塞`;
+      else if(m.status==='COMPLETED')text=`已交付 · ${done}/${steps.length} 阶段完成`;
+      else if(m.status==='CANCELLED')text='已取消';
+      else if(m.status==='PAUSED')text=`已暂停 · ${next?next.label:'等待继续'}`;
+      else text=next?`等待开始：${next.label}`:'等待调度';
+      const dot=m.status==='RUNNING'?'<span class="live-dot" aria-hidden="true"></span>':'';
+      return `${dot}<span>${escapeHtml(text)}</span>`;
+    }
+    // §9：Developer 模式（IS_ADMIN）任务卡 Worker 分配行。数据复用当前打开 Mission
+    // 已加载的 jobs（lease_owner=调度器真实写入的领取 worker，见 facai/store.py），
+    // 不发新请求；未打开的 Mission 没有 jobs 数据就不显示，绝不伪造分配。
+    function workerRowsFor(m){
+      if(!IS_ADMIN||!current||!Array.isArray(current.jobs)||m.id!==selected)return '';
+      const jobs=current.jobs;if(!jobs.length)return '';
+      const rows=jobs.slice(0,6).map(j=>{
+        const step=(Array.isArray(m.steps)?m.steps:[]).find(s=>s.id===j.step_id);
+        const owner=j.lease_owner?j.lease_owner:'待领取';
+        return `<div class="worker-row"><span class="worker-owner" title="lease_owner ${escapeHtml(owner)}">⚙ ${escapeHtml(owner)}</span><span class="worker-task">${escapeHtml(step?step.label:String(j.prompt||'').slice(0,60))}</span><span class="pill ${escapeHtml(j.status)}">${escapeHtml(statusLabel(j.status))}</span></div>`;
+      }).join('');
+      const more=jobs.length>6?`<div class="worker-row"><span class="muted">…共 ${jobs.length} 条队列分配</span></div>`:'';
+      return `<div class="worker-rows" role="group" aria-label="Worker 分配（Developer 模式）"><div class="worker-head">Workers · 队列分配</div>${rows}${more}</div>`;
+    }
+    // §8 专业视图：steps DAG 明细表（阶段 × 依赖 × 状态 × 进度 × 模型），全部来自已有数据。
+    function dagDetail(m){
+      const steps=Array.isArray(m.steps)?m.steps:[];
+      const byRef=new Map();steps.forEach(s=>{byRef.set(s.id,s);byRef.set(s.label,s)});
+      const rows=steps.map((s,i)=>{
+        const deps=(Array.isArray(s.depends_on)?s.depends_on:[]).map(r=>byRef.get(r)?.label).filter(Boolean);
+        const pct=progressPct(s.progress);
+        return `<tr><td>${i+1}. ${escapeHtml(s.label)}</td><td>${deps.length?deps.map(escapeHtml).join('、'):'—'}</td><td>${stepStatusPill(s.status)}</td><td>${pct}%</td><td>${s.model_id?escapeHtml(s.model_id):'—'}</td></tr>`;
+      }).join('');
+      return `<details class="secondary" data-key="dag-detail" open><summary>阶段 DAG 明细（专业视图）</summary><div class="body"><div class="dag-wrap"><table class="dag-table"><caption class="sr-only">Mission 阶段依赖明细</caption><thead><tr><th scope="col">阶段</th><th scope="col">依赖</th><th scope="col">状态</th><th scope="col">进度</th><th scope="col">模型</th></tr></thead><tbody>${rows}</tbody></table></div></div></details>`;
+    }
+    // §8 开发者视图：事件原始 JSON 折叠块，复用 current.events，零新请求。
+    function rawEvents(){
+      const events=Array.isArray(current.events)?current.events:[];
+      return `<details class="secondary" data-key="raw-events"><summary>事件原始 JSON（开发者视图 · ${events.length} 条）</summary><div class="body"><pre class="event">${escapeHtml(JSON.stringify(events,null,2))}</pre></div></details>`;
+    }
+    async function refresh(){
+      try{const list=await request('/missions');
+        document.querySelector('#active-count').textContent=`${list.filter(m=>m.status==='RUNNING').length} 个进行中`;
+        document.querySelector('#count').textContent=`(${list.length})`;
+        renderMissionCountHead(list);
+        document.querySelector('#missions').innerHTML=list.length?list.map(m=>{const pct=progressPct(m.progress);return `<button class="card mission-card ${m.id===selected?'active':''}" data-id="${escapeHtml(m.id)}" aria-label="${escapeHtml(m.title)}，${escapeHtml(statusLabel(m.status))}，进度 ${pct}%"><div class="row"><strong>${escapeHtml(m.title)}</strong>${statusPill(m.status)}</div><div class="bar ${m.status==='RUNNING'?'run':''}"><span style="width:${pct}%"></span></div><div class="mission-action">${missionAction(m)}</div><small>${pct}% · ${m.steps.length} 步 · ${m.steps.filter(s=>s.status==='COMPLETED').length} 完成 · 成本 $${Number(m.cost_total||0).toFixed(4)}</small>${workerRowsFor(m)}</button>`}).join(''):'<p class="empty">尚无任务</p>';
+        document.querySelectorAll('#missions .card').forEach(el=>el.onclick=()=>{currentStage=null;openMission(el.dataset.id)});
+        updatePicker(list);
+        return list;
+      }catch(e){
+        err(e);
+        // 骨架屏的失败态（对齐 loadApiKeys）：boot 时 SSE 尚未建立，refresh 失败后
+        // 没有其他重触发源，#missions 会无限转圈，必须就地给出重试入口。
+        const box=document.querySelector('#missions');
+        if(box){
+          box.innerHTML='<p class="empty">任务列表加载失败 <button type="button" class="ghost" data-retry-missions>点击重试</button></p>';
+          box.querySelector('[data-retry-missions]')?.addEventListener('click',()=>{
+            box.innerHTML='<div class="skel" role="status" aria-label="加载中"><span></span><span></span><span></span></div>';
+            refresh();
+          });
+        }
+        return [];
+      }
+    }
+    function stepTiming(stepId,events){
+      const rel=events.filter(e=>e.step_id===stepId);
+      const starts=rel.filter(e=>e.type==='STEP_RUNNING');
+      if(!starts.length)return '';
+      const terminals=rel.filter(e=>e.type==='STEP_COMPLETED'||e.type==='STEP_FAILED');
+      const end=terminals.at(-1);
+      const start=[...starts].reverse().find(e=>!end||e.sequence>end.sequence)||starts.at(-1);
+      const terminalAfterStart=end&&end.sequence>start.sequence?end:null;
+      const seconds=Math.max(0,Math.round(((terminalAfterStart?new Date(terminalAfterStart.occurred_at):new Date())-new Date(start.occurred_at))/1000));
+      return terminalAfterStart?`用时 ${seconds}s`:`进行中 · ${seconds}s`;
+    }
+    function latestStepError(stepId,events){
+      const matches=events.filter(e=>e.step_id===stepId&&
+        (e.type==='ERROR'||/(FAILED|TIMEOUT|REFUSED|AUTH_FAILED|RATE_LIMITED|RESOURCE_UNAVAILABLE)$/.test(e.type||'')));
+      const event=matches.at(-1);if(!event)return '';
+      const p=event.payload||{};let message=p.line||p.error||p.message||p.reason||
+        (p.exit_code!=null?`退出码 ${p.exit_code}`:event.type==='STEP_FAILED'?'阶段失败':statusLabel(event.type));
+      if(typeof message!=='string')message=JSON.stringify(message);
+      return message.replace(/\s+/g,' ').trim().slice(0,140);
+    }
+    function latestStepEvent(stepId,events,steps){
+      const event=events.filter(e=>e.step_id===stepId).at(-1);if(!event)return null;
+      const p=event.payload||{};let detail=p.line||p.error||p.message||p.reason||'';
+      if(p.dependency){const dep=steps.find(s=>s.id===p.dependency);detail=`依赖 ${dep?dep.label:'阶段'} 未满足`}
+      else if(!detail&&p.status)detail=`状态：${stepStatusLabel(p.status)}`;
+      if(typeof detail!=='string')detail=JSON.stringify(detail);
+      const date=new Date(event.occurred_at);
+      const time=Number.isNaN(date.getTime())?'':date.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      return {label:STEP_EVENT_ZH[event.type]||statusLabel(event.type),detail:detail.replace(/\s+/g,' ').trim().slice(0,100),time};
+    }
+    function workflowLayout(steps){
+      const byRef=new Map();steps.forEach(s=>{byRef.set(s.id,s);byRef.set(s.label,s)});
+      const deps=new Map(steps.map(s=>[s.id,(Array.isArray(s.depends_on)?s.depends_on:[]).map(ref=>byRef.get(ref)?.id).filter(Boolean)]));
+      const depthCache=new Map();
+      function depth(id){if(depthCache.has(id))return depthCache.get(id);const d=Math.max(-1,...(deps.get(id)||[]).map(depth))+1;depthCache.set(id,d);return d}
+      steps.forEach(s=>depth(s.id));
+      const byDepth=new Map();steps.forEach((s,i)=>{const d=depthCache.get(s.id);if(!byDepth.has(d))byDepth.set(d,[]);byDepth.get(d).push({step:s,index:i})});
+      const places=new Map();
+      for(const [d,items] of byDepth)items.forEach((item,lane)=>places.set(item.step.id,{col:d+1,row:lane+1,order:d*100+item.index}));
+      return {deps,places,columns:Math.max(1,...[...depthCache.values()].map(d=>d+1))};
+    }
+    function stageCard(step,index,active,here,layout,parallel){
+      const timing=stepTiming(step.id,current.events);
+      const error=latestStepError(step.id,current.events);
+      const recent=latestStepEvent(step.id,current.events,current.mission.steps);
+      const billing=billingMetrics(current.events,step.id);
+      // The backend persists integer step progress: waiting=0, active/failed=1, completed=100.
+      const stepPct=progressPct(step.progress);
+      const dependencies=(layout.deps.get(step.id)||[]).map(id=>current.mission.steps.find(s=>s.id===id)?.label).filter(Boolean);
+      const place=layout.places.get(step.id)||{col:1,row:index+1,order:index};
+      const style=`--step-col:${place.col};--step-row:${place.row};--step-order:${place.order}`;
+      const depText=dependencies.length?`依赖：${dependencies.map(escapeHtml).join('、')}`:'起点阶段';
+      const showParallel=parallel&&step.status==='RUNNING';
+      const stepModel=step.model_id?`<span class="parallel-chip" title="本阶段绑定模型">⚙ ${escapeHtml(step.model_id)}</span>`:'';
+      return `<button class="stage workflow-step ${escapeHtml(step.status)} ${active?'active':''} ${here?'here':''}" data-step="${escapeHtml(step.id)}" style="${style}" aria-current="${active?'true':'false'}" aria-label="阶段 ${index+1}：${escapeHtml(step.label)}，${stepStatusLabel(step.status)}${showParallel?'，并行节点':''}${step.model_id?'，模型 '+escapeHtml(step.model_id):''}，进度 ${stepPct}%，${escapeHtml(billingLine(billing))}${recent?'，最近事件：'+escapeHtml(recent.label)+(recent.detail?'，'+escapeHtml(recent.detail):''):''}">
+        <div class="node-row"><span class="node" aria-hidden="true">${step.status==='COMPLETED'?'✓':index+1}</span><span class="idx">阶段 ${index+1}</span>${showParallel?'<span class="parallel-chip">并行</span>':''}${stepModel}</div>
+        <div class="label">${escapeHtml(step.label)}</div><div>${stepStatusPill(step.status)}</div>
+        <div class="meta"><span>阶段进度</span><span>${stepPct}%${timing?' · '+escapeHtml(timing):''}</span></div>
+        <div class="stage-progress" aria-hidden="true"><span style="width:${stepPct}%"></span></div>
+        <div class="stage-deps">${depText}</div>
+        <div class="stage-billing">${escapeHtml(billingLine(billing))} · 倍率估算 <span class="estimated-cost">${costAmounts(billing,billingMultiplier())}</span></div>
+        ${recent?`<div class="stage-event" title="${escapeHtml(`${recent.label}${recent.detail?' · '+recent.detail:''}${recent.time?' · '+recent.time:''}`)}"><span class="event-kind">最近事件 · ${escapeHtml(recent.label)}</span>${recent.time?`<time>${escapeHtml(recent.time)}</time>`:''}<span class="event-detail">${escapeHtml(recent.detail||'状态已记录')}</span></div>`:''}
+        ${error?`<div class="stage-error" title="${escapeHtml(error)}">最近错误：${escapeHtml(error)}</div>`:''}</button>`;
+    }
+    function activeStep(m){
+      const s=m.steps;
+      if(!s.length)return null;
+      return s.find(x=>x.status==='RUNNING')||s.find(x=>x.status==='FAILED')||s.find(x=>x.status==='BLOCKED')||s.find(x=>x.status==='WAITING')||s[s.length-1];
+    }
+    function workflowAnnouncement(m){
+      const important=m.steps.filter(step=>{
+        if(['RUNNING','BLOCKED','FAILED'].includes(step.status))return true;
+        const lastEvent=current.events.filter(event=>event.step_id===step.id).at(-1);
+        return step.status==='WAITING'&&lastEvent?.type==='STEP_UNBLOCKED';
+      });
+      if(!important.length)return m.steps.length?'工作流当前没有运行中的阶段。':'工作流尚未添加阶段。';
+      return important.map(step=>{
+        const recent=latestStepEvent(step.id,current.events,m.steps);
+        return `${step.label}：${stepStatusLabel(step.status)}，进度 ${progressPct(step.progress)}%${recent?`，最近事件：${recent.label}${recent.detail?`，${recent.detail}`:''}`:''}`;
+      }).join('；');
+    }
+    function clientBrief(m){
+      // 客户视图：大白话原话 → AI 任务单 → 每阶段状态，用生活语言讲清楚平台做了什么
+      const steps=(m.steps||[]).map(st=>{
+        const cls=st.status==='COMPLETED'?'done':(st.status==='RUNNING'?'run':'');
+        const icon=st.status==='COMPLETED'?'✓':(st.status==='RUNNING'?'▶':(st.status==='FAILED'?'✕':'·'));
+        return `<span class="cb-step ${cls}"><span aria-hidden="true">${icon}</span>${escapeHtml(st.label)}</span>`;
+      }).join('');
+      const brief=m.professional_prompt
+        ?`<div class="cb-row"><span class="cb-tag">第 1 步 · 你的原话（逐字保留）</span><blockquote>${escapeHtml(m.original_input)}</blockquote></div>
+          <div class="cb-row"><span class="cb-tag">第 2 步 · AI 把它整理成的执行任务单</span><blockquote>${escapeHtml(m.professional_prompt)}</blockquote>
+          <div class="cb-steps">${steps}</div></div>`
+        :`<div class="cb-row"><span class="cb-tag">你的任务</span><blockquote>${escapeHtml(m.original_input)}</blockquote><div class="cb-steps">${steps}</div></div>`;
+      return `<section class="client-brief" aria-label="任务说明">${brief}</section>`;
+    }
+    function isLinearChain(steps){
+      // A single dependency chain renders as the simple vertical run view;
+      // anything branchy keeps the DAG canvas. Legacy missions stored empty
+      // depends_on lists and executed strictly in creation order, so an empty
+      // list counts as "follows the previous stage" instead of forcing the
+      // branch canvas onto every old mission.
+      if(!steps.length)return true;
+      const byRef=new Map();steps.forEach(s=>{byRef.set(s.id,s);byRef.set(s.label,s)});
+      let chained=false;
+      for(let i=0;i<steps.length;i++){
+        const refs=(Array.isArray(steps[i].depends_on)?steps[i].depends_on:[]).map(r=>byRef.get(r)?.id).filter(Boolean);
+        if(i===0){if(refs.length)return false;continue}
+        if(refs.length===1&&refs[0]===steps[i-1].id){chained=true;continue}
+        // Legacy missions stored flat lists with no deps at all: implicit order.
+        if(refs.length===0&&!chained)continue;
+        return false;
+      }
+      return true;
+    }
+    function metricsStrip(){
+      const m=current.mission,metrics=billingMetrics(current.events);
+      const done=m.steps.filter(s=>s.status==='COMPLETED').length;
+      const running=m.steps.filter(s=>s.status==='RUNNING').length;
+      const cost=(metrics.costs||[]).filter(c=>c.currency==='USD').reduce((a,c)=>a+c.amount,0);
+      const priced=outputPrice(metrics);
+      const tile=(label,value,extra='')=>`<div class="metric-tile"><small>${label}</small><strong>${value}</strong>${extra?`<span class="muted">${extra}</span>`:''}</div>`;
+      return `<div class="metrics-strip" role="group" aria-label="工作指标">
+        ${tile('总进度',progressPct(m.progress)+'%',done+'/'+m.steps.length+' 阶段')}
+        ${tile('模型调用',metrics.calls+' 次',running?running+' 个阶段执行中':'空闲')}
+        ${tile('Token',metrics.total!=null?metrics.total.toLocaleString():'—','输入 '+(metrics.input!=null?metrics.input.toLocaleString():'—')+' · 输出 '+(metrics.output!=null?metrics.output.toLocaleString():'—'))}
+        ${tile('已记录成本',formatMoney(cost),priced!=null?'输出计价 '+formatMoney(priced):'按输出 token 计价')}
+      </div>`;
+    }
+    function railCard(step,index,active,here){
+      const timing=stepTiming(step.id,current.events);
+      const billing=billingMetrics(current.events,step.id);
+      const error=latestStepError(step.id,current.events);
+      const stepPct=progressPct(step.progress);
+      const stepModel=step.model_id?`<span class="parallel-chip" title="本阶段绑定模型">⚙ ${escapeHtml(step.model_id)}</span>`:'';
+      const cost=(billing.costs||[]).filter(c=>c.currency==='USD').reduce((a,c)=>a+c.amount,0);
+      const est=costAmounts(billing,billingMultiplier());
+      return `<button class="stage workflow-step rail-step ${escapeHtml(step.status)} ${active?'active':''} ${here?'here':''}" data-step="${escapeHtml(step.id)}" aria-current="${active?'true':'false'}" aria-label="阶段 ${index+1}：${escapeHtml(step.label)}，${stepStatusLabel(step.status)}，进度 ${stepPct}%，${escapeHtml(billingLine(billing))}">
+        <span class="node" aria-hidden="true">${step.status==='COMPLETED'?'✓':(step.status==='FAILED'?'!':index+1)}</span>
+        <span class="rail-main"><span class="rail-title"><b>${escapeHtml(step.label)}</b>${stepStatusPill(step.status)}${stepModel}</span>
+        <span class="rail-metrics muted">阶段 ${index+1} · 进度 ${stepPct}%${timing?' · '+escapeHtml(timing):''} · 调用 ${billing.calls} 次 · Token ${billing.total!=null?billing.total.toLocaleString():'—'}${cost?` · ${formatMoney(cost)}`:''} · 倍率估算 <span class="estimated-cost">${est}</span>${error?` · ${escapeHtml(String(error).slice(0,80))}`:''}</span>
+        <span class="stage-progress" aria-hidden="true"><span style="width:${stepPct}%"></span></span></span>
+        <span class="rail-chevron" aria-hidden="true">›</span></button>`;
+    }
+    function renderPipeline(){
+      const m=current.mission;const done=m.steps.filter(s=>s.status==='COMPLETED').length;
+      const here=activeStep(m);
+      const layout=workflowLayout(m.steps);
+      // Parallel count comes straight from persisted RUNNING step statuses — never simulated.
+      const runningCount=m.steps.filter(s=>s.status==='RUNNING').length;
+      const parallel=runningCount>1;
+      const overview=`<button class="stage pipeline-overview ${currentStage?'':'active'}" data-step="" aria-label="Mission 总览，${done}/${m.steps.length} 阶段完成，进度 ${progressPct(m.progress)}%${parallel?`，${runningCount} 路阶段并行运行`:''}"><span class="node" aria-hidden="true">◎</span><strong>全部阶段</strong>${statusPill(m.status)}<span class="muted">${done}/${m.steps.length} 完成</span>${parallel?`<span class="parallel-chip">${runningCount} 路并行</span>`:''}<span class="overview-progress">${progressPct(m.progress)}%</span></button>`;
+      if(isLinearChain(m.steps)){
+        // The simple run view: one vertical status rail, no edge wiring needed.
+        return `<div class="pipeline pipeline-rail" id="pipeline"><div id="pipeline-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true">${escapeHtml(workflowAnnouncement(m))}</div>${overview}<div class="rail-steps">${m.steps.map((s,i)=>railCard(s,i,s.id===currentStage,here&&s.id===here.id)).join('')}</div></div>`;
+      }
+      const columns=layout.columns, minWidth=columns*190+(columns-1)*42;
+      return `<div class="pipeline" id="pipeline"><div id="pipeline-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true">${escapeHtml(workflowAnnouncement(m))}</div>${overview}<div class="pipeline-graph"><div class="pipeline-canvas" id="pipeline-canvas" style="grid-template-columns:repeat(${columns},minmax(180px,1fr));min-width:${minWidth}px">
+        <svg class="workflow-edges" id="workflow-edges" aria-hidden="true"></svg>
+        ${m.steps.map((s,i)=>stageCard(s,i,s.id===currentStage,here&&s.id===here.id,layout,parallel)).join('')}</div></div></div>`;
+    }
+    function drawWorkflowEdges(){
+      const canvas=document.querySelector('#pipeline-canvas'),svg=document.querySelector('#workflow-edges');
+      if(!canvas||!svg)return;
+      const width=canvas.scrollWidth,height=canvas.scrollHeight,base=canvas.getBoundingClientRect();
+      svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.setAttribute('width',width);svg.setAttribute('height',height);
+      const nodes=[...canvas.querySelectorAll('.workflow-step')];const byId=new Map(nodes.map(el=>[el.dataset.step,el]));
+      const paths=[];const mobile=matchMedia('(max-width:900px)').matches;
+      const refToId=new Map();current.mission.steps.forEach(s=>{refToId.set(s.id,s.id);refToId.set(s.label,s.id)});
+      const children=new Map();current.mission.steps.forEach(step=>(Array.isArray(step.depends_on)?step.depends_on:[]).forEach(ref=>{const id=refToId.get(ref);if(!id)return;if(!children.has(id))children.set(id,[]);children.get(id).push(step.id)}));
+      for(const target of nodes){
+        const step=current.mission.steps.find(s=>s.id===target.dataset.step);if(!step)continue;
+        const targetNode=target.querySelector('.node').getBoundingClientRect();
+        const tx=targetNode.left-base.left+targetNode.width/2,ty=targetNode.top-base.top+targetNode.height/2;
+        for(const [depIndex,dep] of (Array.isArray(step.depends_on)?step.depends_on:[]).entries()){
+          const source=byId.get(refToId.get(dep)||dep);if(!source)continue;
+          const sourceNode=source.querySelector('.node').getBoundingClientRect();
+          const sx=sourceNode.left-base.left+sourceNode.width/2,sy=sourceNode.top-base.top+sourceNode.height/2;
+          const bend=mobile?Math.max(18,Math.abs(ty-sy)*.38):Math.max(24,Math.abs(tx-sx)*.38);
+          const lane=(children.get(source.dataset.step)||[]).indexOf(target.dataset.step);
+          const side=mobile?16+(Math.max(0,lane)+depIndex)*8:0;
+          const d=mobile?`M ${sx} ${sy} C ${sx+side} ${sy+bend} ${tx+side} ${ty-bend} ${tx} ${ty}`:
+            `M ${sx} ${sy} C ${sx+bend} ${sy} ${tx-bend} ${ty} ${tx} ${ty}`;
+          const clsList=[];
+          if(source.classList.contains('COMPLETED'))clsList.push('complete');
+          if(source.classList.contains('FAILED'))clsList.push('failed');
+          if((source.classList.contains('COMPLETED')||source.classList.contains('RUNNING'))&&target.classList.contains('RUNNING'))clsList.push('running');
+          const cls=clsList.join(' ');
+          paths.push(`<path class="${cls}" d="${d}"/>`);
+        }
+      }
+      svg.innerHTML=paths.join('');
+    }
+    function eventHtml(e){
+      const p=e.payload||{};const meta=[];
+      if(p.provider)meta.push('provider='+p.provider);if(p.model_id)meta.push('model='+p.model_id);
+      if(p.model_ref)meta.push('ref='+p.model_ref);
+      if(p.runtime_id)meta.push('runtime='+p.runtime_id+(p.runtime_location?'@'+p.runtime_location:''));
+      if(p.skill_id)meta.push('skill='+p.skill_id);
+      if(p.http_status!=null)meta.push('http='+p.http_status);
+      if(p.cost!=null)meta.push('cost=$'+p.cost);if(p.tokens)meta.push('tokens='+p.tokens);
+      if(p.amount!=null)meta.push('cost=$'+p.amount);
+      if(p.label)meta.push(p.label);if(p.reason)meta.push('原因='+String(p.reason).slice(0,80));
+      if(p.commit_hash)meta.push('commit='+String(p.commit_hash).slice(0,8));
+      const tag=meta.length?`<span class="tag">${escapeHtml(meta.join(' · '))}</span>`:'';
+      return `<div class="event ${escapeHtml(e.type)}">${tag}${escapeHtml(new Date(e.occurred_at).toLocaleString())} · <strong>${escapeHtml(e.type)}</strong>\n${escapeHtml(JSON.stringify(p))}</div>`;
+    }
+    function jobActions(j){
+      const b=(label,action,cls='ghost')=>`<button class="${cls}" data-job="${escapeHtml(j.id)}" data-action="${escapeHtml(action)}">${label}</button>`;
+      if(j.status==='QUEUED')return b('暂停','pause')+b('取消','cancel','danger');
+      if(j.status==='PAUSED')return b('继续','resume')+b('取消','cancel','danger');
+      if(j.status==='FAILED'||j.status==='CANCELLED')return b('重试','retry');
+      return '';
+    }
+    function renderInspector(){
+      const m=current.mission,events=current.events;
+      const step=m.steps.find(s=>s.id===currentStage);
+      const scoped=currentStage?events.filter(e=>e.step_id===currentStage):events;
+      const opts=['<option value="">不关联步骤</option>'].concat(m.steps.map(s=>`<option value="${escapeHtml(s.id)}" ${s.id===currentStage?'selected':''}>${escapeHtml(s.label)}</option>`)).join('');
+      return `<div class="row"><strong>${step?'阶段检查：'+escapeHtml(step.label):'阶段检查器 · 全部事件'}</strong><span class="muted">${scoped.length} 条事件</span></div>
+        <div class="grid2">
+          <label>关联步骤<select id="run-step">${opts}</select></label>
+          <label>超时（秒）<input id="run-timeout" type="number" value="300" min="1" max="3600"></label>
+          <label>队列优先级<input id="run-priority" type="number" value="0"></label>
+        </div>
+        <label>任务提示</label><textarea id="run-prompt" placeholder="例如：创建 hello.py 并编写一个通过的测试"></textarea>
+        <div class="actions">
+          <button id="run-button" ${m.agent_id==='opencode'?'':'disabled'}>运行任务</button>
+          <button id="enqueue-button" class="ghost" ${m.agent_id==='opencode'?'':'disabled'}>加入调度队列</button>
+          <span id="run-state" class="muted" role="status" aria-live="polite">${m.agent_id==='opencode'?'':'请先绑定 OpenCode Agent'}</span>
+        </div>
+        <div id="run-result"></div>
+        <h3 style="margin-top:16px">事件（${scoped.length}）</h3>
+        <div id="timeline" class="timeline" role="log" aria-live="polite" aria-label="事件时间线">${scoped.length?scoped.map(eventHtml).join(''):'<p class="empty">暂无事件</p>'}</div>`;
+    }
+    function selectOpts(entries,selected){
+      return ['<option value="">未绑定</option>'].concat(Object.keys(entries).map(k=>`<option value="${escapeHtml(k)}" ${selected===k?'selected':''}>${escapeHtml(k)}</option>`)).join('');
+    }
+    function attributionLine(m,runtimes,models){
+      const model=models[m.model_id],runtime=runtimes[m.runtime_id];
+      const parts=[];
+      if(model)parts.push(`模型 ${model.provider||''} / ${m.model_id}`.replace(' / ',m.model_id?' / ':' '));
+      if(runtime)parts.push(`运行时 ${runtime.name||m.runtime_id}${runtime.location?' @ '+runtime.location:''}`);
+      if(m.skill_id)parts.push(`技能 ${m.skill_id}`);
+      return parts.length?parts.join(' · '):'未绑定模型/运行时';
+    }
+    function renderBindings(m,agents,models,skills,runtimes){
+      const agentOpts=['<option value="">未绑定</option>'].concat(Object.keys(agents).map(k=>`<option value="${escapeHtml(k)}" ${m.agent_id===k?'selected':''}>${escapeHtml(k)}</option>`)).join('');
+      return `<div class="grid2"><label>Agent<select id="bind-agent">${agentOpts}</select></label>
+          <label>Model<select id="bind-model">${selectOpts(models,m.model_id)}</select></label>
+          <label>Skill<select id="bind-skill">${selectOpts(skills,m.skill_id)}</select></label>
+          <label>Runtime<select id="bind-runtime">${selectOpts(runtimes,m.runtime_id)}</select></label></div>
+        <button id="bind-save" class="ghost">保存绑定</button> <span id="bind-state" class="muted"></span>`;
+    }
+    function renderConversionReview(m){
+      const conv=current.events.filter(e=>e.type==='PROMPT_CONVERTED').at(-1);
+      const dispatch=(current.events.filter(e=>e.type==='DISPATCH_QUEUED').at(-1))||(current.events.filter(e=>e.type==='DISPATCH_DEFERRED').at(-1));
+      const sources=current.channelMessages||[];
+      const basis=conv&&Array.isArray(conv.payload.basis)?conv.payload.basis:[];
+      const basisHtml=basis.length?`<ul class="muted" style="margin:6px 0 0;padding-left:18px">${basis.map(b=>`<li>${escapeHtml(b)}</li>`).join('')}</ul>`:'<p class="empty">该 Mission 不是由渠道消息转换而来（暂无转换依据）。</p>';
+      const dispatchHtml=dispatch?`<div class="muted" style="margin-top:8px">派发：<strong>${escapeHtml(dispatch.type)}</strong> · ${escapeHtml(JSON.stringify(dispatch.payload))}</div>`:'';
+      const sourcesHtml=sources.length?sources.map(s=>`<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(s.channel)}</strong><span class="pill">${escapeHtml(statusLabel(s.status)||s.status)}</span></div><small>${escapeHtml(s.sender||'')} · ${escapeHtml(s.created_at)}</small><pre class="event">${escapeHtml(s.text)}</pre></div>`).join(''):'<p class="empty">无关联渠道消息</p>';
+      return `<h3 style="margin-top:14px">转换依据（原话 → 专业提示）</h3>${basisHtml}${dispatchHtml}
+        <h3 style="margin-top:14px">来源渠道消息</h3><div class="list">${sourcesHtml}</div>`;
+    }
+    function renderDetail(){
+      const m=current.mission,models=current.models,runtimes=current.runtimes,skills=current.skills,agents=current.agents;
+      const done=m.steps.filter(s=>s.status==='COMPLETED').length,total=m.steps.length;
+      const cur=activeStep(m);
+      const running=m.status==='RUNNING';
+      const pct=progressPct(m.progress);
+      return `<div class="row"><h2 style="margin:0">${escapeHtml(m.title)}</h2>${statusPill(m.status)}</div>
+        <small>Mission ${escapeHtml(String(m.id).slice(0,8))} · ${escapeHtml(new Date(m.created_at).toLocaleString('zh-CN',{hour12:false}))}</small>
+        <div class="overview" aria-label="Mission 总体概览">
+          <div class="big">
+            <div><div class="pct">${pct}%</div><div class="muted">总体进度 · ${done}/${total} 阶段完成</div></div>
+            <div class="now"><div class="label">当前阶段</div><div class="current-stage" id="current-stage">${cur?`${running?'<span class="live-dot" aria-hidden="true"></span>':''}${statusPill(cur.status)} ${escapeHtml(cur.label)}`:'无阶段'}</div></div>
+          </div>
+          <div class="bar ${running?'run':''}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="总体进度 ${pct}%"><span style="width:${pct}%"></span></div>
+          <div class="row muted"><span>成本 $${Number(m.cost_total||0).toFixed(4)}</span><span>检查点 ${m.checkpoints.length} · 工件 ${m.artifacts.length}</span></div>
+        </div>
+        <div class="muted" id="attribution" style="margin-top:10px">当前归因：${escapeHtml(attributionLine(m,runtimes,models))}</div>
+        ${clientBrief(m)}
+        ${IS_ADMIN?'':metricsStrip()}
+        <h2>工作流水线 <span class="muted">${isLinearChain(m.steps)?'（点击阶段查看事件时间线）':'（连线表示依赖；点击阶段查看事件）'}</span></h2>${renderPipeline()}
+        ${uiView!=='simple'?dagDetail(m):''}
+        ${uiView==='dev'?rawEvents():''}
+        ${billingSummary('detail')}
+        ${billingPanel()}
+        <details class="secondary" data-key="inspector" ${currentStage?'open':''}>
+          <summary>阶段检查器</summary><div class="body">${renderInspector()}</div>
+        </details>
+        <details class="secondary" data-key="binding">
+          <summary>四类能力绑定（各自独立）</summary><div class="body">${renderBindings(m,agents,models,skills,runtimes)}</div>
+        </details>
+        <details class="secondary" data-key="prompt">
+          <summary>原始指令与专业提示</summary><div class="body">
+            <h3 style="margin-top:6px">原始指令（逐字保留）</h3><pre class="event">${escapeHtml(m.original_input)}</pre>
+            <h3>专业提示（与原始指令分开保存，每次修改都会记录）</h3>
+            <textarea id="prompt-text" placeholder="可选的、经过整理的结构化提示；不会改变原始指令">${escapeHtml(m.professional_prompt||'')}</textarea>
+            <button id="prompt-save" class="ghost">保存专业提示</button> <span id="prompt-state" class="muted"></span>
+            ${renderConversionReview(m)}
+          </div>
+        </details>
+        <details class="secondary" data-key="artifacts">
+          <summary>工件 / Git 检查点 / 调度队列</summary><div class="body">
+            <h3 style="margin-top:6px">工件</h3><div id="artifacts" class="list">${m.artifacts.length?m.artifacts.map(a=>`<div class="card" data-artifact="${escapeHtml(a.id)}"><strong>${escapeHtml(a.name)}</strong><small>${escapeHtml(a.created_at)}</small></div>`).join(''):'<p class="empty">暂无工件</p>'}</div>
+            <pre id="artifact-view" class="event" style="display:none"></pre>
+            <h3>Git 检查点</h3><div class="list">${m.checkpoints.length?m.checkpoints.map(c=>`<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(String(c.commit_hash).slice(0,10))}</strong><small>${escapeHtml(c.created_at)}</small></div><small>${escapeHtml(c.message)}</small></div>`).join(''):'<p class="empty">暂无检查点</p>'}</div>
+            <button id="diff-button" class="ghost" ${m.checkpoints.length?'':'disabled'}>查看最新代码 diff</button>
+            <pre id="diff-view" class="event" style="display:none"></pre>
+            <h3>调度队列 <span class="muted">(${current.jobs.length})</span></h3>
+            <div id="jobs" class="list">${current.jobs.length?current.jobs.map(j=>`<div class="card" style="cursor:default"><div class="row"><strong>${escapeHtml(statusLabel(j.status))}</strong><small>优先级 ${j.priority} · 尝试 ${j.attempts}/${j.max_attempts}</small></div><small>${escapeHtml(j.prompt.slice(0,140))}${j.error?' · 错误：'+escapeHtml(j.error):''}</small><div class="actions">${jobActions(j)}</div></div>`).join(''):'<p class="empty">队列为空</p>'}</div>
+          </div>
+        </details>`;
+    }
+    function wire(){
+      const id=selected;
+      const pipeline=document.querySelector('#detail .pipeline');
+      if(pipeline){requestAnimationFrame(drawWorkflowEdges);
+        if(!workflowResizeBound){window.addEventListener('resize',()=>requestAnimationFrame(drawWorkflowEdges));workflowResizeBound=true;}
+        pipeline.onclick=ev=>{const el=ev.target.closest('.stage');if(!el)return;currentStage=el.dataset.step||null;rerender();
+        const det=document.querySelector('#detail details[data-key="inspector"]');if(det)det.open=!!currentStage};
+      }
+      const multiplierInput=document.querySelector('#billing-multiplier');
+      if(multiplierInput)multiplierInput.addEventListener('change',()=>{
+        const parsed=Number(multiplierInput.value),value=Number.isFinite(parsed)?Math.min(10000,Math.max(0,parsed)):billingMultiplier();
+        multiplierInput.value=String(value);
+        try{localStorage.setItem('facai.billingMultiplier',String(value))}catch(_){}
+        document.querySelectorAll('.estimated-cost [data-base]').forEach(node=>{
+          node.textContent=formatMoney(Number(node.dataset.base)*value,node.dataset.currency||'USD');
+        });
+      });
+      const bs=document.querySelector('#bind-save');
+      if(bs)bs.onclick=async()=>{const st=document.querySelector('#bind-state');st.textContent='保存中…';
+        try{await request(`/missions/${id}/binding`,{method:'PUT',body:JSON.stringify({agent_id:document.querySelector('#bind-agent').value||null,model_id:document.querySelector('#bind-model').value||null,skill_id:document.querySelector('#bind-skill').value||null,runtime_id:document.querySelector('#bind-runtime').value||null})});st.textContent='已保存';await openMission(id)}catch(e){st.textContent='';err(e)}};
+      const ps=document.querySelector('#prompt-save');
+      if(ps)ps.onclick=async()=>{const st=document.querySelector('#prompt-state');st.textContent='保存中…';
+        try{await request(`/missions/${id}/prompt`,{method:'PUT',body:JSON.stringify({professional_prompt:document.querySelector('#prompt-text').value||null})});st.textContent='已保存'}catch(e){st.textContent='';err(e)}};
+      const rb=document.querySelector('#run-button');
+      if(rb)rb.onclick=async()=>{const state=document.querySelector('#run-state'),output=document.querySelector('#run-result');
+        const prompt=document.querySelector('#run-prompt').value.trim();if(!prompt){state.textContent='请输入任务提示';return}
+        rb.disabled=true;state.textContent='运行中…（真实调用 OpenCode）';output.innerHTML='';
+        try{const r=await request(`/missions/${id}/opencode/run`,{method:'POST',body:JSON.stringify({prompt,step_id:document.querySelector('#run-step').value||null,timeout:Number(document.querySelector('#run-timeout').value)||300})});
+          state.textContent=`${statusLabel(r.status)} · ${r.provider||''}/${r.model_ref||r.model_id||'默认'}${r.runtime_id?' · 运行时 '+r.runtime_id+(r.runtime_location?'@'+r.runtime_location:''):''} · exit=${r.exit_code} · $${Number(r.cost||0).toFixed(6)} · ${r.checkpoint?String(r.checkpoint).slice(0,8):'无检查点'}`;
+          output.innerHTML=`<div class="event ${escapeHtml(r.status)}">${escapeHtml(r.stdout||'(无 stdout)')}${r.stderr?'\n[stderr]\n'+escapeHtml(r.stderr):''}</div>`;
+          await openMission(id)}catch(e){state.textContent='失败';output.innerHTML=`<div class="event MODEL_FAILED">${escapeHtml(e.message)}</div>`;rb.disabled=false}};
+      const eb=document.querySelector('#enqueue-button');
+      if(eb)eb.onclick=async()=>{const state=document.querySelector('#run-state');
+        const prompt=document.querySelector('#run-prompt').value.trim();if(!prompt){state.textContent='请输入任务提示';return}
+        eb.disabled=true;state.textContent='入队中…';
+        try{await request(`/missions/${id}/jobs`,{method:'POST',body:JSON.stringify({prompt,step_id:document.querySelector('#run-step').value||null,timeout:Number(document.querySelector('#run-timeout').value)||300,priority:Number(document.querySelector('#run-priority').value)||0})});state.textContent='已加入调度队列';await openMission(id)}catch(e){state.textContent='';err(e);eb.disabled=false}};
+      const jb=document.querySelector('#jobs');
+      if(jb)jb.onclick=async ev=>{const btn=ev.target.closest('button[data-action]');if(!btn)return;btn.disabled=true;
+        try{await request(`/jobs/${btn.dataset.job}/${btn.dataset.action}`,{method:'POST'});await openMission(id)}catch(e){err(e);btn.disabled=false}};
+      const ab=document.querySelector('#artifacts');
+      if(ab)ab.onclick=async ev=>{const card=ev.target.closest('.card[data-artifact]');if(!card)return;const view=document.querySelector('#artifact-view');
+        try{const a=await request(`/missions/${id}/artifacts/${card.dataset.artifact}`);view.style.display='block';view.textContent=`${a.name} · ${a.size} 字节${a.truncated?'（已截断）':''}\n\n${a.content}`}catch(e){err(e)}};
+      const db=document.querySelector('#diff-button');
+      if(db)db.onclick=async()=>{const view=document.querySelector('#diff-view');
+        try{const d=await request(`/missions/${id}/diff`);view.style.display='block';view.textContent=d.available?`checkpoint ${String(d.checkpoint).slice(0,10)}${d.truncated?'（已截断）':''}\n\n${d.diff}`:'暂无可用 diff'}catch(e){err(e)}};
+    }
+    function openStates(){const map={};document.querySelectorAll('#detail details[data-key]').forEach(d=>map[d.dataset.key]=d.open);return map}
+    function rerender(){if(!current)return;const focus=document.activeElement&&document.activeElement.id;const states=openStates();
+      document.querySelector('#detail').innerHTML=renderDetail();
+      document.querySelectorAll('#detail details[data-key]').forEach(d=>{if(states[d.dataset.key]!=null)d.open=states[d.dataset.key]});
+      wire();if(focus){const el=document.getElementById(focus);if(el)el.focus()}}
+    async function openMission(id){
+      selected=id;setMissionParam(id);if(source)source.close();
+      // Mobile layout hook: a mission is on screen, so the detail column leads
+      // (see the media-query comment near the end of the stylesheet).
+      document.body.classList.add('mission-open');
+      const [m,events,agents,models,skills,runtimes,jobs,channelMessages]=await Promise.all([
+        request('/missions/'+id),request('/missions/'+id+'/events'),
+        request('/registries/agents'),request('/registries/models'),
+        request('/registries/skills'),request('/registries/runtimes'),
+        request('/missions/'+id+'/jobs'),request('/missions/'+id+'/channel-messages')]);
+      current={mission:m,events,agents,models,skills,runtimes,jobs,channelMessages};
+      document.querySelector('#detail').innerHTML=renderDetail();wire();
+      source=new EventSource(api+'/missions/'+id+'/stream?after='+(events.at(-1)?.sequence||0));
+      // 纯前端连接状态：EventSource 断线会自动重连，这里只如实显示"断了、在重连"，
+      // onopen（含重连成功）即恢复。不借机编造任何任务进度或阶段状态。
+      const sseStatus=document.querySelector('#sse-status');
+      source.onopen=()=>{if(sseStatus){sseStatus.style.display='none';sseStatus.textContent=''}};
+      source.onerror=()=>{if(sseStatus){sseStatus.style.display='';sseStatus.textContent='连接中断，正在重连…'}};
+      source.addEventListener('mission',e=>{
+        const event=JSON.parse(e.data);
+        // 断线重连后服务端仍按打开时的旧 after 全量重放：sequence 不大于已收最大值的
+        // 事件是重放件，直接丢弃，避免调用/token/成本指标随每次重连翻倍。
+        // 事件缺 sequence 时无法判重，保持原样追加（与旧行为一致）。
+        const seq=Number(event.sequence);
+        let maxSeq=0;for(const ev of current.events){const s=Number(ev.sequence);if(Number.isFinite(s)&&s>maxSeq)maxSeq=s}
+        if(Number.isFinite(seq)&&seq<=maxSeq)return;
+        current.events.push(event);rerender();refresh();
+      });
+      await refresh();
+    }
+    document.querySelector('#create-form').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);
+      const mode=document.querySelector('#create-mode')?.value||'manual';
+      try{let m;
+        if(mode==='auto'){
+          m=await request('/missions/auto',{method:'POST',body:JSON.stringify({original_input:f.get('original_input'),title:f.get('title')||null})});
+        }else{
+          m=await request('/missions',{method:'POST',body:JSON.stringify({title:f.get('title'),original_input:f.get('original_input'),steps:String(f.get('steps')).split('\n').map(x=>x.trim()).filter(Boolean)})});
+        }
+        document.querySelector('#error').textContent='';e.target.reset();currentStage=null;await openMission(m.id)}catch(e){err(e)}};
+    document.querySelector('#model-form').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);
+      const body={provider:f.get('provider'),model:f.get('model'),endpoint:f.get('endpoint')};const env=String(f.get('api_key_env')||'').trim();if(env)body.api_key_env=env;
+      try{await request('/registries/models/'+encodeURIComponent(f.get('key')),{method:'PUT',body:JSON.stringify(body)});document.querySelector('#error').textContent='';e.target.reset();await loadRegistries()}catch(e){err(e)}};
+    document.querySelector('#mission-picker').onchange=e=>{const id=e.target.value;if(id){currentStage=null;openMission(id)}else{
+      // 选回占位项 = 关闭详情：不关 SSE、不清 current 的话，五节点流水线条会
+      // 卡在上一个任务的 live 状态持续呼吸动画。
+      selected=null;current=null;currentStage=null;
+      if(source){source.close();source=null}
+      setMissionParam(null);document.body.classList.remove('mission-open');
+      document.querySelector('#detail').innerHTML='<p class="empty">选择一个任务查看真实流水线与阶段输出。</p>'}};
+    document.querySelector('#logout').onclick=async()=>{try{await fetch(api+'/auth/logout',{method:'POST',credentials:'same-origin',headers:csrfToken?{'X-CSRF-Token':csrfToken}:{}})}catch(_){}location='/login'};
+    // 今日开发进度：状态、整数百分比与证据都来自后端 JSON，本地验证与生产部署分开显示。
+    const DAILY_STATUS_CLASS={verified_local:'COMPLETED',deployed:'COMPLETED',in_progress:'RUNNING',blocked:'FAILED',stopped:'PAUSED',not_executing:'WAITING'};
+    function dailyVerification(p){return p.production_deployed?'生产已部署':(p.local_verified?'本地已验证 · 未部署':'本地未验证')}
+    function dailyProviderRow(p){
+      const cls=DAILY_STATUS_CLASS[p.status]||'WAITING',pct=progressPct(p.percent);
+      const blockers=(p.blockers||[]).length?`<small class="daily-blocker">受阻：${p.blockers.map(escapeHtml).join('；')}</small>`:'';
+      const evidence=(p.evidence||[]).length?`<small>证据：${p.evidence.map(escapeHtml).join('；')}</small>`:'';
+      const summary=p.summary?`<small>${escapeHtml(p.summary)}</small>`:'';
+      return `<div class="daily-provider" data-provider="${escapeHtml(p.id)}" data-status="${escapeHtml(p.status)}" data-deployed="${p.production_deployed?'true':'false'}"><div class="row"><strong>${escapeHtml(p.provider)}</strong><span class="pill ${cls}">${escapeHtml(p.status_label)}</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="${escapeHtml(p.provider)} 进度 ${pct}%"><span style="width:${pct}%"></span></div><small>${pct}% · ${escapeHtml(dailyVerification(p))}</small>${summary}${blockers}${evidence}</div>`;
+    }
+    async function loadDailyProgress(){
+      const list=document.querySelector('#daily-progress-list');
+      try{const data=await request('/daily-progress');
+        document.querySelector('#daily-progress-date').textContent=data.date||'';
+        document.querySelector('#daily-progress-note').textContent=data.note||'';
+        const providers=data.providers||[];
+        list.innerHTML=providers.length?providers.map(dailyProviderRow).join(''):'<p class="empty">暂无记录</p>';
+        const busy=providers.filter(p=>p.status==='in_progress').length;
+        const verified=providers.filter(p=>['verified_local','deployed'].includes(p.status)).length;
+        document.querySelector('#daily-progress-active').textContent=`${busy} 进行中 · ${verified} 已验证/部署`;
+      }catch(e){list.innerHTML='<p class="empty">进度数据暂不可用</p>'}
+    }
+    let IS_ADMIN=false;
+    if('serviceWorker' in navigator&&location.protocol==='https:'){
+      navigator.serviceWorker.register('/sw.js').catch(()=>{});
+    }
+    function bindChangePassword(){
+      const form=document.querySelector('#change-password-form');if(!form)return;
+      const st=document.querySelector('#change-password-state');
+      form.onsubmit=async e=>{
+        e.preventDefault();
+        const cur=document.querySelector('#pw-current').value;
+        const nw=document.querySelector('#pw-new').value;
+        const cf=document.querySelector('#pw-confirm').value;
+        if(nw!==cf){if(st){st.textContent='两次输入的新密码不一致';st.style.color='var(--red)'}return}
+        if(st){st.textContent='提交中…';st.style.color=''}
+        try{
+          await request('/auth/change-password',{method:'POST',body:JSON.stringify({current_password:cur,new_password:nw})});
+          // 服务端在改密成功后立即吊销全部会话：必须提示并跳登录页重登，
+          // 否则用户下一次操作才被 401 弹回 /login。
+          if(st){st.textContent='密码已更新，正在跳转登录页…';st.style.color='var(--green)'}
+          form.reset();
+          const b=document.querySelector('#force-reset');if(b)b.remove();
+          setTimeout(()=>{location='/login'},1200);
+        }catch(e2){if(st){st.textContent='修改失败：'+e2.message;st.style.color='var(--red)'}}
+      };
+    }
+    function bindAdminReset(){
+      const form=document.querySelector('#admin-reset-form');if(!form)return;
+      const st=document.querySelector('#admin-reset-state');
+      form.onsubmit=async e=>{
+        e.preventDefault();
+        const u=document.querySelector('#ar-user').value.trim();
+        const p=document.querySelector('#ar-pass').value;
+        if(!u||!p)return;
+        if(st){st.textContent='提交中…';st.style.color=''}
+        try{
+          const r=await request('/auth/admin-reset-password',{method:'POST',body:JSON.stringify({username:u,new_password:p})});
+          if(st){st.textContent=r.must_change_password?'密码已重置（弱口令，该账号下次登录须改密）':'密码已重置';st.style.color='var(--green)'}
+          form.reset();
+        }catch(e2){if(st){st.textContent='重置失败：'+e2.message;st.style.color='var(--red)'}}
+      };
+    }
+    // 协助模式知情横幅（可见可审，绝不静默）：assist 存在时常驻金边横幅，写明
+    // 事由与截止时间；不存在（null/缺字段）时保持隐藏 —— 不渲染任何无依据提示。
+    function renderAssistBanner(assist){
+      const el=document.getElementById('assist-banner');if(!el)return;
+      if(!assist||!assist.active){el.hidden=true;el.innerHTML='';return}
+      let until=assist.expires_at||'';
+      try{if(until)until=new Date(until).toLocaleString()}catch(_){}
+      el.hidden=false;
+      el.innerHTML='🛟 管理员协助会话进行中 · 事由：'+escapeHtml(assist.reason||'（未填写）')
+        +' · 至 '+escapeHtml(until||'（服务端未返回截止时间）')
+        +'<span class="assist-audit">管理员正以协助身份访问本账号的任务范围；其全部操作已写入事件审计（assist_by）。</span>';
+    }
+    async function boot(){
+      try{const s=await request('/auth/session');csrfToken=s.csrf_token||null;
+        // 管理员判定优先用服务端 is_admin（按 FACAI_ADMIN_USER 服务端比对，
+        // 站长改名后不再失效）；旧后端缺该字段时回退原用户名比较，保持旧行为。
+        IS_ADMIN=(!s.auth_required)||(typeof s.is_admin==='boolean'?s.is_admin:(s.username||'admin')==='admin');
+        document.querySelector('#user').textContent=s.auth_required?('用户 '+escapeHtml(s.username||'admin')):'本地开发';
+        renderAssistBanner(s.assist);
+        if(!IS_ADMIN){
+          // 站长私人面板：渠道、n8n、内部进度、全站日报、共享注册表 —— 客户不可见
+          for(const id of ['channel-panel','n8n-panel','daily-progress-panel','ops-brief-panel','registry-panel','reconciliation-panel','members-panel']){
+            document.getElementById(id)?.remove();
+          }
+          document.body.classList.add('client-view');
+          // 宣传位同理：渠道派活对客户不存在入口，改为如实描述网页/API 下单
+          const chip=document.getElementById('cap-channel-chip');
+          if(chip)chip.textContent='🌐 网页 / API 下单 · 渠道派活为站长专属';
+        }else{
+          document.querySelector('#admin-reset-box').style.display='block';
+        }
+        bindChangePassword();
+        if(IS_ADMIN)bindAdminReset();
+        if(s.must_change_password){
+          const panel=document.getElementById('account-panel');if(panel)panel.open=true;
+          const err=document.querySelector('#error');
+          if(err)err.innerHTML='<div id="force-reset" style="background:rgba(248,113,113,.12);border:1px solid var(--red);border-radius:10px;padding:10px 12px;color:#fecaca;font-size:.85rem">⚠️ 你的密码过于简单，已被系统标记。请立即在上方「账户与安全」中把密码改成强密码后才能正常使用。</div>';
+        }
+      }catch(e){return}
+      request('/health').then(()=>document.querySelector('#health').textContent='● 在线').catch(()=>document.querySelector('#health').textContent='离线');
+      request('/pricing').then(r=>{OUTPUT_RATE=r.output_usd_per_mtok!=null?Number(r.output_usd_per_mtok):null;if(current)rerender()}).catch(()=>{});
+      loadMyBilling();
+      if(IS_ADMIN)loadRegistries();
+      loadMyModels();
+      loadApiKeys();
+      loadMyChannels();
+      if(IS_ADMIN)loadOpsBrief();
+      loadArtifactsCenter();
+      loadRecharge();
+      if(IS_ADMIN)loadChannels();
+      if(IS_ADMIN)loadInbox();  // inbox 容器在渠道面板内，仅站长渲染
+      if(IS_ADMIN)loadN8n();
+      if(IS_ADMIN)loadDailyProgress();
+      if(IS_ADMIN)loadReconciliation();
+      if(IS_ADMIN)loadMembers();
+      const list=await refresh();
+      const want=missionParam();
+      const pick=(want&&list.some(m=>m.id===want))?want:(list[0]&&list[0].id);
+      if(pick){await openMission(pick)}else{setMissionParam(null);document.body.classList.remove('mission-open');document.querySelector('#detail').innerHTML='<p class="empty">选择一个任务查看真实流水线与阶段输出。</p>'}
+    }
+    boot();
+  </script>
+  <script>
+    // Mission pipeline strip driver: the five nodes mirror the open mission's
+    // persisted state (steps + events) — never simulated progress. Re-runs on
+    // every detail re-render via MutationObserver; falls back to idle when the
+    // shared `current` binding is unavailable.
+    (function(){
+      const strip=document.getElementById('pipeline-strip');if(!strip)return;
+      const label=document.getElementById('ps-label');
+      const IDLE='任务流水线 · 空闲';
+      const NODES=['channel','compile','authorize','execute','deliver'];
+      function set(name,state){
+        const el=strip.querySelector('.ps-node[data-node="'+name+'"]');if(!el)return;
+        el.classList.remove('done','active','pending','failed');
+        el.classList.add(state);
+      }
+      function update(){
+        let mission=null,events=[];
+        try{
+          if(typeof current!=='undefined'&&current&&current.mission){mission=current.mission;events=current.events||[]}
+        }catch(_){mission=null}
+        if(!mission){
+          strip.dataset.state='idle';if(label)label.textContent=IDLE;
+          NODES.forEach(n=>set(n,'pending'));return;
+        }
+        const steps=mission.steps||[];
+        const done=steps.filter(s=>s.status==='COMPLETED').length;
+        const running=steps.some(s=>s.status==='RUNNING');
+        // 单个步骤 FAILED 不等于任务失败：并行分支下其余步骤可能仍在 RUNNING
+        // （剩余重试额度内 mission 保持 RUNNING），此时红✕会与「运行中」label
+        // 自相矛盾。只有 mission 本身进入 FAILED 才亮执行节点的失败态。
+        const failed=mission.status==='FAILED';
+        const converted=events.some(e=>e.type==='PROMPT_CONVERTED')||!!mission.professional_prompt;
+        const dispatched=events.some(e=>e.type==='DISPATCH_QUEUED')||['RUNNING','COMPLETED','FAILED'].indexOf(mission.status)>=0;
+        const delivered=mission.status==='COMPLETED';
+        const dead=mission.status==='FAILED'||mission.status==='CANCELLED';
+        set('channel','done'); // holding a mission means intake already happened
+        set('compile',converted?'done':((mission.status==='WAITING'||mission.status==='QUEUED')?'active':'done'));
+        set('authorize',dispatched?'done':((mission.status==='WAITING'||mission.status==='QUEUED')?'active':'pending'));
+        set('execute',failed?'failed':(running?'active':(steps.length&&done===steps.length?'done':'pending')));
+        set('deliver',delivered?'done':(dead?'failed':(running&&steps.length&&done===steps.length?'active':'pending')));
+        strip.dataset.state=dead?'failed':(delivered?'done':((running||mission.status==='RUNNING'||mission.status==='QUEUED')?'live':'idle'));
+        if(label)label.textContent='任务流水线 · '+(typeof statusLabel==='function'?statusLabel(mission.status):mission.status);
+      }
+      const detail=document.getElementById('detail');
+      if(detail&&typeof MutationObserver==='function'){new MutationObserver(update).observe(detail,{childList:true,subtree:true})}
+      update();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+{
+  "target": "agent-goose-fork-config (初扫收录实例 G:\\工具\\goose-config)",
+  "origin": "本地路径 G:\\工具\\goose-config",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 37 个文本文件（源码 3、其余 34），识别 36 面（源码档 1、文档/示例 DOC_ 降权 17、其余文件 18；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "SHELL_EXEC",
+      "where": "skills/unlazy/scripts/gate-check.mjs:15",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "skills/unlazy/scripts/gate-check.mjs:15  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_abliteration.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.abliteration.ai/v1",
+      "evidence": "custom_providers/custom_abliteration.json:7  \"base_url\": \"https://api.abliteration.ai/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_audn.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.audn.ai/api/v1",
+      "evidence": "custom_providers/custom_audn.json:7  \"base_url\": \"https://platform.audn.ai/api/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_cottoken.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.cottoken.com/v1",
+      "evidence": "custom_providers/custom_cottoken.json:7  \"base_url\": \"https://api.cottoken.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_gemini.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta/openai",
+      "evidence": "custom_providers/custom_gemini.json:7  \"base_url\": \"https://generativelanguage.googleapis.com/v1beta/openai\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_groq.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.groq.com/openai/v1",
+      "evidence": "custom_providers/custom_groq.json:7  \"base_url\": \"https://api.groq.com/openai/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_intern_ai.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://discovery-api.intern-ai.org.cn/v1",
+      "evidence": "custom_providers/custom_intern_ai.json:7  \"base_url\": \"https://discovery-api.intern-ai.org.cn/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_local_27b_abl.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:11434/v1",
+      "evidence": "custom_providers/custom_local_27b_abl.json:7  \"base_url\": \"http://localhost:11434/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_local_35b.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:11434/v1",
+      "evidence": "custom_providers/custom_local_35b.json:7  \"base_url\": \"http://localhost:11434/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_local_35b_unl.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:11434/v1",
+      "evidence": "custom_providers/custom_local_35b_unl.json:7  \"base_url\": \"http://localhost:11434/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_local_72b.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:11434/v1",
+      "evidence": "custom_providers/custom_local_72b.json:7  \"base_url\": \"http://localhost:11434/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_local_uncensored_9903.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:9903/v1",
+      "evidence": "custom_providers/custom_local_uncensored_9903.json:7  \"base_url\": \"http://localhost:9903/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_runpod_235b.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://3dcdk8f6t4t62m-8000.proxy.runpod.net/v1",
+      "evidence": "custom_providers/custom_runpod_235b.json:7  \"base_url\": \"https://3dcdk8f6t4t62m-8000.proxy.runpod.net/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_uncensored_proxy.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:9900/v1",
+      "evidence": "custom_providers/custom_uncensored_proxy.json:7  \"base_url\": \"http://localhost:9900/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_uncensored_proxy.json.bak-20261004:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:9900/v1",
+      "evidence": "custom_providers/custom_uncensored_proxy.json.bak-20261004:7  \"base_url\": \"http://localhost:9900/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_xai.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.x.ai/v1",
+      "evidence": "custom_providers/custom_xai.json:7  \"base_url\": \"https://api.x.ai/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_zai_proxy.json:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:9900/v1",
+      "evidence": "custom_providers/custom_zai_proxy.json:7  \"base_url\": \"http://localhost:9900/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_zai_proxy.json.bak:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:9900/v1",
+      "evidence": "custom_providers/custom_zai_proxy.json.bak:7  \"base_url\": \"http://localhost:9900/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "custom_providers/custom_zai_proxy.json.bak-auto-20261004-064421:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:9900/v1",
+      "evidence": "custom_providers/custom_zai_proxy.json.bak-auto-20261004-064421:7  \"base_url\": \"http://localhost:9900/v1\","
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:38",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vercel-labs/skills",
+      "evidence": "skills/unlazy/README.md:38  **Any agent, via the [skills CLI](https://github.com/vercel-labs/skills)** (Claude Code, Codex, Cursor and more; it detects what you have):"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:49",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Leonxlnx/unlazy",
+      "evidence": "skills/unlazy/README.md:49  git clone https://github.com/Leonxlnx/unlazy ~/.claude/skills/unlazy\nskills/unlazy/README.md:55  git clone https://github.com/Leonxlnx/unlazy ~/.codex/skills/unlazy\nskills/unlazy/README.md:77  Install the \"unlazy\" skill from https://github.com/Leonxlnx/unlazy so it is"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:92",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Leonxlnx/unlazy/tree/v1",
+      "evidence": "skills/unlazy/README.md:92  The original single-file skill is preserved unchanged on the [v1 branch](https://github.com/Leonxlnx/unlazy/tree/v1) if you want the instructions-only version with zero moving parts."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:138",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Leonxlnx",
+      "evidence": "skills/unlazy/README.md:138  Created by [Leonxlnx](https://github.com/Leonxlnx)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:182",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2512.20662",
+      "evidence": "skills/unlazy/README.md:182  - A December 2025 paper defines LLM laziness as **premature truncation of responses and partial compliance with multi-part requests**, and finds widespread compliance failures on detailed multi-part instructions even under explicit promptin\nskills/unlazy/README.md:202  - [Quantifying Laziness, Decoding Suboptimality, and Context Degradation in LLMs](https://arxiv.org/abs/2512.20662) (December 2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:183",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2501.18585",
+      "evidence": "skills/unlazy/README.md:183  - Reasoning models **abandon promising lines of thought prematurely**, a failure named underthinking ([Thoughts Are All Over the Place, arXiv 2501.18585](https://arxiv.org/abs/2501.18585)). The inverse also exists: models burn compute delib\nskills/unlazy/README.md:206  - [Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs](https://arxiv.org/abs/2501.18585) (January 2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:183",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2604.10739",
+      "evidence": "skills/unlazy/README.md:183  - Reasoning models **abandon promising lines of thought prematurely**, a failure named underthinking ([Thoughts Are All Over the Place, arXiv 2501.18585](https://arxiv.org/abs/2501.18585)). The inverse also exists: models burn compute delib\nskills/unlazy/README.md:199  - [When More Thinking Hurts: Overthinking in LLM Test-Time Compute Scaling](https://arxiv.org/abs/2604.10739) (April 2026)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:183",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2508.13141",
+      "evidence": "skills/unlazy/README.md:183  - Reasoning models **abandon promising lines of thought prematurely**, a failure named underthinking ([Thoughts Are All Over the Place, arXiv 2501.18585](https://arxiv.org/abs/2501.18585)). The inverse also exists: models burn compute delib\nskills/unlazy/README.md:203  - [OptimalThinkingBench: Evaluating Over and Underthinking in LLMs](https://arxiv.org/abs/2508.13141) (ICLR 2026, August 2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:184",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2603.24755",
+      "evidence": "skills/unlazy/README.md:184  - Coding agents **degrade over long-horizon iterative work**: on SlopCodeBench the best agent solves 14.8 percent, with verbosity and code erosion growing several times faster than in human repositories ([arXiv 2603.24755](https://arxiv.org\nskills/unlazy/README.md:200  - [SlopCodeBench: How Coding Agents Degrade Over Long-Horizon Iterative Tasks](https://arxiv.org/abs/2603.24755) (March 2026)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:185",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://inkeep.com/blog/context-anxiety",
+      "evidence": "skills/unlazy/README.md:185  - Agents take shortcuts when they believe resources are running out. Cognition found Claude Sonnet 4.5 **underestimated its remaining context and wrapped up early**, a behavior now called context anxiety ([Inkeep's writeup](https://inkeep.c\nskills/unlazy/README.md:204  - [Context Anxiety: How AI Agents Panic About Their Perceived Context Windows](https://inkeep.com/blog/context-anxiety) (2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:186",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fortune.com/2026/07/28/advanced-ai-models-laziness-open-ai-anthropic/",
+      "evidence": "skills/unlazy/README.md:186  - The failure is mainstream enough that business press covers it: advanced models showing signs of laziness is a named risk for companies betting on agents ([Fortune, July 2026](https://fortune.com/2026/07/28/advanced-ai-models-laziness-ope\nskills/unlazy/README.md:198  - [Fortune: Advanced AI is showing signs of laziness](https://fortune.com/2026/07/28/advanced-ai-models-laziness-open-ai-anthropic/) (July 2026)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:190",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2501.19393",
+      "evidence": "skills/unlazy/README.md:190  The upside is equally well measured. Effort is steerable. Appending a single \"Wait\" token and suppressing the end of thinking, called budget forcing, lifts competition math scores by double digits ([s1: Simple test-time scaling, arXiv 2501.\nskills/unlazy/README.md:207  - [s1: Simple test-time scaling](https://arxiv.org/abs/2501.19393) (January 2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:190",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/unified-diffs.html",
+      "evidence": "skills/unlazy/README.md:190  The upside is equally well measured. Effort is steerable. Appending a single \"Wait\" token and suppressing the end of thinking, called budget forcing, lifts competition math scores by double digits ([s1: Simple test-time scaling, arXiv 2501.\nskills/unlazy/README.md:209  - [Unified diffs make GPT-4 Turbo 3x less lazy](https://aider.chat/docs/unified-diffs.html) (aider)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:190",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://metr.org/blog/2026-1-29-time-horizon-1-1/",
+      "evidence": "skills/unlazy/README.md:190  The upside is equally well measured. Effort is steerable. Appending a single \"Wait\" token and suppressing the end of thinking, called budget forcing, lifts competition math scores by double digits ([s1: Simple test-time scaling, arXiv 2501.\nskills/unlazy/README.md:201  - [METR Time Horizon 1.1](https://metr.org/blog/2026-1-29-time-horizon-1-1/) (January 2026)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:205",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2503.14499",
+      "evidence": "skills/unlazy/README.md:205  - [Measuring AI Ability to Complete Long Tasks](https://arxiv.org/abs/2503.14499) (METR, March 2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/README.md:208",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/2411.09916",
+      "evidence": "skills/unlazy/README.md:208  - [\"Should I Give Up Now?\" Investigating LLM Pitfalls in Software Engineering](https://arxiv.org/abs/2411.09916) (2024, updated 2025)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "skills/unlazy/SKILL.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Leonxlnx/unlazy",
+      "evidence": "skills/unlazy/SKILL.md:7  source: https://github.com/Leonxlnx/unlazy"
+    }
+  ],
+  "reRooting": []
+}

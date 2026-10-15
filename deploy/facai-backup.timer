@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Facai database backup at 01:00 UTC (09:00 Beijing), keeps the last 7
+
+[Timer]
+OnCalendar=*-*-* 01:00:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

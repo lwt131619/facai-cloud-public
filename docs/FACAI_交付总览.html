@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FACAI · 全面发展与交付总览</title>
+<style>
+  :root{--bg:#050b16;--panel:#0b1c3f;--line:#16324f;--cyan:#22d3ee;--cyan2:#67e8f9;
+    --gold:#f5c451;--txt:#dbeafe;--mut:#64748b;--ok:#34d399}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:linear-gradient(180deg,#040914 0%,#061022 100%);color:var(--txt);
+    font-family:"Segoe UI","微软雅黑",system-ui,sans-serif;line-height:1.95;padding:36px 20px}
+  .wrap{max-width:920px;margin:0 auto}
+  h1{font-size:29px;display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  h1 img{width:36px;height:36px;border-radius:9px}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:28px;font-family:Consolas,monospace}
+  h2{font-size:19px;color:var(--cyan2);margin:34px 0 14px;padding-left:12px;border-left:3px solid var(--cyan)}
+  h3{font-size:15px;margin:18px 0 8px;color:var(--gold)}
+  p,li{font-size:14px;color:#c8d8ee}
+  .card{background:linear-gradient(180deg,rgba(11,28,63,.6),rgba(11,28,63,.3));
+    border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin:14px 0}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+  th{color:var(--mut);text-align:left;padding:8px;border-bottom:1px solid var(--line);font-size:11.5px;letter-spacing:1px}
+  td{padding:9px;border-bottom:1px dashed rgba(56,189,248,.12);vertical-align:top}
+  td b{color:var(--cyan2)} .gold{color:var(--gold)} .ok{color:var(--ok)} .mut{color:var(--mut)}
+  .big{font-size:40px;font-weight:800;color:var(--cyan)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+  .stat{border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;
+    background:linear-gradient(180deg,rgba(34,211,238,.06),transparent)}
+  .stat b{font-size:30px;color:var(--txt)} .stat small{display:block;color:var(--mut);font-size:11.5px;margin-top:4px}
+  code{background:#040a18;border:1px solid var(--line);border-radius:6px;padding:2px 8px;color:var(--cyan2);font-size:12.5px;word-break:break-all}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--mut);font-size:12px}
+  @media print{body{background:#fff;color:#111}.card{border-color:#ddd}h2{color:#0369a1}p,li,td{color:#222}.mut,.sub{color:#666}code{background:#f3f4f6;color:#0369a1}.big{color:#0369a1}td b{color:#0369a1}.gold{color:#b45309}.ok{color:#047857}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><img src="facai/static/icon-192.png">FACAI · 全面发展与交付总览</h1>
+  <p class="sub">2026-10-06 · 基线 973 → 1079 全绿 · 生产 9/9 · 14 波部署全 PASS · 四通道 7×24 云端常驻</p>
+
+  <div class="stats">
+    <div class="stat"><div class="big">1079</div><small>测试全绿</small></div>
+    <div class="stat"><div class="big">14</div><small>部署波全 PASS</small></div>
+    <div class="stat"><div class="big">78</div><small>能力收录</small></div>
+    <div class="stat"><div class="big">118</div><small>授权面纳管</small></div>
+  </div>
+
+  <h2>壹 · 产品定位</h2>
+  <div class="card">
+    <p><b>一个人，顶一个公司。</b></p>
+    <p>FACAI 是「你出话、Agent 舰队干活、按 token 计费」的云端任务操作系统：大白话下单 → 自动拆解成任务图（DAG）→ 多 Agent 引擎在隔离工作区并行真实执行 → 产物与账单透明交付。</p>
+    <p style="margin-top:8px">四通道入口全部持久绑定云端，7×24 常驻：<b>网页 · 微信 · Telegram · WhatsApp</b>（LINE 适配器就绪）。绑定一次，凭据加密落库——你设备是否在线无关紧要。</p>
+  </div>
+
+  <h2>贰 · 两日全部交付</h2>
+  <div class="card">
+    <table>
+      <tr><th>域</th><th>内容</th></tr>
+      <tr><td><b>计费体系</b></td><td>$95/$218 每 1M 强制入账 · 资金池（0 余额 402 拦截）· 80% 软阈值提醒 · 每夜对账 · 收费页 /billing · USDT-TRC20 充值（地址已配，单笔 ≥$100）</td></tr>
+      <tr><td><b>授权体系</b></td><td>Owner Gate 接线 · Grant 持久化（重启存活）· 渠内审批（聊天回复「批准」即继续）· 风险分级 · 九态分离</td></tr>
+      <tr><td><b>安全防护</b></td><td>反代三闸（活跃上限/速率/隔离）· 泄漏全堵（路径打码/凭据掩码/openapi 关闭）· 注册解锁 · $100 起充全链</td></tr>
+      <tr><td><b>产品面</b></td><td>收费页 /billing · 说明书 /guide · 手机版 · 控制台指挥台三视图 · PPT 宣传册（3 格式）· 长图微信版</td></tr>
+      <tr><td><b>基建</b></td><td>GitHub 私密镜像 · 每日 9:30 备份+进化+设计迭代 · Docker 四容器 · 夜检环 · 云 Worker · Hermes 密钥更换</td></tr>
+    </table>
+  </div>
+
+  <h2>叁 · 生产状态（实测）</h2>
+  <div class="card">
+    <p class="ok">核心三服务 active · health 正常 · Telegram 实测在线 · 微信 token 已扫码落库 · WhatsApp 服务器自持会话 · Docker 四容器 Up · 夜检 946 passed / 0 failed</p>
+  </div>
+
+  <h2>肆 · 关键文档索引</h2>
+  <div class="card">
+    <p>AUTHORITY_ARCHITECTURE（27 章冻结基线）· CAPABILITY_GRAPH（78 能力/57 native）· REROOT_PLAYBOOK（33 任务改根）· FUNCTIONAL_AUDIT（68 发现/31 verified）· CLOSURE_AUDIT（94 闭环）· HUMAN_INTERACTION_LAYER（UX 规格）· UNIFIED_UI_BASELINE（统一 UI）· BENCHMARK_2026-10-06（五平台对标）· CUSTOMER_SURFACE_MAP（客户面全图）· CHANNEL_HOST_DESIGN（宿主设计）· 交付总览_2026-10-06（本文档姊妹篇）</p>
+  </div>
+
+  <h2>伍 · 进行中与下一步</h2>
+  <div class="card">
+    <p>反代审计波收尾（第三集群额度恢复自动续）· 宿主第二刀收敛部署 · WhatsApp 配对码宿主 · LINE token 接线 · Discord/Slack 适配器 · 9900 收口二期（Ollama 拉 GLM 本地档 → pivot 全本地）</p>
+  </div>
+
+  <div class="foot">FACAI Cloud · Owner 授权体系 · 每日进化 · © 2026<br>
+  本文档由 FACAI 自主生成并随仓库版本管理 · 打印/分享请用浏览器打印功能（自动切换浅色打印版式）</div>
+</div>
+</body>
+</html>

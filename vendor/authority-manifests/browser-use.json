@@ -1,0 +1,1900 @@
+{
+  "target": "browser-use (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\browser-use)",
+  "origin": "https://github.com/browser-use/browser-use",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 146 个文本文件（源码 146、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "bin/setup.sh:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://redsymbol.net/articles/unofficial-bash-strict-mode/",
+      "evidence": "bin/setup.sh:7  # http://redsymbol.net/articles/unofficial-bash-strict-mode/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bin/setup.sh:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html",
+      "evidence": "bin/setup.sh:8  # https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bin/setup.sh:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browser-use/browser-use",
+      "evidence": "bin/setup.sh:26  git clone https://github.com/browser-use/browser-use"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bin/setup.sh:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://astral.sh/uv/install.sh",
+      "evidence": "bin/setup.sh:31  curl -LsSf https://astral.sh/uv/install.sh | sh"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/__init__.py:7",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SETUP_LOGGING",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/__init__.py:7  if os.environ.get('BROWSER_USE_SETUP_LOGGING', 'true').lower() != 'false':"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/cli.py:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BH_CLIENT",
+      "rule": "os.environ[]",
+      "evidence": "browser_use/cli.py:30  os.environ['BH_CLIENT'] = 'browser-use-cli'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/cli.py:31",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BH_CLIENT_VERSION",
+      "rule": "os.environ[]",
+      "evidence": "browser_use/cli.py:31  os.environ['BH_CLIENT_VERSION'] = _browser_use_version()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/cli.py:67",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_LOGGING_LEVEL",
+      "rule": "os.environ[]",
+      "evidence": "browser_use/cli.py:67  os.environ['BROWSER_USE_LOGGING_LEVEL'] = 'critical'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/cli.py:68",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SETUP_LOGGING",
+      "rule": "os.environ[]",
+      "evidence": "browser_use/cli.py:68  os.environ['BROWSER_USE_SETUP_LOGGING'] = 'false'"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "browser_use/cli.py:101",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "browser_use/cli.py:101  result = subprocess.run(cmd)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/cli.py:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "browser_use/cli.py:207  'open': 'new_tab(\"https://example.com\")',\nbrowser_use/cli.py:257  replacement = f'  {hint.lstrip(\"# \")}\\n\\nExample:\\n  browser-use <<\\'PY\\'\\n  new_tab(\"https://example.com\")\\n  print(page_info())\\n  PY'\nbrowser_use/cli.py:277  new_tab(\"https://example.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/cli.py:250",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browser-use/browser-use/blob/main/browser_use/skills/browser-use/SKILL.md",
+      "evidence": "browser_use/cli.py:250  Skill reference:               https://github.com/browser-use/browser-use/blob/main/browser_use/skills/browser-use/SKILL.md\nbrowser_use/cli.py:330  docs: https://github.com/browser-use/browser-use/blob/main/browser_use/skills/browser-use/SKILL.md\"\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/cli.py:308",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://news.ycombinator.com",
+      "evidence": "browser_use/cli.py:308  new_tab(\"https://news.ycombinator.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/cli.py:324",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browser-use/browser-use",
+      "evidence": "browser_use/cli.py:324  my browser. Follow https://github.com/browser-use/browser-use if setup or"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:55",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_LOGGING_LEVEL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:55  return os.getenv('BROWSER_USE_LOGGING_LEVEL', 'info').lower()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:59",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANONYMIZED_TELEMETRY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:59  return os.getenv('ANONYMIZED_TELEMETRY', 'true').lower()[:1] in 'ty1'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:63",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_CLOUD_SYNC",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:63  return os.getenv('BROWSER_USE_CLOUD_SYNC', str(self.ANONYMIZED_TELEMETRY)).lower()[:1] in 'ty1'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/config.py:67",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.browser-use.com",
+      "evidence": "browser_use/config.py:67  url = os.getenv('BROWSER_USE_CLOUD_API_URL', 'https://api.browser-use.com')\nbrowser_use/config.py:203  BROWSER_USE_CLOUD_API_URL: str = Field(default='https://api.browser-use.com')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:67",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_CLOUD_API_URL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:67  url = os.getenv('BROWSER_USE_CLOUD_API_URL', 'https://api.browser-use.com')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:73",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_CLOUD_UI_URL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:73  url = os.getenv('BROWSER_USE_CLOUD_UI_URL', '')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:81",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_MODEL_PRICING_URL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:81  url = os.getenv('BROWSER_USE_MODEL_PRICING_URL', '')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:89",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XDG_CACHE_HOME",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:89  return Path(os.getenv('XDG_CACHE_HOME', '~/.cache')).expanduser().resolve()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:93",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XDG_CONFIG_HOME",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:93  return Path(os.getenv('XDG_CONFIG_HOME', '~/.config')).expanduser().resolve()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:97",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_CONFIG_DIR",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:97  path = Path(os.getenv('BROWSER_USE_CONFIG_DIR', str(self.XDG_CONFIG_HOME / 'browseruse'))).expanduser().resolve()\nbrowser_use/config.py:125  Path(os.getenv('BROWSER_USE_CONFIG_DIR', str(self.XDG_CONFIG_HOME / 'browseruse'))).expanduser().resolve()"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:135",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:135  return os.getenv('OPENAI_API_KEY', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:139",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:139  return os.getenv('ANTHROPIC_API_KEY', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:143",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:143  return os.getenv('GOOGLE_API_KEY', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:147",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "DEEPSEEK_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:147  return os.getenv('DEEPSEEK_API_KEY', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:151",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GROK_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:151  return os.getenv('GROK_API_KEY', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:155",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "NOVITA_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:155  return os.getenv('NOVITA_API_KEY', '')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:159",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_ENDPOINT",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:159  return os.getenv('AZURE_OPENAI_ENDPOINT', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:163",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:163  return os.getenv('AZURE_OPENAI_KEY', '')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/config.py:167",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SKIP_LLM_API_KEY_VERIFICATION",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:167  return os.getenv('SKIP_LLM_API_KEY_VERIFICATION', 'false').lower()[:1] in 'ty1'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:171",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DEFAULT_LLM",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:171  return os.getenv('DEFAULT_LLM', '')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:176",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "IN_DOCKER",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:176  return os.getenv('IN_DOCKER', 'false').lower()[:1] in 'ty1' or is_running_in_docker()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:180",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "IS_IN_EVALS",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:180  return os.getenv('IS_IN_EVALS', 'false').lower()[:1] in 'ty1'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:184",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_VERSION_CHECK",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:184  return os.getenv('BROWSER_USE_VERSION_CHECK', 'true').lower()[:1] in 'ty1'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/config.py:188",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "WIN_FONT_DIR",
+      "rule": "os.getenv",
+      "evidence": "browser_use/config.py:188  return os.getenv('WIN_FONT_DIR', 'C:\\\\Windows\\\\Fonts')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/init_cmd.py:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/browser-use/template-library/main",
+      "evidence": "browser_use/init_cmd.py:28  TEMPLATE_REPO_URL = 'https://raw.githubusercontent.com/browser-use/template-library/main'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/init_cmd.py:431",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.browser-use.com/dashboard/settings?tab=api-keys&new&utm_source=oss&utm_medium=cli",
+      "evidence": "browser_use/init_cmd.py:431  '   (Get your key at https://cloud.browser-use.com/dashboard/settings?tab=api-keys&new&utm_source=oss&utm_medium=cli)\\n\\n',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/logging_config.py:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://stackoverflow.com/q/2183233/2988730",
+      "evidence": "browser_use/logging_config.py:49  # http://stackoverflow.com/q/2183233/2988730, especially"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/logging_config.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://stackoverflow.com/a/13638084/2988730",
+      "evidence": "browser_use/logging_config.py:50  # http://stackoverflow.com/a/13638084/2988730"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/observability.py:34",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LMNR_LOGGING_LEVEL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/observability.py:34  lmnr_debug_mode = os.getenv('LMNR_LOGGING_LEVEL', '').lower()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/observability.py:49",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_VERBOSE_OBSERVABILITY",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/observability.py:49  if os.environ.get('BROWSER_USE_VERBOSE_OBSERVABILITY', 'false').lower() == 'true':\nbrowser_use/observability.py:53  if os.environ.get('BROWSER_USE_VERBOSE_OBSERVABILITY', 'false').lower() == 'true':"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://XXX.XX",
+      "evidence": "browser_use/utils.py:30  \"\"\"Return True for mock placeholder hostnames like https://XXX.XX.\"\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{url",
+      "evidence": "browser_use/utils.py:31  parsed_url = urlparse(url if '://' in url else f'https://{url}')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:51",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/search",
+      "evidence": "browser_use/utils.py:51  # \"https://example.com/search.\\\\n2. Next step\". Those are task text,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/a",
+      "evidence": "browser_use/utils.py:57  # prose when it has no opener inside the candidate, as in \"(see https://x.com/a)\"."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:570",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "browser_use/utils.py:570  - http*://example.com will match http://example.com, https://example.com\nbrowser_use/utils.py:574  For example, 'example.com' will match 'https://example.com' but not 'http://example.com'."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:570",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "browser_use/utils.py:570  - http*://example.com will match http://example.com, https://example.com\nbrowser_use/utils.py:574  For example, 'example.com' will match 'https://example.com' but not 'http://example.com'."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/utils.py:695",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LIBRARY_VERSION",
+      "rule": "os.environ[]",
+      "evidence": "browser_use/utils.py:695  os.environ['LIBRARY_VERSION'] = version  # used by bubus event_schema so all Event schemas include versioning\nbrowser_use/utils.py:702  os.environ['LIBRARY_VERSION'] = version"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/utils.py:718",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org/pypi/browser-use/json",
+      "evidence": "browser_use/utils.py:718  response = await client.get('https://pypi.org/pypi/browser-use/json')"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "browser_use/utils.py:772",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": "browser_use/utils.py:772  subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=package_root, stderr=subprocess.DEVNULL).decode().strip()\nbrowser_use/utils.py:777  subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=package_root, stderr=subprocess.DEVNULL)\nbrowser_use/utils.py:784  subprocess.check_output(['git', 'config', '--get', 'remote.origin.url'], cwd=package_root, stderr=subprocess.DEVNULL)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/actor/utils.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes",
+      "evidence": "browser_use/actor/utils.py:18  https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes\nbrowser_use/actor/utils.py:174  https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/actor/playground/flights.py:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/travel/flights",
+      "evidence": "browser_use/actor/playground/flights.py:20  await page.goto('https://www.google.com/travel/flights')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/actor/playground/mixed_automation.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-use.github.io/stress-tests/challenges/angularjs-form.html",
+      "evidence": "browser_use/actor/playground/mixed_automation.py:37  await page.goto('https://browser-use.github.io/stress-tests/challenges/angularjs-form.html')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/actor/playground/playground.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org",
+      "evidence": "browser_use/actor/playground/playground.py:37  page = await browser.new_page('https://en.wikipedia.org')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/agent/service.py:1665",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.browser-use.com?utm_source=oss&utm_medium=captcha_nudge",
+      "evidence": "browser_use/agent/service.py:1665  '         Try: Browser(use_cloud=True)  |  Get an API key: https://cloud.browser-use.com?utm_source=oss&utm_medium=captcha_nudge'\nbrowser_use/agent/service.py:2181  '         Try: Browser(use_cloud=True)  |  Get an API key: https://cloud.browser-use.com?utm_source=oss&utm_medium=captcha_nudge'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/agent/service.py:2187",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browser-use/browser-use/issues",
+      "evidence": "browser_use/agent/service.py:2187  self.logger.info('   Open a short issue on GitHub: https://github.com/browser-use/browser-use/issues')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/beta/service.py:91",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-use.com/terminal/install.sh",
+      "evidence": "browser_use/beta/service.py:91  TERMINAL_INSTALL_COMMAND = 'curl -fsSL https://browser-use.com/terminal/install.sh | sh'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:189",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_TERMINAL_BINARY",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:189  env_path = os.environ.get('BROWSER_USE_TERMINAL_BINARY')\nbrowser_use/beta/service.py:237  env_binary = os.environ.get('BROWSER_USE_TERMINAL_BINARY')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:195",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BUT_HOME",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:195  but_home = Path(os.environ.get('BUT_HOME', '~/.browser-use-terminal')).expanduser()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:196",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BUT_INSTALL_DIR",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:196  but_install_dir = Path(os.environ.get('BUT_INSTALL_DIR', '~/.local/bin')).expanduser()"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "browser_use/beta/service.py:303",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "browser_use/beta/service.py:303  result = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:339",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SDK_STREAM_LIMIT_BYTES",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:339  self.stream_limit = int(os.environ.get('BROWSER_USE_SDK_STREAM_LIMIT_BYTES', str(64 * 1024 * 1024)))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:340",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SDK_READ_CHUNK_BYTES",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:340  self.read_chunk_size = int(os.environ.get('BROWSER_USE_SDK_READ_CHUNK_BYTES', str(1024 * 1024)))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:341",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SDK_MAX_LINE_BYTES",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:341  self.max_line_bytes = int(os.environ.get('BROWSER_USE_SDK_MAX_LINE_BYTES', str(512 * 1024 * 1024)))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:689",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_RUST_MODEL",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:689  return os.environ.get('BROWSER_USE_RUST_MODEL', 'gpt-5.3-codex-spark')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:1202",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_RUST_DIRECT_INITIAL_NAVIGATION",
+      "rule": "os.getenv",
+      "evidence": "browser_use/beta/service.py:1202  raw = os.getenv('BROWSER_USE_RUST_DIRECT_INITIAL_NAVIGATION')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:3923",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_RUST_LAMINAR_MAX_LLM_SPANS",
+      "rule": "os.getenv",
+      "evidence": "browser_use/beta/service.py:3923  max_spans = _int_value(os.getenv('BROWSER_USE_RUST_LAMINAR_MAX_LLM_SPANS') or 80)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/beta/service.py:4679",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browser-use/browser-use/issues",
+      "evidence": "browser_use/beta/service.py:4679  self.logger.info('   Please open a short issue here: https://github.com/browser-use/browser-use/issues')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/beta/service.py:4737",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.browser-use.com?utm_source=oss&utm_medium=captcha_nudge",
+      "evidence": "browser_use/beta/service.py:4737  '         Try: Browser(use_cloud=True)  |  Get an API key: https://cloud.browser-use.com?utm_source=oss&utm_medium=captcha_nudge'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:4863",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_RUST_LAMINAR_MAX_TOOL_SPANS",
+      "rule": "os.getenv",
+      "evidence": "browser_use/beta/service.py:4863  max_spans=_int_value(os.getenv('BROWSER_USE_RUST_LAMINAR_MAX_TOOL_SPANS') or 160),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:6429",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SDK_SERVER",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:6429  explicit = os.environ.get('BROWSER_USE_SDK_SERVER')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:6701",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_RUST_STATE_DIR",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:6701  state_dir = os.environ.get('BROWSER_USE_RUST_STATE_DIR')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:6707",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_RUST_BROWSER_MODE",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:6707  value = os.environ.get('BROWSER_USE_RUST_BROWSER_MODE')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/beta/service.py:6710",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_BROWSER_MODE",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/beta/service.py:6710  value = os.environ.get('BROWSER_USE_BROWSER_MODE')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/browser/_cdp_timeout.py:68",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_CDP_TIMEOUT_S",
+      "rule": "os.getenv",
+      "evidence": "browser_use/browser/_cdp_timeout.py:68  DEFAULT_CDP_REQUEST_TIMEOUT_S: float = _parse_env_cdp_timeout(os.getenv('BROWSER_USE_CDP_TIMEOUT_S'))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "browser_use/browser/chrome.py:54",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "browser_use/browser/chrome.py:54  result = subprocess.run(['which', cmd], capture_output=True, text=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/demo_mode.py:448",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/browser-use/browser-use/main/static/browser-use-dark.png",
+      "evidence": "browser_use/browser/demo_mode.py:448  logo.src = 'https://raw.githubusercontent.com/browser-use/browser-use/main/static/browser-use-dark.png';"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/demo_mode.py:485",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "browser_use/browser/demo_mode.py:485  const logoSvg = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"none\" viewBox=\"0 0 1000 1000\"><path fill=\"#fff\" d=\"M585.941 28.655C672.468-.3 755.454-7.585 825.373 10.74l1.022.272.605.144.641.19c19.554 5.302 37.541 12."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/browser/profile.py:21",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_DISABLE_EXTENSIONS",
+      "rule": "os.getenv",
+      "evidence": "browser_use/browser/profile.py:21  env_val = os.getenv('BROWSER_USE_DISABLE_EXTENSIONS')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/browser/profile.py:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_HEADLESS",
+      "rule": "os.getenv",
+      "evidence": "browser_use/browser/profile.py:30  env_val = os.getenv('BROWSER_USE_HEADLESS')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:46",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/microsoft/playwright/blob/41008eeddd020e2dee1c540f7c0cdfa337e99637/packages/playwright-core/src/server/chromium/chromiumSwitches.ts#L76",
+      "evidence": "browser_use/browser/profile.py:46  # Playwright defaults: https://github.com/microsoft/playwright/blob/41008eeddd020e2dee1c540f7c0cdfa337e99637/packages/playwright-core/src/server/chromium/chromiumSwitches.ts#L76\nbrowser_use/browser/profile.py:163  # # provided by playwright by default: https://github.com/microsoft/playwright/blob/41008eeddd020e2dee1c540f7c0cdfa337e99637/packages/playwright-core/src/server/chromium/chromiumSwitches.ts#L76"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/microsoft/playwright/issues/16126",
+      "evidence": "browser_use/browser/profile.py:75  # See https://github.com/microsoft/playwright/issues/16126"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:136",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/51629151/puppeteer-protocol-error-page-navigate-target-closed",
+      "evidence": "browser_use/browser/profile.py:136  # '--single-process',  # might be the cause of \"Target page, context or browser has been closed\" errors during CDP page.captureScreenshot https://stackoverflow.com/questions/51629151/puppeteer-protocol-error-page-navigate-target-closed"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:164",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://source.chromium.org/chromium/chromium/src/+/main:testing/variations/README.md",
+      "evidence": "browser_use/browser/profile.py:164  '--disable-field-trial-config',  # https://source.chromium.org/chromium/chromium/src/+/main:testing/variations/README.md"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:187",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromium-review.googlesource.com/c/chromium/src/+/2436773",
+      "evidence": "browser_use/browser/profile.py:187  # // See https://chromium-review.googlesource.com/c/chromium/src/+/2436773"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:190",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromium-review.googlesource.com/c/chromium/src/+/4853540",
+      "evidence": "browser_use/browser/profile.py:190  # // https://chromium-review.googlesource.com/c/chromium/src/+/4853540"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:192",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://issues.chromium.org/41491762",
+      "evidence": "browser_use/browser/profile.py:192  # // https://issues.chromium.org/41491762"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:353",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://playwright.dev/python/docs/api/class-browser#browser-new-context",
+      "evidence": "browser_use/browser/profile.py:353  https://playwright.dev/python/docs/api/class-browser#browser-new-context\nbrowser_use/browser/profile.py:516  https://playwright.dev/python/docs/api/class-browser#browser-new-context"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:394",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://playwright.dev/python/docs/api/class-browsertype#browser-type-connect",
+      "evidence": "browser_use/browser/profile.py:394  https://playwright.dev/python/docs/api/class-browsertype#browser-type-connect"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:395",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://playwright.dev/python/docs/api/class-browsertype#browser-type-connect-over-cdp",
+      "evidence": "browser_use/browser/profile.py:395  https://playwright.dev/python/docs/api/class-browsertype#browser-type-connect-over-cdp"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:408",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://playwright.dev/python/docs/api/class-browsertype#browser-type-launch",
+      "evidence": "browser_use/browser/profile.py:408  https://playwright.dev/python/docs/api/class-browsertype#browser-type-launch"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:444",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/microsoft/playwright/blob/41008eeddd020e2dee1c540f7c0cdfa337e99637/packages/playwright-core/src/server/chromium/chromiumSwitches.ts",
+      "evidence": "browser_use/browser/profile.py:444  description='List of default CLI args to stop playwright from applying (see https://github.com/microsoft/playwright/blob/41008eeddd020e2dee1c540f7c0cdfa337e99637/packages/playwright-core/src/server/chromium/chromiumSwitches.ts)',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:446",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://playwright.dev/docs/browsers#chromium-headless-shell",
+      "evidence": "browser_use/browser/profile.py:446  channel: BrowserChannel | None = None  # https://playwright.dev/docs/browsers#chromium-headless-shell"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:526",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/microsoft/playwright/pull/34591/files",
+      "evidence": "browser_use/browser/profile.py:526  # - https://github.com/microsoft/playwright/pull/34591/files"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:528",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Skn0tt/playwright/blob/c446bc44bac4fbfdf52439ba434f92192459be4e/packages/playwright-core/src/server/storageScript.ts#L84C1-L123C2",
+      "evidence": "browser_use/browser/profile.py:528  # - https://github.com/Skn0tt/playwright/blob/c446bc44bac4fbfdf52439ba434f92192459be4e/packages/playwright-core/src/server/storageScript.ts#L84C1-L123C2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:551",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://playwright.dev/python/docs/api/class-browsertype#browser-type-launch-persistent-context",
+      "evidence": "browser_use/browser/profile.py:551  https://playwright.dev/python/docs/api/class-browsertype#browser-type-launch-persistent-context"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:571",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://host:8080",
+      "evidence": "browser_use/browser/profile.py:571  - server: Full proxy URL, e.g. \"http://host:8080\" or \"socks5://host:1080\"\nbrowser_use/browser/profile.py:576  server: str | None = Field(default=None, description='Proxy URL, e.g. http://host:8080 or socks5://host:1080')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:630",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "browser_use/browser/profile.py:630  description='List of allowed domains for navigation e.g. [\"*.google.com\", \"https://example.com\", \"chrome-extension://*\"]. Lists with 100+ items are auto-optimized to sets (no pattern matching).',\nbrowser_use/browser/profile.py:634  description='List of prohibited domains for navigation e.g. [\"*.google.com\", \"https://example.com\", \"chrome-extension://*\"]. Allowed domains take precedence over prohibited domains. Lists with 100+ items are auto-optimized to sets (no patte"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:1034",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=133&acceptformat=crx3&x=id%3Dddkjiahejlhfcafbddmgiahcphecmpfh%26uc",
+      "evidence": "browser_use/browser/profile.py:1034  'url': 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=133&acceptformat=crx3&x=id%3Dddkjiahejlhfcafbddmgiahcphecmpfh%26uc',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:1039",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=133&acceptformat=crx3&x=id%3Dedibdbjcniadpccecjdfdjjppcpchdlm%26uc",
+      "evidence": "browser_use/browser/profile.py:1039  'url': 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=133&acceptformat=crx3&x=id%3Dedibdbjcniadpccecjdfdjjppcpchdlm%26uc',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:1044",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=133&acceptformat=crx3&x=id%3Dgidlfommnbibbmegmgajdbikelkdcmcl%26uc",
+      "evidence": "browser_use/browser/profile.py:1044  'url': 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=133&acceptformat=crx3&x=id%3Dgidlfommnbibbmegmgajdbikelkdcmcl%26uc',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:1049",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=130&acceptformat=crx3&x=id%3Dpgojnojmmhpofjgdmaebadhbocahppod%26uc",
+      "evidence": "browser_use/browser/profile.py:1049  # \t'url': 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=130&acceptformat=crx3&x=id%3Dpgojnojmmhpofjgdmaebadhbocahppod%26uc',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:1055",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=130&acceptformat=crx3&x=id%3Dmdjildafknihdffpkfmmpnpoiajfjnjd%26uc",
+      "evidence": "browser_use/browser/profile.py:1055  # \t'url': 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=130&acceptformat=crx3&x=id%3Dmdjildafknihdffpkfmmpnpoiajfjnjd%26uc',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/profile.py:1060",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=130&acceptformat=crx3&x=id%3Dhmgpakheknboplhmlicfkkgjipfabmhp%26uc",
+      "evidence": "browser_use/browser/profile.py:1060  # \t'url': 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=130&acceptformat=crx3&x=id%3Dhmgpakheknboplhmlicfkkgjipfabmhp%26uc',"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/browser/python_highlights.py:530",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_SCREENSHOT_FILE",
+      "rule": "os.getenv",
+      "evidence": "browser_use/browser/python_highlights.py:530  filename = os.getenv('BROWSER_USE_SCREENSHOT_FILE')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/session.py:903",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.browser-use.com?utm_source=oss&utm_medium=browser_launch_failure",
+      "evidence": "browser_use/browser/session.py:903  '         Try: Browser(use_cloud=True)  |  Get an API key: https://cloud.browser-use.com?utm_source=oss&utm_medium=browser_launch_failure'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/cloud/cloud.py:24",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.browser-use.com",
+      "evidence": "browser_use/browser/cloud/cloud.py:24  def __init__(self, api_base_url: str = 'https://api.browser-use.com'):"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/browser/cloud/cloud.py:81",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/browser/cloud/cloud.py:81  api_token = os.getenv('BROWSER_USE_API_KEY')\nbrowser_use/browser/cloud/cloud.py:169  api_token = os.getenv('BROWSER_USE_API_KEY')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/cloud/cloud.py:94",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=use_cloud",
+      "evidence": "browser_use/browser/cloud/cloud.py:94  'https://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=use_cloud'\nbrowser_use/browser/cloud/cloud.py:110  'https://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=use_cloud'\nbrowser_use/browser/cloud/cloud.py:182  'https://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=use_cloud'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/watchdogs/aboutblank_watchdog.py:180",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cf.browser-use.com/logo.svg",
+      "evidence": "browser_use/browser/watchdogs/aboutblank_watchdog.py:180  img.src = 'https://cf.browser-use.com/logo.svg';"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/watchdogs/har_recording_watchdog.py:77",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://host[:port",
+      "evidence": "browser_use/browser/watchdogs/har_recording_watchdog.py:77  # https://host[:port]/..."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/watchdogs/har_recording_watchdog.py:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{host_port",
+      "evidence": "browser_use/browser/watchdogs/har_recording_watchdog.py:83  return f'https://{host_port}'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/browser/watchdogs/local_browser_watchdog.py:245",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLAYWRIGHT_BROWSERS_PATH",
+      "rule": "os.environ.get",
+      "evidence": "browser_use/browser/watchdogs/local_browser_watchdog.py:245  playwright_path = os.environ.get('PLAYWRIGHT_BROWSERS_PATH')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/browser/watchdogs/local_browser_watchdog.py:446",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:{port",
+      "evidence": "browser_use/browser/watchdogs/local_browser_watchdog.py:446  async with session.get(f'http://127.0.0.1:{port}/json/version') as resp:\nbrowser_use/browser/watchdogs/local_browser_watchdog.py:449  return f'http://127.0.0.1:{port}/'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/views.py:386",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BackendNode",
+      "evidence": "browser_use/dom/views.py:386  - (DOM node) https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BackendNode"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/views.py:387",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode",
+      "evidence": "browser_use/dom/views.py:387  - (AX node) https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/views.py:388",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DOMNode",
+      "evidence": "browser_use/dom/views.py:388  - (Snapshot node) https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DOMNode"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-use.github.io/stress-tests/challenges/iframe-inception-level2.html",
+      "evidence": "browser_use/dom/playground/extraction.py:36  'https://browser-use.github.io/stress-tests/challenges/iframe-inception-level2.html',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/travel/flights",
+      "evidence": "browser_use/dom/playground/extraction.py:37  'https://www.google.com/travel/flights',\nbrowser_use/dom/playground/extraction.py:41  'https://www.google.com/travel/flights',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v0-simple-ui-test-site.vercel.app",
+      "evidence": "browser_use/dom/playground/extraction.py:38  'https://v0-simple-ui-test-site.vercel.app',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-use.github.io/stress-tests/challenges/iframe-inception-level1.html",
+      "evidence": "browser_use/dom/playground/extraction.py:39  'https://browser-use.github.io/stress-tests/challenges/iframe-inception-level1.html',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-use.github.io/stress-tests/challenges/angular-form.html",
+      "evidence": "browser_use/dom/playground/extraction.py:40  'https://browser-use.github.io/stress-tests/challenges/angular-form.html',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.amazon.com/s?k=laptop",
+      "evidence": "browser_use/dom/playground/extraction.py:42  'https://www.amazon.com/s?k=laptop',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:43",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/trending",
+      "evidence": "browser_use/dom/playground/extraction.py:43  'https://github.com/trending',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com",
+      "evidence": "browser_use/dom/playground/extraction.py:44  'https://www.reddit.com',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.ycombinator.com/companies",
+      "evidence": "browser_use/dom/playground/extraction.py:45  'https://www.ycombinator.com/companies',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:46",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.kayak.com/flights",
+      "evidence": "browser_use/dom/playground/extraction.py:46  'https://www.kayak.com/flights',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.booking.com",
+      "evidence": "browser_use/dom/playground/extraction.py:47  'https://www.booking.com',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.airbnb.com",
+      "evidence": "browser_use/dom/playground/extraction.py:48  'https://www.airbnb.com',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.linkedin.com/jobs",
+      "evidence": "browser_use/dom/playground/extraction.py:49  'https://www.linkedin.com/jobs',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions",
+      "evidence": "browser_use/dom/playground/extraction.py:50  'https://stackoverflow.com/questions',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_iframe",
+      "evidence": "browser_use/dom/playground/extraction.py:55  'https://www.w3schools.com/html/tryit.asp?filename=tryhtml_iframe',  # Nested iframes\nbrowser_use/dom/playground/extraction.py:66  'https://www.w3schools.com/html/tryit.asp?filename=tryhtml_iframe': '🔸 NESTED IFRAMES: Multiple iframe layers',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://semantic-ui.com/modules/dropdown.html",
+      "evidence": "browser_use/dom/playground/extraction.py:56  'https://semantic-ui.com/modules/dropdown.html',  # Complex dropdowns\nbrowser_use/dom/playground/extraction.py:67  'https://semantic-ui.com/modules/dropdown.html': '🔸 COMPLEX DROPDOWNS: Custom dropdown components',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.dezlearn.com/nested-iframes-example/",
+      "evidence": "browser_use/dom/playground/extraction.py:57  'https://www.dezlearn.com/nested-iframes-example/',  # Cross-origin nested iframes\nbrowser_use/dom/playground/extraction.py:68  'https://www.dezlearn.com/nested-iframes-example/': '🔸 CROSS-ORIGIN IFRAMES: Different domain iframes',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://codepen.io/towc/pen/mJzOWJ",
+      "evidence": "browser_use/dom/playground/extraction.py:58  'https://codepen.io/towc/pen/mJzOWJ',  # Canvas elements with interactions\nbrowser_use/dom/playground/extraction.py:69  'https://codepen.io/towc/pen/mJzOWJ': '🔸 CANVAS ELEMENTS: Interactive canvas graphics',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://jqueryui.com/accordion/",
+      "evidence": "browser_use/dom/playground/extraction.py:59  'https://jqueryui.com/accordion/',  # Complex accordion/dropdown widgets\nbrowser_use/dom/playground/extraction.py:70  'https://jqueryui.com/accordion/': '🔸 ACCORDION WIDGETS: Collapsible content sections',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v0-simple-landing-page-seven-xi.vercel.app/",
+      "evidence": "browser_use/dom/playground/extraction.py:60  'https://v0-simple-landing-page-seven-xi.vercel.app/',  # Simple landing page with iframe"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/extraction.py:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.unesco.org/en",
+      "evidence": "browser_use/dom/playground/extraction.py:61  'https://www.unesco.org/en',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/playground/multi_act.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-use.github.io/stress-tests/challenges/react-native-web-form.html",
+      "evidence": "browser_use/dom/playground/multi_act.py:13  Go to https://browser-use.github.io/stress-tests/challenges/react-native-web-form.html and complete the React Native Web form by filling in all required fields and submitting."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/dom/serializer/serializer.py:1225",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date",
+      "evidence": "browser_use/dom/serializer/serializer.py:1225  # Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/integrations/gmail/service.py:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.googleapis.com/auth/gmail.readonly",
+      "evidence": "browser_use/integrations/gmail/service.py:35  SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/integrations/gmail/service.py:114",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.cloud.google.com/",
+      "evidence": "browser_use/integrations/gmail/service.py:114  '1. Go to https://console.cloud.google.com/\\n'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/messages.py:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.openai.com/docs/guides/vision#low-or-high-fidelity-image-understanding",
+      "evidence": "browser_use/llm/messages.py:61  [Vision guide](https://platform.openai.com/docs/guides/vision#low-or-high-fidelity-image-understanding)."
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:115",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MISTRAL_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:115  api_key = os.getenv('MISTRAL_API_KEY')\nbrowser_use/llm/models.py:192  api_key = os.getenv('MISTRAL_API_KEY')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/models.py:116",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mistral.ai/v1",
+      "evidence": "browser_use/llm/models.py:116  base_url = os.getenv('MISTRAL_BASE_URL', 'https://api.mistral.ai/v1')\nbrowser_use/llm/models.py:193  base_url = os.getenv('MISTRAL_BASE_URL', 'https://api.mistral.ai/v1')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/models.py:116",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MISTRAL_BASE_URL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:116  base_url = os.getenv('MISTRAL_BASE_URL', 'https://api.mistral.ai/v1')\nbrowser_use/llm/models.py:193  base_url = os.getenv('MISTRAL_BASE_URL', 'https://api.mistral.ai/v1')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:169",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:169  api_key = os.getenv('OPENAI_API_KEY')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:174",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:174  api_key = os.getenv('AZURE_OPENAI_KEY') or os.getenv('AZURE_OPENAI_API_KEY')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:174",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:174  api_key = os.getenv('AZURE_OPENAI_KEY') or os.getenv('AZURE_OPENAI_API_KEY')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/models.py:175",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_ENDPOINT",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:175  azure_endpoint = os.getenv('AZURE_OPENAI_ENDPOINT')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:180",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:180  api_key = os.getenv('GOOGLE_API_KEY')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:187",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:187  api_key = os.getenv('ANTHROPIC_API_KEY')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:213",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "CEREBRAS_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:213  api_key = os.getenv('CEREBRAS_API_KEY')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/models.py:220",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/models.py:220  api_key = os.getenv('BROWSER_USE_API_KEY')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/anthropic/chat.py:179",
+      "what": "初扫：anthropic SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via anthropic，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "anthropic",
+      "inferred": true,
+      "evidence": "browser_use/llm/anthropic/chat.py:179  return AsyncAnthropic(**client_params)"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/azure/chat.py:74",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/azure/chat.py:74  self.api_key = self.api_key or os.getenv('AZURE_OPENAI_KEY') or os.getenv('AZURE_OPENAI_API_KEY')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/azure/chat.py:74",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/azure/chat.py:74  self.api_key = self.api_key or os.getenv('AZURE_OPENAI_KEY') or os.getenv('AZURE_OPENAI_API_KEY')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/azure/chat.py:75",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_ENDPOINT",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/azure/chat.py:75  self.azure_endpoint = self.azure_endpoint or os.getenv('AZURE_OPENAI_ENDPOINT')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/azure/chat.py:76",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_OPENAI_DEPLOYMENT",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/azure/chat.py:76  self.azure_deployment = self.azure_deployment or os.getenv('AZURE_OPENAI_DEPLOYMENT')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/browser_use/chat.py:96",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/browser_use/chat.py:96  self.api_key = api_key or os.getenv('BROWSER_USE_API_KEY')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/browser_use/chat.py:97",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://llm.api.browser-use.com",
+      "evidence": "browser_use/llm/browser_use/chat.py:97  self.base_url = base_url or os.getenv('BROWSER_USE_LLM_URL', 'https://llm.api.browser-use.com')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/browser_use/chat.py:97",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_LLM_URL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/browser_use/chat.py:97  self.base_url = base_url or os.getenv('BROWSER_USE_LLM_URL', 'https://llm.api.browser-use.com')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/browser_use/chat.py:106",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=chat_browser_use",
+      "evidence": "browser_use/llm/browser_use/chat.py:106  'https://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=chat_browser_use'\nbrowser_use/llm/browser_use/chat.py:291  message=f'BROWSER_USE_API_KEY is invalid. Get a new key at:\\nhttps://cloud.browser-use.com/new-api-key?utm_source=oss&utm_medium=chat_browser_use\\n{error_detail}',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/browser_use/chat.py:297",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://cloud.browser-use.com/billing?utm_source=oss&utm_medium=chat_browser_use",
+      "evidence": "browser_use/llm/browser_use/chat.py:297  message=f'Browser Use credits exhausted. Add more at:\\nhttps://cloud.browser-use.com/billing?utm_source=oss&utm_medium=chat_browser_use\\n{error_detail}',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/cerebras/chat.py:42",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.cerebras.ai/v1",
+      "evidence": "browser_use/llm/cerebras/chat.py:42  base_url: str | httpx.URL | None = 'https://api.cerebras.ai/v1'"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/cerebras/chat.py:51",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "CEREBRAS_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/cerebras/chat.py:51  api_key = self.api_key or os.getenv('CEREBRAS_API_KEY')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/cerebras/chat.py:59",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "browser_use/llm/cerebras/chat.py:59  return AsyncOpenAI("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/deepseek/chat.py:43",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.deepseek.com/v1",
+      "evidence": "browser_use/llm/deepseek/chat.py:43  base_url: str | httpx.URL | None = 'https://api.deepseek.com/v1'"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/deepseek/chat.py:54",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "DEEPSEEK_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/deepseek/chat.py:54  api_key = self.api_key or os.getenv('DEEPSEEK_API_KEY')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/deepseek/chat.py:62",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "browser_use/llm/deepseek/chat.py:62  return AsyncOpenAI("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/groq/parser.py:77",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browser-use/browser-use/issues/1458",
+      "evidence": "browser_use/llm/groq/parser.py:77  # some models occasionally respond with a list containing one dict: https://github.com/browser-use/browser-use/issues/1458"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/mistral/chat.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mistral.ai/v1",
+      "evidence": "browser_use/llm/mistral/chat.py:39  base_url: str | httpx.URL = 'https://api.mistral.ai/v1'"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/mistral/chat.py:55",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MISTRAL_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/mistral/chat.py:55  key = self.api_key or os.getenv('MISTRAL_API_KEY')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/mistral/chat.py:61",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MISTRAL_BASE_URL",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/mistral/chat.py:61  return str(os.getenv('MISTRAL_BASE_URL', self.base_url)).rstrip('/')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/openai/chat.py:117",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "browser_use/llm/openai/chat.py:117  return AsyncOpenAI(**client_params)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/openrouter/chat.py:45",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "browser_use/llm/openrouter/chat.py:45  base_url: str | httpx.URL = 'https://openrouter.ai/api/v1'"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/openrouter/chat.py:61",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/openrouter/chat.py:61  api_key = self.api_key or os.getenv('OPENROUTER_API_KEY')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/openrouter/chat.py:98",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "browser_use/llm/openrouter/chat.py:98  self._client = AsyncOpenAI(**client_params)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/orcarouter/chat.py:44",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.orcarouter.ai/v1",
+      "evidence": "browser_use/llm/orcarouter/chat.py:44  base_url: str | httpx.URL = 'https://api.orcarouter.ai/v1'"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/orcarouter/chat.py:61",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ORCAROUTER_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/orcarouter/chat.py:61  key = self.api_key or os.getenv('ORCAROUTER_API_KEY')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/orcarouter/chat.py:97",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "browser_use/llm/orcarouter/chat.py:97  self._client = AsyncOpenAI(**client_params)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/tests/test_anthropic_cache.py:72",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/image.jpg",
+      "evidence": "browser_use/llm/tests/test_anthropic_cache.py:72  ContentPartImageParam(image_url=ImageURL(url='https://example.com/image.jpg'), type='image_url'),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/tests/test_chat_models.py:62",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_chat_models.py:62  if not os.getenv('OPENROUTER_API_KEY'):\nbrowser_use/llm/tests/test_chat_models.py:64  return ChatOpenRouter(model='openai/gpt-4o-mini', api_key=os.getenv('OPENROUTER_API_KEY'), temperature=0)\nbrowser_use/llm/tests/test_chat_models.py:234  if not os.getenv('OPENROUTER_API_KEY'):"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/tests/test_chat_models.py:70",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_chat_models.py:70  if not os.getenv('OPENAI_API_KEY'):\nbrowser_use/llm/tests/test_chat_models.py:85  if not os.getenv('OPENAI_API_KEY'):"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/tests/test_chat_models.py:101",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_chat_models.py:101  if not os.getenv('ANTHROPIC_API_KEY'):\nbrowser_use/llm/tests/test_chat_models.py:115  if not os.getenv('ANTHROPIC_API_KEY'):"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/tests/test_chat_models.py:131",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_chat_models.py:131  if not os.getenv('GOOGLE_API_KEY'):\nbrowser_use/llm/tests/test_chat_models.py:134  chat = ChatGoogle(model='gemini-2.0-flash', api_key=os.getenv('GOOGLE_API_KEY'), temperature=0)\nbrowser_use/llm/tests/test_chat_models.py:145  if not os.getenv('GOOGLE_API_KEY'):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/tests/test_chat_models.py:161",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_CLOUD_PROJECT",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_chat_models.py:161  if not os.getenv('GOOGLE_CLOUD_PROJECT'):\nbrowser_use/llm/tests/test_chat_models.py:167  project=os.getenv('GOOGLE_CLOUD_PROJECT'),\nbrowser_use/llm/tests/test_chat_models.py:181  if not os.getenv('GOOGLE_CLOUD_PROJECT'):"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/tests/test_chat_models.py:203",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GROQ_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_chat_models.py:203  if not os.getenv('GROQ_API_KEY'):\nbrowser_use/llm/tests/test_chat_models.py:217  if not os.getenv('GROQ_API_KEY'):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/tests/test_single_step.py:78",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "browser_use/llm/tests/test_single_step.py:78  url='https://example.com',\nbrowser_use/llm/tests/test_single_step.py:95  url='https://example.com',"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/tests/test_single_step.py:141",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OCI_MODEL_ID",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_single_step.py:141  'model_id': os.getenv('OCI_MODEL_ID', 'placeholder'),\nbrowser_use/llm/tests/test_single_step.py:156  not _check_oci_credentials() or not os.getenv('OCI_MODEL_ID') or not os.getenv('OCI_COMPARTMENT_ID'),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/tests/test_single_step.py:143",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com",
+      "evidence": "browser_use/llm/tests/test_single_step.py:143  'OCI_SERVICE_ENDPOINT', 'https://inference.generativeai.us-chicago-1.oci.oraclecloud.com'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/llm/tests/test_single_step.py:145",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OCI_COMPARTMENT_ID",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/tests/test_single_step.py:145  'compartment_id': os.getenv('OCI_COMPARTMENT_ID', 'placeholder'),\nbrowser_use/llm/tests/test_single_step.py:156  not _check_oci_credentials() or not os.getenv('OCI_MODEL_ID') or not os.getenv('OCI_COMPARTMENT_ID'),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "browser_use/llm/vercel/chat.py:289",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://ai-gateway.vercel.sh/v1",
+      "evidence": "browser_use/llm/vercel/chat.py:289  base_url: The Vercel AI Gateway endpoint (defaults to https://ai-gateway.vercel.sh/v1)\nbrowser_use/llm/vercel/chat.py:331  base_url: str | httpx.URL = 'https://ai-gateway.vercel.sh/v1'"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/vercel/chat.py:350",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AI_GATEWAY_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/vercel/chat.py:350  api_key = self.api_key or os.getenv('AI_GATEWAY_API_KEY') or os.getenv('VERCEL_OIDC_TOKEN')"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "browser_use/llm/vercel/chat.py:350",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "VERCEL_OIDC_TOKEN",
+      "rule": "os.getenv",
+      "evidence": "browser_use/llm/vercel/chat.py:350  api_key = self.api_key or os.getenv('AI_GATEWAY_API_KEY') or os.getenv('VERCEL_OIDC_TOKEN')"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "browser_use/llm/vercel/chat.py:384",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "browser_use/llm/vercel/chat.py:384  self._client = AsyncOpenAI(**client_params)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "browser_use/mcp/server.py:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BROWSER_USE_LOGGING_LEVEL",
+      "rule": "os.environ[]",
+      "evidence": "browser_use/mcp/server.py:30  os.environ['BROWSER_USE_LOGGING_LEVEL'] = 'critical'"
+    }
+  ],
+  "reRooting": []
+}

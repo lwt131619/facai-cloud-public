@@ -1,0 +1,1892 @@
+{
+  "target": "uptime-kuma (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\uptime-kuma)",
+  "origin": "https://github.com/louislam/uptime-kuma",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 223 个文本文件（源码 223、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": ".eslintrc.js:43",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vuejs/eslint-plugin-vue/issues/462#issuecomment-430234675",
+      "evidence": ".eslintrc.js:43  \"vue/require-component-is\": \"off\", // not allow is=\"style\" https://github.com/vuejs/eslint-plugin-vue/issues/462#issuecomment-430234675"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "playwright.config.js:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CI",
+      "rule": "process.env",
+      "evidence": "playwright.config.js:13  const headless = !!process.env.CI || process.env.HEADLESS_E2E_TESTS === \"1\";\nplaywright.config.js:25  forbidOnly: !!process.env.CI,\nplaywright.config.js:28  retries: process.env.CI ? 2 : 0,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "playwright.config.js:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HEADLESS_E2E_TESTS",
+      "rule": "process.env",
+      "evidence": "playwright.config.js:13  const headless = !!process.env.CI || process.env.HEADLESS_E2E_TESTS === \"1\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "playwright.config.js:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:${port",
+      "evidence": "playwright.config.js:14  export const url = `http://localhost:${port}`;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "vite.config.mjs:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://vitejs.dev/config/",
+      "evidence": "vite.config.mjs:10  // https://vitejs.dev/config/"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "vite.config.mjs:16",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "npm_package_version",
+      "rule": "process.env",
+      "evidence": "vite.config.mjs:16  FRONTEND_VERSION: JSON.stringify(process.env.npm_package_version),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_init_db.js:478",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/46134830/maximum-length-for-cron-job",
+      "evidence": "db/knex_init_db.js:478  -- 999 characters. https://stackoverflow.com/questions/46134830/maximum-length-for-cron-job"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_migrations/2025-10-29-0000-better-auth.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.better-auth.com/docs/concepts/database#core-schema",
+      "evidence": "db/knex_migrations/2025-10-29-0000-better-auth.js:2  * The schema from: https://www.better-auth.com/docs/concepts/database#core-schema"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_migrations/2026-01-02-0713-gamedig-v4-to-v5.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gamedig/node-gamedig/blob/master/MIGRATE_IDS.md",
+      "evidence": "db/knex_migrations/2026-01-02-0713-gamedig-v4-to-v5.js:2  // Reference: https://github.com/gamedig/node-gamedig/blob/master/MIGRATE_IDS.md"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_migrations/2026-05-26-0000-better-auth-username.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://better-auth.com/docs/plugins/username#schema",
+      "evidence": "db/knex_migrations/2026-05-26-0000-better-auth-username.js:2  * The schema from: https://better-auth.com/docs/plugins/username#schema"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_migrations/2026-05-26-0010-better-auth-admin.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://better-auth.com/docs/plugins/admin#schema",
+      "evidence": "db/knex_migrations/2026-05-26-0010-better-auth-admin.js:2  * The schema from: https://better-auth.com/docs/plugins/admin#schema"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_migrations/2026-06-08-0000-better-auth-2fa.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://better-auth.com/docs/plugins/2fa#schema",
+      "evidence": "db/knex_migrations/2026-06-08-0000-better-auth-2fa.js:2  * The schema from: https://better-auth.com/docs/plugins/2fa#schema"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "db/knex_migrations/2026-06-29-0000-better-auth-api-key.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://www.better-auth.com/docs/plugins/api-key/reference#schema",
+      "evidence": "db/knex_migrations/2026-06-29-0000-better-auth-api-key.js:2  * The api key schema from: https://www.better-auth.com/docs/plugins/api-key/reference#schema"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/build-healthcheck.js:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/build-healthcheck.js:1  const childProcess = require(\"child_process\");"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/checkout-pr.mjs:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/checkout-pr.mjs:1  import childProcess from \"child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/checkout-pr.mjs:4",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_GH_REPO",
+      "rule": "process.env",
+      "evidence": "extra/checkout-pr.mjs:4  let { name, branch } = parsePrName(process.env.UPTIME_KUMA_GH_REPO);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/checkout-pr.mjs:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/${name",
+      "evidence": "extra/checkout-pr.mjs:9  let result = childProcess.spawnSync(\"git\", [ \"remote\", \"add\", name, `https://github.com/${name}/uptime-kuma` ], {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/close-incorrect-issue.mjs:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues/new/choose",
+      "evidence": "extra/close-incorrect-issue.mjs:40  body: `@${username}: Hello! :wave:\\n\\nThis issue is being automatically closed because it does not follow the issue template. Please **DO NOT open blank issues and use our [issue-templates](https://github.com/louislam/uptime-kuma/issues/new"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/deploy-demo-server.js:16",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DEMO_HOST",
+      "rule": "process.env",
+      "evidence": "extra/deploy-demo-server.js:16  host: process.env.UPTIME_KUMA_DEMO_HOST,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/deploy-demo-server.js:17",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DEMO_PORT",
+      "rule": "process.env",
+      "evidence": "extra/deploy-demo-server.js:17  port: process.env.UPTIME_KUMA_DEMO_PORT,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/deploy-demo-server.js:18",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DEMO_USERNAME",
+      "rule": "process.env",
+      "evidence": "extra/deploy-demo-server.js:18  username: process.env.UPTIME_KUMA_DEMO_USERNAME,"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "extra/deploy-demo-server.js:19",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DEMO_PRIVATE_KEY_PATH",
+      "rule": "process.env",
+      "evidence": "extra/deploy-demo-server.js:19  privateKeyPath: process.env.UPTIME_KUMA_DEMO_PRIVATE_KEY_PATH,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/deploy-demo-server.js:22",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DEMO_CWD",
+      "rule": "process.env",
+      "evidence": "extra/deploy-demo-server.js:22  let cwd = process.env.UPTIME_KUMA_DEMO_CWD;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/download-dist.js:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/releases/download/${version",
+      "evidence": "extra/download-dist.js:11  const url = `https://github.com/louislam/uptime-kuma/releases/download/${version}/${filename}`;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "extra/healthcheck.go:25",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_TLS_REJECT_UNAUTHORIZED",
+      "rule": "process.env",
+      "evidence": "extra/healthcheck.go:25  // process.env.NODE_TLS_REJECT_UNAUTHORIZED = \"0\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/prepare-v1-test-db.mjs:15",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/prepare-v1-test-db.mjs:15  import { execFileSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/prepare-v1-test-db.mjs:111",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "extra/prepare-v1-test-db.mjs:111  \"INSERT INTO monitor (name, active, user_id, interval, type, url, method, maxretries, maxredirects, accepted_statuscodes_json, retry_interval, created_date) VALUES ('Migrated Monitor', 0, 1, 60, 'http', 'https://example.com', 'GET', 0, 10, "
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/prepare-v2-test-db.mjs:15",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/prepare-v2-test-db.mjs:15  import { execFileSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/prepare-v2-test-db.mjs:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "extra/prepare-v2-test-db.mjs:107  \"INSERT INTO monitor (name, active, user_id, interval, type, url, method, maxretries, maxredirects, accepted_statuscodes_json, retry_interval, created_date) VALUES ('Migrated Monitor', 0, 1, 60, 'http', 'https://example.com', 'GET', 0, 10, "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/prepare-v2-test-db.mjs:117",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9222",
+      "evidence": "extra/prepare-v2-test-db.mjs:117  db.prepare(\"INSERT INTO remote_browser (name, url, user_id) VALUES ('Browser 1', 'http://127.0.0.1:9222', 1)\").run();"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/rebase-pr.js:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/rebase-pr.js:1  const { execSync } = require(\"child_process\");"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/start-clear-server.mjs:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/start-clear-server.mjs:2  import { spawn } from \"child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/docker-latest-warning/docker-latest-warning.js:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/wiki/Docker-Tags",
+      "evidence": "extra/docker-latest-warning/docker-latest-warning.js:39  <a class=\"link-light\" href=\"https://github.com/louislam/uptime-kuma/wiki/Docker-Tags\" target=\"_blank\" rel=\"noopener noreferrer\">Recommended Docker Tags</a>"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/kuma-pr/index.mjs:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/kuma-pr/index.mjs:2  import { spawn } from \"child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/bash-curl/index.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/bash-curl/index.sh:3  PUSH_URL=\"https://example.com/api/push/key?status=up&msg=OK&ping=\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/docker/index.sh:1",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/docker/index.sh:1  docker run -d --restart=always --name uptime-kuma-push louislam/uptime-kuma:push \"https://example.com/api/push/key?status=up&msg=OK&ping=\" 60"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/go/index.go:10",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/go/index.go:10  const PushURL = \"https://example.com/api/push/key?status=up&msg=OK&ping=\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/java/index.java:10",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/java/index.java:10  public static final String PUSH_URL = \"https://example.com/api/push/key?status=up&msg=OK&ping=\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/javascript-fetch/index.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/javascript-fetch/index.js:2  const pushURL = \"https://example.com/api/push/key?status=up&msg=OK&ping=\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/python/index.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/python/index.py:4  push_url = \"https://example.com/api/push/key?status=up&msg=OK&ping=\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/push-examples/typescript-fetch/index.ts:2",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api/push/key?status=up&msg=OK&ping=",
+      "evidence": "extra/push-examples/typescript-fetch/index.ts:2  const pushURL: string = \"https://example.com/api/push/key?status=up&msg=OK&ping=\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/build-and-upload-assets.mjs:12",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/build-and-upload-assets.mjs:12  import * as childProcess from \"child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/build-and-upload-assets.mjs:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/build-and-upload-assets.mjs:29  const dryRun = process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/build-images.mjs:28",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/build-images.mjs:28  const dryRun = process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/create-draft-release.mjs:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_PREVIOUS_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/create-draft-release.mjs:23  const previousVersion = process.env.RELEASE_PREVIOUS_VERSION;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/create-draft-release.mjs:24",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/create-draft-release.mjs:24  const dryRun = process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/create-release.mjs:5",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_PREVIOUS_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/create-release.mjs:5  const previousVersion = process.env.RELEASE_PREVIOUS_VERSION;"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/generate-changelog.mjs:5",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/generate-changelog.mjs:5  import * as childProcess from \"child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/generate-changelog.mjs:301",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_BASE_BRANCH",
+      "rule": "process.env",
+      "evidence": "extra/release/generate-changelog.mjs:301  process.env.RELEASE_BASE_BRANCH || \"master\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/install-deps.mjs:9",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/install-deps.mjs:9  import * as childProcess from \"child_process\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/lib.mjs:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/lib.mjs:2  import * as childProcess from \"child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:12  export const dryRun = process.env.RELEASE_DRY_RUN === \"1\" || process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:12  export const dryRun = process.env.RELEASE_DRY_RUN === \"1\" || process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:19",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:19  return process.env.RELEASE_VERSION || process.env.RELEASE_BETA_VERSION;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:19",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_BETA_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:19  return process.env.RELEASE_VERSION || process.env.RELEASE_BETA_VERSION;\nextra/release/lib.mjs:27  return process.env.RELEASE_IS_BETA === \"true\" || !!process.env.RELEASE_BETA_VERSION;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:27",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_IS_BETA",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:27  return process.env.RELEASE_IS_BETA === \"true\" || !!process.env.RELEASE_BETA_VERSION;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:61",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MERGE_SHA",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:61  if (process.env.MERGE_SHA) {\nextra/release/lib.mjs:62  return process.env.MERGE_SHA;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:93",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_REPO_NAMES",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:93  if (process.env.RELEASE_REPO_NAMES) {\nextra/release/lib.mjs:95  return process.env.RELEASE_REPO_NAMES.split(\",\").map((name) => name.trim());"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/release/lib.mjs:187",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hub.docker.com/v2/repositories/${repoName",
+      "evidence": "extra/release/lib.mjs:187  const response = await fetch(`https://hub.docker.com/v2/repositories/${repoName}/tags/?page_size=100`);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/release/lib.mjs:353",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/releases/tag/${version",
+      "evidence": "extra/release/lib.mjs:353  console.log(`  1. Review the draft release: https://github.com/louislam/uptime-kuma/releases/tag/${version}`);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/release/lib.mjs:605",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/actions/runs/${githubRunId",
+      "evidence": "extra/release/lib.mjs:605  ? `https://github.com/louislam/uptime-kuma/actions/runs/${githubRunId}/workflow`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/release/lib.mjs:606",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/actions/workflows/release.yml",
+      "evidence": "extra/release/lib.mjs:606  : `https://github.com/louislam/uptime-kuma/actions/workflows/release.yml`;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/lib.mjs:623",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_BASE_BRANCH",
+      "rule": "process.env",
+      "evidence": "extra/release/lib.mjs:623  const baseBranch = process.env.RELEASE_BASE_BRANCH || \"master\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/release/lib.mjs:642",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/pull/1234",
+      "evidence": "extra/release/lib.mjs:642  // Extract PR number from URL (e.g., https://github.com/louislam/uptime-kuma/pull/1234)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/merge-pr.mjs:9",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/merge-pr.mjs:9  import * as childProcess from \"child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/merge-pr.mjs:20",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/merge-pr.mjs:20  const dryRun = process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/merge-pr.mjs:34",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PR_NUMBER",
+      "rule": "process.env",
+      "evidence": "extra/release/merge-pr.mjs:34  if (process.env.PR_NUMBER) {\nextra/release/merge-pr.mjs:35  return parseInt(process.env.PR_NUMBER, 10);"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/prepare-release.mjs:10",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/prepare-release.mjs:10  import * as childProcess from \"child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/prepare-release.mjs:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_PREVIOUS_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/prepare-release.mjs:30  const previousVersion = process.env.RELEASE_PREVIOUS_VERSION;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/prepare-release.mjs:31",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/prepare-release.mjs:31  const dryRun = process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/prepare-release.mjs:34",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_RUN_ID",
+      "rule": "process.env",
+      "evidence": "extra/release/prepare-release.mjs:34  const githubRunId = process.env.GITHUB_RUN_ID;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/release.mjs:24",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_IS_BETA",
+      "rule": "process.env",
+      "evidence": "extra/release/release.mjs:24  process.env.RELEASE_IS_BETA = \"true\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/release.mjs:28",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DRY_RUN",
+      "rule": "process.env",
+      "evidence": "extra/release/release.mjs:28  const dryRun = process.env.DRY_RUN === \"true\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/release/update-version.mjs:9",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "extra/release/update-version.mjs:9  const childProcess = require(\"child_process\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/update-version.mjs:11",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/update-version.mjs:11  const version = process.env.RELEASE_VERSION;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/release/update-version.mjs:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://regex101.com/r/hmj2Bc/1",
+      "evidence": "extra/release/update-version.mjs:36  // Replace the version: https://regex101.com/r/hmj2Bc/1"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/upload-artifacts-beta.mjs:3",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_BETA_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/upload-artifacts-beta.mjs:3  const version = process.env.RELEASE_BETA_VERSION;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "extra/release/upload-artifacts-beta.mjs:4",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_GITHUB_TOKEN",
+      "rule": "process.env",
+      "evidence": "extra/release/upload-artifacts-beta.mjs:4  const githubToken = process.env.RELEASE_GITHUB_TOKEN;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/release/upload-artifacts.mjs:3",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_VERSION",
+      "rule": "process.env",
+      "evidence": "extra/release/upload-artifacts.mjs:3  const version = process.env.RELEASE_VERSION;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "extra/release/upload-artifacts.mjs:4",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "RELEASE_GITHUB_TOKEN",
+      "rule": "process.env",
+      "evidence": "extra/release/upload-artifacts.mjs:4  const githubToken = process.env.RELEASE_GITHUB_TOKEN;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/better-auth.ts:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DISABLE_LEAK_PWD_CHECK",
+      "rule": "process.env",
+      "evidence": "server/better-auth.ts:29  const disableHibp = process.env.UPTIME_KUMA_DISABLE_LEAK_PWD_CHECK;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/better-auth.ts:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "server/better-auth.ts:89  baseURL: \"http://localhost:3000\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "server/better-auth.ts:190",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_AUTH_SECRET",
+      "rule": "process.env",
+      "evidence": "server/better-auth.ts:190  const env = process.env.UPTIME_KUMA_AUTH_SECRET;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/check-version.js:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://uptime.kuma.pet/version",
+      "evidence": "server/check-version.js:11  const UPDATE_CHECKER_LATEST_VERSION_URL = \"https://uptime.kuma.pet/version\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/check-version.js:27",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TEST_CHECK_VERSION",
+      "rule": "process.env",
+      "evidence": "server/check-version.js:27  if (process.env.TEST_CHECK_VERSION === \"1\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/client.js:154",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_IS_CONTAINER",
+      "rule": "process.env",
+      "evidence": "server/client.js:154  info.isContainer = process.env.UPTIME_KUMA_IS_CONTAINER === \"1\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/config.js:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "server/config.js:9  let hostEnv = isFreeBSD ? null : process.env.HOST;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/config.js:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_HOST",
+      "rule": "process.env",
+      "evidence": "server/config.js:10  const hostname = args.host || process.env.UPTIME_KUMA_HOST || hostEnv;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/config.js:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_PORT",
+      "rule": "process.env",
+      "evidence": "server/config.js:12  const port = [args.port, process.env.UPTIME_KUMA_PORT, process.env.PORT, 3001]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/config.js:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "server/config.js:12  const port = [args.port, process.env.UPTIME_KUMA_PORT, process.env.PORT, 3001]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "server/config.js:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_SSL_KEY",
+      "rule": "process.env",
+      "evidence": "server/config.js:16  const sslKey = args[\"ssl-key\"] || process.env.UPTIME_KUMA_SSL_KEY || process.env.SSL_KEY || undefined;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "server/config.js:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_KEY",
+      "rule": "process.env",
+      "evidence": "server/config.js:16  const sslKey = args[\"ssl-key\"] || process.env.UPTIME_KUMA_SSL_KEY || process.env.SSL_KEY || undefined;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/config.js:17",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_SSL_CERT",
+      "rule": "process.env",
+      "evidence": "server/config.js:17  const sslCert = args[\"ssl-cert\"] || process.env.UPTIME_KUMA_SSL_CERT || process.env.SSL_CERT || undefined;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/config.js:17",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT",
+      "rule": "process.env",
+      "evidence": "server/config.js:17  const sslCert = args[\"ssl-cert\"] || process.env.UPTIME_KUMA_SSL_CERT || process.env.SSL_CERT || undefined;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "server/config.js:20",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_SSL_KEY_PASSPHRASE",
+      "rule": "process.env",
+      "evidence": "server/config.js:20  process.env.UPTIME_KUMA_SSL_KEY_PASSPHRASE ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "server/config.js:21",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_KEY_PASSPHRASE",
+      "rule": "process.env",
+      "evidence": "server/config.js:21  process.env.SSL_KEY_PASSPHRASE ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/database.js:152",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DATA_DIR",
+      "rule": "process.env",
+      "evidence": "server/database.js:152  Database.dataDir = process.env.DATA_DIR || args[\"data-dir\"] || Database.getDevDataDir() || \"./data/\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "server/database.js:206",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "server/database.js:206  const { execSync } = require(\"child_process\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/6245570/how-do-i-get-the-current-branch-name-in-git",
+      "evidence": "server/database.js:207  // Reference: https://stackoverflow.com/questions/6245570/how-do-i-get-the-current-branch-name-in-git"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/database.js:275",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DB_POOL_MAX_CONNECTIONS",
+      "rule": "process.env",
+      "evidence": "server/database.js:275  let parsedMaxPoolConnections = parseInt(process.env.UPTIME_KUMA_DB_POOL_MAX_CONNECTIONS);\nserver/database.js:277  if (!process.env.UPTIME_KUMA_DB_POOL_MAX_CONNECTIONS) {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:318",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/knex/knex/issues/3176#issuecomment-3389054899",
+      "evidence": "server/database.js:318  // See: https://github.com/knex/knex/issues/3176#issuecomment-3389054899"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/database.js:326",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_SQLITE_SINGLE_CONNECTION",
+      "rule": "process.env",
+      "evidence": "server/database.js:326  if (process.env.UPTIME_KUMA_SQLITE_SINGLE_CONNECTION !== \"false\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:372",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mysqljs/sqlstring?tab=readme-ov-file#escaping-query-identifiers",
+      "evidence": "server/database.js:372  // Doc: https://github.com/mysqljs/sqlstring?tab=readme-ov-file#escaping-query-identifiers"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/database.js:435",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SQL_LOG",
+      "rule": "process.env",
+      "evidence": "server/database.js:435  if (process.env.SQL_LOG === \"1\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:487",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlite.org/pragma.html#pragma_synchronous",
+      "evidence": "server/database.js:487  // Read more: https://sqlite.org/pragma.html#pragma_synchronous"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:520",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://knexjs.org/guide/migrations.html",
+      "evidence": "server/database.js:520  // https://knexjs.org/guide/migrations.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:521",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gist.github.com/NigelEarle/70db130cc040cc2868555b29a0278261",
+      "evidence": "server/database.js:521  // https://gist.github.com/NigelEarle/70db130cc040cc2868555b29a0278261"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:524",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/drizzle-team/drizzle-orm/issues/1813",
+      "evidence": "server/database.js:524  // Known issue of knex: https://github.com/drizzle-team/drizzle-orm/issues/1813"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/database.js:632",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues",
+      "evidence": "server/database.js:632  \"Please submit a bug report if you still encounter the problem after restart: https://github.com/louislam/uptime-kuma/issues\"\nserver/database.js:676  \"Please submit the bug report if you still encounter the problem after restart: https://github.com/louislam/uptime-kuma/issues\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/database.js:917",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SET_MIGRATE_AGGREGATE_TABLE_TO_TRUE",
+      "rule": "process.env",
+      "evidence": "server/database.js:917  if (process.env.SET_MIGRATE_AGGREGATE_TABLE_TO_TRUE === \"1\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/docker.js:113",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues/2165",
+      "evidence": "server/docker.js:113  * Change it to `http://` on the fly in order to fix it. (https://github.com/louislam/uptime-kuma/issues/2165)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/docker.js:133",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com:2376",
+      "evidence": "server/docker.js:133  * (e.g. the FQDN of 'https://example.com:2376' is 'example.com' so the directory"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "server/embedded-mariadb.js:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "server/embedded-mariadb.js:2  const childProcess = require(\"child_process\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/image-data-uri.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/DiegoZoracKy/image-data-uri/blob/master/lib/image-data-uri.js",
+      "evidence": "server/image-data-uri.js:2  From https://github.com/DiegoZoracKy/image-data-uri/blob/master/lib/image-data-uri.js"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/prometheus.js:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/pull/4704#issuecomment-2366524692",
+      "evidence": "server/prometheus.js:101  * See https://github.com/louislam/uptime-kuma/pull/4704#issuecomment-2366524692"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/server.js:65",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_ENV",
+      "rule": "process.env",
+      "evidence": "server/server.js:65  if (!process.env.NODE_ENV) {\nserver/server.js:66  process.env.NODE_ENV = \"production\";\nserver/server.js:73  log.info(\"server\", \"Env: \" + process.env.NODE_ENV);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/server.js:69",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_WS_ORIGIN_CHECK",
+      "rule": "process.env",
+      "evidence": "server/server.js:69  if (!process.env.UPTIME_KUMA_WS_ORIGIN_CHECK) {\nserver/server.js:70  process.env.UPTIME_KUMA_WS_ORIGIN_CHECK = \"cors-like\";\nserver/server.js:76  if (process.env.UPTIME_KUMA_WS_ORIGIN_CHECK === \"bypass\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/server.js:74",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_IS_CONTAINER",
+      "rule": "process.env",
+      "evidence": "server/server.js:74  log.debug(\"server\", \"Inside Container: \" + (process.env.UPTIME_KUMA_IS_CONTAINER === \"1\"));\nserver/server.js:87  if (process.env.UPTIME_KUMA_IS_CONTAINER === \"1\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/server.js:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DEBUG_INSPECTOR",
+      "rule": "process.env",
+      "evidence": "server/server.js:80  if (isDev || process.env.UPTIME_KUMA_DEBUG_INSPECTOR === \"1\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/server.js:156",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN",
+      "rule": "process.env",
+      "evidence": "server/server.js:156  !!process.env.UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN || args[\"disable-frame-sameorigin\"] || false;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "server/server.js:157",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_CLOUDFLARED_TOKEN",
+      "rule": "process.env",
+      "evidence": "server/server.js:157  const cloudflaredToken = args[\"cloudflared-token\"] || process.env.UPTIME_KUMA_CLOUDFLARED_TOKEN || undefined;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/server.js:348",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/wiki/Reset-Password-via-CLI",
+      "evidence": "server/server.js:348  response.redirect(\"https://github.com/louislam/uptime-kuma/wiki/Reset-Password-via-CLI\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/server.js:1609",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues",
+      "evidence": "server/server.js:1609  console.error(\"If you keep encountering errors, please report to https://github.com/louislam/uptime-kuma/issues\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/setup-database.js:98",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DB_TYPE",
+      "rule": "process.env",
+      "evidence": "server/setup-database.js:98  if (process.env.UPTIME_KUMA_DB_TYPE) {\nserver/setup-database.js:101  dbConfig.type = process.env.UPTIME_KUMA_DB_TYPE;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/setup-database.js:102",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DB_HOSTNAME",
+      "rule": "process.env",
+      "evidence": "server/setup-database.js:102  dbConfig.hostname = process.env.UPTIME_KUMA_DB_HOSTNAME;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/setup-database.js:103",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DB_PORT",
+      "rule": "process.env",
+      "evidence": "server/setup-database.js:103  dbConfig.port = process.env.UPTIME_KUMA_DB_PORT;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/setup-database.js:104",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DB_NAME",
+      "rule": "process.env",
+      "evidence": "server/setup-database.js:104  dbConfig.dbName = process.env.UPTIME_KUMA_DB_NAME;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/setup-database.js:107",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_DB_SOCKET",
+      "rule": "process.env",
+      "evidence": "server/setup-database.js:107  dbConfig.socketPath = process.env.UPTIME_KUMA_DB_SOCKET?.trim();\nserver/setup-database.js:166  isEnabledMariaDBSocket: process.env.UPTIME_KUMA_DB_SOCKET?.trim().length > 0,\nserver/setup-database.js:210  if (process.env.UPTIME_KUMA_DB_SOCKET?.trim().length > 0) {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/setup-database.js:127",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_ENABLE_EMBEDDED_MARIADB",
+      "rule": "process.env",
+      "evidence": "server/setup-database.js:127  return process.env.UPTIME_KUMA_ENABLE_EMBEDDED_MARIADB === \"1\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/uptime-calculator.js:105",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TEST_BACKEND",
+      "rule": "process.env",
+      "evidence": "server/uptime-calculator.js:105  if (process.env.TEST_BACKEND) {\nserver/uptime-calculator.js:297  if (process.env.TEST_BACKEND) {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/uptime-kuma-server.js:101",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_ENV",
+      "rule": "process.env",
+      "evidence": "server/uptime-kuma-server.js:101  if (process.env.NODE_ENV !== \"development\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/uptime-kuma-server.js:165",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_WS_ORIGIN_CHECK",
+      "rule": "process.env",
+      "evidence": "server/uptime-kuma-server.js:165  const bypass = process.env.UPTIME_KUMA_WS_ORIGIN_CHECK === \"bypass\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/uptime-kuma-server.js:224",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TZ",
+      "rule": "process.env",
+      "evidence": "server/uptime-kuma-server.js:224  process.env.TZ = await this.getTimezone();\nserver/uptime-kuma-server.js:225  dayjs.tz.setDefault(process.env.TZ);\nserver/uptime-kuma-server.js:226  log.debug(\"DEBUG\", \"Timezone: \" + process.env.TZ);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/uptime-kuma-server.js:534",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_IS_CONTAINER",
+      "rule": "process.env",
+      "evidence": "server/uptime-kuma-server.js:534  if (process.env.UPTIME_KUMA_IS_CONTAINER) {\nserver/uptime-kuma-server.js:549  if (process.env.UPTIME_KUMA_IS_CONTAINER) {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/util-server.js:137",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://${destAddr",
+      "evidence": "server/util-server.js:137  const url = new URL(`http://${destAddr}`);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/util-server.js:401",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/dyaa/ssl-checker/blob/master/src/index.ts",
+      "evidence": "server/util-server.js:401  //https://github.com/dyaa/ssl-checker/blob/master/src/index.ts"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/util-server.js:494",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TIMELOGGER",
+      "rule": "process.env",
+      "evidence": "server/util-server.js:494  if (process.env.TIMELOGGER === \"1\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/util-server.js:598",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_ENV",
+      "rule": "process.env",
+      "evidence": "server/util-server.js:598  if (process.env.NODE_ENV === \"development\") {\nserver/util-server.js:622  if (process.env.NODE_ENV === \"development\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/util-server.js:828",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/59099454/is-there-a-way-to-call-sleep-without-await-keyword",
+      "evidence": "server/util-server.js:828  * Source: https://stackoverflow.com/questions/59099454/is-there-a-way-to-call-sleep-without-await-keyword"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/util-server.js:837",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TEST_BACKEND",
+      "rule": "process.env",
+      "evidence": "server/util-server.js:837  if (process.env.TEST_BACKEND) {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/util-server.js:963",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mathisonian/command-exists/issues/22",
+      "evidence": "server/util-server.js:963  * Read more: https://github.com/mathisonian/command-exists/issues/22"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/analytics/google-analytics.js:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.googletagmanager.com/gtag/js?id=${escapedTagIdHTMLAttribute",
+      "evidence": "server/analytics/google-analytics.js:21  <script async src=\"https://www.googletagmanager.com/gtag/js?id=${escapedTagIdHTMLAttribute}\"></script>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/domain_expiry.js:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://data.iana.org/rdap/dns.json",
+      "evidence": "server/model/domain_expiry.js:54  const response = await fetch(\"https://data.iana.org/rdap/dns.json\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/monitor.js:469",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/pull/3961#issuecomment-1804149144",
+      "evidence": "server/model/monitor.js:469  // See https://github.com/louislam/uptime-kuma/pull/3961#issuecomment-1804149144"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/monitor.js:527",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/nodejs/node/issues/3940",
+      "evidence": "server/model/monitor.js:527  maxCachedSessions: 0, // Use Custom agent to disable session reuse (https://github.com/nodejs/node/issues/3940)\nserver/model/monitor.js:793  maxCachedSessions: 0, // Use Custom agent to disable session reuse (https://github.com/nodejs/node/issues/3940)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/model/monitor.js:682",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_LOG_RESPONSE_BODY_MONITOR_ID",
+      "rule": "process.env",
+      "evidence": "server/model/monitor.js:682  if (process.env.UPTIME_KUMA_LOG_RESPONSE_BODY_MONITOR_ID == this.id) {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/monitor.js:1102",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues",
+      "evidence": "server/model/monitor.js:1102  log.error(\"monitor\", \"Please report to https://github.com/louislam/uptime-kuma/issues\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/monitor.js:1191",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/1759956/curl-error-18-transfer-closed-with-outstanding-read-data-remaining",
+      "evidence": "server/model/monitor.js:1191  // Read more: https://stackoverflow.com/questions/1759956/curl-error-18-transfer-closed-with-outstanding-read-data-remaining"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/status_page.js:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3001/status/",
+      "evidence": "server/model/status_page.js:58  // Handle url with trailing slash (http://localhost:3001/status/)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/status_page.js:94",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes",
+      "evidence": "server/model/status_page.js:94  language: \"en\", // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/model/status_page.js:195",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues/2186",
+      "evidence": "server/model/status_page.js:195  // Add jsesc, fix https://github.com/louislam/uptime-kuma/issues/2186"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/modules/apicache/apicache.js:106",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DEBUG",
+      "rule": "process.env",
+      "evidence": "server/modules/apicache/apicache.js:106  let debugEnv = process.env.DEBUG && process.env.DEBUG.split(\",\").indexOf(\"apicache\") !== -1;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/modules/apicache/apicache.js:350",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kwhitley/apicache/blob/0d5686cc21fad353c6dddee646288c2fca3e4f50/src/apicache.js#L254",
+      "evidence": "server/modules/apicache/apicache.js:350  // Original Source: https://github.com/kwhitley/apicache/blob/0d5686cc21fad353c6dddee646288c2fca3e4f50/src/apicache.js#L254"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/modules/apicache/apicache.js:354",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_ENV",
+      "rule": "process.env",
+      "evidence": "server/modules/apicache/apicache.js:354  if (process.env.NODE_ENV !== \"production\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/modules/axios-ntlm/lib/flags.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/elasticio/node-ntlm-client/master/lib/flags.js",
+      "evidence": "server/modules/axios-ntlm/lib/flags.js:2  // Original file https://raw.githubusercontent.com/elasticio/node-ntlm-client/master/lib/flags.js"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/modules/axios-ntlm/lib/hash.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/elasticio/node-ntlm-client/blob/master/lib/hash.js",
+      "evidence": "server/modules/axios-ntlm/lib/hash.js:2  // Original source at https://github.com/elasticio/node-ntlm-client/blob/master/lib/hash.js"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/modules/axios-ntlm/lib/ntlm.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/elasticio/node-ntlm-client/master/lib/ntlm.js",
+      "evidence": "server/modules/axios-ntlm/lib/ntlm.js:2  // Original file https://raw.githubusercontent.com/elasticio/node-ntlm-client/master/lib/ntlm.js"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/modules/dayjs/plugin/timezone.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/issues/2318",
+      "evidence": "server/modules/dayjs/plugin/timezone.js:3  * Try to fix https://github.com/louislam/uptime-kuma/issues/2318"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/modules/dayjs/plugin/timezone.js:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/iamkun/dayjs/tree/dev/src/plugin/utc",
+      "evidence": "server/modules/dayjs/plugin/timezone.js:4  * Source: https://github.com/iamkun/dayjs/tree/dev/src/plugin/utc"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/globalping.js:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jsdelivr/globalping-typescript",
+      "evidence": "server/monitor-types/globalping.js:18  * Library documentation: https://github.com/jsdelivr/globalping-typescript"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/globalping.js:20",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://globalping.io/docs/api.globalping.io",
+      "evidence": "server/monitor-types/globalping.js:20  * API documentation: https://globalping.io/docs/api.globalping.io"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/globalping.js:592",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dash.globalping.io?view=add-credits",
+      "evidence": "server/monitor-types/globalping.js:592  const creditsHelpLink = \"https://dash.globalping.io?view=add-credits\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/postgres.js:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/brianc/node-postgres/issues/1927",
+      "evidence": "server/monitor-types/postgres.js:45  // See https://github.com/brianc/node-postgres/issues/1927"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/rabbitmq.js:58",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/api",
+      "evidence": "server/monitor-types/rabbitmq.js:58  // Without a trailing slash, path in baseUrl will be removed. https://example.com/api -> https://example.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/rabbitmq.js:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "server/monitor-types/rabbitmq.js:58  // Without a trailing slash, path in baseUrl will be removed. https://example.com/api -> https://example.com"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "server/monitor-types/real-browser-monitor-type.js:5",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "server/monitor-types/real-browser-monitor-type.js:5  const childProcess = require(\"child_process\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/monitor-types/real-browser-monitor-type.js:22",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LOCALAPPDATA",
+      "rule": "process.env",
+      "evidence": "server/monitor-types/real-browser-monitor-type.js:22  allowedList.push(process.env.LOCALAPPDATA + \"\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\");\nserver/monitor-types/real-browser-monitor-type.js:27  allowedList.push(process.env.LOCALAPPDATA + \"\\\\Chromium\\\\Application\\\\chrome.exe\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/monitor-types/real-browser-monitor-type.js:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PROGRAMFILES",
+      "rule": "process.env",
+      "evidence": "server/monitor-types/real-browser-monitor-type.js:23  allowedList.push(process.env.PROGRAMFILES + \"\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\");\nserver/monitor-types/real-browser-monitor-type.js:28  allowedList.push(process.env.PROGRAMFILES + \"\\\\Chromium\\\\Application\\\\chrome.exe\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/monitor-types/real-browser-monitor-type.js:64",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_ALLOW_ALL_CHROME_EXEC",
+      "rule": "process.env",
+      "evidence": "server/monitor-types/real-browser-monitor-type.js:64  if (config.args[\"allow-all-chrome-exec\"] || process.env.UPTIME_KUMA_ALLOW_ALL_CHROME_EXEC === \"1\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/monitor-types/real-browser-monitor-type.js:117",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "UPTIME_KUMA_IS_CONTAINER",
+      "rule": "process.env",
+      "evidence": "server/monitor-types/real-browser-monitor-type.js:117  if (process.env.UPTIME_KUMA_IS_CONTAINER) {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/real-browser-monitor-type.js:258",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/security/advisories/GHSA-2qgm-m29m-cj2h",
+      "evidence": "server/monitor-types/real-browser-monitor-type.js:258  // https://github.com/louislam/uptime-kuma/security/advisories/GHSA-2qgm-m29m-cj2h"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/steam.js:41",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.steampowered.com/IGameServersService/GetServerList/v1/",
+      "evidence": "server/monitor-types/steam.js:41  const steamApiUrl = \"https://api.steampowered.com/IGameServersService/GetServerList/v1/\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/steam.js:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/nodejs/node/issues/3940",
+      "evidence": "server/monitor-types/steam.js:56  maxCachedSessions: 0, // Use Custom agent to disable session reuse (https://github.com/nodejs/node/issues/3940)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "server/monitor-types/system-service.js:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "server/monitor-types/system-service.js:2  const { execFile } = require(\"child_process\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/tcp.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-6",
+      "evidence": "server/monitor-types/tcp.js:10  * @see https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-6"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/tcp.js:169",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://etherx.jabber.org/streams",
+      "evidence": "server/monitor-types/tcp.js:169  `<stream:stream to='${monitor.hostname}' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/websocket-upgrade.js:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.iana.org/assignments/websocket/websocket.xml#close-code-number",
+      "evidence": "server/monitor-types/websocket-upgrade.js:5  // Define closing error codes https://www.iana.org/assignments/websocket/websocket.xml#close-code-number"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/monitor-types/websocket-upgrade.js:125",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.iana.org/assignments/websocket/websocket.xml#subprotocol-name",
+      "evidence": "server/monitor-types/websocket-upgrade.js:125  // If user inputs subprotocol(s), convert to array, set Sec-WebSocket-Protocol header, timeout in ms. Subprotocol Identifier column: https://www.iana.org/assignments/websocket/websocket.xml#subprotocol-name"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/360messenger.js:76",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.360messenger.com/v2/sendMessage",
+      "evidence": "server/notification-providers/360messenger.js:76  return axios.post(\"https://api.360messenger.com/v2/sendMessage\", recipientData, config);\nserver/notification-providers/360messenger.js:113  return axios.post(\"https://api.360messenger.com/v2/sendMessage\", data, config);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/360messenger.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.360messenger.com/v2/sendGroup",
+      "evidence": "server/notification-providers/360messenger.js:87  return axios.post(\"https://api.360messenger.com/v2/sendGroup\", groupData, config);\nserver/notification-providers/360messenger.js:100  return axios.post(\"https://api.360messenger.com/v2/sendGroup\", data, config);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/46elks.js:12",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.46elks.com/a1/sms",
+      "evidence": "server/notification-providers/46elks.js:12  const url = \"https://api.46elks.com/a1/sms\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "server/notification-providers/HaloPSA.js:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "npm_package_version",
+      "rule": "process.env",
+      "evidence": "server/notification-providers/HaloPSA.js:47  uptime_kuma_version: process.env.npm_package_version || \"unknown\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/Webpush.js:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma",
+      "evidence": "server/notification-providers/Webpush.js:18  webpush.setVapidDetails(\"https://github.com/louislam/uptime-kuma\", publicVapidKey, privateVapidKey);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/aliyun-sms.js:72",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://dysmsapi.aliyuncs.com/",
+      "evidence": "server/notification-providers/aliyun-sms.js:72  url: \"http://dysmsapi.aliyuncs.com/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/aliyun-sms.js:108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://help.aliyun.com/document_detail/315526.html",
+      "evidence": "server/notification-providers/aliyun-sms.js:108  // See https://help.aliyun.com/document_detail/315526.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/aliyun-sms.js:109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tools.ietf.org/html/rfc3986",
+      "evidence": "server/notification-providers/aliyun-sms.js:109  // This encoding methods as known as RFC 3986 (https://tools.ietf.org/html/rfc3986)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/amootsms.js:141",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://portal.amootsms.com/rest/SendSimple",
+      "evidence": "server/notification-providers/amootsms.js:141  \"https://portal.amootsms.com/rest/SendSimple\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/amootsms.js:216",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://portal.amootsms.com/rest/SendWithPattern",
+      "evidence": "server/notification-providers/amootsms.js:216  \"https://portal.amootsms.com/rest/SendWithPattern\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/amootsms.js:270",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://portal.amootsms.com/rest/SendWithPatternOWN",
+      "evidence": "server/notification-providers/amootsms.js:270  \"https://portal.amootsms.com/rest/SendWithPatternOWN\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/bale.js:12",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://tapi.bale.ai",
+      "evidence": "server/notification-providers/bale.js:12  const url = \"https://tapi.bale.ai\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/bark.js:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/raw/master/public/icon.png",
+      "evidence": "server/notification-providers/bark.js:15  const barkNotificationAvatar = \"https://github.com/louislam/uptime-kuma/raw/master/public/icon.png\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/bearsms.js:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.bearsms.com/index.php?${params.toString(",
+      "evidence": "server/notification-providers/bearsms.js:34  const url = `https://app.bearsms.com/index.php?${params.toString()}`;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/brevo.js:43",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.brevo.com/v3/smtp/email",
+      "evidence": "server/notification-providers/brevo.js:43  let result = await axios.post(\"https://api.brevo.com/v3/smtp/email\", data, config);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/cellsynt.js:13",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://www.cellsynt.com/en/sms/api-integration",
+      "evidence": "server/notification-providers/cellsynt.js:13  // docs at https://www.cellsynt.com/en/sms/api-integration"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/cellsynt.js:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://se-1.cellsynt.net/sms.php",
+      "evidence": "server/notification-providers/cellsynt.js:26  const resp = await axios.post(\"https://se-1.cellsynt.net/sms.php\", null, config);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/clicksendsms.js:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://rest.clicksend.com/v3/sms/send",
+      "evidence": "server/notification-providers/clicksendsms.js:12  const url = \"https://rest.clicksend.com/v3/sms/send\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/clickup.js:37",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.clickup.com/api/v3/workspaces/${notification.clickupWorkspaceId",
+      "evidence": "server/notification-providers/clickup.js:37  const url = `https://api.clickup.com/api/v3/workspaces/${notification.clickupWorkspaceId}/chat/channels/${notification.clickupChannelId}/messages`;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/discord.js:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/developers/docs/resources/message#message-object-message-flags",
+      "evidence": "server/notification-providers/discord.js:16  // @see https://discord.com/developers/docs/resources/message#message-object-message-flags"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/discord.js:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/louislam/uptime-kuma/raw/master/public/icon.png",
+      "evidence": "server/notification-providers/discord.js:57  discordtestdata.avatar_url = \"https://github.com/louislam/uptime-kuma/raw/master/public/icon.png\";\nserver/notification-providers/discord.js:83  payload.avatar_url = \"https://github.com/louislam/uptime-kuma/raw/master/public/icon.png\";\nserver/notification-providers/discord.js:110  payload.avatar_url = \"https://github.com/louislam/uptime-kuma/raw/master/public/icon.png\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "server/notification-providers/egosms.js:23",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://www.egosms.co/api/v1/plain/?${params.toString(",
+      "evidence": "server/notification-providers/egosms.js:23  const url = `https://www.egosms.co/api/v1/plain/?${params.toString()}`;"
+    }
+  ],
+  "reRooting": []
+}

@@ -1,0 +1,367 @@
+"""Durable mission scheduler.
+
+Jobs live in SQLite, so queued work, leases and recovery survive a process
+restart. A worker claims a job under a lease, executes it with the same
+mission-scoped execution path as the synchronous API, and finalizes it with the
+real outcome. Concurrency is bounded per scheduler instance.
+"""
+
+import os
+import re
+import threading
+import uuid
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+from pathlib import Path
+
+from . import checkpoint
+from . import router
+from .execution import execute_mission_task, opencode_model_ref
+
+# Documented default and upper bound for scheduler concurrency.
+DEFAULT_CONCURRENCY = 2
+CONCURRENCY_LIMIT = 8
+
+# 逆向克隆防护（2026-10-06）：平台自身崩溃（except Exception 路径）的文本会
+# 作为 job error 落库，并经 /jobs 行与 JOB_FAILED/STEP_FAILED 事件到达客户。
+# OSError 等异常的 str() 带服务器文件路径，httpx 连接错误带运营方网关主机名
+# ——落库前把文件系统路径与 URL 主机形状打码；暂态标记词（429/locked/
+# timeout 等路由分类依据）不受影响，分类仍读原始文本。
+_CRASH_PATH_SHAPE = re.compile(
+    r"(?:[A-Za-z]:\\[^\s\"']+)|(?:\b/[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)+)"
+    r"|(?:https?://[^\s\"']+)")
+
+
+def mask_filesystem_paths(text):
+    """Crash-path text for customer-visible storage: layout shapes become [路径]."""
+    return _CRASH_PATH_SHAPE.sub("[路径]", str(text))
+# Hard ceiling on parallel RUNNING jobs per mission: same-mission branches run
+# in isolated git worktrees, so beyond this they simply queue.
+MAX_PARALLEL_PER_MISSION = 3
+
+
+def _worker_limit(value):
+    """Parse the configured concurrency without ever aborting startup.
+
+    ``FACAI_MAX_WORKERS`` comes from the systemd ``EnvironmentFile``, where a
+    blank value is a normal way to leave a setting at its default. A missing,
+    empty or non-numeric value therefore falls back to the documented default
+    instead of raising ``ValueError`` while the application is still importing;
+    an out-of-range number is clamped to the supported range.
+    """
+    try:
+        parsed = int(str(value).strip())
+    except (TypeError, ValueError):
+        parsed = DEFAULT_CONCURRENCY
+    return max(1, min(CONCURRENCY_LIMIT, parsed))
+
+
+class Scheduler:
+    def __init__(self, store, adapter, registries, root, concurrency=None,
+                 lease_seconds=600, worker_id=None, adapter_resolver=None):
+        self.store = store
+        self.adapter = adapter
+        # Optional callable (mission -> adapter) for per-mission agent selection
+        # via the agent registry ("opencode", "goose", ...). None keeps the
+        # single-adapter behavior.
+        self.adapter_resolver = adapter_resolver
+        self.registries = registries
+        self.root = root
+        configured = (concurrency if concurrency is not None
+                      else os.getenv("FACAI_MAX_WORKERS", str(DEFAULT_CONCURRENCY)))
+        self.concurrency = _worker_limit(configured)
+        # Floor for every claim's lease: the store extends it to cover the
+        # job's own timeout, so a long-running job is never recovered while its
+        # worker is still executing it.
+        self.lease_seconds = lease_seconds
+        self.worker_id = worker_id or f"worker-{uuid.uuid4().hex[:8]}"
+        self._lock = threading.Lock()
+        self._stop = threading.Event()
+        self._thread = None
+        self._health_lock = threading.Lock()
+        self._last_attempt_at = None
+        self._last_success_at = None
+        self._last_error = None
+        self._consecutive_errors = 0
+
+    def enqueue(self, mission_id, prompt, **kwargs):
+        return self.store.enqueue_job(mission_id, prompt, **kwargs)
+
+    def recover(self):
+        # Expired conversion claims join the same periodic recovery path as job
+        # leases, so a crashed channel worker is replayed without operator action.
+        self.store.recover_stale_channel_conversions()
+        return self.store.requeue_expired()
+
+    def stats(self):
+        with self._health_lock:
+            health = {
+                "background_running": bool(self._thread and self._thread.is_alive()),
+                "last_attempt_at": self._last_attempt_at,
+                "last_success_at": self._last_success_at,
+                "last_error": self._last_error,
+                "consecutive_errors": self._consecutive_errors,
+            }
+        return {"concurrency": self.concurrency, "running": self.store.count_running_jobs(),
+                "worker": self.worker_id, **health}
+
+    def _is_parallel_branch(self, job, batch_counts):
+        """True when this job's step runs beside another live step of the mission.
+
+        Such steps execute in isolated git worktrees of the mission workspace so
+        two agents never write the shared tree concurrently, and their branches
+        pass a merge gate before the step counts as complete. Mission-level
+        jobs (no step) never isolate. Dependency readiness is already enforced
+        by ``claim_job``; ``batch_counts`` is the per-mission size of the claim
+        batch, and the store query covers siblings claimed by other workers.
+        """
+        if not job["step_id"]:
+            return False
+        if batch_counts.get(job["mission_id"], 0) > 1:
+            return True
+        try:
+            siblings = self.store.jobs(job["mission_id"])
+        except Exception:
+            return False
+        return any(other["id"] != job["id"] and other["status"] == "RUNNING"
+                   and other["step_id"] not in (None, job["step_id"])
+                   for other in siblings)
+
+    def _model_with_key(self, model, owner):
+        """Attach the decrypted credential of an owner-registered model.
+
+        The plaintext key exists in memory for the duration of one dispatch
+        only; it is never logged, never stored and never returned.
+        """
+        ref = (model or {}).get("user_model_id")
+        if not ref:
+            return model
+        token = self.store.user_model_encrypted_key(owner, ref)
+        if not token:
+            return model
+        try:
+            from .secretbox import decrypt
+
+            return {**model, "api_key": decrypt(self.root, token)}
+        except Exception:
+            return model
+
+    def _execute(self, job, batch_counts=None):
+        mission = self.store.get(job["mission_id"])
+        if mission is None:
+            self.store.finish_job(job["id"], "FAILED", "mission missing")
+            return
+        owner = mission.get("owner_id", "admin")
+        model = self._model_with_key(
+            self.registries.resolve("models", mission["model_id"], owner_id=owner), owner)
+        runtime = self.registries.resolve("runtimes", mission["runtime_id"], owner_id=owner)
+        skill = self.registries.resolve("skills", mission["skill_id"], owner_id=owner)
+        # A step-level model binding, when present and still resolvable, names the
+        # model that actually runs this job: it drives the OpenCode --model flag
+        # and the provider/cost attribution (the job's model_ref, set at dispatch
+        # time, already carries the same model's OpenCode ref).
+        step_model_id = (self.store.step_model_id(job["mission_id"], job["step_id"])
+                         if job["step_id"] else None)
+        step_model = (self.registries.resolve("models", step_model_id, owner_id=owner)
+                      if step_model_id else None)
+        if step_model is not None:
+            model = self._model_with_key(step_model, owner)
+        # P0-14 Router: a rerouted job carries its replacement backend in the
+        # error field's machine marker. That binding outranks mission and step
+        # bindings for this run, so the adapter flag (model_ref, repointed by
+        # store.reroute_job), the credentials, and the session/cost/attribution
+        # identity all follow the backend that will actually execute.
+        rerouted_to = router.reroute_target(job.get("error"))
+        if rerouted_to:
+            entry = self.registries.resolve("models", rerouted_to, owner_id=owner)
+            if entry is not None:
+                model = self._model_with_key(entry, owner)
+                step_model = entry
+                step_model_id = rerouted_to
+        # The backend to blame (and reroute away from) if this run fails.
+        failed_backend = step_model_id if step_model is not None else mission["model_id"]
+        model_ref = job["model_ref"] or opencode_model_ref(model)
+        adapter = self.adapter
+        if self.adapter_resolver is not None:
+            adapter = self.adapter_resolver(mission)
+            if adapter is None:
+                self.store.finish_job(job["id"], "FAILED",
+                                      f"Unsupported agent adapter: {mission.get('agent_id')}")
+                return
+        # True parallel branches of one mission run in isolated git worktrees;
+        # when git (or a repository) is unavailable this degrades to the shared
+        # mission workspace exactly as before.
+        worktree = None
+        if self._is_parallel_branch(job, batch_counts or {}):
+            base_workspace = mission.get("workspace") or \
+                str(Path(self.root) / "workspaces" / mission["id"])
+            worktree = checkpoint.prepare_worktree(base_workspace,
+                                                   suffix=job["step_id"][:8])
+            if worktree is None:
+                # Isolation is impossible (git missing, no commits, or a
+                # residue collision that survived cleanup): say so instead of
+                # silently degrading this step into the shared workspace.
+                self.store.append(job["mission_id"], "WORKTREE_FALLBACK",
+                                  {"step_id": job["step_id"],
+                                   "path": base_workspace,
+                                   "reason": "worktree unavailable; step runs unisolated "
+                                             "in the shared mission workspace"},
+                                  job["step_id"], None, mission.get("agent_id") or "opencode")
+        # The worker holds execution from here: re-arm the lease so a peer
+        # scheduler's recovery pass cannot requeue a live job that already
+        # spent part of its claim lease queued (serial lock, backoff, batch).
+        self.store.touch_job_lease(job["id"], job["timeout"])
+        try:
+            result = execute_mission_task(self.store, adapter, mission, model, self.root,
+                                          job["prompt"], job["step_id"], model_ref, job["timeout"],
+                                          runtime=runtime, skill=skill,
+                                          step_model_id=step_model_id if step_model is not None else None,
+                                          agent_id=mission.get("agent_id"),
+                                          workspace_override=worktree["path"] if worktree else None,
+                                          worktree=worktree)
+            merge = result.get("merge")
+            if result["status"] == "OPENCODE_COMPLETED" and merge is not None \
+                    and not merge.get("merged"):
+                self._finish_or_requeue(
+                    job, f"merge conflict: {(worktree or {}).get('branch', '')}",
+                    mission=mission, failed_backend=failed_backend)
+            elif result["status"] == "OPENCODE_COMPLETED" and (merge is None or merge.get("merged")):
+                self.store.finish_job(job["id"], "COMPLETED")
+            else:
+                detail = result["status"]
+                if result.get("status") == "OPENCODE_FAILED" and result.get("stderr"):
+                    # The stderr tail carries the real transient markers
+                    # (e.g. SQLite "database is locked" from the CLI).
+                    detail = f"{detail}: {result['stderr'][-400:]}"
+                self._finish_or_requeue(
+                    job, detail, mission=mission, failed_backend=failed_backend,
+                    state=router.outcome_state(status=result["status"], text=detail))
+        except Exception as exc:
+            # Attribute the failure truthfully; never mark a failed run complete.
+            # 存储文本打码（见 mask_filesystem_paths），分类仍用原始文本。
+            self._finish_or_requeue(job, mask_filesystem_paths(str(exc))[:500],
+                                    mission=mission, failed_backend=failed_backend,
+                                    state=router.outcome_state(text=str(exc)))
+
+    def _finish_or_requeue(self, job, error, mission=None, state=None, failed_backend=None):
+        """Finish a failed job, requeue it when the failure is transient, or
+        reroute it to another backend when the failure names a backend state.
+
+        A 24/7 station cannot have an operator babysitting every hiccup: an
+        upstream timeout, a rate limit, a provider resource error or a
+        transport/SQLite hiccup is re-run automatically with exponential
+        backoff while the job still has attempts left. Permanent failures
+        (auth, refusal, missing bindings) finish FAILED and stay that way --
+        honesty about what actually broke is never retried away.
+
+        Before a terminal FAILED, though, §15/§16 (P0-14 Router) applies: a
+        backend state (PROVIDER_REFUSAL / BACKEND_UNAVAILABLE / TIMEOUT) is
+        THIS BACKEND DID NOT EXECUTE, not a mission verdict. When another
+        registered backend exists and the per-job reroute ceiling is not
+        reached, the job is rerouted instead of failed; with no alternative
+        it fails exactly as before. A gate denial (MISSION_DENIED) is a
+        local decision and is never rerouted.
+        """
+        text = (error or "").lower()
+        transient = any(marker in text for marker in (
+            "timeout", "rate_limit", "rate limited", "resource_unavailable",
+            "resource unavailable", "transport", "database is locked",
+            "model_resource", "connection", "502", "503", "504",
+            # A service restart/redeploy kills the agent subprocess mid-run.
+            # That is an interruption, not a verdict on the work: the step must
+            # re-run rather than die because a deploy happened to ship while it
+            # was executing. A 24/7 station redeploys unattended.
+            "interrupt", "sigterm", "sigkill", "killed", "terminated",
+            "broken pipe", "connection reset", "unexpected eof",
+            "shutting down", "canceled", "cancelled",
+            # A parallel-branch merge conflict resolves on a solo re-run (the
+            # sibling branch has completed by then), so one automatic retry is
+            # the difference between a stalled mission and a finished one.
+            "merge conflict"))
+        if transient and job["attempts"] < job["max_attempts"]:
+            delay = min(300 * (2 ** max(0, job["attempts"] - 1)),
+                        int(os.getenv("FACAI_RETRY_BACKOFF_CAP", "1800")))
+            reason = f"transient failure, auto-retry in {delay}s: {error}"[:500]
+            # A rerouted job keeps its replacement-backend binding across
+            # transient backoffs: the marker must survive the requeue or the
+            # next claim would silently fall back to the failed backend.
+            marker = router.reroute_marker_prefix(job.get("error"))
+            if marker:
+                reason = (marker + reason)[:500]
+            self.store.requeue_job_backoff(job["id"], delay, reason)
+            return self.store.get_job(job["id"])
+        rerouted = None
+        if mission is not None:
+            rerouted = router.reroute(
+                self.store, self.registries, job, mission,
+                state=state or router.outcome_state(text=error),
+                failed_backend=failed_backend or (mission or {}).get("model_id"),
+                error=error)
+        if rerouted is not None:
+            return rerouted
+        self.store.finish_job(job["id"], "FAILED", error)
+        return self.store.get_job(job["id"])
+
+    def run_once(self):
+        with self._lock:
+            self.recover()
+            slots = max(0, self.concurrency - self.store.count_running_jobs())
+            jobs = []
+            for _ in range(slots):
+                job = self.store.claim_job(self.worker_id, self.lease_seconds,
+                                           parallel_mission_jobs=min(self.concurrency,
+                                                                     MAX_PARALLEL_PER_MISSION))
+                if job is None:
+                    break
+                jobs.append(job)
+            if not jobs:
+                return []
+            batch_counts = {}
+            for job in jobs:
+                batch_counts[job["mission_id"]] = batch_counts.get(job["mission_id"], 0) + 1
+            if len(jobs) == 1:
+                self._execute(jobs[0], batch_counts)
+            else:
+                with ThreadPoolExecutor(max_workers=len(jobs)) as pool:
+                    list(pool.map(lambda job: self._execute(job, batch_counts), jobs))
+            return [job["id"] for job in jobs]
+
+    def run_pending(self):
+        total = 0
+        while True:
+            done = self.run_once()
+            total += len(done)
+            if not done:
+                break
+        return total
+
+    def start(self, interval=1.0):
+        if self._thread and self._thread.is_alive():
+            return
+        self._stop.clear()
+        self._thread = threading.Thread(target=self._serve, args=(interval,), daemon=True)
+        self._thread.start()
+
+    def _serve(self, interval):
+        while not self._stop.is_set():
+            attempt_at = datetime.now(timezone.utc).isoformat()
+            with self._health_lock:
+                self._last_attempt_at = attempt_at
+            try:
+                self.run_once()
+                with self._health_lock:
+                    self._last_success_at = datetime.now(timezone.utc).isoformat()
+                    self._last_error = None
+                    self._consecutive_errors = 0
+            except Exception as exc:
+                # Keep operational state useful without exposing exception text,
+                # which can contain webhook paths, credentials or user data.
+                with self._health_lock:
+                    self._last_error = type(exc).__name__
+                    self._consecutive_errors += 1
+            self._stop.wait(interval)
+
+    def stop(self):
+        self._stop.set()
+        if self._thread:
+            self._thread.join(timeout=5)

@@ -1,0 +1,1942 @@
+{
+  "target": "agent-cline-fork (初扫收录实例 G:\\Agents\\改刀军团\\Cline)",
+  "origin": "本地路径 G:\\Agents\\改刀军团\\Cline",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 155 个文本文件（源码 155、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": ".claude/hooks/claude-code-for-web-setup.sh:16",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/cli/cli/releases/latest",
+      "evidence": ".claude/hooks/claude-code-for-web-setup.sh:16  GH_VERSION=$(curl -s https://api.github.com/repos/cli/cli/releases/latest | grep '\"tag_name\"' | cut -d'\"' -f4 | sed 's/^v//')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".claude/hooks/claude-code-for-web-setup.sh:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cli/cli/releases/download/v${GH_VERSION",
+      "evidence": ".claude/hooks/claude-code-for-web-setup.sh:17  curl -sL \"https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz\" -o /tmp/gh.tar.gz"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".claude/hooks/claude-code-for-web-setup.sh:37",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/settings/tokens?type=beta",
+      "evidence": ".claude/hooks/claude-code-for-web-setup.sh:37  echo \"1. Create a Fine-grained Personal Access Token at https://github.com/settings/tokens?type=beta\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": ".github/scripts/coverage_check/github_api.py:109",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_TOKEN",
+      "rule": "os.environ.get",
+      "evidence": ".github/scripts/coverage_check/github_api.py:109  token = os.environ.get('GITHUB_TOKEN')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/coverage_check/github_api.py:121",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/{repo",
+      "evidence": ".github/scripts/coverage_check/github_api.py:121  comments_url = f'https://api.github.com/repos/{repo}/issues/{pr_number}/comments'\n.github/scripts/coverage_check/github_api.py:142  update_url = f'https://api.github.com/repos/{repo}/issues/comments/{comment_id}'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".github/scripts/coverage_check/github_api.py:170",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_OUTPUT",
+      "rule": "os.environ[]",
+      "evidence": ".github/scripts/coverage_check/github_api.py:170  with open(os.environ['GITHUB_OUTPUT'], 'a') as f:"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/coverage_check/util.py:190",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".github/scripts/coverage_check/util.py:190  result = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".github/scripts/coverage_check/workflow.py:239",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_STEP_SUMMARY",
+      "rule": "os.environ.get",
+      "evidence": ".github/scripts/coverage_check/workflow.py:239  github_step_summary = os.environ.get('GITHUB_STEP_SUMMARY')"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/tests/coverage_check_test.py:71",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".github/scripts/tests/coverage_check_test.py:71  result = subprocess.run(cmd, shell=True, check=False, capture_output=True, text=True)\n.github/scripts/tests/coverage_check_test.py:78  result = subprocess.run(cmd, shell=True, check=False, capture_output=True, text=True)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/vitest.setup.ts:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/vitest.setup.ts:12  process.env.CLINE_DIR = join(isolatedRoot, \".cline\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/vitest.setup.ts:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/vitest.setup.ts:13  process.env.CLINE_DATA_DIR = join(isolatedRoot, \"data\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/vitest.setup.ts:14",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HUB_DISCOVERY_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/vitest.setup.ts:14  process.env.CLINE_HUB_DISCOVERY_PATH = join(isolatedRoot, \"hub-discovery.json\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/vitest.setup.ts:15",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_NO_AUTO_UPDATE",
+      "rule": "process.env",
+      "evidence": "apps/cli/vitest.setup.ts:15  process.env.CLINE_NO_AUTO_UPDATE = \"1\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/script/postinstall.mjs:31",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HUB_DISCOVERY_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/script/postinstall.mjs:31  const explicitPath = process.env.CLINE_HUB_DISCOVERY_PATH?.trim();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/script/postinstall.mjs:33",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/script/postinstall.mjs:33  process.env.CLINE_DATA_DIR?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/script/postinstall.mjs:35",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/script/postinstall.mjs:35  process.env.CLINE_DIR?.trim() || path.join(os.homedir(), \".cline\"),"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/cli.e2e.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/cli.e2e.test.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/cli.e2e.test.ts:19",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BUN_EXEC_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/cli.e2e.test.ts:19  const bunExec = process.env.BUN_EXEC_PATH ?? \"bun\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/cli.e2e.test.ts:733",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mcp.example.com",
+      "evidence": "apps/cli/src/cli.e2e.test.ts:733  url: \"https://mcp.example.com\",\napps/cli/src/cli.e2e.test.ts:819  url: \"https://mcp.example.com\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/cli.interactive.e2e.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/cli.interactive.e2e.test.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/cli.interactive.e2e.test.ts:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BUN_EXEC_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/cli.interactive.e2e.test.ts:9  const bunExec = process.env.BUN_EXEC_PATH ?? \"bun\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/cli.tuistory.e2e.test.ts:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/remorses/tuistory",
+      "evidence": "apps/cli/src/cli.tuistory.e2e.test.ts:3  // (https://github.com/remorses/tuistory) instead of `script` + timed printf."
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/cli.tuistory.e2e.test.ts:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BUN_EXEC_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/cli.tuistory.e2e.test.ts:23  const bunExec = process.env.BUN_EXEC_PATH ?? \"bun\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/index.ts:25",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_VCR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/index.ts:25  initVcr(process.env.CLINE_VCR);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/main.test.ts:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_GLOBAL_SETTINGS_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/main.test.ts:23  const originalGlobalSettingsPath = process.env.CLINE_GLOBAL_SETTINGS_PATH;\napps/cli/src/main.test.ts:250  process.env.CLINE_GLOBAL_SETTINGS_PATH = join(\napps/cli/src/main.test.ts:362  delete process.env.CLINE_GLOBAL_SETTINGS_PATH;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/main.test.ts:843",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.cline.bot/dashboard/subscription?personal=true",
+      "evidence": "apps/cli/src/main.test.ts:843  url: \"https://app.cline.bot/dashboard/subscription?personal=true\",\napps/cli/src/main.test.ts:1230  url: \"https://app.cline.bot/dashboard/subscription?personal=true\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/main.test.ts:1257",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1",
+      "evidence": "apps/cli/src/main.test.ts:1257  baseUrl: \"http://127.0.0.1:9900/v1\",\napps/cli/src/main.test.ts:1262  baseUrl: \"http://127.0.0.1:9900/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/main.test.ts:1288",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.example.test",
+      "evidence": "apps/cli/src/main.test.ts:1288  baseUrl: \"https://api.example.test\",\napps/cli/src/main.test.ts:1309  clineApiBaseUrl: \"https://api.example.test\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/main.ts:229",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_SANDBOX",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/main.ts:229  enabled: !!opts.dataDir || process.env.CLINE_SANDBOX?.trim() === \"1\",\napps/cli/src/main.ts:876  !!args.dataDir || process.env.CLINE_SANDBOX?.trim() === \"1\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/main.ts:759",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HOOK_AGENT_RESUME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/main.ts:759  process.env.CLINE_HOOK_AGENT_RESUME = \"1\";\napps/cli/src/main.ts:761  delete process.env.CLINE_HOOK_AGENT_RESUME;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/main.ts:805",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HOOKS_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/main.ts:805  process.env.CLINE_HOOKS_DIR = args.hooksDir.trim();"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/acp/acpAgent.ts:153",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_API_KEY",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/acp/acpAgent.ts:153  if (!this.authResult && !process.env.CLINE_API_KEY) {\napps/cli/src/acp/acpAgent.ts:610  return process.env.CLINE_API_KEY ?? this.authResult?.apiKey ?? \"\";\napps/cli/src/acp/acpAgent.ts:766  const apiKey = process.env.CLINE_API_KEY ?? this.authResult?.apiKey ?? \"\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/acp/acpAgent.ts:190",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_PROVIDER",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/acp/acpAgent.ts:190  process.env.CLINE_PROVIDER ?? this.authResult?.providerId ?? \"cline\";\napps/cli/src/acp/acpAgent.ts:265  process.env.CLINE_PROVIDER ?? this.authResult?.providerId ?? \"cline\";\napps/cli/src/acp/acpAgent.ts:464  if (process.env.CLINE_PROVIDER) {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/acp/acpAgent.ts:201",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_MODEL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/acp/acpAgent.ts:201  process.env.CLINE_MODEL,\napps/cli/src/acp/acpAgent.ts:278  process.env.CLINE_MODEL,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/acp/session-load.test.ts:271",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bun.sh/blog/bun-v1.3.14",
+      "evidence": "apps/cli/src/acp/session-load.test.ts:271  url: \"https://bun.sh/blog/bun-v1.3.14\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/auth.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/auth.test.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/auth.test.ts:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.openai.azure.com/openai/deployments/gpt-4.1",
+      "evidence": "apps/cli/src/commands/auth.test.ts:23  \"https://example.openai.azure.com/openai/deployments/gpt-4.1\",\napps/cli/src/commands/auth.test.ts:31  baseurl: \"https://example.openai.azure.com/openai/deployments/gpt-4.1\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/bin-wrapper.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/bin-wrapper.test.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/bin-wrapper.test.ts:62",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_WRAPPER_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/bin-wrapper.test.ts:62  console.log(process.env.CLINE_WRAPPER_PATH ?? \"\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/config.ts:32",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/config.ts:32  const clineDir = process.env.CLINE_DIR?.trim() || join(homedir(), \".cline\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/connect.test.ts:611",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECTOR_SUPERVISED",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/connect.test.ts:611  delete process.env.CLINE_CONNECTOR_SUPERVISED;\napps/cli/src/commands/connect.test.ts:643  process.env.CLINE_CONNECTOR_SUPERVISED = \"1\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:62",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HUB_WEBVIEW_DIST_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:62  process.env.CLINE_HUB_WEBVIEW_DIST_DIR = webviewDistDir;\napps/cli/src/commands/dashboard.test.ts:86  webviewDistDir: process.env.CLINE_HUB_WEBVIEW_DIST_DIR,\napps/cli/src/commands/dashboard.test.ts:126  expect(process.env.CLINE_HUB_WEBVIEW_DIST_DIR).toBe(webviewDistDir);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/dashboard.test.ts:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9090",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:70  publicUrl: \"http://127.0.0.1:9090\",\napps/cli/src/commands/dashboard.test.ts:90  publicUrl: \"http://127.0.0.1:9090\",\napps/cli/src/commands/dashboard.test.ts:116  publicUrl: \"http://127.0.0.1:9090\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:78",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "WORKSPACE_ROOT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:78  workspaceRoot: process.env.WORKSPACE_ROOT,\napps/cli/src/commands/dashboard.test.ts:125  expect(process.env.WORKSPACE_ROOT).toBe(originalEnv.WORKSPACE_ROOT);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:79",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:79  clineDir: process.env.CLINE_DIR,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:80  clineDataDir: process.env.CLINE_DATA_DIR,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:81",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_PROVIDER_SETTINGS_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:81  providerSettingsPath: process.env.CLINE_PROVIDER_SETTINGS_PATH,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:82",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:82  host: process.env.HOST,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:83",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HUB_DASHBOARD_PORT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:83  port: process.env.CLINE_HUB_DASHBOARD_PORT,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:84",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PUBLIC_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:84  publicUrl: process.env.PUBLIC_URL,"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/commands/dashboard.test.ts:85",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ROOM_SECRET",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:85  roomSecret: process.env.ROOM_SECRET,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/dashboard.test.ts:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9090/",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:89  listenUrl: \"http://127.0.0.1:9090/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/dashboard.test.ts:91",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9090/?roomSecret=secret",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:91  inviteUrl: \"http://127.0.0.1:9090/?roomSecret=secret\",\napps/cli/src/commands/dashboard.test.ts:120  expect(opened).toEqual([\"http://127.0.0.1:9090/?roomSecret=secret\"]);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/dashboard.test.ts:139",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8787/",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:139  listenUrl: \"http://127.0.0.1:8787/\",\napps/cli/src/commands/dashboard.test.ts:181  listenUrl: \"http://127.0.0.1:8787/\",\napps/cli/src/commands/dashboard.test.ts:196  listenUrl: \"http://127.0.0.1:8787/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/dashboard.test.ts:140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8787",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:140  publicUrl: \"http://127.0.0.1:8787\",\napps/cli/src/commands/dashboard.test.ts:141  inviteUrl: \"http://127.0.0.1:8787\",\napps/cli/src/commands/dashboard.test.ts:182  publicUrl: \"http://127.0.0.1:8787\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.test.ts:168",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_WRAPPER_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.test.ts:168  process.env.CLINE_WRAPPER_PATH = wrapperPath;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.ts:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_SANDBOX",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.ts:80  if (options.dataDir || process.env.CLINE_SANDBOX?.trim() === \"1\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/dashboard.ts:118",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_WRAPPER_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/dashboard.ts:118  process.env.CLINE_WRAPPER_PATH\napps/cli/src/commands/dashboard.ts:119  ? dirname(process.env.CLINE_WRAPPER_PATH)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/distribution-package.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/distribution-package.test.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/doctor.test.ts:72",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/doctor.test.ts:72  vi.mock(\"node:child_process\", () => ({"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/doctor.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/doctor.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/hub.test.ts:46",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_BUILD_ENV",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/hub.test.ts:46  const originalBuildEnv = process.env.CLINE_BUILD_ENV;\napps/cli/src/commands/hub.test.ts:52  delete process.env.CLINE_BUILD_ENV;\napps/cli/src/commands/hub.test.ts:54  process.env.CLINE_BUILD_ENV = originalBuildEnv;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/kanban.test.ts:15",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/kanban.test.ts:15  const originalPath = process.env.PATH;\napps/cli/src/commands/kanban.test.ts:40  delete process.env.PATH;\napps/cli/src/commands/kanban.test.ts:42  process.env.PATH = originalPath;"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/kanban.ts:6",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/kanban.ts:6  } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/mcp.test.ts:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mcp.context7.com/mcp",
+      "evidence": "apps/cli/src/commands/mcp.test.ts:54  targetArgs: [\"https://mcp.context7.com/mcp\"],\napps/cli/src/commands/mcp.test.ts:59  url: \"https://mcp.context7.com/mcp\",\napps/cli/src/commands/mcp.test.ts:182  targetArgs: [\"https://mcp.context7.com/mcp\"],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/mcp.test.ts:67",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mcp.linear.app/mcp",
+      "evidence": "apps/cli/src/commands/mcp.test.ts:67  targetArgs: [\"npx\", \"-y\", \"mcp-remote\", \"https://mcp.linear.app/mcp\"],\napps/cli/src/commands/mcp.test.ts:72  url: \"https://mcp.linear.app/mcp\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/mcp.test.ts:81",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/mcp",
+      "evidence": "apps/cli/src/commands/mcp.test.ts:81  targetArgs: [\"https://example.com/mcp\"],\napps/cli/src/commands/mcp.test.ts:86  url: \"https://example.com/mcp\",\napps/cli/src/commands/mcp.test.ts:158  targetArgs: [\"https://example.com/mcp\", \"--header=X-Extra: yes\"],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/mcp.test.ts:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/sse",
+      "evidence": "apps/cli/src/commands/mcp.test.ts:95  targetArgs: [\"https://example.com/sse\"],\napps/cli/src/commands/mcp.test.ts:100  url: \"https://example.com/sse\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/plugin.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:1  import { execFileSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/plugin.test.ts:45",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:45  originalHome = process.env.HOME;\napps/cli/src/commands/plugin.test.ts:49  process.env.HOME = home;\napps/cli/src/commands/plugin.test.ts:83  delete process.env.HOME;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/plugin.test.ts:46",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:46  originalClineDir = process.env.CLINE_DIR;\napps/cli/src/commands/plugin.test.ts:50  process.env.CLINE_DIR = join(home, \".cline\");\napps/cli/src/commands/plugin.test.ts:53  setClineDir(process.env.CLINE_DIR);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/plugin.test.ts:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:47  originalClineDataDir = process.env.CLINE_DATA_DIR;\napps/cli/src/commands/plugin.test.ts:51  process.env.CLINE_DATA_DIR = join(home, \".cline\", \"data\");\napps/cli/src/commands/plugin.test.ts:93  delete process.env.CLINE_DATA_DIR;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/plugin.test.ts:48",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_MCP_SETTINGS_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:48  originalMcpSettingsPath = process.env.CLINE_MCP_SETTINGS_PATH;\napps/cli/src/commands/plugin.test.ts:98  delete process.env.CLINE_MCP_SETTINGS_PATH;\napps/cli/src/commands/plugin.test.ts:100  process.env.CLINE_MCP_SETTINGS_PATH = originalMcpSettingsPath;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:116",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/acme/plugin",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:116  repo: \"https://github.com/acme/plugin\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:150",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cline/cline/blob/main/sdk/examples/plugins/weather-metrics.ts",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:150  \"https://github.com/cline/cline/blob/main/sdk/examples/plugins/weather-metrics.ts\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:154",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/cline/cline/main/sdk/examples/plugins/weather-metrics.ts",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:154  url: \"https://raw.githubusercontent.com/cline/cline/main/sdk/examples/plugins/weather-metrics.ts\",\napps/cli/src/commands/plugin.test.ts:162  \"https://raw.githubusercontent.com/cline/cline/main/sdk/examples/plugins/weather-metrics.ts\",\napps/cli/src/commands/plugin.test.ts:166  url: \"https://raw.githubusercontent.com/cline/cline/main/sdk/examples/plugins/weather-metrics.ts\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:173",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/plugins/weather-metrics.ts",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:173  parsePluginSource(\"http://example.com/plugins/weather-metrics.ts\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/acme/plugins/blob/main/weather-metrics.ts",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:198  \"https://github.com/acme/plugins/blob/main/weather-metrics.ts\";\napps/cli/src/commands/plugin.test.ts:355  \"https://github.com/acme/plugins/blob/main/weather-metrics.ts\";\napps/cli/src/commands/plugin.test.ts:377  \"https://github.com/acme/plugins/blob/main/weather-metrics.ts\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:201",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/acme/plugins/main/weather-metrics.ts",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:201  \"https://raw.githubusercontent.com/acme/plugins/main/weather-metrics.ts\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/plugin.test.ts:705",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/mcp",
+      "evidence": "apps/cli/src/commands/plugin.test.ts:705  transport: { type: \"streamableHttp\", url: \"https://example.com/mcp\" },\napps/cli/src/commands/plugin.test.ts:757  transport: { type: \"streamableHttp\", url: \"https://example.com/mcp\" },\napps/cli/src/commands/plugin.test.ts:808  transport: { type: \"streamableHttp\", url: \"https://example.com/mcp\" },"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/skill.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/skill.ts:1  import { type SpawnOptions, spawn } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/skill.ts:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.npmjs.com/package/skills",
+      "evidence": "apps/cli/src/commands/skill.ts:9  // (https://www.npmjs.com/package/skills). We run it through `npx` so users"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/update.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/update.test.ts:1  import type { ChildProcess } from \"node:child_process\";\napps/cli/src/commands/update.test.ts:11  vi.mock(\"node:child_process\", async (importOriginal) => {\napps/cli/src/commands/update.test.ts:12  const actual = await importOriginal<typeof import(\"node:child_process\")>();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_BUILD_ENV",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:30  const originalBuildEnv = process.env.CLINE_BUILD_ENV;\napps/cli/src/commands/update.test.ts:55  delete process.env.CLINE_BUILD_ENV;\napps/cli/src/commands/update.test.ts:57  process.env.CLINE_BUILD_ENV = originalBuildEnv;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:31",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:31  const originalDataDir = process.env.CLINE_DATA_DIR;\napps/cli/src/commands/update.test.ts:60  delete process.env.CLINE_DATA_DIR;\napps/cli/src/commands/update.test.ts:62  process.env.CLINE_DATA_DIR = originalDataDir;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:32",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HUB_DISCOVERY_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:32  const originalHubDiscoveryPath = process.env.CLINE_HUB_DISCOVERY_PATH;\napps/cli/src/commands/update.test.ts:65  delete process.env.CLINE_HUB_DISCOVERY_PATH;\napps/cli/src/commands/update.test.ts:67  process.env.CLINE_HUB_DISCOVERY_PATH = originalHubDiscoveryPath;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:33",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_WRAPPER_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:33  const originalWrapperPath = process.env.CLINE_WRAPPER_PATH;\napps/cli/src/commands/update.test.ts:70  delete process.env.CLINE_WRAPPER_PATH;\napps/cli/src/commands/update.test.ts:72  process.env.CLINE_WRAPPER_PATH = originalWrapperPath;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:34",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_GLOBAL_SETTINGS_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:34  const originalGlobalSettingsPath = process.env.CLINE_GLOBAL_SETTINGS_PATH;\napps/cli/src/commands/update.test.ts:75  delete process.env.CLINE_GLOBAL_SETTINGS_PATH;\napps/cli/src/commands/update.test.ts:77  process.env.CLINE_GLOBAL_SETTINGS_PATH = originalGlobalSettingsPath;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:35",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "IS_DEV",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:35  const originalIsDev = process.env.IS_DEV;\napps/cli/src/commands/update.test.ts:80  delete process.env.IS_DEV;\napps/cli/src/commands/update.test.ts:82  process.env.IS_DEV = originalIsDev;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.test.ts:36",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_NO_AUTO_UPDATE",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.test.ts:36  const originalNoAutoUpdate = process.env.CLINE_NO_AUTO_UPDATE;\napps/cli/src/commands/update.test.ts:85  delete process.env.CLINE_NO_AUTO_UPDATE;\napps/cli/src/commands/update.test.ts:87  process.env.CLINE_NO_AUTO_UPDATE = originalNoAutoUpdate;"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/commands/update.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/commands/update.ts:1  import { type ChildProcess, spawn } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.ts:92",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_WRAPPER_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.ts:92  process.env.CLINE_WRAPPER_PATH || process.argv[1] || \"\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/update.ts:188",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/${encodeURIComponent(packageName",
+      "evidence": "apps/cli/src/commands/update.ts:188  `https://registry.npmjs.org/${encodeURIComponent(packageName)}/${tag}`,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.ts:311",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "IS_DEV",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.ts:311  if (process.env.IS_DEV === \"true\") return;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/update.ts:312",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_NO_AUTO_UPDATE",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/update.ts:312  if (process.env.CLINE_NO_AUTO_UPDATE === \"1\") return;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/commands/rpc-runtime/provider-registry.test.ts:20",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.example.com",
+      "evidence": "apps/cli/src/commands/rpc-runtime/provider-registry.test.ts:20  baseUrl: \"https://api.example.com\",\napps/cli/src/commands/rpc-runtime/provider-registry.test.ts:40  baseUrl: \"https://api.example.com\",\napps/cli/src/commands/rpc-runtime/provider-registry.test.ts:57  baseUrl: \"https://api.example.com\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/commands/schedule/common.ts:179",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HUB_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/commands/schedule/common.ts:179  const resolved = address ?? process.env.CLINE_HUB_ADDRESS;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/chat-runtime.ts:81",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://${hostHeader",
+      "evidence": "apps/cli/src/connectors/chat-runtime.ts:81  const requestUrl = new URL(req.url || \"/\", `http://${hostHeader}`);"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/connectors/common.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/connectors/common.ts:1  import { spawn } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/hooks.ts:28",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SHELL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/hooks.ts:28  const shell = process.env.SHELL?.trim() || \"sh\";\napps/cli/src/connectors/hooks.ts:81  const shell = process.env.SHELL?.trim() || \"sh\";"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/session-runtime.test.ts:77",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/session-runtime.test.ts:77  delete process.env.OPENROUTER_API_KEY;\napps/cli/src/connectors/session-runtime.test.ts:90  process.env.OPENROUTER_API_KEY = \"env-openrouter-key\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/discord.test.ts:69",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test",
+      "evidence": "apps/cli/src/connectors/adapters/discord.test.ts:69  \"https://example.test\",\napps/cli/src/connectors/adapters/discord.test.ts:75  expect(options.baseUrl).toBe(\"https://example.test\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/discord.test.ts:473",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.test/api/webhooks/discord",
+      "evidence": "apps/cli/src/connectors/adapters/discord.test.ts:473  const request = new Request(\"https://example.test/api/webhooks/discord\", {\napps/cli/src/connectors/adapters/discord.test.ts:518  new Request(\"https://example.test/api/webhooks/discord\", {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:432",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://discord.com/api/v10${input.path",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:432  const response = await fetch(`https://discord.com/api/v10${input.path}`, {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:775",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_RPC_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:775  process.env.CLINE_RPC_ADDRESS?.trim() ||\napps/cli/src/connectors/adapters/discord.ts:875  process.env.CLINE_RPC_ADDRESS?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:828",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:828  Number.parseInt(process.env.PORT ?? \"8787\", 10);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:832",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_MENTION_ROLE_IDS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:832  process.env.DISCORD_MENTION_ROLE_IDS?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:841",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_BOT_USERNAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:841  process.env.DISCORD_BOT_USERNAME?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:846",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_APPLICATION_ID",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:846  process.env.DISCORD_APPLICATION_ID?.trim() ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:851",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_BOT_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:851  process.env.DISCORD_BOT_TOKEN?.trim() ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:854",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_PUBLIC_KEY",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:854  opts.publicKey?.trim() || process.env.DISCORD_PUBLIC_KEY?.trim() || \"\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:857",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_OWNER_USER_ID",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:857  process.env.DISCORD_OWNER_USER_ID?.trim() ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:862",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISCORD_IGNORE_BOT_AUTHORS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:862  process.env.DISCORD_IGNORE_BOT_AUTHORS?.trim() ?? \"\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:879",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:879  process.env.CLINE_CONNECT_HOOK_COMMAND?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:881",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:881  host: opts.host?.trim() || process.env.HOST?.trim() || \"0.0.0.0\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:884",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BASE_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:884  process.env.BASE_URL?.trim() ||"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/discord.ts:885",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${port",
+      "evidence": "apps/cli/src/connectors/adapters/discord.ts:885  `http://127.0.0.1:${port}`,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:262",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_RPC_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:262  process.env.CLINE_RPC_ADDRESS?.trim() ||\napps/cli/src/connectors/adapters/gchat.ts:330  process.env.CLINE_RPC_ADDRESS?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:313",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:313  Number.parseInt(process.env.PORT ?? \"8787\", 10);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:318",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_CHAT_BOT_USERNAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:318  process.env.GOOGLE_CHAT_BOT_USERNAME?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:334",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:334  process.env.CLINE_CONNECT_HOOK_COMMAND?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:336",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:336  host: opts.host?.trim() || process.env.HOST?.trim() || \"0.0.0.0\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:339",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BASE_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:339  process.env.BASE_URL?.trim() ||"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:340",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${port",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:340  `http://127.0.0.1:${port}`,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:343",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_CHAT_PUBSUB_TOPIC",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:343  process.env.GOOGLE_CHAT_PUBSUB_TOPIC?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:346",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_CHAT_IMPERSONATE_USER",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:346  process.env.GOOGLE_CHAT_IMPERSONATE_USER?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:349",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_CHAT_USE_ADC",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:349  process.env.GOOGLE_CHAT_USE_ADC?.trim().toLowerCase() === \"true\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/gchat.ts:352",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GOOGLE_CHAT_CREDENTIALS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/gchat.ts:352  process.env.GOOGLE_CHAT_CREDENTIALS?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:322",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_RPC_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:322  process.env.CLINE_RPC_ADDRESS?.trim() ||\napps/cli/src/connectors/adapters/linear.ts:410  process.env.CLINE_RPC_ADDRESS?.trim() ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:367",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINEAR_API_KEY",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:367  const apiKey = opts.apiKey?.trim() || process.env.LINEAR_API_KEY?.trim();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:369",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINEAR_CLIENT_ID",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:369  opts.clientId?.trim() || process.env.LINEAR_CLIENT_ID?.trim();"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:371",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINEAR_CLIENT_SECRET",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:371  opts.clientSecret?.trim() || process.env.LINEAR_CLIENT_SECRET?.trim();"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:373",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINEAR_ACCESS_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:373  opts.accessToken?.trim() || process.env.LINEAR_ACCESS_TOKEN?.trim();"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:375",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINEAR_WEBHOOK_SECRET",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:375  opts.webhookSecret?.trim() || process.env.LINEAR_WEBHOOK_SECRET?.trim();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:388",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:388  Number.parseInt(process.env.PORT ?? \"8787\", 10);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:393",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINEAR_BOT_USERNAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:393  process.env.LINEAR_BOT_USERNAME?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:414",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:414  process.env.CLINE_CONNECT_HOOK_COMMAND?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:416",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:416  host: opts.host?.trim() || process.env.HOST?.trim() || \"0.0.0.0\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:419",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BASE_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:419  process.env.BASE_URL?.trim() ||"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/linear.ts:420",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${port",
+      "evidence": "apps/cli/src/connectors/adapters/linear.ts:420  `http://127.0.0.1:${port}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/slack.test.ts:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.test",
+      "evidence": "apps/cli/src/connectors/adapters/slack.test.ts:17  expect(__test__.inferSlackConnectionMode(\"https://example.test\")).toBe(\napps/cli/src/connectors/adapters/slack.test.ts:33  \"https://example.test\",\napps/cli/src/connectors/adapters/slack.test.ts:37  expect(options.baseUrl).toBe(\"https://example.test\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.test.ts:43",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BASE_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.test.ts:43  const previousBaseUrl = process.env.BASE_URL;\napps/cli/src/connectors/adapters/slack.test.ts:44  delete process.env.BASE_URL;\napps/cli/src/connectors/adapters/slack.test.ts:55  delete process.env.BASE_URL;"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/connectors/adapters/slack.test.ts:439",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/connectors/adapters/slack.test.ts:439  const { spawn } = await import(\"node:child_process\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.test.ts:446",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.test.ts:446  const previousDataDir = process.env.CLINE_DATA_DIR;\napps/cli/src/connectors/adapters/slack.test.ts:448  process.env.CLINE_DATA_DIR = dataDir;\napps/cli/src/connectors/adapters/slack.test.ts:478  delete process.env.CLINE_DATA_DIR;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:538",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_RPC_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:538  process.env.CLINE_RPC_ADDRESS?.trim() ||\napps/cli/src/connectors/adapters/slack.ts:651  process.env.CLINE_RPC_ADDRESS?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:590",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:590  Number.parseInt(process.env.PORT ?? \"8787\", 10);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:592",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BASE_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:592  const baseUrl = opts.baseUrl?.trim() || process.env.BASE_URL?.trim();"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:601",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_BOT_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:601  opts.botToken?.trim() || process.env.SLACK_BOT_TOKEN?.trim();"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:603",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_APP_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:603  ? opts.appToken?.trim() || process.env.SLACK_APP_TOKEN?.trim()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:618",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_BOT_USERNAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:618  process.env.SLACK_BOT_USERNAME?.trim() ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:625",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_SIGNING_SECRET",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:625  process.env.SLACK_SIGNING_SECRET?.trim()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:630",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_CLIENT_ID",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:630  ? opts.clientId?.trim() || process.env.SLACK_CLIENT_ID?.trim()"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:634",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_CLIENT_SECRET",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:634  ? opts.clientSecret?.trim() || process.env.SLACK_CLIENT_SECRET?.trim()"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:637",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_ENCRYPTION_KEY",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:637  opts.encryptionKey?.trim() || process.env.SLACK_ENCRYPTION_KEY?.trim(),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:640",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SLACK_INSTALLATION_KEY_PREFIX",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:640  process.env.SLACK_INSTALLATION_KEY_PREFIX?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:655",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:655  process.env.CLINE_CONNECT_HOOK_COMMAND?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/slack.ts:657",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/slack.ts:657  host: opts.host?.trim() || process.env.HOST?.trim() || \"0.0.0.0\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/telegram-format.test.ts:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "apps/cli/src/connectors/adapters/telegram-format.test.ts:47  \"**Bold** and `code` plus [link](https://example.com)\",\napps/cli/src/connectors/adapters/telegram-format.test.ts:62  url: \"https://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/telegram-format.test.ts:147",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.telegram.org/bottoken/sendMessage",
+      "evidence": "apps/cli/src/connectors/adapters/telegram-format.test.ts:147  \"https://api.telegram.org/bottoken/sendMessage\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/telegram-format.ts:6",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.telegram.org",
+      "evidence": "apps/cli/src/connectors/adapters/telegram-format.ts:6  const TELEGRAM_API_BASE = \"https://api.telegram.org\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/telegram.test.ts:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.test.ts:26  const originalClineDataDir = process.env.CLINE_DATA_DIR;\napps/cli/src/connectors/adapters/telegram.test.ts:37  process.env.CLINE_DATA_DIR = dataDir;\napps/cli/src/connectors/adapters/telegram.test.ts:44  delete process.env.CLINE_DATA_DIR;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/telegram.test.ts:125",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.test.ts:125  const originalHookCommand = process.env.CLINE_CONNECT_HOOK_COMMAND;\napps/cli/src/connectors/adapters/telegram.test.ts:126  process.env.CLINE_CONNECT_HOOK_COMMAND = \"echo noop\";\napps/cli/src/connectors/adapters/telegram.test.ts:140  delete process.env.CLINE_CONNECT_HOOK_COMMAND;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/telegram.test.ts:311",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.telegram.org/bot123:test/getMe",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.test.ts:311  \"https://api.telegram.org/bot123:test/getMe\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/telegram.ts:68",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.telegram.org",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.ts:68  const TELEGRAM_API_BASE = \"https://api.telegram.org\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/telegram.ts:501",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_RPC_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.ts:501  process.env.CLINE_RPC_ADDRESS?.trim() ||\napps/cli/src/connectors/adapters/telegram.ts:567  process.env.CLINE_RPC_ADDRESS?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/telegram.ts:538",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TELEGRAM_BOT_USERNAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.ts:538  process.env.TELEGRAM_BOT_USERNAME?.trim() ?? \"\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/telegram.ts:541",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "TELEGRAM_BOT_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.ts:541  opts.botToken?.trim() || process.env.TELEGRAM_BOT_TOKEN?.trim();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/telegram.ts:547",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.ts:547  process.env.CLINE_CONNECT_HOOK_COMMAND?.trim();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/telegram.ts:710",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_TELEGRAM_CONNECT_CHILD",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/telegram.ts:710  process.env.CLINE_TELEGRAM_CONNECT_CHILD !== \"1\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:305",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_RPC_ADDRESS",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:305  process.env.CLINE_RPC_ADDRESS?.trim() ||\napps/cli/src/connectors/adapters/whatsapp.ts:378  process.env.CLINE_RPC_ADDRESS?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:351",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:351  Number.parseInt(process.env.PORT ?? \"8787\", 10);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:356",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "WHATSAPP_BOT_USERNAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:356  process.env.WHATSAPP_BOT_USERNAME?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:360",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "WHATSAPP_PHONE_NUMBER_ID",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:360  process.env.WHATSAPP_PHONE_NUMBER_ID?.trim(),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:362",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "WHATSAPP_ACCESS_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:362  opts.accessToken?.trim() || process.env.WHATSAPP_ACCESS_TOKEN?.trim(),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:364",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "WHATSAPP_APP_SECRET",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:364  opts.appSecret?.trim() || process.env.WHATSAPP_APP_SECRET?.trim(),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:366",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "WHATSAPP_VERIFY_TOKEN",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:366  opts.verifyToken?.trim() || process.env.WHATSAPP_VERIFY_TOKEN?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:382",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_CONNECT_HOOK_COMMAND",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:382  process.env.CLINE_CONNECT_HOOK_COMMAND?.trim(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:384",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:384  host: opts.host?.trim() || process.env.HOST?.trim() || \"0.0.0.0\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:387",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "BASE_URL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:387  process.env.BASE_URL?.trim() ||"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/connectors/adapters/whatsapp.ts:388",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${port",
+      "evidence": "apps/cli/src/connectors/adapters/whatsapp.ts:388  `http://127.0.0.1:${port}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/kanban-migration/notice.test.ts:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cline.bot/desktop",
+      "evidence": "apps/cli/src/kanban-migration/notice.test.ts:74  expect(notice?.url).toBe(\"https://cline.bot/desktop\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/kanban-migration/notice.ts:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cline.bot/desktop",
+      "evidence": "apps/cli/src/kanban-migration/notice.ts:11  const DESKTOP_APP_URL = \"https://cline.bot/desktop\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.test.ts:33",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_DATA_DIR",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.test.ts:33  CLINE_DATA_DIR: process.env.CLINE_DATA_DIR,\napps/cli/src/logging/adapter.test.ts:65  process.env.CLINE_DATA_DIR = dataDir;\napps/cli/src/logging/adapter.test.ts:104  process.env.CLINE_DATA_DIR = dataDir;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.test.ts:34",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.test.ts:34  CLINE_LOG_PATH: process.env.CLINE_LOG_PATH,\napps/cli/src/logging/adapter.test.ts:66  delete process.env.CLINE_LOG_PATH;\napps/cli/src/logging/adapter.test.ts:123  delete process.env.CLINE_LOG_PATH;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.test.ts:35",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_LEVEL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.test.ts:35  CLINE_LOG_LEVEL: process.env.CLINE_LOG_LEVEL,\napps/cli/src/logging/adapter.test.ts:67  delete process.env.CLINE_LOG_LEVEL;\napps/cli/src/logging/adapter.test.ts:124  delete process.env.CLINE_LOG_LEVEL;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.test.ts:36",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_NAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.test.ts:36  CLINE_LOG_NAME: process.env.CLINE_LOG_NAME,\napps/cli/src/logging/adapter.test.ts:68  delete process.env.CLINE_LOG_NAME;\napps/cli/src/logging/adapter.test.ts:125  delete process.env.CLINE_LOG_NAME;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.test.ts:37",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_ENABLED",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.test.ts:37  CLINE_LOG_ENABLED: process.env.CLINE_LOG_ENABLED,\napps/cli/src/logging/adapter.test.ts:69  delete process.env.CLINE_LOG_ENABLED;\napps/cli/src/logging/adapter.test.ts:105  process.env.CLINE_LOG_ENABLED = \"0\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.ts:63",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_ENABLED",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.ts:63  const enabledEnv = process.env.CLINE_LOG_ENABLED?.trim();"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.ts:67",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_LEVEL",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.ts:67  const level = normalizeLogLevel(base?.level ?? process.env.CLINE_LOG_LEVEL);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/adapter.ts:71",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_NAME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/adapter.ts:71  process.env.CLINE_LOG_NAME?.trim() ||"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/logging/log-path.ts:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_LOG_PATH",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/logging/log-path.ts:12  process.env.CLINE_LOG_PATH?.trim() ||"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "apps/cli/src/runtime/prompt.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "apps/cli/src/runtime/prompt.test.ts:1  import { execFileSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/runtime/prompt.test.ts:68",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/cline/repo.git",
+      "evidence": "apps/cli/src/runtime/prompt.test.ts:68  [\"remote\", \"add\", \"origin\", \"https://example.com/cline/repo.git\"],\napps/cli/src/runtime/prompt.test.ts:78  expect(prompt).toContain(\"origin: https://example.com/cline/repo.git\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/runtime/run-agent.test.ts:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.cline.bot/dashboard/subscription?personal=true",
+      "evidence": "apps/cli/src/runtime/run-agent.test.ts:42  \"https://app.cline.bot/dashboard/subscription?personal=true\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/runtime/run-agent.test.ts:1242",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://cline.test/api/v1",
+      "evidence": "apps/cli/src/runtime/run-agent.test.ts:1242  baseUrl: \"https://cline.test/api/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "apps/cli/src/runtime/run-interactive.test.ts:75",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://example.com/v1",
+      "evidence": "apps/cli/src/runtime/run-interactive.test.ts:75  baseUrl: \"https://example.com/v1\",\napps/cli/src/runtime/run-interactive.test.ts:106  baseUrl: \"https://example.com/v1\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/runtime/run-interactive.test.ts:131",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HOOK_AGENT_RESUME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/runtime/run-interactive.test.ts:131  const originalAgentResume = process.env.CLINE_HOOK_AGENT_RESUME;\napps/cli/src/runtime/run-interactive.test.ts:135  delete process.env.CLINE_HOOK_AGENT_RESUME;\napps/cli/src/runtime/run-interactive.test.ts:137  process.env.CLINE_HOOK_AGENT_RESUME = originalAgentResume;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/runtime/run-interactive.ts:153",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_HOOK_AGENT_RESUME",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/runtime/run-interactive.ts:153  const previousAgentResume = process.env.CLINE_HOOK_AGENT_RESUME;\napps/cli/src/runtime/run-interactive.ts:154  process.env.CLINE_HOOK_AGENT_RESUME = \"1\";\napps/cli/src/runtime/run-interactive.ts:160  delete process.env.CLINE_HOOK_AGENT_RESUME;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/runtime/run-zen.test.ts:53",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_SESSION_BACKEND_MODE",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/runtime/run-zen.test.ts:53  delete process.env.CLINE_SESSION_BACKEND_MODE;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "apps/cli/src/runtime/run-zen.ts:41",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLINE_SESSION_BACKEND_MODE",
+      "rule": "process.env",
+      "evidence": "apps/cli/src/runtime/run-zen.ts:41  process.env.CLINE_SESSION_BACKEND_MODE?.trim().toLowerCase() === \"local\""
+    }
+  ],
+  "reRooting": []
+}

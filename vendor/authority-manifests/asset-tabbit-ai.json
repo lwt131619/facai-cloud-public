@@ -1,0 +1,72 @@
+{
+  "target": "tabbit.ai（Lumina Lab，新加坡注册）— Agentic AI Browser，闭源商业产品",
+  "origin": "https://www.tabbit.ai（utm_source=moge.ai 渠道进入；操作员 2026-10-13 吸收分析指令）",
+  "managementClass": "T3 UNMANAGED_OBSERVED —— 闭源产品：只收录可观测主张与格式，浏览器二进制从未也不会被反编译；一切吸收以 L0_REFERENCE（设计参照）为上限，除非对方开源",
+  "summary": "可观测面清点（营销站 SPA，首页/定价/文档同源渲染）：AI 原生浏览器（macOS 12+/Win10+，Linux/移动在路线图）；@-mention 上下文装配（标签页/文件/截图/高亮元素拖入即成 Agent 上下文）；多 Agent + 技能装载（Research/Operator/Writer/Analyst 各配技能）；‘SOTA 模型 12 小时内上线’作为产品功能；2000 个面向 top100 站点的日常技能（Triage Feed 按实际观看度排序、Pod Highlights 播客引语抽取、Real Comments 有效分歧挖掘、Save to KB 存 Notion/Obsidian）；技能创作者计划；数据本机加密 + SOC 2 Type I + 会话顶部常显模型名与路由地区（新加坡/本区合规服务器，自称不中转不记录）；免费浏览器 + 周度免费额度 + 设为默认浏览器解锁 10× 用量（增长钩子）+ Pro 付费层；一键从 Safari/Edge/Chrome 迁移；Chrome 式后台自动更新；Tabbit CLI；自称 107,763 用户/20+ 国家。技术指纹：Next.js 营销站 + cdn.tabbit.ai、Google Sign-In（gsi）、GTM/Facebook/TikTok 埋点、中英双语 alternate。",
+  "surfaces": [
+    {
+      "kind": "PRODUCT_CLAIM",
+      "where": "homepage hero",
+      "what": "产品主张：标签页即上下文（PDF/书签/HTML 元素/标签页堆积全部可入上下文），@ 任意对象驱动 Agent 读-规划-执行",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": null,
+      "evidence": "Context: Not just tabs — PDFs, bookmarks, HTML elements, tab graves. Every bit on your desktop."
+    },
+    {
+      "kind": "PRODUCT_CLAIM",
+      "where": "homepage: multi-agent",
+      "what": "多 Agent 分工（Research/Operator/Writer/Analyst）且各自装载技能——与 facai 转换台的逐阶段 Agent 分配同构，其差异点在‘每 Agent 独立技能装载’",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": null,
+      "evidence": "Multi-agent, now with skills — Each loaded with the right Skills."
+    },
+    {
+      "kind": "PRODUCT_CLAIM",
+      "where": "homepage: model freshness",
+      "what": "模型保鲜作为卖点：新 SOTA 模型发布 12 小时内可用（GPT-5.6/Claude Sonnet 5/Gemini 3.8/Kimi K3/GLM 5.3/DeepSeek V4/Qwen 3.8）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": null,
+      "evidence": "Every SOTA model. Day one. — live in Tabbit within 12 hours of launch."
+    },
+    {
+      "kind": "PRODUCT_CLAIM",
+      "where": "homepage: skills",
+      "what": "技能生态：2000 个面向高频站点的日常技能 + 四个示范技能（Triage Feed 按观看完成度排序/Pod Highlights 时间戳引语抽取/Real Comments 有效分歧/Save to KB）+ 创作者招募",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": null,
+      "evidence": "2000 Agentic Skills - for top 100 sites daily use"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "FAQ: model routing",
+      "what": "模型路由透明度：提示词直达所选模型商，合规服务器（新加坡/本区），会话顶部常显模型名与地区，自称不中转不镜像",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "model-vendor-compliant-servers (sg/or-region)",
+      "evidence": "The model name is always shown at the top of the chat, so you can verify which provider and which region your prompt goes to."
+    },
+    {
+      "kind": "PRODUCT_CLAIM",
+      "where": "FAQ: growth + pricing",
+      "what": "商业化：浏览器永久免费；Trial 周额度；设为默认浏览器解锁 Standard 10× 用量；Pro 付费层（顶级模型+高频 Agent）；一键迁移竞品数据；Chrome 式后台静默更新",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": null,
+      "evidence": "setting Tabbit as your default browser unlocks the Standard plan with 10× the usage at no cost"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "page head",
+      "what": "技术指纹（营销站层面）：Next.js SSR + cdn.tabbit.ai 静态资源、Google Sign-In（accounts.google.com/gsi）、GTM/Facebook/TikTok 分析埋点——仅站点指纹，与产品内部实现无关",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.tabbit.ai",
+      "evidence": "preload: cdn.tabbit.ai/main-site/_next/...; accounts.google.com/gsi/client"
+    }
+  ],
+  "reRooting": []
+}

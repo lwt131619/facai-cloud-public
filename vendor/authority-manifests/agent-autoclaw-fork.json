@@ -1,0 +1,8 @@
+{
+  "target": "agent-autoclaw-fork (初扫收录实例 G:\\军团源码库\\AutoClaw)",
+  "origin": "本地路径 G:\\军团源码库\\AutoClaw",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 0 个文本文件（源码 0、其余 0），识别 0 面（源码档 0、文档/示例 DOC_ 降权 0、其余文件 0；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [],
+  "reRooting": []
+}

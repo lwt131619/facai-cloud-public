@@ -1,0 +1,1923 @@
+{
+  "target": "litellm (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\litellm)",
+  "origin": "https://github.com/BerriAI/litellm",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 239 个文本文件（源码 239、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "qa_sticky_session.sh:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "qa_sticky_session.sh:4  #   LITELLM_BASE_URL=http://localhost:4000 LITELLM_KEY=\"$LITELLM_MASTER_KEY\" bash qa_sticky_session.sh\nqa_sticky_session.sh:8  BASE=\"${LITELLM_BASE_URL:-http://localhost:4000}\"\nqa_sticky_session.sh:11  # proxy running at http://localhost:4000"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/prepare_replica_roles.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DATABASE_URL",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/prepare_replica_roles.py:9  DATABASE_URL: Final = os.environ[\"DATABASE_URL\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".circleci/scripts/run_integration.sh:78",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:4000",
+      "evidence": ".circleci/scripts/run_integration.sh:78  export INTEGRATION_PROXY_URL=http://127.0.0.1:4000"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".circleci/scripts/run_integration.sh:80",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8190",
+      "evidence": ".circleci/scripts/run_integration.sh:80  export INTEGRATION_UPSTREAM_URL=http://127.0.0.1:8190"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_integration.sh:87",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CIRCLE_SHA1",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/run_integration.sh:87  export INTEGRATION_SEED=\"$(.venv/bin/python -c 'import hashlib,os; print(int(hashlib.sha256((os.environ.get(\"CIRCLE_SHA1\", \"local\") + os.environ.get(\"CIRCLE_WORKFLOW_ID\", \"local\")).encode()).hexdigest()[:8],16))')\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_integration.sh:87",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CIRCLE_WORKFLOW_ID",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/run_integration.sh:87  export INTEGRATION_SEED=\"$(.venv/bin/python -c 'import hashlib,os; print(int(hashlib.sha256((os.environ.get(\"CIRCLE_SHA1\", \"local\") + os.environ.get(\"CIRCLE_WORKFLOW_ID\", \"local\")).encode()).hexdigest()[:8],16))')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".circleci/scripts/run_integration.sh:124",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://198.51.100.1",
+      "evidence": ".circleci/scripts/run_integration.sh:124  if curl --noproxy '*' --connect-timeout 2 -s http://198.51.100.1 >/dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".circleci/scripts/run_integration.sh:184",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:$port",
+      "evidence": ".circleci/scripts/run_integration.sh:184  LITELLM_MASTER_KEY=\"$LITELLM_MASTER_KEY\" LITELLM_SALT_KEY=\"$LITELLM_SALT_KEY\" LITELLM_UI_PATH=\"$LITELLM_UI_PATH\" PROXY_BASE_URL=\"http://127.0.0.1:$port\" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".circleci/scripts/run_integration.sh:195",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:4001",
+      "evidence": ".circleci/scripts/run_integration.sh:195  export INTEGRATION_PEER_URL=http://127.0.0.1:4001\n.circleci/scripts/run_integration.sh:205  export INTEGRATION_PEER_URL=http://127.0.0.1:4001"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".circleci/scripts/run_migration_tests.py:36",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": ".circleci/scripts/run_migration_tests.py:36  return subprocess.check_output(command, text=True, timeout=90).strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:57",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MIGRATION_CANDIDATE_IMAGE",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/run_migration_tests.py:57  \"candidate_image\": os.environ.get(\"MIGRATION_CANDIDATE_IMAGE\", \"\"),\n.circleci/scripts/run_migration_tests.py:71  assert metadata[\"candidate_image\"] == os.environ.get(\"MIGRATION_CANDIDATE_IMAGE\", \"\"), \"Wrong release candidate\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:64",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MIGRATION_TEST_SUITE",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/run_migration_tests.py:64  suite: Final = os.environ[\"MIGRATION_TEST_SUITE\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:69",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MIGRATION_TEST_IMAGE",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/run_migration_tests.py:69  \"docker\", \"image\", \"inspect\", os.environ[\"LITELLM_MIGRATION_TEST_IMAGE\"], \"--format\", \"{{.Id}}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:72",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MIGRATION_TEST_OUTPUT",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/run_migration_tests.py:72  destination: Final = Path(os.environ[\"MIGRATION_TEST_OUTPUT\"])"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".circleci/scripts/run_migration_tests.py:75",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".circleci/scripts/run_migration_tests.py:75  result: Final = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:98",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MIGRATION_BASELINE_IMAGE",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/run_migration_tests.py:98  \"baseline_image\": os.environ.get(\"LITELLM_MIGRATION_BASELINE_IMAGE\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:103",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CIRCLE_WORKFLOW_ID",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/run_migration_tests.py:103  \"workflow_id\": os.environ.get(\"CIRCLE_WORKFLOW_ID\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/run_migration_tests.py:104",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CIRCLE_BUILD_NUM",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/run_migration_tests.py:104  \"job_number\": os.environ.get(\"CIRCLE_BUILD_NUM\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/wait_integration_services.py:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "INTEGRATION_PROXY_URL",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/wait_integration_services.py:12  primary: Final = os.environ[\"INTEGRATION_PROXY_URL\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/wait_integration_services.py:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "INTEGRATION_PEER_URL",
+      "rule": "os.environ.get",
+      "evidence": ".circleci/scripts/wait_integration_services.py:13  peer: Final = os.environ.get(\"INTEGRATION_PEER_URL\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/wait_integration_services.py:15",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "INTEGRATION_UPSTREAM_URL",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/wait_integration_services.py:15  upstream: Final = os.environ[\"INTEGRATION_UPSTREAM_URL\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": ".circleci/scripts/wait_integration_services.py:20",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "INTEGRATION_MASTER_KEY",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/wait_integration_services.py:20  os.environ[\"INTEGRATION_MASTER_KEY\"],"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/wait_integration_services.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "REDIS_HOST",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/wait_integration_services.py:26  Redis(host=os.environ[\"REDIS_HOST\"], port=int(os.environ[\"REDIS_PORT\"]), socket_timeout=2)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".circleci/scripts/wait_integration_services.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "REDIS_PORT",
+      "rule": "os.environ[]",
+      "evidence": ".circleci/scripts/wait_integration_services.py:26  Redis(host=os.environ[\"REDIS_HOST\"], port=int(os.environ[\"REDIS_PORT\"]), socket_timeout=2)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".devcontainer/post-create.sh:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://astral.sh/uv/0.10.9/install.sh",
+      "evidence": ".devcontainer/post-create.sh:5  curl -LsSf https://astral.sh/uv/0.10.9/install.sh | env UV_NO_MODIFY_PATH=1 sh"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".github/e2e-stack/assert_tests_ran.py:20",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2E_REQUIRED_TEST_COUNT",
+      "rule": "os.environ.get",
+      "evidence": ".github/e2e-stack/assert_tests_ran.py:20  expected_count: Final = os.environ.get(\"E2E_REQUIRED_TEST_COUNT\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/e2e-stack/start-idp.sh:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${KEYCLOAK_PORT",
+      "evidence": ".github/e2e-stack/start-idp.sh:38  \"http://127.0.0.1:${KEYCLOAK_PORT}/realms/litellm-e2e/.well-known/openid-configuration\" >/dev/null 2>&1; do"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/auto_update_price_and_context_window_file.py:27",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.friendli.ai/serverless/v1/models",
+      "evidence": ".github/scripts/auto_update_price_and_context_window_file.py:27  FRIENDLI_API_URL = \"https://api.friendli.ai/serverless/v1/models\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/auto_update_price_and_context_window_file.py:288",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1/models",
+      "evidence": ".github/scripts/auto_update_price_and_context_window_file.py:288  openrouter_url = \"https://openrouter.ai/api/v1/models\"  # URL to fetch OpenRouter data"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/auto_update_price_and_context_window_file.py:289",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://ai-gateway.vercel.sh/v1/models",
+      "evidence": ".github/scripts/auto_update_price_and_context_window_file.py:289  vercel_ai_gateway_url = \"https://ai-gateway.vercel.sh/v1/models\"  # URL to fetch Vercel AI Gateway data"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/run_llm_translation_tests.py:338",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".github/scripts/run_llm_translation_tests.py:338  subprocess.run([\"uv\", \"run\", \"--no-sync\", \"python\", \"-c\", \"import pytest_timeout\"],\n.github/scripts/run_llm_translation_tests.py:349  result = subprocess.run(cmd, capture_output=False)\n.github/scripts/run_llm_translation_tests.py:415  result = subprocess.run([\"git\", \"rev-parse\", \"HEAD\"],"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/run_merge_smoke.py:80",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".github/scripts/run_merge_smoke.py:80  proc: Final = subprocess.run(\n.github/scripts/run_merge_smoke.py:105  proc: Final = subprocess.run(list(argv), timeout=120, capture_output=True, text=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/run_merge_smoke.py:144",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9/v1",
+      "evidence": ".github/scripts/run_merge_smoke.py:144  api_base: http://127.0.0.1:9/v1"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/run_merge_smoke.py:198",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": ".github/scripts/run_merge_smoke.py:198  def _verify_port_owner(port: int, proc: subprocess.Popen[bytes]) -> CheckResult:\n.github/scripts/run_merge_smoke.py:239  proc: Final = subprocess.Popen(\n.github/scripts/run_merge_smoke.py:315  def _terminate(proc: subprocess.Popen[bytes], log_file: TextIO) -> None:"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".github/scripts/scan_keywords.py:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_EVENT_PATH",
+      "rule": "os.environ.get",
+      "evidence": ".github/scripts/scan_keywords.py:10  event_path = os.environ.get(\"GITHUB_EVENT_PATH\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": ".github/scripts/scan_keywords.py:88",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "KEYWORDS",
+      "rule": "os.environ.get",
+      "evidence": ".github/scripts/scan_keywords.py:88  keywords_env = os.environ.get(\"KEYWORDS\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".github/scripts/scan_keywords.py:107",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_OUTPUT",
+      "rule": "os.environ.get",
+      "evidence": ".github/scripts/scan_keywords.py:107  github_output = os.environ.get(\"GITHUB_OUTPUT\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": ".github/scripts/scan_keywords.py:114",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PROVIDER_ISSUE_WEBHOOK_URL",
+      "rule": "os.environ.get",
+      "evidence": ".github/scripts/scan_keywords.py:114  webhook_url = os.environ.get(\"PROVIDER_ISSUE_WEBHOOK_URL\", \"\").strip()"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/smoke_test_native_wheel.py:58",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".github/scripts/smoke_test_native_wheel.py:58  result: Final = subprocess.run((sys.executable, \"-c\", CHILD_SCRIPT, str(native_path)), check=False)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".github/scripts/verify_linux_native_wheel.py:38",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": ".github/scripts/verify_linux_native_wheel.py:38  return subprocess.run(command, check=check, capture_output=capture_output, text=text)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "ci_cd/baseline_db.py:29",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "ci_cd/baseline_db.py:29  result = subprocess.run("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "ci_cd/cost_map_guard.py:182",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "ci_cd/cost_map_guard.py:182  result: Final = subprocess.run((\"git\", *args), check=False, capture_output=True, text=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ci_cd/generate_model_prices_schema.py:249",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.litellm.ai/docs/providers",
+      "evidence": "ci_cd/generate_model_prices_schema.py:249  \"description\": \"LiteLLM provider slug; one of https://docs.litellm.ai/docs/providers.\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ci_cd/generate_model_prices_schema.py:317",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://json-schema.org/draft/2020-12/schema",
+      "evidence": "ci_cd/generate_model_prices_schema.py:317  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ci_cd/generate_model_prices_schema.py:321",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json",
+      "evidence": "ci_cd/generate_model_prices_schema.py:321  \"(https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json). \""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "ci_cd/run_migration.py:96",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "ci_cd/run_migration.py:96  result: Final = subprocess.run(\nci_cd/run_migration.py:124  subprocess.run(\nci_cd/run_migration.py:143  result = subprocess.run("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "ci_cd/run_migration.py:273",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DATABASE_URL",
+      "rule": "os.environ[]",
+      "evidence": "ci_cd/run_migration.py:273  os.environ[\"DATABASE_URL\"] = db_url"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/nova_sonic_realtime.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_ASYNCIO_QUEUE_MAXSIZE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/nova_sonic_realtime.py:26  AUDIO_QUEUE_MAXSIZE = int(os.getenv(\"LITELLM_ASYNCIO_QUEUE_MAXSIZE\", 10_000))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/nova_sonic_realtime.py:37",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MASTER_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/nova_sonic_realtime.py:37  LITELLM_API_KEY = os.environ[\"LITELLM_MASTER_KEY\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/veo_video_generation.py:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000/gemini/v1beta",
+      "evidence": "cookbook/veo_video_generation.py:28  base_url: str = \"http://localhost:4000/gemini/v1beta\",\ncookbook/veo_video_generation.py:276  - LITELLM_BASE_URL: Your LiteLLM proxy URL (default: http://localhost:4000/gemini/v1beta)\ncookbook/veo_video_generation.py:281  base_url = os.getenv(\"LITELLM_BASE_URL\", \"http://localhost:4000/gemini/v1beta\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/veo_video_generation.py:281",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_BASE_URL",
+      "rule": "os.getenv",
+      "evidence": "cookbook/veo_video_generation.py:281  base_url = os.getenv(\"LITELLM_BASE_URL\", \"http://localhost:4000/gemini/v1beta\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/veo_video_generation.py:282",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/veo_video_generation.py:282  api_key = os.environ[\"LITELLM_API_KEY\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/anthropic_agent_sdk/agent_with_mcp.py:40",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USE_MCP",
+      "rule": "os.getenv",
+      "evidence": "cookbook/anthropic_agent_sdk/agent_with_mcp.py:40  use_mcp = os.getenv(\"USE_MCP\", \"true\").lower() == \"true\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/anthropic_agent_sdk/common.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/anthropic_agent_sdk/common.py:13  LITELLM_PROXY_URL = os.getenv(\"LITELLM_PROXY_URL\", \"http://localhost:4000\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/anthropic_agent_sdk/common.py:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_PROXY_URL",
+      "rule": "os.getenv",
+      "evidence": "cookbook/anthropic_agent_sdk/common.py:13  LITELLM_PROXY_URL = os.getenv(\"LITELLM_PROXY_URL\", \"http://localhost:4000\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/anthropic_agent_sdk/common.py:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/anthropic_agent_sdk/common.py:16  LITELLM_API_KEY = os.environ[\"LITELLM_API_KEY\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/anthropic_agent_sdk/common.py:19",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MODEL",
+      "rule": "os.getenv",
+      "evidence": "cookbook/anthropic_agent_sdk/common.py:19  LITELLM_MODEL = os.getenv(\"LITELLM_MODEL\", \"bedrock-claude-sonnet-4.5\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/anthropic_agent_sdk/common.py:54",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_BASE_URL",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/anthropic_agent_sdk/common.py:54  os.environ[\"ANTHROPIC_BASE_URL\"] = litellm_base_url"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/anthropic_agent_sdk/common.py:55",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/anthropic_agent_sdk/common.py:55  os.environ[\"ANTHROPIC_API_KEY\"] = config.LITELLM_API_KEY"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/benchmark/benchmark.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.litellm.ai/docs/providers",
+      "evidence": "cookbook/benchmark/benchmark.py:11  # select any LLM listed here: https://docs.litellm.ai/docs/providers\ncookbook/benchmark/benchmark.py:15  # https://docs.litellm.ai/docs/providers"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/benchmark/benchmark.py:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/benchmark/benchmark.py:16  os.environ[\"OPENAI_API_KEY\"] = \"\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/benchmark/benchmark.py:17",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/benchmark/benchmark.py:17  os.environ[\"ANTHROPIC_API_KEY\"] = \"\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/codellama-server/main.py:15",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/codellama-server/main.py:15  # os.environ[\"OPENAI_API_KEY\"] = \"\" # set your openai key here"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/codellama-server/main.py:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/codellama-server/main.py:16  # os.environ[\"ANTHROPIC_API_KEY\"] = \"\" # set your anthropic key here"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/codellama-server/main.py:17",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "TOGETHER_AI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/codellama-server/main.py:17  # os.environ[\"TOGETHER_AI_API_KEY\"] = \"\" # set your together ai key here"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/codellama-server/main.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://litellm.readthedocs.io/en/latest/supported/",
+      "evidence": "cookbook/codellama-server/main.py:18  # see supported models / keys here: https://litellm.readthedocs.io/en/latest/supported/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/codellama-server/main.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.litellm.ai/docs/caching/",
+      "evidence": "cookbook/codellama-server/main.py:22  # litellm.caching_with_models = True # CACHING: caching_with_models Keys in the cache are messages + model. - to learn more: https://docs.litellm.ai/docs/caching/"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/codellama-server/main.py:24",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "PROMPTLAYER_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/codellama-server/main.py:24  os.environ[\"PROMPTLAYER_API_KEY\"] = ("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/codellama-server/main.py:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://promptlayer.com/",
+      "evidence": "cookbook/codellama-server/main.py:25  \"\"  # set your promptlayer key here - https://promptlayer.com/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/codellama-server/main.py:62",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.together.xyz/playground/chat?model=togethercomputer%2FCodeLlama-34b-Instruct",
+      "evidence": "cookbook/codellama-server/main.py:62  \"togethercomputer/CodeLlama-34b-Instruct\"  # by default use Together AI's CodeLlama model - https://api.together.xyz/playground/chat?model=togethercomputer%2FCodeLlama-34b-Instruct"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/community-resources/get_hf_models.py:53",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://huggingface.co/api/models?filter=text-generation-inference",
+      "evidence": "cookbook/community-resources/get_hf_models.py:53  url = \"https://huggingface.co/api/models?filter=text-generation-inference\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/community-resources/get_hf_models.py:61",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://huggingface.co/api/models?filter=conversational",
+      "evidence": "cookbook/community-resources/get_hf_models.py:61  url = \"https://huggingface.co/api/models?filter=conversational\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/gollem_go_agent_framework/basic/main.go:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/gollem_go_agent_framework/basic/main.go:20  proxyURL := \"http://localhost:4000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/gollem_go_agent_framework/streaming/main.go:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/gollem_go_agent_framework/streaming/main.go:23  proxyURL := \"http://localhost:4000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/gollem_go_agent_framework/tools/main.go:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/gollem_go_agent_framework/tools/main.go:31  proxyURL := \"http://localhost:4000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm-ollama-docker-image/test.py:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8000",
+      "evidence": "cookbook/litellm-ollama-docker-image/test.py:3  api_base = \"http://0.0.0.0:8000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080/beta/litellm_prompt_management?prompt_id=YOUR_PROMPT_ID",
+      "evidence": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:13  \"http://localhost:8080/beta/litellm_prompt_management?prompt_id=YOUR_PROMPT_ID\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:187",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "BRAINTRUST_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:187  braintrust_token = os.getenv(\"BRAINTRUST_API_KEY\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:196",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.braintrust.dev/v1/prompt/{prompt_id",
+      "evidence": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:196  braintrust_url = f\"https://api.braintrust.dev/v1/prompt/{prompt_id}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:261",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:261  port = int(os.getenv(\"PORT\", \"8080\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:262",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOST",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:262  host = os.getenv(\"HOST\", \"0.0.0.0\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:265",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{host",
+      "evidence": "cookbook/litellm_proxy_server/braintrust_prompt_wrapper_server.py:265  print(f\"📚 API Documentation available at http://{host}:{port}/docs\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/cli_token_usage.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000/",
+      "evidence": "cookbook/litellm_proxy_server/cli_token_usage.py:12  LITELLM_BASE_URL = \"http://localhost:4000/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/cli_token_usage.py:62",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://your-proxy.com",
+      "evidence": "cookbook/litellm_proxy_server/cli_token_usage.py:62  print(\"2. Replace 'https://your-proxy.com' with your actual proxy URL\")"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "cookbook/litellm_proxy_server/batch_api/bedrock/bedrock.py:5",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "cookbook/litellm_proxy_server/batch_api/bedrock/bedrock.py:5  client = OpenAI("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/batch_api/bedrock/bedrock.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000",
+      "evidence": "cookbook/litellm_proxy_server/batch_api/bedrock/bedrock.py:6  base_url=\"http://0.0.0.0:4000\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_proxy_server/batch_api/bedrock/bedrock.py:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MASTER_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/litellm_proxy_server/batch_api/bedrock/bedrock.py:7  api_key=os.environ[\"LITELLM_MASTER_KEY\"],"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "cookbook/litellm_proxy_server/mcp/mcp_with_litellm_proxy.py:11",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "cookbook/litellm_proxy_server/mcp/mcp_with_litellm_proxy.py:11  client = openai.OpenAI("
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_proxy_server/mcp/mcp_with_litellm_proxy.py:12",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MASTER_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/litellm_proxy_server/mcp/mcp_with_litellm_proxy.py:12  api_key=os.environ[\"LITELLM_MASTER_KEY\"],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_proxy_server/mcp/mcp_with_litellm_proxy.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/litellm_proxy_server/mcp/mcp_with_litellm_proxy.py:13  base_url=\"http://localhost:4000\",  # paste your litellm proxy base url here"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_proxy.py:22",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_proxy.py:22  \"api_key\": os.getenv(\"AZURE_API_KEY\"),\ncookbook/litellm_router/load_test_proxy.py:31  \"api_key\": os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router/load_test_proxy.py:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_proxy.py:23  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),\ncookbook/litellm_router/load_test_proxy.py:32  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router/load_test_proxy.py:24",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_proxy.py:24  \"api_base\": os.getenv(\"AZURE_API_BASE\"),\ncookbook/litellm_router/load_test_proxy.py:33  \"api_base\": os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_proxy.py:40",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_proxy.py:40  \"api_key\": os.getenv(\"OPENAI_API_KEY\"),\ncookbook/litellm_router/load_test_proxy.py:85  api_key=os.environ[\"OPENAI_API_KEY\"], base_url=\"http://0.0.0.0:8000\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_proxy.py:84",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "cookbook/litellm_router/load_test_proxy.py:84  client = openai.OpenAI("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_router/load_test_proxy.py:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8000",
+      "evidence": "cookbook/litellm_router/load_test_proxy.py:85  api_key=os.environ[\"OPENAI_API_KEY\"], base_url=\"http://0.0.0.0:8000\"\ncookbook/litellm_router/load_test_proxy.py:86  )  # base_url=\"http://0.0.0.0:8000\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_queuing.py:22",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_queuing.py:22  \"api_key\": os.getenv(\"AZURE_API_KEY\"),\ncookbook/litellm_router/load_test_queuing.py:31  \"api_key\": os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router/load_test_queuing.py:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_queuing.py:23  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),\ncookbook/litellm_router/load_test_queuing.py:32  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router/load_test_queuing.py:24",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_queuing.py:24  \"api_base\": os.getenv(\"AZURE_API_BASE\"),\ncookbook/litellm_router/load_test_queuing.py:33  \"api_base\": os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_queuing.py:40",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_queuing.py:40  \"api_key\": os.getenv(\"OPENAI_API_KEY\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_router/load_test_queuing.py:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8000/queue/request",
+      "evidence": "cookbook/litellm_router/load_test_queuing.py:93  response = requests.post(\"http://0.0.0.0:8000/queue/request\", json=data)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_router/load_test_queuing.py:106",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8000{url",
+      "evidence": "cookbook/litellm_router/load_test_queuing.py:106  polling_url = f\"http://0.0.0.0:8000{url}\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_router.py:22",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_router.py:22  \"api_key\": os.getenv(\"AZURE_API_KEY\"),\ncookbook/litellm_router/load_test_router.py:31  \"api_key\": os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router/load_test_router.py:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_router.py:23  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),\ncookbook/litellm_router/load_test_router.py:32  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router/load_test_router.py:24",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_router.py:24  \"api_base\": os.getenv(\"AZURE_API_BASE\"),\ncookbook/litellm_router/load_test_router.py:33  \"api_base\": os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router/load_test_router.py:40",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router/load_test_router.py:40  \"api_key\": os.getenv(\"OPENAI_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_openai_client.py:17",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_openai_client.py:17  azure_endpoint=os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_openai_client.py:18",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_openai_client.py:18  api_key=os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router.py:36",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router.py:36  \"api_key\": os.getenv(\"OPENAI_API_KEY\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router.py:43",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router.py:43  \"api_key\": os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router.py:44",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router.py:44  \"api_base\": os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router.py:45",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router.py:45  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:42",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:42  \"api_key\": os.getenv(\"OPENAI_API_KEY\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:49",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:49  \"api_key\": os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:50",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:50  \"api_base\": os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:51",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/test_loadtest_router_withs3_cache.py:51  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_endpoint.py:17",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_endpoint.py:17  \"api_key\": os.getenv(\"AZURE_API_KEY\"),\ncookbook/litellm_router_load_test/memory_usage/router_endpoint.py:28  \"api_key\": os.getenv(\"AZURE_API_KEY\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_endpoint.py:18",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_endpoint.py:18  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_endpoint.py:19",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_endpoint.py:19  \"api_base\": os.getenv(\"AZURE_API_BASE\"),\ncookbook/litellm_router_load_test/memory_usage/router_endpoint.py:29  \"api_base\": os.getenv(\"AZURE_API_BASE\"),"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:25",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:25  \"api_key\": os.getenv(\"AZURE_API_KEY\"),\ncookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:36  \"api_key\": os.environ[\"AZURE_API_KEY\"],"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:26  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:27",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:27  \"api_base\": os.getenv(\"AZURE_API_BASE\"),\ncookbook/litellm_router_load_test/memory_usage/router_memory_usage copy.py:37  \"api_base\": os.environ[\"AZURE_API_BASE\"],"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:25",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:25  \"api_key\": os.getenv(\"AZURE_API_KEY\"),\ncookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:36  \"api_key\": os.environ[\"AZURE_API_KEY\"],"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_VERSION",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:26  \"api_version\": os.getenv(\"AZURE_API_VERSION\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:27",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AZURE_API_BASE",
+      "rule": "os.getenv",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:27  \"api_base\": os.getenv(\"AZURE_API_BASE\"),\ncookbook/litellm_router_load_test/memory_usage/router_memory_usage.py:37  \"api_base\": os.environ[\"AZURE_API_BASE\"],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/litellm_router_load_test/memory_usage/send_request.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:8000/router_acompletion",
+      "evidence": "cookbook/litellm_router_load_test/memory_usage/send_request.py:5  url = \"http://localhost:8000/router_acompletion\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/livekit_agent_sdk/main.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/livekit_agent_sdk/main.py:15  PROXY_URL = os.getenv(\"LITELLM_PROXY_URL\", \"http://localhost:4000\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/livekit_agent_sdk/main.py:15",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_PROXY_URL",
+      "rule": "os.getenv",
+      "evidence": "cookbook/livekit_agent_sdk/main.py:15  PROXY_URL = os.getenv(\"LITELLM_PROXY_URL\", \"http://localhost:4000\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/livekit_agent_sdk/main.py:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/livekit_agent_sdk/main.py:16  API_KEY = os.environ[\"LITELLM_API_KEY\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/livekit_agent_sdk/main.py:17",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MODEL",
+      "rule": "os.getenv",
+      "evidence": "cookbook/livekit_agent_sdk/main.py:17  MODEL = os.getenv(\"LITELLM_MODEL\", \"grok-voice-agent\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/misc/add_new_models.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000",
+      "evidence": "cookbook/misc/add_new_models.py:5  proxy_base_url = input(\"Enter your proxy base URL (e.g., http://localhost:4000): \")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/misc/migrate_proxy_config.py:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000",
+      "evidence": "cookbook/misc/migrate_proxy_config.py:93  proxy_base_url = \"http://0.0.0.0:4000\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/misc/migrate_proxy_config.py:94",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MASTER_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/misc/migrate_proxy_config.py:94  master_key = os.environ[\"LITELLM_MASTER_KEY\"]"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "cookbook/misc/openai_timeouts.py:8",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "cookbook/misc/openai_timeouts.py:8  client = OpenAI("
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/misc/openai_timeouts.py:10",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "cookbook/misc/openai_timeouts.py:10  api_key=os.environ.get(\"OPENAI_API_KEY\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/misc/test_responses_api.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4001",
+      "evidence": "cookbook/misc/test_responses_api.py:7  client = OpenAI(base_url=\"http://0.0.0.0:4001\", api_key=os.environ[\"LITELLM_MASTER_KEY\"])"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/misc/test_responses_api.py:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MASTER_KEY",
+      "rule": "os.environ[]",
+      "evidence": "cookbook/misc/test_responses_api.py:7  client = OpenAI(base_url=\"http://0.0.0.0:4001\", api_key=os.environ[\"LITELLM_MASTER_KEY\"])"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "cookbook/misc/test_responses_api.py:7",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "cookbook/misc/test_responses_api.py:7  client = OpenAI(base_url=\"http://0.0.0.0:4001\", api_key=os.environ[\"LITELLM_MASTER_KEY\"])"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080",
+      "evidence": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:11  The server will start on http://localhost:8080"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:506",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MOCK_BEDROCK_HOST",
+      "rule": "os.getenv",
+      "evidence": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:506  host = os.getenv(\"MOCK_BEDROCK_HOST\", \"0.0.0.0\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:507",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MOCK_BEDROCK_PORT",
+      "rule": "os.getenv",
+      "evidence": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:507  port = int(os.getenv(\"MOCK_BEDROCK_PORT\", \"8080\"))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:508",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MOCK_BEDROCK_TOKEN",
+      "rule": "os.getenv",
+      "evidence": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:508  bearer_token = os.getenv(\"MOCK_BEDROCK_TOKEN\", \"mock-bedrock-token-12345\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:516",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{host",
+      "evidence": "cookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:516  print(f\"Server starting on: http://{host}:{port}\")\ncookbook/mock_guardrail_server/mock_bedrock_guardrail_server.py:523  curl -X POST \"http://{host}:{port}/guardrail/test-guardrail/version/1/apply\" \\\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/mock_prompt_management_server/mock_prompt_management_server.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080",
+      "evidence": "cookbook/mock_prompt_management_server/mock_prompt_management_server.py:11  The server will start on http://localhost:8080\ncookbook/mock_prompt_management_server/mock_prompt_management_server.py:367  print(f\"\\nStarting server on http://localhost:8080\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cookbook/mock_prompt_management_server/mock_prompt_management_server.py:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080/beta/litellm_prompt_management?prompt_id=hello-world-prompt",
+      "evidence": "cookbook/mock_prompt_management_server/mock_prompt_management_server.py:14  curl \"http://localhost:8080/beta/litellm_prompt_management?prompt_id=hello-world-prompt\"\ncookbook/mock_prompt_management_server/mock_prompt_management_server.py:385  '  curl \"http://localhost:8080/beta/litellm_prompt_management?prompt_id=hello-world-prompt\"'"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "db_scripts/migrate_keys.py:14",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DATABASE_URL",
+      "rule": "os.environ[]",
+      "evidence": "db_scripts/migrate_keys.py:14  os.environ[\"DATABASE_URL\"] = DATABASE_URL"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "docker/build_admin_ui.sh:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION",
+      "evidence": "docker/build_admin_ui.sh:47  curl -fsSL \"https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh\" -o \"$NVM_SCRIPT\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/enterprise_hooks/aporia_ai.py:46",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "APORIO_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "enterprise/enterprise_hooks/aporia_ai.py:46  self.aporia_api_key = api_key or os.environ[\"APORIO_API_KEY\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/enterprise_hooks/aporia_ai.py:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "APORIO_API_BASE",
+      "rule": "os.environ[]",
+      "evidence": "enterprise/enterprise_hooks/aporia_ai.py:47  self.aporia_api_base = api_base or os.environ[\"APORIO_API_BASE\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/enterprise_hooks/aporia_ai.py:99",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gr-prd-trial.aporia.com/some-id",
+      "evidence": "enterprise/enterprise_hooks/aporia_ai.py:99  curl https://gr-prd-trial.aporia.com/some-id \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/enterprise_hooks/google_text_moderation.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.google.com/natural-language/docs/moderating-text",
+      "evidence": "enterprise/enterprise_hooks/google_text_moderation.py:4  #   https://cloud.google.com/natural-language/docs/moderating-text"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/enterprise_hooks/google_text_moderation.py:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.google.com/natural-language/docs/moderating-text#safety_attribute_confidence_scores",
+      "evidence": "enterprise/enterprise_hooks/google_text_moderation.py:38  ]  # https://cloud.google.com/natural-language/docs/moderating-text#safety_attribute_confidence_scores"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/llama_guard.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://huggingface.co/meta-llama/LlamaGuard-7b/tree/main",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/llama_guard.py:4  #   https://huggingface.co/meta-llama/LlamaGuard-7b/tree/main"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/llm_guard.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://llm-guard.com/",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/llm_guard.py:4  #   https://llm-guard.com/"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/pagerduty/pagerduty.py:55",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "PAGERDUTY_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/pagerduty/pagerduty.py:55  _api_key = os.getenv(\"PAGERDUTY_API_KEY\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/pagerduty/pagerduty.py:298",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://developer.pagerduty.com/api-reference/YXBpOjI3NDgyNjU-pager-duty-v2-events-api",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/pagerduty/pagerduty.py:298  https://developer.pagerduty.com/api-reference/YXBpOjI3NDgyNjU-pager-duty-v2-events-api"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/pagerduty/pagerduty.py:318",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://events.pagerduty.com/v2/enqueue",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/pagerduty/pagerduty.py:318  url=\"https://events.pagerduty.com/v2/enqueue\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/secrets_plugins/github_token.py:21",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/secrets_plugins/github_token.py:21  # ref. https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:731",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "EMAIL_LOGO_URL",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:731  custom_logo = os.getenv(\"EMAIL_LOGO_URL\", None)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:732",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "EMAIL_SUPPORT_CONTACT",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:732  custom_support = os.getenv(\"EMAIL_SUPPORT_CONTACT\", None)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:733",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "EMAIL_SIGNATURE",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:733  custom_signature = os.getenv(\"EMAIL_SIGNATURE\", None)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:734",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "EMAIL_SUBJECT_INVITATION",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:734  custom_subject_invitation = os.getenv(\"EMAIL_SUBJECT_INVITATION\", None)"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:735",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "EMAIL_SUBJECT_KEY_CREATED",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:735  custom_subject_key_created = os.getenv(\"EMAIL_SUBJECT_KEY_CREATED\", None)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:761",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:761  \"PROXY_BASE_URL\", \"http://0.0.0.0:4000\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:781",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "EMAIL_SUBJECT_KEY_ROTATED",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:781  custom_subject_key_rotated = os.getenv(\"EMAIL_SUBJECT_KEY_ROTATED\", None)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:816",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://enterprise.litellm.ai/demo",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:816  \"Schedule a meeting here: https://enterprise.litellm.ai/demo\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:965",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000/ui/onboarding?invitation_id=7a096b3a-37c6-440f-9dd1-ba22e8043f6b",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/base_email.py:965  # http://localhost:4000/ui/onboarding?invitation_id=7a096b3a-37c6-440f-9dd1-ba22e8043f6b"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://resend.com/docs/api-reference/emails/send-email",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:4  https://resend.com/docs/api-reference/emails/send-email"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.resend.com/emails",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:18  RESEND_API_ENDPOINT = \"https://api.resend.com/emails\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:40",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "RESEND_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:40  self.resend_api_key = os.getenv(\"RESEND_API_KEY\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:41",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "RESEND_FROM_EMAIL",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/resend_email.py:41  self.resend_from_email = os.getenv(\"RESEND_FROM_EMAIL\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.sendgrid.com/api-reference/mail-send/mail-send",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:4  Docs: https://docs.sendgrid.com/api-reference/mail-send/mail-send"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:19",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.sendgrid.com/v3/mail/send",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:19  SENDGRID_API_ENDPOINT = \"https://api.sendgrid.com/v3/mail/send\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:35",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SENDGRID_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:35  self.sendgrid_api_key = os.getenv(\"SENDGRID_API_KEY\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:36",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SENDGRID_SENDER_EMAIL",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/enterprise_callbacks/send_emails/sendgrid_email.py:36  self.sendgrid_sender_email = os.getenv(\"SENDGRID_SENDER_EMAIL\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/proxy/liteadmin.py:208",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_ADMIN_AGENT_URL",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/proxy/liteadmin.py:208  worker_url: Final = os.getenv(\"LITELLM_ADMIN_AGENT_URL\", \"\").rstrip(\"/\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "enterprise/litellm_enterprise/proxy/liteadmin.py:209",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ADMIN_AGENT_SERVICE_TOKEN",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/proxy/liteadmin.py:209  service_token: Final = os.getenv(\"ADMIN_AGENT_SERVICE_TOKEN\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "enterprise/litellm_enterprise/proxy/proxy_server.py:32",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DOCS_DESCRIPTION",
+      "rule": "os.getenv",
+      "evidence": "enterprise/litellm_enterprise/proxy/proxy_server.py:32  docs_description = os.getenv(\"DOCS_DESCRIPTION\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:478",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000/project/new",
+      "evidence": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:478  curl --location 'http://0.0.0.0:4000/project/new' \\\\\nenterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:505  curl --location 'http://0.0.0.0:4000/project/new' \\\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:693",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000/project/update",
+      "evidence": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:693  curl --location 'http://0.0.0.0:4000/project/update' \\\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:947",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000/project/delete",
+      "evidence": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:947  curl --location --request DELETE 'http://0.0.0.0:4000/project/delete' \\\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:1055",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000/project/info?project_id=project-123",
+      "evidence": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:1055  curl --location 'http://0.0.0.0:4000/project/info?project_id=project-123' \\\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:1110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:4000/project/list",
+      "evidence": "enterprise/litellm_enterprise/proxy/management_endpoints/project_endpoints.py:1110  curl --location 'http://0.0.0.0:4000/project/list' \\\\"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_DEV_ENV_HOT_RELOAD",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:26  return os.getenv(\"LITELLM_DEV_ENV_HOT_RELOAD\") == \"True\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MODE",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:29  if os.getenv(\"LITELLM_MODE\", \"DEV\") == \"DEV\":\nlitellm/__init__.py:107  litellm_mode = os.getenv(\"LITELLM_MODE\", \"DEV\")  # \"PRODUCTION\", \"DEV\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:244",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/BerriAI/litellm/discussions/648",
+      "evidence": "litellm/__init__.py:244  None  # Not used anymore, will be removed in next MAJOR release - https://github.com/BerriAI/litellm/discussions/648\nlitellm/__init__.py:247  None  # Not used anymore, will be removed in next MAJOR release - https://github.com/BerriAI/litellm/discussions/648\nlitellm/__init__.py:401  caching: bool = False  # Not used anymore, will be removed in next MAJOR release - https://github.com/BerriAI/litellm/discussions/648"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:251",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MODIFY_PARAMS",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:251  modify_params = bool(os.getenv(\"LITELLM_MODIFY_PARAMS\", False))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:254",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_USE_CHAT_COMPLETIONS_URL_FOR_ANTHROPIC_MESSAGES",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:254  os.getenv(\"LITELLM_USE_CHAT_COMPLETIONS_URL_FOR_ANTHROPIC_MESSAGES\", False)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:270",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_ROUTE_ALL_CHAT_OPENAI_TO_RESPONSES",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:270  os.getenv(\"LITELLM_ROUTE_ALL_CHAT_OPENAI_TO_RESPONSES\", \"false\").lower() == \"true\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:274",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_GEMINI_LIVE_DEFER_SETUP",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:274  gemini_live_defer_setup: bool = os.getenv(\"LITELLM_GEMINI_LIVE_DEFER_SETUP\", \"false\").lower() == \"true\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:343",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_ENABLE_ANTHROPIC_PROMPT_CACHING",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:343  enable_anthropic_prompt_caching: bool = os.getenv(\"LITELLM_ENABLE_ANTHROPIC_PROMPT_CACHING\", \"false\").lower() == \"true\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:344",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_ANTHROPIC_PROMPT_CACHING_TTL",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:344  _anthropic_prompt_caching_ttl_env: Optional[str] = os.getenv(\"LITELLM_ANTHROPIC_PROMPT_CACHING_TTL\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:403",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.litellm.ai/docs/caching",
+      "evidence": "litellm/__init__.py:403  cache: Optional[\"Cache\"] = None  # cache object <- use this - https://docs.litellm.ai/docs/caching"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:429",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json",
+      "evidence": "litellm/__init__.py:429  \"https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:433",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.litellm.ai/blog/rss.xml",
+      "evidence": "litellm/__init__.py:433  \"https://docs.litellm.ai/blog/rss.xml\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:437",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/BerriAI/litellm/main/litellm/anthropic_beta_headers_config.json",
+      "evidence": "litellm/__init__.py:437  \"https://raw.githubusercontent.com/BerriAI/litellm/main/litellm/anthropic_beta_headers_config.json\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:441",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/BerriAI/litellm/main/litellm/proxy/public_endpoints/autorouter_presets.json",
+      "evidence": "litellm/__init__.py:441  \"https://raw.githubusercontent.com/BerriAI/litellm/main/litellm/proxy/public_endpoints/autorouter_presets.json\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "litellm/__init__.py:443",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_WHATS_NEW_URL",
+      "rule": "os.getenv",
+      "evidence": "litellm/__init__.py:443  whats_new_url: str | None = os.getenv(\"LITELLM_WHATS_NEW_URL\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:1037",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://azure.microsoft.com/en-in/pricing/details/cognitive-services/openai-service/",
+      "evidence": "litellm/__init__.py:1037  # https://azure.microsoft.com/en-in/pricing/details/cognitive-services/openai-service/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "litellm/__init__.py:2369",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/BerriAI/litellm/issues/18659",
+      "evidence": "litellm/__init__.py:2369  # See: https://github.com/BerriAI/litellm/issues/18659"
+    }
+  ],
+  "reRooting": []
+}

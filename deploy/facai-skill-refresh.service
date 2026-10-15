@@ -1,0 +1,9 @@
+[Unit]
+Description=FACAI skill refresh loop (reingest + crawl diff + exercise)
+After=network-online.target facai-cloud.service
+
+[Service]
+Type=oneshot
+User=facai
+WorkingDirectory=/opt/facai-cloud
+ExecStart=/opt/facai-cloud/.venv/bin/python -m facai.ops.skill_refresh --data /opt/facai-cloud/data --out /opt/facai-cloud/docs/SKILL_REFRESH_latest.json

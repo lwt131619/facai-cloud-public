@@ -1,0 +1,2410 @@
+{
+  "target": "radare2 (初扫收录实例 C:\\Users\\user\\Radare2)",
+  "origin": "本地路径 C:\\Users\\user\\Radare2",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 907 个文本文件（源码 189、其余 718），识别 266 面（源码档 66、文档/示例 DOC_ 降权 137、其余文件 63；截断=False/True，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "autogen.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/acr",
+      "evidence": "autogen.sh:3  # Look for the 'acr' tool here: https://github.com/radare/acr\nautogen.sh:5  #  git clone https://github.com/radare/acr"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/upload.sh:38",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/settings/tokens",
+      "evidence": ".github/upload.sh:38  read -r -s -p \"Token (https://github.com/settings/tokens): \" GITHUB_TOKEN"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/upload.sh:41",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/$REPO_SLUG/git/refs/tags/$RELEASE_NAME",
+      "evidence": ".github/upload.sh:41  tag_url=\"https://api.github.com/repos/$REPO_SLUG/git/refs/tags/$RELEASE_NAME\"\n.github/upload.sh:82  delete_url=\"https://api.github.com/repos/$REPO_SLUG/git/refs/tags/$RELEASE_NAME\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/upload.sh:47",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/$REPO_SLUG/releases/tags/$RELEASE_NAME",
+      "evidence": ".github/upload.sh:47  release_url=\"https://api.github.com/repos/$REPO_SLUG/releases/tags/$RELEASE_NAME\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/upload.sh:65",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/$REPO_SLUG/releases/$release_id",
+      "evidence": ".github/upload.sh:65  delete_url=\"https://api.github.com/repos/$REPO_SLUG/releases/$release_id\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/upload.sh:98",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/$REPO_SLUG/releases",
+      "evidence": ".github/upload.sh:98  --data '{\"tag_name\": \"'\"$RELEASE_NAME\"'\",\"target_commitish\": \"'\"$GITHUB_SHA\"'\",\"name\": \"'\"$RELEASE_TITLE\"'\",\"body\": \"'\"$BODY\"'\",\"draft\": false,\"prerelease\": '$is_prerelease'}' \"https://api.github.com/repos/$REPO_SLUG/releases\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/r2pm/r2pm-view.py:16",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/radareorg/radare2-pm/contents/db",
+      "evidence": "binr/r2pm/r2pm-view.py:16  R2PM_DB_URL = 'https://api.github.com/repos/radareorg/radare2-pm/contents/db'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/r2pm/r2pm-view.py:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/radareorg/radare2-pm/master/db/{package_name",
+      "evidence": "binr/r2pm/r2pm-view.py:31  url = f\"https://raw.githubusercontent.com/radareorg/radare2-pm/master/db/{package_name}\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "doc/pdb/index.js:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "doc/pdb/index.js:2  var spawn = require('child_process').spawn;\ndoc/pdb/index.js:50  var spawn = require('child_process').spawn;\ndoc/pdb/index.js:77  var spawn = require('child_process').spawn;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "doc/pdb/index.js:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://msdl.microsoft.com/download/symbols",
+      "evidence": "doc/pdb/index.js:11  const DOWNLOABLE_LINK = 'https://msdl.microsoft.com/download/symbols';"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "libr/egg/p/sc/scmangle.py:292",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SOURCE_DATE_EPOCH",
+      "rule": "os.environ.get",
+      "evidence": "libr/egg/p/sc/scmangle.py:292  elif os.environ.get('SOURCE_DATE_EPOCH') is not None:\nlibr/egg/p/sc/scmangle.py:293  seed = int(os.environ['SOURCE_DATE_EPOCH'])"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "libr/io/p/io_r2pipe-test.js:3",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "R2PIPE_IN",
+      "rule": "process.env",
+      "evidence": "libr/io/p/io_r2pipe-test.js:3  var nfd_in = +process.env.R2PIPE_IN;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "libr/io/p/io_r2pipe-test.js:4",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "R2PIPE_OUT",
+      "rule": "process.env",
+      "evidence": "libr/io/p/io_r2pipe-test.js:4  var nfd_out = +process.env.R2PIPE_OUT;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "libr/lang/p/pipe-node.js:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "R2PIPE_IN",
+      "rule": "process.env",
+      "evidence": "libr/lang/p/pipe-node.js:9  var IN = +process.env.R2PIPE_IN;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "libr/lang/p/pipe-node.js:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "R2PIPE_OUT",
+      "rule": "process.env",
+      "evidence": "libr/lang/p/pipe-node.js:10  var OUT = +process.env.R2PIPE_OUT;"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "libr/syscall/d/gen.py:36",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "libr/syscall/d/gen.py:36  subprocess.call([sdb_exe, _output, \"==\", _tmpfile])"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/ipsw-kernel-symbolicate.r2.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://blacktop.github.io/ipsw/blog/kernel-symbolication/",
+      "evidence": "scripts/ipsw-kernel-symbolicate.r2.js:2  // ref: https://blacktop.github.io/ipsw/blog/kernel-symbolication/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/licenses.r2.js:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://spdx.org/licenses/",
+      "evidence": "scripts/licenses.r2.js:32  const response = r2.syscmds(\"curl -s https://spdx.org/licenses/\"+aliasedName+\".json\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/r2sptrace.py:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gist.github.com/thestr4ng3r/403fecffc081a899618b1500ba6d1156",
+      "evidence": "scripts/r2sptrace.py:1  # https://gist.github.com/thestr4ng3r/403fecffc081a899618b1500ba6d1156"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/r2sptrace.py:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/issues/12070",
+      "evidence": "scripts/r2sptrace.py:2  # https://github.com/radareorg/radare2/issues/12070"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/bolt/r2.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cloud.radare.org",
+      "evidence": "shlr/www/bolt/r2.js:1  var r2={},backward=!1,next_curoff=0,next_lastoff=0,prev_curoff=0,prev_lastoff=0,hascmd=!1,r2_root=self.location.pathname.split(\"/\").slice(0,-2).join(\"/\");function isFirefoxOS(){return\"undefined\"!=typeof locationbar&&!locationbar.visible&&-1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/d3/d3.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "shlr/www/d3/d3.js:1  (function(){function i(e){var t=-1,n=e.length,r=[];while(++t<n)r.push(e[t]);return r}function s(e){return Array.prototype.slice.call(e)}function a(){return this}function f(e){return e!=null&&!isNaN(e)}function l(e){return e.length}function "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/d3/d3.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/xhtml",
+      "evidence": "shlr/www/d3/d3.js:1  (function(){function i(e){var t=-1,n=e.length,r=[];while(++t<n)r.push(e[t]);return r}function s(e){return Array.prototype.slice.call(e)}function a(){return this}function f(e){return e!=null&&!isNaN(e)}function l(e){return e.length}function "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/d3/d3.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/xlink",
+      "evidence": "shlr/www/d3/d3.js:1  (function(){function i(e){var t=-1,n=e.length,r=[];while(++t<n)r.push(e[t]);return r}function s(e){return Array.prototype.slice.call(e)}function a(){return this}function f(e){return e!=null&&!isNaN(e)}function l(e){return e.length}function "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/d3/d3.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/XML/1998/namespace",
+      "evidence": "shlr/www/d3/d3.js:1  (function(){function i(e){var t=-1,n=e.length,r=[];while(++t<n)r.push(e[t]);return r}function s(e){return Array.prototype.slice.call(e)}function a(){return this}function f(e){return e!=null&&!isNaN(e)}function l(e){return e.length}function "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/d3/d3.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/xmlns/",
+      "evidence": "shlr/www/d3/d3.js:1  (function(){function i(e){var t=-1,n=e.length,r=[];while(++t<n)r.push(e[t]);return r}function s(e){return Array.prototype.slice.call(e)}function a(){return this}function f(e){return e!=null&&!isNaN(e)}function l(e){return e.length}function "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/f/r2.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cloud.radare.org",
+      "evidence": "shlr/www/f/r2.js:1  function isFirefoxOS(){return\"undefined\"!=typeof locationbar&&!locationbar.visible&&navigator.userAgent.indexOf(\"Firefox\")>-1&&navigator.userAgent.indexOf(\"Mobile\")>-1&&\"mozApps\"in navigator}function asyncLoop(r,n,e){var t=0,o=!1,a={next:fu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/m/r2.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cloud.radare.org",
+      "evidence": "shlr/www/m/r2.js:1  var r2={},backward=!1,next_curoff=0,next_lastoff=0,prev_curoff=0,prev_lastoff=0,hascmd=!1,r2_root=self.location.pathname.split(\"/\").slice(0,-2).join(\"/\");function isFirefoxOS(){return\"undefined\"!=typeof locationbar&&!locationbar.visible&&-1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/p/r2core.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cloud.radare.org",
+      "evidence": "shlr/www/p/r2core.js:1  var BBGraph=function(){this.vertices={},this.edges=[],this.elements=[],this.links=[],this.fcn_offset=0,joint.shapes.html={},joint.shapes.html.Element=joint.shapes.basic.Rect.extend({defaults:joint.util.deepSupplement({type:\"html.Element\",at"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "shlr/www/t/app.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cloud.radare.org",
+      "evidence": "shlr/www/t/app.js:3  var r2={},backward=!1,next_curoff=0,next_lastoff=0,prev_curoff=0,prev_lastoff=0,hascmd=!1,r2_root=self.location.pathname.split(\"/\").slice(0,-2).join(\"/\");function isFirefoxOS(){return\"undefined\"!=typeof locationbar&&!locationbar.visible&&-1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/android-ndk-install.sh:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dl.google.com/android/repository/android-ndk-$V-$O-x86_64.zip",
+      "evidence": "sys/android-ndk-install.sh:29  wget -c -q https://dl.google.com/android/repository/android-ndk-$V-$O-x86_64.zip"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/android-release.sh:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-bin",
+      "evidence": "sys/android-release.sh:54  git clone https://github.com/radareorg/radare2-bin"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/debian.sh:120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-book/releases/latest/download/r2book.info.gz",
+      "evidence": "sys/debian.sh:120  \"https://github.com/radareorg/radare2-book/releases/latest/download/r2book.info.gz\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/derizin.sh:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rizinorg/rizin",
+      "evidence": "sys/derizin.sh:8  git clone https://github.com/rizinorg/rizin"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/docker_build_alpine_image.sh:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2.git",
+      "evidence": "sys/docker_build_alpine_image.sh:95  github=\"https://github.com/radareorg/radare2.git\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/docker_build_alpine_image.sh:133",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://api.github.com/repos/radare/radare2/commits/$r2branch",
+      "evidence": "sys/docker_build_alpine_image.sh:133  \"http://api.github.com/repos/radare/radare2/commits/$r2branch\" | \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/extras.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-extras",
+      "evidence": "sys/extras.sh:3  git clone https://github.com/radareorg/radare2-extras"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/filc.sh:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/pizlonator/fil-c/releases/download/v${FILC_VERSION",
+      "evidence": "sys/filc.sh:20  \"https://github.com/pizlonator/fil-c/releases/download/v${FILC_VERSION}/${FILC_NAME}.tar.xz\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/install-debs.sh:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/releases/download/${V",
+      "evidence": "sys/install-debs.sh:4  wget https://github.com/radareorg/radare2/releases/download/${V}/radare2_${V}_amd64.deb\nsys/install-debs.sh:5  wget https://github.com/radareorg/radare2/releases/download/${V}/radare2-dev_${V}_amd64.deb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/install.sh:161",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "sys/install.sh:161  git pull https://github.com/radareorg/radare2 master"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "sys/lint.py:559",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "sys/lint.py:559  files = subprocess.run([\"git\", \"ls-files\", \"-z\"], cwd=ROOT,\nsys/lint.py:619  res = subprocess.run([sys.executable, os.path.join(ROOT, \"sys\", \"check_includes.py\")], cwd=ROOT)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/macos-cert.sh:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/derekparker/delve/blob/master/scripts/gencert.sh",
+      "evidence": "sys/macos-cert.sh:2  # Credits to https://github.com/derekparker/delve/blob/master/scripts/gencert.sh"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "sys/meson.py:87",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "sys/meson.py:87  ret = subprocess.call(cmd)\nsys/meson.py:98  ret = subprocess.call(command)\nsys/meson.py:109  ret = subprocess.call(command)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "sys/meson.py:247",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CFLAGS",
+      "rule": "os.environ.get",
+      "evidence": "sys/meson.py:247  cflags = os.environ.get('CFLAGS')\nsys/meson.py:250  os.environ['CFLAGS'] = cflags + ' -fsanitize=' + sanitizers"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "sys/meson.py:252",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LDFLAGS",
+      "rule": "os.environ.get",
+      "evidence": "sys/meson.py:252  ldflags = os.environ.get('LDFLAGS')\nsys/meson.py:255  os.environ['LDFLAGS'] = ldflags + ' -fsanitize=' + sanitizers"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "sys/meson.py:260",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": "sys/meson.py:260  upstream_remote = subprocess.check_output([\"git\", \"remote\", \"-v\"]).decode()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/meson.py:264",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "sys/meson.py:264  remote = 'https://github.com/radareorg/radare2'"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "sys/meson.py:301",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "os.system",
+      "evidence": "sys/meson.py:301  os.system(sudo + 'make uninstall PWD=\"$PWD/build\" BTOP=\"$PWD/build/binr\"')\nsys/meson.py:305  os.system(sudo + 'make symstall PWD=\"$PWD/build\" BTOP=\"$PWD/build/binr\"')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/prai.sh:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/pull/${PR",
+      "evidence": "sys/prai.sh:15  curl -sL https://github.com/radareorg/radare2/pull/${PR}.diff | mai -S \"${MS}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/release-notes.sh:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/releases/download/${VERS",
+      "evidence": "sys/release-notes.sh:58  echo \"curl -Ls https://github.com/radareorg/radare2/releases/download/${VERS}/radare2-${VERS}.tar.xz | tar xJv\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/sanitize.sh:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://clang.llvm.org/docs/UsersManual.html#controlling-code-generation",
+      "evidence": "sys/sanitize.sh:32  echo \"  https://clang.llvm.org/docs/UsersManual.html#controlling-code-generation\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/sdk.sh:209",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apple.com/DTDs/PropertyList-1.0.dtd",
+      "evidence": "sys/sdk.sh:209  <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/sync.sh:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2.git",
+      "evidence": "sys/sync.sh:5  git remote add upstream https://github.com/radareorg/radare2.git"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/termux.sh:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "sys/termux.sh:21  git pull https://github.com/radareorg/radare2 master"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/translate.sh:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/radare2-translations",
+      "evidence": "sys/translate.sh:23  git clone --depth 1 https://github.com/radare/radare2-translations sys/lang || exit 1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/update_urls.sh:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://[^",
+      "evidence": "sys/update_urls.sh:95  urls=$(echo \"$line\" | grep -o 'http://[^ \"'\\''<>)]*')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/update_urls.sh:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://([^/",
+      "evidence": "sys/update_urls.sh:101  domain=$(echo \"$url\" | sed -E 's|http://([^/]+).*|\\1|')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/update_urls.sh:110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://|https://|",
+      "evidence": "sys/update_urls.sh:110  https_url=$(echo \"$url\" | sed 's|http://|https://|')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/user.sh:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "sys/user.sh:66  git pull https://github.com/radareorg/radare2 master"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sys/wasi-env.sh:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_MAJOR",
+      "evidence": "sys/wasi-env.sh:16  export WASI_SDK_URL=\"${WASI_SDK_URL:-https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_MAJOR}/wasi-sdk-${WASI_VERSION}-${WASI_ARCH}-${WASI_OS}.tar.gz}\"\nsys/wasi-env.sh:17  export WASI_SYSROOT_URL=\"${WASI_SYSROOT_URL:-https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_MAJOR}/wasi-sysroot-${WASI_VERSION}.tar.gz}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "test/perf/gha.sh:10",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/radareorg/radare2/actions/runs",
+      "evidence": "test/perf/gha.sh:10  \"https://api.github.com/repos/radareorg/radare2/actions/runs\" > gha.json"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "test/perf/main.r2.js:78",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://d3js.org/d3.v3.min.js",
+      "evidence": "test/perf/main.r2.js:78  console.log('<script src=\"https://d3js.org/d3.v3.min.js\"></script>');"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "test/perf/main.r2.js:79",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js",
+      "evidence": "test/perf/main.r2.js:79  console.log('<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js\"></script>');"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "test/perf/main.r2.js:230",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/commit/",
+      "evidence": "test/perf/main.r2.js:230  line += \"<td><a href='https://github.com/radareorg/radare2/commit/\"+log.commit+\"'>\"+log.count+\"</a></td>\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "test/scripts/test-webserver.sh:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9393/",
+      "evidence": "test/scripts/test-webserver.sh:5  curl -s --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:9393/ > /dev/null 2>&1\ntest/scripts/test-webserver.sh:7  r2 -N -c 'b $s;pr~:0..11' -qcq http://127.0.0.1:9393/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "test/scripts/test-webserver.sh:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9393/cmd",
+      "evidence": "test/scripts/test-webserver.sh:6  r2 -N -qc '=0 pd 10' -C http://127.0.0.1:9393/cmd"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/issues",
+      "evidence": "CONTRIBUTING.md:7  [here](https://github.com/radareorg/radare2/issues))"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:30",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learnxinyminutes.com/docs/git",
+      "evidence": "CONTRIBUTING.md:30  [here](https://learnxinyminutes.com/docs/git)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:54",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/pulls",
+      "evidence": "CONTRIBUTING.md:54  * Open a [pull request](https://github.com/radareorg/radare2/pulls) (PR) on"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:87",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "CONTRIBUTING.md:87  git remote add radareorg https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:634",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://radare.org/get/lacon-radare-2009/",
+      "evidence": "DEVELOPERS.md:634  [This presentation](http://radare.org/get/lacon-radare-2009/) gives a good"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:642",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-bindings",
+      "evidence": "DEVELOPERS.md:642  [here](https://github.com/radareorg/radare2-bindings)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:705",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "DEVELOPERS.md:705  git clone https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:722",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com:radareorg/radare2",
+      "evidence": "DEVELOPERS.md:722  git pull https://github.com:radareorg/radare2 master"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:752",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-testbins",
+      "evidence": "DEVELOPERS.md:752  git clone https://github.com/radareorg/radare2-testbins"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:758",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-testbins/blob/master/README",
+      "evidence": "DEVELOPERS.md:758  README](https://github.com/radareorg/radare2-testbins/blob/master/README)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:772",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/issues",
+      "evidence": "DEVELOPERS.md:772  [here](https://github.com/radareorg/radare2/issues)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "DEVELOPERS.md:794",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radareorg/blob/master/source/download_paths.rst",
+      "evidence": "DEVELOPERS.md:794  - Update the [paths on the website](https://github.com/radareorg/radareorg/blob/master/source/download_paths.rst)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "INSTALL.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/releases",
+      "evidence": "INSTALL.md:3  To get the latest packaged versions of Radare2, visit the [Releases page](https://github.com/radareorg/radare2/releases). For most users, installing directly from the Git repository is recommended to ensure you have the most recent features"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "INSTALL.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "INSTALL.md:12  git clone https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "INSTALL.md:23",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2env",
+      "evidence": "INSTALL.md:23  - **Manage Multiple Installations**: Utilize [r2env](https://github.com/radareorg/r2env) to handle multiple Radare2 versions on the same machine. It can be installed via Python's `pip` tool."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "INSTALL.md:69",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/metapackage/radare2",
+      "evidence": "INSTALL.md:69  <a href=\"https://repology.org/metapackage/radare2\">"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "INSTALL.md:70",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/vertical-allrepos/radare2.svg",
+      "evidence": "INSTALL.md:70  <img src=\"https://repology.org/badge/vertical-allrepos/radare2.svg\" alt=\"Packaging status\" align=\"right\" width=\"150px\">"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:1",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://radare.org/",
+      "evidence": "README.md:1  <a href=\"https://radare.org/\"><img border=0 src=\"doc/images/r2emoji.png\" alt=\"screenshot\" align=\"left\" width=\"128px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/latest-versions/radare2.svg",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/project/radare2/versions",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt\nREADME.md:175  * [![Termux package](https://repology.org/badge/version-for-repo/termux/radare2.svg)](https://repology.org/project/radare2/versions)\nREADME.md:176  * [![Alpine Linux 3.23 package](https://repology.org/badge/version-for-repo/alpine_3_23/radare2.svg)](https://repology.org/project/radare2/versions)  [![Alpine Linux 3.22 package](https://repology.org/badge/version-for-repo/alpine_3_22/rada"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/actions/workflows/ci.yml?query=branch%3Amaster",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/actions/workflows/build.yml/badge.svg?branch=master",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/actions/workflows/build.yml?query=branch%3Amaster",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/actions/workflows/tcc.yml/badge.svg?branch=master",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/actions/workflows/tcc.yml",
+      "evidence": "README.md:5  [![Latest packaged version](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) [![Tests Status](https://github.com/radareorg/radare2/actions/workflows/ci.yml/badge.svg?branch=master)](htt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bestpractices.coreinfrastructure.org/projects/741/badge",
+      "evidence": "README.md:6  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/741/badge)](https://bestpractices.coreinfrastructure.org/projects/741) [![Build Status](https://scan.coverity.com/projects/416/badge.svg)](https://scan.coverity.co"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bestpractices.coreinfrastructure.org/projects/741",
+      "evidence": "README.md:6  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/741/badge)](https://bestpractices.coreinfrastructure.org/projects/741) [![Build Status](https://scan.coverity.com/projects/416/badge.svg)](https://scan.coverity.co"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scan.coverity.com/projects/416/badge.svg",
+      "evidence": "README.md:6  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/741/badge)](https://bestpractices.coreinfrastructure.org/projects/741) [![Build Status](https://scan.coverity.com/projects/416/badge.svg)](https://scan.coverity.co"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scan.coverity.com/projects/416",
+      "evidence": "README.md:6  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/741/badge)](https://bestpractices.coreinfrastructure.org/projects/741) [![Build Status](https://scan.coverity.com/projects/416/badge.svg)](https://scan.coverity.co"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://badgen.net/discord/members/YBey7CR9jf",
+      "evidence": "README.md:6  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/741/badge)](https://bestpractices.coreinfrastructure.org/projects/741) [![Build Status](https://scan.coverity.com/projects/416/badge.svg)](https://scan.coverity.co"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.gg/YBey7CR9jf",
+      "evidence": "README.md:6  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/741/badge)](https://bestpractices.coreinfrastructure.org/projects/741) [![Build Status](https://scan.coverity.com/projects/416/badge.svg)](https://scan.coverity.co\nREADME.md:134  * Discord: [Server](https://discord.gg/YBey7CR9jf)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:25",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.radare.org/",
+      "evidence": "README.md:25  <a href=\"https://www.radare.org/\"><img src=\"doc/images/shot.png\" alt=\"screenshot\" align=\"center\" border=0 width=\"600px\"></a>\nREADME.md:133  * Website: [https://www.radare.org/](https://www.radare.org/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:30",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/releases",
+      "evidence": "README.md:30  Download the last [released](https://github.com/radareorg/radare2/releases) binaries."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "README.md:35  git clone https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:66",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/iaito",
+      "evidence": "README.md:66  * [iaito](https://github.com/radareorg/iaito): The official Qt graphical interface"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:67",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-extras/tree/master/keystone",
+      "evidence": "README.md:67  * [keystone](https://github.com/radareorg/radare2-extras/tree/master/keystone) Assembler instructions using the Keystone library"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:68",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2ai",
+      "evidence": "README.md:68  * [decai](https://github.com/radareorg/r2ai) Decompiler based on AI\nREADME.md:69  * [r2ai](https://github.com/radareorg/r2ai) Run a Language Model in localhost with Llama inside r2!"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:70",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wargio/r2dec-js",
+      "evidence": "README.md:70  * [r2dec](https://github.com/wargio/r2dec-js): A decompiler based on r2 written in JS, accessed with the `pdd` command"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:71",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/FernandoDoming/r2diaphora",
+      "evidence": "README.md:71  * [r2diaphora](https://github.com/FernandoDoming/r2diaphora): [Diaphora](https://github.com/joxeankoret/diaphora)'s binary diffing engine on top of radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:71",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/joxeankoret/diaphora",
+      "evidence": "README.md:71  * [r2diaphora](https://github.com/FernandoDoming/r2diaphora): [Diaphora](https://github.com/joxeankoret/diaphora)'s binary diffing engine on top of radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:72",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/trufae/r2flutter",
+      "evidence": "README.md:72  * [r2flutter](https://github.com/trufae/r2flutter): Dart/Flutter AOT snapshot analysis for Android and iOS apps"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:73",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/nowsecure/r2frida",
+      "evidence": "README.md:73  * [r2frida](https://github.com/nowsecure/r2frida): The frida io plugin. Start r2 with `r2 frida://0` to use it"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:74",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2ghidra",
+      "evidence": "README.md:74  * [r2ghidra](https://github.com/radareorg/r2ghidra): The standalone native ghidra decompiler accessible with `pdg`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:75",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r4ghidra",
+      "evidence": "README.md:75  * [r4ghidra](https://github.com/radareorg/r4ghidra): Feel the radare joy inside your Ghidra"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:76",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-r2papi",
+      "evidence": "README.md:76  * [r2papi](https://github.com/radareorg/radare2-r2papi) High level api on top of r2pipe"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:77",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-r2pipe",
+      "evidence": "README.md:77  * [r2pipe](https://github.com/radareorg/radare2-r2pipe) Script radare2 from any programming language"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:78",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-extras/tree/master/r2poke",
+      "evidence": "README.md:78  * [r2poke](https://github.com/radareorg/radare2-extras/tree/master/r2poke) Integration with GNU/Poke for extended binary parsing capabilities"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:79",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hanemile/radare2-GoReSym",
+      "evidence": "README.md:79  * [goresym](https://github.com/hanemile/radare2-GoReSym): Import GoReSym symbol as flags"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:80",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2yara",
+      "evidence": "README.md:80  * [r2yara](https://github.com/radareorg/r2yara) Run Yara from r2 or use r2 primitives from Yara"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:81",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radius2",
+      "evidence": "README.md:81  * [radius2](https://github.com/radareorg/radius2): A fast symbolic execution engine based on boolector and esil"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:82",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2sarif",
+      "evidence": "README.md:82  * [r2sarif](https://github.com/radareorg/r2sarif) import/extend/export SARIF documents"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:83",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2hermes",
+      "evidence": "README.md:83  * [r2hermes](https://github.com/radareorg/r2hermes) Disassembler and analyzer for React Native Hermes bytecode"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:84",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Ahmeth4n/r2renef",
+      "evidence": "README.md:84  * [r2renef](https://github.com/Ahmeth4n/r2renef) Renef IO Plugin for Radare2 - Dynamic Android Instrumentation"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:85",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/r2unity",
+      "evidence": "README.md:85  * [r2unity](https://github.com/radareorg/r2unity): Inspect Unity IL2CPP metadata and native binaries from radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:86",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/warrp",
+      "evidence": "README.md:86  * [warrp](https://github.com/radareorg/warrp) Native radare2 plugin for the binary ninja's WARP format"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:107",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-pm",
+      "evidence": "README.md:107  by using the [r2pm](https://github.com/radareorg/radare2-pm) package manager."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:118",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://book.rada.re",
+      "evidence": "README.md:118  * [Official Book](https://book.rada.re): Read about r2 usage\nREADME.md:129  Learn more about r2 watching [youtube talks](https://www.youtube.com/c/r2con) from [r2con](https://rada.re/con). There are also many blogposts, slidedecks and the [official radare2 book](https://book.rada.re), but it's always a good idea to"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:129",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.youtube.com/c/r2con",
+      "evidence": "README.md:129  Learn more about r2 watching [youtube talks](https://www.youtube.com/c/r2con) from [r2con](https://rada.re/con). There are also many blogposts, slidedecks and the [official radare2 book](https://book.rada.re), but it's always a good idea to"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:129",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://rada.re/con",
+      "evidence": "README.md:129  Learn more about r2 watching [youtube talks](https://www.youtube.com/c/r2con) from [r2con](https://rada.re/con). There are also many blogposts, slidedecks and the [official radare2 book](https://book.rada.re), but it's always a good idea to"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:135",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://infosec.exchange/@radareorg",
+      "evidence": "README.md:135  * Mastodon: [@radareorg](https://infosec.exchange/@radareorg)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:136",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://t.me/radare",
+      "evidence": "README.md:136  * Telegram: [Main](https://t.me/radare) and [Side](https://t.me/radare_side) channels"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:136",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://t.me/radare_side",
+      "evidence": "README.md:136  * Telegram: [Main](https://t.me/radare) and [Side](https://t.me/radare_side) channels"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:137",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://libera.chat",
+      "evidence": "README.md:137  * [irc.libera.chat](https://libera.chat): `#radare`, `#radare_side`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:138",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://matrix.to/#/#radare:matrix.org",
+      "evidence": "README.md:138  * [Matrix](https://matrix.to/#/#radare:matrix.org): `#radare:matrix.org`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:174",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://snapcraft.io/radare2/badge.svg",
+      "evidence": "README.md:174  * [![Snap package](https://snapcraft.io/radare2/badge.svg)](https://snapcraft.io/radare2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:174",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://snapcraft.io/radare2",
+      "evidence": "README.md:174  * [![Snap package](https://snapcraft.io/radare2/badge.svg)](https://snapcraft.io/radare2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:175",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/termux/radare2.svg",
+      "evidence": "README.md:175  * [![Termux package](https://repology.org/badge/version-for-repo/termux/radare2.svg)](https://repology.org/project/radare2/versions)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:176",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/alpine_3_23/radare2.svg",
+      "evidence": "README.md:176  * [![Alpine Linux 3.23 package](https://repology.org/badge/version-for-repo/alpine_3_23/radare2.svg)](https://repology.org/project/radare2/versions)  [![Alpine Linux 3.22 package](https://repology.org/badge/version-for-repo/alpine_3_22/rada"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:176",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/alpine_3_22/radare2.svg",
+      "evidence": "README.md:176  * [![Alpine Linux 3.23 package](https://repology.org/badge/version-for-repo/alpine_3_23/radare2.svg)](https://repology.org/project/radare2/versions)  [![Alpine Linux 3.22 package](https://repology.org/badge/version-for-repo/alpine_3_22/rada"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:177",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/arch/radare2.svg",
+      "evidence": "README.md:177  * [![Arch package](https://repology.org/badge/version-for-repo/arch/radare2.svg)](https://repology.org/project/radare2/versions)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:178",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/fedora_42/radare2.svg",
+      "evidence": "README.md:178  * [![Fedora 42](https://repology.org/badge/version-for-repo/fedora_42/radare2.svg)](https://repology.org/project/radare2/versions) [![Fedora 41](https://repology.org/badge/version-for-repo/fedora_41/radare2.svg)](https://repology.org/projec"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:178",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/fedora_41/radare2.svg",
+      "evidence": "README.md:178  * [![Fedora 42](https://repology.org/badge/version-for-repo/fedora_42/radare2.svg)](https://repology.org/project/radare2/versions) [![Fedora 41](https://repology.org/badge/version-for-repo/fedora_41/radare2.svg)](https://repology.org/projec"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:179",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/homebrew/radare2.svg",
+      "evidence": "README.md:179  * [![Homebrew package](https://repology.org/badge/version-for-repo/homebrew/radare2.svg)](https://repology.org/project/radare2/versions) [![MacPorts package](https://repology.org/badge/version-for-repo/macports/radare2.svg)](https://repolog"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:179",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/macports/radare2.svg",
+      "evidence": "README.md:179  * [![Homebrew package](https://repology.org/badge/version-for-repo/homebrew/radare2.svg)](https://repology.org/project/radare2/versions) [![MacPorts package](https://repology.org/badge/version-for-repo/macports/radare2.svg)](https://repolog"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:180",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/haikuports_master/radare2.svg",
+      "evidence": "README.md:180  * [![Haiku Ports](https://repology.org/badge/version-for-repo/haikuports_master/radare2.svg)](https://repology.org/project/radare2/versions) [![Void Linux](https://repology.org/badge/version-for-repo/void_x86_64/radare2.svg)](https://repolo"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:180",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://repology.org/badge/version-for-repo/void_x86_64/radare2.svg",
+      "evidence": "README.md:180  * [![Haiku Ports](https://repology.org/badge/version-for-repo/haikuports_master/radare2.svg)](https://repology.org/project/radare2/versions) [![Void Linux](https://repology.org/badge/version-for-repo/void_x86_64/radare2.svg)](https://repolo"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "SECURITY.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/issues",
+      "evidence": "SECURITY.md:14  section](https://github.com/radareorg/radare2/issues) repository for that"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "USAGE.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.radare.org",
+      "evidence": "USAGE.md:7  https://www.radare.org"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "USAGE.md:58",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/blob/master/man",
+      "evidence": "USAGE.md:58  Check out the [manpages](https://github.com/radareorg/radare2/blob/master/man)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "USAGE.md:64",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-r2pipe",
+      "evidence": "USAGE.md:64  but it is recommended to use [r2pipe](https://github.com/radareorg/radare2-r2pipe) which is a simple interface to"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "configure:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.nopcode.org",
+      "evidence": "configure:4  # @url:    http://www.nopcode.org"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "configure:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/acr",
+      "evidence": "configure:5  # @repo:   git clone https://github.com/radare/acr"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meson.build:138",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mesonbuild/meson/issues/4328",
+      "evidence": "meson.build:138  # workaround for Solaris until https://github.com/mesonbuild/meson/issues/4328 is fixed"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/PULL_REQUEST_TEMPLATE.md:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/blob/master/DEVELOPERS.md",
+      "evidence": ".github/PULL_REQUEST_TEMPLATE.md:2  Read https://github.com/radareorg/radare2/blob/master/DEVELOPERS.md"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": ".github/PULL_REQUEST_TEMPLATE.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2book",
+      "evidence": ".github/PULL_REQUEST_TEMPLATE.md:10  - [ ] I wrote some lines in the [book](https://github.com/radareorg/radare2book) (optional)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/stale.yml:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/probot/stale",
+      "evidence": ".github/stale.yml:1  # Configuration for probot-stale - https://github.com/probot/stale"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:285",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/archive/master/radare2-5.1.0-git.tar.gz",
+      "evidence": ".github/workflows/build.yml:285  #        wget -O https://github.com/radareorg/radare2/archive/master/radare2-5.1.0-git.tar.gz"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:317",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/archive/5860c3efc12d4b75e72bdce4b1d3834599620913/radare2-5.1.0-git.tar.gz",
+      "evidence": ".github/workflows/build.yml:317  #        wget https://github.com/radareorg/radare2/archive/5860c3efc12d4b75e72bdce4b1d3834599620913/radare2-5.1.0-git.tar.gz"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:785",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ftp.fau.de/debian/pool/main/liba/libabigail/libabigail0_2.2-2_amd64.deb",
+      "evidence": ".github/workflows/build.yml:785  wget https://ftp.fau.de/debian/pool/main/liba/libabigail/libabigail0_2.2-2_amd64.deb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:787",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ftp.fau.de/debian/pool/main/liba/libabigail/libabigail-dev_2.2-2_amd64.deb",
+      "evidence": ".github/workflows/build.yml:787  wget https://ftp.fau.de/debian/pool/main/liba/libabigail/libabigail-dev_2.2-2_amd64.deb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:789",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ftp.fau.de/debian/pool/main/liba/libabigail/abigail-tools_2.2-2_amd64.deb",
+      "evidence": ".github/workflows/build.yml:789  wget https://ftp.fau.de/debian/pool/main/liba/libabigail/abigail-tools_2.2-2_amd64.deb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/build.yml:800",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/radareorg/radare2/releases/latest",
+      "evidence": ".github/workflows/build.yml:800  https://api.github.com/repos/radareorg/radare2/releases/latest \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/ci.yml:120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/capstone-engine/capstone",
+      "evidence": ".github/workflows/ci.yml:120  git clone --branch v5 --single-branch --depth=1 https://github.com/capstone-engine/capstone"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/ci.yml:271",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": ".github/workflows/ci.yml:271  #    git clone --depth 1 https://github.com/radareorg/radare2 \"spa ces\" ; cd \"spa ces\" ; ./sys/install.sh > /dev/null ; cd ..\n.github/workflows/ci.yml:276  #    git clone --depth 1 https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/codeql-analysis.yml:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://git.io/JvXDl",
+      "evidence": ".github/workflows/codeql-analysis.yml:41  # 📚 https://git.io/JvXDl"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/coverity-scan.yml:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scan.coverity.com/download/cxx/linux64",
+      "evidence": ".github/workflows/coverity-scan.yml:15  wget -q https://scan.coverity.com/download/cxx/linux64 --post-data \"token=$TOKEN&project=radare2\" -O cov-analysis-linux64.tar.gz"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/coverity-scan.yml:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://scan.coverity.com/builds?project=radare2",
+      "evidence": ".github/workflows/coverity-scan.yml:45  https://scan.coverity.com/builds?project=radare2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/qemu.yml:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/marketplace/actions/run-on-architecture",
+      "evidence": ".github/workflows/qemu.yml:1  # https://github.com/marketplace/actions/run-on-architecture"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/tcc.yml:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/TinyCC/tinycc",
+      "evidence": ".github/workflows/tcc.yml:20  git clone https://github.com/TinyCC/tinycc\n.github/workflows/tcc.yml:73  git clone https://github.com/TinyCC/tinycc\n.github/workflows/tcc.yml:116  git clone https://github.com/TinyCC/tinycc"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/r2r/r2r.c:1238",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-testbins",
+      "evidence": "binr/r2r/r2r.c:1238  : \"git clone --depth 1 https://github.com/radareorg/radare2-testbins bins\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/r2r/run.c:69",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/419736",
+      "evidence": "binr/r2r/run.c:69  // see https://stackoverflow.com/a/419736"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/radare2/Info.plist:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.apple.com/DTDs/PropertyList-1.0.dtd",
+      "evidence": "binr/radare2/Info.plist:2  <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"https://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/radare2/Makefile:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://kripken.github.io/emscripten-site/docs/optimizing/Optimizing-Code.html",
+      "evidence": "binr/radare2/Makefile:21  # https://kripken.github.io/emscripten-site/docs/optimizing/Optimizing-Code.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/radare2/radare2_ios.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.apple.com/DTDs/PropertyList-1.0.dtd",
+      "evidence": "binr/radare2/radare2_ios.xml:2  <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"https://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/radare2/radare2_macos.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.apple.com/DTDs/PropertyList-1.0.dtd",
+      "evidence": "binr/radare2/radare2_macos.xml:2  <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"https://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/ragg2/shellcodes.c.src:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.groar.org/expl/openbsd/english.shtml",
+      "evidence": "binr/ragg2/shellcodes.c.src:29  // https://www.groar.org/expl/openbsd/english.shtml"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/ragg2/shellcodes.c.src:232",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.48bits.com/papers/sparc_shellcodes.txt",
+      "evidence": "binr/ragg2/shellcodes.c.src:232  https://www.48bits.com/papers/sparc_shellcodes.txt"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/ragg2/shellcodes.c.src:807",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://shell-storm.org/shellcode/files/shellcode-735.php",
+      "evidence": "binr/ragg2/shellcodes.c.src:807  * https://shell-storm.org/shellcode/files/shellcode-735.php"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/ragg2/shellcodes.c.src:867",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://shell-storm.org/shellcode/files/shellcode-736.php",
+      "evidence": "binr/ragg2/shellcodes.c.src:867  * https://shell-storm.org/shellcode/files/shellcode-736.php"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "binr/ragg2/shellcodes.c.src:878",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://hammackj.com/2011/04/28/osx-x64-reverse-tcp-shellcode/",
+      "evidence": "binr/ragg2/shellcodes.c.src:878  * https://hammackj.com/2011/04/28/osx-x64-reverse-tcp-shellcode/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/android.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/tools/sdk/ndk/index.html",
+      "evidence": "doc/android.md:10  * https://developer.android.com/tools/sdk/ndk/index.html"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/avr.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.wch.cn/download/CH341SER_MAC_ZIP.html",
+      "evidence": "doc/avr.md:13  * [https://www.wch.cn/download/CH341SER_MAC_ZIP.html](https://www.wch.cn/download/CH341SER_MAC_ZIP.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/avr.md:17",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.arduino.cc/en/Main/Software",
+      "evidence": "doc/avr.md:17  * [https://www.arduino.cc/en/Main/Software](https://www.arduino.cc/en/Main/Software)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/cross-compile.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/dockcross/dockcross",
+      "evidence": "doc/cross-compile.md:5  * [https://github.com/dockcross/dockcross](https://github.com/dockcross/dockcross)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/cross-compile.md:39",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/pull/5060",
+      "evidence": "doc/cross-compile.md:39  * https://github.com/radareorg/radare2/pull/5060"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/cross-compile.md:40",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://blogs.nopcode.org/brainstorm/2016/07/26/cross-compiling-with-docker",
+      "evidence": "doc/cross-compile.md:40  * https://blogs.nopcode.org/brainstorm/2016/07/26/cross-compiling-with-docker"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/flirt.md:18",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.hex-rays.com/products/ida/tech/flirt/in_depth.shtml",
+      "evidence": "doc/flirt.md:18  there's a paragraph in [IDA F.L.I.R.T. Technology: In-Depth](https://www.hex-rays.com/products/ida/tech/flirt/in_depth.shtml)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/freebsd.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "doc/freebsd.md:16  git clone https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/freebsd.md:25",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/valabind",
+      "evidence": "doc/freebsd.md:25  git clone https://github.com/radare/valabind"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/freebsd.md:33",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-bindings",
+      "evidence": "doc/freebsd.md:33  git clone https://github.com/radareorg/radare2-bindings"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/gprobe.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/RedBalloonShenanigans/MonitorDarkly",
+      "evidence": "doc/gprobe.md:12  [MonitorDarkly exploit](https://github.com/RedBalloonShenanigans/MonitorDarkly)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/ida.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-extras/tree/master/r2ida",
+      "evidence": "doc/ida.md:5  [https://github.com/radareorg/radare2-extras/tree/master/r2ida](https://github.com/radareorg/radare2-extras/tree/master/r2ida)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/iphone.md:31",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://lolcathost.org/b/libgcc_4.2-20080410-1-6_iphoneos-arm.deb",
+      "evidence": "doc/iphone.md:31  wget https://lolcathost.org/b/libgcc_4.2-20080410-1-6_iphoneos-arm.deb"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/iphone.md:32",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://lolcathost.org/b/libSystem.dylib",
+      "evidence": "doc/iphone.md:32  wget https://lolcathost.org/b/libSystem.dylib"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/iphone.md:123",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/cydia",
+      "evidence": "doc/iphone.md:123  git clone https://github.com/radare/cydia"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/10130143/gpl-lgpl-and-static-linking",
+      "evidence": "doc/licenses.md:5  https://stackoverflow.com/questions/10130143/gpl-lgpl-and-static-linking"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/1394623/can-i-dynamically-call-a-lgpl-gpl-software-in-my-closed-source-application",
+      "evidence": "doc/licenses.md:9  https://stackoverflow.com/questions/1394623/can-i-dynamically-call-a-lgpl-gpl-software-in-my-closed-source-application"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses.md:54",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/software/librejs/free-your-javascript.html",
+      "evidence": "doc/licenses.md:54  * https://www.gnu.org/software/librejs/free-your-javascript.html"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses.md:55",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://greendrake.info/#nfy0",
+      "evidence": "doc/licenses.md:55  * https://greendrake.info/#nfy0"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/macos.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://llvm.org/svn/llvm-project/lldb/trunk/docs/code-signing.txt",
+      "evidence": "doc/macos.md:56  (Based on https://llvm.org/svn/llvm-project/lldb/trunk/docs/code-signing.txt)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/maemo.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://qt.nokia.com/downloads/",
+      "evidence": "doc/maemo.md:6  https://qt.nokia.com/downloads/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/openbsd.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "doc/openbsd.md:14  git clone https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/openbsd.md:22",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/valabind",
+      "evidence": "doc/openbsd.md:22  git clone https://github.com/radare/valabind"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/openbsd.md:29",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-bindings",
+      "evidence": "doc/openbsd.md:29  git clone https://github.com/radareorg/radare2-bindings"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/repo:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "doc/repo:2  R2=https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/repo:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/ired",
+      "evidence": "doc/repo:3  IRED=https://github.com/radare/ired"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/repo:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-extras",
+      "evidence": "doc/repo:4  EXTRAS=https://github.com/radareorg/radare2-extras"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/repo:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radare/radare2-capstone",
+      "evidence": "doc/repo:5  CAPSTONE=https://github.com/radare/radare2-capstone"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/repo:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-bindings",
+      "evidence": "doc/repo:6  BINDINGS=https://github.com/radareorg/radare2-bindings"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/sdb_ordinal.md:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/tree/master/libr/bin/d/dll",
+      "evidence": "doc/sdb_ordinal.md:4  2. Upload file `DLLNAME.sdb.txt` in https://github.com/radareorg/radare2/tree/master/libr/bin/d/dll"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/sdb_ordinal.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/blob/master/libr/bin/d/Makefile#L14",
+      "evidence": "doc/sdb_ordinal.md:5  3. Change the following [Makefile](https://github.com/radareorg/radare2/blob/master/libr/bin/d/Makefile#L14)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/snap.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://snapcraft.io/docs/installing-snapd",
+      "evidence": "doc/snap.md:3  radare2 is also available as a snap package and can be installed on a system that supports snap packages. See [Installing snapd](https://snapcraft.io/docs/installing-snapd) to setup your system to support snap packages."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/snap.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://snapcraft.io/static/images/badges/en/snap-store-black.svg",
+      "evidence": "doc/snap.md:11  [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/radare2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/snap.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://snapcraft.io/radare2",
+      "evidence": "doc/snap.md:11  [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/radare2)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/snap.md:15",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2-snap",
+      "evidence": "doc/snap.md:15  To review the snap build reciepe this can be found in [this separate repository](https://github.com/radareorg/radare2-snap)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/termux.md:28",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2",
+      "evidence": "doc/termux.md:28  git clone --depth 1 https://github.com/radareorg/radare2"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/wasm.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/WebAssembly/wasi-sdk/releases",
+      "evidence": "doc/wasm.md:13  - Install the WASI SDK from https://github.com/WebAssembly/wasi-sdk/releases"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/wasm.md:101",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/xterm@5/lib/xterm.min.js",
+      "evidence": "doc/wasm.md:101  <script src=\"https://cdn.jsdelivr.net/npm/xterm@5/lib/xterm.min.js\"></script>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/windows.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://radare.gitbooks.io/radare2book/content/first_steps/windows_compilation.html",
+      "evidence": "doc/windows.md:6  You can follow the [r2book](https://radare.gitbooks.io/radare2book/content/first_steps/windows_compilation.html) for a more complete guide."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/yara.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://b161268c3bf5a87bc67309e7c870820f5f39f672.googledrive.com/host/0BznOMqZ9f3VUek8yN3VvSGdhRFU/YARA-Manual.pdf",
+      "evidence": "doc/yara.md:5  [Yara User's Manual](https://b161268c3bf5a87bc67309e7c870820f5f39f672.googledrive.com/host/0BznOMqZ9f3VUek8yN3VvSGdhRFU/YARA-Manual.pdf)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/yara.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://virustotal.github.io/yara/",
+      "evidence": "doc/yara.md:7  The following is [YARA in a nutshell](https://virustotal.github.io/yara/) from this document:"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/Apache-2.0.txt:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.apache.org/licenses/",
+      "evidence": "doc/licenses/Apache-2.0.txt:3  https://www.apache.org/licenses/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/Apache-2.0.txt:67",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "doc/licenses/Apache-2.0.txt:67  https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/GPL-3.0-only.txt:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fsf.org/",
+      "evidence": "doc/licenses/GPL-3.0-only.txt:4  Copyright © 2007 Free Software Foundation, Inc. <https://fsf.org/>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/GPL-3.0-only.txt:218",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "doc/licenses/GPL-3.0-only.txt:218  You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.\ndoc/licenses/GPL-3.0-only.txt:230  You should also get your employer (if you work as a programmer) or school, if any, to sign a “copyright disclaimer” for the program, if necessary. For more information on this, and how to apply and follow the GNU GPL, see <https://www.gnu.o"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/GPL-3.0-only.txt:232",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/philosophy/why-not-lgpl.html",
+      "evidence": "doc/licenses/GPL-3.0-only.txt:232  The GNU General Public License does not permit incorporating your program into proprietary programs. If your program is a subroutine library, you may consider it more useful to permit linking proprietary applications with the library. If th"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/LGPL-3.0-only.txt:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fsf.org/",
+      "evidence": "doc/licenses/LGPL-3.0-only.txt:4  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\ndoc/licenses/LGPL-3.0-only.txt:76  Copyright © 2007 Free Software Foundation, Inc. <https://fsf.org/>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/LGPL-3.0-only.txt:290",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "doc/licenses/LGPL-3.0-only.txt:290  You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.\ndoc/licenses/LGPL-3.0-only.txt:302  You should also get your employer (if you work as a programmer) or school, if any, to sign a “copyright disclaimer” for the program, if necessary. For more information on this, and how to apply and follow the GNU GPL, see <https://www.gnu.o"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/licenses/LGPL-3.0-only.txt:304",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/philosophy/why-not-lgpl.html",
+      "evidence": "doc/licenses/LGPL-3.0-only.txt:304  The GNU General Public License does not permit incorporating your program into proprietary programs. If your program is a subroutine library, you may consider it more useful to permit linking proprietary applications with the library. If th"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/pdb/package.json:8",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2.git",
+      "evidence": "doc/pdb/package.json:8  \"url\": \"https://github.com/radareorg/radare2.git\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/pdb/package.json:34",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/radareorg/radare2/issues",
+      "evidence": "doc/pdb/package.json:34  \"url\": \"https://github.com/radareorg/radare2/issues\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/pdb/package.json:36",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.radare.org",
+      "evidence": "doc/pdb/package.json:36  \"homepage\": \"https://www.radare.org\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/pdb/pdb_usage.md:52",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://radareorg.github.io/blog/posts/types/",
+      "evidence": "doc/pdb/pdb_usage.md:52  Check out this post for more information about pf: https://radareorg.github.io/blog/posts/types/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "doc/zsh/_r2:19",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cmd/",
+      "evidence": "doc/zsh/_r2:19  '-C[file is host:port (alias for -c+=http://%s/cmd/)]'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:436",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.dwarfstd.org/doc/DWARF4.pdf#page=102&zoom=100",
+      "evidence": "libr/anal/dwarf_process.c:436  * https://www.dwarfstd.org/doc/DWARF4.pdf#page=102&zoom=100,0,0\nlibr/anal/dwarf_process.c:580  // https://www.dwarfstd.org/doc/DWARF4.pdf#page=102&zoom=100,0,0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:480",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.dwarfstd.org/doc/DWARF4.pdf#page=39&zoom=100",
+      "evidence": "libr/anal/dwarf_process.c:480  https://www.dwarfstd.org/doc/DWARF4.pdf#page=39&zoom=100,0,0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:525",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.dwarfstd.org/doc/DWARF4.pdf#page=110&zoom=100",
+      "evidence": "libr/anal/dwarf_process.c:525  * https://www.dwarfstd.org/doc/DWARF4.pdf#page=110&zoom=100,0,0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:722",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.dwarfstd.org/doc/DWARF4.pdf#page=96&zoom=100",
+      "evidence": "libr/anal/dwarf_process.c:722  * https://www.dwarfstd.org/doc/DWARF4.pdf#page=96&zoom=100,0,0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:888",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf",
+      "evidence": "libr/anal/dwarf_process.c:888  /* x86_64 https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:889",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/wiki/hjl-tools/x86-psABI/x86-64-psABI-1.0.pdf",
+      "evidence": "libr/anal/dwarf_process.c:889  // https://raw.githubusercontent.com/wiki/hjl-tools/x86-psABI/x86-64-psABI-1.0.pdf"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:1108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://01.org/sites/default/files/file_attach/intel386-psabi-1.0.pdf",
+      "evidence": "libr/anal/dwarf_process.c:1108  /* x86 https://01.org/sites/default/files/file_attach/intel386-psabi-1.0.pdf */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/dwarf_process.c:1175",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://refspecs.linuxfoundation.org/ELF/ppc64/PPC-elf64abi-1.9.html#DW-REG",
+      "evidence": "libr/anal/dwarf_process.c:1175  /* https://refspecs.linuxfoundation.org/ELF/ppc64/PPC-elf64abi-1.9.html#DW-REG */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/flirt.c:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.hex-rays.com/products/ida/tech/flirt/in_depth.shtml",
+      "evidence": "libr/anal/flirt.c:5  /* more information on flirt https://www.hex-rays.com/products/ida/tech/flirt/in_depth.shtml */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/p/anal_blaze.c:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://arxiv.org/abs/1902.01437",
+      "evidence": "libr/anal/p/anal_blaze.c:3  // based on the algorithm described https://arxiv.org/abs/1902.01437"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/p/anal_gopclntab.c:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/AsherDLL/r2gopclntabParser",
+      "evidence": "libr/anal/p/anal_gopclntab.c:3  // -> https://github.com/AsherDLL/r2gopclntabParser"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/anal/p/anal_six.c:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Siguza/misc/master/xref.c",
+      "evidence": "libr/anal/p/anal_six.c:3  // Context: https://raw.githubusercontent.com/Siguza/misc/master/xref.c"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/d/nes-init.r2:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.nesdev.org/wiki/CPU_memory_map",
+      "evidence": "libr/arch/d/nes-init.r2:1  # https://www.nesdev.org/wiki/CPU_memory_map"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/include/opcode/lanai.h:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.myri.com/",
+      "evidence": "libr/arch/include/opcode/lanai.h:33  * 325 N. Santa Anita Ave.          World Wide Web: https://www.myri.com/ *"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/6502/plugin.c:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://unusedino.de/ec64/technical/aay/c64/bchrt651.htm",
+      "evidence": "libr/arch/p/6502/plugin.c:3  /* 6502 info taken from https://unusedino.de/ec64/technical/aay/c64/bchrt651.htm"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/6502/plugin.c:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://homepage.ntlworld.com/cyborgsystems/CS_Main/6502/6502.htm",
+      "evidence": "libr/arch/p/6502/plugin.c:6  *\thttps://homepage.ntlworld.com/cyborgsystems/CS_Main/6502/6502.htm"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/6502/plugin.c:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.archive.org/web/20160406122905/https://homepage.ntlworld.com/cyborgsystems/CS_Main/6502/6502.htm",
+      "evidence": "libr/arch/p/6502/plugin.c:8  *\t1 https://web.archive.org/web/20160406122905/https://homepage.ntlworld.com/cyborgsystems/CS_Main/6502/6502.htm"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/6502/plugin.c:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/csBlueChip/6502_Programming_Guide",
+      "evidence": "libr/arch/p/6502/plugin.c:9  *\t2 https://github.com/csBlueChip/6502_Programming_Guide"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/6502/plugin.c:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://vice-emu.sourceforge.net/",
+      "evidence": "libr/arch/p/6502/plugin.c:11  *\thttps://vice-emu.sourceforge.net/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/alpha/alpha-opc.c:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ftp.digital.com/pub/Digital/info/semiconductor",
+      "evidence": "libr/arch/p/alpha/alpha-opc.c:44  on-line at http://ftp.digital.com/pub/Digital/info/semiconductor"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/any_vasm/plugin.c:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://sun.hasenbraten.de/vasm/",
+      "evidence": "libr/arch/p/any_vasm/plugin.c:29  .author = \"http://sun.hasenbraten.de/vasm/ (r2pm -ci vasm)\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/armass64.c:168",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://llvm.org/doxygen/AArch64AddressingModes_8h_source.html",
+      "evidence": "libr/arch/p/arm/armass64.c:168  // https://llvm.org/doxygen/AArch64AddressingModes_8h_source.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/plugin_v35.c:1753",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Find_first_set",
+      "evidence": "libr/arch/p/arm/plugin_v35.c:1753  from https://en.wikipedia.org/wiki/Find_first_set modified for up to size 64"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/aarch64/aarch64-dis.c:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "libr/arch/p/arm/aarch64/aarch64-dis.c:19  see <https://www.gnu.org/licenses/>.  */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/aarch64/aarch64-dis.h:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "libr/arch/p/arm/aarch64/aarch64-dis.h:19  see <https://www.gnu.org/licenses/>.  */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/aarch64/aarch64-opc-2.c:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "libr/arch/p/arm/aarch64/aarch64-opc-2.c:19  see <https://www.gnu.org/licenses/>.  */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/aarch64/aarch64-opc.c:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "libr/arch/p/arm/aarch64/aarch64-opc.c:19  see <https://www.gnu.org/licenses/>.  */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/aarch64/aarch64-opc.h:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "libr/arch/p/arm/aarch64/aarch64-opc.h:19  see <https://www.gnu.org/licenses/>.  */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/arm/aarch64/aarch64.h:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "libr/arch/p/arm/aarch64/aarch64.h:20  see <https://www.gnu.org/licenses/>.  */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/avr/plugin.c:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.atmel.com/images/atmel-0856-avr-instruction-set-manual.pdf",
+      "evidence": "libr/arch/p/avr/plugin.c:4  http://www.atmel.com/images/atmel-0856-avr-instruction-set-manual.pdf"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/avr/plugin.c:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Atmel_AVR_instruction_set",
+      "evidence": "libr/arch/p/avr/plugin.c:5  https://en.wikipedia.org/wiki/Atmel_AVR_instruction_set"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/avr/plugin.c:1950",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.nongnu.org/avr-libc/user-manual/FAQ.html",
+      "evidence": "libr/arch/p/avr/plugin.c:1950  // explained in https://www.nongnu.org/avr-libc/user-manual/FAQ.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/avr/plugin.c:1951",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.avrfreaks.net/forum/function-calling-convention-gcc-generated-assembly-file",
+      "evidence": "libr/arch/p/avr/plugin.c:1951  // and https://www.avrfreaks.net/forum/function-calling-convention-gcc-generated-assembly-file"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/avr/plugin.c:2197",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vancegroup-mirrors/avr-libc/blob/06cc6ff5e6120b36f1b246871728addee58d3f87/avr-libc/include/avr/iom328p.h#L216",
+      "evidence": "libr/arch/p/avr/plugin.c:2197  // TODO: continue from here: https://github.com/vancegroup-mirrors/avr-libc/blob/06cc6ff5e6120b36f1b246871728addee58d3f87/avr-libc/include/avr/iom328p.h#L216"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libr/arch/p/cris/plugin.c:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://developer.axis.com/old/documentation/hw/etraxfs/des_ref/des_ref.pdf",
+      "evidence": "libr/arch/p/cris/plugin.c:10  http://developer.axis.com/old/documentation/hw/etraxfs/des_ref/des_ref.pdf"
+    }
+  ],
+  "reRooting": []
+}

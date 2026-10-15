@@ -1,0 +1,108 @@
+{
+  "target": "asset-supay-tuoku (初扫收录实例 D:\\分类清理区\\06_黑产工具_钓鱼假U卡\\supay 托库)",
+  "origin": "本地路径 D:\\分类清理区\\06_黑产工具_钓鱼假U卡\\supay 托库",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 6 个文本文件（源码 2、其余 4），识别 11 面（源码档 5、文档/示例 DOC_ 降权 5、其余文件 1；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "probe.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/",
+      "evidence": "probe.py:9  \"https://www.supaycard.com/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "probe.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/app/card",
+      "evidence": "probe.py:10  \"https://www.supaycard.com/app/card\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "probe.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://supaycard.com/",
+      "evidence": "probe.py:11  \"https://supaycard.com/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "probe.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/app/card?id=1",
+      "evidence": "probe.py:12  \"https://www.supaycard.com/app/card?id=1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "run_sqlmap.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/app/card?id=1",
+      "evidence": "run_sqlmap.py:12  \"-u\", \"https://www.supaycard.com/app/card?id=1\","
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "probe_out.txt:1",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/",
+      "evidence": "probe_out.txt:1  HTTP https://www.supaycard.com/ CODE=403 SERVER=cloudflare CF=a4597f3a9ab655f9-KUL CT=text/html; charset=UTF-8 SNIP=b'<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html;"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "probe_out.txt:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/app/card",
+      "evidence": "probe_out.txt:2  HTTP https://www.supaycard.com/app/card CODE=403 SERVER=cloudflare CF=a4597f3adc28d869-KUL CT=text/html; charset=UTF-8 SNIP=b'<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"te"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "probe_out.txt:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://supaycard.com/",
+      "evidence": "probe_out.txt:3  HTTP https://supaycard.com/ CODE=403 SERVER=cloudflare CF=a4597f3b2914c0f0-KUL CT=text/html; charset=UTF-8 SNIP=b'<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; cha"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "probe_out.txt:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/app/card?id=1",
+      "evidence": "probe_out.txt:4  HTTP https://www.supaycard.com/app/card?id=1 CODE=403 SERVER=cloudflare CF=a4597f3b495e3e8d-KUL CT=text/html; charset=UTF-8 SNIP=b'<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" conten"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap_banner.log:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "sqlmap_banner.log:6  |_|V...       |_|   https://sqlmap.org"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "www.supaycard.com/target.txt:1",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.supaycard.com/app/card?id=1",
+      "evidence": "www.supaycard.com/target.txt:1  https://www.supaycard.com/app/card?id=1 (GET)  # C:\\Users\\user\\Desktop\\sqlmap-tool\\sqlmap.py -u https://www.supaycard.com/app/card?id=1 --random-agent --batch --banner --level=1 --risk=1 --timeout=20 --retries=1 --threads=1 -v 1 --flush-ses"
+    }
+  ],
+  "reRooting": []
+}

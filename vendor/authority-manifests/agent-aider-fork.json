@@ -1,0 +1,3628 @@
+{
+  "target": "agent-aider-fork (初扫收录实例 G:\\Agents\\改刀军团\\Aider)",
+  "origin": "本地路径 G:\\Agents\\改刀军团\\Aider",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 268 个文本文件（源码 180、其余 88），识别 395 面（源码档 195、文档/示例 DOC_ 降权 180、其余文件 20；截断=False/True，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "aider/analytics.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com",
+      "evidence": "aider/analytics.py:57  posthog_host = \"https://us.i.posthog.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/analytics.py:209",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/PostHog/posthog-python/blob/9e1bb8c58afaa229da24c4fb576c08bb88a75752/posthog/consumer.py#L86",
+      "evidence": "aider/analytics.py:209  # https://github.com/PostHog/posthog-python/blob/9e1bb8c58afaa229da24c4fb576c08bb88a75752/posthog/consumer.py#L86"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/analytics.py:210",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/2532",
+      "evidence": "aider/analytics.py:210  # https://github.com/Aider-AI/aider/issues/2532"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/args.py:392",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pygments.org/styles",
+      "evidence": "aider/args.py:392  \" see https://pygments.org/styles for available themes)\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/args.py:873",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "COLUMNS",
+      "rule": "os.environ[]",
+      "evidence": "aider/args.py:873  os.environ[\"COLUMNS\"] = \"70\"\naider/args.py:886  os.environ[\"COLUMNS\"] = \"100\"\naider/args.py:899  os.environ[\"COLUMNS\"] = \"120\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/args_formatter.py:101",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/config/dotenv.html",
+      "evidence": "aider/args_formatter.py:101  # https://aider.chat/docs/config/dotenv.html"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/commands.py:974",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "aider/commands.py:974  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/dump.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://docs.python.org/library/traceback.html",
+      "evidence": "aider/dump.py:15  # http://docs.python.org/library/traceback.html"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/editor.py:85",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "VISUAL",
+      "rule": "os.environ.get",
+      "evidence": "aider/editor.py:85  editor = os.environ.get(\"VISUAL\", os.environ.get(\"EDITOR\", default))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/editor.py:85",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "EDITOR",
+      "rule": "os.environ.get",
+      "evidence": "aider/editor.py:85  editor = os.environ.get(\"VISUAL\", os.environ.get(\"EDITOR\", default))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/editor.py:134",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "aider/editor.py:134  subprocess.call(command_str, shell=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/gui.py:163",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues",
+      "evidence": "aider/gui.py:163  \" issues](https://github.com/Aider-AI/aider/issues).\"\naider/gui.py:531  \"Report a bug\": \"https://github.com/Aider-AI/aider/issues\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/gui.py:477",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://",
+      "evidence": "aider/gui.py:477  placeholder=\"https://...\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/help.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://download.pytorch.org/whl/cpu",
+      "evidence": "aider/help.py:22  \"https://download.pytorch.org/whl/cpu\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/help.py:81",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/{url_path",
+      "evidence": "aider/help.py:81  return f\"https://aider.chat/{url_path}\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/help.py:138",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "TOKENIZERS_PARALLELISM",
+      "rule": "os.environ[]",
+      "evidence": "aider/help.py:138  os.environ[\"TOKENIZERS_PARALLELISM\"] = \"true\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/io.py:279",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NO_COLOR",
+      "rule": "os.environ.get",
+      "evidence": "aider/io.py:279  no_color = os.environ.get(\"NO_COLOR\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/io.py:1093",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "aider/io.py:1093  result = subprocess.run("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/linter.py:151",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "aider/linter.py:151  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/llm.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat",
+      "evidence": "aider/llm.py:9  AIDER_SITE_URL = \"https://aider.chat\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/llm.py:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OR_SITE_URL",
+      "rule": "os.environ[]",
+      "evidence": "aider/llm.py:12  os.environ[\"OR_SITE_URL\"] = AIDER_SITE_URL"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/llm.py:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OR_APP_NAME",
+      "rule": "os.environ[]",
+      "evidence": "aider/llm.py:13  os.environ[\"OR_APP_NAME\"] = AIDER_APP_NAME"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/llm.py:14",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LITELLM_MODE",
+      "rule": "os.environ[]",
+      "evidence": "aider/llm.py:14  os.environ[\"LITELLM_MODE\"] = \"PRODUCTION\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/main.py:220",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/772",
+      "evidence": "aider/main.py:220  # See https://github.com/Aider-AI/aider/issues/772"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/main.py:254",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/2193",
+      "evidence": "aider/main.py:254  # https://github.com/Aider-AI/aider/issues/2193"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/main.py:522",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_VERIFY",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:522  os.environ[\"SSL_VERIFY\"] = \"\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/main.py:613",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:613  os.environ[\"ANTHROPIC_API_KEY\"] = args.anthropic_api_key"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/main.py:616",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:616  os.environ[\"OPENAI_API_KEY\"] = args.openai_api_key"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/main.py:621",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_BASE",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:621  os.environ[\"OPENAI_API_BASE\"] = args.openai_api_base"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/main.py:626",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_VERSION",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:626  os.environ[\"OPENAI_API_VERSION\"] = args.openai_api_version"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/main.py:629",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_TYPE",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:629  os.environ[\"OPENAI_API_TYPE\"] = args.openai_api_type"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/main.py:634",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_ORGANIZATION",
+      "rule": "os.environ[]",
+      "evidence": "aider/main.py:634  os.environ[\"OPENAI_ORGANIZATION\"] = args.openai_organization_id"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/main.py:786",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "aider/main.py:786  if args.model.startswith(\"openrouter/\") and not os.environ.get(\"OPENROUTER_API_KEY\"):\naider/main.py:795  if os.environ.get(\"OPENROUTER_API_KEY\"):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/models.py:163",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/BerriAI/litellm/main/",
+      "evidence": "aider/models.py:163  \"https://raw.githubusercontent.com/BerriAI/litellm/main/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/models.py:279",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/<model_route",
+      "evidence": "aider/models.py:279  Expected URL: https://openrouter.ai/<model_route>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/models.py:285",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/",
+      "evidence": "aider/models.py:285  url = \"https://openrouter.ai/\" + url_part"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/models.py:748",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/BerriAI/litellm/issues/3190",
+      "evidence": "aider/models.py:748  # https://github.com/BerriAI/litellm/issues/3190"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/models.py:758",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AWS_PROFILE",
+      "rule": "os.environ.get",
+      "evidence": "aider/models.py:758  if os.environ.get(\"AWS_PROFILE\"):"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/models.py:954",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_COPILOT_TOKEN",
+      "rule": "os.environ[]",
+      "evidence": "aider/models.py:954  github_token = os.environ[\"GITHUB_COPILOT_TOKEN\"]\naider/models.py:959  \"Authorization\": f\"Bearer {os.environ['GITHUB_COPILOT_TOKEN']}\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/models.py:965",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/copilot_internal/v2/token",
+      "evidence": "aider/models.py:965  url = \"https://api.github.com/copilot_internal/v2/token\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/models.py:986",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_SANITY_CHECK_TURNS",
+      "rule": "os.environ.get",
+      "evidence": "aider/models.py:986  if os.environ.get(\"AIDER_SANITY_CHECK_TURNS\"):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/onboarding.py:31",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1/auth/key",
+      "evidence": "aider/onboarding.py:31  \"http://127.0.0.1:9900/v1/auth/key\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/onboarding.py:53",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "aider/onboarding.py:53  openrouter_key = os.environ.get(\"OPENROUTER_API_KEY\")\naider/onboarding.py:102  os.environ[\"OPENROUTER_API_KEY\"] = openrouter_key\naider/onboarding.py:359  os.environ[\"OPENROUTER_API_KEY\"] = api_key"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/onboarding.py:178",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1/auth/keys",
+      "evidence": "aider/onboarding.py:178  \"http://127.0.0.1:9900/v1/auth/keys\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/onboarding.py:223",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:{port",
+      "evidence": "aider/onboarding.py:223  callback_url = f\"http://localhost:{port}/callback/aider\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/onboarding.py:303",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/auth",
+      "evidence": "aider/onboarding.py:303  auth_url_base = \"https://openrouter.ai/auth\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/openrouter.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1/models",
+      "evidence": "aider/openrouter.py:5  (downloaded from ``http://127.0.0.1:9900/v1/models``) and exposes a\naider/openrouter.py:30  MODELS_URL = \"http://127.0.0.1:9900/v1/models\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/prompts.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://www.conventionalcommits.org/en/v1.0.0/#summary",
+      "evidence": "aider/prompts.py:7  # https://www.conventionalcommits.org/en/v1.0.0/#summary"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/repo.py:124",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gitpython-developers/GitPython/issues/427",
+      "evidence": "aider/repo.py:124  # https://github.com/gitpython-developers/GitPython/issues/427"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/repo.py:292",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GIT_COMMITTER_NAME",
+      "rule": "os.environ.get",
+      "evidence": "aider/repo.py:292  original_committer_name_env = os.environ.get(\"GIT_COMMITTER_NAME\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/repo.py:293",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GIT_AUTHOR_NAME",
+      "rule": "os.environ.get",
+      "evidence": "aider/repo.py:293  original_author_name_env = os.environ.get(\"GIT_AUTHOR_NAME\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/repomap.py:382",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/link_analysis/pagerank_alg.html#pagerank",
+      "evidence": "aider/repomap.py:382  # https://networkx.org/documentation/stable/_modules/networkx/algorithms/link_analysis/pagerank_alg.html#pagerank"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/report.py:31",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": "aider/report.py:31  git_version = subprocess.check_output([\"git\", \"--version\"]).decode().strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/run_cmd.py:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SHELL",
+      "rule": "os.environ.get",
+      "evidence": "aider/run_cmd.py:47  shell = os.environ.get(\"SHELL\", \"/bin/sh\")\naider/run_cmd.py:108  shell = os.environ.get(\"SHELL\", \"/bin/sh\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/run_cmd.py:62",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "aider/run_cmd.py:62  process = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:1",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/",
+      "evidence": "aider/urls.py:1  website = \"https://aider.chat/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:2",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/faq.html#how-can-i-add-all-the-files-to-the-chat",
+      "evidence": "aider/urls.py:2  add_all_files = \"https://aider.chat/docs/faq.html#how-can-i-add-all-the-files-to-the-chat\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:3",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/troubleshooting/edit-errors.html",
+      "evidence": "aider/urls.py:3  edit_errors = \"https://aider.chat/docs/troubleshooting/edit-errors.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/git.html",
+      "evidence": "aider/urls.py:4  git = \"https://aider.chat/docs/git.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/install/optional.html#enable-playwright",
+      "evidence": "aider/urls.py:5  enable_playwright = \"https://aider.chat/docs/install/optional.html#enable-playwright\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/assets/icons/favicon-32x32.png",
+      "evidence": "aider/urls.py:6  favicon = \"https://aider.chat/assets/icons/favicon-32x32.png\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/llms/warnings.html",
+      "evidence": "aider/urls.py:7  model_warnings = \"https://aider.chat/docs/llms/warnings.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/troubleshooting/token-limits.html",
+      "evidence": "aider/urls.py:8  token_limits = \"https://aider.chat/docs/troubleshooting/token-limits.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/llms.html",
+      "evidence": "aider/urls.py:9  llms = \"https://aider.chat/docs/llms.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/faq.html#can-i-use-aider-in-a-large-mono-repo",
+      "evidence": "aider/urls.py:10  large_repos = \"https://aider.chat/docs/faq.html#can-i-use-aider-in-a-large-mono-repo\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/new",
+      "evidence": "aider/urls.py:11  github_issues = \"https://github.com/Aider-AI/aider/issues/new\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/211",
+      "evidence": "aider/urls.py:12  git_index_version = \"https://github.com/Aider-AI/aider/issues/211\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/troubleshooting/imports.html",
+      "evidence": "aider/urls.py:13  install_properly = \"https://aider.chat/docs/troubleshooting/imports.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:14",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/more/analytics.html",
+      "evidence": "aider/urls.py:14  analytics = \"https://aider.chat/docs/more/analytics.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/HISTORY.html#release-notes",
+      "evidence": "aider/urls.py:15  release_notes = \"https://aider.chat/HISTORY.html#release-notes\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:16",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/more/edit-formats.html",
+      "evidence": "aider/urls.py:16  edit_formats = \"https://aider.chat/docs/more/edit-formats.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/urls.py:17",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/troubleshooting/models-and-keys.html",
+      "evidence": "aider/urls.py:17  models_and_keys = \"https://aider.chat/docs/troubleshooting/models-and-keys.html\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/utils.py:220",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "aider/utils.py:220  subprocess.run(ensurepip_cmd, capture_output=True, check=False)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "aider/utils.py:226",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "aider/utils.py:226  process = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/versioncheck.py:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider.git",
+      "evidence": "aider/versioncheck.py:24  [\"git+https://github.com/Aider-AI/aider.git\"],"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/versioncheck.py:39",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_DOCKER_IMAGE",
+      "rule": "os.environ.get",
+      "evidence": "aider/versioncheck.py:39  docker_image = os.environ.get(\"AIDER_DOCKER_IMAGE\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/versioncheck.py:78",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://pypi.org/pypi/aider-chat/json",
+      "evidence": "aider/versioncheck.py:78  response = requests.get(\"https://pypi.org/pypi/aider-chat/json\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "aider/voice.py:184",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "aider/voice.py:184  api_key = os.getenv(\"OPENAI_API_KEY\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/coders/base_coder.py:823",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/BerriAI/litellm/pull/6928",
+      "evidence": "aider/coders/base_coder.py:823  # https://github.com/BerriAI/litellm/pull/6928"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "aider/coders/base_coder.py:1349",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_CACHE_KEEPALIVE_DELAY",
+      "rule": "os.environ.get",
+      "evidence": "aider/coders/base_coder.py:1349  delay = float(os.environ.get(\"AIDER_CACHE_KEEPALIVE_DELAY\", delay))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/coders/editblock_coder.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/2258",
+      "evidence": "aider/coders/editblock_coder.py:57  # https://github.com/Aider-AI/aider/issues/2258"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/coders/editblock_coder.py:433",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/1158",
+      "evidence": "aider/coders/editblock_coder.py:433  # https://github.com/Aider-AI/aider/issues/1158"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/coders/help_prompts.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://",
+      "evidence": "aider/coders/help_prompts.py:15  Include *bare* urls. *Do not* make [markdown links](http://...)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/coders/help_prompts.py:17",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/usage.html",
+      "evidence": "aider/coders/help_prompts.py:17  - https://aider.chat/docs/usage.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/coders/help_prompts.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/faq.html",
+      "evidence": "aider/coders/help_prompts.py:18  - https://aider.chat/docs/faq.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/install.sh:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opensource.org/licenses/MIT",
+      "evidence": "aider/website/install.sh:5  # <LICENSE-MIT or https://opensource.org/licenses/MIT>, at your"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/install.sh:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com",
+      "evidence": "aider/website/install.sh:25  INSTALLER_BASE_URL=\"${UV_INSTALLER_GITHUB_BASE_URL:-https://github.com}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/install.sh:63",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/astral-sh/uv/releases/download/0.5.9",
+      "evidence": "aider/website/install.sh:63  https://github.com/astral-sh/uv/releases/download/0.5.9"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/install.sh:1329",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fishshell.com/docs/current/cmds/source.html",
+      "evidence": "aider/website/install.sh:1329  # https://fishshell.com/docs/current/cmds/source.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/_includes/code-in-json-benchmark.js:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/chart.js",
+      "evidence": "aider/website/_includes/code-in-json-benchmark.js:14  <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/_includes/code-in-json-syntax.js:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/chart.js",
+      "evidence": "aider/website/_includes/code-in-json-syntax.js:14  <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "benchmark/benchmark.py:33",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_BENCHMARK_DIR",
+      "rule": "os.environ.get",
+      "evidence": "benchmark/benchmark.py:33  BENCHMARK_DNAME = Path(os.environ.get(\"AIDER_BENCHMARK_DIR\", \"tmp.benchmarks\"))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "benchmark/benchmark.py:639",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": "benchmark/benchmark.py:639  version = subprocess.check_output("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "benchmark/benchmark.py:1027",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "benchmark/benchmark.py:1027  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "benchmark/clone-exercism.sh:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/exercism/$lang",
+      "evidence": "benchmark/clone-exercism.sh:16  git clone \"https://github.com/exercism/$lang\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "benchmark/install-docker-ubuntu.sh:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://download.docker.com/linux/ubuntu/gpg",
+      "evidence": "benchmark/install-docker-ubuntu.sh:22  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "benchmark/install-docker-ubuntu.sh:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://download.docker.com/linux/ubuntu",
+      "evidence": "benchmark/install-docker-ubuntu.sh:27  \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \\"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "benchmark/rungrid.py:56",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "benchmark/rungrid.py:56  subprocess.run(cmd, check=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/30k-image.py:152",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "scripts/30k-image.py:152  <svg width=\"{width}\" height=\"{height}\" viewBox=\"0 0 {width} {height}\" xmlns=\"http://www.w3.org/2000/svg\">"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "scripts/blame.py:84",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "scripts/blame.py:84  result = subprocess.run(cmd, capture_output=True, text=True, check=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/dl_icons.py:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/@mdi/svg@latest/svg/{icon_name",
+      "evidence": "scripts/dl_icons.py:30  url = f\"https://cdn.jsdelivr.net/npm/@mdi/svg@latest/svg/{icon_name}.svg\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:106",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.googleapis.com/auth/cloud-platform",
+      "evidence": "scripts/homepage.py:106  credentials_path, scopes=[\"https://www.googleapis.com/auth/cloud-platform\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:172",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.pepy.tech/api/v2/projects/{package_name",
+      "evidence": "scripts/homepage.py:172  url = f\"https://api.pepy.tech/api/v2/projects/{package_name}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:192",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/{repo",
+      "evidence": "scripts/homepage.py:192  url = f\"https://api.github.com/repos/{repo}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:285",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/stargazers",
+      "evidence": "scripts/homepage.py:285  markdown = f\"\"\"  <a href=\"https://github.com/Aider-AI/aider/stargazers\"><img alt=\"GitHub Stars\" title=\"{GITHUB_STARS_TOOLTIP}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:286",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/github/stars/Aider-AI/aider?style=flat-square&logo=github&color=f1c40f&labelColor=555555",
+      "evidence": "scripts/homepage.py:286  src=\"https://img.shields.io/github/stars/Aider-AI/aider?style=flat-square&logo=github&color=f1c40f&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:287",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://pypi.org/project/aider-chat/",
+      "evidence": "scripts/homepage.py:287  <a href=\"https://pypi.org/project/aider-chat/\"><img alt=\"PyPI Downloads\" title=\"{PYPI_DOWNLOADS_TOOLTIP}\"\nscripts/homepage.py:393  <a href=\"https://pypi.org/project/aider-chat/\" class=\"github-badge badge-installs\" title=\"{PYPI_DOWNLOADS_TOOLTIP}\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:288",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/📦%20Installs-{downloads_formatted",
+      "evidence": "scripts/homepage.py:288  src=\"https://img.shields.io/badge/📦%20Installs-{downloads_formatted}-2ecc71?style=flat-square&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:290",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://img.shields.io/badge/📈%20Tokens%2Fweek-{TOKENS_PER_WEEK",
+      "evidence": "scripts/homepage.py:290  src=\"https://img.shields.io/badge/📈%20Tokens%2Fweek-{TOKENS_PER_WEEK}-3498db?style=flat-square&labelColor=555555\"/>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:291",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/#options-menu",
+      "evidence": "scripts/homepage.py:291  <a href=\"https://openrouter.ai/#options-menu\"><img alt=\"OpenRouter Ranking\" title=\"{OPENROUTER_TOOLTIP}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:292",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/🏆%20OpenRouter-Top%2020-9b59b6?style=flat-square&labelColor=555555",
+      "evidence": "scripts/homepage.py:292  src=\"https://img.shields.io/badge/🏆%20OpenRouter-Top%2020-9b59b6?style=flat-square&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:293",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/HISTORY.html",
+      "evidence": "scripts/homepage.py:293  <a href=\"https://aider.chat/HISTORY.html\"><img alt=\"Singularity\" title=\"{SINGULARITY_TOOLTIP}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:294",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/🔄%20Singularity-{aider_percent_rounded",
+      "evidence": "scripts/homepage.py:294  src=\"https://img.shields.io/badge/🔄%20Singularity-{aider_percent_rounded}%25-e74c3c?style=flat-square&labelColor=555555\"/></a>\"\"\"  # noqa"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "scripts/homepage.py:307",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USE_BIGQUERY",
+      "rule": "os.environ.get",
+      "evidence": "scripts/homepage.py:307  bigquery_env = os.environ.get(\"USE_BIGQUERY\", \"false\")\nscripts/homepage.py:346  bigquery_env = os.environ.get(\"USE_BIGQUERY\", \"false\")\nscripts/homepage.py:561  bigquery_env = os.environ.get(\"USE_BIGQUERY\", \"false\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "scripts/homepage.py:314",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "PEPY_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "scripts/homepage.py:314  api_key = os.environ.get(\"PEPY_API_KEY\")\nscripts/homepage.py:353  api_key = os.environ.get(\"PEPY_API_KEY\")\nscripts/homepage.py:575  api_key = args.api_key or os.environ.get(\"PEPY_API_KEY\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/homepage.py:389",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider",
+      "evidence": "scripts/homepage.py:389  html = f\"\"\"<a href=\"https://github.com/Aider-AI/aider\" class=\"github-badge badge-stars\" title=\"{GITHUB_STARS_TOOLTIP}\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/issues.py:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/blob/main/scripts/issues.py",
+      "evidence": "scripts/issues.py:27  Note: [A bot script](https://github.com/Aider-AI/aider/blob/main/scripts/issues.py) made these updates to the issue."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/issues.py:64",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com",
+      "evidence": "scripts/issues.py:64  GITHUB_API_URL = \"https://api.github.com\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "scripts/issues.py:67",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_TOKEN",
+      "rule": "os.getenv",
+      "evidence": "scripts/issues.py:67  TOKEN = os.getenv(\"GITHUB_TOKEN\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/logo_svg.py:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "scripts/logo_svg.py:86  <svg width=\"{width}\" height=\"{height}\" viewBox=\"0 0 {width} {height}\" xmlns=\"http://www.w3.org/2000/svg\">"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "scripts/recording_audio.py:22",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "scripts/recording_audio.py:22  OPENAI_API_KEY = os.environ.get(\"OPENAI_API_KEY\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "scripts/recording_audio.py:64",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "scripts/recording_audio.py:64  subprocess.run([\"ffmpeg\", \"-version\"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)\nscripts/recording_audio.py:77  subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/recording_audio.py:104",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1/audio/speech",
+      "evidence": "scripts/recording_audio.py:104  url = \"http://127.0.0.1:9900/v1/audio/speech\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/recording_audio.py:213",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ffmpeg.org/download.html",
+      "evidence": "scripts/recording_audio.py:213  print(\"To enable compression, please install FFmpeg: https://ffmpeg.org/download.html\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/tsl_pack_langs.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/{owner",
+      "evidence": "scripts/tsl_pack_langs.py:13  api_url = f\"https://api.github.com/repos/{owner}/{repo}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/tsl_pack_langs.py:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/{owner",
+      "evidence": "scripts/tsl_pack_langs.py:24  base_url = f\"https://raw.githubusercontent.com/{owner}/{repo}/{branch}\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "scripts/update-history.py:36",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "scripts/update-history.py:36  result = subprocess.run(cmd, capture_output=True, text=True)\nscripts/update-history.py:52  result = subprocess.run(cmd, capture_output=True, text=True)\nscripts/update-history.py:107  blame_result = subprocess.run([\"python3\", \"scripts/blame.py\"], capture_output=True, text=True)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "scripts/versionbump.py:15",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "scripts/versionbump.py:15  branch = subprocess.run(\nscripts/versionbump.py:25  status = subprocess.run([\"git\", \"status\", \"--porcelain\"], capture_output=True, text=True).stdout\nscripts/versionbump.py:33  subprocess.run([\"git\", \"fetch\", \"origin\"], check=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "scripts/yank-old-versions.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org/pypi/{package_name",
+      "evidence": "scripts/yank-old-versions.py:7  url = f\"https://pypi.org/pypi/{package_name}/json\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_aws_credentials.py:18",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AWS_PROFILE",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_aws_credentials.py:18  os.environ[\"AWS_PROFILE\"] = \"test-profile\"\ntests/basic/test_aws_credentials.py:50  os.environ[\"AWS_PROFILE\"] = \"test-profile\"\ntests/basic/test_aws_credentials.py:82  os.environ[\"AWS_PROFILE\"] = \"test-profile\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:875",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "tests/basic/test_coder.py:875  (\"Check http://example.com, it's cool\", \"http://example.com\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:876",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.example.com/page",
+      "evidence": "tests/basic/test_coder.py:876  (\"Visit https://www.example.com/page and see stuff\", \"https://www.example.com/page\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:878",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://subdomain.example.com:8080/path?query=value",
+      "evidence": "tests/basic/test_coder.py:878  \"Go to http://subdomain.example.com:8080/path?query=value, or not\",\ntests/basic/test_coder.py:879  \"http://subdomain.example.com:8080/path?query=value\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:882",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/path#fragment",
+      "evidence": "tests/basic/test_coder.py:882  \"See https://example.com/path#fragment for example\",\ntests/basic/test_coder.py:883  \"https://example.com/path#fragment\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:885",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "tests/basic/test_coder.py:885  (\"Look at http://localhost:3000\", \"http://localhost:3000\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:886",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/setup#whatever",
+      "evidence": "tests/basic/test_coder.py:886  (\"View https://example.com/setup#whatever\", \"https://example.com/setup#whatever\"),\ntests/basic/test_coder.py:908  \"can you check out https://example.com/setup#whatever\",\ntests/basic/test_coder.py:909  \"https://example.com/setup#whatever\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:887",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:8000/api/v1/",
+      "evidence": "tests/basic/test_coder.py:887  (\"Open http://127.0.0.1:8000/api/v1/\", \"http://127.0.0.1:8000/api/v1/\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:889",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/path/to/page.html?param1=value1&param2=value2",
+      "evidence": "tests/basic/test_coder.py:889  \"Try https://example.com/path/to/page.html?param1=value1&param2=value2\",\ntests/basic/test_coder.py:890  \"https://example.com/path/to/page.html?param1=value1&param2=value2\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:892",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://user:password@example.com",
+      "evidence": "tests/basic/test_coder.py:892  (\"Access http://user:password@example.com\", \"http://user:password@example.com\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:894",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/path_(with_parentheses",
+      "evidence": "tests/basic/test_coder.py:894  \"Use https://example.com/path_(with_parentheses)\",\ntests/basic/test_coder.py:895  \"https://example.com/path_(with_parentheses)\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:906",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3002",
+      "evidence": "tests/basic/test_coder.py:906  (\"check http://localhost:3002, there is an error\", \"http://localhost:3002\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:919",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example1.com",
+      "evidence": "tests/basic/test_coder.py:919  multi_url_input = \"Check http://example1.com and https://example2.com/page\"\ntests/basic/test_coder.py:921  self.assertIn(\"http://example1.com\", result)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:919",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example2.com/page",
+      "evidence": "tests/basic/test_coder.py:919  multi_url_input = \"Check http://example1.com and https://example2.com/page\"\ntests/basic/test_coder.py:922  self.assertIn(\"https://example2.com/page\", result)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_coder.py:931",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "tests/basic/test_coder.py:931  \"Check https://example.com, then https://example.com again, and https://example.com one\"\ntests/basic/test_coder.py:936  self.assertEqual(result.count(\"https://example.com\"), 4)\ntests/basic/test_coder.py:937  self.assertIn(\"https://example.com\", result)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_commands.py:149",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/293",
+      "evidence": "tests/basic/test_commands.py:149  # https://github.com/Aider-AI/aider/issues/293"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_commands.py:439",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/201",
+      "evidence": "tests/basic/test_commands.py:439  # https://github.com/Aider-AI/aider/issues/201"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_commands.py:480",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/178",
+      "evidence": "tests/basic/test_commands.py:480  # https://github.com/Aider-AI/aider/issues/178\ntests/basic/test_commands.py:504  # https://github.com/Aider-AI/aider/issues/178"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_deprecated.py:16",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_deprecated.py:16  os.environ[\"OPENAI_API_KEY\"] = \"deadbeef\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_deprecated.py:17",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_CHECK_UPDATE",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_deprecated.py:17  os.environ[\"AIDER_CHECK_UPDATE\"] = \"false\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_deprecated.py:18",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_ANALYTICS",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_deprecated.py:18  os.environ[\"AIDER_ANALYTICS\"] = \"false\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tests/basic/test_editblock.py:205",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": "tests/basic/test_editblock.py:205  No problem! Here are the changes to patch `subprocess.check_output` instead of `subprocess.run` in both tests:\ntests/basic/test_editblock.py:215  with patch(\"subprocess.check_output\") as mock_check_output:\ntests/basic/test_editblock.py:231  with patch(\"subprocess.check_output\") as mock_check_output:"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tests/basic/test_editblock.py:205",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "tests/basic/test_editblock.py:205  No problem! Here are the changes to patch `subprocess.check_output` instead of `subprocess.run` in both tests:\ntests/basic/test_editblock.py:211  with patch(\"subprocess.run\") as mock_run:\ntests/basic/test_editblock.py:221  with patch(\"subprocess.run\") as mock_run:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_editblock.py:324",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/2258",
+      "evidence": "tests/basic/test_editblock.py:324  # https://github.com/Aider-AI/aider/issues/2258"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_editblock.py:536",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/2879",
+      "evidence": "tests/basic/test_editblock.py:536  # https://github.com/Aider-AI/aider/issues/2879"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_editblock.py:558",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/3785",
+      "evidence": "tests/basic/test_editblock.py:558  # https://github.com/Aider-AI/aider/issues/3785"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tests/basic/test_editor.py:132",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "tests/basic/test_editor.py:132  patch(\"subprocess.call\") as mock_subprocess,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_exceptions.py:51",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "tests/basic/test_exceptions.py:51  request = httpx.Request(\"GET\", \"https://example.com\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tests/basic/test_linter.py:30",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "tests/basic/test_linter.py:30  @patch(\"subprocess.Popen\")\ntests/basic/test_linter.py:50  @patch(\"subprocess.Popen\")\ntests/basic/test_linter.py:62  with patch(\"subprocess.Popen\") as mock_popen:"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_main.py:24",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:24  os.environ[\"OPENAI_API_KEY\"] = \"deadbeef\"\ntests/basic/test_main.py:954  self.assertEqual(os.environ.get(\"OPENAI_API_KEY\"), \"key2\")\ntests/basic/test_main.py:1101  os.environ[\"OPENAI_API_KEY\"] = \"test-key\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:25",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_CHECK_UPDATE",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:25  os.environ[\"AIDER_CHECK_UPDATE\"] = \"false\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_ANALYTICS",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:26  os.environ[\"AIDER_ANALYTICS\"] = \"false\"\ntests/basic/test_main.py:907  self.assertEqual(os.environ.get(\"AIDER_ANALYTICS\"), \"false\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:33",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "HOME",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:33  os.environ[\"HOME\"] = self.homedir_obj.name\ntests/basic/test_main.py:299  os.environ[\"HOME\"] = str(fake_home)\ntests/basic/test_main.py:523  os.environ[\"HOME\"] = str(fake_home)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tests/basic/test_main.py:109",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "tests/basic/test_main.py:109  subprocess.run([\"git\", \"add\", str(subdir)])\ntests/basic/test_main.py:110  subprocess.run([\"git\", \"commit\", \"-m\", \"added\"])"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:131",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GIT_CONFIG_GLOBAL",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:131  os.environ[\"GIT_CONFIG_GLOBAL\"] = \"globalgitconfig\"\ntests/basic/test_main.py:153  del os.environ[\"GIT_CONFIG_GLOBAL\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:309",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:309  os.environ[\"E\"] = \"existing\"\ntests/basic/test_main.py:322  self.assertEqual(os.environ[\"E\"], \"existing\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:318",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "A",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:318  self.assertEqual(os.environ[\"A\"], \"named\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:319",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "B",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:319  self.assertEqual(os.environ[\"B\"], \"cwd\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:320",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "C",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:320  self.assertEqual(os.environ[\"C\"], \"git\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:321",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "D",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:321  self.assertEqual(os.environ[\"D\"], \"home\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:913",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TEST_VAR",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:913  self.assertEqual(os.environ.get(\"TEST_VAR\"), \"test_value\")\ntests/basic/test_main.py:935  self.assertEqual(os.environ.get(\"TEST_VAR\"), \"test value with spaces\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:928",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TEST_VAR1",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:928  self.assertEqual(os.environ.get(\"TEST_VAR1\"), \"value1\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:929",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TEST_VAR2",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:929  self.assertEqual(os.environ.get(\"TEST_VAR2\"), \"value2\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_main.py:947",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANTHROPIC_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:947  self.assertEqual(os.environ.get(\"ANTHROPIC_API_KEY\"), \"test-key\")\ntests/basic/test_main.py:953  self.assertEqual(os.environ.get(\"ANTHROPIC_API_KEY\"), \"key1\")\ntests/basic/test_main.py:1077  os.environ[\"ANTHROPIC_API_KEY\"] = \"test-key\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_main.py:1085",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "DEEPSEEK_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:1085  os.environ[\"DEEPSEEK_API_KEY\"] = \"test-key\"\ntests/basic/test_main.py:1090  del os.environ[\"DEEPSEEK_API_KEY\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_main.py:1093",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:1093  os.environ[\"OPENROUTER_API_KEY\"] = \"test-key\"\ntests/basic/test_main.py:1098  del os.environ[\"OPENROUTER_API_KEY\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_main.py:1109",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GEMINI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_main.py:1109  os.environ[\"GEMINI_API_KEY\"] = \"test-key\"\ntests/basic/test_main.py:1114  del os.environ[\"GEMINI_API_KEY\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_main.py:1464",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OAUTH_VAR",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:1464  self.assertEqual(os.environ.get(\"OAUTH_VAR\"), \"oauth_val\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:1465",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GIT_VAR",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:1465  self.assertEqual(os.environ.get(\"GIT_VAR\"), \"git_val\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:1466",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CWD_VAR",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:1466  self.assertEqual(os.environ.get(\"CWD_VAR\"), \"cwd_val\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_main.py:1468",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SHARED_VAR",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_main.py:1468  self.assertEqual(os.environ.get(\"SHARED_VAR\"), \"cwd_shared\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_onboarding.py:56",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1/auth/key",
+      "evidence": "tests/basic/test_onboarding.py:56  \"http://127.0.0.1:9900/v1/auth/key\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/basic/test_onboarding.py:211",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:9900/v1/auth/keys",
+      "evidence": "tests/basic/test_onboarding.py:211  \"http://127.0.0.1:9900/v1/auth/keys\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_onboarding.py:389",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENROUTER_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_onboarding.py:389  self.assertEqual(os.environ.get(\"OPENROUTER_API_KEY\"), \"new_or_key\")\ntests/basic/test_onboarding.py:393  del os.environ[\"OPENROUTER_API_KEY\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_repo.py:242",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GIT_COMMITTER_NAME",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_repo.py:242  original_committer_name = os.environ.get(\"GIT_COMMITTER_NAME\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_repo.py:244",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GIT_AUTHOR_NAME",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_repo.py:244  original_author_name = os.environ.get(\"GIT_AUTHOR_NAME\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "tests/basic/test_ssl_verification.py:14",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_ssl_verification.py:14  os.environ[\"OPENAI_API_KEY\"] = \"test-key\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_ssl_verification.py:15",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_CHECK_UPDATE",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_ssl_verification.py:15  os.environ[\"AIDER_CHECK_UPDATE\"] = \"false\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_ssl_verification.py:16",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_ANALYTICS",
+      "rule": "os.environ[]",
+      "evidence": "tests/basic/test_ssl_verification.py:16  os.environ[\"AIDER_ANALYTICS\"] = \"false\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/basic/test_ssl_verification.py:68",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_VERIFY",
+      "rule": "os.environ.get",
+      "evidence": "tests/basic/test_ssl_verification.py:68  self.assertEqual(os.environ.get(\"SSL_VERIFY\"), \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "tests/browser/test_browser.py:11",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "AIDER_ANALYTICS",
+      "rule": "os.environ[]",
+      "evidence": "tests/browser/test_browser.py:11  os.environ[\"AIDER_ANALYTICS\"] = \"false\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/help/test_help.py:100",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs",
+      "evidence": "tests/help/test_help.py:100  self.assertEqual(fname_to_url(\"website/docs/index.md\"), \"https://aider.chat/docs\")\ntests/help/test_help.py:108  fname_to_url(\"/home/user/project/website/docs/index.md\"), \"https://aider.chat/docs\"\ntests/help/test_help.py:118  self.assertEqual(fname_to_url(r\"website\\docs\\index.md\"), \"https://aider.chat/docs\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/help/test_help.py:102",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat/docs/usage.html",
+      "evidence": "tests/help/test_help.py:102  fname_to_url(\"website/docs/usage.md\"), \"https://aider.chat/docs/usage.html\"\ntests/help/test_help.py:112  \"https://aider.chat/docs/usage.html\",\ntests/help/test_help.py:120  fname_to_url(r\"website\\docs\\usage.md\"), \"https://aider.chat/docs/usage.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/scrape/test_playwright_disable.py:33",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "tests/scrape/test_playwright_disable.py:33  content = scraper.scrape(\"http://example.com\")\ntests/scrape/test_playwright_disable.py:50  content = scraper.scrape(\"http://example.com\")\ntests/scrape/test_playwright_disable.py:132  commands.cmd_web(\"http://example.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/scrape/test_scrape.py:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://self-signed.badssl.com",
+      "evidence": "tests/scrape/test_scrape.py:24  result_verify = scrape_with_retries(scraper_verify, \"https://self-signed.badssl.com\")\ntests/scrape/test_scrape.py:32  result_no_verify = scrape_with_retries(scraper_no_verify, \"https://self-signed.badssl.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "tests/scrape/test_scrape.py:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "tests/scrape/test_scrape.py:47  result = self.commands.cmd_web(\"https://example.com\", return_content=True)\ntests/scrape/test_scrape.py:75  result = scraper.scrape(\"https://example.com\")\ntests/scrape/test_scrape.py:90  scraper.scrape_with_httpx(\"https://example.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".pre-commit-config.yaml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/PyCQA/isort",
+      "evidence": ".pre-commit-config.yaml:2  - repo: https://github.com/PyCQA/isort"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".pre-commit-config.yaml:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/psf/black",
+      "evidence": ".pre-commit-config.yaml:7  - repo: https://github.com/psf/black"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".pre-commit-config.yaml:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/pycqa/flake8",
+      "evidence": ".pre-commit-config.yaml:12  - repo: https://github.com/pycqa/flake8"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".pre-commit-config.yaml:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/codespell-project/codespell",
+      "evidence": ".pre-commit-config.yaml:17  - repo: https://github.com/codespell-project/codespell"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:17",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/leaderboards/",
+      "evidence": "CONTRIBUTING.md:17  [LLM benchmark results](https://aider.chat/docs/leaderboards/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:20",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/blob/main/benchmark/README.md",
+      "evidence": "CONTRIBUTING.md:20  [benchmark README](https://github.com/Aider-AI/aider/blob/main/benchmark/README.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:23",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/blob/main/aider/website/_data/",
+      "evidence": "CONTRIBUTING.md:23  [benchmark results data files](https://github.com/Aider-AI/aider/blob/main/aider/website/_data/)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:37",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/legal/contributor-agreement.html",
+      "evidence": "CONTRIBUTING.md:37  [Individual Contributor License Agreement](https://aider.chat/docs/legal/contributor-agreement.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:45",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider.git",
+      "evidence": "CONTRIBUTING.md:45  git clone https://github.com/Aider-AI/aider.git"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:162",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.python.org/dev/peps/pep-0008/",
+      "evidence": "CONTRIBUTING.md:162  The project follows the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for Python code, with a maximum line length of 100 characters. Additionally, the project uses [isort](https://pycqa.github.io/isort/) and [Black](https:/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:162",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pycqa.github.io/isort/",
+      "evidence": "CONTRIBUTING.md:162  The project follows the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for Python code, with a maximum line length of 100 characters. Additionally, the project uses [isort](https://pycqa.github.io/isort/) and [Black](https:/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:162",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://black.readthedocs.io/en/stable/",
+      "evidence": "CONTRIBUTING.md:162  The project follows the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for Python code, with a maximum line length of 100 characters. Additionally, the project uses [isort](https://pycqa.github.io/isort/) and [Black](https:/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:170",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.pytest.org/en/latest/",
+      "evidence": "CONTRIBUTING.md:170  The project uses [pytest](https://docs.pytest.org/en/latest/) for running unit tests. The test files are located in the `aider/tests` directory and follow the naming convention `test_*.py`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:231",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pre-commit.com/",
+      "evidence": "CONTRIBUTING.md:231  The project uses [pre-commit](https://pre-commit.com/) hooks to automatically format code, lint, and run other checks before committing changes. After cloning the repository, run the following command to set up the pre-commit hooks:"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:307",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/languages.html",
+      "evidence": "HISTORY.md:307  - Big upgrade in [programming languages supported](https://aider.chat/docs/languages.html) by adopting [tree-sitter-language-pack](https://github.com/Goldziher/tree-sitter-language-pack/).\nHISTORY.md:577  - Added [RepoMap support for Dart language](https://aider.chat/docs/languages.html) by @malkoG."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:307",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Goldziher/tree-sitter-language-pack/",
+      "evidence": "HISTORY.md:307  - Big upgrade in [programming languages supported](https://aider.chat/docs/languages.html) by adopting [tree-sitter-language-pack](https://github.com/Goldziher/tree-sitter-language-pack/)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:341",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/notifications.html",
+      "evidence": "HISTORY.md:341  - Added [notifications when LLM responses are ready](https://aider.chat/docs/usage/notifications.html) with `--notifications` flag."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:501",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/watch.html",
+      "evidence": "HISTORY.md:501  - [Watch files](https://aider.chat/docs/usage/watch.html) improvements:\nHISTORY.md:538  - [Use aider in your IDE or editor](https://aider.chat/docs/usage/watch.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:507",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/commands.html#entering-multi-line-chat-messages",
+      "evidence": "HISTORY.md:507  - [New `--multiline` flag and `/multiline-mode` command](https://aider.chat/docs/usage/commands.html#entering-multi-line-chat-messages) makes ENTER a soft newline and META-ENTER send the message, by @miradnanali.\nHISTORY.md:597  - Added support for [optional multiline input tags](https://aider.chat/docs/usage/commands.html#entering-multi-line-chat-messages) with matching closing tags."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:508",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/copypaste.html#copy-aiders-code-context-to-your-clipboard-paste-into-the-web-ui",
+      "evidence": "HISTORY.md:508  - `/copy-context <instructions>` now takes optional \"instructions\" when [copying code context to the clipboard](https://aider.chat/docs/usage/copypaste.html#copy-aiders-code-context-to-your-clipboard-paste-into-the-web-ui)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:517",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/copypaste.html",
+      "evidence": "HISTORY.md:517  - [Aider works with LLM web chat UIs](https://aider.chat/docs/usage/copypaste.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:520",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config/aider_conf.html#storing-llm-keys",
+      "evidence": "HISTORY.md:520  - [Set API keys and other environment variables for all providers from command line or YAML conf file](https://aider.chat/docs/config/aider_conf.html#storing-llm-keys)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:549",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/HISTORY.html",
+      "evidence": "HISTORY.md:549  - [Aider wrote 61% of the code in this release.](https://aider.chat/HISTORY.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:574",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config/model-aliases.html",
+      "evidence": "HISTORY.md:574  - Added `--alias` config to define [custom model aliases](https://aider.chat/docs/config/model-aliases.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:578",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/more/analytics.html",
+      "evidence": "HISTORY.md:578  - Ask 2.5% of users if they want to opt-in to [analytics](https://aider.chat/docs/more/analytics.html).\nHISTORY.md:596  - Ask 1% of users if they want to opt-in to [analytics](https://aider.chat/docs/more/analytics.html).\nHISTORY.md:654  - Anonymous, opt-in [analytics](https://aider.chat/docs/more/analytics.html) with no personal data sharing."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:592",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/commands.html",
+      "evidence": "HISTORY.md:592  - Added [`/editor` command](https://aider.chat/docs/usage/commands.html) to open system editor for writing prompts, by @thehunmonkgroup."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:598",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config/adv-model-settings.html#global-extra-params",
+      "evidence": "HISTORY.md:598  - Improved [model settings configuration](https://aider.chat/docs/config/adv-model-settings.html#global-extra-params) with support for global `extra_params` for `litellm.completion()`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:635",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/leaderboards/",
+      "evidence": "HISTORY.md:635  - Scored 75% on [aider's code editing leaderboard](https://aider.chat/docs/leaderboards/).\nHISTORY.md:1169  - GPT-4o tops the [aider LLM code editing leaderboard](https://aider.chat/docs/leaderboards/) at 72.9%, versus 68.4% for Opus.\nHISTORY.md:1191  - [Aider LLM code editing leaderboards](https://aider.chat/docs/leaderboards/) that rank popular models according to their ability to edit code."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:716",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/09/26/architect.html",
+      "evidence": "HISTORY.md:716  - [Use a pair of Architect/Editor models for improved coding](https://aider.chat/2024/09/26/architect.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:859",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/caching.html#preventing-cache-expiration",
+      "evidence": "HISTORY.md:859  - [Keep your prompt cache from expiring](https://aider.chat/docs/usage/caching.html#preventing-cache-expiration) with `--cache-keepalive-pings`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:941",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/scripting.html",
+      "evidence": "HISTORY.md:941  - When [scripting aider](https://aider.chat/docs/scripting.html) messages can now contain in-chat `/` commands."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:969",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/07/01/sonnet-not-lazy.html",
+      "evidence": "HISTORY.md:969  - [Aider already supported infinite output from Sonnet.](https://aider.chat/2024/07/01/sonnet-not-lazy.html)\nHISTORY.md:1091  - [Allow Claude 3.5 Sonnet to stream back >4k tokens!](https://aider.chat/2024/07/01/sonnet-not-lazy.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:980",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/git.html#commit-messages",
+      "evidence": "HISTORY.md:980  - [Commit message](https://aider.chat/docs/git.html#commit-messages) improvements:"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:984",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/lint-test.html",
+      "evidence": "HISTORY.md:984  - [Linting](https://aider.chat/docs/usage/lint-test.html) improvements:"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:989",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/install/docker.html",
+      "evidence": "HISTORY.md:989  - Improved [docker support](https://aider.chat/docs/install/docker.html):\nHISTORY.md:1377  - Added universal ctags and multiple architectures to the [aider docker image](https://aider.chat/docs/install/docker.html)\nHISTORY.md:1383  - Easily [run aider from a docker image](https://aider.chat/docs/install/docker.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1074",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/troubleshooting/support.html",
+      "evidence": "HISTORY.md:1074  - Use `/help <question>` to [ask for help about using aider](https://aider.chat/docs/troubleshooting/support.html), customizing settings, troubleshooting, using LLMs, etc."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1095",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/images-urls.html",
+      "evidence": "HISTORY.md:1095  - [Enabled image support](https://aider.chat/docs/usage/images-urls.html) for 3.5 Sonnet and for GPT-4o & 3.5 Sonnet via OpenRouter (by @yamitzky)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1108",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/BerriAI/litellm/issues/4408",
+      "evidence": "HISTORY.md:1108  - https://github.com/BerriAI/litellm/issues/4408"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1119",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/git.html#commit-attribution",
+      "evidence": "HISTORY.md:1119  - Options to suppress adding \"(aider)\" to the [git author and committer names](https://aider.chat/docs/git.html#commit-attribution)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1126",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/leaderboards/#claude-35-sonnet-takes-the-top-spot",
+      "evidence": "HISTORY.md:1126  - Use `--sonnet` for Claude 3.5 Sonnet, which is the top model on [aider's LLM code editing leaderboard](https://aider.chat/docs/leaderboards/#claude-35-sonnet-takes-the-top-spot)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1133",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/commands.html#vi",
+      "evidence": "HISTORY.md:1133  - Use `--vim` for [vim keybindings](https://aider.chat/docs/usage/commands.html#vi) in the chat."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1134",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms/warnings.html#specifying-context-window-size-and-token-costs",
+      "evidence": "HISTORY.md:1134  - [Add LLM metadata](https://aider.chat/docs/llms/warnings.html#specifying-context-window-size-and-token-costs) via `.aider.models.json` file (by @caseymcc)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1135",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/troubleshooting/token-limits.html",
+      "evidence": "HISTORY.md:1135  - More detailed [error messages on token limit errors](https://aider.chat/docs/troubleshooting/token-limits.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1155",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/05/22/linting.html",
+      "evidence": "HISTORY.md:1155  - [Aider can now lint your code and fix any errors](https://aider.chat/2024/05/22/linting.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1170",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/leaderboards/#code-refactoring-leaderboard",
+      "evidence": "HISTORY.md:1170  - GPT-4o takes second on [aider's refactoring leaderboard](https://aider.chat/docs/leaderboards/#code-refactoring-leaderboard) with 62.9%, versus Opus at 72.3%."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1187",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms.html#deepseek",
+      "evidence": "HISTORY.md:1187  - Added native support for [Deepseek models](https://aider.chat/docs/llms.html#deepseek) using `DEEPSEEK_API_KEY` and `deepseek/deepseek-chat`, etc rather than as a generic OpenAI compatible API."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1200",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/05/02/browser.html",
+      "evidence": "HISTORY.md:1200  - [Aider is now also AI pair programming in your browser!](https://aider.chat/2024/05/02/browser.html) Use the `--browser` switch to launch an experimental browser based version of aider."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1209",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms.html#free-models",
+      "evidence": "HISTORY.md:1209  - Added [Gemini 1.5 Pro](https://aider.chat/docs/llms.html#free-models) as a recommended free model."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1216",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms.html#model-warnings",
+      "evidence": "HISTORY.md:1216  - Improved [model warnings](https://aider.chat/docs/llms.html#model-warnings) for unknown or unfamiliar models"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1224",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms.html",
+      "evidence": "HISTORY.md:1224  - Added support for [directly connecting to Anthropic, Cohere, Gemini and many other LLM providers](https://aider.chat/docs/llms.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1231",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms.html#cohere",
+      "evidence": "HISTORY.md:1231  - Improved \"whole\" and \"diff\" backends to better support [Cohere's free to use Command-R+ model](https://aider.chat/docs/llms.html#cohere)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1239",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/03/08/claude-3.html",
+      "evidence": "HISTORY.md:1239  - Benchmarked at 61.7% on Exercism benchmark, comparable to `gpt-4-0613` and worse than the `gpt-4-preview-XXXX` models. See [recent Exercism benchmark results](https://aider.chat/2024/03/08/claude-3.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1240",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/01/25/benchmarks-0125.html",
+      "evidence": "HISTORY.md:1240  - Benchmarked at 34.1% on the refactoring/laziness benchmark, significantly worse than the `gpt-4-preview-XXXX` models. See [recent refactor bencmark results](https://aider.chat/2024/01/25/benchmarks-0125.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1264",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html#how-can-i-add-all-the-files-to-the-chat",
+      "evidence": "HISTORY.md:1264  - https://aider.chat/docs/faq.html#how-can-i-add-all-the-files-to-the-chat"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1269",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/blog/",
+      "evidence": "HISTORY.md:1269  - Made past articles part of https://aider.chat/blog/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1289",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "HISTORY.md:1289  - Added `--openrouter` as a shortcut for `--openai-api-base https://openrouter.ai/api/v1`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1324",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/unified-diffs.html",
+      "evidence": "HISTORY.md:1324  - [Significantly reduced \"lazy\" coding from GPT-4 Turbo due to new unified diff edit format](https://aider.chat/docs/unified-diffs.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1346",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/benchmarks-1106.html",
+      "evidence": "HISTORY.md:1346  - [Benchmarks for OpenAI's new 11/06 models](https://aider.chat/docs/benchmarks-1106.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1347",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html#can-i-script-aider",
+      "evidence": "HISTORY.md:1347  - Streamlined [API for scripting aider, added docs](https://aider.chat/docs/faq.html#can-i-script-aider)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1348",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/benchmarks.html",
+      "evidence": "HISTORY.md:1348  - Ask for more concise SEARCH/REPLACE blocks. [Benchmarked](https://aider.chat/docs/benchmarks.html) at 63.9%, no regression.\nHISTORY.md:1368  - Switched from \"edit block\" to \"search/replace block\", which reduced malformed edit blocks. [Benchmarked](https://aider.chat/docs/benchmarks.html) at 66.2%, no regression.\nHISTORY.md:1369  - Improved handling of malformed edit blocks targeting multiple edits to the same file. [Benchmarked](https://aider.chat/docs/benchmarks.html) at 65.4%, no regression."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1367",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/repomap.html",
+      "evidence": "HISTORY.md:1367  - [Improved repository map using tree-sitter](https://aider.chat/docs/repomap.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1397",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html#accessing-other-llms-with-openrouter",
+      "evidence": "HISTORY.md:1397  - [Support for Claude2 and other LLMs via OpenRouter](https://aider.chat/docs/faq.html#accessing-other-llms-with-openrouter) by @joshuavial"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1398",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/tree/main/benchmark",
+      "evidence": "HISTORY.md:1398  - Documentation for [running the aider benchmarking suite](https://github.com/Aider-AI/aider/tree/main/benchmark)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1404",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html#how-did-v0130-change-git-usage",
+      "evidence": "HISTORY.md:1404  - [Only git commit dirty files that GPT tries to edit](https://aider.chat/docs/faq.html#how-did-v0130-change-git-usage)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1412",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/voice.html",
+      "evidence": "HISTORY.md:1412  - [Voice-to-code](https://aider.chat/docs/usage/voice.html) support, which allows you to code with your voice."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1453",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html#azure",
+      "evidence": "HISTORY.md:1453  - Support for the OpenAI models in [Azure](https://aider.chat/docs/faq.html#azure)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1463",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/joshuavial/aider.nvim",
+      "evidence": "HISTORY.md:1463  - Install docs link to [NeoVim plugin](https://github.com/joshuavial/aider.nvim) by @joshuavial"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1481",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html",
+      "evidence": "HISTORY.md:1481  - Added [FAQ](https://aider.chat/docs/faq.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "HISTORY.md:1516",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/exercism/python",
+      "evidence": "HISTORY.md:1516  - https://github.com/exercism/python"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "LICENSE.txt:4",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/",
+      "evidence": "LICENSE.txt:4  http://www.apache.org/licenses/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "LICENSE.txt:196",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "LICENSE.txt:196  http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/",
+      "evidence": "README.md:2  <a href=\"https://aider.chat/\"><img src=\"https://aider.chat/assets/logo.svg\" alt=\"Aider Logo\" width=\"300\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:2",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/logo.svg",
+      "evidence": "README.md:2  <a href=\"https://aider.chat/\"><img src=\"https://aider.chat/assets/logo.svg\" alt=\"Aider Logo\" width=\"300\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/screencast.svg",
+      "evidence": "README.md:16  src=\"https://aider.chat/assets/screencast.svg\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:27",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/stargazers",
+      "evidence": "README.md:27  <a href=\"https://github.com/Aider-AI/aider/stargazers\"><img alt=\"GitHub Stars\" title=\"Total number of GitHub stars the Aider project has received\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:28",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/github/stars/Aider-AI/aider?style=flat-square&logo=github&color=f1c40f&labelColor=555555",
+      "evidence": "README.md:28  src=\"https://img.shields.io/github/stars/Aider-AI/aider?style=flat-square&logo=github&color=f1c40f&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:29",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org/project/aider-chat/",
+      "evidence": "README.md:29  <a href=\"https://pypi.org/project/aider-chat/\"><img alt=\"PyPI Downloads\" title=\"Total number of installations via pip from PyPI\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:30",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/📦%20Installs-6.8M-2ecc71?style=flat-square&labelColor=555555",
+      "evidence": "README.md:30  src=\"https://img.shields.io/badge/📦%20Installs-6.8M-2ecc71?style=flat-square&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:32",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/📈%20Tokens%2Fweek-15B-3498db?style=flat-square&labelColor=555555",
+      "evidence": "README.md:32  src=\"https://img.shields.io/badge/📈%20Tokens%2Fweek-15B-3498db?style=flat-square&labelColor=555555\"/>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:33",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/#options-menu",
+      "evidence": "README.md:33  <a href=\"https://openrouter.ai/#options-menu\"><img alt=\"OpenRouter Ranking\" title=\"Aider's ranking among applications on the OpenRouter platform\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:34",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/🏆%20OpenRouter-Top%2020-9b59b6?style=flat-square&labelColor=555555",
+      "evidence": "README.md:34  src=\"https://img.shields.io/badge/🏆%20OpenRouter-Top%2020-9b59b6?style=flat-square&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/HISTORY.html",
+      "evidence": "README.md:35  <a href=\"https://aider.chat/HISTORY.html\"><img alt=\"Singularity\" title=\"Percentage of the new code in Aider's last release written by Aider itself\"\nREADME.md:139  - [Release notes](https://aider.chat/HISTORY.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:36",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/🔄%20Singularity-88%25-e74c3c?style=flat-square&labelColor=555555",
+      "evidence": "README.md:36  src=\"https://img.shields.io/badge/🔄%20Singularity-88%25-e74c3c?style=flat-square&labelColor=555555\"/></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:42",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/llms.html",
+      "evidence": "README.md:42  ### [Cloud and local LLMs](https://aider.chat/docs/llms.html)\nREADME.md:44  <a href=\"https://aider.chat/docs/llms.html\"><img src=\"https://aider.chat/assets/icons/brain.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>\nREADME.md:130  - [Connecting to LLMs](https://aider.chat/docs/llms.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:44",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/brain.svg",
+      "evidence": "README.md:44  <a href=\"https://aider.chat/docs/llms.html\"><img src=\"https://aider.chat/assets/icons/brain.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:49",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/repomap.html",
+      "evidence": "README.md:49  ### [Maps your codebase](https://aider.chat/docs/repomap.html)\nREADME.md:51  <a href=\"https://aider.chat/docs/repomap.html\"><img src=\"https://aider.chat/assets/icons/map-outline.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:51",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/map-outline.svg",
+      "evidence": "README.md:51  <a href=\"https://aider.chat/docs/repomap.html\"><img src=\"https://aider.chat/assets/icons/map-outline.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:56",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/languages.html",
+      "evidence": "README.md:56  ### [100+ code languages](https://aider.chat/docs/languages.html)\nREADME.md:58  <a href=\"https://aider.chat/docs/languages.html\"><img src=\"https://aider.chat/assets/icons/code-tags.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:58",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/code-tags.svg",
+      "evidence": "README.md:58  <a href=\"https://aider.chat/docs/languages.html\"><img src=\"https://aider.chat/assets/icons/code-tags.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:63",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/git.html",
+      "evidence": "README.md:63  ### [Git integration](https://aider.chat/docs/git.html)\nREADME.md:65  <a href=\"https://aider.chat/docs/git.html\"><img src=\"https://aider.chat/assets/icons/source-branch.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:65",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/source-branch.svg",
+      "evidence": "README.md:65  <a href=\"https://aider.chat/docs/git.html\"><img src=\"https://aider.chat/assets/icons/source-branch.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:70",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/watch.html",
+      "evidence": "README.md:70  ### [Use in your IDE](https://aider.chat/docs/usage/watch.html)\nREADME.md:72  <a href=\"https://aider.chat/docs/usage/watch.html\"><img src=\"https://aider.chat/assets/icons/monitor.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:72",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/monitor.svg",
+      "evidence": "README.md:72  <a href=\"https://aider.chat/docs/usage/watch.html\"><img src=\"https://aider.chat/assets/icons/monitor.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:77",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/images-urls.html",
+      "evidence": "README.md:77  ### [Images & web pages](https://aider.chat/docs/usage/images-urls.html)\nREADME.md:79  <a href=\"https://aider.chat/docs/usage/images-urls.html\"><img src=\"https://aider.chat/assets/icons/image-multiple.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:79",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/image-multiple.svg",
+      "evidence": "README.md:79  <a href=\"https://aider.chat/docs/usage/images-urls.html\"><img src=\"https://aider.chat/assets/icons/image-multiple.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:84",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/voice.html",
+      "evidence": "README.md:84  ### [Voice-to-code](https://aider.chat/docs/usage/voice.html)\nREADME.md:86  <a href=\"https://aider.chat/docs/usage/voice.html\"><img src=\"https://aider.chat/assets/icons/microphone.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:86",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/microphone.svg",
+      "evidence": "README.md:86  <a href=\"https://aider.chat/docs/usage/voice.html\"><img src=\"https://aider.chat/assets/icons/microphone.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:91",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/lint-test.html",
+      "evidence": "README.md:91  ### [Linting & testing](https://aider.chat/docs/usage/lint-test.html)\nREADME.md:93  <a href=\"https://aider.chat/docs/usage/lint-test.html\"><img src=\"https://aider.chat/assets/icons/check-all.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:93",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/check-all.svg",
+      "evidence": "README.md:93  <a href=\"https://aider.chat/docs/usage/lint-test.html\"><img src=\"https://aider.chat/assets/icons/check-all.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:98",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/copypaste.html",
+      "evidence": "README.md:98  ### [Copy/paste to web chat](https://aider.chat/docs/usage/copypaste.html)\nREADME.md:100  <a href=\"https://aider.chat/docs/usage/copypaste.html\"><img src=\"https://aider.chat/assets/icons/content-copy.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:100",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/assets/icons/content-copy.svg",
+      "evidence": "README.md:100  <a href=\"https://aider.chat/docs/usage/copypaste.html\"><img src=\"https://aider.chat/assets/icons/content-copy.svg\" width=\"32\" height=\"32\" align=\"left\" valign=\"middle\" style=\"margin-right:10px\"></a>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:122",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/install.html",
+      "evidence": "README.md:122  See the [installation instructions](https://aider.chat/docs/install.html) and [usage documentation](https://aider.chat/docs/usage.html) for more details.\nREADME.md:127  - [Installation Guide](https://aider.chat/docs/install.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:122",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage.html",
+      "evidence": "README.md:122  See the [installation instructions](https://aider.chat/docs/install.html) and [usage documentation](https://aider.chat/docs/usage.html) for more details.\nREADME.md:128  - [Usage Guide](https://aider.chat/docs/usage.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:129",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/tutorials.html",
+      "evidence": "README.md:129  - [Tutorial Videos](https://aider.chat/docs/usage/tutorials.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:131",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config.html",
+      "evidence": "README.md:131  - [Configuration Options](https://aider.chat/docs/config.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:132",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/troubleshooting.html",
+      "evidence": "README.md:132  - [Troubleshooting](https://aider.chat/docs/troubleshooting.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:133",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/faq.html",
+      "evidence": "README.md:133  - [FAQ](https://aider.chat/docs/faq.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:136",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/leaderboards/",
+      "evidence": "README.md:136  - [LLM Leaderboards](https://aider.chat/docs/leaderboards/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:137",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider",
+      "evidence": "README.md:137  - [GitHub Repository](https://github.com/Aider-AI/aider)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:138",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.gg/Y7X7bhMQFV",
+      "evidence": "README.md:138  - [Discord Community](https://discord.gg/Y7X7bhMQFV)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:140",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/blog/",
+      "evidence": "README.md:140  - [Blog](https://aider.chat/blog/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:144",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/esrtweet/status/1910809356381413593",
+      "evidence": "README.md:144  - *\"My life has changed... Aider... It's going to rock your world.\"* — [Eric S. Raymond on X](https://x.com/esrtweet/status/1910809356381413593)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:145",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://youtu.be/YALpX8oOn78",
+      "evidence": "README.md:145  - *\"The best free open source AI coding assistant.\"* — [IndyDevDan on YouTube](https://youtu.be/YALpX8oOn78)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:146",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.youtube.com/watch?v=df8afeb1FY8",
+      "evidence": "README.md:146  - *\"The best AI coding assistant so far.\"* — [Matthew Berman on YouTube](https://www.youtube.com/watch?v=df8afeb1FY8)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:147",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://news.ycombinator.com/item?id=36212100",
+      "evidence": "README.md:147  - *\"Aider ... has easily quadrupled my coding productivity.\"* — [SOLAR_FIELDS on Hacker News](https://news.ycombinator.com/item?id=36212100)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:148",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://news.ycombinator.com/item?id=38185326",
+      "evidence": "README.md:148  - *\"It's a cool workflow... Aider's ergonomics are perfect for me.\"* — [qup on Hacker News](https://news.ycombinator.com/item?id=38185326)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:149",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/124",
+      "evidence": "README.md:149  - *\"It's really like having your senior developer live right in your Git repo - truly amazing!\"* — [rappster on GitHub](https://github.com/Aider-AI/aider/issues/124)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:150",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/6#issue-1722897858",
+      "evidence": "README.md:150  - *\"What an amazing tool. It's incredible.\"* — [valyagolev on GitHub](https://github.com/Aider-AI/aider/issues/6#issue-1722897858)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:151",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/82#issuecomment-1631876700",
+      "evidence": "README.md:151  - *\"Aider is such an astounding thing!\"* — [cgrothaus on GitHub](https://github.com/Aider-AI/aider/issues/82#issuecomment-1631876700)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:152",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://twitter.com/d_feldman/status/1662295077387923456",
+      "evidence": "README.md:152  - *\"It was WAY faster than I would be getting off the ground and making the first few working versions.\"* — [Daniel Feldman on X](https://twitter.com/d_feldman/status/1662295077387923456)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:153",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://news.ycombinator.com/item?id=38205643",
+      "evidence": "README.md:153  - *\"THANK YOU for Aider! It really feels like a glimpse into the future of coding.\"* — [derwiki on Hacker News](https://news.ycombinator.com/item?id=38205643)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:154",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1174002618058678323/1174084556257775656",
+      "evidence": "README.md:154  - *\"It's just amazing. It is freeing me to do things I felt were out my comfort zone before.\"* — [Dougie on Discord](https://discord.com/channels/1131200896827654144/1174002618058678323/1174084556257775656)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:155",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/112#issuecomment-1637429008",
+      "evidence": "README.md:155  - *\"This project is stellar.\"* — [funkytaco on GitHub](https://github.com/Aider-AI/aider/issues/112#issuecomment-1637429008)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:156",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/84",
+      "evidence": "README.md:156  - *\"Amazing project, definitely the best AI coding assistant I've used.\"* — [joshuavial on GitHub](https://github.com/Aider-AI/aider/issues/84)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:157",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1133421607499595858/1229689636012691468",
+      "evidence": "README.md:157  - *\"I absolutely love using Aider ... It makes software development feel so much lighter as an experience.\"* — [principalideal0 on Discord](https://discord.com/channels/1131200896827654144/1133421607499595858/1229689636012691468)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:158",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com/r/OpenAI/s/nmNwkHy1zG",
+      "evidence": "README.md:158  - *\"I have been recovering from ... surgeries ... aider ... has allowed me to continue productivity.\"* — [codeninja on Reddit](https://www.reddit.com/r/OpenAI/s/nmNwkHy1zG)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:159",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1131200896827654149/1135913253483069470",
+      "evidence": "README.md:159  - *\"I am an aider addict. I'm getting so much more work done, but in less time.\"* — [dandandan on Discord](https://discord.com/channels/1131200896827654144/1131200896827654149/1135913253483069470)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:160",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1131200896827654149/1178736602797846548",
+      "evidence": "README.md:160  - *\"Aider... blows everything else out of the water hands down, there's no competition whatsoever.\"* — [SystemSculpt on Discord](https://discord.com/channels/1131200896827654144/1131200896827654149/1178736602797846548)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:161",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1133060684540813372/1262374225298198548",
+      "evidence": "README.md:161  - *\"Aider is amazing, coupled with Sonnet 3.5 it's quite mind blowing.\"* — [Josh Dingus on Discord](https://discord.com/channels/1131200896827654144/1133060684540813372/1262374225298198548)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:162",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.youtube.com/watch?v=MPYFPvxfGZs",
+      "evidence": "README.md:162  - *\"Hands down, this is the best AI coding assistant tool so far.\"* — [IndyDevDan on YouTube](https://www.youtube.com/watch?v=MPYFPvxfGZs)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:163",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1131200896827654149/1258453375620747264",
+      "evidence": "README.md:163  - *\"[Aider] changed my daily coding workflows. It's mind-blowing how ...(it)... can change your life.\"* — [maledorak on Discord](https://discord.com/channels/1131200896827654144/1131200896827654149/1258453375620747264)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:164",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://twitter.com/NickADobos/status/1690408967963652097?s=20",
+      "evidence": "README.md:164  - *\"Best agent for actual dev work in existing codebases.\"* — [Nick Dobos on X](https://twitter.com/NickADobos/status/1690408967963652097?s=20)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:165",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/chris65536/status/1905053299251798432",
+      "evidence": "README.md:165  - *\"One of my favorite pieces of software. Blazing trails on new paradigms!\"* — [Chris Wall on X](https://x.com/chris65536/status/1905053299251798432)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:166",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/starryhopeblog/status/1904985812137132056",
+      "evidence": "README.md:166  - *\"Aider has been revolutionary for me and my work.\"* — [Starry Hope on X](https://x.com/starryhopeblog/status/1904985812137132056)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:167",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/Chris65536/status/1905053418961391929",
+      "evidence": "README.md:167  - *\"Try aider! One of the best ways to vibe code.\"* — [Chris Wall on X](https://x.com/Chris65536/status/1905053418961391929)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:168",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://news.ycombinator.com/item?id=44035015",
+      "evidence": "README.md:168  - *\"Freaking love Aider.\"* — [hztar on Hacker News](https://news.ycombinator.com/item?id=44035015)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:169",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com/r/ChatGPTCoding/comments/1ik16y6/whats_your_take_on_aider/mbip39n/",
+      "evidence": "README.md:169  - *\"Aider is hands down the best. And it's free and opensource.\"* — [AriyaSavakaLurker on Reddit](https://www.reddit.com/r/ChatGPTCoding/comments/1ik16y6/whats_your_take_on_aider/mbip39n/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:170",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com/r/ChatGPTCoding/comments/1heuvuo/aider_vs_cline_vs_windsurf_vs_cursor/m27dcnb/",
+      "evidence": "README.md:170  - *\"Aider is also my best friend.\"* — [jzn21 on Reddit](https://www.reddit.com/r/ChatGPTCoding/comments/1heuvuo/aider_vs_cline_vs_windsurf_vs_cursor/m27dcnb/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:171",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com/r/ChatGPTCoding/comments/1heuvuo/aider_vs_cline_vs_windsurf_vs_cursor/m27cp99/",
+      "evidence": "README.md:171  - *\"Try Aider, it's worth it.\"* — [jorgejhms on Reddit](https://www.reddit.com/r/ChatGPTCoding/comments/1heuvuo/aider_vs_cline_vs_windsurf_vs_cursor/m27cp99/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:172",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/ccui42/status/1904965344999145698",
+      "evidence": "README.md:172  - *\"I like aider :)\"* — [Chenwei Cui on X](https://x.com/ccui42/status/1904965344999145698)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:173",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/rsweetland/status/1904963807237259586",
+      "evidence": "README.md:173  - *\"Aider is the precision tool of LLM code gen... Minimal, thoughtful and capable of surgical changes ... while keeping the developer in control.\"* — [Reilly Sweetland on X](https://x.com/rsweetland/status/1904963807237259586)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:174",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1131200896827654149/1355675042259796101",
+      "evidence": "README.md:174  - *\"Cannot believe aider vibe coded a 650 LOC feature across service and cli today in 1 shot.\"* - [autopoietist on Discord](https://discord.com/channels/1131200896827654144/1131200896827654149/1355675042259796101)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:175",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/jodavaho/status/1911154899057795218",
+      "evidence": "README.md:175  - *\"Oh no the secret is out! Yes, Aider is the best coding tool around. I highly, highly recommend it to anyone.\"* — [Joshua D Vander Hook on X](https://x.com/jodavaho/status/1911154899057795218)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:176",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/anitaheeder/status/1908338609645904160",
+      "evidence": "README.md:176  - *\"thanks to aider, i have started and finished three personal projects within the last two days\"* — [joseph stalzyn on X](https://x.com/anitaheeder/status/1908338609645904160)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:177",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.com/channels/1131200896827654144/1273248471394291754/1356727448372252783",
+      "evidence": "README.md:177  - *\"Been using aider as my daily driver for over a year ... I absolutely love the tool, like beyond words.\"* — [koleok on Discord](https://discord.com/channels/1131200896827654144/1273248471394291754/1356727448372252783)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:178",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://news.ycombinator.com/item?id=43930201",
+      "evidence": "README.md:178  - *\"Aider ... is the tool to benchmark against.\"* — [BeetleB on Hacker News](https://news.ycombinator.com/item?id=43930201)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:179",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/yacineMTB/status/1911224442430124387",
+      "evidence": "README.md:179  - *\"aider is really cool\"* — [kache on X](https://x.com/yacineMTB/status/1911224442430124387)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pyproject.toml:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider",
+      "evidence": "pyproject.toml:24  Homepage = \"https://github.com/Aider-AI/aider\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/check_pypi_version.yml:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/3699",
+      "evidence": ".github/workflows/check_pypi_version.yml:5  # See https://github.com/Aider-AI/aider/issues/3699 for example."
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/pages.yml:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aider.chat",
+      "evidence": ".github/workflows/pages.yml:87  linkchecker --ignore-url='.+\\.(mp4|mov|avi)' https://aider.chat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/workflows/windows_check_pypi_version.yml:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Aider-AI/aider/issues/3699",
+      "evidence": ".github/workflows/windows_check_pypi_version.yml:5  # See https://github.com/Aider-AI/aider/issues/3699 for example."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-language-pack/README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Goldziher/tree-sitter-language-pack/blob/main/sources/language_definitions.json",
+      "evidence": "aider/queries/tree-sitter-language-pack/README.md:3  https://github.com/Goldziher/tree-sitter-language-pack/blob/main/sources/language_definitions.json"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-language-pack/README.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Goldziher/tree-sitter-language-pack/",
+      "evidence": "aider/queries/tree-sitter-language-pack/README.md:7  https://github.com/Goldziher/tree-sitter-language-pack/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/queries/tree-sitter-language-pack/commonlisp-tags.scm:113",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tree-sitter.github.io/tree-sitter/code-navigation-systems",
+      "evidence": "aider/queries/tree-sitter-language-pack/commonlisp-tags.scm:113  ;;     (https://tree-sitter.github.io/tree-sitter/code-navigation-systems)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/queries/tree-sitter-language-pack/csharp-tags.scm:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-c-sharp/blob/master/queries/tags.scm",
+      "evidence": "aider/queries/tree-sitter-language-pack/csharp-tags.scm:1  ; Based on https://github.com/tree-sitter/tree-sitter-c-sharp/blob/master/queries/tags.scm"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-c",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:7  * [https://github.com/tree-sitter/tree-sitter-c](https://github.com/tree-sitter/tree-sitter-c) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:8",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-c-sharp",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:8  * [https://github.com/tree-sitter/tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-cpp",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:9  * [https://github.com/tree-sitter/tree-sitter-cpp](https://github.com/tree-sitter/tree-sitter-cpp) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Wilfred/tree-sitter-elisp",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:10  * [https://github.com/Wilfred/tree-sitter-elisp](https://github.com/Wilfred/tree-sitter-elisp) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/elixir-lang/tree-sitter-elixir",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:11  * [https://github.com/elixir-lang/tree-sitter-elixir](https://github.com/elixir-lang/tree-sitter-elixir) — licensed under the Apache License, Version 2.0."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/elm-tooling/tree-sitter-elm",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:12  * [https://github.com/elm-tooling/tree-sitter-elm](https://github.com/elm-tooling/tree-sitter-elm) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-go",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:13  * [https://github.com/tree-sitter/tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:14",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-java",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:14  * [https://github.com/tree-sitter/tree-sitter-java](https://github.com/tree-sitter/tree-sitter-java) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:15",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-javascript",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:15  * [https://github.com/tree-sitter/tree-sitter-javascript](https://github.com/tree-sitter/tree-sitter-javascript) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:16",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-ocaml",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:16  * [https://github.com/tree-sitter/tree-sitter-ocaml](https://github.com/tree-sitter/tree-sitter-ocaml) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:17",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-php",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:17  * [https://github.com/tree-sitter/tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:18",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-python",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:18  * [https://github.com/tree-sitter/tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:19",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-ql",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:19  * [https://github.com/tree-sitter/tree-sitter-ql](https://github.com/tree-sitter/tree-sitter-ql) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:20",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r-lib/tree-sitter-r",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:20  * [https://github.com/r-lib/tree-sitter-r](https://github.com/r-lib/tree-sitter-r) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:21",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-ruby",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:21  * [https://github.com/tree-sitter/tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:22",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-rust",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:22  * [https://github.com/tree-sitter/tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:23",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-typescript",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:23  * [https://github.com/tree-sitter/tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) — licensed under the MIT License."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/queries/tree-sitter-languages/README.md:24",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/starelmanma/tree-sitter-fortran",
+      "evidence": "aider/queries/tree-sitter-languages/README.md:24  * [https://github.com/starelmanma/tree-sitter-fortran](https://github.com/starelmanma/tree-sitter-fortran) — licensed under the MIT License."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/queries/tree-sitter-languages/fortran-tags.scm:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/stadelmanma/tree-sitter-fortran",
+      "evidence": "aider/queries/tree-sitter-languages/fortran-tags.scm:1  ;; derived from: https://github.com/stadelmanma/tree-sitter-fortran"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/queries/tree-sitter-languages/hcl-tags.scm:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter-grammars/tree-sitter-hcl/blob/main/make_grammar.js",
+      "evidence": "aider/queries/tree-sitter-languages/hcl-tags.scm:1  ;; Based on https://github.com/tree-sitter-grammars/tree-sitter-hcl/blob/main/make_grammar.js"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/queries/tree-sitter-languages/julia-tags.scm:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tree-sitter/tree-sitter-julia",
+      "evidence": "aider/queries/tree-sitter-languages/julia-tags.scm:1  ;; derived from: https://github.com/tree-sitter/tree-sitter-julia"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/resources/model-metadata.json:221",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "evidence": "aider/resources/model-metadata.json:221  \"source\": \"https://cloud.google.com/vertex-ai/generative-ai/pricing\"\naider/resources/model-metadata.json:257  \"source\": \"https://cloud.google.com/vertex-ai/generative-ai/pricing\"\naider/resources/model-metadata.json:293  \"source\": \"https://cloud.google.com/vertex-ai/generative-ai/pricing\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/resources/model-metadata.json:540",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/models#gemini-2.5-flash-preview",
+      "evidence": "aider/resources/model-metadata.json:540  \"source\": \"https://ai.google.dev/gemini-api/docs/models#gemini-2.5-flash-preview\"\naider/resources/model-metadata.json:569  \"source\": \"https://ai.google.dev/gemini-api/docs/models#gemini-2.5-flash-preview\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/resources/model-metadata.json:598",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro-preview",
+      "evidence": "aider/resources/model-metadata.json:598  \"source\": \"https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro-preview\"\naider/resources/model-metadata.json:627  \"source\": \"https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro-preview\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/resources/model-metadata.json:655",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro",
+      "evidence": "aider/resources/model-metadata.json:655  \"source\": \"https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/resources/model-metadata.json:682",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash",
+      "evidence": "aider/resources/model-metadata.json:682  \"source\": \"https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/resources/model-metadata.json:709",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash-lite",
+      "evidence": "aider/resources/model-metadata.json:709  \"source\": \"https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash-lite\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "aider/website/Gemfile:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://rubygems.org",
+      "evidence": "aider/website/Gemfile:1  source 'https://rubygems.org'"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:330",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/languages.html",
+      "evidence": "aider/website/HISTORY.md:330  - Big upgrade in [programming languages supported](https://aider.chat/docs/languages.html) by adopting [tree-sitter-language-pack](https://github.com/Goldziher/tree-sitter-language-pack/).\naider/website/HISTORY.md:600  - Added [RepoMap support for Dart language](https://aider.chat/docs/languages.html) by @malkoG."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:330",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Goldziher/tree-sitter-language-pack/",
+      "evidence": "aider/website/HISTORY.md:330  - Big upgrade in [programming languages supported](https://aider.chat/docs/languages.html) by adopting [tree-sitter-language-pack](https://github.com/Goldziher/tree-sitter-language-pack/)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:364",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/notifications.html",
+      "evidence": "aider/website/HISTORY.md:364  - Added [notifications when LLM responses are ready](https://aider.chat/docs/usage/notifications.html) with `--notifications` flag."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:524",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/watch.html",
+      "evidence": "aider/website/HISTORY.md:524  - [Watch files](https://aider.chat/docs/usage/watch.html) improvements:\naider/website/HISTORY.md:561  - [Use aider in your IDE or editor](https://aider.chat/docs/usage/watch.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:530",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/commands.html#entering-multi-line-chat-messages",
+      "evidence": "aider/website/HISTORY.md:530  - [New `--multiline` flag and `/multiline-mode` command](https://aider.chat/docs/usage/commands.html#entering-multi-line-chat-messages) makes ENTER a soft newline and META-ENTER send the message, by @miradnanali.\naider/website/HISTORY.md:620  - Added support for [optional multiline input tags](https://aider.chat/docs/usage/commands.html#entering-multi-line-chat-messages) with matching closing tags."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:531",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/copypaste.html#copy-aiders-code-context-to-your-clipboard-paste-into-the-web-ui",
+      "evidence": "aider/website/HISTORY.md:531  - `/copy-context <instructions>` now takes optional \"instructions\" when [copying code context to the clipboard](https://aider.chat/docs/usage/copypaste.html#copy-aiders-code-context-to-your-clipboard-paste-into-the-web-ui)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:540",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/copypaste.html",
+      "evidence": "aider/website/HISTORY.md:540  - [Aider works with LLM web chat UIs](https://aider.chat/docs/usage/copypaste.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:543",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config/aider_conf.html#storing-llm-keys",
+      "evidence": "aider/website/HISTORY.md:543  - [Set API keys and other environment variables for all providers from command line or YAML conf file](https://aider.chat/docs/config/aider_conf.html#storing-llm-keys)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:572",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/HISTORY.html",
+      "evidence": "aider/website/HISTORY.md:572  - [Aider wrote 61% of the code in this release.](https://aider.chat/HISTORY.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:597",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config/model-aliases.html",
+      "evidence": "aider/website/HISTORY.md:597  - Added `--alias` config to define [custom model aliases](https://aider.chat/docs/config/model-aliases.html)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:601",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/more/analytics.html",
+      "evidence": "aider/website/HISTORY.md:601  - Ask 2.5% of users if they want to opt-in to [analytics](https://aider.chat/docs/more/analytics.html).\naider/website/HISTORY.md:619  - Ask 1% of users if they want to opt-in to [analytics](https://aider.chat/docs/more/analytics.html).\naider/website/HISTORY.md:677  - Anonymous, opt-in [analytics](https://aider.chat/docs/more/analytics.html) with no personal data sharing."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:615",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/commands.html",
+      "evidence": "aider/website/HISTORY.md:615  - Added [`/editor` command](https://aider.chat/docs/usage/commands.html) to open system editor for writing prompts, by @thehunmonkgroup."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:621",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/config/adv-model-settings.html#global-extra-params",
+      "evidence": "aider/website/HISTORY.md:621  - Improved [model settings configuration](https://aider.chat/docs/config/adv-model-settings.html#global-extra-params) with support for global `extra_params` for `litellm.completion()`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:658",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/leaderboards/",
+      "evidence": "aider/website/HISTORY.md:658  - Scored 75% on [aider's code editing leaderboard](https://aider.chat/docs/leaderboards/)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:739",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/2024/09/26/architect.html",
+      "evidence": "aider/website/HISTORY.md:739  - [Use a pair of Architect/Editor models for improved coding](https://aider.chat/2024/09/26/architect.html)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:882",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/usage/caching.html#preventing-cache-expiration",
+      "evidence": "aider/website/HISTORY.md:882  - [Keep your prompt cache from expiring](https://aider.chat/docs/usage/caching.html#preventing-cache-expiration) with `--cache-keepalive-pings`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "aider/website/HISTORY.md:964",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aider.chat/docs/scripting.html",
+      "evidence": "aider/website/HISTORY.md:964  - When [scripting aider](https://aider.chat/docs/scripting.html) messages can now contain in-chat `/` commands."
+    }
+  ],
+  "reRooting": []
+}

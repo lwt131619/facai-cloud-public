@@ -1,0 +1,16 @@
+{
+  "schema": "facai.case-ingest/1",
+  "at": "2026-10-13T02:36:03.922778+00:00",
+  "total": 1,
+  "registered": 0,
+  "updated": 0,
+  "skipped": 1,
+  "blocked": 0,
+  "results": [
+    {
+      "url": "https://blog.csdn.net/qq_34801745/article/details/111274699",
+      "decision": "skipped",
+      "reason": "抓取失败：HTTP 521"
+    }
+  ]
+}

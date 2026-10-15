@@ -1,0 +1,1809 @@
+{
+  "target": "tauri (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\tauri)",
+  "origin": "https://github.com/tauri-apps/tauri",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 119 个文本文件（源码 119、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/cmake.sh:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Kitware/CMake/releases/download/v${version",
+      "evidence": ".docker/cross/cmake.sh:19  curl --retry 3 -sSfL \"https://github.com/Kitware/CMake/releases/download/v${version}/cmake-${version}-linux-x86_64.sh\" -o cmake.sh"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/dropbear.sh:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://matt.ucc.asn.au/dropbear/releases/dropbear-${version",
+      "evidence": ".docker/cross/dropbear.sh:27  curl --retry 3 -sSfL \"https://matt.ucc.asn.au/dropbear/releases/dropbear-${version}.tar.bz2\" -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://http.debian.net/debian/",
+      "evidence": ".docker/cross/linux-image.sh:14  local debsource=\"deb http://http.debian.net/debian/ buster main\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://security.debian.org/",
+      "evidence": ".docker/cross/linux-image.sh:15  debsource=\"${debsource}\\ndeb http://security.debian.org/ buster/updates main\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://archive.debian.org/debian",
+      "evidence": ".docker/cross/linux-image.sh:48  debsource=\"deb http://archive.debian.org/debian jessie main\"\n.docker/cross/linux-image.sh:49  debsource=\"${debsource}\\ndeb http://archive.debian.org/debian jessie-backports main\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ftp.ports.debian.org/debian-ports",
+      "evidence": ".docker/cross/linux-image.sh:50  debsource=\"${debsource}\\ndeb http://ftp.ports.debian.org/debian-ports unstable main\"\n.docker/cross/linux-image.sh:51  debsource=\"${debsource}\\ndeb http://ftp.ports.debian.org/debian-ports unreleased main\"\n.docker/cross/linux-image.sh:67  debsource=\"deb http://ftp.ports.debian.org/debian-ports unstable main\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:63",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://packages.debian.org/en/sid/linux-image-powerpc64",
+      "evidence": ".docker/cross/linux-image.sh:63  # https://packages.debian.org/en/sid/linux-image-powerpc64"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://packages.debian.org/en/sid/linux-image-sparc64",
+      "evidence": ".docker/cross/linux-image.sh:82  # https://packages.debian.org/en/sid/linux-image-sparc64"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:117",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ftp-master.debian.org/keys/archive-key-{7.0",
+      "evidence": ".docker/cross/linux-image.sh:117  curl --retry 3 -sSfL 'https://ftp-master.debian.org/keys/archive-key-{7.0,8,9,10}.asc' -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:118",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ftp-master.debian.org/keys/archive-key-{8",
+      "evidence": ".docker/cross/linux-image.sh:118  curl --retry 3 -sSfL 'https://ftp-master.debian.org/keys/archive-key-{8,9,10}-security.asc' -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:119",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ftp-master.debian.org/keys/release-{7",
+      "evidence": ".docker/cross/linux-image.sh:119  curl --retry 3 -sSfL 'https://ftp-master.debian.org/keys/release-{7,8,9,10}.asc' -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/linux-image.sh:120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.ports.debian.org/archive_{2020",
+      "evidence": ".docker/cross/linux-image.sh:120  curl --retry 3 -sSfL 'https://www.ports.debian.org/archive_{2020,2021,2022}.key' -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/libffi/libffi/archive/refs/tags/v${version",
+      "evidence": ".docker/cross/qemu.sh:18  curl --retry 3 -sSfL \"https://github.com/libffi/libffi/archive/refs/tags/v${version}.tar.gz\" -O -L"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://kernel.org/pub/linux/utils/util-linux/v${version",
+      "evidence": ".docker/cross/qemu.sh:37  curl --retry 3 -sSfL \"https://kernel.org/pub/linux/utils/util-linux/v${version}/util-linux-${version_spec}.tar.xz\" -O -L"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://download.savannah.nongnu.org/releases/attr/attr-${version",
+      "evidence": ".docker/cross/qemu.sh:59  curl --retry 3 -sSfL \"https://download.savannah.nongnu.org/releases/attr/attr-${version}.src.tar.gz\" -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${version",
+      "evidence": ".docker/cross/qemu.sh:82  curl --retry 3 -sSfL \"https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${version}.tar.xz\" -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:100",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.cairographics.org/releases/pixman-${version",
+      "evidence": ".docker/cross/qemu.sh:100  curl --retry 3 -sSfL \"https://www.cairographics.org/releases/pixman-${version}.tar.gz\" -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:152",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://git.savannah.gnu.org/gitweb/?p=config.git",
+      "evidence": ".docker/cross/qemu.sh:152  if_centos 'curl --retry 3 -sSfL \"https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD\" -o /usr/share/automake*/config.guess'\n.docker/cross/qemu.sh:153  if_centos 'curl --retry 3 -sSfL \"https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD\" -o /usr/share/automake*/config.sub'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/qemu.sh:187",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://download.qemu.org/qemu-${version",
+      "evidence": ".docker/cross/qemu.sh:187  curl --retry 3 -sSfL \"https://download.qemu.org/qemu-${version}.tar.xz\" -O"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".docker/cross/xargo.sh:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sh.rustup.rs",
+      "evidence": ".docker/cross/xargo.sh:15  curl --retry 3 -sSfL https://sh.rustup.rs -o rustup-init.sh"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".scripts/ci/check-license-header.js:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/burtonageo/cargo-bundle",
+      "evidence": ".scripts/ci/check-license-header.js:15  '// Copyright 2016-2019 Cargo-Bundle developers <https://github.com/burtonageo/cargo-bundle>'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bench/src/build_benchmark_jsons.rs:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/benchmark_results",
+      "evidence": "bench/src/build_benchmark_jsons.rs:5  //! This Rust binary runs on CI and provides internal metrics results of Tauri. To learn more see [benchmark_results](https://github.com/tauri-apps/benchmark_results) repository."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bench/src/build_benchmark_jsons.rs:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png",
+      "evidence": "bench/src/build_benchmark_jsons.rs:10  html_logo_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\",\nbench/src/build_benchmark_jsons.rs:11  html_favicon_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bench/src/run_benchmark.rs:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/benchmark_results",
+      "evidence": "bench/src/run_benchmark.rs:6  //! To learn more see [benchmark_results](https://github.com/tauri-apps/benchmark_results) repository."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bench/src/run_benchmark.rs:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png",
+      "evidence": "bench/src/run_benchmark.rs:11  html_logo_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\",\nbench/src/run_benchmark.rs:12  html_favicon_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bench/src/run_benchmark.rs:342",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/lemarier/tauri-test/releases/download/v2.0.0/json_3mb.json",
+      "evidence": "bench/src/run_benchmark.rs:342  \"https://github.com/lemarier/tauri-test/releases/download/v2.0.0/json_3mb.json\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/build.rs:235",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts",
+      "evidence": "crates/tauri/build.rs:235  // <https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/build.rs:272",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/pull/4383#issuecomment-1212221864",
+      "evidence": "crates/tauri/build.rs:272  // see https://github.com/tauri-apps/tauri/pull/4383#issuecomment-1212221864"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/scripts/bundle.global.js:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://${t",
+      "evidence": "crates/tauri/scripts/bundle.global.js:1  var __TAURI_IIFE__=function(e){\"use strict\";function n(e,n,t,i){if(\"a\"===t&&!i)throw new TypeError(\"Private accessor was defined without a getter\");if(\"function\"==typeof n?e!==n||!i:!n.has(e))throw new TypeError(\"Cannot read private member "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/scripts/ipc-protocol.js:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/wry/blob/a0403b9e2f1ff9d73be7dce1184f058afcaa1d82/src/lib.rs#L1130",
+      "evidence": "crates/tauri/scripts/ipc-protocol.js:83  // `window.ipc.postMessage` came from `tauri-runtime-wry` > `wry` [`with_ipc_handler`](https://github.com/tauri-apps/wry/blob/a0403b9e2f1ff9d73be7dce1184f058afcaa1d82/src/lib.rs#L1130)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/scripts/ipc.js:93",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/whatwg/html/issues/7428",
+      "evidence": "crates/tauri/scripts/ipc.js:93  // so that `structuredClone` would use, so until https://github.com/whatwg/html/issues/7428"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:325",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/reference/config/#frontenddist",
+      "evidence": "crates/tauri/src/app.rs:325  /// which contains your frontend assets in [`frontendDist`](https://v2.tauri.app/reference/config/#frontenddist) during build time."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:327",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/reference/config/#devurl",
+      "evidence": "crates/tauri/src/app.rs:327  /// In dev mode, if [`devUrl`](https://v2.tauri.app/reference/config/#devurl) is set, we don't bundle the assets to reduce re-builds,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:342",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.localhost",
+      "evidence": "crates/tauri/src/app.rs:342  ///   the csp header will contain `https://tauri.localhost` instead of `http://tauri.localhost`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:342",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tauri.localhost",
+      "evidence": "crates/tauri/src/app.rs:342  ///   the csp header will contain `https://tauri.localhost` instead of `http://tauri.localhost`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:1353",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://crates.io/crates/tao",
+      "evidence": "crates/tauri/src/app.rs:1353  /// [`tao`]: https://crates.io/crates/tao\ncrates/tauri/src/app.rs:2368  /// [`tao`]: https://crates.io/crates/tao"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:2228",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/2875766-seturlschemehandler",
+      "evidence": "crates/tauri/src/app.rs:2228  /// Leverages [setURLSchemeHandler](https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/2875766-seturlschemehandler) on macOS,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:2229",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.microsoft.com/en-us/dotnet/api/microsoft.web.webview2.core.corewebview2.addwebresourcerequestedfilter?view=webview2-dotnet-1.0.774.44",
+      "evidence": "crates/tauri/src/app.rs:2229  /// [AddWebResourceRequestedFilter](https://docs.microsoft.com/en-us/dotnet/api/microsoft.web.webview2.core.corewebview2.addwebresourcerequestedfilter?view=webview2-dotnet-1.0.774.44) on Windows"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:2230",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://webkitgtk.org/reference/webkit2gtk/stable/WebKitWebContext.html#webkit-web-context-register-uri-scheme",
+      "evidence": "crates/tauri/src/app.rs:2230  /// and [webkit-web-context-register-uri-scheme](https://webkitgtk.org/reference/webkit2gtk/stable/WebKitWebContext.html#webkit-web-context-register-uri-scheme) on Linux."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:2264",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<scheme_name",
+      "evidence": "crates/tauri/src/app.rs:2264  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`).\ncrates/tauri/src/app.rs:2332  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/app.rs:2264",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://my-scheme.localhost/path/to/page",
+      "evidence": "crates/tauri/src/app.rs:2264  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`).\ncrates/tauri/src/app.rs:2332  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://doc.rust-lang.org/stable/cargo/reference/manifest.html#the-features-section",
+      "evidence": "crates/tauri/src/lib.rs:11  //! The following are a list of [Cargo features](https://doc.rust-lang.org/stable/cargo/reference/manifest.html#the-features-section) that can be enabled or disabled:\ncrates/tauri/src/lib.rs:53  //! The following are a list of [Cargo features](https://doc.rust-lang.org/stable/cargo/reference/manifest.html#the-features-section) that enables commands for Tauri's API package."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/wry",
+      "evidence": "crates/tauri/src/lib.rs:13  //! - **wry** *(enabled by default)*: Enables the [wry](https://github.com/tauri-apps/wry) runtime. Only disable it if you want a custom runtime."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/windows/win32/controls/common-control-versions",
+      "evidence": "crates/tauri/src/lib.rs:14  //! - **common-controls-v6** *(enabled by default)*: Enables [Common Controls v6](https://learn.microsoft.com/en-us/windows/win32/controls/common-control-versions) support on Windows, mainly for the predefined `about` menu item."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/tree/dev/examples/multiwebview",
+      "evidence": "crates/tauri/src/lib.rs:26  //!   See the [multiwebview example](https://github.com/tauri-apps/tauri/tree/dev/examples/multiwebview)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tracing/latest/tracing",
+      "evidence": "crates/tauri/src/lib.rs:27  //! - **tracing**: Enables [`tracing`](https://docs.rs/tracing/latest/tracing) for window startup, plugins, `Window::eval`, events, IPC, updater and custom protocol request handlers."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/specta/%5E2.0.0-rc.9/specta/attr.specta.html",
+      "evidence": "crates/tauri/src/lib.rs:48  //! - **specta**: Add support for [`specta::specta`](https://docs.rs/specta/%5E2.0.0-rc.9/specta/attr.specta.html) with Tauri arguments such as [`State`], [`Window`] and [`AppHandle`]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png",
+      "evidence": "crates/tauri/src/lib.rs:61  html_logo_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\",\ncrates/tauri/src/lib.rs:62  html_favicon_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:297",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri-build",
+      "evidence": "crates/tauri/src/lib.rs:297  /// [`tauri-build`]: https://docs.rs/tauri-build\ncrates/tauri/src/lib.rs:306  /// [`tauri-build`]: https://docs.rs/tauri-build"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:735",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/12721",
+      "evidence": "crates/tauri/src/lib.rs:735  /// [tauri-apps/tauri#12721]: https://github.com/tauri-apps/tauri/issues/12721"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:838",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app/reference/config/#capabilities",
+      "evidence": "crates/tauri/src/lib.rs:838  /// [`tauri.conf.json > app > security > capabilities`]: https://tauri.app/reference/config/#capabilities"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:839",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri-build/2/tauri_build/struct.Attributes.html#method.capabilities_path_pattern",
+      "evidence": "crates/tauri/src/lib.rs:839  /// [tauri_build::Attributes::capabilities_path_pattern]: https://docs.rs/tauri-build/2/tauri_build/struct.Attributes.html#method.capabilities_path_pattern"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/lib.rs:1280",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://rfc.zeromq.org/spec/32/",
+      "evidence": "crates/tauri/src/lib.rs:1280  /// [Z85]: https://rfc.zeromq.org/spec/32/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:67",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView",
+      "evidence": "crates/tauri/src/plugin.rs:67  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)\ncrates/tauri/src/plugin.rs:347  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)\ncrates/tauri/src/plugin.rs:397  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:68",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView",
+      "evidence": "crates/tauri/src/plugin.rs:68  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)\ncrates/tauri/src/plugin.rs:348  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)\ncrates/tauri/src/plugin.rs:398  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:356",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app",
+      "evidence": "crates/tauri/src/plugin.rs:356  ///   if (window.location.origin === 'https://tauri.app') {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:598",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/2875766-seturlschemehandler",
+      "evidence": "crates/tauri/src/plugin.rs:598  /// Leverages [setURLSchemeHandler](https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/2875766-seturlschemehandler) on macOS,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:599",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.microsoft.com/en-us/dotnet/api/microsoft.web.webview2.core.corewebview2.addwebresourcerequestedfilter?view=webview2-dotnet-1.0.774.44",
+      "evidence": "crates/tauri/src/plugin.rs:599  /// [AddWebResourceRequestedFilter](https://docs.microsoft.com/en-us/dotnet/api/microsoft.web.webview2.core.corewebview2.addwebresourcerequestedfilter?view=webview2-dotnet-1.0.774.44) on Windows"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:600",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://webkitgtk.org/reference/webkit2gtk/stable/WebKitWebContext.html#webkit-web-context-register-uri-scheme",
+      "evidence": "crates/tauri/src/plugin.rs:600  /// and [webkit-web-context-register-uri-scheme](https://webkitgtk.org/reference/webkit2gtk/stable/WebKitWebContext.html#webkit-web-context-register-uri-scheme) on Linux."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:633",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<scheme_name",
+      "evidence": "crates/tauri/src/plugin.rs:633  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`).\ncrates/tauri/src/plugin.rs:707  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/plugin.rs:633",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://my-scheme.localhost/path/to/page",
+      "evidence": "crates/tauri/src/plugin.rs:633  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`).\ncrates/tauri/src/plugin.rs:707  /// - Windows and Android: `http://<scheme_name>.localhost/<path>` by default (so it will be `http://my-scheme.localhost/path/to/page`)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/process.rs:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://appimage.org/",
+      "evidence": "crates/tauri/src/process.rs:47  /// [AppImage]: https://appimage.org/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/state.rs:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/SergioBenitez/state/blob/556c1b94db8ce8427a0e72de7983ab5a9af4cc41/src/ident_hash.rs",
+      "evidence": "crates/tauri/src/state.rs:71  // Taken from: https://github.com/SergioBenitez/state/blob/556c1b94db8ce8427a0e72de7983ab5a9af4cc41/src/ident_hash.rs"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/state.rs:162",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/SergioBenitez/state/blob/556c1b94db8ce8427a0e72de7983ab5a9af4cc41/tests/main.rs",
+      "evidence": "crates/tauri/src/state.rs:162  // Ported from https://github.com/SergioBenitez/state/blob/556c1b94db8ce8427a0e72de7983ab5a9af4cc41/tests/main.rs"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/event/listener.rs:173",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/16214",
+      "evidence": "crates/tauri/src/event/listener.rs:173  // see https://github.com/tauri-apps/tauri/issues/16214"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/image/mod.rs:446",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://v2.tauri.app/reference/javascript/api/namespaceimage/#transformimage",
+      "evidence": "crates/tauri/src/image/mod.rs:446  /// This type is meant to be used along the [transformImage](https://v2.tauri.app/reference/javascript/api/namespaceimage/#transformimage) API."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:920",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app",
+      "evidence": "crates/tauri/src/ipc/authority.rs:920  let url = \"https://tauri.app\";\ncrates/tauri/src/ipc/authority.rs:1023  url: \"https://tauri.app\".parse().unwrap()\ncrates/tauri/src/ipc/authority.rs:1073  let url = \"https://tauri.app\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:959",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tauri.*",
+      "evidence": "crates/tauri/src/ipc/authority.rs:959  let url = \"http://tauri.*\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1229",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1229  let remote_url = \"http://localhost:8080\";\ncrates/tauri/src/ipc/authority.rs:1346  let remote_url = \"http://localhost:8080\";\ncrates/tauri/src/ipc/authority.rs:1467  \"myplugin.my-command-webview-window not allowed on window \\\"other-window\\\", webview \\\"other-webview\\\", URL: local\\n\\nallowed on: [windows: \\\"main-*\\\", webviews: \\\"webview-*\\\", URL: local], [windows: \\\"main-*\\\", webviews: \\\"webview-*\\\", URL:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1313",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080/",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1313  \"myplugin.my-command explicitly denied on origin remote: http://localhost:8080/\\n\\nreferenced by: capability: remotecap, permission: deny-command\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1323",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:123",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1323  url: \"http://localhost:123\".parse().unwrap(),\ncrates/tauri/src/ipc/authority.rs:1478  url: \"http://localhost:123\".parse().unwrap()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1452",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhst",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1452  url: \"http://localhst\".parse().unwrap()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1455",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhst/",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1455  \"myplugin.my-command-window not allowed on window \\\"main-*\\\", webview \\\"any-webview\\\", URL: http://localhst/\\n\\nallowed on: [windows: \\\"main-*\\\", URL: local]\\n\\nreferenced by: capability: maincap, permission: allow-command\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1481",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:123/",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1481  \"myplugin.my-command-webview-window not allowed on window \\\"main-*\\\", webview \\\"webview-*\\\", URL: http://localhost:123/\\n\\nallowed on: [windows: \\\"main-*\\\", webviews: \\\"webview-*\\\", URL: local], [windows: \\\"main-*\\\", webviews: \\\"webview-*\\\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/authority.rs:1544",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "crates/tauri/src/ipc/authority.rs:1544  \"scope\": { \"allow\": [{ \"url\": \"https://example.com\" }] }\ncrates/tauri/src/ipc/authority.rs:1591  vec![json!({ \"url\": \"https://example.com\" })]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/command.rs:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/security/scope/",
+      "evidence": "crates/tauri/src/ipc/command.rs:60  ///     [scope documentation](https://v2.tauri.app/security/scope/)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/command.rs:192",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/dtolnay/case-studies/blob/master/autoref-specialization/README.md",
+      "evidence": "crates/tauri/src/ipc/command.rs:192  /// [Autoref-based stable specialization](https://github.com/dtolnay/case-studies/blob/master/autoref-specialization/README.md)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/format_callback.rs:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/34958490",
+      "evidence": "crates/tauri/src/ipc/format_callback.rs:11  /// The information about this is quite limited. On Chrome/Edge and Firefox, [the maximum string size is approximately 1 GB](https://stackoverflow.com/a/34958490)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/format_callback.rs:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length#description",
+      "evidence": "crates/tauri/src/ipc/format_callback.rs:13  /// [From MDN:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length#description)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/ipc/format_callback.rs:92",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/GoogleChromeLabs/json-parse-benchmark",
+      "evidence": "crates/tauri/src/ipc/format_callback.rs:92  /// See [json-parse-benchmark](https://github.com/GoogleChromeLabs/json-parse-benchmark)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/mod.rs:109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rust-lang/rust/blob/1be5c8f90912c446ecbdc405cbc4a89f9acd20fd/library/alloc/src/str.rs#L260-L297",
+      "evidence": "crates/tauri/src/manager/mod.rs:109  // inspired by <https://github.com/rust-lang/rust/blob/1be5c8f90912c446ecbdc405cbc4a89f9acd20fd/library/alloc/src/str.rs#L260-L297>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/mod.rs:335",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tauri.localhost",
+      "evidence": "crates/tauri/src/manager/mod.rs:335  /// Returns `tauri://localhost` or its `wry` workaround URL `http://tauri.localhost`/`https://tauri.localhost`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/mod.rs:335",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.localhost",
+      "evidence": "crates/tauri/src/manager/mod.rs:335  /// Returns `tauri://localhost` or its `wry` workaround URL `http://tauri.localhost`/`https://tauri.localhost`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/mod.rs:790",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tauri.localhost/",
+      "evidence": "crates/tauri/src/manager/mod.rs:790  \"http://tauri.localhost/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/mod.rs:798",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.localhost/",
+      "evidence": "crates/tauri/src/manager/mod.rs:798  \"https://tauri.localhost/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/mod.rs:808",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:4000/",
+      "evidence": "crates/tauri/src/manager/mod.rs:808  \"http://localhost:4000/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/webview.rs:782",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost",
+      "evidence": "crates/tauri/src/manager/webview.rs:782  assert!(is_local_network_url(&\"http://localhost\".parse().unwrap()));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/webview.rs:784",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "crates/tauri/src/manager/webview.rs:784  &\"http://127.0.0.1:8080\".parse().unwrap()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/webview.rs:787",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://192.168.3.17",
+      "evidence": "crates/tauri/src/manager/webview.rs:787  &\"https://192.168.3.17\".parse().unwrap()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/manager/webview.rs:790",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app",
+      "evidence": "crates/tauri/src/manager/webview.rs:790  assert!(!is_local_network_url(&\"https://tauri.app\".parse().unwrap()));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/menu/mod.rs:718",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/windows/win32/winprog/windows-data-types#HMENU",
+      "evidence": "crates/tauri/src/menu/mod.rs:718  /// [`HMENU`]: https://learn.microsoft.com/en-us/windows/win32/winprog/windows-data-types#HMENU"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/path/desktop.rs:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
+      "evidence": "crates/tauri/src/path/desktop.rs:39  /// - **Linux:** Resolves to [`xdg-user-dirs`](https://www.freedesktop.org/wiki/Software/xdg-user-dirs/)' `XDG_MUSIC_DIR`.\ncrates/tauri/src/path/desktop.rs:94  /// - **Linux:** Resolves to [`xdg-user-dirs`](https://www.freedesktop.org/wiki/Software/xdg-user-dirs/)' `XDG_DESKTOP_DIR`.\ncrates/tauri/src/path/desktop.rs:105  /// - **Linux:** Resolves to [`xdg-user-dirs`](https://www.freedesktop.org/wiki/Software/xdg-user-dirs/)' `XDG_DOCUMENTS_DIR`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/path/desktop.rs:227",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app/plugin/file-system/",
+      "evidence": "crates/tauri/src/path/desktop.rs:227  ///   we return a special URI prefix `asset://localhost/` here that can be used with the [file system plugin](https://tauri.app/plugin/file-system/),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/path/desktop.rs:228",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri-plugin-fs/latest/tauri_plugin_fs/trait.FsExt.html#tymethod.fs",
+      "evidence": "crates/tauri/src/path/desktop.rs:228  ///   with that, you can read the files through [`FsExt::fs`](https://docs.rs/tauri-plugin-fs/latest/tauri_plugin_fs/trait.FsExt.html#tymethod.fs)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/path/mod.rs:97",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/dirs/",
+      "evidence": "crates/tauri/src/path/mod.rs:97  /// For more information, check the [`dirs` documentation](https://docs.rs/dirs/)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/path/plugin.rs:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rust-lang/cargo/blob/46fa867ff7043e3a0545bf3def7be904e1497afd/crates/cargo-util/src/paths.rs#L73-L106",
+      "evidence": "crates/tauri/src/path/plugin.rs:16  /// <https://github.com/rust-lang/cargo/blob/46fa867ff7043e3a0545bf3def7be904e1497afd/crates/cargo-util/src/paths.rs#L73-L106>\ncrates/tauri/src/path/plugin.rs:46  /// <https://github.com/rust-lang/cargo/blob/46fa867ff7043e3a0545bf3def7be904e1497afd/crates/cargo-util/src/paths.rs#L73-L106>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/protocol/asset.rs:286",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tauri.localhost",
+      "evidence": "crates/tauri/src/protocol/asset.rs:286  crate::async_runtime::block_on(get_response(request, &scope, \"http://tauri.localhost\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/protocol/tauri.rs:162",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.$P",
+      "evidence": "crates/tauri/src/protocol/tauri.rs:162  // the `strip_prefix` only returns None when a request is made to `https://tauri.$P` on Windows and Android"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/protocol/tauri.rs:225",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.apple.com/en-us/102229",
+      "evidence": "crates/tauri/src/protocol/tauri.rs:225  \", did you grant local network permissions? That is required to reach the development server. Please grant the permission via the prompt or in `Settings > Privacy & Security > Local Network` and restart the app. See https://support.apple.co"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/resources/mod.rs:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/denoland/deno/blob/0ae83847f498a2886ae32172e50fd5bdbab2f524/core/resources.rs#L220",
+      "evidence": "crates/tauri/src/resources/mod.rs:6  // a modified version of https://github.com/denoland/deno/blob/0ae83847f498a2886ae32172e50fd5bdbab2f524/core/resources.rs#L220"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/scope/fs.rs:237",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/security/advisories/GHSA-6mv3-wm7j-h4w5",
+      "evidence": "crates/tauri/src/scope/fs.rs:237  // see: <https://github.com/tauri-apps/tauri/security/advisories/GHSA-6mv3-wm7j-h4w5>\ncrates/tauri/src/scope/fs.rs:520  // see: <https://github.com/tauri-apps/tauri/security/advisories/GHSA-6mv3-wm7j-h4w5>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/scope/mod.rs:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/security/asset-protocol/",
+      "evidence": "crates/tauri/src/scope/mod.rs:18  //!   that the [asset protocol](https://v2.tauri.app/security/asset-protocol/) checks before serving"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/scope/mod.rs:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/plugin/persisted-scope/",
+      "evidence": "crates/tauri/src/scope/mod.rs:41  //! Use the [persisted scope plugin](https://v2.tauri.app/plugin/persisted-scope/)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/test/mod.rs:43",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tauri.localhost",
+      "evidence": "crates/tauri/src/test/mod.rs:43  //!             url: \"http://tauri.localhost\".parse().unwrap(),\ncrates/tauri/src/test/mod.rs:221  ///                 \"http://tauri.localhost\"\ncrates/tauri/src/test/mod.rs:284  ///                 \"http://tauri.localhost\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/tray/mod.rs:294",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/appkit/nsimage/1520017-template?language=objc",
+      "evidence": "crates/tauri/src/tray/mod.rs:294  /// Use the icon as a [template](https://developer.apple.com/documentation/appkit/nsimage/1520017-template?language=objc). **macOS only**.\ncrates/tauri/src/tray/mod.rs:560  /// Sets the current icon as a [template](https://developer.apple.com/documentation/appkit/nsimage/1520017-template?language=objc). **macOS only**."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:201",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkwebview",
+      "evidence": "crates/tauri/src/webview/mod.rs:201  /// [WKWebView]: https://developer.apple.com/documentation/webkit/wkwebview"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:210",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller",
+      "evidence": "crates/tauri/src/webview/mod.rs:210  /// [controller]: https://developer.apple.com/documentation/webkit/wkusercontentcontroller"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:219",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/appkit/nswindow",
+      "evidence": "crates/tauri/src/webview/mod.rs:219  /// [NSWindow]: https://developer.apple.com/documentation/appkit/nswindow"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:228",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+      "evidence": "crates/tauri/src/webview/mod.rs:228  /// [UIViewController]: https://developer.apple.com/documentation/uikit/uiviewcontroller"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:345",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app/",
+      "evidence": "crates/tauri/src/webview/mod.rs:345  let webview_builder = tauri::webview::WebviewBuilder::new(\"label\", tauri::WebviewUrl::External(\"https://tauri.app/\".parse().unwrap()));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:352",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/wry/issues/583",
+      "evidence": "crates/tauri/src/webview/mod.rs:352  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583\ncrates/tauri/src/webview/mod.rs:394  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583\ncrates/tauri/src/webview/mod.rs:2446  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:591",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://developer.mozilla.org/en-US/docs/Web/API/Window/open",
+      "evidence": "crates/tauri/src/webview/mod.rs:591  /// [window.open]: https://developer.mozilla.org/en-US/docs/Web/API/Window/open"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:919",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app",
+      "evidence": "crates/tauri/src/webview/mod.rs:919  if (window.location.origin === 'https://tauri.app') {\ncrates/tauri/src/webview/mod.rs:978  if (window.location.origin === 'https://tauri.app') {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:940",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView",
+      "evidence": "crates/tauri/src/webview/mod.rs:940  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)\ncrates/tauri/src/webview/mod.rs:999  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:941",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView",
+      "evidence": "crates/tauri/src/webview/mod.rs:941  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)\ncrates/tauri/src/webview/mod.rs:1000  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1072",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/release-notes/archive?tabs=dotnetcsharp#10121039",
+      "evidence": "crates/tauri/src/webview/mod.rs:1072  ///    see https://learn.microsoft.com/en-us/microsoft-edge/webview2/release-notes/archive?tabs=dotnetcsharp#10121039"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1119",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2settings?view=webview2-winrt-1.0.2420.47#iszoomcontrolenabled",
+      "evidence": "crates/tauri/src/webview/mod.rs:1119  /// - **Windows**: Controls WebView2's [`IsZoomControlEnabled`](https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2settings?view=webview2-winrt-1.0.2420.47#iszoomcontrolenabled)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1134",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2environmentoptions?view=webview2-winrt-1.0.2739.15#arebrowserextensionsenabled",
+      "evidence": "crates/tauri/src/webview/mod.rs:1134  /// - **Windows**: Enables the WebView2 environment's [`AreBrowserExtensionsEnabled`](https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2environmentoptions?view=webview2-winrt-1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1167",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://<scheme",
+      "evidence": "crates/tauri/src/webview/mod.rs:1167  /// Sets whether the custom protocols should use `https://<scheme>.localhost` instead of the default `http://<scheme>.localhost` on Windows and Android. Defaults to `false`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1167",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<scheme",
+      "evidence": "crates/tauri/src/webview/mod.rs:1167  /// Sets whether the custom protocols should use `https://<scheme>.localhost` instead of the default `http://<scheme>.localhost` on Windows and Android. Defaults to `false`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1223",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/5250#issuecomment-2569380578",
+      "evidence": "crates/tauri/src/webview/mod.rs:1223  /// see <https://github.com/tauri-apps/tauri/issues/5250#issuecomment-2569380578>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1283",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/objc2-web-kit/latest/objc2_web_kit/struct.WKWebView.html#method.allowsLinkPreview",
+      "evidence": "crates/tauri/src/webview/mod.rs:1283  /// See https://docs.rs/objc2-web-kit/latest/objc2_web_kit/struct.WKWebView.html#method.allowsLinkPreview"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1298",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/49673399/service-workers-unavailable-in-wkwebview-in-ios-11-3/64155509#64155509",
+      "evidence": "crates/tauri/src/webview/mod.rs:1298  /// [StackOverflow](https://stackoverflow.com/questions/49673399/service-workers-unavailable-in-wkwebview-in-ios-11-3/64155509#64155509)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1303",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.mozilla.org/en-US/docs/Glossary/Registrable_domain",
+      "evidence": "crates/tauri/src/webview/mod.rs:1303  /// domains`](https://developer.mozilla.org/en-US/docs/Glossary/Registrable_domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1330",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/blob/dev/examples/streaming/main.rs",
+      "evidence": "crates/tauri/src/webview/mod.rs:1330  /// example](https://github.com/tauri-apps/tauri/blob/dev/examples/streaming/main.rs)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1335",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://webkit.org/blog/10882/app-bound-domains/",
+      "evidence": "crates/tauri/src/webview/mod.rs:1335  /// Domains](https://webkit.org/blog/10882/app-bound-domains/).\ncrates/tauri/src/webview/mod.rs:1337  /// See https://webkit.org/blog/10882/app-bound-domains/ and"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1338",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/limitsnavigationstoappbounddomains",
+      "evidence": "crates/tauri/src/webview/mod.rs:1338  /// https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/limitsnavigationstoappbounddomains"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1818",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/struct.WebView.html",
+      "evidence": "crates/tauri/src/webview/mod.rs:1818  // see <https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/struct.WebView.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1819",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/trait.WebViewExt.html",
+      "evidence": "crates/tauri/src/webview/mod.rs:1819  // and <https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/trait.WebViewExt.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1826",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/webview2-com/0.19.1/webview2_com/Microsoft/Web/WebView2/Win32/struct.ICoreWebView2Controller.html",
+      "evidence": "crates/tauri/src/webview/mod.rs:1826  // see https://docs.rs/webview2-com/0.19.1/webview2_com/Microsoft/Web/WebView2/Win32/struct.ICoreWebView2Controller.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1912",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/reference/config/#assetprotocolconfig",
+      "evidence": "crates/tauri/src/webview/mod.rs:1912  /// [`app.security.assetProtocol`](https://v2.tauri.app/reference/config/#assetprotocolconfig)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1914",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/reference/config/#csp-1",
+      "evidence": "crates/tauri/src/webview/mod.rs:1914  /// [`app.security.csp`](https://v2.tauri.app/reference/config/#csp-1) directive,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1915",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://asset.localhost",
+      "evidence": "crates/tauri/src/webview/mod.rs:1915  /// e.g. `img-src 'self' asset: http://asset.localhost`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1917",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{protocol",
+      "evidence": "crates/tauri/src/webview/mod.rs:1917  /// On Windows and Android the URL is `http://{protocol}.localhost/{path}`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:1986",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<protocol-name",
+      "evidence": "crates/tauri/src/webview/mod.rs:1986  // on window and android, custom protocols are `http://<protocol-name>.path/to/route`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2396",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore",
+      "evidence": "crates/tauri/src/webview/mod.rs:2396  /// [`WKWebsiteDataStore`]: https://developer.apple.com/documentation/webkit/wkwebsitedatastore"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2697",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://asset.localhost/{encoded",
+      "evidence": "crates/tauri/src/webview/mod.rs:2697  format!(\"http://asset.localhost/{encoded}\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2701",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://asset.localhost/{encoded",
+      "evidence": "crates/tauri/src/webview/mod.rs:2701  format!(\"https://asset.localhost/{encoded}\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2705",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://custom.localhost/{encoded",
+      "evidence": "crates/tauri/src/webview/mod.rs:2705  format!(\"http://custom.localhost/{encoded}\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2743",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.localhost/",
+      "evidence": "crates/tauri/src/webview/mod.rs:2743  assert!(webview.is_local_url(&Url::parse(\"https://tauri.localhost/\").unwrap()));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2746",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://<name",
+      "evidence": "crates/tauri/src/webview/mod.rs:2746  // On Windows/Android, custom protocols are served as `https://<name>.localhost/`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2768",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://myproto.localhost/",
+      "evidence": "crates/tauri/src/webview/mod.rs:2768  assert!(webview.is_local_url(&url(\"https://myproto.localhost/\")));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2771",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://myproto.evil.com/",
+      "evidence": "crates/tauri/src/webview/mod.rs:2771  assert!(!webview.is_local_url(&url(\"https://myproto.evil.com/\")));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2774",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://notregistered.localhost/",
+      "evidence": "crates/tauri/src/webview/mod.rs:2774  assert!(!webview.is_local_url(&url(\"https://notregistered.localhost/\")));"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/mod.rs:2800",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://evil.com",
+      "evidence": "crates/tauri/src/webview/mod.rs:2800  url: \"https://evil.com\".parse().unwrap(),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:100",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/wry/issues/583",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:100  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583\ncrates/tauri/src/webview/webview_window.rs:149  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583\ncrates/tauri/src/webview/webview_window.rs:2734  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:314",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://developer.mozilla.org/en-US/docs/Web/API/Window/open",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:314  /// [window.open]: https://developer.mozilla.org/en-US/docs/Web/API/Window/open"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:683",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:683  ///   From [MSDN owned windows docs](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows):\ncrates/tauri/src/webview/webview_window.rs:701  /// For more information, see <https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows>\ncrates/tauri/src/webview/webview_window.rs:715  /// For more information, see <https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:687",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.gtk.org/gtk3/method.Window.set_transient_for.html",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:687  /// - **Linux**: This makes the new window transient for parent, see <https://docs.gtk.org/gtk3/method.Window.set_transient_for.html>\ncrates/tauri/src/webview/webview_window.rs:747  /// See <https://docs.gtk.org/gtk3/method.Window.set_transient_for.html>\ncrates/tauri/src/webview/webview_window.rs:762  /// See <https://docs.gtk.org/gtk3/method.Window.set_transient_for.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:688",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/appkit/nswindow/1419152-addchildwindow?language=objc",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:688  /// - **macOS**: This adds the window as a child of parent, see <https://developer.apple.com/documentation/appkit/nswindow/1419152-addchildwindow?language=objc>\ncrates/tauri/src/webview/webview_window.rs:737  /// See <https://developer.apple.com/documentation/appkit/nswindow/1419152-addchildwindow?language=objc>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:727",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#child-windows",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:727  /// For more information, see <https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#child-windows>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:811",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/objc2-web-kit/latest/objc2_web_kit/struct.WKWebView.html#method.allowsLinkPreview",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:811  /// See https://docs.rs/objc2-web-kit/latest/objc2_web_kit/struct.WKWebView.html#method.allowsLinkPreview"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:836",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/appkit/nswindow/1644704-tabbingidentifier",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:836  /// [tabbing identifier]: <https://developer.apple.com/documentation/appkit/nswindow/1644704-tabbingidentifier>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:850",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tao/issues/72#issuecomment-975607891",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:850  /// - **Windows**: If using decorations or shadows, you may want to try this workaround <https://github.com/tauri-apps/tao/issues/72#issuecomment-975607891>\ncrates/tauri/src/webview/webview_window.rs:2153  /// - **Windows**: If using decorations or shadows, you may want to try this workaround <https://github.com/tauri-apps/tao/issues/72#issuecomment-975607891>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:987",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:987  ///   if (window.location.origin === 'https://tauri.app') {\ncrates/tauri/src/webview/webview_window.rs:1032  ///   if (window.location.origin === 'https://tauri.app') {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1005",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1005  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)\ncrates/tauri/src/webview/webview_window.rs:1050  /// [addDocumentStartJavaScript]: https://developer.android.com/reference/androidx/webkit/WebViewCompat#addDocumentStartJavaScript(android.webkit.WebView,java.lang.String,java.util.Set%3Cjava.lang.String%3E)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1006",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1006  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)\ncrates/tauri/src/webview/webview_window.rs:1051  /// [onPageStarted]: https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1159",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2settings?view=webview2-winrt-1.0.2420.47#iszoomcontrolenabled",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1159  /// - **Windows**: Controls WebView2's [`IsZoomControlEnabled`](https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2settings?view=webview2-winrt-1.0.2420.47#iszoomcontrolenabled)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1174",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2environmentoptions?view=webview2-winrt-1.0.2739.15#arebrowserextensionsenabled",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1174  /// - **Windows**: Enables the WebView2 environment's [`AreBrowserExtensionsEnabled`](https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2environmentoptions?view=webview2-winrt-1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://<scheme",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1207  /// Sets whether the custom protocols should use `https://<scheme>.localhost` instead of the default `http://<scheme>.localhost` on Windows and Android. Defaults to `false`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<scheme",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1207  /// Sets whether the custom protocols should use `https://<scheme>.localhost` instead of the default `http://<scheme>.localhost` on Windows and Android. Defaults to `false`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1267",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/5250#issuecomment-2569380578",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1267  /// see <https://github.com/tauri-apps/tauri/issues/5250#issuecomment-2569380578>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1375",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/49673399/service-workers-unavailable-in-wkwebview-in-ios-11-3/64155509#64155509",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1375  /// [StackOverflow](https://stackoverflow.com/questions/49673399/service-workers-unavailable-in-wkwebview-in-ios-11-3/64155509#64155509)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1380",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.mozilla.org/en-US/docs/Glossary/Registrable_domain",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1380  /// domains`](https://developer.mozilla.org/en-US/docs/Glossary/Registrable_domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1407",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/blob/dev/examples/streaming/main.rs",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1407  /// example](https://github.com/tauri-apps/tauri/blob/dev/examples/streaming/main.rs)),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1412",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://webkit.org/blog/10882/app-bound-domains/",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1412  /// Domains](https://webkit.org/blog/10882/app-bound-domains/).\ncrates/tauri/src/webview/webview_window.rs:1414  /// See https://webkit.org/blog/10882/app-bound-domains/ and"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:1415",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/limitsnavigationstoappbounddomains",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:1415  /// https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/limitsnavigationstoappbounddomains"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Window_(computing",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2109  /// [decorated]: https://en.wikipedia.org/wiki/Window_(computing)#Window_decoration"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2459",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/struct.WebView.html",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2459  ///           // see <https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/struct.WebView.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2460",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/trait.WebViewExt.html",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2460  ///           // and <https://docs.rs/webkit2gtk/2.0.0/webkit2gtk/trait.WebViewExt.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2467",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/webview2-com/0.19.1/webview2_com/Microsoft/Web/WebView2/Win32/struct.ICoreWebView2Controller.html",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2467  ///           // see <https://docs.rs/webview2-com/0.19.1/webview2_com/Microsoft/Web/WebView2/Win32/struct.ICoreWebView2Controller.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2525",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/reference/config/#assetprotocolconfig",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2525  /// [`app.security.assetProtocol`](https://v2.tauri.app/reference/config/#assetprotocolconfig)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2527",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://v2.tauri.app/reference/config/#csp-1",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2527  /// [`app.security.csp`](https://v2.tauri.app/reference/config/#csp-1) directive,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2528",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://asset.localhost",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2528  /// e.g. `img-src 'self' asset: http://asset.localhost`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/webview/webview_window.rs:2530",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{protocol",
+      "evidence": "crates/tauri/src/webview/webview_window.rs:2530  /// On Windows and Android the URL is `http://{protocol}.localhost/{path}`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:208",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/wry/issues/583",
+      "evidence": "crates/tauri/src/window/mod.rs:208  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583\ncrates/tauri/src/window/mod.rs:255  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583\ncrates/tauri/src/window/mod.rs:1154  /// [the Webview2 issue]: https://github.com/tauri-apps/wry/issues/583"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:644",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows",
+      "evidence": "crates/tauri/src/window/mod.rs:644  ///   From [MSDN owned windows docs](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows):\ncrates/tauri/src/window/mod.rs:682  /// For more information, see <https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows>\ncrates/tauri/src/window/mod.rs:696  /// For more information, see <https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#owned-windows>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:648",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.gtk.org/gtk3/method.Window.set_transient_for.html",
+      "evidence": "crates/tauri/src/window/mod.rs:648  /// - **Linux**: This makes the new window transient for parent, see <https://docs.gtk.org/gtk3/method.Window.set_transient_for.html>\ncrates/tauri/src/window/mod.rs:734  /// See <https://docs.gtk.org/gtk3/method.Window.set_transient_for.html>\ncrates/tauri/src/window/mod.rs:751  /// See <https://docs.gtk.org/gtk3/method.Window.set_transient_for.html>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:649",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/appkit/nswindow/1419152-addchildwindow?language=objc",
+      "evidence": "crates/tauri/src/window/mod.rs:649  /// - **macOS**: This adds the window as a child of parent, see <https://developer.apple.com/documentation/appkit/nswindow/1419152-addchildwindow?language=objc>\ncrates/tauri/src/window/mod.rs:722  /// See <https://developer.apple.com/documentation/appkit/nswindow/1419152-addchildwindow?language=objc>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:710",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#child-windows",
+      "evidence": "crates/tauri/src/window/mod.rs:710  /// For more information, see <https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#child-windows>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:796",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developer.apple.com/documentation/appkit/nswindow/1644704-tabbingidentifier",
+      "evidence": "crates/tauri/src/window/mod.rs:796  /// [tabbing identifier]: <https://developer.apple.com/documentation/appkit/nswindow/1644704-tabbingidentifier>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:810",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tao/issues/72#issuecomment-975607891",
+      "evidence": "crates/tauri/src/window/mod.rs:810  /// - **Windows**: If using decorations or shadows, you may want to try this workaround <https://github.com/tauri-apps/tao/issues/72#issuecomment-975607891>\ncrates/tauri/src/window/mod.rs:2171  /// - **Windows**: If using decorations or shadows, you may want to try this workaround <https://github.com/tauri-apps/tao/issues/72#issuecomment-975607891>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:1212",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tauri.app",
+      "evidence": "crates/tauri/src/window/mod.rs:1212  ///         WebviewUrl::External(\"https://tauri.app\".parse().unwrap()),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/mod.rs:2115",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Window_(computing",
+      "evidence": "crates/tauri/src/window/mod.rs:2115  /// [decorated]: https://en.wikipedia.org/wiki/Window_(computing)#Window_decoration"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/scripts/drag.js:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/8306",
+      "evidence": "crates/tauri/src/window/scripts/drag.js:9  // moves after the double click, it should be cancelled (see https://github.com/tauri-apps/tauri/issues/8306)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/src/window/scripts/drag.js:99",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/2549#issuecomment-1250036908",
+      "evidence": "crates/tauri/src/window/scripts/drag.js:99  // https://github.com/tauri-apps/tauri/issues/2549#issuecomment-1250036908"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri/tests/restart.rs:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apple.com/DTDs/PropertyList-1.0.dtd",
+      "evidence": "crates/tauri/tests/restart.rs:71  <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:82",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri/latest/tauri/",
+      "evidence": "crates/tauri-build/src/lib.rs:82  //! [`tauri`]: https://docs.rs/tauri/latest/tauri/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri/latest/tauri/macro.generate_context.html",
+      "evidence": "crates/tauri-build/src/lib.rs:83  //! [`tauri::generate_context!`]: https://docs.rs/tauri/latest/tauri/macro.generate_context.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://doc.rust-lang.org/cargo/reference/build-scripts.html#cargorustc-cfgkeyvalue",
+      "evidence": "crates/tauri-build/src/lib.rs:84  //! [cfg aliases]: https://doc.rust-lang.org/cargo/reference/build-scripts.html#cargorustc-cfgkeyvalue\ncrates/tauri-build/src/lib.rs:606  /// [cfg alias]: https://doc.rust-lang.org/cargo/reference/build-scripts.html#cargorustc-cfgkeyvalue"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/windows/win32/sbscs/application-manifests",
+      "evidence": "crates/tauri-build/src/lib.rs:85  //! [application manifest]: https://learn.microsoft.com/en-us/windows/win32/sbscs/application-manifests\ncrates/tauri-build/src/lib.rs:344  /// [application manifest]: https://learn.microsoft.com/en-us/windows/win32/sbscs/application-manifests\ncrates/tauri-build/src/lib.rs:449  /// [manifest]: https://learn.microsoft.com/en-us/windows/win32/sbscs/application-manifests"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts",
+      "evidence": "crates/tauri-build/src/lib.rs:86  //! [environment variables set by cargo]: https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png",
+      "evidence": "crates/tauri-build/src/lib.rs:89  html_logo_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\",\ncrates/tauri-build/src/lib.rs:90  html_favicon_url = \"https://github.com/tauri-apps/tauri/raw/dev/.github/icon.png\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:292",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rust-lang/cargo/issues/5457",
+      "evidence": "crates/tauri-build/src/lib.rs:292  // TODO: far from ideal, but there's no other way to get the target dir, see <https://github.com/rust-lang/cargo/issues/5457>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:514",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://doc.rust-lang.org/cargo/reference/build-scripts.html#rerun-if-changed",
+      "evidence": "crates/tauri-build/src/lib.rs:514  /// [rerun-if-changed]: https://doc.rust-lang.org/cargo/reference/build-scripts.html#rerun-if-changed"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:581",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri/latest/tauri/macro.tauri_build_context.html",
+      "evidence": "crates/tauri-build/src/lib.rs:581  /// [`tauri::tauri_build_context!`]: https://docs.rs/tauri/latest/tauri/macro.tauri_build_context.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:634",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/conditional-compilation.html",
+      "evidence": "crates/tauri-build/src/lib.rs:634  /// [conditional compilation]: https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/conditional-compilation.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/lib.rs:775",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tauri-apps/tauri/issues/7710",
+      "evidence": "crates/tauri-build/src/lib.rs:775  // https://github.com/tauri-apps/tauri/issues/7710"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/static_vcruntime.rs:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ChrisDenton/static_vcruntime/",
+      "evidence": "crates/tauri-build/src/static_vcruntime.rs:5  // taken from <https://github.com/ChrisDenton/static_vcruntime/>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "crates/tauri-build/src/codegen/context.rs:63",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.rs/tauri/latest/tauri/macro.tauri_build_context.html",
+      "evidence": "crates/tauri-build/src/codegen/context.rs:63  /// [`tauri::tauri_build_context!`]: https://docs.rs/tauri/latest/tauri/macro.tauri_build_context.html"
+    }
+  ],
+  "reRooting": []
+}

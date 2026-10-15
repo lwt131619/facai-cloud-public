@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FACAI · 使用说明书（无审核版）</title>
+<style>
+  :root{--bg:#050b16;--panel:rgba(13,27,54,.72);--line:rgba(56,189,248,.16);
+    --cyan:#22d3ee;--cyan2:#67e8f9;--gold:#f5c451;--txt:#dbeafe;--mut:#64748b;--ok:#34d399;--warn:#f5c451}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(1100px 600px at 70% -10%,#0b1c3f 0%,var(--bg) 55%) fixed,var(--bg);
+    color:var(--txt);font-family:"Segoe UI",system-ui,"Microsoft YaHei",sans-serif;line-height:1.85;padding:30px 18px}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:26px;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  h1 img{width:32px;height:32px;border-radius:8px}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:26px}
+  h2{font-size:18px;color:var(--cyan2);margin:34px 0 12px;padding-left:12px;border-left:3px solid var(--cyan)}
+  h3{font-size:15px;color:var(--txt);margin:20px 0 8px}
+  p,li{font-size:14px;color:#cbd5e1}
+  .card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px 22px;margin:14px 0}
+  .step{display:flex;gap:12px;margin:12px 0;align-items:flex-start}
+  .step .n{min-width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),#3b82f6);
+    color:#04121f;font-weight:800;display:grid;place-items:center;font-size:13px;margin-top:3px}
+  code{background:#040a18;border:1px solid var(--line);border-radius:6px;padding:2px 7px;
+    color:var(--cyan2);font-size:13px;word-break:break-all}
+  pre{background:#040a18;border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;
+    font-size:12.5px;color:#93c5fd;margin:10px 0}
+  .note{border-left:3px solid var(--warn);background:rgba(245,196,81,.06);border-radius:0 10px 10px 0;
+    padding:10px 14px;font-size:13px;margin:12px 0}
+  .note b{color:var(--warn)}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .mut{color:var(--mut)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+  th{color:var(--mut);text-align:left;padding:7px;border-bottom:1px solid var(--line);font-size:11.5px}
+  td{padding:8px;border-bottom:1px dashed rgba(56,189,248,.1);vertical-align:top}
+  a{color:var(--cyan2)}
+  .toc{columns:2;font-size:13.5px;margin:8px 0}
+  .toc a{text-decoration:none}
+  @media(max-width:700px){.toc{columns:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><img src="/static/icon-192.png" alt="FACAI"> FACAI 使用说明书</h1>
+  <p class="sub">无审核·满话直说版 —— 怎么连、怎么充、怎么下单、钱怎么算，全部一次讲清。最后附 FACAI 项目核心讲解。</p>
+
+  <div class="toc">
+    <a href="#connect">一、客户连接方式（三种入口）</a><br>
+    <a href="#register">二、注册与登录</a><br>
+    <a href="#billing">三、充值与计费标准（$100 起充）</a><br>
+    <a href="#order">四、下单：一句话开工</a><br>
+    <a href="#approve">五、任务执行与授权（无审核）</a><br>
+    <a href="#bind">六、绑定你自己的渠道（三方接入）</a><br>
+    <a href="#api">七、API 连接（开发者）</a><br>
+    <a href="#core">八、FACAI 项目核心讲解</a><br>
+    <a href="#rules">九、规则与红线</a>
+  </div>
+
+  <h2 id="connect">一、客户连接方式（三种入口，全部 7×24 云端常驻）</h2>
+  <div class="card">
+    <div class="step"><div class="n">1</div><div><b>网页</b> —— <a href="https://whstapp.lol">whstapp.lol</a>
+      <p>注册登录后直接用。手机打开也是全功能响应式页面。</p></div></div>
+    <div class="step"><div class="n">2</div><div><b>聊天渠道</b> —— 绑定一次，永久在线
+      <p><span class="ok">Telegram</span>：把消息发给平台 Bot 即可下任务、收进度。<br>
+      <span class="ok">微信</span>：控制台渠道面板扫码授权一次，你的微信就成为 FACAI 的任务入口（凭据存云端，与你手机是否在线无关）。<br>
+      <span class="ok">WhatsApp</span>：服务器自持会话，配对/绑定一次永久生效。<br>
+      <span class="ok">Discord / Slack</span>：绑定你自己创建的 Bot，进度与结果直接推你自己的频道（见第六节）。<br>
+      <span class="mut">LINE：适配器已就绪，官方号 token 接入后开放。</span></p></div></div>
+    <div class="step"><div class="n">3</div><div><b>API</b> —— 开发者用 HTTP 直接调
+      <p>控制台「我的 API」面板签发 Bearer Key（<code>facai_&lt;id&gt;_&lt;secret&gt;</code>），即可程序化创建任务、查进度、拉账单。Key 只显示一次，丢失只能重签。</p></div></div>
+    <div class="note"><b>持久化说明：</b>三种入口的凭据都存在 FACAI 云端服务器（加密落盘）。你手机关机、电脑关机，任务照常执行、消息照常收发——这是默认行为，不是可选项。</div>
+  </div>
+
+  <h2 id="register">二、注册与登录</h2>
+  <div class="card">
+    <div class="step"><div class="n">1</div><div>打开 <a href="https://whstapp.lol">whstapp.lol</a> → 「注册新账号」</div></div>
+    <div class="step"><div class="n">2</div><div>用户名：3-32 位字母/数字/下划线/连字符；密码：≥8 位，不能是纯数字、连续/重复字符或常见弱口令</div></div>
+    <div class="step"><div class="n">3</div><div>注册即登录。名额有限（内测期每实例 5 个账号），注册失败重试即可，不会被锁</div></div>
+    <p class="mut">忘记密码：联系管理员重置。连续输错登录密码会触发 IP 临时锁（5 分钟），注册不受影响。</p>
+  </div>
+
+  <h2 id="billing">三、充值与计费标准（单笔 $100 起充）</h2>
+  <div class="card">
+    <h3>计费标准（FACAI 定价，任务完成按真实用量结算）</h3>
+    <table>
+      <tr><th>项目</th><th>价格</th></tr>
+      <tr><td>输入 tokens</td><td><b class="ok">$95</b> / 每 100 万</td></tr>
+      <tr><td>输出 tokens</td><td><b class="warn">$218</b> / 每 100 万</td></tr>
+      <tr><td>最低充值</td><td><b class="warn">$100</b> USDT（TRC20）/ 单笔</td></tr>
+    </table>
+    <h3>充值流程（4 步）</h3>
+    <div class="step"><div class="n">1</div><div>登录后打开 <a href="/billing">whstapp.lol/billing</a> —— 页面显示你的<strong>可用余额</strong>与平台收款地址（USDT-TRC20）</div></div>
+    <div class="step"><div class="n">2</div><div>从你的钱包转 USDT（TRC20 网络）到该地址，<b>单笔 ≥ $100</b></div></div>
+    <div class="step"><div class="n">3</div><div>在页面填入充值金额 → 提交请求（5 分钟窗口）→ 补填链上 txid</div></div>
+    <div class="step"><div class="n">4</div><div>链上检测到账自动入账（通常几分钟）；管理员也可人工核准。入账后余额立即恢复</div></div>
+    <div class="note"><b>资金池规则：</b>新账号余额为 0，<b>余额为 0 时无法启动任务</b>（提示 402）。充值入账即解锁。余额烧到 80% 会收到一次「余额即将用尽」提醒；烧完则任务暂停，充值后继续。</div>
+  </div>
+
+  <h2 id="order">四、下单：一句话开工</h2>
+  <div class="card">
+    <p>在输入框（网页顶部 / 渠道聊天框）直接说人话：</p>
+    <pre>「帮我把这个项目部署到服务器，手机能打开。」</pre>
+    <p>FACAI 自动完成：<b class="ok">听懂需求</b> → <b class="ok">拆成阶段任务</b> → <b class="ok">多 Agent 并行执行</b>（Git 检查点、真实进度）→ <b class="ok">交付产物 + 账单</b>。</p>
+    <h3>任务生命周期（你在页面上看到的六段）</h3>
+    <table>
+      <tr><th>阶段</th><th>含义</th></tr>
+      <tr><td>理解 / 展开</td><td>大白话 → 明确目标 → 完整任务清单</td></tr>
+      <tr><td>计划 / 就绪</td><td>执行计划排好，立即开工（无审核模式，无需确认）</td></tr>
+      <tr><td>执行 / 重规划</td><td>多 Agent 真实干活；出问题自动换办法继续</td></tr>
+      <tr><td>验证 / 完成</td><td>结果核对 → 交付产物 + 完整过程时间线</td></tr>
+    </table>
+    <p class="mut">「正在执行」就是真的在执行；「已自动解决」必然有失败+恢复+成功的事件为证——UI 不造假。</p>
+  </div>
+
+  <h2 id="approve">五、任务执行与授权（无审核模式）</h2>
+  <div class="card">
+    <p><b class="ok">任务即下即执行，全程无需批准（无审核模式）。</b>没有「批准/取消」步骤，没有 15 分钟等待，没有任何一步会停下来等你回复——下完单你就可以去忙别的。</p>
+    <p class="mut"><b>后台发生了什么（你永远不用操作）：</b>授权体系仍然存在，但只在后台由 <b>FACAI OWNER 权威根</b>自动补签授权令牌，并写入审计留痕（evidence chain）。你永远不需要回复「批准」，也永远不会收到「需要你的授权才能继续」的请求。</p>
+    <h3>你唯一需要关心的三件事</h3>
+    <div class="step"><div class="n">1</div><div><b>余额</b> —— 余额为 0 时任务无法启动（提示 402）。这是<b class="warn">计费硬闸</b>，不是审批：充值入账即恢复，任务不丢失</div></div>
+    <div class="step"><div class="n">2</div><div><b>渠道</b> —— 绑定你自己的 Bot/聊天渠道（见第六节），进度、结果、账单实时推到你手上</div></div>
+    <div class="step"><div class="n">3</div><div><b>时间线</b> —— 每个阶段开始/完成/失败全程可查，审计留痕随时回看</div></div>
+  </div>
+
+  <h2 id="bind">六、绑定你自己的渠道（三方接入）</h2>
+  <div class="card">
+    <p>在控制台「<b>我的通知渠道</b>」面板绑定<b>你自己创建</b>的 Bot：任务进度、完成通知、账单都会推到你自己的聊天里。凭据加密存储、永不回显、只在推送时解密；绑定前平台会<b class="ok">真实调用上游验证</b>（格式合法 ≠ 有效），验证过才落库。解绑后自动回落站方渠道。</p>
+    <h3>绑定后怎么用（四件事）</h3>
+    <div class="step"><div class="n">1</div><div><b>下任务</b> —— 从你的聊天窗口直接发一句话，和网页输入框等效</div></div>
+    <div class="step"><div class="n">2</div><div><b>收进度</b> —— 每个阶段开始/完成/失败实时推送，无需盯网页</div></div>
+    <div class="step"><div class="n">3</div><div><b>免批直行</b> —— 任务即下即执行，授权令牌由后台自动补签，无需你回复任何消息</div></div>
+    <div class="step"><div class="n">4</div><div><b>收结果</b> —— 完成通知带产物与账单，网页随时回看</div></div>
+
+    <h3>Telegram（最简单，5 分钟）</h3>
+    <div class="step"><div class="n">1</div><div>Telegram 里找 <b>@BotFather</b> → 发送 <code>/newbot</code> → 起名 → 复制 Token（形如 <code>123456:ABC-DEF…</code>）</div></div>
+    <div class="step"><div class="n">2</div><div>拿 Chat ID：私聊你的 Bot 发一条消息，或把 Bot 拉进群（群 ID 是 <code>-100…</code> 负数）；频道则用 <code>@频道名</code> 并把 Bot 设为管理员</div></div>
+    <div class="step"><div class="n">3</div><div>控制台填 <b>Bot Token + Chat ID</b> → 点绑定（平台会真实调 getMe 验证）</div></div>
+
+    <h3>Discord</h3>
+    <div class="step"><div class="n">1</div><div><a href="https://discord.com/developers/applications" rel="noopener">Discord Developer Portal</a> → New Application → Bot 页 → <b>Reset Token</b> 复制（三段式长串）</div></div>
+    <div class="step"><div class="n">2</div><div>把 Bot 邀请进你的服务器（OAuth2 → URL Generator 勾 <code>bot</code> + Send Messages 权限）；用户设置 → 高级 → 打开<b>开发者模式</b></div></div>
+    <div class="step"><div class="n">3</div><div>右键目标频道 → <b>复制频道 ID</b>；控制台填 Bot Token + 频道 ID → 绑定（平台调 /users/@me 验证）</div></div>
+
+    <h3>Slack</h3>
+    <div class="step"><div class="n">1</div><div><a href="https://api.slack.com/apps" rel="noopener">api.slack.com/apps</a> → Create New App → 左侧 <b>OAuth &amp; Permissions</b> → Install to Workspace → 复制 <b>Bot User OAuth Token</b>（<code>xoxb-</code> 开头）</div></div>
+    <div class="step"><div class="n">2</div><div>在目标频道里输入 <code>/invite @你的机器人</code> 把它拉进来；频道详情底部复制<b>频道 ID</b>（<code>C</code> 开头）</div></div>
+    <div class="step"><div class="n">3</div><div>控制台填 Bot Token + 频道 ID → 绑定（平台调 auth.test 验证）</div></div>
+
+    <h3>LINE</h3>
+    <div class="step"><div class="n">1</div><div><a href="https://developers.line.biz" rel="noopener">developers.line.biz</a> → 建 Messaging API 频道 → 复制 <b>Channel access token</b>（需先点 Issue 生成）与 <b>Channel secret</b></div></div>
+    <div class="step"><div class="n">2</div><div>把官方号加为好友；Basic settings 里复制你的 <b>User ID</b>（<code>U</code> + 32 位十六进制）</div></div>
+    <div class="step"><div class="n">3</div><div>控制台填 Token + Secret + User ID → 绑定（平台调 bot info 验证 token）</div></div>
+
+    <h3>微信 / WhatsApp（云端宿主）</h3>
+    <p>这两类是「把你的私人账号<b>宿主</b>在云端」——控制台渠道宿主面板发起：微信扫码授权一次，WhatsApp 服务器自持会话/配对一次，之后 7×24 常驻、与你手机在线无关。凭据存独立加密命名空间，随绑随解。</p>
+
+    <h3>绑定失败速查（422 都带上游原话）</h3>
+    <table>
+      <tr><th>现象</th><th>最常见原因</th></tr>
+      <tr><td>Token 格式不合法</td><td>复制不完整（Telegram 少了冒号前数字；Discord 少一段；Slack 不是 xoxb- 开头）</td></tr>
+      <tr><td>「Telegram 返回 Not Found」</td><td>Token 被BotFather 重置过，去 Revoke 后复制新的</td></tr>
+      <tr><td>「Discord 返回 401: Unauthorized」</td><td>Token 复制错/已 Reset</td></tr>
+      <tr><td>「Slack 返回 invalid_auth」</td><td>拿成了 user token（xoxp-），要 <code>xoxb-</code> 的 Bot Token</td></tr>
+      <tr><td>绑定成功但收不到推送</td><td>Bot 不在目标群/频道里；Telegram 群还要关掉 Bot 的 Privacy Mode（BotFather → /setprivacy → Disable）</td></tr>
+    </table>
+    <p class="mut">安全边界：绑定的是<b>你自己</b>的 Bot，FACAI 只用它给你推消息；平台不碰你的 Bot 的其他权限。凭据永不出现在日志、审计和任何回显里。</p>
+  </div>
+
+  <h2 id="api">七、API 连接（开发者）</h2>
+  <div class="card">
+    <p>控制台「我的 API」面板 → 生成 Key（<code>facai_&lt;id&gt;_&lt;secret&gt;</code>，只显示一次）。</p>
+    <pre>curl https://whstapp.lol/api/v1/missions \
+  -H "Authorization: Bearer facai_xxx_yyy" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"竞品日报","original_input":"抓取三个竞品出中文日报","steps":["抓取","分析","成稿"]}'</pre>
+    <p>常用端点：<code>GET /api/v1/missions</code>（列表）· <code>GET /api/v1/missions/{id}</code>（详情）·
+       <code>GET /api/v1/billing/me</code>（余额与定价）· <code>POST /api/v1/my/channels/telegram</code>（绑定你自己的 Bot 收进度）。</p>
+    <p class="mut">Key 作用域仅限任务/账单/产物；不能铸造新 Key、不能访问管理面板；可随时吊销。绑定 Telegram/Line 时系统会先真实验证你的 Bot 再入库，假 token 进不来。</p>
+  </div>
+
+  <h2 id="core">八、FACAI 项目核心讲解（这个平台是什么）</h2>
+  <div class="card">
+    <p><b>一句话：FACAI 是一个「你出话、Agent 舰队干活、按 token 收费」的云端任务操作系统。</b></p>
+    <h3>四层架构（从上到下）</h3>
+    <table>
+      <tr><th>层</th><th>是什么</th><th>你感知到什么</th></tr>
+      <tr><td><b>OWNER 授权层</b></td><td>平台最高权限根。任何 Agent 干任何有副作用的事，都由 OWNER 权威根在后台自动补签授权令牌（Grant）并写入审计留痕（evidence chain），全程无人工审批</td><td>你完全无感知——无审核模式下这一层全自动运转，永远不需要你批准</td></tr>
+      <tr><td><b>编排层</b></td><td>把你的大白话编译成任务图（DAG），调度多模型多 Agent 并行执行，出问题自动换办法重规划</td><td>任务进度条与时间线</td></tr>
+      <tr><td><b>通道层</b></td><td>Telegram / 微信 / WhatsApp / LINE / 网页 / API，全部持久绑定云端，7×24 收发</td><td>你在哪句话近就在哪下单</td></tr>
+      <tr><td><b>计费层</b></td><td>按真实 token 用量、以冻结价目（$95/$218 每 1M）结算；USDT-TRC20 充值入资金池</td><td>账单面板与每笔任务的透明成本</td></tr>
+    </table>
+    <h3>三条核心原则</h3>
+    <p>① <b>即下即执行</b>——任务下达即执行，授权令牌由 OWNER 权威根后台自动补签并留审计，全程无需批准；<br>
+       ② <b>拒绝不背锅</b>——上游模型拒绝只是「这个后端没执行」，平台自动换后端继续，你的任务不受影响；<br>
+       ③ <b>收录能力，不收录授权</b>——平台吸收 Goose/OpenCode/Hermes 等开源 Agent 的全部能力，但它们的授权根一律重新挂到 FACAI OWNER。</p>
+    <h3>多 Agent 执行真相</h3>
+    <p>你的任务被拆成依赖图，每个阶段由不同的 Agent（OpenCode / Goose / Hermes 等已收录引擎）在隔离工作区真实执行——Git 检查点留痕、并行分支隔离、失败自动重试或换引擎。你看到的时间线就是真实发生的事，无模拟成分。</p>
+  </div>
+
+  <h2 id="rules">九、规则与红线</h2>
+  <div class="card">
+    <ul>
+      <li>账号仅限本人使用，不可转售/转借 API 访问（余额按账号扣，转售烧的是你自己的池子，且违规即冻结）</li>
+      <li>单笔充值 ≥ $100；余额 0 时任务暂停（不丢失，充值后继续）</li>
+      <li>违法用途（入侵、诈骗、恶意软件等）一经发现冻结账号并保留审计记录</li>
+      <li>管理员协助排障时，你的页面会显示「管理员协助会话进行中」横幅——全程可见、全程审计、30 分钟自动过期</li>
+      <li>你的 API Key / Bot 凭据加密存云端，永不回显；丢失即吊销重签</li>
+    </ul>
+  </div>
+
+  <p class="sub" style="margin-top:26px">FACAI Cloud · whstapp.lol · 本页即官方说明书，随版本更新 · 有问题直接在渠道里说话，Agent 舰队听得到</p>
+</div>
+</body>
+</html>

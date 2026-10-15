@@ -1,0 +1,1853 @@
+{
+  "target": "asset-checktopdd (初扫收录实例 D:\\分类清理区\\06_黑产工具_钓鱼假U卡\\CheckTopDD项目)",
+  "origin": "本地路径 D:\\分类清理区\\06_黑产工具_钓鱼假U卡\\CheckTopDD项目",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 220 个文本文件（源码 220、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/auto_start.py:11",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "01_主程序/auto_start.py:11  p = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Coverage.py:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://coverage.readthedocs.io/en/latest/install.html#c-extension",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Coverage.py:61  \"See https://coverage.readthedocs.io/en/latest/install.html#c-extension\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Utils.py:598",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://peps.python.org/pep-0440/#public-version-identifiers",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Utils.py:598  SEE: https://peps.python.org/pep-0440/#public-version-identifiers"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:45",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CC",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:45  CC = get_config_var('CC', os.environ.get('CC', ''))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:46",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CFLAGS",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:46  CFLAGS = get_config_var('CFLAGS') + ' ' + os.environ.get('CFLAGS', '')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LINKCC",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:47  LINKCC = get_config_var('LINKCC', os.environ.get('LINKCC', CC))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:103",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/BuildExecutable.py:103  returncode = subprocess.call(cmd, shell=shell)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cache.py:61",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CYTHON_CACHE_DIR",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cache.py:61  return os.environ[\"CYTHON_CACHE_DIR\"]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cache.py:69",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XDG_CACHE_HOME",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cache.py:69  parent = os.environ.get(\"XDG_CACHE_HOME\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cache.py:177",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cache.py:177  completed_process = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cythonize.py:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://setuptools.pypa.io/en/latest/userguide/ext_modules.html#compiler-and-linker-options",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Cythonize.py:207  https://setuptools.pypa.io/en/latest/userguide/ext_modules.html#compiler-and-linker-options\"\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:784",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cython.readthedocs.io/en/latest/src/userguide/sharing_declarations.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:784  \"See https://cython.readthedocs.io/en/latest/src/userguide/sharing_declarations.html \""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:974",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CYTHON_FORCE_REGEN",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:974  force = os.environ.get(\"CYTHON_FORCE_REGEN\") == \"1\"  # allow global overrides for build systems"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:1185",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue39432",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:1185  # https://bugs.python.org/issue39432"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:1214",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XML_RESULTS",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:1214  if os.environ.get('XML_RESULTS'):\n01_主程序/checktopddV2.1.5.exe_extracted/Cython/Build/Dependencies.py:1215  compile_result_dir = os.environ['XML_RESULTS']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/CmdLine.py:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cython.org/",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/CmdLine.py:71  description = \"Cython (https://cython.org/) is a compiler for code written in the \"\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Code.py:373",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://trac.cython.org/cython_trac/ticket/475",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Code.py:373  # http://trac.cython.org/cython_trac/ticket/475"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Code.py:2197",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/blob/920de7ccdcfa7284b6d23a124771b17c66dd3e4f/Objects/unicodeobject.c#L713-L739",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Code.py:2197  # See https://github.com/python/cpython/blob/920de7ccdcfa7284b6d23a124771b17c66dd3e4f/Objects/unicodeobject.c#L713-L739"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Code.py:2300",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-2-c4146?view=msvc-170",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Code.py:2300  # See https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-2-c4146?view=msvc-170"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Dataclass.py:294",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.python.org/3/library/dataclasses.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Dataclass.py:294  # default argument values from https://docs.python.org/3/library/dataclasses.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Errors.py:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue1692335",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Errors.py:71  # see https://bugs.python.org/issue1692335\n01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Errors.py:119  # see https://bugs.python.org/issue1692335"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ExprNodes.py:7017",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/5668",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ExprNodes.py:7017  # See https://github.com/cython/cython/issues/5668"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ExprNodes.py:10615",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/pull/1836",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ExprNodes.py:10615  # See https://github.com/cython/cython/pull/1836"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ExprNodes.py:15382",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/4146",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ExprNodes.py:15382  # This is a special case of https://github.com/cython/cython/issues/4146"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Lexicon.py:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-4/",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Lexicon.py:74  # https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-4/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/LineTable.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/blob/1054a755a3016f95fcd24b3ad20e8ed9048b7939/InternalDocs/locations.md",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/LineTable.py:4  See  https://github.com/python/cpython/blob/1054a755a3016f95fcd24b3ad20e8ed9048b7939/InternalDocs/locations.md"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/LineTable.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/blob/1054a755a3016f95fcd24b3ad20e8ed9048b7939/Python/assemble.c#L192",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/LineTable.py:5  See  https://github.com/python/cpython/blob/1054a755a3016f95fcd24b3ad20e8ed9048b7939/Python/assemble.c#L192"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:464",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue4709",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:464  # Work around https://bugs.python.org/issue4709"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:750",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:750  # https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:3094",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue39432",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:3094  # Hack for a distutils bug - https://bugs.python.org/issue39432\n01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:3100  code.putln(\"void %s(void) {} /* workaround for https://bugs.python.org/issue39432 */\" % wrong_punycode_module_name)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:3140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.python.org/3/c-api/init.html#sub-interpreter-support",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ModuleNode.py:3140  # See issues listed here: https://docs.python.org/3/c-api/init.html#sub-interpreter-support"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Nodes.py:4811",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/1699",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Nodes.py:4811  # Work-around for https://github.com/cython/cython/issues/1699"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Options.py:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#directive-autoattribute",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Options.py:38  See https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#directive-autoattribute"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Options.py:128",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/tree/master/Demos/embed",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Options.py:128  #: See `this demo <https://github.com/cython/cython/tree/master/Demos/embed>`_"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ParseTreeTransforms.py:1786",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/2468",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/ParseTreeTransforms.py:1786  # (see https://github.com/cython/cython/issues/2468)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Parsing.py:1432",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/issues/86014",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Parsing.py:1432  # the Python 3.9+ behaviour: https://github.com/python/cpython/issues/86014"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Parsing.py:2534",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/4310",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Parsing.py:2534  \"See https://github.com/cython/cython/issues/4310\", level=1)\n01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Parsing.py:2541  \"See https://github.com/cython/cython/issues/4310\", level=1)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:118",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.cppreference.com/w/cpp/language/function_template#Template_argument_deduction",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:118  https://en.cppreference.com/w/cpp/language/function_template#Template_argument_deduction"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:1928",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://wiki.cython.org/enhancements/fusedtypes",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:1928  See http://wiki.cython.org/enhancements/fusedtypes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:4275",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.cplusplus.com/reference/vector/vector-bool/",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:4275  # http://www.cplusplus.com/reference/vector/vector-bool/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:5322",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.cppreference.com/w/cpp/language/template_argument_deduction#Deduction_from_a_function_call",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/PyrexTypes.py:5322  # https://en.cppreference.com/w/cpp/language/template_argument_deduction#Deduction_from_a_function_call"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Symtab.py:607",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/software/libc/manual/html_node/Reserved-Names.html#Reserved-Names",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Symtab.py:607  # See https://www.gnu.org/software/libc/manual/html_node/Reserved-Names.html#Reserved-Names"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Symtab.py:1098",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/3544",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Compiler/Symtab.py:1098  # Not strictly Python behaviour but see https://github.com/cython/cython/issues/3544"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Cygdb.py:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sourceware.org/gdb/onlinedocs/gdb/Command-Files.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Cygdb.py:44  # See https://sourceware.org/gdb/onlinedocs/gdb/Command-Files.html"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Cygdb.py:54",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "VIRTUAL_ENV",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Cygdb.py:54  virtualenv = os.getenv('VIRTUAL_ENV')"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Cygdb.py:163",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Cygdb.py:163  p = subprocess.Popen([options.gdb, '-command', tempfilename] + gdb_argv)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/DebugWriter.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cython/cython/issues/5552",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/DebugWriter.py:22  See https://github.com/cython/cython/issues/5552"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libcython.py:250",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Frames-In-Python.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libcython.py:250  https://sourceware.org/gdb/current/onlinedocs/gdb.html/Frames-In-Python.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libcython.py:940",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sourceware.org/git/?p=binutils-gdb.git",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libcython.py:940  # https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=gdb/python/py-cmd.c;h=7143c1c5f7fdce9316a8c41fc2246bc6a07630d4;hb=HEAD#l140"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://sourceware.org/gdb/current/onlinedocs/gdb/Python-API.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:13  http://sourceware.org/gdb/current/onlinedocs/gdb/Python-API.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:260",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugzilla.redhat.com/show_bug.cgi?id=556975",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:260  See e.g. https://bugzilla.redhat.com/show_bug.cgi?id=556975 with"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:307",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bugs.python.org/issue8032#msg100882",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:307  # http://bugs.python.org/issue8032#msg100882"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:1448",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bugs.python.org/issue8279?#msg102276",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:1448  # See http://bugs.python.org/issue8279?#msg102276"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:2136",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://sourceware.org/bugzilla/show_bug.cgi?id=12212",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:2136  # http://sourceware.org/bugzilla/show_bug.cgi?id=12212"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:2152",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://sourceware.org/bugzilla/show_bug.cgi?id=12216",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/libpython.py:2152  http://sourceware.org/bugzilla/show_bug.cgi?id=12216"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/TestLibCython.py:35",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/TestLibCython.py:35  p = subprocess.Popen(['gdb', '-nx', '--version'], stdout=subprocess.PIPE)\n01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/TestLibCython.py:53  p = subprocess.Popen(['gdb', '-batch', '-x', python_version_script.name],\n01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/TestLibCython.py:224  self.p = subprocess.Popen("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/TestLibCython.py:217",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PYTHONPATH",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/TestLibCython.py:217  path = os.environ.get('PYTHONPATH')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/test_libcython_in_gdb.py:523",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "GDB_DEBUG",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Debugger/Tests/test_libcython_in_gdb.py:523  _do_debug = os.environ.get('GDB_DEBUG')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Distutils/build_ext.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/pypa/setuptools/blob/9f1822ee910df3df930a98ab99f66d18bb70659b/setuptools/command/build_ext.py#L16",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/Cython/Distutils/build_ext.py:6  # https://github.com/pypa/setuptools/blob/9f1822ee910df3df930a98ab99f66d18bb70659b/setuptools/command/build_ext.py#L16"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__init__.py:98",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANDROID_SERIAL",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__init__.py:98  serial = os.environ.get(\"ANDROID_SERIAL\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__main__.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openatx/stf-binaries/archive/0.2.zip",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__main__.py:57  cache_download(\"https://github.com/openatx/stf-binaries/archive/0.2.zip\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__main__.py:184",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s:%d/%s",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__main__.py:184  url = \"http://%s:%d/%s\" % (current_ip(), port, filename)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__main__.py:224",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/__main__.py:224  retcode = subprocess.call([sys.executable, '-m', 'pip', 'install', '-U', 'httpio'])"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:79",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:79  subprocess.run([adb_path(), \"start-server\"], timeout=20.0, creationflags=flags)  # 20s should enough for adb start"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openatx/adbutils/issues/169",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:86  # https://github.com/openatx/adbutils/issues/169"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:211",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANDROID_ADB_SERVER_HOST",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:211  host = os.environ.get(\"ANDROID_ADB_SERVER_HOST\", \"127.0.0.1\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:213",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ANDROID_ADB_SERVER_PORT",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_adb.py:213  port = int(os.environ.get(\"ANDROID_ADB_SERVER_PORT\", 5037))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:89",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openatx/adbutils/issues/145",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:89  # https://github.com/openatx/adbutils/issues/145"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dl.google.com/android/repository/platform-tools_r28.0.1-darwin.zip",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:95  # 1.0.40 https://dl.google.com/android/repository/platform-tools_r28.0.1-darwin.zip"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:96",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dl.google.com/android/repository/platform-tools_r26.0.1-darwin.zip",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:96  # 1.0.39 https://dl.google.com/android/repository/platform-tools_r26.0.1-darwin.zip"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:155",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_output",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:155  return subprocess.check_output("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:261",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openatx/uiautomator2/issues/998",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:261  # https://github.com/openatx/uiautomator2/issues/998"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:529",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://android.googlesource.com/platform/system/core/+/android-cts-7.0_r18/adb/framebuffer_service.cpp",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:529  # Ref: https://android.googlesource.com/platform/system/core/+/android-cts-7.0_r18/adb/framebuffer_service.cpp"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:530",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/DeviceFarmer/adbkit/blob/c16081384ca34addbdab318bda3c76434b7538af/src/adb/command/host-transport/framebuffer.ts",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:530  # Ref: https://github.com/DeviceFarmer/adbkit/blob/c16081384ca34addbdab318bda3c76434b7538af/src/adb/command/host-transport/framebuffer.ts"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:621",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Swind/pure-python-adb/blob/master/ppadb/command/transport/__init__.py#L179",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_device_base.py:621  # Ref: https://github.com/Swind/pure-python-adb/blob/master/ppadb/command/transport/__init__.py#L179"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openatx/adbutils/issues/85",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:50  # https://github.com/openatx/adbutils/issues/85"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:92",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ADBUTILS_ADB_PATH",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:92  if os.getenv(\"ADBUTILS_ADB_PATH\"):\n01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:93  return os.getenv(\"ADBUTILS_ADB_PATH\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:119",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/5045771",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:119  # https://stackoverflow.com/questions/5045771"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:134",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_call",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/_utils.py:134  subprocess.check_call("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/errors.py:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mzlogin/awesome-adb",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/errors.py:31  Reference: https://github.com/mzlogin/awesome-adb"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/pidcat.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/pidcat.py:9  http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/pidcat.py:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://jsharkey.org/",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/pidcat.py:19  # Originally written by Jeff Sharkey, http://jsharkey.org/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/pidcat.py:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://jakewharton.com",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/pidcat.py:21  # Package filtering and output improvements by Jake Wharton, http://jakewharton.com"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/screenrecord.py:98",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/screenrecord.py:98  self._p: subprocess.Popen = None\n01_主程序/checktopddV2.1.5.exe_extracted/adbutils/screenrecord.py:110  self._p = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/screenrecord.py:143",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/21263064/how-to-wrap-h264-into-a-mp4-container",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/screenrecord.py:143  https://stackoverflow.com/questions/21263064/how-to-wrap-h264-into-a-mp4-container"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/shell.py:425",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openatx/uiautomator2/issues/200",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/shell.py:425  # Related issue: https://github.com/openatx/uiautomator2/issues/200"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/shell.py:443",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/13193592/adb-android-getting-the-name-of-the-current-activity",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/adbutils/shell.py:443  # https://stackoverflow.com/questions/13193592/adb-android-getting-the-name-of-the-current-activity"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:136",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/12302",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:136  if sys.version_info[:2] >= (3, 8):  # https://github.com/python/cpython/pull/12302"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:143",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PATH",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:143  os.environ['PATH'] = ';'.join(l_vars['BINARIES_PATHS']) + ';' + os.environ.get('PATH', '')\n01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:144  if DEBUG: print('OpenCV loader: PATH={}'.format(str(os.environ['PATH'])))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:147",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LD_LIBRARY_PATH",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:147  os.environ['LD_LIBRARY_PATH'] = ':'.join(l_vars['BINARIES_PATHS']) + ':' + os.environ.get('LD_LIBRARY_PATH', '')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:164",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/opencv/opencv/issues/18502",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/__init__.py:164  sys.path = save_sys_path  # multiprocessing should start from bootstrap code (https://github.com/opencv/opencv/issues/18502)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/config-3.py:16",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "QT_QPA_PLATFORM_PLUGIN_PATH",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/config-3.py:16  os.environ[\"QT_QPA_PLATFORM_PLUGIN_PATH\"] = os.path.join("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/config-3.py:22",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "QT_QPA_FONTDIR",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/config-3.py:22  os.environ[\"QT_QPA_FONTDIR\"] = os.path.join("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/mat_wrapper/__init__.py:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://numpy.org/doc/stable/user/basics.subclassing.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/cv2/mat_wrapper/__init__.py:13  # NumPy documentation: https://numpy.org/doc/stable/user/basics.subclassing.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_C_ops.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_C_ops.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:615",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CINN_CONFIG_PATH",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:615  os.environ['CINN_CONFIG_PATH'] = str(data_file_path)\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:622  os.environ['CINN_CONFIG_PATH'] = data_file_path"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:655",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGCX_ROOT",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:655  flagcx_lib_path = os.getenv('FLAGCX_ROOT', '') + \"/build/lib\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:673",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ProgramFiles",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:673  pfiles_path = os.getenv('ProgramFiles', 'C:\\\\Program Files')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:732",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aka.ms/vs/16/release/vc_redist.x64.exe",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:732  It can be downloaded at https://aka.ms/vs/16/release/vc_redist.x64.exe'''"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:761",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PATH",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:761  prev_path = os.environ['PATH']\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:762  os.environ['PATH'] = ';'.join(\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:763  [*dll_paths, os.environ['PATH']]"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:1236",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_trace_api",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/__init__.py:1236  FLAGS_trace_api = os.environ.get(\"FLAGS_trace_api\", None)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_legacy_C_ops.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_legacy_C_ops.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_pir_ops.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_pir_ops.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/batch.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/batch.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/callbacks.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/callbacks.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/check_import_scipy.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/check_import_scipy.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/check_import_scipy.py:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/check_import_scipy.py:27  + \"\\nplease download Visual C++ Redistributable from https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/common_ops_import.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/common_ops_import.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/fft.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/fft.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/hub.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/hub.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/linalg.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/linalg.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/pir_utils.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/pir_utils.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/regularizer.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/regularizer.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/signal.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/signal.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/signal.py:479",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ieeexplore.ieee.org/document/1164317",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/signal.py:479  gives the `[Griffin-Lim optimal estimate] <https://ieeexplore.ieee.org/document/1164317>`_"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/signal.py:651",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.check_NOLA.html",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/signal.py:651  'Abort istft because Nonzero Overlap Add (NOLA) condition failed. For more information about NOLA constraint please see `scipy.signal.check_NOLA`(https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.check_NOLA.html).'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/sysconfig.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/sysconfig.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/backport.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/backport.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/basic.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/basic.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/basic.py:69",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://typing.readthedocs.io/en/latest/source/unreachable.html#marking-code-as-unreachable",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/basic.py:69  Refer to https://typing.readthedocs.io/en/latest/source/unreachable.html#marking-code-as-unreachable"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/device_like.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/device_like.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/dtype_like.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/dtype_like.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/layout.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/layout.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/shape.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/_typing/shape.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/accuracy_compare.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/accuracy_compare.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/amp_lists.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/amp_lists.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/auto_cast.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/auto_cast.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/debugging.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/debugging.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/debugging.py:621",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_call",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/debugging.py:621  ...     subprocess.check_call("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/grad_scaler.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/amp/grad_scaler.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/api_tracer/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/api_tracer/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/api_tracer/api_tracer.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/api_tracer/api_tracer.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/backend.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/backend.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/init_backend.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/init_backend.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/wave_backend.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/backends/wave_backend.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/dataset.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/dataset.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/esc50.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/esc50.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/esc50.py:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dx.doi.org/10.1145/2733373.2806390",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/esc50.py:52  http://dx.doi.org/10.1145/2733373.2806390"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/esc50.py:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://paddleaudio.bj.bcebos.com/datasets/ESC-50-master.zip",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/esc50.py:101  'url': 'https://paddleaudio.bj.bcebos.com/datasets/ESC-50-master.zip',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tspace.library.utoronto.ca/handle/1807/24487",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:39  Toronto emotional speech set (TESS) https://tspace.library.utoronto.ca/handle/1807/24487"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://doi.org/10.5683/SP2/E8H2MF",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:40  https://doi.org/10.5683/SP2/E8H2MF"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:79",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bj.bcebos.com/paddleaudio/datasets/TESS_Toronto_emotional_speech_set.zip",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/datasets/tess.py:79  'url': 'https://bj.bcebos.com/paddleaudio/datasets/TESS_Toronto_emotional_speech_set.zip',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/features/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/features/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/features/layers.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/features/layers.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/functional.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/functional.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/functional.py:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/librosa/librosa",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/functional.py:14  # Modified from librosa(https://github.com/librosa/librosa)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/window.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/audio/functional/window.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/autograd.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/autograd.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/backward_mode.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/backward_mode.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/backward_utils.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/backward_utils.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/ir_backward.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/ir_backward.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/py_layer.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/py_layer.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/saved_tensors_hooks.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/autograd/saved_tensors_hooks.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/__init__.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/__init__.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/__init__.py:150",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OMP_NUM_THREADS",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/__init__.py:150  num_threads = int(os.getenv('OMP_NUM_THREADS', '1'))\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/__init__.py:164  os.environ['OMP_NUM_THREADS'] = str(num_threads)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/backward.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/backward.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/backward.py:1612",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_program_topo_reorder",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/backward.py:1612  if os.environ.get(\"FLAGS_program_topo_reorder\", \"False\") in ["
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/compiler.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/compiler.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:37",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "path",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:37  os.environ['path'] = (\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:38  current_path + ';' + third_lib_path + ';' + os.environ['path']"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/12302",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:42  # https://github.com/python/cpython/pull/12302"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:75",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "os.popen",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:75  pipe = os.popen('cat /proc/cpuinfo | grep -i avx')\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:86  pipe = os.popen('sysctl machdep.cpu.features | grep -i avx')"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:97",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:97  pipe = subprocess.Popen(\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:187  out, err = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:161",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://en.wikipedia.org/wiki/CPUID#EAX.3D1:_Processor_Info_and_Feature_Bits",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:161  # http://en.wikipedia.org/wiki/CPUID#EAX.3D1:_Processor_Info_and_Feature_Bits"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:391",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUSTOM_DEVICE_ROOT",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:391  if os.environ.get('CUSTOM_DEVICE_ROOT', None) is not None:\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:396  os.environ['CUSTOM_DEVICE_ROOT'] = os.path.normpath(lib_path)\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:398  os.environ['CUSTOM_DEVICE_ROOT'] = ''"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:432",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_model_return_data",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:432  flag = os.getenv(\"FLAGS_model_return_data\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:441",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_log",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:441  flag = os.getenv(\"FLAGS_prim_log\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:461",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_forward",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:461  flag_value = os.getenv(\"FLAGS_prim_forward\")\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:659  flag_value = os.getenv(\"FLAGS_prim_forward\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:473",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_backward",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:473  flag_value = os.getenv(\"FLAGS_prim_backward\")\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:650  flag_value = os.getenv(\"FLAGS_prim_backward\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:485",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_all",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:485  flag_value = os.getenv(\"FLAGS_prim_all\")\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:668  flag_value = os.getenv(\"FLAGS_prim_all\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:555",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_skip_dynamic",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:555  flag = os.getenv(\"FLAGS_prim_skip_dynamic\", \"1\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:563",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_enable_dynamic",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:563  flag = os.getenv(\"FLAGS_prim_enable_dynamic\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:571",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_dist_prim_all",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:571  flag = os.getenv(\"FLAGS_dist_prim_all\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:579",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_enable_auto_recompute",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:579  flag = os.getenv(\"FLAGS_enable_auto_recompute\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:690",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_vjp_skip_default_ops",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:690  flag = os.getenv(\"FLAGS_prim_vjp_skip_default_ops\", \"1\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:703",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_prim_backward_blacklist",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/core.py:703  ops_org = os.getenv(\"FLAGS_prim_backward_blacklist\", \"\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/data_feed_desc.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/data_feed_desc.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/data_feeder.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/data_feeder.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/dataset.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/dataset.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/default_scope_funcs.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/default_scope_funcs.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/device_worker.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/device_worker.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/dygraph_utils.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/dygraph_utils.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/executor.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/executor.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/executor.py:1030",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_enable_prim_after_distribute",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/executor.py:1030  os.getenv(\"FLAGS_enable_prim_after_distribute\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/executor.py:1253",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.paddlepaddle.org.cn/documentation/docs/en/develop/guides/01_paddle2.0_introduction/update_en.html#stand-alone-multi-card-launch",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/executor.py:1253  `document for multiple-cards <https://www.paddlepaddle.org.cn/documentation/docs/en/develop/guides/01_paddle2.0_introduction/update_en.html#stand-alone-multi-card-launch>`_"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:7  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:215",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_enable_pir_api",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:215  env_pir_enabled = os.environ.get(\"FLAGS_enable_pir_api\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:422",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_enable_pir_in_executor",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:422  flag = str(os.environ.get(\"FLAGS_enable_pir_in_executor\")).lower()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:435",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_use_cinn",
+      "rule": "os.environ.get",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:435  flag = str(os.environ.get(\"FLAGS_use_cinn\")).lower()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:869",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CPU_NUM",
+      "rule": "os.environ[]",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:869  os.environ[\"CPU_NUM\"] = str(1)\n01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:870  cpu_num = os.environ.get(\"CPU_NUM\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:875",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "FLAGS_selected_gpus",
+      "rule": "os.getenv",
+      "evidence": "01_主程序/checktopddV2.1.5.exe_extracted/paddle/base/framework.py:875  gpus_env = os.getenv(\"FLAGS_selected_gpus\")"
+    }
+  ],
+  "reRooting": []
+}

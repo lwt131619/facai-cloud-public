@@ -1,0 +1,985 @@
+{
+  "target": "asset-fakeu-docs (初扫收录实例 D:\\分类清理区\\06_黑产工具_钓鱼假U卡\\fake-u-最新文档包)",
+  "origin": "本地路径 D:\\分类清理区\\06_黑产工具_钓鱼假U卡\\fake-u-最新文档包",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 18 个文本文件（源码 7、其余 11），识别 108 面（源码档 11、文档/示例 DOC_ 降权 2、其余文件 95；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/agent/agent.js:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3939",
+      "evidence": "源码/fake-u-system/agent/agent.js:6  const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3939';"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "源码/fake-u-system/agent/agent.js:6",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SERVER_URL",
+      "rule": "process.env",
+      "evidence": "源码/fake-u-system/agent/agent.js:6  const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3939';"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "源码/fake-u-system/agent/agent.js:7",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_NAME",
+      "rule": "process.env",
+      "evidence": "源码/fake-u-system/agent/agent.js:7  const NODE_NAME = process.env.NODE_NAME || `node-${os.hostname()}`;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "源码/fake-u-system/agent/agent.js:8",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_REGION",
+      "rule": "process.env",
+      "evidence": "源码/fake-u-system/agent/agent.js:8  const NODE_REGION = process.env.NODE_REGION || 'auto';"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "源码/fake-u-system/server/index.js:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PORT",
+      "rule": "process.env",
+      "evidence": "源码/fake-u-system/server/index.js:10  const PORT = process.env.PORT || 3939;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/index.js:99",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:${PORT",
+      "evidence": "源码/fake-u-system/server/index.js:99  console.log(`RPC Server running on http://0.0.0.0:${PORT}`);\n源码/fake-u-system/server/index.js:100  console.log(`Admin panel: http://0.0.0.0:${PORT}/admin.html`);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/db/schema.js:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://u.linshop.store",
+      "evidence": "源码/fake-u-system/server/db/schema.js:22  rpc_url: 'https://u.linshop.store'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "脚本/deploy-new-server.sh:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://deb.nodesource.com/setup_${NODE_MAJOR",
+      "evidence": "脚本/deploy-new-server.sh:31  curl -fsSL \"https://deb.nodesource.com/setup_${NODE_MAJOR}.x\" | bash -"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "脚本/deploy-new-server.sh:79",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dl.cloudsmith.io/public/caddy/stable/gpg.key",
+      "evidence": "脚本/deploy-new-server.sh:79  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "脚本/deploy-new-server.sh:81",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt",
+      "evidence": "脚本/deploy-new-server.sh:81  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "脚本/deploy-new-server.sh:121",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${PORT",
+      "evidence": "脚本/deploy-new-server.sh:121  curl -s http://127.0.0.1:${PORT}/ || true"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://americadt.top/admin.html",
+      "evidence": "README.md:11  ├── 访问管理面板.url              管理面板快捷方式 → https://americadt.top/admin.html\nREADME.md:34  | 管理面板 | https://americadt.top/admin.html |\nREADME.md:44  URL=https://americadt.top/admin.html"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://americadt.top/",
+      "evidence": "README.md:35  | RPC 接口 | https://americadt.top/ |"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "访问管理面板.url:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://americadt.top/admin.html",
+      "evidence": "访问管理面板.url:2  URL=https://americadt.top/admin.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/agent/package-lock.json:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/nanoid/-/nanoid-5.1.16.tgz",
+      "evidence": "源码/fake-u-system/agent/package-lock.json:16  \"resolved\": \"https://registry.npmjs.org/nanoid/-/nanoid-5.1.16.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/agent/package-lock.json:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sponsors/ai",
+      "evidence": "源码/fake-u-system/agent/package-lock.json:21  \"url\": \"https://github.com/sponsors/ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/client/public/admin.html:274",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://americadt.top",
+      "evidence": "源码/fake-u-system/client/public/admin.html:274  let rpcUrl = 'https://americadt.top';"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/@adraffy/ens-normalize/-/ens-normalize-1.11.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:19  \"resolved\": \"https://registry.npmjs.org/@adraffy/ens-normalize/-/ens-normalize-1.11.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/@noble/curves/-/curves-1.2.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:25  \"resolved\": \"https://registry.npmjs.org/@noble/curves/-/curves-1.2.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://paulmillr.com/funding/",
+      "evidence": "源码/fake-u-system/server/package-lock.json:32  \"url\": \"https://paulmillr.com/funding/\"\n源码/fake-u-system/server/package-lock.json:44  \"url\": \"https://paulmillr.com/funding/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/@noble/hashes/-/hashes-1.3.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:37  \"resolved\": \"https://registry.npmjs.org/@noble/hashes/-/hashes-1.3.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/@types/node/-/node-22.7.5.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:49  \"resolved\": \"https://registry.npmjs.org/@types/node/-/node-22.7.5.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:58  \"resolved\": \"https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/aes-js/-/aes-js-4.0.0-beta.5.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:71  \"resolved\": \"https://registry.npmjs.org/aes-js/-/aes-js-4.0.0-beta.5.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:77",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:77  \"resolved\": \"https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/body-parser/-/body-parser-1.20.8.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:83  \"resolved\": \"https://registry.npmjs.org/body-parser/-/body-parser-1.20.8.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:107  \"resolved\": \"https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:116",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:116  \"resolved\": \"https://registry.npmjs.org/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:129",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:129  \"resolved\": \"https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sponsors/ljharb",
+      "evidence": "源码/fake-u-system/server/package-lock.json:140  \"url\": \"https://github.com/sponsors/ljharb\"\n源码/fake-u-system/server/package-lock.json:414  \"url\": \"https://github.com/sponsors/ljharb\"\n源码/fake-u-system/server/package-lock.json:438  \"url\": \"https://github.com/sponsors/ljharb\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:145",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.4.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:145  \"resolved\": \"https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.4.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:157",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:157  \"resolved\": \"https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:166",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/cookie/-/cookie-0.7.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:166  \"resolved\": \"https://registry.npmjs.org/cookie/-/cookie-0.7.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:175",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.7.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:175  \"resolved\": \"https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.7.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:181",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/cors/-/cors-2.8.6.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:181  \"resolved\": \"https://registry.npmjs.org/cors/-/cors-2.8.6.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:193",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/express",
+      "evidence": "源码/fake-u-system/server/package-lock.json:193  \"url\": \"https://opencollective.com/express\"\n源码/fake-u-system/server/package-lock.json:369  \"url\": \"https://opencollective.com/express\"\n源码/fake-u-system/server/package-lock.json:507  \"url\": \"https://opencollective.com/express\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:198  \"resolved\": \"https://registry.npmjs.org/debug/-/debug-2.6.9.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:207  \"resolved\": \"https://registry.npmjs.org/depd/-/depd-2.0.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:216",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:216  \"resolved\": \"https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:226",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:226  \"resolved\": \"https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:240",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:240  \"resolved\": \"https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:246",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:246  \"resolved\": \"https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:255",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:255  \"resolved\": \"https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:264",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:264  \"resolved\": \"https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:273",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/es-object-atoms/-/es-object-atoms-1.1.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:273  \"resolved\": \"https://registry.npmjs.org/es-object-atoms/-/es-object-atoms-1.1.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:285",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:285  \"resolved\": \"https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:291",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:291  \"resolved\": \"https://registry.npmjs.org/etag/-/etag-1.8.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:300",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/ethers/-/ethers-6.17.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:300  \"resolved\": \"https://registry.npmjs.org/ethers/-/ethers-6.17.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:305",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sponsors/ethers-io/",
+      "evidence": "源码/fake-u-system/server/package-lock.json:305  \"url\": \"https://github.com/sponsors/ethers-io/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:309",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.buymeacoffee.com/ricmoo",
+      "evidence": "源码/fake-u-system/server/package-lock.json:309  \"url\": \"https://www.buymeacoffee.com/ricmoo\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:328",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/express/-/express-4.22.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:328  \"resolved\": \"https://registry.npmjs.org/express/-/express-4.22.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:374",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/finalhandler/-/finalhandler-1.3.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:374  \"resolved\": \"https://registry.npmjs.org/finalhandler/-/finalhandler-1.3.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:392",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:392  \"resolved\": \"https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:401",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:401  \"resolved\": \"https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:410",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:410  \"resolved\": \"https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:419",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:419  \"resolved\": \"https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:443",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/get-proto/-/get-proto-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:443  \"resolved\": \"https://registry.npmjs.org/get-proto/-/get-proto-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:456",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:456  \"resolved\": \"https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:468",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/has-symbols/-/has-symbols-1.1.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:468  \"resolved\": \"https://registry.npmjs.org/has-symbols/-/has-symbols-1.1.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:480",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/hasown/-/hasown-2.0.4.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:480  \"resolved\": \"https://registry.npmjs.org/hasown/-/hasown-2.0.4.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:492",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:492  \"resolved\": \"https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:512",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:512  \"resolved\": \"https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:524",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:524  \"resolved\": \"https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:530",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:530  \"resolved\": \"https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:539",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:539  \"resolved\": \"https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:548",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:548  \"resolved\": \"https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:557",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-1.0.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:557  \"resolved\": \"https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-1.0.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:561",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sponsors/sindresorhus",
+      "evidence": "源码/fake-u-system/server/package-lock.json:561  \"url\": \"https://github.com/sponsors/sindresorhus\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:566",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/methods/-/methods-1.1.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:566  \"resolved\": \"https://registry.npmjs.org/methods/-/methods-1.1.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:575",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/mime/-/mime-1.6.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:575  \"resolved\": \"https://registry.npmjs.org/mime/-/mime-1.6.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:587",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:587  \"resolved\": \"https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:596",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:596  \"resolved\": \"https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:608",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:608  \"resolved\": \"https://registry.npmjs.org/ms/-/ms-2.0.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:614",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/nanoid/-/nanoid-5.1.16.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:614  \"resolved\": \"https://registry.npmjs.org/nanoid/-/nanoid-5.1.16.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:619",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sponsors/ai",
+      "evidence": "源码/fake-u-system/server/package-lock.json:619  \"url\": \"https://github.com/sponsors/ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:632",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:632  \"resolved\": \"https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:641",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:641  \"resolved\": \"https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:650",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:650  \"resolved\": \"https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:662",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:662  \"resolved\": \"https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:674",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:674  \"resolved\": \"https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:683",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.13.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:683  \"resolved\": \"https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.13.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:689",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.8.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:689  \"resolved\": \"https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.8.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:706",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:706  \"resolved\": \"https://registry.npmjs.org/qs/-/qs-6.16.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:722",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:722  \"resolved\": \"https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:731",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/raw-body/-/raw-body-2.5.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:731  \"resolved\": \"https://registry.npmjs.org/raw-body/-/raw-body-2.5.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:746",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:746  \"resolved\": \"https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:751",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sponsors/feross",
+      "evidence": "源码/fake-u-system/server/package-lock.json:751  \"url\": \"https://github.com/sponsors/feross\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:755",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.patreon.com/feross",
+      "evidence": "源码/fake-u-system/server/package-lock.json:755  \"url\": \"https://www.patreon.com/feross\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:759",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://feross.org/support",
+      "evidence": "源码/fake-u-system/server/package-lock.json:759  \"url\": \"https://feross.org/support\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:766",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:766  \"resolved\": \"https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:772",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/send/-/send-0.19.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:772  \"resolved\": \"https://registry.npmjs.org/send/-/send-0.19.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:796",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:796  \"resolved\": \"https://registry.npmjs.org/ms/-/ms-2.1.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:802",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/serve-static/-/serve-static-1.16.3.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:802  \"resolved\": \"https://registry.npmjs.org/serve-static/-/serve-static-1.16.3.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:817",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:817  \"resolved\": \"https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:823",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:823  \"resolved\": \"https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:842",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:842  \"resolved\": \"https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:858",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:858  \"resolved\": \"https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:876",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:876  \"resolved\": \"https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:895",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/statuses/-/statuses-2.0.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:895  \"resolved\": \"https://registry.npmjs.org/statuses/-/statuses-2.0.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:904",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:904  \"resolved\": \"https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:913",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/tslib/-/tslib-2.7.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:913  \"resolved\": \"https://registry.npmjs.org/tslib/-/tslib-2.7.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:919",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:919  \"resolved\": \"https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:932",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/undici-types/-/undici-types-6.19.8.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:932  \"resolved\": \"https://registry.npmjs.org/undici-types/-/undici-types-6.19.8.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:938",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:938  \"resolved\": \"https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:947",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:947  \"resolved\": \"https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:956",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:956  \"resolved\": \"https://registry.npmjs.org/vary/-/vary-1.1.2.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/package-lock.json:965",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/ws/-/ws-8.21.0.tgz",
+      "evidence": "源码/fake-u-system/server/package-lock.json:965  \"resolved\": \"https://registry.npmjs.org/ws/-/ws-8.21.0.tgz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "源码/fake-u-system/server/db/data.json:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://u.linshop.store",
+      "evidence": "源码/fake-u-system/server/db/data.json:15  \"rpc_url\": \"https://u.linshop.store\","
+    }
+  ],
+  "reRooting": []
+}

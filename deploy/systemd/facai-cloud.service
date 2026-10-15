@@ -1,0 +1,49 @@
+[Unit]
+Description=Facai Cloud Mission Control
+Documentation=file:///opt/facai-cloud/docs/DEPLOYMENT.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=facai
+Group=facai
+WorkingDirectory=/opt/facai-cloud
+# Application login/runtime config (admin password, data dir, session, scheduler).
+EnvironmentFile=/etc/facai-cloud/facai.env
+# Per-service provider credentials, one file per upstream (e.g. deepseek.env), so
+# keys are classified by service instead of mixed into the app env. The leading
+# '-' keeps the unit valid before any provider file has been installed.
+EnvironmentFile=-/etc/facai-cloud/providers/*.env
+# The OpenCode adapter runs the self-contained CLI installed by
+# deploy/install-opencode.sh at /usr/local/bin/opencode, so it must be on PATH.
+# OpenCode keeps its own store under $HOME/.local, and the hardened service may
+# only write inside the data directory, so HOME points there. Secrets still come
+# from EnvironmentFile; none are passed on a command line.
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+Environment=HOME=/opt/facai-cloud/data/opencode/home
+Environment=XDG_CONFIG_HOME=/opt/facai-cloud/data/opencode/home/.config
+Environment=XDG_DATA_HOME=/opt/facai-cloud/data/opencode/home/.local/share
+Environment=XDG_CACHE_HOME=/opt/facai-cloud/data/opencode/home/.cache
+ExecStart=/opt/facai-cloud/.venv/bin/python -m uvicorn facai.api:app \
+    --host 127.0.0.1 --port 8765 --proxy-headers --forwarded-allow-ips 127.0.0.1
+Restart=on-failure
+RestartSec=3
+
+# Hardening: the service runs as an unprivileged user and can only write its data dir.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/facai-cloud/data
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

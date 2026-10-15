@@ -1,0 +1,1809 @@
+{
+  "target": "awesome-mcp-servers (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\awesome-mcp-servers)",
+  "origin": "https://github.com/punkpeye/awesome-mcp-servers",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 4 个文本文件（源码 0、其余 4），识别 200 面（源码档 0、文档/示例 DOC_ 降权 200、其余文件 0；截断=False/True，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "DOC_NETWORK",
+      "where": "CONTRIBUTING.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/punkpeye/awesome-remote-mcp-servers",
+      "evidence": "CONTRIBUTING.md:10  This list is for servers with a public GitHub repository — something you install and run yourself. If your server is remote-only (just a hosted URL, no installable package), it belongs in [awesome-remote-mcp-servers](https://github.com/punk"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://awesome.re/badge.svg",
+      "evidence": "README-fa-ir.md:3  # سرورهای MCP عالی [![عالی](https://awesome.re/badge.svg)](https://awesome.re)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://awesome.re",
+      "evidence": "README-fa-ir.md:3  # سرورهای MCP عالی [![عالی](https://awesome.re/badge.svg)](https://awesome.re)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/Thai-Click-blue",
+      "evidence": "README-fa-ir.md:5  [![ไทย](https://img.shields.io/badge/Thai-Click-blue)](README-th.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:6",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/English-Click-yellow",
+      "evidence": "README-fa-ir.md:6  [![English](https://img.shields.io/badge/English-Click-yellow)](README.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/繁體中文-點擊查看-orange",
+      "evidence": "README-fa-ir.md:7  [![繁體中文](https://img.shields.io/badge/繁體中文-點擊查看-orange)](README-zh_TW.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:8",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/简体中文-点击查看-orange",
+      "evidence": "README-fa-ir.md:8  [![简体中文](https://img.shields.io/badge/简体中文-点击查看-orange)](README-zh.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:9",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/日本語-クリック-青",
+      "evidence": "README-fa-ir.md:9  [![日本語](https://img.shields.io/badge/日本語-クリック-青)](README-ja.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:10",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/한국어-클릭-yellow",
+      "evidence": "README-fa-ir.md:10  [![한국어](https://img.shields.io/badge/한국어-클릭-yellow)](README-ko.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/Português_Brasileiro-Clique-green",
+      "evidence": "README-fa-ir.md:11  [![Português Brasileiro](https://img.shields.io/badge/Português_Brasileiro-Clique-green)](README-pt_BR.md)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/discord/1312302100125843476?logo=discord&label=discord",
+      "evidence": "README-fa-ir.md:12  [![Discord](https://img.shields.io/discord/1312302100125843476?logo=discord&label=discord)](https://glama.ai/mcp/discord)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:12",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/discord",
+      "evidence": "README-fa-ir.md:12  [![Discord](https://img.shields.io/discord/1312302100125843476?logo=discord&label=discord)](https://glama.ai/mcp/discord)\nREADME-fa-ir.md:45  * [سرور دیسکورد](https://glama.ai/mcp/discord)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/reddit/subreddit-subscribers/mcp?style=flat&logo=reddit&label=subreddit",
+      "evidence": "README-fa-ir.md:13  [![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/mcp?style=flat&logo=reddit&label=subreddit)](https://www.reddit.com/r/mcp/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com/r/mcp/",
+      "evidence": "README-fa-ir.md:13  [![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/mcp?style=flat&logo=reddit&label=subreddit)](https://www.reddit.com/r/mcp/)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:28",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://modelcontextprotocol.io/",
+      "evidence": "README-fa-ir.md:28  [MCP](https://modelcontextprotocol.io/) یک پروتکل باز است که به مدل‌های هوش مصنوعی امکان تعامل امن با منابع محلی و راه دور را از طریق پیاده‌سازی‌های سرور استاندارد شده می‌دهد. این لیست بر روی سرورهای MCP آماده برای تولید و آزمایشی تمرکز دار"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:32",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/punkpeye/awesome-mcp-clients/",
+      "evidence": "README-fa-ir.md:32  [awesome-mcp-clients](https://github.com/punkpeye/awesome-mcp-clients/) و [glama.ai/mcp/clients](https://glama.ai/mcp/clients) را بررسی کنید."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:32",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/clients",
+      "evidence": "README-fa-ir.md:32  [awesome-mcp-clients](https://github.com/punkpeye/awesome-mcp-clients/) و [glama.ai/mcp/clients](https://glama.ai/mcp/clients) را بررسی کنید."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/chat",
+      "evidence": "README-fa-ir.md:35  > [Glama Chat](https://glama.ai/chat) یک کلاینت هوش مصنوعی چندوجهی با پشتیبانی از MCP و [دروازه هوش مصنوعی](https://glama.ai/gateway) است."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/gateway",
+      "evidence": "README-fa-ir.md:35  > [Glama Chat](https://glama.ai/chat) یک کلاینت هوش مصنوعی چندوجهی با پشتیبانی از MCP و [دروازه هوش مصنوعی](https://glama.ai/gateway) است."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:39",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/blog/2024-11-25-model-context-protocol-quickstart",
+      "evidence": "README-fa-ir.md:39  * [شروع سریع پروتکل زمینه مدل (MCP)](https://glama.ai/blog/2024-11-25-model-context-protocol-quickstart)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:40",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://youtu.be/wxCCzo9dGj0",
+      "evidence": "README-fa-ir.md:40  * [تنظیم برنامه دسکتاپ Claude برای استفاده از پایگاه داده SQLite](https://youtu.be/wxCCzo9dGj0)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:44",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.reddit.com/r/mcp",
+      "evidence": "README-fa-ir.md:44  * [r/mcp Reddit](https://www.reddit.com/r/mcp)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:77",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/servers",
+      "evidence": "README-fa-ir.md:77  > ما اکنون یک [دایرکتوری مبتنی بر وب](https://glama.ai/mcp/servers) داریم که با مخزن همگام‌سازی شده است."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:123",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/1mcp-app/agent",
+      "evidence": "README-fa-ir.md:123  - [1mcp/agent](https://github.com/1mcp-app/agent) 📇 ☁️ 🏠 🍎 🪟 🐧 - یک پیاده‌سازی سرور Model Context Protocol یکپارچه که چندین سرور MCP را در یک سرور تجمیع می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:124",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/duaraghav8/MCPJungle",
+      "evidence": "README-fa-ir.md:124  - [duaraghav8/MCPJungle](https://github.com/duaraghav8/MCPJungle) 🏎️ 🏠 - رجیستری سرور MCP خودمیزبان برای عامل‌های هوش مصنوعی سازمانی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:125",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/glenngillen/mcpmcp-server",
+      "evidence": "README-fa-ir.md:125  - [glenngillen/mcpmcp-server](https://github.com/glenngillen/mcpmcp-server) ☁️ 📇 🍎 🪟 🐧 - لیستی از سرورهای MCP تا بتوانید از کلاینت خود بپرسید از کدام سرورها برای بهبود گردش کار روزانه خود می‌توانید استفاده کنید."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:126",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hamflx/imagen3-mcp",
+      "evidence": "README-fa-ir.md:126  - [hamflx/imagen3-mcp](https://github.com/hamflx/imagen3-mcp) 📇 🏠 🪟 🍎 🐧 - یک ابزار قدرتمند تولید تصویر با استفاده از API Imagen 3.0 گوگل از طریق MCP. تولید تصاویر با کیفیت بالا از طریق دستورات متنی با کنترل‌های پیشرفته عکاسی، هنری و فوتورئا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:127",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/julien040/anyquery",
+      "evidence": "README-fa-ir.md:127  - [julien040/anyquery](https://github.com/julien040/anyquery) 🏎️ 🏠 ☁️ - بیش از ۴۰ برنامه را با یک باینری با استفاده از SQL کوئری کنید. همچنین می‌تواند به پایگاه داده سازگار با PostgreSQL، MySQL یا SQLite شما متصل شود. طراحی شده به صورت محلی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:128",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/metatool-ai/metatool-app",
+      "evidence": "README-fa-ir.md:128  - [metatool-ai/metatool-app](https://github.com/metatool-ai/metatool-app) 📇 ☁️ 🏠 🍎 🪟 🐧 - MetaMCP یک سرور میان‌افزار MCP یکپارچه است که اتصالات MCP شما را با رابط کاربری گرافیکی مدیریت می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:129",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sitbon/magg",
+      "evidence": "README-fa-ir.md:129  - [sitbon/magg](https://github.com/sitbon/magg) 🍎 🪟 🐧 ☁️ 🏠 🐍 - Magg: یک سرور متا-MCP که به عنوان یک هاب جهانی عمل می‌کند و به LLMها اجازه می‌دهد تا به طور خودکار چندین سرور MCP را کشف، نصب و هماهنگ کنند - اساساً به دستیاران هوش مصنوعی این ق"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:130",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/SureScaleAI/openai-gpt-image-mcp",
+      "evidence": "README-fa-ir.md:130  - [SureScaleAI/openai-gpt-image-mcp](https://github.com/SureScaleAI/openai-gpt-image-mcp) 📇 ☁️ - سرور MCP تولید/ویرایش تصویر OpenAI GPT."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:131",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sxhxliang/mcp-access-point",
+      "evidence": "README-fa-ir.md:131  - [sxhxliang/mcp-access-point](https://github.com/sxhxliang/mcp-access-point) 📇 ☁️ 🏠 🍎 🪟 🐧 - یک سرویس وب را با یک کلیک و بدون هیچ گونه تغییر در کد، به یک سرور MCP تبدیل کنید."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:132",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/TheLunarCompany/lunar/tree/main/mcpx",
+      "evidence": "README-fa-ir.md:132  - [TheLunarCompany/lunar#mcpx](https://github.com/TheLunarCompany/lunar/tree/main/mcpx) 📇 🏠  ☁️ 🍎 🪟 🐧 - MCPX یک دروازه منبع باز و آماده برای تولید است تا سرورهای MCP را در مقیاس بزرگ مدیریت کند—کشف ابزار، کنترل‌های دسترسی، اولویت‌بندی تماس "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:133",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/VeriTeknik/pluggedin-mcp-proxy",
+      "evidence": "README-fa-ir.md:133  - [VeriTeknik/pluggedin-mcp-proxy](https://github.com/VeriTeknik/pluggedin-mcp-proxy)  📇 🏠 - یک سرور پروکسی جامع که چندین سرور MCP را در یک رابط واحد با ویژگی‌های دید گسترده ترکیب می‌کند. این سرور کشف و مدیریت ابزارها، پرامپت‌ها، منابع و قا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:134",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/waystation-ai/mcp",
+      "evidence": "README-fa-ir.md:134  - [WayStation-ai/mcp](https://github.com/waystation-ai/mcp) ☁️ 🍎 🪟 - Claude Desktop و دیگر میزبان‌های MCP را به طور یکپارچه و امن به برنامه‌های مورد علاقه خود (Notion، Slack، Monday، Airtable، و غیره) متصل کنید. کمتر از ۹۰ ثانیه طول می‌کشد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:135",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wegotdocs/open-mcp",
+      "evidence": "README-fa-ir.md:135  - [wegotdocs/open-mcp](https://github.com/wegotdocs/open-mcp) 📇 🏠 🍎 🪟 🐧 - یک API وب را در ۱۰ ثانیه به یک سرور MCP تبدیل کنید و آن را به رجیستری منبع باز اضافه کنید: https://open-mcp.org"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:135",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://open-mcp.org",
+      "evidence": "README-fa-ir.md:135  - [wegotdocs/open-mcp](https://github.com/wegotdocs/open-mcp) 📇 🏠 🍎 🪟 🐧 - یک API وب را در ۱۰ ثانیه به یک سرور MCP تبدیل کنید و آن را به رجیستری منبع باز اضافه کنید: https://open-mcp.org"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:136",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Data-Everything/mcp-server-templates",
+      "evidence": "README-fa-ir.md:136  - [Data-Everything/mcp-server-templates](https://github.com/Data-Everything/mcp-server-templates) 📇 🏠 🍎 🪟 🐧 - یک سرور. همه ابزارها. یک پلتفرم MCP یکپارچه که بسیاری از برنامه‌ها، ابزارها و خدمات را پشت یک رابط قدرتمند متصل می‌کند—ایده‌آل برا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:137",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/YangLiangwei/PersonalizationMCP",
+      "evidence": "README-fa-ir.md:137  - [YangLiangwei/PersonalizationMCP](https://github.com/YangLiangwei/PersonalizationMCP) 🐍 ☁️ 🏠 🍎 🪟 🐧 - سرور MCP جامع تجمیع داده‌های شخصی با یکپارچه‌سازی پلتفرم‌های Steam، YouTube، Bilibili، Spotify، Reddit و دیگر پلتفرم‌ها. دارای احراز هویت"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:146",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/drakonkat/wizzy-mcp-tmdb",
+      "evidence": "README-fa-ir.md:146  - [drakonkat/wizzy-mcp-tmdb](https://github.com/drakonkat/wizzy-mcp-tmdb) 📇 ☁️ - یک سرور MCP برای API پایگاه داده فیلم که به دستیاران هوش مصنوعی امکان جستجو و بازیابی اطلاعات فیلم، سریال تلویزیونی و افراد را می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:147",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/8enSmith/mcp-open-library",
+      "evidence": "README-fa-ir.md:147  - [8enSmith/mcp-open-library](https://github.com/8enSmith/mcp-open-library) 📇 ☁️ - یک سرور MCP برای API کتابخانه باز که به دستیاران هوش مصنوعی امکان جستجوی اطلاعات کتاب را می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:148",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/abhiemj/manim-mcp-server",
+      "evidence": "README-fa-ir.md:148  - [abhiemj/manim-mcp-server](https://github.com/abhiemj/manim-mcp-server) 🐍 🏠 🪟 🐧 - یک سرور MCP محلی که با استفاده از Manim انیمیشن تولید می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:149",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ahujasid/blender-mcp",
+      "evidence": "README-fa-ir.md:149  - [ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) 🐍 - سرور MCP برای کار با Blender"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:150",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/aliafsahnoudeh/shahnameh-mcp-server",
+      "evidence": "README-fa-ir.md:150  - [aliafsahnoudeh/shahnameh-mcp-server](https://github.com/aliafsahnoudeh/shahnameh-mcp-server) 🐍 🏠 🍎 🪟 🐧 - یک ام سی پی سرور برای دسترسی به بخش ها و اشعار و توضیحات شاهنامه فردوسی حماسه بزرگ فارسی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:151",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/burningion/video-editing-mcp",
+      "evidence": "README-fa-ir.md:151  - [burningion/video-editing-mcp](https://github.com/burningion/video-editing-mcp) 🐍 - اضافه کردن، تحلیل، جستجو و تولید ویرایش‌های ویدیویی از مجموعه Video Jungle شما"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:152",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cantian-ai/bazi-mcp",
+      "evidence": "README-fa-ir.md:152  - [cantian-ai/bazi-mcp](https://github.com/cantian-ai/bazi-mcp) 📇 🏠 ☁️ 🍎 🪟 - نمودار و تحلیل جامع و دقیق Bazi (طالع‌بینی چینی) را ارائه می‌دهد"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:153",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cswkim/discogs-mcp-server",
+      "evidence": "README-fa-ir.md:153  - [cswkim/discogs-mcp-server](https://github.com/cswkim/discogs-mcp-server) 📇 ☁️ - سرور MCP برای تعامل با API Discogs"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:154",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/diivi/aseprite-mcp",
+      "evidence": "README-fa-ir.md:154  - [diivi/aseprite-mcp](https://github.com/diivi/aseprite-mcp) 🐍 🏠 - سرور MCP با استفاده از API Aseprite برای ایجاد هنر پیکسلی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:155",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/djalal/quran-mcp-server",
+      "evidence": "README-fa-ir.md:155  - [djalal/quran-mcp-server](https://github.com/djalal/quran-mcp-server) 📇 ☁️ سرور MCP برای تعامل با مجموعه متون Quran.com از طریق API رسمی REST v4."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:156",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/raveenb/fal-mcp-server",
+      "evidence": "README-fa-ir.md:156  - [raveenb/fal-mcp-server](https://github.com/raveenb/fal-mcp-server) 🐍 ☁️ - تولید تصاویر، ویدیوها و موسیقی هوش مصنوعی با استفاده از مدل‌های Fal.ai (FLUX، Stable Diffusion، MusicGen) مستقیماً در Claude Desktop"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:157",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mikechao/metmuseum-mcp",
+      "evidence": "README-fa-ir.md:157  - [mikechao/metmuseum-mcp](https://github.com/mikechao/metmuseum-mcp) 📇 ☁️ - یکپارچه‌سازی با API مجموعه موزه هنر متروپولیتن برای جستجو و نمایش آثار هنری در مجموعه."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:158",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OctoEverywhere/mcp",
+      "evidence": "README-fa-ir.md:158  - [OctoEverywhere/mcp](https://github.com/OctoEverywhere/mcp) #️⃣ ☁️ - یک سرور MCP چاپگر سه بعدی که امکان دریافت وضعیت زنده چاپگر، عکس‌های وب‌کم و کنترل چاپگر را فراهم می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:159",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/omni-mcp/isaac-sim-mcp",
+      "evidence": "README-fa-ir.md:159  - [omni-mcp/isaac-sim-mcp](https://github.com/omni-mcp/isaac-sim-mcp) 📇 ☁️ - یک سرور MCP و یک افزونه که کنترل زبان طبیعی NVIDIA Isaac Sim، Lab، OpenUSD و غیره را امکان‌پذیر می‌سازد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:160",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/PatrickPalmer/MayaMCP",
+      "evidence": "README-fa-ir.md:160  - [PatrickPalmer/MayaMCP](https://github.com/PatrickPalmer/MayaMCP) 🐍 🏠 - سرور MCP برای Autodesk Maya"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:161",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r-huijts/oorlogsbronnen-mcp",
+      "evidence": "README-fa-ir.md:161  - [r-huijts/oorlogsbronnen-mcp](https://github.com/r-huijts/oorlogsbronnen-mcp) 📇 ☁️ - یکپارچه‌سازی با API Oorlogsbronnen (منابع جنگ) برای دسترسی به سوابق تاریخی جنگ جهانی دوم، عکس‌ها و اسناد از هلند (۱۹۴۰-۱۹۴۵)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:162",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r-huijts/rijksmuseum-mcp",
+      "evidence": "README-fa-ir.md:162  - [r-huijts/rijksmuseum-mcp](https://github.com/r-huijts/rijksmuseum-mcp) 📇 ☁️ - یکپارچه‌سازی با API Rijksmuseum برای جستجوی آثار هنری، جزئیات و مجموعه‌ها"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:163",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/samuelgursky/davinci-resolve-mcp",
+      "evidence": "README-fa-ir.md:163  - [samuelgursky/davinci-resolve-mcp](https://github.com/samuelgursky/davinci-resolve-mcp) 🐍 - یکپارچه‌سازی سرور MCP برای DaVinci Resolve که ابزارهای قدرتمندی برای ویرایش ویدیو، درجه‌بندی رنگ، مدیریت رسانه و کنترل پروژه فراهم می‌کند"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:164",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tasopen/mcp-alphabanana",
+      "evidence": "README-fa-ir.md:164  - [tasopen/mcp-alphabanana](https://github.com/tasopen/mcp-alphabanana) [glama](https://glama.ai/mcp/servers/@tasopen/mcp-alphabanana) 📇 🏠 🍎 🪟 🐧 - سرور MCP محلی برای تولید دارایی‌های تصویری با Google Gemini (Nano Banana 2 / Pro). از خروجی ش"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:164",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/servers/@tasopen/mcp-alphabanana",
+      "evidence": "README-fa-ir.md:164  - [tasopen/mcp-alphabanana](https://github.com/tasopen/mcp-alphabanana) [glama](https://glama.ai/mcp/servers/@tasopen/mcp-alphabanana) 📇 🏠 🍎 🪟 🐧 - سرور MCP محلی برای تولید دارایی‌های تصویری با Google Gemini (Nano Banana 2 / Pro). از خروجی ش"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:165",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/yuna0x0/anilist-mcp",
+      "evidence": "README-fa-ir.md:165  - [yuna0x0/anilist-mcp](https://github.com/yuna0x0/anilist-mcp) 📇 ☁️ - یک سرور MCP که API AniList را برای اطلاعات انیمه و مانگا یکپارچه می‌کند"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:172",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Narasimhaponnada/mermaid-mcp",
+      "evidence": "README-fa-ir.md:172  - [Narasimhaponnada/mermaid-mcp](https://github.com/Narasimhaponnada/mermaid-mcp) 📇 ☁️ 🍎 🪟 🐧 - تولید نمودار Mermaid با قدرت هوش مصنوعی با بیش از ۲۲ نوع نمودار شامل فلوچارت‌ها، نمودارهای توالی، نمودارهای کلاس، نمودارهای ER، نمودارهای معماری،"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:176",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/genomoncology/biomcp",
+      "evidence": "README-fa-ir.md:176  - [genomoncology/biomcp](https://github.com/genomoncology/biomcp) 🐍 ☁️ - سرور MCP تحقیقات زیست‌پزشکی که دسترسی به PubMed، ClinicalTrials.gov و MyVariant.info را فراهم می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:177",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/longevity-genie/biothings-mcp",
+      "evidence": "README-fa-ir.md:177  - [longevity-genie/biothings-mcp](https://github.com/longevity-genie/biothings-mcp) 🐍 🏠 ☁️ - سرور MCP برای تعامل با API BioThings، شامل ژن‌ها، واریانت‌های ژنتیکی، داروها و اطلاعات طبقه‌بندی."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:178",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/longevity-genie/gget-mcp",
+      "evidence": "README-fa-ir.md:178  - [longevity-genie/gget-mcp](https://github.com/longevity-genie/gget-mcp) 🐍 🏠 ☁️ - سرور MCP که یک جعبه ابزار قدرتمند بیوانفورماتیک برای کوئری‌ها و تحلیل‌های ژنومیک فراهم می‌کند و کتابخانه محبوب `gget` را پوشش می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:179",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/longevity-genie/opengenes-mcp",
+      "evidence": "README-fa-ir.md:179  - [longevity-genie/opengenes-mcp](https://github.com/longevity-genie/opengenes-mcp) 🎖️ 🐍 🏠 ☁️ - سرور MCP برای یک پایگاه داده قابل کوئری برای تحقیقات پیری و طول عمر از پروژه OpenGenes."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:180",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/longevity-genie/synergy-age-mcp",
+      "evidence": "README-fa-ir.md:180  - [longevity-genie/synergy-age-mcp](https://github.com/longevity-genie/synergy-age-mcp) 🎖️ 🐍 🏠 ☁️ - سرور MCP برای پایگاه داده SynergyAge از تعاملات ژنتیکی سینرژیک و آنتاگونیستی در طول عمر."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:181",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/the-momentum/fhir-mcp-server",
+      "evidence": "README-fa-ir.md:181  - [the-momentum/fhir-mcp-server](https://github.com/the-momentum/fhir-mcp-server) 🐍 🏠 ☁️ - سرور MCP که عامل‌های هوش مصنوعی را به سرورهای FHIR متصل می‌کند. یک مورد استفاده نمونه، کوئری تاریخچه بیمار به زبان طبیعی است."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:182",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wso2/fhir-mcp-server",
+      "evidence": "README-fa-ir.md:182  - [wso2/fhir-mcp-server](https://github.com/wso2/fhir-mcp-server) 🐍 🏠 ☁️ - سرور Model Context Protocol برای APIهای Fast Healthcare Interoperability Resources (FHIR). یکپارچه‌سازی یکپارچه با سرورهای FHIR را فراهم می‌کند و به دستیاران هوش مصن"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:183",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/JamesANZ/medical-mcp",
+      "evidence": "README-fa-ir.md:183  - [JamesANZ/medical-mcp](https://github.com/JamesANZ/medical-mcp) 📇 🏠 - یک سرور MCP که دسترسی به اطلاعات پزشکی، پایگاه‌های داده دارویی و منابع مراقبت‌های بهداشتی را فراهم می‌کند. به دستیاران هوش مصنوعی امکان کوئری داده‌های پزشکی، تداخلات دا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:184",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/the-momentum/apple-health-mcp-server",
+      "evidence": "README-fa-ir.md:184  - [the-momentum/apple-health-mcp-server](https://github.com/the-momentum/apple-health-mcp-server) 🐍 🏠 🍎 🪟 🐧 - یک سرور MCP که دسترسی به داده‌های صادر شده از Apple Health را فراهم می‌کند. تحلیل داده‌ها نیز شامل می‌شود."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:185",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OHNLP/omop_mcp",
+      "evidence": "README-fa-ir.md:185  - [OHNLP/omop_mcp](https://github.com/OHNLP/omop_mcp) 🐍 🏠 ☁️ - نگاشت ترمینولوژی بالینی به مفاهیم OMOP با استفاده از LLMها برای استانداردسازی و قابلیت همکاری داده‌های مراقبت‌های بهداشتی."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:191",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/34892002/bilibili-mcp-js",
+      "evidence": "README-fa-ir.md:191  - [34892002/bilibili-mcp-js](https://github.com/34892002/bilibili-mcp-js) 📇 🏠 - یک سرور MCP که از جستجوی محتوای Bilibili پشتیبانی می‌کند. نمونه‌های یکپارچه‌سازی با LangChain و اسکریپت‌های تست را ارائه می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:192",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bytedance/UI-TARS-desktop/tree/main/packages/agent-infra/mcp-servers/browser",
+      "evidence": "README-fa-ir.md:192  - [agent-infra/mcp-server-browser](https://github.com/bytedance/UI-TARS-desktop/tree/main/packages/agent-infra/mcp-servers/browser) 📇 🏠 - قابلیت‌های اتوماسیون مرورگر با استفاده از Puppeteer، که هم از اتصال مرورگر محلی و هم از راه دور پشتیبا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:193",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+      "evidence": "README-fa-ir.md:193  - [automatalabs/mcp-server-playwright](https://github.com/Automata-Labs-team/MCP-Server-Playwright) 🐍 - یک سرور MCP برای اتوماسیون مرورگر با استفاده از Playwright"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:194",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/blackwhite084/playwright-plus-python-mcp",
+      "evidence": "README-fa-ir.md:194  - [blackwhite084/playwright-plus-python-mcp](https://github.com/blackwhite084/playwright-plus-python-mcp) 🐍 - یک سرور پایتون MCP با استفاده از Playwright برای اتوماسیون مرورگر، مناسب‌تر برای llm"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:195",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/browsermcp/mcp",
+      "evidence": "README-fa-ir.md:195  - [browsermcp/mcp](https://github.com/browsermcp/mcp) 📇 🏠 - اتوماسیون مرورگر محلی Chrome شما"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:196",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/co-browser/browser-use-mcp-server",
+      "evidence": "README-fa-ir.md:196  - [co-browser/browser-use-mcp-server](https://github.com/co-browser/browser-use-mcp-server) 🐍 - browser-use بسته‌بندی شده به عنوان یک سرور MCP با انتقال SSE. شامل یک dockerfile برای اجرای chromium در docker + یک سرور vnc."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:197",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/eat-pray-ai/yutu",
+      "evidence": "README-fa-ir.md:197  - [eat-pray-ai/yutu](https://github.com/eat-pray-ai/yutu) 🏎️ 🏠 🍎 🐧 🪟 - یک سرور MCP و CLI کاملاً کاربردی برای YouTube برای اتوماسیون عملیات YouTube"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:198",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/executeautomation/mcp-playwright",
+      "evidence": "README-fa-ir.md:198  - [executeautomation/playwright-mcp-server](https://github.com/executeautomation/mcp-playwright) 📇 - یک سرور MCP با استفاده از Playwright برای اتوماسیون مرورگر و استخراج وب"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:199",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/eyalzh/browser-control-mcp",
+      "evidence": "README-fa-ir.md:199  - [eyalzh/browser-control-mcp](https://github.com/eyalzh/browser-control-mcp) 📇 🏠 - یک سرور MCP همراه با یک افزونه مرورگر که به کلاینت‌های LLM امکان کنترل مرورگر کاربر (Firefox) را می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:200",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/freema/firefox-devtools-mcp",
+      "evidence": "README-fa-ir.md:200  - [freema/firefox-devtools-mcp](https://github.com/freema/firefox-devtools-mcp) 📇 🏠 - اتوماسیون مرورگر Firefox از طریق WebDriver BiDi برای تست، استخراج داده و کنترل مرورگر. از تعاملات مبتنی بر snapshot/UID، نظارت بر شبکه، ضبط کنسول و اسکرین"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:201",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/FradSer/mcp-server-apple-reminders",
+      "evidence": "README-fa-ir.md:201  - [fradser/mcp-server-apple-reminders](https://github.com/FradSer/mcp-server-apple-reminders) 📇 🏠 🍎 - یک سرور MCP برای تعامل با Apple Reminders در macOS"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:202",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript",
+      "evidence": "README-fa-ir.md:202  - [kimtaeyoon83/mcp-server-youtube-transcript](https://github.com/kimtaeyoon83/mcp-server-youtube-transcript) 📇 ☁️ - دریافت زیرنویس‌ها و رونوشت‌های YouTube برای تحلیل هوش مصنوعی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:203",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kimtth/mcp-aoai-web-browsing",
+      "evidence": "README-fa-ir.md:203  - [kimtth/mcp-aoai-web-browsing](https://github.com/kimtth/mcp-aoai-web-browsing) 🐍 🏠 - یک پیاده‌سازی `حداقلی` سرور/کلاینت MCP با استفاده از Azure OpenAI و Playwright."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:204",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/lightpanda-io/gomcp",
+      "evidence": "README-fa-ir.md:204  - [lightpanda-io/gomcp](https://github.com/lightpanda-io/gomcp) 🏎 🏠/☁️ 🐧/🍎 - یک سرور MCP در Go برای Lightpanda، مرورگر headless فوق‌العاده سریع که برای اتوماسیون وب طراحی شده است"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:205",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/microsoft/playwright-mcp",
+      "evidence": "README-fa-ir.md:205  - [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) - سرور MCP رسمی Microsoft Playwright، که به LLMها امکان تعامل با صفحات وب از طریق snapshotهای دسترسی ساختاریافته را می‌دهد"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:206",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+      "evidence": "README-fa-ir.md:206  - [modelcontextprotocol/server-puppeteer](https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer) 📇 🏠 - اتوماسیون مرورگر برای استخراج و تعامل وب"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:207",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ndthanhdev/mcp-browser-kit",
+      "evidence": "README-fa-ir.md:207  - [ndthanhdev/mcp-browser-kit](https://github.com/ndthanhdev/mcp-browser-kit) 📇 🏠 - یک سرور MCP که به دستیاران هوش مصنوعی امکان تعامل با مرورگرهای محلی شما را می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:208",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/pskill9/web-search",
+      "evidence": "README-fa-ir.md:208  - [pskill9/web-search](https://github.com/pskill9/web-search) 📇 🏠 - یک سرور MCP که جستجوی وب رایگان را با استفاده از نتایج جستجوی Google امکان‌پذیر می‌کند، بدون نیاز به کلید API."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:209",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/PhungXuanAnh/selenium-mcp-server",
+      "evidence": "README-fa-ir.md:209  - [PhungXuanAnh/selenium-mcp-server](https://github.com/PhungXuanAnh/selenium-mcp-server) 🐍 🏠 🍎 🪟 🐧 - یک سرور Model Context Protocol که قابلیت‌های اتوماسیون وب را از طریق Selenium WebDriver فراهم می‌کند"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:210",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/recursechat/mcp-server-apple-shortcuts",
+      "evidence": "README-fa-ir.md:210  - [recursechat/mcp-server-apple-shortcuts](https://github.com/recursechat/mcp-server-apple-shortcuts) 📇 🏠 🍎 - یکپارچه‌سازی سرور MCP با Apple Shortcuts"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:211",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/xspadex/bilibili-mcp.git",
+      "evidence": "README-fa-ir.md:211  - [xspadex/bilibili-mcp](https://github.com/xspadex/bilibili-mcp.git) 📇 🏠 - ابزاری مبتنی بر FastMCP که ویدیوهای پرطرفدار Bilibili را دریافت کرده و آنها را از طریق یک رابط MCP استاندارد در دسترس قرار می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:212",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/imprvhub/mcp-browser-agent",
+      "evidence": "README-fa-ir.md:212  - [imprvhub/mcp-browser-agent](https://github.com/imprvhub/mcp-browser-agent) 📇 🏠 - یکپارچه‌سازی Model Context Protocol (MCP) که به Claude Desktop قابلیت‌های اتوماسیون مرورگر خودکار را می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:218",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/4everland/4everland-hosting-mcp",
+      "evidence": "README-fa-ir.md:218  - [4everland/4everland-hosting-mcp](https://github.com/4everland/4everland-hosting-mcp) 🎖️ 📇 🏠 🍎 🐧 - یک پیاده‌سازی سرور MCP برای 4EVERLAND Hosting که استقرار فوری کد تولید شده توسط هوش مصنوعی را به شبکه‌های ذخیره‌سازی غیرمتمرکز مانند Greenf"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:219",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/aashari/mcp-server-aws-sso",
+      "evidence": "README-fa-ir.md:219  - [aashari/mcp-server-aws-sso](https://github.com/aashari/mcp-server-aws-sso) 📇 ☁️ 🏠 - یکپارچه‌سازی AWS Single Sign-On (SSO) که به سیستم‌های هوش مصنوعی امکان تعامل امن با منابع AWS را با شروع ورود SSO، لیست کردن حساب‌ها/نقش‌ها و اجرای دستور"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:220",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/alexbakers/mcp-ipfs",
+      "evidence": "README-fa-ir.md:220  - [alexbakers/mcp-ipfs](https://github.com/alexbakers/mcp-ipfs) 📇 ☁️ - آپلود و دستکاری ذخیره‌سازی IPFS"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:221",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/aliyun/alibaba-cloud-ops-mcp-server",
+      "evidence": "README-fa-ir.md:221  - [aliyun/alibaba-cloud-ops-mcp-server](https://github.com/aliyun/alibaba-cloud-ops-mcp-server) 🎖️ 🐍 ☁️ - یک سرور MCP که به دستیاران هوش مصنوعی امکان عملیات روی منابع Alibaba Cloud را می‌دهد و از ECS، Cloud Monitor، OOS و محصولات ابری پرکار"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:222",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/mcp",
+      "evidence": "README-fa-ir.md:222  - [awslabs/mcp](https://github.com/awslabs/mcp) 🎖️ ☁️ - سرورهای MCP AWS برای یکپارچه‌سازی یکپارچه با خدمات و منابع AWS."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:223",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bright8192/esxi-mcp-server",
+      "evidence": "README-fa-ir.md:223  - [bright8192/esxi-mcp-server](https://github.com/bright8192/esxi-mcp-server) 🐍 ☁️ - یک سرور مدیریت VMware ESXi/vCenter مبتنی بر MCP (Model Control Protocol) که رابط‌های API REST ساده برای مدیریت ماشین مجازی فراهم می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:224",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cloudflare/mcp-server-cloudflare",
+      "evidence": "README-fa-ir.md:224  - [cloudflare/mcp-server-cloudflare](https://github.com/cloudflare/mcp-server-cloudflare) 🎖️ 📇 ☁️ - یکپارچه‌سازی با خدمات Cloudflare شامل Workers، KV، R2 و D1"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:225",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cyclops-ui/mcp-cyclops",
+      "evidence": "README-fa-ir.md:225  - [cyclops-ui/mcp-cyclops](https://github.com/cyclops-ui/mcp-cyclops) 🎖️ 🏎️ ☁️ - یک سرور MCP که به عامل‌های هوش مصنوعی اجازه می‌دهد منابع Kubernetes را از طریق انتزاع Cyclops مدیریت کنند"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:226",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/erikhoward/adls-mcp-server",
+      "evidence": "README-fa-ir.md:226  - [erikhoward/adls-mcp-server](https://github.com/erikhoward/adls-mcp-server) 🐍 ☁️/🏠 - سرور MCP برای Azure Data Lake Storage. می‌تواند عملیات مدیریت کانتینرها، خواندن/نوشتن/آپلود/دانلود روی فایل‌های کانتینر و مدیریت متادیتای فایل را انجام د"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:227",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/espressif/esp-rainmaker-mcp",
+      "evidence": "README-fa-ir.md:227  - [espressif/esp-rainmaker-mcp](https://github.com/espressif/esp-rainmaker-mcp) 🎖️ 🐍 🏠 ☁️ 📟 - سرور MCP رسمی Espressif برای مدیریت و کنترل دستگاه‌های ESP RainMaker."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:228",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Flux159/mcp-server-kubernetes",
+      "evidence": "README-fa-ir.md:228  - [flux159/mcp-server-kubernetes](https://github.com/Flux159/mcp-server-kubernetes) 📇 ☁️/🏠 - پیاده‌سازی Typescript عملیات کلاستر Kubernetes برای podها، deploymentها، serviceها."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:229",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hardik-id/azure-resource-graph-mcp-server",
+      "evidence": "README-fa-ir.md:229  - [hardik-id/azure-resource-graph-mcp-server](https://github.com/hardik-id/azure-resource-graph-mcp-server) 📇 ☁️/🏠 - یک سرور Model Context Protocol برای کوئری و تحلیل منابع Azure در مقیاس بزرگ با استفاده از Azure Resource Graph، که به دستیا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:230",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/johnneerdael/netskope-mcp",
+      "evidence": "README-fa-ir.md:230  - [johnneerdael/netskope-mcp](https://github.com/johnneerdael/netskope-mcp) 🔒 ☁️ - یک MCP برای دسترسی به تمام اجزای Netskope Private Access در محیط‌های Netskope Private Access شامل اطلاعات دقیق راه‌اندازی و نمونه‌های LLM در مورد استفاده."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:231",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/kestra-io/mcp-server-python",
+      "evidence": "README-fa-ir.md:231  - [kestra-io/mcp-server-python](https://github.com/kestra-io/mcp-server-python) 🐍 ☁️ - پیاده‌سازی سرور MCP برای پلتفرم هماهنگ‌سازی گردش کار [Kestra](https://kestra.io)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:231",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://kestra.io",
+      "evidence": "README-fa-ir.md:231  - [kestra-io/mcp-server-python](https://github.com/kestra-io/mcp-server-python) 🐍 ☁️ - پیاده‌سازی سرور MCP برای پلتفرم هماهنگ‌سازی گردش کار [Kestra](https://kestra.io)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:232",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/liveblocks/liveblocks-mcp-server",
+      "evidence": "README-fa-ir.md:232  - [liveblocks/liveblocks-mcp-server](https://github.com/liveblocks/liveblocks-mcp-server) 🎖️ 📇 ☁️ - ایجاد، تغییر و حذف جنبه‌های مختلف [Liveblocks](https://liveblocks.io) مانند اتاق‌ها، رشته‌ها، نظرات، اعلان‌ها و موارد دیگر. علاوه بر این، دس"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:232",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://liveblocks.io",
+      "evidence": "README-fa-ir.md:232  - [liveblocks/liveblocks-mcp-server](https://github.com/liveblocks/liveblocks-mcp-server) 🎖️ 📇 ☁️ - ایجاد، تغییر و حذف جنبه‌های مختلف [Liveblocks](https://liveblocks.io) مانند اتاق‌ها، رشته‌ها، نظرات، اعلان‌ها و موارد دیگر. علاوه بر این، دس"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:233",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/manusa/kubernetes-mcp-server",
+      "evidence": "README-fa-ir.md:233  - [manusa/Kubernetes MCP Server](https://github.com/manusa/kubernetes-mcp-server) 🏎️ 🏠 A - سرور قدرتمند Kubernetes MCP با پشتیبانی اضافی برای OpenShift. علاوه بر ارائه عملیات CRUD برای **هر** منبع Kubernetes، این سرور ابزارهای تخصصی برای تع"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:234",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mctlhq/mctl-mcp",
+      "evidence": "README-fa-ir.md:234  - [mctlhq/mctl-mcp](https://github.com/mctlhq/mctl-mcp) [![mctl-mcp MCP server](https://glama.ai/mcp/servers/mctlhq/mctl-mcp/badges/score.svg)](https://glama.ai/mcp/servers/mctlhq/mctl-mcp) ☁️ - پلتفرم بومی هوش مصنوعی برای مدیریت کوبرنتیز و"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:234",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/servers/mctlhq/mctl-mcp/badges/score.svg",
+      "evidence": "README-fa-ir.md:234  - [mctlhq/mctl-mcp](https://github.com/mctlhq/mctl-mcp) [![mctl-mcp MCP server](https://glama.ai/mcp/servers/mctlhq/mctl-mcp/badges/score.svg)](https://glama.ai/mcp/servers/mctlhq/mctl-mcp) ☁️ - پلتفرم بومی هوش مصنوعی برای مدیریت کوبرنتیز و"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:234",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/servers/mctlhq/mctl-mcp",
+      "evidence": "README-fa-ir.md:234  - [mctlhq/mctl-mcp](https://github.com/mctlhq/mctl-mcp) [![mctl-mcp MCP server](https://glama.ai/mcp/servers/mctlhq/mctl-mcp/badges/score.svg)](https://glama.ai/mcp/servers/mctlhq/mctl-mcp) ☁️ - پلتفرم بومی هوش مصنوعی برای مدیریت کوبرنتیز و"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:235",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mrostamii/rancher-mcp-server",
+      "evidence": "README-fa-ir.md:235  - [mrostamii/rancher-mcp-server](https://github.com/mrostamii/rancher-mcp-server) [glama](https://glama.ai/mcp/servers/mrostamii/rancher-mcp-server) 🏎️ ☁️/🏠 - سرور MCP برای اکوسیستم Rancher با عملیات Kubernetes چندکلاستری، مدیریت Harvester "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:235",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/servers/mrostamii/rancher-mcp-server",
+      "evidence": "README-fa-ir.md:235  - [mrostamii/rancher-mcp-server](https://github.com/mrostamii/rancher-mcp-server) [glama](https://glama.ai/mcp/servers/mrostamii/rancher-mcp-server) 🏎️ ☁️/🏠 - سرور MCP برای اکوسیستم Rancher با عملیات Kubernetes چندکلاستری، مدیریت Harvester "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:236",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Nebula-Block-Data/nebulablock-mcp-server",
+      "evidence": "README-fa-ir.md:236  - [Nebula-Block-Data/nebulablock-mcp-server](https://github.com/Nebula-Block-Data/nebulablock-mcp-server) 📇 🏠 - با کتابخانه fastmcp یکپارچه می‌شود تا طیف کاملی از قابلیت‌های NebulaBlock API را به عنوان ابزارهای قابل دسترس در معرض دید قرار د"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:237",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/nwiizo/tfmcp",
+      "evidence": "README-fa-ir.md:237  - [nwiizo/tfmcp](https://github.com/nwiizo/tfmcp) - 🦀 🏠 - یک سرور Terraform MCP که به دستیاران هوش مصنوعی امکان مدیریت و عملیات محیط‌های Terraform را می‌دهد و خواندن پیکربندی‌ها، تحلیل planها، اعمال پیکربندی‌ها و مدیریت state Terraform را ا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:238",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openstack-kr/python-openstackmcp-server",
+      "evidence": "README-fa-ir.md:238  - [openstack-kr/python-openstackmcp-server](https://github.com/openstack-kr/python-openstackmcp-server) 🐍 ☁️ - سرور MCP OpenStack برای مدیریت زیرساخت ابری مبتنی بر openstacksdk."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:239",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/pibblokto/cert-manager-mcp-server",
+      "evidence": "README-fa-ir.md:239  - [pibblokto/cert-manager-mcp-server](https://github.com/pibblokto/cert-manager-mcp-server) 🐍 🍎/🐧 ☁️ - سرور mcp برای مدیریت و عیب‌یابی [cert-manager](https://github.com/cert-manager/cert-manager)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:239",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cert-manager/cert-manager",
+      "evidence": "README-fa-ir.md:239  - [pibblokto/cert-manager-mcp-server](https://github.com/pibblokto/cert-manager-mcp-server) 🐍 🍎/🐧 ☁️ - سرور mcp برای مدیریت و عیب‌یابی [cert-manager](https://github.com/cert-manager/cert-manager)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:240",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/portainer/portainer-mcp",
+      "evidence": "README-fa-ir.md:240  - [portainer/portainer-mcp](https://github.com/portainer/portainer-mcp) 🏎️ ☁️/🏠 - یک سرور MCP قدرتمند که به دستیاران هوش مصنوعی امکان تعامل یکپارچه با نمونه‌های Portainer را می‌دهد و دسترسی به زبان طبیعی به مدیریت کانتینر، عملیات استقرار و "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:241",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/pythonanywhere/pythonanywhere-mcp-server",
+      "evidence": "README-fa-ir.md:241  - [pythonanywhere/pythonanywhere-mcp-server](https://github.com/pythonanywhere/pythonanywhere-mcp-server) 🐍 🏠 - پیاده‌سازی سرور MCP برای پلتفرم ابری PythonAnywhere."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:242",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/qiniu/qiniu-mcp-server",
+      "evidence": "README-fa-ir.md:242  - [qiniu/qiniu-mcp-server](https://github.com/qiniu/qiniu-mcp-server) 🐍 ☁️ - یک MCP ساخته شده بر روی محصولات Qiniu Cloud، که از دسترسی به Qiniu Cloud Storage، خدمات پردازش رسانه و غیره پشتیبانی می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:243",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/redis/mcp-redis-cloud",
+      "evidence": "README-fa-ir.md:243  - [redis/mcp-redis-cloud](https://github.com/redis/mcp-redis-cloud) 📇 ☁️ - منابع Redis Cloud خود را به راحتی با استفاده از زبان طبیعی مدیریت کنید. پایگاه‌های داده ایجاد کنید، اشتراک‌ها را نظارت کنید و استقرارهای ابری را با دستورات ساده پیکر"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:244",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/reza-gholizade/k8s-mcp-server",
+      "evidence": "README-fa-ir.md:244  - [reza-gholizade/k8s-mcp-server](https://github.com/reza-gholizade/k8s-mcp-server) 🏎️ ☁️/🏠 - یک سرور Kubernetes Model Context Protocol (MCP) که ابزارهایی برای تعامل با کلاسترهای Kubernetes از طریق یک رابط استاندارد، شامل کشف منابع API، مدی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:245",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rohitg00/kubectl-mcp-server",
+      "evidence": "README-fa-ir.md:245  - [rohitg00/kubectl-mcp-server](https://github.com/rohitg00/kubectl-mcp-server) 🐍 ☁️/🏠 - یک سرور Model Context Protocol (MCP) برای Kubernetes که به دستیاران هوش مصنوعی مانند Claude، Cursor و دیگران امکان تعامل با کلاسترهای Kubernetes از طری"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:246",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rrmistry/tilt-mcp",
+      "evidence": "README-fa-ir.md:246  - [rrmistry/tilt-mcp](https://github.com/rrmistry/tilt-mcp) 🐍 🏠 🍎 🪟 🐧 - یک سرور Model Context Protocol که با Tilt یکپارچه می‌شود تا دسترسی برنامه‌ریزی شده به منابع، لاگ‌ها و عملیات مدیریتی Tilt را برای محیط‌های توسعه Kubernetes فراهم کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:247",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/silenceper/mcp-k8s",
+      "evidence": "README-fa-ir.md:247  - [silenceper/mcp-k8s](https://github.com/silenceper/mcp-k8s) 🏎️ ☁️/🏠 - MCP-K8S یک ابزار مدیریت منابع Kubernetes مبتنی بر هوش مصنوعی است که به کاربران امکان می‌دهد هر منبعی را در کلاسترهای Kubernetes از طریق تعامل زبان طبیعی، از جمله منابع "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:248",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/StacklokLabs/mkp",
+      "evidence": "README-fa-ir.md:248  - [StacklokLabs/mkp](https://github.com/StacklokLabs/mkp) 🏎️ ☁️ - MKP یک سرور Model Context Protocol (MCP) برای Kubernetes است که به برنامه‌های مبتنی بر LLM امکان تعامل با کلاسترهای Kubernetes را می‌دهد. این سرور ابزارهایی برای لیست کردن و "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:249",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/StacklokLabs/ocireg-mcp",
+      "evidence": "README-fa-ir.md:249  - [StacklokLabs/ocireg-mcp](https://github.com/StacklokLabs/ocireg-mcp) 🏎️ ☁️ - یک سرور MCP مبتنی بر SSE که به برنامه‌های مبتنی بر LLM امکان تعامل با رجیستری‌های OCI را می‌دهد. این سرور ابزارهایی برای بازیابی اطلاعات در مورد تصاویر کانتینر،"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:250",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/strowk/mcp-k8s-go",
+      "evidence": "README-fa-ir.md:250  - [strowk/mcp-k8s-go](https://github.com/strowk/mcp-k8s-go) 🏎️ ☁️/🏠 - عملیات کلاستر Kubernetes از طریق MCP"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:251",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/thunderboltsid/mcp-nutanix",
+      "evidence": "README-fa-ir.md:251  - [thunderboltsid/mcp-nutanix](https://github.com/thunderboltsid/mcp-nutanix) 🏎️ 🏠/☁️ - سرور MCP مبتنی بر Go برای ارتباط با منابع Nutanix Prism Central."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:252",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/trilogy-group/aws-pricing-mcp",
+      "evidence": "README-fa-ir.md:252  - [trilogy-group/aws-pricing-mcp](https://github.com/trilogy-group/aws-pricing-mcp) 🏎️ ☁️/🏠 - اطلاعات به‌روز قیمت‌گذاری EC2 را با یک تماس دریافت کنید. سریع. با استفاده از یک کاتالوگ قیمت‌گذاری AWS از پیش تجزیه شده."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:253",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/VmLia/books-mcp-server",
+      "evidence": "README-fa-ir.md:253  - [VmLia/books-mcp-server](https://github.com/VmLia/books-mcp-server) 📇 ☁️ - این یک سرور MCP است که برای کوئری کتاب‌ها استفاده می‌شود و می‌تواند در کلاینت‌های رایج MCP مانند Cherry Studio اعمال شود."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:254",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/weibaohui/k8m",
+      "evidence": "README-fa-ir.md:254  - [weibaohui/k8m](https://github.com/weibaohui/k8m) 🏎️ ☁️/🏠 - مدیریت و عملیات چند کلاستر Kubernetes MCP را فراهم می‌کند و دارای یک رابط مدیریتی، لاگ‌گیری و نزدیک به ۵۰ ابزار داخلی برای سناریوهای رایج DevOps و توسعه است. از منابع استاندارد و"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:255",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/weibaohui/kom",
+      "evidence": "README-fa-ir.md:255  - [weibaohui/kom](https://github.com/weibaohui/kom) 🏎️ ☁️/🏠 - مدیریت و عملیات چند کلاستر Kubernetes MCP را فراهم می‌کند. می‌تواند به عنوان یک SDK در پروژه شما یکپارچه شود و شامل نزدیک به ۵۰ ابزار داخلی برای سناریوهای رایج DevOps و توسعه است"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:256",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wenhuwang/mcp-k8s-eye",
+      "evidence": "README-fa-ir.md:256  - [wenhuwang/mcp-k8s-eye](https://github.com/wenhuwang/mcp-k8s-eye) 🏎️ ☁️/🏠 - سرور MCP برای مدیریت kubernetes و تحلیل کلاستر و سلامت برنامه شما"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:262",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/alfonsograziano/node-code-sandbox-mcp",
+      "evidence": "README-fa-ir.md:262  - [alfonsograziano/node-code-sandbox-mcp](https://github.com/alfonsograziano/node-code-sandbox-mcp) 📇 🏠 – یک سرور MCP Node.js که sandboxهای ایزوله مبتنی بر Docker را برای اجرای قطعه کدهای JavaScript با نصب وابستگی‌های npm در لحظه و تخریب تم"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:263",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ckanthony/openapi-mcp",
+      "evidence": "README-fa-ir.md:263  - [ckanthony/openapi-mcp](https://github.com/ckanthony/openapi-mcp) 🏎️ ☁️ - OpenAPI-MCP: سرور MCP داکرایز شده برای اجازه دادن به عامل هوش مصنوعی شما برای دسترسی به هر API با مستندات api موجود."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:264",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gwbischof/outsource-mcp",
+      "evidence": "README-fa-ir.md:264  - [gwbischof/outsource-mcp](https://github.com/gwbischof/outsource-mcp) 🐍 ☁️ - به دستیار هوش مصنوعی خود، دستیاران هوش مصنوعی خودش را بدهید. برای مثال: \"می‌توانی از openai بخواهی تصویری از یک سگ تولید کند؟\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:265",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hileamlakB/PRIMS",
+      "evidence": "README-fa-ir.md:265  - [hileamlakB/PRIMS](https://github.com/hileamlakB/PRIMS) 🐍 🏠 – یک سرور MCP مفسر زمان اجرای Python که کد ارسالی کاربر را در یک محیط ایزوله اجرا می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:266",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ouvreboite/openapi-to-mcp",
+      "evidence": "README-fa-ir.md:266  - [ouvreboite/openapi-to-mcp](https://github.com/ouvreboite/openapi-to-mcp) #️⃣ ☁️ - سرور MCP سبک برای دسترسی به هر API با استفاده از مشخصات OpenAPI آن. از OAuth2 و پارامترهای کامل JSON schema و بدنه درخواست پشتیبانی می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:267",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/r33drichards/mcp-js",
+      "evidence": "README-fa-ir.md:267  - [r33drichards/mcp-js](https://github.com/r33drichards/mcp-js) 🦀 🏠 🐧 🍎 - یک sandbox اجرای کد Javascript که از v8 برای ایزوله کردن کد برای اجرای javascript تولید شده توسط هوش مصنوعی به صورت محلی و بدون ترس استفاده می‌کند. از snapshot گرفتن "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:268",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/yepcode/mcp-server-js",
+      "evidence": "README-fa-ir.md:268  - [yepcode/mcp-server-js](https://github.com/yepcode/mcp-server-js) 🎖️ 📇 ☁️ - اجرای هر کد تولید شده توسط LLM در یک محیط sandbox امن و مقیاس‌پذیر و ایجاد ابزارهای MCP خود با استفاده از JavaScript یا Python، با پشتیبانی کامل از بسته‌های NPM و"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:269",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/dagger/container-use",
+      "evidence": "README-fa-ir.md:269  - [dagger/container-use](https://github.com/dagger/container-use) 🏎️ 🏠 🐧 🍎 🪟 - محیط‌های کانتینری برای عامل‌های کدنویسی. چندین عامل می‌توانند به طور مستقل کار کنند، در کانتینرها و شاخه‌های git تازه ایزوله شده‌اند. بدون تداخل، آزمایش‌های فراو"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:275",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/doggybee/mcp-server-leetcode",
+      "evidence": "README-fa-ir.md:275  - [doggybee/mcp-server-leetcode](https://github.com/doggybee/mcp-server-leetcode) 📇 ☁️ - یک سرور MCP که به مدل‌های هوش مصنوعی امکان جستجو، بازیابی و حل مسائل LeetCode را می‌دهد. از فیلتر کردن متادیتا، پروفایل‌های کاربری، ارسال‌ها و دسترسی ب"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:276",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ezyang/codemcp",
+      "evidence": "README-fa-ir.md:276  - [ezyang/codemcp](https://github.com/ezyang/codemcp) 🐍 🏠 - عامل کدنویسی با ابزارهای پایه خواندن، نوشتن و خط فرمان."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:277",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gabrielmaialva33/winx-code-agent",
+      "evidence": "README-fa-ir.md:277  - [gabrielmaialva33/winx-code-agent](https://github.com/gabrielmaialva33/winx-code-agent) 🦀 🏠 - یک پیاده‌سازی مجدد Rust با کارایی بالا از WCGW برای عامل‌های کد، که اجرای shell و قابلیت‌های پیشرفته مدیریت فایل را برای LLMها از طریق MCP فراهم"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:278",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jinzcdev/leetcode-mcp-server",
+      "evidence": "README-fa-ir.md:278  - [jinzcdev/leetcode-mcp-server](https://github.com/jinzcdev/leetcode-mcp-server) 📇 ☁️ - سرور MCP که دسترسی خودکار به مسائل برنامه‌نویسی، راه‌حل‌ها، ارسال‌ها و داده‌های عمومی **LeetCode** را با احراز هویت اختیاری برای ویژگی‌های خاص کاربر (م"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:279",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/juehang/vscode-mcp-server",
+      "evidence": "README-fa-ir.md:279  - [juehang/vscode-mcp-server](https://github.com/juehang/vscode-mcp-server) 📇 🏠 - یک سرور MCP که به هوش مصنوعی مانند Claude اجازه می‌دهد از ساختار دایرکتوری در یک فضای کاری VS Code بخواند، مشکلاتی که توسط linter(s) و سرور زبان شناسایی شده‌ا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:280",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/micl2e2/code-to-tree",
+      "evidence": "README-fa-ir.md:280  - [micl2e2/code-to-tree](https://github.com/micl2e2/code-to-tree) 🌊 🏠 📟 🐧 🪟 🍎 - یک سرور MCP تک-باینری که کد منبع را بدون توجه به زبان به AST تبدیل می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:281",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/oraios/serena",
+      "evidence": "README-fa-ir.md:281  - [oraios/serena](https://github.com/oraios/serena) 🐍 🏠 - یک عامل کدنویسی کاملاً مجهز که با استفاده از سرورهای زبان به عملیات کد نمادین متکی است."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:282",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com.mcas.ms/pdavis68/RepoMapper",
+      "evidence": "README-fa-ir.md:282  - [pdavis68/RepoMapper](https://github.com.mcas.ms/pdavis68/RepoMapper) 🐧 🪟 🍎 - یک سرور MCP (و ابزار خط فرمان) برای ارائه یک نقشه پویا از فایل‌های مرتبط با چت از مخزن با پروتوتایپ‌های تابع آنها و فایل‌های مرتبط به ترتیب اهمیت. بر اساس عملکر"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:283",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/rinadelph/Agent-MCP",
+      "evidence": "README-fa-ir.md:283  - [rinadelph/Agent-MCP](https://github.com/rinadelph/Agent-MCP) 🐍 🏠 - چارچوبی برای ایجاد سیستم‌های چند-عاملی با استفاده از MCP برای همکاری هماهنگ هوش مصنوعی، با مدیریت وظایف، زمینه مشترک و قابلیت‌های RAG."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:284",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/stippi/code-assistant",
+      "evidence": "README-fa-ir.md:284  - [stippi/code-assistant](https://github.com/stippi/code-assistant) 🦀 🏠 - عامل کدنویسی با ابزارهای پایه list، read، replace_in_file، write، execute_command و جستجوی وب. از چندین پروژه به طور همزمان پشتیبانی می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:285",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tiianhk/MaxMSP-MCP-Server",
+      "evidence": "README-fa-ir.md:285  - [tiianhk/MaxMSP-MCP-Server](https://github.com/tiianhk/MaxMSP-MCP-Server) 🐍 🏠 🎵 🎥 - یک عامل کدنویسی برای Max (Max/MSP/Jitter)، که یک زبان برنامه‌نویسی بصری برای موسیقی و چندرسانه‌ای است."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:286",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/nesquikm/mcp-rubber-duck",
+      "evidence": "README-fa-ir.md:286  - [nesquikm/mcp-rubber-duck](https://github.com/nesquikm/mcp-rubber-duck) 📇 🏠 ☁️ - یک سرور MCP که به چندین LLM سازگار با OpenAI متصل می‌شود - پنل اشکال‌زدایی rubber duck هوش مصنوعی شما برای توضیح مشکلات به \"duck\"های مختلف هوش مصنوعی و دریاف"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:287",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/VertexStudio/developer",
+      "evidence": "README-fa-ir.md:287  - [VertexStudio/developer](https://github.com/VertexStudio/developer) 🦀 🏠 🍎 🪟 🐧 - ابزارهای جامع توسعه‌دهنده برای ویرایش فایل، اجرای دستورات shell و قابلیت‌های ضبط صفحه"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:288",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wende/cicada",
+      "evidence": "README-fa-ir.md:288  - [wende/cicada](https://github.com/wende/cicada) 🐍 🏠 🍎 🪟 🐧 - هوش کد برای Elixir: جستجوی ماژول، ردیابی تابع و انتساب PR از طریق تجزیه AST tree-sitter"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:294",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/automateyournetwork/pyATS_MCP",
+      "evidence": "README-fa-ir.md:294  - [automateyournetwork/pyATS_MCP](https://github.com/automateyournetwork/pyATS_MCP) - سرور Cisco pyATS که تعامل ساختاریافته و مبتنی بر مدل با دستگاه‌های شبکه را امکان‌پذیر می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:295",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/aymericzip/intlayer",
+      "evidence": "README-fa-ir.md:295  - [aymericzip/intlayer](https://github.com/aymericzip/intlayer) 📇 ☁️ 🏠 - یک سرور MCP که IDE شما را با کمک‌های مبتنی بر هوش مصنوعی برای ابزار Intlayer i18n / CMS تقویت می‌کند: دسترسی هوشمند به CLI، دسترسی به مستندات."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:296",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/freema/openclaw-mcp",
+      "evidence": "README-fa-ir.md:296  - [freema/openclaw-mcp](https://github.com/freema/openclaw-mcp) [glama](https://glama.ai/mcp/servers/@freema/openclaw-mcp) 📇 ☁️ 🏠 - سرور MCP برای یکپارچه‌سازی دستیار هوش مصنوعی [OpenClaw](https://github.com/openclaw/openclaw). امکان واگذاری"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:296",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://glama.ai/mcp/servers/@freema/openclaw-mcp",
+      "evidence": "README-fa-ir.md:296  - [freema/openclaw-mcp](https://github.com/freema/openclaw-mcp) [glama](https://glama.ai/mcp/servers/@freema/openclaw-mcp) 📇 ☁️ 🏠 - سرور MCP برای یکپارچه‌سازی دستیار هوش مصنوعی [OpenClaw](https://github.com/openclaw/openclaw). امکان واگذاری"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:296",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/openclaw/openclaw",
+      "evidence": "README-fa-ir.md:296  - [freema/openclaw-mcp](https://github.com/freema/openclaw-mcp) [glama](https://glama.ai/mcp/servers/@freema/openclaw-mcp) 📇 ☁️ 🏠 - سرور MCP برای یکپارچه‌سازی دستیار هوش مصنوعی [OpenClaw](https://github.com/openclaw/openclaw). امکان واگذاری"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:297",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ferrislucas/iterm-mcp",
+      "evidence": "README-fa-ir.md:297  - [ferrislucas/iterm-mcp](https://github.com/ferrislucas/iterm-mcp) 🖥️ 🛠️ 💬 - یک سرور Model Context Protocol که دسترسی به iTerm را فراهم می‌کند. می‌توانید دستورات را اجرا کنید و در مورد آنچه در ترمینال iTerm می‌بینید سؤال بپرسید."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:298",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/g0t4/mcp-server-commands",
+      "evidence": "README-fa-ir.md:298  - [g0t4/mcp-server-commands](https://github.com/g0t4/mcp-server-commands) 📇 🏠 - اجرای هر دستوری با ابزارهای `run_command` و `run_script`."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:299",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/maxim-saplin/mcp_safe_local_python_executor",
+      "evidence": "README-fa-ir.md:299  - [maxim-saplin/mcp_safe_local_python_executor](https://github.com/maxim-saplin/mcp_safe_local_python_executor) - مفسر Python امن مبتنی بر `LocalPythonExecutor` از HF Smolagents"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:300",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/misiektoja/kill-process-mcp",
+      "evidence": "README-fa-ir.md:300  - [misiektoja/kill-process-mcp](https://github.com/misiektoja/kill-process-mcp) 🐍 🏠 🍎 🪟 🐧 - لیست کردن و خاتمه دادن به فرآیندهای سیستم عامل از طریق کوئری‌های زبان طبیعی"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:301",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/MladenSU/cli-mcp-server",
+      "evidence": "README-fa-ir.md:301  - [MladenSU/cli-mcp-server](https://github.com/MladenSU/cli-mcp-server) 🐍 🏠 - رابط خط فرمان با اجرای امن و سیاست‌های امنیتی قابل تنظیم"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:302",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OthmaneBlial/term_mcp_deepseek",
+      "evidence": "README-fa-ir.md:302  - [OthmaneBlial/term_mcp_deepseek](https://github.com/OthmaneBlial/term_mcp_deepseek) 🐍 🏠 - یک سرور شبیه MCP DeepSeek برای ترمینال"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:303",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sonirico/mcp-shell",
+      "evidence": "README-fa-ir.md:303  - [sonirico/mcp-shell](https://github.com/sonirico/mcp-shell) - 🏎️ 🏠 🍎 🪟 🐧 به هوش مصنوعی دست بدهید. سرور MCP برای اجرای امن، قابل حسابرسی و بر حسب تقاضای دستورات shell در محیط‌های ایزوله مانند docker."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:304",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tufantunc/ssh-mcp",
+      "evidence": "README-fa-ir.md:304  - [tufantunc/ssh-mcp](https://github.com/tufantunc/ssh-mcp) 📇 🏠 🐧 🪟 - سرور MCP که کنترل SSH برای سرورهای Linux و Windows را از طریق Model Context Protocol در معرض دید قرار می‌دهد. اجرای امن دستورات shell راه دور با احراز هویت رمز عبور یا کل"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:305",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/tumf/mcp-shell-server",
+      "evidence": "README-fa-ir.md:305  - [tumf/mcp-shell-server](https://github.com/tumf/mcp-shell-server) - یک سرور اجرای دستور shell امن که Model Context Protocol (MCP) را پیاده‌سازی می‌کند"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:306",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/wonderwhy-er/DesktopCommanderMCP",
+      "evidence": "README-fa-ir.md:306  - [wonderwhy-er/DesktopCommanderMCP](https://github.com/wonderwhy-er/DesktopCommanderMCP) 📇 🏠 🍎 🪟 🐧 - یک چاقوی سوئیسی که می‌تواند برنامه‌ها را مدیریت/اجرا کند و فایل‌های کد و متنی را بخواند/بنویسد/جستجو/ویرایش کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:312",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/AbdelStark/nostr-mcp",
+      "evidence": "README-fa-ir.md:312  - [AbdelStark/nostr-mcp](https://github.com/AbdelStark/nostr-mcp) ☁️ - یک سرور MCP Nostr که امکان تعامل با Nostr، ارسال یادداشت و موارد دیگر را می‌دهد."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:313",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/adhikasp/mcp-twikit",
+      "evidence": "README-fa-ir.md:313  - [adhikasp/mcp-twikit](https://github.com/adhikasp/mcp-twikit) 🐍 ☁️ - تعامل با جستجو و تایم‌لاین توییتر"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:314",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/agentmail-to/agentmail-toolkit/tree/main/mcp",
+      "evidence": "README-fa-ir.md:314  - [agentmail-toolkit/mcp](https://github.com/agentmail-to/agentmail-toolkit/tree/main/mcp) 🐍 💬 - یک سرور MCP برای ایجاد صندوق‌های ورودی در لحظه برای ارسال، دریافت و انجام اقدامات روی ایمیل. ما عامل‌های هوش مصنوعی برای ایمیل نیستیم، بلکه ایم"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:315",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/areweai/tsgram-mcp",
+      "evidence": "README-fa-ir.md:315  - [areweai/tsgram-mcp](https://github.com/areweai/tsgram-mcp) - TSgram: تلگرام + Claude با دسترسی به فضای کاری محلی روی گوشی شما در typescript. در حین حرکت کد بخوانید، بنویسید و لذت ببرید!"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:316",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/arpitbatra123/mcp-googletasks",
+      "evidence": "README-fa-ir.md:316  - [arpitbatra123/mcp-googletasks](https://github.com/arpitbatra123/mcp-googletasks) 📇 ☁️ - یک سرور MCP برای ارتباط با Google Tasks API"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:317",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Cactusinhand/mcp_server_notify",
+      "evidence": "README-fa-ir.md:317  - [Cactusinhand/mcp_server_notify](https://github.com/Cactusinhand/mcp_server_notify) 🐍 🏠 - یک سرور MCP که هنگام تکمیل وظایف عامل، اعلان‌های دسکتاپ را با جلوه صوتی ارسال می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:318",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/PhononX/cv-mcp-server",
+      "evidence": "README-fa-ir.md:318  - [PhononX/cv-mcp-server](https://github.com/PhononX/cv-mcp-server) 🎖️ 📇 🏠 ☁️ 🍎 🪟 🐧 - سرور MCP که عامل‌های هوش مصنوعی را به [Carbon Voice](https://getcarbon.app) متصل می‌کند. ایجاد، مدیریت و تعامل با پیام‌های صوتی، مکالمات، پیام‌های مستقیم،"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:318",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://getcarbon.app",
+      "evidence": "README-fa-ir.md:318  - [PhononX/cv-mcp-server](https://github.com/PhononX/cv-mcp-server) 🎖️ 📇 🏠 ☁️ 🍎 🪟 🐧 - سرور MCP که عامل‌های هوش مصنوعی را به [Carbon Voice](https://getcarbon.app) متصل می‌کند. ایجاد، مدیریت و تعامل با پیام‌های صوتی، مکالمات، پیام‌های مستقیم،"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:319",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/carterlasalle/mac_messages_mcp",
+      "evidence": "README-fa-ir.md:319  - [carterlasalle/mac_messages_mcp](https://github.com/carterlasalle/mac_messages_mcp) 🏠 🍎 🚀 - یک سرور MCP که به طور امن با پایگاه داده iMessage شما از طریق Model Context Protocol (MCP) ارتباط برقرار می‌کند و به LLMها امکان کوئری و تحلیل مکا"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:320",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/chaindead/telegram-mcp",
+      "evidence": "README-fa-ir.md:320  - [chaindead/telegram-mcp](https://github.com/chaindead/telegram-mcp) 🏎️ 🏠 - یکپارچه‌سازی با Telegram API برای دسترسی به داده‌های کاربر، مدیریت گفتگوها (چت‌ها، کانال‌ها، گروه‌ها)، بازیابی پیام‌ها و مدیریت وضعیت خوانده شدن"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:321",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/chigwell/telegram-mcp",
+      "evidence": "README-fa-ir.md:321  - [chigwell/telegram-mcp](https://github.com/chigwell/telegram-mcp) 🐍 🏠 - یکپارچه‌سازی با Telegram API برای دسترسی به داده‌های کاربر، مدیریت گفتگوها (چت‌ها، کانال‌ها، گروه‌ها)، بازیابی پیام‌ها، ارسال پیام‌ها و مدیریت وضعیت خوانده شدن."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:322",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Danielpeter-99/calcom-mcp",
+      "evidence": "README-fa-ir.md:322  - [Danielpeter-99/calcom-mcp](https://github.com/Danielpeter-99/calcom-mcp) 🐍 🏠 - سرور MCP برای Calcom. مدیریت انواع رویدادها، ایجاد رزروها و دسترسی به داده‌های زمان‌بندی Cal.com از طریق LLMها."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:323",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/elie222/inbox-zero/tree/main/apps/mcp-server",
+      "evidence": "README-fa-ir.md:323  - [elie222/inbox-zero](https://github.com/elie222/inbox-zero/tree/main/apps/mcp-server) 🐍 ☁️ - یک سرور MCP برای Inbox Zero. عملکردهایی را به Gmail اضافه می‌کند مانند پیدا کردن ایمیل‌هایی که باید به آنها پاسخ دهید یا باید آنها را پیگیری کنید"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:324",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/FastAlertNow/mcp-server",
+      "evidence": "README-fa-ir.md:324  - [FastAlertNow/mcp-server](https://github.com/FastAlertNow/mcp-server) 🎖️ 📇 ☁️ - سرور MCP رسمی FastAlert. این سرور به عامل‌های هوش مصنوعی (مانند Claude، ChatGPT و Cursor) امکان می‌دهد لیست کانال‌های شما را مشاهده و مستقیماً از طریق API Fas"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:325",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gerkensm/callcenter.js-mcp",
+      "evidence": "README-fa-ir.md:325  - [gerkensm/callcenter.js-mcp](https://github.com/gerkensm/callcenter.js-mcp) 📇 ☁️ - یک سرور MCP برای برقراری تماس‌های تلفنی با استفاده از VoIP/SIP و Realtime API OpenAI و مشاهده رونوشت."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:326",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gitmotion/ntfy-me-mcp",
+      "evidence": "README-fa-ir.md:326  - [gitmotion/ntfy-me-mcp](https://github.com/gitmotion/ntfy-me-mcp) 📇 ☁️ 🏠 - یک سرور MCP ntfy برای ارسال/دریافت اعلان‌های ntfy به سرور ntfy خودمیزبان شما از عامل‌های هوش مصنوعی 📤 (پشتیبانی از احراز هویت توکن امن و موارد دیگر - با npx یا doc"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:327",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gotoolkits/mcp-wecombot-server.git",
+      "evidence": "README-fa-ir.md:327  - [gotoolkits/wecombot](https://github.com/gotoolkits/mcp-wecombot-server.git) 🚀 ☁️ - یک برنامه سرور MCP که انواع مختلف پیام‌ها را به ربات گروه WeCom ارسال می‌کند."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:328",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/hannesrudolph/imessage-query-fastmcp-mcp-server",
+      "evidence": "README-fa-ir.md:328  - [hannesrudolph/imessage-query-fastmcp-mcp-server](https://github.com/hannesrudolph/imessage-query-fastmcp-mcp-server) 🐍 🏠 🍎 - یک سرور MCP که دسترسی ایمن به پایگاه داده iMessage شما را از طریق Model Context Protocol (MCP) فراهم می‌کند و به"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:329",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/InditexTech/mcp-teams-server",
+      "evidence": "README-fa-ir.md:329  - [InditexTech/mcp-teams-server](https://github.com/InditexTech/mcp-teams-server) 🐍 ☁️ - سرور MCP که پیام‌رسانی Microsoft Teams را یکپارچه می‌کند (خواندن، ارسال، منشن کردن، لیست کردن اعضا و رشته‌ها)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:330",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/infobip/mcp",
+      "evidence": "README-fa-ir.md:330  - [Infobip/mcp](https://github.com/infobip/mcp) 🎖️ ☁️ - سرور MCP رسمی Infobip برای یکپارچه‌سازی پلتفرم ارتباطی ابری جهانی Infobip. این سرور عامل‌های هوش مصنوعی را به ابرقدرت‌های ارتباطی مجهز می‌کند و به آنها اجازه می‌دهد پیام‌های SMS و RCS "
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:331",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jagan-shanmugam/mattermost-mcp-host",
+      "evidence": "README-fa-ir.md:331  - [jagan-shanmugam/mattermost-mcp-host](https://github.com/jagan-shanmugam/mattermost-mcp-host) 🐍 🏠 - یک سرور MCP همراه با میزبان MCP که دسترسی به تیم‌ها، کانال‌ها و پیام‌های Mattermost را فراهم می‌کند. میزبان MCP به عنوان یک ربات در Matter"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:332",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jaipandya/producthunt-mcp-server",
+      "evidence": "README-fa-ir.md:332  - [jaipandya/producthunt-mcp-server](https://github.com/jaipandya/producthunt-mcp-server) 🐍 🏠 - سرور MCP برای Product Hunt. تعامل با پست‌های پرطرفدار، نظرات، مجموعه‌ها، کاربران و موارد دیگر."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:333",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/joinly-ai/joinly",
+      "evidence": "README-fa-ir.md:333  - [joinly-ai/joinly](https://github.com/joinly-ai/joinly) 🐍☁️ - سرور MCP برای تعامل با پلتفرم‌های جلسات مبتنی بر مرورگر (Zoom، Teams، Google Meet). به عامل‌های هوش مصنوعی امکان ارسال ربات‌ها به جلسات آنلاین، جمع‌آوری رونوشت‌های زنده، صحبت ک"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:334",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/keturiosakys/bluesky-context-server",
+      "evidence": "README-fa-ir.md:334  - [keturiosakys/bluesky-context-server](https://github.com/keturiosakys/bluesky-context-server) 📇 ☁️ - یکپارچه‌سازی با نمونه Bluesky برای کوئری و تعامل"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README-fa-ir.md:335",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/khan2a/telephony-mcp-server",
+      "evidence": "README-fa-ir.md:335  - [khan2a/telephony-mcp-server](https://github.com/khan2a/telephony-mcp-server) 🐍 💬 - سرور تلفنی MCP برای اتوماسیون تماس‌های صوتی با تبدیل گفتار به متن و تشخیص گفتار برای خلاصه‌سازی مکالمات تماس. ارسال و دریافت SMS، تشخیص پست صوتی و یکپارچه"
+    }
+  ],
+  "reRooting": []
+}

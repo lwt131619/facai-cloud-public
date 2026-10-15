@@ -1,0 +1,216 @@
+{
+  "date": "2026-10-02",
+  "title": "今日开发进度",
+  "note": "百分比为整数，仅由已完成里程碑计算。2026-10-02 本地全量回归 488 项通过，更新已部署并通过服务健康检查；个人微信扫码仍需重新发起并由账号本人扫码完成。",
+  "deployment": {
+    "date": "2026-10-02",
+    "status": "verified",
+    "full_test_result": "488 passed",
+    "service": "facai-cloud.service active",
+    "local_health_http": 200,
+    "anonymous_auth_gate_http": 401,
+    "app_backup": "/var/backups/facai-cloud/app-20261002T120222Z.tar.gz",
+    "note": "进度 API 受管理员认证保护；部署重启会清除进程内旧会话，需要管理员重新登录。"
+  },
+  "providers": [
+    {
+      "id": "deepseek",
+      "provider": "DeepSeek",
+      "work": "微信入站去重与故障恢复；今日进度 API / 网页面板",
+      "status": "deployed",
+      "local_verified": true,
+      "production_deployed": true,
+      "summary": "已部署：同一入站消息重复 webhook 只允许一个转换持有租约，崩溃后过期租约可重试；同时交付今日进度 API / 面板。最终全量回归 488 项通过，生产服务健康检查通过。",
+      "milestones": [
+        {"label": "入站消息转换租约实现（重复投递只转换一次）", "done": true},
+        {"label": "崩溃后过期租约恢复为可重试", "done": true},
+        {"label": "相关 188 项测试通过", "done": true},
+        {"label": "最终全量回归 488 项测试通过", "done": true},
+        {"label": "已部署并通过生产健康检查", "done": true}
+      ],
+      "evidence": [
+        "tests/test_channel_conversion_claim.py",
+        "相关测试 188 passed",
+        "租户隔离修改前全量 465 passed",
+        "最终全量回归 488 passed"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "gemini",
+      "provider": "Gemini",
+      "work": "多租户隔离增量（auth / mission / registry）",
+      "status": "deployed",
+      "local_verified": true,
+      "production_deployed": true,
+      "summary": "本地已验证：租户隔离增量已实现；全量回归最初暴露注册表兼容问题，已修复旧版注册表访问路径，最终全量 488 项测试通过。",
+      "milestones": [
+        {"label": "租户隔离增量实现", "done": true},
+        {"label": "定向 auth/mission/registry 测试 17 项通过", "done": true},
+        {"label": "修复全量回归暴露的注册表兼容问题", "done": true},
+        {"label": "最终全量回归 488 项通过", "done": true},
+        {"label": "已部署并通过生产健康检查", "done": true}
+      ],
+      "evidence": [
+        "定向测试 17 passed",
+        "全量回归最初 15 failed（注册表兼容），已修复",
+        "最终全量回归 488 passed"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "grok",
+      "provider": "Grok",
+      "work": "微信个人号二维码 PNG 修复",
+      "status": "deployed",
+      "local_verified": true,
+      "production_deployed": true,
+      "summary": "已部署：微信二维码 PNG 修复无需 Pillow，微信定向测试和最终全量回归通过，生产服务健康检查通过；扫码授权仍需用户在微信端完成。",
+      "milestones": [
+        {"label": "微信二维码 PNG 修复实现", "done": true},
+        {"label": "微信定向测试通过并纳入最终全量回归 488 项通过", "done": true},
+        {"label": "已部署并通过生产健康检查", "done": true}
+      ],
+      "evidence": [
+        "微信定向测试 20 passed, 1 deselected（兼容性修复前）；最终全量回归 488 passed"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "glm",
+      "provider": "GLM",
+      "work": "本轮尝试接入（上游余额 / 资源）",
+      "status": "blocked",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "受阻：本轮尝试调用 GLM，但上游以余额 / 资源不足拒绝，调用失败；本轮没有产出代码改动，不计为进行中。",
+      "milestones": [
+        {"label": "上游余额 / 资源可用", "done": false},
+        {"label": "本轮产出代码改动", "done": false}
+      ],
+      "evidence": [
+        "GLM API 返回余额 / 资源不足，调用被拒绝",
+        "本轮无代码改动"
+      ],
+      "blockers": [
+        "上游账户余额 / 资源不足"
+      ]
+    },
+    {
+      "id": "claude",
+      "provider": "Claude",
+      "work": "按负责人指示停止",
+      "status": "stopped",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "按负责人指示停止，本轮未执行任务，也没有代码改动；这是主动停止，不是失败。",
+      "milestones": [
+        {"label": "本轮产出代码改动", "done": false}
+      ],
+      "evidence": [
+        "负责人指示停止"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "openai",
+      "provider": "Codex / OpenAI",
+      "work": "注册表兼容回归修复、全量测试与部署统筹",
+      "status": "deployed",
+      "local_verified": true,
+      "production_deployed": true,
+      "summary": "已完成：修复租户隔离改动造成的旧注册表兼容回归，最终全量 488 项通过，更新已部署并通过生产健康检查。",
+      "milestones": [
+        {"label": "定位并修复旧注册表兼容问题", "done": true},
+        {"label": "全量回归 488 项通过", "done": true},
+        {"label": "生产部署及健康检查", "done": true}
+      ],
+      "evidence": ["最终全量回归 488 passed", "服务 active，健康接口 200"],
+      "blockers": []
+    },
+    {
+      "id": "qwen",
+      "provider": "Qwen",
+      "work": "本轮未分配任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮未执行，无任何失败证据。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    },
+    {
+      "id": "kimi",
+      "provider": "Kimi",
+      "work": "本轮未分配任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮未执行，无任何失败证据。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    },
+    {
+      "id": "mistral",
+      "provider": "Mistral",
+      "work": "本轮未分配任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮未执行，无任何失败证据。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    },
+    {
+      "id": "openrouter",
+      "provider": "OpenRouter",
+      "work": "本轮未分配 API 请求或编码任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮没有调用该上游，也没有代码改动；不把已保存的密钥视为正在工作。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    },
+    {
+      "id": "groq",
+      "provider": "Groq",
+      "work": "本轮未分配 API 请求或编码任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮没有调用该上游，也没有代码改动；不把已保存的密钥视为正在工作。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    },
+    {
+      "id": "huggingface",
+      "provider": "Hugging Face",
+      "work": "本轮未分配 API 请求或编码任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮没有调用该上游，也没有代码改动；不把已保存的密钥视为正在工作。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    },
+    {
+      "id": "bocha",
+      "provider": "博查搜索",
+      "work": "本轮未分配搜索或编码任务",
+      "status": "not_executing",
+      "local_verified": false,
+      "production_deployed": false,
+      "summary": "本轮没有调用搜索接口，也没有代码改动。",
+      "milestones": [],
+      "evidence": [],
+      "blockers": []
+    }
+  ]
+}

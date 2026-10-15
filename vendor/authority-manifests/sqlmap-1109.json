@@ -1,0 +1,1818 @@
+{
+  "target": "sqlmap-1109 (初扫收录实例 C:\\Users\\user\\opencode\\skills\\sqlmap-dev)",
+  "origin": "本地路径 C:\\Users\\user\\opencode\\skills\\sqlmap-dev",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 74 个文本文件（源码 74、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "sqlmap.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)\nsqlmap.py:161  errMsg += \"repackage. sqlmap is free and open source under the GPL (https://sqlmap.org). \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/issues/156319",
+      "evidence": "sqlmap.py:16  # Reference: https://github.com/python/cpython/issues/156319 - CPython's tier-2 optimizer can\nsqlmap.py:579  errMsg += \"(Reference: 'https://github.com/python/cpython/issues/156319'). Please rerun with it \""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "sqlmap.py:21",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PYTHON_JIT",
+      "rule": "os.environ.get",
+      "evidence": "sqlmap.py:21  if hasattr(sys, \"monitoring\") and (sys._jit.is_enabled() if hasattr(sys, \"_jit\") else (sys.version_info >= (3, 13) and os.environ.get(\"PYTHON_JIT\") == '1')):\nsqlmap.py:575  elif (sys._jit.is_enabled() if hasattr(sys, \"_jit\") else (sys.version_info >= (3, 13) and os.environ.get(\"PYTHON_JIT\") == '1')):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.python.org/3/library/sys.monitoring.html",
+      "evidence": "sqlmap.py:22  for _ in range(6):  # valid tool id range (Reference: https://docs.python.org/3/library/sys.monitoring.html)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/#installation",
+      "evidence": "sqlmap.py:32  sys.exit(\"[!] wrong installation detected (missing modules). Visit 'https://github.com/sqlmapproject/sqlmap/#installation' for further details\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:252",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%s",
+      "evidence": "sqlmap.py:252  target = \"https://%s\" % target"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:392",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://qiita.com/tkprof/items/7d7b2d00df9c5f16fffe",
+      "evidence": "sqlmap.py:392  errMsg += \"(Reference: 'https://qiita.com/tkprof/items/7d7b2d00df9c5f16fffe')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:398",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/encode/httpcore/discussions/995",
+      "evidence": "sqlmap.py:398  errMsg += \"(Reference: 'https://github.com/encode/httpcore/discussions/995')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:404",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue18183",
+      "evidence": "sqlmap.py:404  errMsg += \"(Reference: 'https://bugs.python.org/issue18183')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:410",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/PyMySQL/PyMySQL/issues/700",
+      "evidence": "sqlmap.py:410  errMsg += \"(Reference: 'https://github.com/PyMySQL/PyMySQL/issues/700')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:417",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue8104",
+      "evidence": "sqlmap.py:417  errMsg += \"(Reference: 'https://bugs.python.org/issue8104')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:429",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.python.org/2/library/sys.html",
+      "evidence": "sqlmap.py:429  errMsg += \"(Reference: 'https://docs.python.org/2/library/sys.html')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:471",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/4572#issuecomment-775041086",
+      "evidence": "sqlmap.py:471  errMsg += \" (Reference: 'https://github.com/sqlmapproject/sqlmap/issues/4572#issuecomment-775041086')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:564",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/38841364",
+      "evidence": "sqlmap.py:564  errMsg += \"(Reference: 'https://stackoverflow.com/a/38841364' & 'https://bugs.python.org/issue24944#msg249231')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:564",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue24944#msg249231",
+      "evidence": "sqlmap.py:564  errMsg += \"(Reference: 'https://stackoverflow.com/a/38841364' & 'https://bugs.python.org/issue24944#msg249231')\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmap.py:691",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://stackoverflow.com/questions/1635080/terminate-a-multi-thread-python-program",
+      "evidence": "sqlmap.py:691  # Reference: http://stackoverflow.com/questions/1635080/terminate-a-multi-thread-python-program"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sqlmapapi.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "sqlmapapi.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/beep/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/beep/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/beep/beep.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/beep/beep.py:6  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/beep/beep.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://lists.gnu.org/archive/html/emacs-devel/2014-09/msg00815.html",
+      "evidence": "extra/beep/beep.py:39  # Reference: https://lists.gnu.org/archive/html/emacs-devel/2014-09/msg00815.html"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "extra/beep/beep.py:41",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "os.system",
+      "evidence": "extra/beep/beep.py:41  os.system(\"play-sound-file '%s' 2>/dev/null\" % filename)\nextra/beep/beep.py:44  os.system(\"afplay '%s' 2>/dev/null\" % BEEP_WAV_FILENAME)\nextra/beep/beep.py:53  if not os.system(\"%s '%s' 2>/dev/null\" % (_, filename)):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/boundarycheck/boundarycheck.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/boundarycheck/boundarycheck.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/cloak/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/cloak/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/cloak/cloak.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/cloak/cloak.py:6  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbgtool/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbgtool/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbgtool/dbgtool.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbgtool/dbgtool.py:6  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/__init__.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://host:port",
+      "evidence": "extra/dbwire/__init__.py:57  'http://host:port', with a literal IPv6 address bracketed as RFC 3986 requires. Without the brackets"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/__init__.py:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s:%d",
+      "evidence": "extra/dbwire/__init__.py:64  return \"http://%s:%d\" % (host, int(port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/clickhouse.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/clickhouse.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/cubrid.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/cubrid.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/firebird.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/firebird.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/dbwire/firebird.py:724",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USER",
+      "rule": "os.environ.get",
+      "evidence": "extra/dbwire/firebird.py:724  os_user = os.environ.get(\"USER\", \"\") or os.environ.get(\"USERNAME\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/dbwire/firebird.py:724",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USERNAME",
+      "rule": "os.environ.get",
+      "evidence": "extra/dbwire/firebird.py:724  os_user = os.environ.get(\"USER\", \"\") or os.environ.get(\"USERNAME\", \"\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/monetdb.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/monetdb.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/mysql.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/mysql.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/postgres.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/postgres.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/presto.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/presto.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/sybase.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/sybase.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/dbwire/tds.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/dbwire/tds.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/__init__.py:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/__init__.py:2  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/__main__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/__main__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)\nextra/esperanto/__main__.py:14  _SITE = \"https://sqlmap.org\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/atlas.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/atlas.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/discovery.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/discovery.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/engine.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/engine.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/enumeration.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/enumeration.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/extraction.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/extraction.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/handler.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/handler.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/oracle.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/oracle.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/records.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/records.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/run.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/run.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/run.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://host/vuln?id=1*",
+      "evidence": "extra/esperanto/run.py:10  python run.py -u 'http://host/vuln?id=1*' --string <true-marker> --tables --dump -T users"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/esperanto/wordlist.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/esperanto/wordlist.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/icmpsh/__init__.py:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.gnu.org/licenses/",
+      "evidence": "extra/icmpsh/__init__.py:20  #  along with this program.  If not, see <http://www.gnu.org/licenses/>."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/icmpsh/icmpsh_m.py:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.gnu.org/licenses/",
+      "evidence": "extra/icmpsh/icmpsh_m.py:20  #  along with this program.  If not, see <http://www.gnu.org/licenses/>."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/aes.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/aes.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/client.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/client.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/crypto.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/crypto.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/der.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/der.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/discovery.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/discovery.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/kerberos/discovery.py:36",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "KRB5_CONFIG",
+      "rule": "os.environ.get",
+      "evidence": "extra/kerberos/discovery.py:36  path = os.environ.get(\"KRB5_CONFIG\") or \"/etc/krb5.conf\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "extra/kerberos/discovery.py:188",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SQLMAP_KERBEROS_KDC",
+      "rule": "os.environ.get",
+      "evidence": "extra/kerberos/discovery.py:188  override = os.environ.get(\"SQLMAP_KERBEROS_KDC\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/kerberos/spnego.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/kerberos/spnego.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/blanks.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/blanks.sh:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/drei.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/drei.sh:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/duplicates.py:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/duplicates.py:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/junk.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/junk.sh:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pycodestyle.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/pycodestyle.sh:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pydiatra.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/pydiatra.sh:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pyflakes.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/pyflakes.sh:3  # Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/shutils/pypi.sh:22  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)\nextra/shutils/pypi.sh:36  url='https://sqlmap.org',\nextra/shutils/pypi.sh:78  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/wiki",
+      "evidence": "extra/shutils/pypi.sh:38  'Documentation': 'https://github.com/sqlmapproject/sqlmap/wiki',\nextra/shutils/pypi.sh:167  -  User's manual: https://github.com/sqlmapproject/sqlmap/wiki"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/",
+      "evidence": "extra/shutils/pypi.sh:39  'Source': 'https://github.com/sqlmapproject/sqlmap/',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues",
+      "evidence": "extra/shutils/pypi.sh:40  'Tracker': 'https://github.com/sqlmapproject/sqlmap/issues',\nextra/shutils/pypi.sh:166  -  Issue tracker: https://github.com/sqlmapproject/sqlmap/issues"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/archive/$VERSION.zip",
+      "evidence": "extra/shutils/pypi.sh:42  download_url='https://github.com/sqlmapproject/sqlmap/archive/$VERSION.zip',\nextra/shutils/pypi.sh:70  wget \"https://github.com/sqlmapproject/sqlmap/archive/$VERSION.zip\" -O sqlmap.zip"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.python.org/pypi?%3Aaction=list_classifiers",
+      "evidence": "extra/shutils/pypi.sh:48  # https://pypi.python.org/pypi?%3Aaction=list_classifiers"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:105",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.github.com/wiki/sqlmapproject/sqlmap/images/sqlmap_screenshot.png",
+      "evidence": "extra/shutils/pypi.sh:105  .. figure:: https://raw.github.com/wiki/sqlmapproject/sqlmap/images/sqlmap_screenshot.png"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/wiki/Screenshots",
+      "evidence": "extra/shutils/pypi.sh:110  screenshots <https://github.com/sqlmapproject/sqlmap/wiki/Screenshots>`__\nextra/shutils/pypi.sh:172  -  Screenshots: https://github.com/sqlmapproject/sqlmap/wiki/Screenshots"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:121",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/tarball/master",
+      "evidence": "extra/shutils/pypi.sh:121  `here <https://github.com/sqlmapproject/sqlmap/tarball/master>`__ or\nextra/shutils/pypi.sh:162  `.tar.gz <https://github.com/sqlmapproject/sqlmap/tarball/master>`__"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:123",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/zipball/master",
+      "evidence": "extra/shutils/pypi.sh:123  `here <https://github.com/sqlmapproject/sqlmap/zipball/master>`__.\nextra/shutils/pypi.sh:163  or `.zip <https://github.com/sqlmapproject/sqlmap/zipball/master>`__"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:126",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap",
+      "evidence": "extra/shutils/pypi.sh:126  `Git <https://github.com/sqlmapproject/sqlmap>`__ repository:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:130",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap.git",
+      "evidence": "extra/shutils/pypi.sh:130  git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git sqlmap-dev"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:133",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.python.org/download/",
+      "evidence": "extra/shutils/pypi.sh:133  `Python <http://www.python.org/download/>`__ version **2.7** and"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:151",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://asciinema.org/a/46601",
+      "evidence": "extra/shutils/pypi.sh:151  You can find a sample run `here <https://asciinema.org/a/46601>`__. To"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:155",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/wiki/Usage",
+      "evidence": "extra/shutils/pypi.sh:155  manual <https://github.com/sqlmapproject/sqlmap/wiki/Usage>`__."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:165",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/commits/master.atom",
+      "evidence": "extra/shutils/pypi.sh:165  https://github.com/sqlmapproject/sqlmap/commits/master.atom"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:169",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/wiki/FAQ",
+      "evidence": "extra/shutils/pypi.sh:169  https://github.com/sqlmapproject/sqlmap/wiki/FAQ"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:170",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://x.com/sqlmap",
+      "evidence": "extra/shutils/pypi.sh:170  -  X: https://x.com/sqlmap\nextra/shutils/pypi.sh:179  :target: https://x.com/sqlmap"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:171",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.youtube.com/user/inquisb/videos",
+      "evidence": "extra/shutils/pypi.sh:171  -  Demos: http://www.youtube.com/user/inquisb/videos"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:174",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/python-2.7|3.x-yellow.svg",
+      "evidence": "extra/shutils/pypi.sh:174  .. |Python 2.7|3.x| image:: https://img.shields.io/badge/python-2.7|3.x-yellow.svg"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:175",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.python.org/",
+      "evidence": "extra/shutils/pypi.sh:175  :target: https://www.python.org/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:176",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/license-GPLv2-red.svg",
+      "evidence": "extra/shutils/pypi.sh:176  .. |License| image:: https://img.shields.io/badge/license-GPLv2-red.svg"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:177",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/sqlmapproject/sqlmap/master/LICENSE",
+      "evidence": "extra/shutils/pypi.sh:177  :target: https://raw.githubusercontent.com/sqlmapproject/sqlmap/master/LICENSE"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:178",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/x-@sqlmap-blue.svg",
+      "evidence": "extra/shutils/pypi.sh:178  .. |X| image:: https://img.shields.io/badge/x-@sqlmap-blue.svg"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/pypi.sh:182",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://rst.ninjs.org/",
+      "evidence": "extra/shutils/pypi.sh:182  .. http://rst.ninjs.org/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/strip.sh:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.thegeekstuff.com/2012/09/strip-command-examples/",
+      "evidence": "extra/shutils/strip.sh:3  # References:   http://www.thegeekstuff.com/2012/09/strip-command-examples/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/strip.sh:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.muppetlabs.com/~breadbox/software/elfkickers.html",
+      "evidence": "extra/shutils/strip.sh:4  #               http://www.muppetlabs.com/~breadbox/software/elfkickers.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/strip.sh:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ptspts.blogspot.hr/2013/12/how-to-make-smaller-c-and-c-binaries.html",
+      "evidence": "extra/shutils/strip.sh:5  #               https://ptspts.blogspot.hr/2013/12/how-to-make-smaller-c-and-c-binaries.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/strip.sh:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/BR903/ELFkickers/tree/master/sstrip",
+      "evidence": "extra/shutils/strip.sh:7  # https://github.com/BR903/ELFkickers/tree/master/sstrip"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/shutils/strip.sh:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.ubuntuupdates.org/package/core/cosmic/universe/updates/postgresql-server-dev-10",
+      "evidence": "extra/shutils/strip.sh:8  # https://www.ubuntuupdates.org/package/core/cosmic/universe/updates/postgresql-server-dev-10"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/vulnserver/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "extra/vulnserver/vulnserver.py:6  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:361",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.org/p1",
+      "evidence": "extra/vulnserver/vulnserver.py:361  (\"http://example.org/p1\", \"http://xmlns.com/foaf/0.1/name\", \"luther\"),\nextra/vulnserver/vulnserver.py:362  (\"http://example.org/p1\", \"http://xmlns.com/foaf/0.1/mbox\", \"luther@example.org\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:361",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://xmlns.com/foaf/0.1/name",
+      "evidence": "extra/vulnserver/vulnserver.py:361  (\"http://example.org/p1\", \"http://xmlns.com/foaf/0.1/name\", \"luther\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:362",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://xmlns.com/foaf/0.1/mbox",
+      "evidence": "extra/vulnserver/vulnserver.py:362  (\"http://example.org/p1\", \"http://xmlns.com/foaf/0.1/mbox\", \"luther@example.org\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:363",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.org/secret",
+      "evidence": "extra/vulnserver/vulnserver.py:363  (\"http://example.org/secret\", \"http://example.org/flag\", \"S3CR3Tvalue\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:363",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.org/flag",
+      "evidence": "extra/vulnserver/vulnserver.py:363  (\"http://example.org/secret\", \"http://example.org/flag\", \"S3CR3Tvalue\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:610",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/XSL/Transform",
+      "evidence": "extra/vulnserver/vulnserver.py:610  <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\nextra/vulnserver/vulnserver.py:616  <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "extra/vulnserver/vulnserver.py:1783",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s:%d",
+      "evidence": "extra/vulnserver/vulnserver.py:1783  print(\"[i] running HTTP server at 'http://%s:%d'\" % (address, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/controller/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/action.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/controller/action.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/checks.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/controller/checks.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/checks.py:1225",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue18183",
+      "evidence": "lib/controller/checks.py:1225  # Reference: https://bugs.python.org/issue18183"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/checks.py:1568",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://seclists.org/nmap-dev/2011/q2/att-1005/http-waf-detect.nse",
+      "evidence": "lib/controller/checks.py:1568  Reference: http://seclists.org/nmap-dev/2011/q2/att-1005/http-waf-detect.nse"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/checks.py:1662",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.wisec.it/sectou.php?id=472f952d79293",
+      "evidence": "lib/controller/checks.py:1662  Reference: http://www.wisec.it/sectou.php?id=472f952d79293"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/controller.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/controller/controller.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "lib/controller/controller.py:786",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "lib/controller/controller.py:786  process = subprocess.Popen(conf.alert, shell=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/controller/handler.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/controller/handler.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/__init__.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/__init__.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/agent.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/agent.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/agent.py:117",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/6128",
+      "evidence": "lib/core/agent.py:117  # Dirty patch for Python 3.14.7 re.sub() regression (e.g. https://github.com/sqlmapproject/sqlmap/issues/6128)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/agent.py:197",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/5488",
+      "evidence": "lib/core/agent.py:197  # NOTE: https://github.com/sqlmapproject/sqlmap/issues/5488"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/agent.py:292",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/4030",
+      "evidence": "lib/core/agent.py:292  if where == PAYLOAD.WHERE.REPLACE and not conf.prefix:  # Note: https://github.com/sqlmapproject/sqlmap/issues/4030"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/agent.py:444",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/5057",
+      "evidence": "lib/core/agent.py:444  # NOTE: https://github.com/sqlmapproject/sqlmap/issues/5057"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/agent.py:1250",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.archive.org/web/20150218053955/http://vorg.ca/626-the-MS-SQL-equivalent-to-MySQLs-limit-command",
+      "evidence": "lib/core/agent.py:1250  # Reference: https://web.archive.org/web/20150218053955/http://vorg.ca/626-the-MS-SQL-equivalent-to-MySQLs-limit-command"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/bigarray.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/bigarray.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/common.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:727",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/4137#issuecomment-2013783111",
+      "evidence": "lib/core/common.py:727  # NOTE: for cases with custom injection marker(s) inside (e.g. https://github.com/sqlmapproject/sqlmap/issues/4137#issuecomment-2013783111) - p.s. doesn't care too much about the structure (e.g. injection into the flat array values)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1210",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.gossamer-threads.com/lists/python/python/781893",
+      "evidence": "lib/core/common.py:1210  time.sleep(0.05)  # Reference: http://www.gossamer-threads.com/lists/python/python/781893"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1337",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/33873570",
+      "evidence": "lib/core/common.py:1337  # Reference: https://stackoverflow.com/a/33873570"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1617",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pureinfotech.com/list-environment-variables-windows-10/",
+      "evidence": "lib/core/common.py:1617  # Reference: https://pureinfotech.com/list-environment-variables-windows-10/"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "lib/core/common.py:1618",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LOCALAPPDATA",
+      "rule": "os.getenv",
+      "evidence": "lib/core/common.py:1618  if os.getenv(\"LOCALAPPDATA\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "lib/core/common.py:1620",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USERPROFILE",
+      "rule": "os.getenv",
+      "evidence": "lib/core/common.py:1620  elif os.getenv(\"USERPROFILE\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "lib/core/common.py:1629",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XDG_DATA_HOME",
+      "rule": "os.environ[]",
+      "evidence": "lib/core/common.py:1629  paths.SQLMAP_HOME_PATH = os.path.join(os.environ[\"XDG_DATA_HOME\"], \"sqlmap\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1650",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.py2exe.org/index.cgi/WhereAmI",
+      "evidence": "lib/core/common.py:1650  # Reference: http://www.py2exe.org/index.cgi/WhereAmI"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1783",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.test.com/?id=1",
+      "evidence": "lib/core/common.py:1783  >>> conf.url = \"https://www.test.com/?id=1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1804",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%s",
+      "evidence": "lib/core/common.py:1804  conf.url = \"https://%s\" % conf.url"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1806",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s",
+      "evidence": "lib/core/common.py:1806  conf.url = \"http://%s\" % conf.url\nlib/core/common.py:5077  value = \"http://%s\" % value"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:1897",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/16652683",
+      "evidence": "lib/core/common.py:1897  # Reference: https://stackoverflow.com/a/16652683"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:2240",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bugs.python.org/issue18171",
+      "evidence": "lib/core/common.py:2240  Patch for a Python Issue18171 (http://bugs.python.org/issue18171)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "lib/core/common.py:2456",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "COLUMNS",
+      "rule": "os.getenv",
+      "evidence": "lib/core/common.py:2456  if os.getenv(\"COLUMNS\", \"\").isdigit():\nlib/core/common.py:2457  width = int(os.getenv(\"COLUMNS\"))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "lib/core/common.py:2505",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "lib/core/common.py:2505  process = subprocess.Popen(cmd, **popenKwargs)\nlib/core/common.py:5974  process = subprocess.Popen(\"git diff-index --quiet HEAD --\", shell=True, cwd=paths.SQLMAP_ROOT_PATH, stdout=subprocess.PIPE, stderr=subprocess.PIPE)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "lib/core/common.py:2511",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "lib/core/common.py:2511  subprocess.call([\"taskkill\", \"/F\", \"/T\", \"/PID\", str(process.pid)])"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:2645",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.goldb.org/corestats.html",
+      "evidence": "lib/core/common.py:2645  # Reference: http://www.goldb.org/corestats.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:2823",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://coding.derkeiler.com/Archive/Python/comp.lang.python/2004-06/2267.html",
+      "evidence": "lib/core/common.py:2823  # Reference: http://coding.derkeiler.com/Archive/Python/comp.lang.python/2004-06/2267.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:2837",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://boredzo.org/blog/archives/2007-01-06/longest-common-prefix-in-python-2",
+      "evidence": "lib/core/common.py:2837  # Reference: http://boredzo.org/blog/archives/2007-01-06/longest-common-prefix-in-python-2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:2965",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.answers.com/topic/standard-deviation",
+      "evidence": "lib/core/common.py:2965  # Math reference: http://www.answers.com/topic/standard-deviation"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4022",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://stackoverflow.com/a/3168436",
+      "evidence": "lib/core/common.py:4022  def openFile(filename, mode='r', encoding=UNICODE_ENCODING, errors=\"reversible\", buffering=1):  # \"buffering=1\" means line buffered (Reference: http://stackoverflow.com/a/3168436)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4032",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/37462452",
+      "evidence": "lib/core/common.py:4032  # Reference: https://stackoverflow.com/a/37462452"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4080",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord",
+      "evidence": "lib/core/common.py:4080  # Reference: https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4081",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/1531",
+      "evidence": "lib/core/common.py:4081  # Note: https://github.com/sqlmapproject/sqlmap/issues/1531"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4084",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support?view=sql-server-2017",
+      "evidence": "lib/core/common.py:4084  # Reference: https://docs.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support?view=sql-server-2017 and https://stackoverflow.com/a/14488478"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4084",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/14488478",
+      "evidence": "lib/core/common.py:4084  # Reference: https://docs.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support?view=sql-server-2017 and https://stackoverflow.com/a/14488478"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4087",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.postgresqltutorial.com/postgresql-ascii/",
+      "evidence": "lib/core/common.py:4087  elif Backend.getIdentifiedDbms() in (DBMS.PGSQL, DBMS.ORACLE, DBMS.SQLITE, DBMS.DB2, DBMS.PRESTO, DBMS.H2, DBMS.HSQLDB, DBMS.DERBY, DBMS.MONETDB, DBMS.VERTICA, DBMS.SPANNER):     # Note: cases with Unicode code points (e.g. http://www.postg"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4150",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/sqlmapproject/sqlmap/master/lib/core/settings.py",
+      "evidence": "lib/core/common.py:4150  req = _urllib.request.Request(url=\"https://raw.githubusercontent.com/sqlmapproject/sqlmap/master/lib/core/settings.py\", headers={HTTP_HEADER.USER_AGENT: fetchRandomAgent()})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4218",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/search/issues?q=%s",
+      "evidence": "lib/core/common.py:4218  req = _urllib.request.Request(url=\"https://api.github.com/search/issues?q=%s\" % _urllib.parse.quote(\"repo:sqlmapproject/sqlmap Unhandled exception (#%s)\" % key), headers={HTTP_HEADER.USER_AGENT: fetchRandomAgent()})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4237",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/sqlmapproject/sqlmap/issues",
+      "evidence": "lib/core/common.py:4237  req = _urllib.request.Request(url=\"https://api.github.com/repos/sqlmapproject/sqlmap/issues\", data=getBytes(json.dumps(data)), headers={HTTP_HEADER.AUTHORIZATION: \"token %s\" % token, HTTP_HEADER.USER_AGENT: fetchRandomAgent()})"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4245",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/",
+      "evidence": "lib/core/common.py:4245  issueUrl = re.search(r\"https://github.com/sqlmapproject/sqlmap/issues/\\d+\", content or \"\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4267",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.test.com/vuln.php?id=1",
+      "evidence": "lib/core/common.py:4267  >>> maskSensitiveData('python sqlmap.py -u \"http://www.test.com/vuln.php?id=1\" --banner') == 'python sqlmap.py -u *********************************** --banner'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4394",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://sqlmap.org",
+      "evidence": "lib/core/common.py:4394  # NOTE: special case when part of the result shares the same output as the payload (e.g. ?id=1... and \"sqlmap/1.0-dev (http://sqlmap.org)\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4489",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.peterbe.com/plog/unicode-to-ascii",
+      "evidence": "lib/core/common.py:4489  # Reference: http://www.peterbe.com/plog/unicode-to-ascii"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4509",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://stackoverflow.com/questions/954884/what-special-characters-are-allowed-in-t-sql-column-retVal",
+      "evidence": "lib/core/common.py:4509  # Reference: http://stackoverflow.com/questions/954884/what-special-characters-are-allowed-in-t-sql-column-retVal"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4539",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.frontbase.com/documentation/FBUsers_4.pdf",
+      "evidence": "lib/core/common.py:4539  # Note: SQL 92 has restrictions for identifiers starting with underscore (e.g. http://www.frontbase.com/documentation/FBUsers_4.pdf)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4562",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/5192",
+      "evidence": "lib/core/common.py:4562  if (conf.db or \"\").lower() != \"information_schema\":     # NOTE: https://github.com/sqlmapproject/sqlmap/issues/5192"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4730",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tools.ietf.org/html/rfc4180",
+      "evidence": "lib/core/common.py:4730  # Reference: http://tools.ietf.org/html/rfc4180"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4836",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://blog.elsdoerfer.name/2008/12/12/opening-iris-in-python/",
+      "evidence": "lib/core/common.py:4836  # Reference: http://blog.elsdoerfer.name/2008/12/12/opening-iris-in-python/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4838",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www",
+      "evidence": "lib/core/common.py:4838  >>> asciifyUrl(u'http://www.\\\\u0161u\\\\u0107uraj.com')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4839",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.xn--uuraj-gxa24d.com",
+      "evidence": "lib/core/common.py:4839  'http://www.xn--uuraj-gxa24d.com'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4930",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.site.com",
+      "evidence": "lib/core/common.py:4930  >>> findPageForms('<html><form action=\"/input.php\" method=\"POST\"><input type=\"text\" name=\"id\" value=\"1\"><input type=\"submit\" value=\"Submit\"></form></html>', 'http://www.site.com') == set([('http://www.site.com/input.php', 'POST', 'id=1', No"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:4930",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.site.com/input.php",
+      "evidence": "lib/core/common.py:4930  >>> findPageForms('<html><form action=\"/input.php\" method=\"POST\"><input type=\"text\" name=\"id\" value=\"1\"><input type=\"submit\" value=\"Submit\"></form></html>', 'http://www.site.com') == set([('http://www.site.com/input.php', 'POST', 'id=1', No"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5064",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.target.com/page1.php?id=1",
+      "evidence": "lib/core/common.py:5064  >>> checkSameHost('http://www.target.com/page1.php?id=1', 'http://www.target.com/images/page2.php')\nlib/core/common.py:5066  >>> checkSameHost('http://www.target.com/page1.php?id=1', 'http://www.target2.com/images/page2.php')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5064",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.target.com/images/page2.php",
+      "evidence": "lib/core/common.py:5064  >>> checkSameHost('http://www.target.com/page1.php?id=1', 'http://www.target.com/images/page2.php')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5066",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.target2.com/images/page2.php",
+      "evidence": "lib/core/common.py:5066  >>> checkSameHost('http://www.target.com/page1.php?id=1', 'http://www.target2.com/images/page2.php')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5096",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.target.com/vuln.php?id=1",
+      "evidence": "lib/core/common.py:5096  >>> getHostHeader('http://www.target.com/vuln.php?id=1')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5098",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://[::1",
+      "evidence": "lib/core/common.py:5098  >>> getHostHeader('http://[::1]:8080/vuln.php?id=1')\nlib/core/common.py:5100  >>> getHostHeader('http://[::1]/vuln.php?id=1')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5149",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://blog.oneortheother.info/tip/python-fix-cp720-encoding/index.html",
+      "evidence": "lib/core/common.py:5149  errMsg += \"'http://blog.oneortheother.info/tip/python-fix-cp720-encoding/index.html' \""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5393",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.hashbangcode.com/blog/netscape-http-cooke-file-parser-php-584.html",
+      "evidence": "lib/core/common.py:5393  # Reference: http://www.hashbangcode.com/blog/netscape-http-cooke-file-parser-php-584.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5468",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bugs.python.org/issue2275",
+      "evidence": "lib/core/common.py:5468  # Reference: http://bugs.python.org/issue2275"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/common.py:5620",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.example.com:80/",
+      "evidence": "lib/core/common.py:5620  >>> next(parseRequestFile(reqFile)) == ('http://www.example.com:80/', 'POST', 'id=1', None, (('User-agent', 'foobar'), ('Host', 'www.example.com')))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/compat.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/compat.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/compat.py:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://svn.python.org/projects/python/trunk/Lib/random.py",
+      "evidence": "lib/core/compat.py:24  Reference: https://svn.python.org/projects/python/trunk/Lib/random.py"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/compat.py:209",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/urllib3/urllib3/blob/master/src/urllib3/filepost.py",
+      "evidence": "lib/core/compat.py:209  # Reference: https://github.com/urllib3/urllib3/blob/master/src/urllib3/filepost.py"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/compat.py:225",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://python3porting.com/differences.html",
+      "evidence": "lib/core/compat.py:225  # Reference: http://python3porting.com/differences.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/compat.py:240",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://code.activestate.com/recipes/576653-convert-a-cmp-function-to-a-key-function/",
+      "evidence": "lib/core/compat.py:240  # Reference: https://code.activestate.com/recipes/576653-convert-a-cmp-function-to-a-key-function/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/convert.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/convert.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/convert.py:423",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/a/49459036",
+      "evidence": "lib/core/convert.py:423  # Reference: https://stackoverflow.com/a/49459036"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/convert.py:427",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Base64#URL_applications",
+      "evidence": "lib/core/convert.py:427  # Reference: https://en.wikipedia.org/wiki/Base64#URL_applications\nlib/core/convert.py:469  # Reference: https://en.wikipedia.org/wiki/Base64#URL_applications"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/convert.py:428",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://perldoc.perl.org/MIME/Base64.html",
+      "evidence": "lib/core/convert.py:428  # Reference: https://perldoc.perl.org/MIME/Base64.html\nlib/core/convert.py:470  # Reference: https://perldoc.perl.org/MIME/Base64.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/convert.py:619",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/foo",
+      "evidence": "lib/core/convert.py:619  >>> stdoutEncode({\"url\": \"http://example.com/foo\", \"data\": \"id=1\"}) == {\"url\": \"http://example.com/foo\", \"data\": \"id=1\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/convert.py:653",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/6054",
+      "evidence": "lib/core/convert.py:653  # Reference: https://github.com/sqlmapproject/sqlmap/issues/6054"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/data.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/data.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/datatype.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/datatype.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/datatype.py:104",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/sqlmapproject/sqlmap/issues/1888",
+      "evidence": "lib/core/datatype.py:104  self.notes = []  # Note: https://github.com/sqlmapproject/sqlmap/issues/1888"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/datatype.py:118",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.kunxi.org/2014/05/lru-cache-in-python",
+      "evidence": "lib/core/datatype.py:118  # Reference: https://www.kunxi.org/2014/05/lru-cache-in-python"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/datatype.py:171",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://code.activestate.com/recipes/576694/",
+      "evidence": "lib/core/datatype.py:171  # Reference: https://code.activestate.com/recipes/576694/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/decorators.py:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://sqlmap.org",
+      "evidence": "lib/core/decorators.py:4  Copyright (c) 2006-2026 sqlmap developers (https://sqlmap.org)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "lib/core/decorators.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://code.activestate.com/recipes/325205-cache-decorator-in-python-24/",
+      "evidence": "lib/core/decorators.py:39  Reference: http://code.activestate.com/recipes/325205-cache-decorator-in-python-24/"
+    }
+  ],
+  "reRooting": []
+}

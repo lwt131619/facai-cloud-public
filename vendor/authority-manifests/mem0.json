@@ -1,0 +1,1895 @@
+{
+  "target": "mem0 (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\mem0)",
+  "origin": "https://github.com/mem0ai/mem0",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 228 个文本文件（源码 228、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:11",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.claude.com/docs/en/about-claude/models/migration-guide",
+      "evidence": ".github/scripts/infer-component-labels.test.js:11  body: \"### Component\\n\\nCore / Python SDK\\n\\n### Description\\n\\n### Summary\\n\\nWhen using Anthropic latest models such as `claude-opus-4-7`, `claude-opus-4-8`, or `claude-sonnet-5`, Mem0 still sends sampling parameters like `temperature` / "
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:29",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://xxxxxxxxx/v1",
+      "evidence": ".github/scripts/infer-component-labels.test.js:29  body: \"### Component\\n\\nOpenClaw\\n\\n### Description\\n\\n### Summary\\nuse openclaw.json config:\\n\\n```json\\n...\\n\\\"embedder\\\": {\\n              \\\"provider\\\": \\\"openai\\\",\\n              \\\"config\\\": {\\n                \\\"model\\\": \\\"bge-base-zh-v"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://qdrant:6333",
+      "evidence": ".github/scripts/infer-component-labels.test.js:29  body: \"### Component\\n\\nOpenClaw\\n\\n### Description\\n\\n### Summary\\nuse openclaw.json config:\\n\\n```json\\n...\\n\\\"embedder\\\": {\\n              \\\"provider\\\": \\\"openai\\\",\\n              \\\"config\\\": {\\n                \\\"model\\\": \\\"bge-base-zh-v"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/components/llms/overview",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/components/vectordbs/dbs/azure",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.mem0.ai/components/embedders/models/azure_openai",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.mem0.ai/components/llms/models/azure_openai",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/cookbooks/companions/voice-companion-openai",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/cookbooks/essentials/exporting-memories",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/cookbooks/integrations/tavily-search",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/cookbooks/overview",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/infer-component-labels.test.js:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai/platform/overview",
+      "evidence": ".github/scripts/infer-component-labels.test.js:47  body: \"### Description\\n\\n### Page\\nMultiple pages — see list below.\\n\\n### What's Wrong or Missing\\n1. https://docs.mem0.ai/components/llms/overview — \\\"a llm\\\" should be \\\"an LLM\\\"\\n2. https://docs.mem0.ai/components/vectordbs/dbs/azure —"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/branding.ts:41",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NO_COLOR",
+      "rule": "process.env",
+      "evidence": "cli/node/src/branding.ts:41  if (!process.stdout.isTTY || process.env.NO_COLOR) return plain;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/branding.ts:99",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node",
+      "evidence": "cli/node/src/branding.ts:99  ? `Run ${brand(\"mem0 init\")} to reconfigure your API key · https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/config.ts:17",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/src/config.ts:17  export const DEFAULT_BASE_URL = \"https://api.mem0.ai\";"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cli/node/src/config.ts:121",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "process.env",
+      "evidence": "cli/node/src/config.ts:121  if (process.env.MEM0_API_KEY)\ncli/node/src/config.ts:122  config.platform.apiKey = process.env.MEM0_API_KEY;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/config.ts:123",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_BASE_URL",
+      "rule": "process.env",
+      "evidence": "cli/node/src/config.ts:123  if (process.env.MEM0_BASE_URL)\ncli/node/src/config.ts:124  config.platform.baseUrl = process.env.MEM0_BASE_URL;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/config.ts:125",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_USER_ID",
+      "rule": "process.env",
+      "evidence": "cli/node/src/config.ts:125  if (process.env.MEM0_USER_ID)\ncli/node/src/config.ts:126  config.defaults.userId = process.env.MEM0_USER_ID;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/config.ts:127",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_AGENT_ID",
+      "rule": "process.env",
+      "evidence": "cli/node/src/config.ts:127  if (process.env.MEM0_AGENT_ID)\ncli/node/src/config.ts:128  config.defaults.agentId = process.env.MEM0_AGENT_ID;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/config.ts:129",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_APP_ID",
+      "rule": "process.env",
+      "evidence": "cli/node/src/config.ts:129  if (process.env.MEM0_APP_ID) config.defaults.appId = process.env.MEM0_APP_ID;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/config.ts:130",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_RUN_ID",
+      "rule": "process.env",
+      "evidence": "cli/node/src/config.ts:130  if (process.env.MEM0_RUN_ID) config.defaults.runId = process.env.MEM0_RUN_ID;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/index.ts:707",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/src/index.ts:707  \"\\nExamples:\\n  $ mem0 config set defaults.user_id alice\\n  $ mem0 config set platform.base_url https://api.mem0.ai\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/node/src/telemetry.ts:11",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "cli/node/src/telemetry.ts:11  import { spawn } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/telemetry.ts:19",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com/i/v0/e/",
+      "evidence": "cli/node/src/telemetry.ts:19  const POSTHOG_HOST = \"https://us.i.posthog.com/i/v0/e/\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/telemetry.ts:26",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "process.env",
+      "evidence": "cli/node/src/telemetry.ts:26  return process.env.MEM0_TELEMETRY !== \"false\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/telemetry.ts:143",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/src/telemetry.ts:143  mem0BaseUrl: config.platform.baseUrl || \"https://api.mem0.ai\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/commands/agent-mode.ts:56",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/src/commands/agent-mode.ts:56  const baseUrl = (config.platform.baseUrl || \"https://api.mem0.ai\").replace(\ncli/node/src/commands/agent-mode.ts:167  const baseUrl = (config.platform.baseUrl || \"https://api.mem0.ai\").replace("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/commands/agent-rush.ts:38",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/src/commands/agent-rush.ts:38  const baseUrl = (config.platform?.baseUrl ?? \"https://api.mem0.ai\").replace("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/commands/identify.ts:34",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/src/commands/identify.ts:34  const baseUrl = (config.platform.baseUrl || \"https://api.mem0.ai\").replace("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/commands/init.ts:249",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node",
+      "evidence": "cli/node/src/commands/init.ts:249  `  ${dim(\"Get your API key at https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node\")}`,\ncli/node/src/commands/init.ts:299  \"Visit https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node to get a new key, or run mem0 init again.\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/commands/init.ts:267",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USER",
+      "rule": "process.env",
+      "evidence": "cli/node/src/commands/init.ts:267  const _systemUser = process.env.USER || process.env.USERNAME || \"mem0-cli\";\ncli/node/src/commands/init.ts:490  opts.userId || process.env.USER || process.env.USERNAME || \"mem0-cli\";\ncli/node/src/commands/init.ts:517  opts.userId || process.env.USER || process.env.USERNAME || \"mem0-cli\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/commands/init.ts:267",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USERNAME",
+      "rule": "process.env",
+      "evidence": "cli/node/src/commands/init.ts:267  const _systemUser = process.env.USER || process.env.USERNAME || \"mem0-cli\";\ncli/node/src/commands/init.ts:490  opts.userId || process.env.USER || process.env.USERNAME || \"mem0-cli\";\ncli/node/src/commands/init.ts:517  opts.userId || process.env.USER || process.env.USERNAME || \"mem0-cli\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/src/commands/init.ts:339",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_BASE_URL",
+      "rule": "process.env",
+      "evidence": "cli/node/src/commands/init.ts:339  process.env.MEM0_BASE_URL ||"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cli/node/src/commands/init.ts:398",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "process.env",
+      "evidence": "cli/node/src/commands/init.ts:398  const envKey = (process.env.MEM0_API_KEY || \"\").trim();"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/commands/utils.ts:65",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node",
+      "evidence": "cli/node/src/commands/utils.ts:65  `  ${dim(\"Get a key at\")} ${brand(\"https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-node\")}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/src/commands/whoami.ts:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mem0.ai/agentrush",
+      "evidence": "cli/node/src/commands/whoami.ts:17  printInfo(\"Find your row at https://mem0.ai/agentrush\");"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/node/tests/agent-mode.test.ts:15",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "cli/node/tests/agent-mode.test.ts:15  import { execSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/agent-mode.test.ts:94",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1",
+      "evidence": "cli/node/tests/agent-mode.test.ts:94  MEM0_BASE_URL: \"http://127.0.0.1:1\", // blackhole\ncli/node/tests/agent-mode.test.ts:119  MEM0_BASE_URL: \"http://127.0.0.1:1\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/node/tests/cli-integration.test.ts:6",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "cli/node/tests/cli-integration.test.ts:6  import { execSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/config.test.ts:64",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/tests/config.test.ts:64  expect(config.platform.baseUrl).toBe(\"https://api.mem0.ai\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/init-internals.test.ts:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x",
+      "evidence": "cli/node/tests/init-internals.test.ts:32  await expect(pingKey(\"k\", \"http://x\")).resolves.toBe(true);\ncli/node/tests/init-internals.test.ts:37  await expect(pingKey(\"k\", \"http://x\")).resolves.toBe(false);\ncli/node/tests/init-internals.test.ts:42  await expect(pingKey(\"k\", \"http://x\")).resolves.toBe(false);"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/node/tests/option-parity.test.ts:5",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "cli/node/tests/option-parity.test.ts:5  import { execSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/platform-backend.test.ts:223",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai/v1/memories/mem%2Fa%3Fb%23c/?source=CLI",
+      "evidence": "cli/node/tests/platform-backend.test.ts:223  \"https://api.mem0.ai/v1/memories/mem%2Fa%3Fb%23c/?source=CLI\",\ncli/node/tests/platform-backend.test.ts:225  \"https://api.mem0.ai/v1/memories/mem%2Fa%3Fb%23c/?source=CLI\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/platform-backend.test.ts:224",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai/v1/memories/mem%2Fa%3Fb%23c/",
+      "evidence": "cli/node/tests/platform-backend.test.ts:224  \"https://api.mem0.ai/v1/memories/mem%2Fa%3Fb%23c/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/platform-backend.test.ts:238",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai/v2/entities/user/org%2Fteam%3Factive%23frag/?source=CLI",
+      "evidence": "cli/node/tests/platform-backend.test.ts:238  \"https://api.mem0.ai/v2/entities/user/org%2Fteam%3Factive%23frag/?source=CLI\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/platform-backend.test.ts:239",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai/v1/event/evt%2Fa%3Fb%23c/",
+      "evidence": "cli/node/tests/platform-backend.test.ts:239  \"https://api.mem0.ai/v1/event/evt%2Fa%3Fb%23c/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/setup.ts:67",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/tests/setup.ts:67  base_url: \"https://api.mem0.ai\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/node/tests/telemetry.test.ts:13",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "cli/node/tests/telemetry.test.ts:13  vi.mock(\"node:child_process\", () => ({"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/node/tests/telemetry.test.ts:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "process.env",
+      "evidence": "cli/node/tests/telemetry.test.ts:23  delete process.env.MEM0_TELEMETRY;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/node/tests/telemetry.test.ts:30",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/node/tests/telemetry.test.ts:30  baseUrl: \"https://api.mem0.ai\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/app.py:770",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://custom.api.mem0.ai",
+      "evidence": "cli/python/src/mem0_cli/app.py:770  mem0 config set platform.base_url https://custom.api.mem0.ai"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/branding.py:39",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NO_COLOR",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/branding.py:39  if not sys.stdout.isatty() or os.environ.get(\"NO_COLOR\") is not None:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/branding.py:151",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python[/bold",
+      "evidence": "cli/python/src/mem0_cli/branding.py:151  f\" · [bold]https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python[/bold][/]\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/config.py:22",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/src/mem0_cli/config.py:22  DEFAULT_BASE_URL = \"https://api.mem0.ai\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cli/python/src/mem0_cli/config.py:120",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/config.py:120  env_key = os.environ.get(\"MEM0_API_KEY\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/config.py:124",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_BASE_URL",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/config.py:124  env_base = os.environ.get(\"MEM0_BASE_URL\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/config.py:128",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_USER_ID",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/config.py:128  env_user_id = os.environ.get(\"MEM0_USER_ID\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/config.py:132",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_AGENT_ID",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/config.py:132  env_agent_id = os.environ.get(\"MEM0_AGENT_ID\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/config.py:136",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_APP_ID",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/config.py:136  env_app_id = os.environ.get(\"MEM0_APP_ID\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/config.py:140",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_RUN_ID",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/config.py:140  env_run_id = os.environ.get(\"MEM0_RUN_ID\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/telemetry.py:23",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com/i/v0/e/",
+      "evidence": "cli/python/src/mem0_cli/telemetry.py:23  POSTHOG_HOST = \"https://us.i.posthog.com/i/v0/e/\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/telemetry.py:27",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/telemetry.py:27  val = os.environ.get(\"MEM0_TELEMETRY\", \"true\").lower()"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/telemetry.py:135",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/src/mem0_cli/telemetry.py:135  \"mem0_base_url\": config.platform.base_url or \"https://api.mem0.ai\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/python/src/mem0_cli/telemetry.py:140",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "cli/python/src/mem0_cli/telemetry.py:140  child = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/agent_mode_cmd.py:71",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/src/mem0_cli/commands/agent_mode_cmd.py:71  base_url = (config.platform.base_url or \"https://api.mem0.ai\").rstrip(\"/\")\ncli/python/src/mem0_cli/commands/agent_mode_cmd.py:154  base_url = (config.platform.base_url or \"https://api.mem0.ai\").rstrip(\"/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/agent_rush_cmd.py:53",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/src/mem0_cli/commands/agent_rush_cmd.py:53  base_url = (config.platform.base_url or \"https://api.mem0.ai\").rstrip(\"/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/identify_cmd.py:48",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/src/mem0_cli/commands/identify_cmd.py:48  base_url = (config.platform.base_url or \"https://api.mem0.ai\").rstrip(\"/\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/commands/init_cmd.py:244",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_BASE_URL",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/commands/init_cmd.py:244  base_url = os.environ.get(\"MEM0_BASE_URL\", config.platform.base_url or DEFAULT_BASE_URL)"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "cli/python/src/mem0_cli/commands/init_cmd.py:319",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/commands/init_cmd.py:319  _env_key = (os.environ.get(\"MEM0_API_KEY\") or \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/commands/init_cmd.py:388",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USER",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/commands/init_cmd.py:388  user_id or os.environ.get(\"USER\") or os.environ.get(\"USERNAME\") or \"mem0-cli\"\ncli/python/src/mem0_cli/commands/init_cmd.py:415  user_id = user_id or os.environ.get(\"USER\") or os.environ.get(\"USERNAME\") or \"mem0-cli\"\ncli/python/src/mem0_cli/commands/init_cmd.py:463  user_id or os.environ.get(\"USER\") or os.environ.get(\"USERNAME\") or \"mem0-cli\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "cli/python/src/mem0_cli/commands/init_cmd.py:388",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USERNAME",
+      "rule": "os.environ.get",
+      "evidence": "cli/python/src/mem0_cli/commands/init_cmd.py:388  user_id or os.environ.get(\"USER\") or os.environ.get(\"USERNAME\") or \"mem0-cli\"\ncli/python/src/mem0_cli/commands/init_cmd.py:415  user_id = user_id or os.environ.get(\"USER\") or os.environ.get(\"USERNAME\") or \"mem0-cli\"\ncli/python/src/mem0_cli/commands/init_cmd.py:463  user_id or os.environ.get(\"USER\") or os.environ.get(\"USERNAME\") or \"mem0-cli\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/init_cmd.py:509",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python[/",
+      "evidence": "cli/python/src/mem0_cli/commands/init_cmd.py:509  f\"  [{DIM_COLOR}]Get your API key at https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python[/]\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/init_cmd.py:563",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python",
+      "evidence": "cli/python/src/mem0_cli/commands/init_cmd.py:563  hint=\"Visit https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python to get a new key, then run mem0 init again.\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/utils.py:80",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python[/bold",
+      "evidence": "cli/python/src/mem0_cli/commands/utils.py:80  f\"  [{DIM_COLOR}]Get a key at [bold]https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=cli-python[/bold][/]\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/src/mem0_cli/commands/whoami_cmd.py:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mem0.ai/agentrush",
+      "evidence": "cli/python/src/mem0_cli/commands/whoami_cmd.py:25  print_info(console, \"Find your row at https://mem0.ai/agentrush\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/conftest.py:92",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/tests/conftest.py:92  \"base_url\": \"https://api.mem0.ai\",\ncli/python/tests/conftest.py:145  config.platform.base_url = \"https://api.mem0.ai\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/python/tests/test_agent_mode.py:38",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "cli/python/tests/test_agent_mode.py:38  result = subprocess.run(\ncli/python/tests/test_agent_mode.py:100  result = subprocess.run(\ncli/python/tests/test_agent_mode.py:135  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_agent_mode.py:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1",
+      "evidence": "cli/python/tests/test_agent_mode.py:107  \"MEM0_BASE_URL\": \"http://127.0.0.1:1\",  # blackhole\ncli/python/tests/test_agent_mode.py:142  \"MEM0_BASE_URL\": \"http://127.0.0.1:1\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/python/tests/test_cli_integration.py:58",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "cli/python/tests/test_cli_integration.py:58  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_commands.py:1039",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://custom.api.mem0.ai",
+      "evidence": "cli/python/tests/test_commands.py:1039  cmd_config_set(\"platform.base_url\", \"https://custom.api.mem0.ai\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_config.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/tests/test_config.py:37  assert config.platform.base_url == \"https://api.mem0.ai\"\ncli/python/tests/test_config.py:109  \"platform\": {\"api_key\": \"m0-test\", \"base_url\": \"https://api.mem0.ai\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_init_internals.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x",
+      "evidence": "cli/python/tests/test_init_internals.py:37  assert _ping_key(\"k\", \"http://x\") is True\ncli/python/tests/test_init_internals.py:42  assert _ping_key(\"k\", \"http://x\") is False\ncli/python/tests/test_init_internals.py:47  assert _ping_key(\"k\", \"http://x\") is False"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_init_internals.py:197",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/tests/test_init_internals.py:197  cfg.platform.base_url = \"https://api.mem0.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_platform_backend.py:14",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/tests/test_platform_backend.py:14  return PlatformBackend(PlatformConfig(api_key=\"test-key\", base_url=\"https://api.mem0.ai\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/python/tests/test_platform_backend_options.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "cli/python/tests/test_platform_backend_options.py:12  return PlatformBackend(PlatformConfig(api_key=\"test-key\", base_url=\"https://api.mem0.ai\"))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "cli/python/tests/test_telemetry.py:46",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "cli/python/tests/test_telemetry.py:46  monkeypatch.setattr(\"mem0_cli.telemetry.subprocess.Popen\", fake_popen)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/next-env.d.ts:5",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://nextjs.org/docs/app/api-reference/config/typescript",
+      "evidence": "examples/mem0-demo/next-env.d.ts:5  // see https://nextjs.org/docs/app/api-reference/config/typescript for more information."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/app/assistant.tsx:92",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mem0ai/mem0/tree/main/examples",
+      "evidence": "examples/mem0-demo/app/assistant.tsx:92  <GithubButton url=\"https://github.com/mem0ai/mem0/tree/main/examples\" />"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/app/assistant.tsx:94",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.mem0.ai/?utm_source=oss&utm_medium=example-mem0-demo",
+      "evidence": "examples/mem0-demo/app/assistant.tsx:94  <Link href={\"https://app.mem0.ai/?utm_source=oss&utm_medium=example-mem0-demo\"} target=\"_blank\" className=\"py-1 ml-2 px-4 font-semibold dark:bg-zinc-100 dark:hover:bg-zinc-200 bg-zinc-800 text-white rounded-full hover:bg-zinc-900 dark:text-"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/components/assistant-ui/thread.tsx:174",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mem0ai/mem0/tree/main/examples",
+      "evidence": "examples/mem0-demo/components/assistant-ui/thread.tsx:174  <GithubButton url=\"https://github.com/mem0ai/mem0/tree/main/examples\" className=\"w-full rounded-lg h-9 pl-2 text-sm font-semibold bg-zinc-800 dark:border-zinc-800 dark:text-white text-white hover:bg-zinc-900\" text=\"View on Github\" />"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/components/assistant-ui/thread.tsx:177",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.mem0.ai/?utm_source=oss&utm_medium=example-mem0-demo",
+      "evidence": "examples/mem0-demo/components/assistant-ui/thread.tsx:177  href={\"https://app.mem0.ai/?utm_source=oss&utm_medium=example-mem0-demo\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/components/assistant-ui/thread.tsx:530",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "examples/mem0-demo/components/assistant-ui/thread.tsx:530  xmlns=\"http://www.w3.org/2000/svg\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/mem0-demo/components/mem0/github-button.tsx:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "examples/mem0-demo/components/mem0/github-button.tsx:12  xmlns=\"http://www.w3.org/2000/svg\""
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "examples/misc/movie_recommendation_grok3.py:40",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "examples/misc/movie_recommendation_grok3.py:40  grok_client = OpenAI("
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "examples/misc/movie_recommendation_grok3.py:41",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "XAI_API_KEY",
+      "rule": "os.getenv",
+      "evidence": "examples/misc/movie_recommendation_grok3.py:41  api_key=os.getenv(\"XAI_API_KEY\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/movie_recommendation_grok3.py:42",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.x.ai/v1",
+      "evidence": "examples/misc/movie_recommendation_grok3.py:42  base_url=\"https://api.x.ai/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/strands_agent_aws_elasticache_neptune.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://aws.amazon.com/blogs/database/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics/",
+      "evidence": "examples/misc/strands_agent_aws_elasticache_neptune.py:15  - AWS Blog: https://aws.amazon.com/blogs/database/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/strands_agent_aws_elasticache_neptune.py:16",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://mem0.ai/blog/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics",
+      "evidence": "examples/misc/strands_agent_aws_elasticache_neptune.py:16  - Mem0 Blog: https://mem0.ai/blog/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "examples/misc/strands_agent_aws_elasticache_neptune.py:71",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "VALKEY_URL",
+      "rule": "os.getenv",
+      "evidence": "examples/misc/strands_agent_aws_elasticache_neptune.py:71  \"valkey_url\": os.getenv(\"VALKEY_URL\", \"valkey://localhost:6379\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "examples/misc/strands_agent_aws_elasticache_neptune.py:82",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NEPTUNE_ENDPOINT",
+      "rule": "os.getenv",
+      "evidence": "examples/misc/strands_agent_aws_elasticache_neptune.py:82  \"endpoint\": os.getenv(\"NEPTUNE_ENDPOINT\", \"neptune-graph://g-6n3v83av7a\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/study_buddy.py:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pages.physics.ua.edu/staff/fabi/ph101/classnotes/8RotD101.pdf",
+      "evidence": "examples/misc/study_buddy.py:66  pdf_url = \"https://pages.physics.ua.edu/staff/fabi/ph101/classnotes/8RotD101.pdf\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/vllm_example.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8000",
+      "evidence": "examples/misc/vllm_example.py:11  Wait for the message: \"Uvicorn running on http://0.0.0.0:8000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/vllm_example.py:15",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8000/health",
+      "evidence": "examples/misc/vllm_example.py:15  curl http://localhost:8000/health"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/misc/vllm_example.py:21",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://localhost:8000/v1",
+      "evidence": "examples/misc/vllm_example.py:21  export VLLM_BASE_URL=\"http://localhost:8000/v1\"\nexamples/misc/vllm_example.py:33  \"vllm_base_url\": \"http://localhost:8000/v1\","
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "examples/misc/voice_assistant_elevenlabs.py:35",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "examples/misc/voice_assistant_elevenlabs.py:35  openai_client = OpenAI()"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "examples/multiagents/llamaindex_learning_system.py:45",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "examples/multiagents/llamaindex_learning_system.py:45  self.llm = OpenAI(model=\"gpt-4.1-nano-2025-04-14\", temperature=0.2)"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "examples/multimodal-demo/useChat.ts:38",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "examples/multimodal-demo/useChat.ts:38  const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true});"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "examples/multimodal-demo/src/hooks/useChat.ts:38",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "examples/multimodal-demo/src/hooks/useChat.ts:38  const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true});"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/install-mem0-plugin.sh:310",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.mem0.ai${NC",
+      "evidence": "examples/nemoclaw/install-mem0-plugin.sh:310  echo -e \"  ${DIM}Get your Mem0 API key from: https://app.mem0.ai${NC}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/install-mem0-plugin.sh:417",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai",
+      "evidence": "examples/nemoclaw/install-mem0-plugin.sh:417  echo -e \"  ${BOLD}Documentation:${NC} https://docs.mem0.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/install-mem0-plugin.sh:418",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.npmjs.com/package/@mem0/openclaw-mem0",
+      "evidence": "examples/nemoclaw/install-mem0-plugin.sh:418  echo -e \"  ${BOLD}Plugin source:${NC} https://www.npmjs.com/package/@mem0/openclaw-mem0\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/mem0ai/mem0/main/scripts/setup-mem0-nemoclaw.sh",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:9  #   curl -fsSL https://raw.githubusercontent.com/mem0ai/mem0/main/scripts/setup-mem0-nemoclaw.sh | bash\nexamples/nemoclaw/setup-mem0-nemoclaw.sh:89  echo \"     curl -fsSL https://raw.githubusercontent.com/mem0ai/mem0/main/scripts/setup-mem0-nemoclaw.sh | bash\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:84",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.docker.com/products/docker-desktop/",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:84  echo \"     https://www.docker.com/products/docker-desktop/\"\nexamples/nemoclaw/setup-mem0-nemoclaw.sh:290  echo \"    https://www.docker.com/products/docker-desktop/\"\nexamples/nemoclaw/setup-mem0-nemoclaw.sh:301  echo \"     https://www.docker.com/products/docker-desktop/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:440",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:440  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash &&\nexamples/nemoclaw/setup-mem0-nemoclaw.sh:476  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:446",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/NVIDIA/NemoClaw.git",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:446  git clone --depth 1 https://github.com/NVIDIA/NemoClaw.git /root/.nemoclaw-src &&\nexamples/nemoclaw/setup-mem0-nemoclaw.sh:489  git clone --depth 1 https://github.com/NVIDIA/NemoClaw.git \"$NEMOCLAW_DIR\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:755",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://app.mem0.ai${NC",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:755  echo -e \"  ${DIM}Get your Mem0 API key from: https://app.mem0.ai${NC}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:862",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.mem0.ai",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:862  echo -e \"  ${BOLD}Documentation:${NC} https://docs.mem0.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/nemoclaw/setup-mem0-nemoclaw.sh:863",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.npmjs.com/package/@mem0/openclaw-mem0",
+      "evidence": "examples/nemoclaw/setup-mem0-nemoclaw.sh:863  echo -e \"  ${BOLD}Plugin source:${NC} https://www.npmjs.com/package/@mem0/openclaw-mem0\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/notebooks/helper/mem0_teachability.py:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/autogen-ai",
+      "evidence": "examples/notebooks/helper/mem0_teachability.py:1  # Copyright (c) 2023 - 2024, Owners of https://github.com/autogen-ai"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/notebooks/helper/mem0_teachability.py:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/microsoft/autogen",
+      "evidence": "examples/notebooks/helper/mem0_teachability.py:5  # Portions derived from  https://github.com/microsoft/autogen are under the MIT License."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/openai-inbuilt-tools/index.js:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=example-openai-inbuilt-tools",
+      "evidence": "examples/openai-inbuilt-tools/index.js:7  apiKey: process.env.MEM0_API_KEY, // GET THIS API KEY FROM MEM0 (https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=example-openai-inbuilt-tools)"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "examples/openai-inbuilt-tools/index.js:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "process.env",
+      "evidence": "examples/openai-inbuilt-tools/index.js:7  apiKey: process.env.MEM0_API_KEY, // GET THIS API KEY FROM MEM0 (https://app.mem0.ai/dashboard/api-keys?utm_source=oss&utm_medium=example-openai-inbuilt-tools)"
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "examples/openai-inbuilt-tools/index.js:38",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "examples/openai-inbuilt-tools/index.js:38  const openAIClient = new OpenAI();"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/yt-assistant-chrome/src/background.js:137",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1/models",
+      "evidence": "examples/yt-assistant-chrome/src/background.js:137  const response = await fetch(\"https://api.openai.com/v1/models\", {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/yt-assistant-chrome/src/background.js:167",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "evidence": "examples/yt-assistant-chrome/src/background.js:167  const response = await fetch(\"https://api.openai.com/v1/chat/completions\", {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "examples/yt-assistant-chrome/src/content.js:7",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "evidence": "examples/yt-assistant-chrome/src/content.js:7  apiEndpoint: \"https://api.openai.com/v1/chat/completions\","
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/conformance/run.py:149",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/agent-plugin-core/conformance/run.py:149  result = subprocess.run("
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/agent-plugin-core/conformance/run.py:287",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/conformance/run.py:287  if LIVE_GROUP in selected and not os.environ.get(\"MEM0_API_KEY\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/flush_worker.py:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_HANDOFF_PATH",
+      "rule": "os.environ[]",
+      "evidence": "integrations/agent-plugin-core/python/flush_worker.py:29  os.environ[\"MEM0_CODE_HANDOFF_PATH\"] = str(handoff_path)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/flush_worker.py:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_HARNESS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/flush_worker.py:30  harness = os.environ.get(\"MEM0_PLUGIN_HARNESS\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/flush_worker.py:32",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_SOURCE_TAG",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/flush_worker.py:32  source_tag = os.environ.get(\"MEM0_PLUGIN_SOURCE_TAG\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/flush_worker.py:35",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_ENV_PREFIX",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/flush_worker.py:35  env_prefix=os.environ.get(\"MEM0_PLUGIN_ENV_PREFIX\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/flush_worker.py:36",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_DATA_DIR_NAME",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/flush_worker.py:36  data_dir_name=os.environ.get(\"MEM0_PLUGIN_DATA_DIR_NAME\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/flush_worker.py:66",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_EXTRACTION_WAIT_SECONDS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/flush_worker.py:66  os.environ.get(\"MEM0_CODE_EXTRACTION_WAIT_SECONDS\", \"120\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/hook_runner.py:68",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_MIN_QUERY_CHARS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/hook_runner.py:68  minimum_query_chars = int(os.environ.get(\"MEM0_CODE_MIN_QUERY_CHARS\", \"20\"))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/python/hook_runner.py:118",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "integrations/agent-plugin-core/python/hook_runner.py:118  subprocess.Popen("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/hook_runner.py:194",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_AUTO_FLUSH",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/hook_runner.py:194  return os.environ.get(\"MEM0_CODE_AUTO_FLUSH\", \"true\").lower() in {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/hook_runner.py:217",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_IDLE_FLUSH_SECONDS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/hook_runner.py:217  int(os.environ.get(\"MEM0_CODE_IDLE_FLUSH_SECONDS\", str(DEFAULT_IDLE_FLUSH_SECONDS))),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/hook_runner.py:347",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_SYNC_FLUSH",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/hook_runner.py:347  if os.environ.get(\"MEM0_CODE_SYNC_FLUSH\") == \"1\":"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/mcp_server.py:117",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_PROJECT_DIR",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/mcp_server.py:117  repo = resolve_repo(cwd or os.environ.get(\"CLAUDE_PROJECT_DIR\") or os.getcwd())"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_cli.py:87",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_DATA_DIR",
+      "rule": "os.environ[]",
+      "evidence": "integrations/agent-plugin-core/python/memory_cli.py:87  os.environ[\"MEM0_CODE_DATA_DIR\"] = args.plugin_data_dir"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:31",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:31  DEFAULT_API_URL = \"https://api.mem0.ai\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:191",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:191  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{host_path",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:207  remote = f\"https://{host_path}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:299",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PROJECT_ID",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:299  configured = _scope_value(os.environ.get(\"MEM0_PROJECT_ID\"))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:383",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:383  os.environ.get(\"MEM0_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:433  os.environ.get(\"MEM0_API_KEY\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:384",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLUGIN_OPTION_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:384  or os.environ.get(\"PLUGIN_OPTION_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:400  os.environ.get(\"PLUGIN_OPTION_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:434  or os.environ.get(\"PLUGIN_OPTION_API_KEY\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:385",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_PLUGIN_OPTION_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:385  or os.environ.get(\"CLAUDE_PLUGIN_OPTION_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:401  or os.environ.get(\"CLAUDE_PLUGIN_OPTION_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:435  or os.environ.get(\"CLAUDE_PLUGIN_OPTION_API_KEY\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:386",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_PLUGIN_OPTION_MEM0_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:386  or os.environ.get(\"CLAUDE_PLUGIN_OPTION_MEM0_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:402  or os.environ.get(\"CLAUDE_PLUGIN_OPTION_MEM0_API_KEY\")\nintegrations/agent-plugin-core/python/memory_core.py:436  or os.environ.get(\"CLAUDE_PLUGIN_OPTION_MEM0_API_KEY\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:473",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_USER_ID",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:473  or _scope_value(os.environ.get(\"MEM0_USER_ID\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:474",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_RESOLVED_USER_ID",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:474  or _scope_value(os.environ.get(\"MEM0_RESOLVED_USER_ID\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:475",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USER",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:475  or _scope_value(os.environ.get(\"USER\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:476",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "USERNAME",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:476  or _scope_value(os.environ.get(\"USERNAME\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:483",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_DATA_DIR",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:483  os.environ.get(\"MEM0_CODE_DATA_DIR\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:484",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_DATA_DIR",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:484  or os.environ.get(\"MEM0_PLUGIN_DATA_DIR\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:485",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLUGIN_DATA",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:485  or os.environ.get(\"PLUGIN_DATA\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:486",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_PLUGIN_DATA",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:486  or os.environ.get(\"CLAUDE_PLUGIN_DATA\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:1895",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_HANDOFF_PATH",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:1895  path = os.environ.get(\"MEM0_CODE_HANDOFF_PATH\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:1908",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_EXTRACTION_WAIT_SECONDS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:1908  wait_seconds = float(os.environ.get(\"MEM0_CODE_EXTRACTION_WAIT_SECONDS\", \"120\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:1909",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_EVENT_POLL_SECONDS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:1909  poll_seconds = max(float(os.environ.get(\"MEM0_CODE_EVENT_POLL_SECONDS\", \"1\")), 0.1)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/memory_core.py:1995",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_URL",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/memory_core.py:1995  api_url = os.environ.get(\"MEM0_API_URL\", DEFAULT_API_URL).rstrip(\"/\")\nintegrations/agent-plugin-core/python/memory_core.py:2334  os.environ.get(\"MEM0_API_URL\", DEFAULT_API_URL).rstrip(\"/\")\nintegrations/agent-plugin-core/python/memory_core.py:2584  api_url = os.environ.get(\"MEM0_API_URL\", DEFAULT_API_URL).rstrip(\"/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/python/telemetry.py:95",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com/i/v0/e/",
+      "evidence": "integrations/agent-plugin-core/python/telemetry.py:95  POSTHOG_CAPTURE_URL = \"https://us.i.posthog.com/i/v0/e/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/python/telemetry.py:96",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com/batch/",
+      "evidence": "integrations/agent-plugin-core/python/telemetry.py:96  POSTHOG_BATCH_URL = \"https://us.i.posthog.com/batch/\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/telemetry.py:117",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/telemetry.py:117  return os.environ.get(\"MEM0_TELEMETRY\", \"true\").strip().lower() not in {"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/python/telemetry.py:566",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "integrations/agent-plugin-core/python/telemetry.py:566  subprocess.Popen("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/python/telemetry.py:776",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_URL",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/python/telemetry.py:776  url = os.environ.get(\"MEM0_API_URL\", memory_core.DEFAULT_API_URL).rstrip(\"/\") + \"/v1/ping/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/tests/test_build.py:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+      "evidence": "integrations/agent-plugin-core/tests/test_build.py:57  \"https://agent-plugins.org/schemas/1.0.0/plugin.schema.json\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/tests/test_conformance.py:23",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/agent-plugin-core/tests/test_conformance.py:23  result = subprocess.run(\nintegrations/agent-plugin-core/tests/test_conformance.py:61  result = subprocess.run(\nintegrations/agent-plugin-core/tests/test_conformance.py:108  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/tests/test_conformance.py:126",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1",
+      "evidence": "integrations/agent-plugin-core/tests/test_conformance.py:126  \"MEM0_API_URL\": \"http://127.0.0.1:1\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/tests/test_conformance.py:158",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/agent-plugin-core/tests/test_conformance.py:158  [sys.executable, \"-c\", \"import os; print(os.environ.get('MEM0_TELEMETRY', 'unset'))\"],"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/tests/test_conformance.py:170",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CI",
+      "rule": "os.environ[]",
+      "evidence": "integrations/agent-plugin-core/tests/test_conformance.py:170  [sys.executable, \"-c\", \"import os; print(os.environ['CI'])\"],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/tests/test_subagents.py:72",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1",
+      "evidence": "integrations/agent-plugin-core/tests/test_subagents.py:72  env.update(MEM0_CODE_DATA_DIR=str(database.parent), MEM0_TELEMETRY=\"false\", MEM0_API_URL=\"http://127.0.0.1:1\")"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/tests/test_subagents.py:75",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/agent-plugin-core/tests/test_subagents.py:75  result = subprocess.run("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/tests/test_uninitialised_identity.py:55",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/agent-plugin-core/tests/test_uninitialised_identity.py:55  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/tests/test_validate.py:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+      "evidence": "integrations/agent-plugin-core/tests/test_validate.py:11  PLUGIN_SCHEMA = \"https://agent-plugins.org/schemas/1.0.0/plugin.schema.json\"\nintegrations/agent-plugin-core/tests/test_validate.py:40  \"'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json' was expected\\n\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/agent-plugin-core/tests/test_validate.py:15",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/agent-plugin-core/tests/test_validate.py:15  return subprocess.run(\nintegrations/agent-plugin-core/tests/test_validate.py:85  return subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/tests/test_validate.py:33",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://agent-plugins.org/v1.0.0/plugin.schema.json",
+      "evidence": "integrations/agent-plugin-core/tests/test_validate.py:33  write_manifest(bundle, \"https://agent-plugins.org/v1.0.0/plugin.schema.json\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/typescript/src/telemetry.ts:6",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://us.i.posthog.com/batch/",
+      "evidence": "integrations/agent-plugin-core/typescript/src/telemetry.ts:6  const POSTHOG_BATCH_URL = \"https://us.i.posthog.com/batch/\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/typescript/src/telemetry.ts:47",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "process.env",
+      "evidence": "integrations/agent-plugin-core/typescript/src/telemetry.ts:47  const value = process.env.MEM0_TELEMETRY;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/agent-plugin-core/typescript/tests/identity.test.ts:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/mem0ai/mem0/",
+      "evidence": "integrations/agent-plugin-core/typescript/tests/identity.test.ts:8  assert.equal(parseProjectFromRemote(\"https://github.com/mem0ai/mem0/\"), \"mem0ai-mem0\");"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/agent-plugin-core/typescript/tests/telemetry.test.ts:46",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_TELEMETRY",
+      "rule": "process.env",
+      "evidence": "integrations/agent-plugin-core/typescript/tests/telemetry.test.ts:46  const original = process.env.MEM0_TELEMETRY;\nintegrations/agent-plugin-core/typescript/tests/telemetry.test.ts:49  process.env.MEM0_TELEMETRY = value;\nintegrations/agent-plugin-core/typescript/tests/telemetry.test.ts:66  if (original === undefined) delete process.env.MEM0_TELEMETRY;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/flush_worker.py:29",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_HANDOFF_PATH",
+      "rule": "os.environ[]",
+      "evidence": "integrations/antigravity-plugin/core/flush_worker.py:29  os.environ[\"MEM0_CODE_HANDOFF_PATH\"] = str(handoff_path)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/flush_worker.py:30",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_HARNESS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/flush_worker.py:30  harness = os.environ.get(\"MEM0_PLUGIN_HARNESS\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/flush_worker.py:32",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_SOURCE_TAG",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/flush_worker.py:32  source_tag = os.environ.get(\"MEM0_PLUGIN_SOURCE_TAG\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/flush_worker.py:35",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_ENV_PREFIX",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/flush_worker.py:35  env_prefix=os.environ.get(\"MEM0_PLUGIN_ENV_PREFIX\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/flush_worker.py:36",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PLUGIN_DATA_DIR_NAME",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/flush_worker.py:36  data_dir_name=os.environ.get(\"MEM0_PLUGIN_DATA_DIR_NAME\", \"\"),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/flush_worker.py:66",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_EXTRACTION_WAIT_SECONDS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/flush_worker.py:66  os.environ.get(\"MEM0_CODE_EXTRACTION_WAIT_SECONDS\", \"120\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/hook_runner.py:68",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_MIN_QUERY_CHARS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/hook_runner.py:68  minimum_query_chars = int(os.environ.get(\"MEM0_CODE_MIN_QUERY_CHARS\", \"20\"))"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/antigravity-plugin/core/hook_runner.py:118",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "integrations/antigravity-plugin/core/hook_runner.py:118  subprocess.Popen("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/hook_runner.py:194",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_AUTO_FLUSH",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/hook_runner.py:194  return os.environ.get(\"MEM0_CODE_AUTO_FLUSH\", \"true\").lower() in {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/hook_runner.py:217",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_IDLE_FLUSH_SECONDS",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/hook_runner.py:217  int(os.environ.get(\"MEM0_CODE_IDLE_FLUSH_SECONDS\", str(DEFAULT_IDLE_FLUSH_SECONDS))),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/hook_runner.py:347",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_SYNC_FLUSH",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/hook_runner.py:347  if os.environ.get(\"MEM0_CODE_SYNC_FLUSH\") == \"1\":"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/mcp_server.py:117",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_PROJECT_DIR",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/mcp_server.py:117  repo = resolve_repo(cwd or os.environ.get(\"CLAUDE_PROJECT_DIR\") or os.getcwd())"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/memory_cli.py:87",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_CODE_DATA_DIR",
+      "rule": "os.environ[]",
+      "evidence": "integrations/antigravity-plugin/core/memory_cli.py:87  os.environ[\"MEM0_CODE_DATA_DIR\"] = args.plugin_data_dir"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/antigravity-plugin/core/memory_core.py:31",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.mem0.ai",
+      "evidence": "integrations/antigravity-plugin/core/memory_core.py:31  DEFAULT_API_URL = \"https://api.mem0.ai\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "integrations/antigravity-plugin/core/memory_core.py:191",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "integrations/antigravity-plugin/core/memory_core.py:191  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "integrations/antigravity-plugin/core/memory_core.py:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://{host_path",
+      "evidence": "integrations/antigravity-plugin/core/memory_core.py:207  remote = f\"https://{host_path}\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "integrations/antigravity-plugin/core/memory_core.py:299",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_PROJECT_ID",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/memory_core.py:299  configured = _scope_value(os.environ.get(\"MEM0_PROJECT_ID\"))"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/antigravity-plugin/core/memory_core.py:383",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "MEM0_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/memory_core.py:383  os.environ.get(\"MEM0_API_KEY\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "integrations/antigravity-plugin/core/memory_core.py:384",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLUGIN_OPTION_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "integrations/antigravity-plugin/core/memory_core.py:384  or os.environ.get(\"PLUGIN_OPTION_API_KEY\")"
+    }
+  ],
+  "reRooting": []
+}

@@ -1,0 +1,27 @@
+name: facai-automation
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.41.5
+    restart: unless-stopped
+    ports:
+      # Admin UI and Facai relay are loopback-only; expose through an authenticated
+      # HTTPS reverse proxy only if a later deployment explicitly needs it.
+      - "127.0.0.1:5678:5678"
+    environment:
+      N8N_HOST: 127.0.0.1
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      N8N_EDITOR_BASE_URL: http://127.0.0.1:5678/
+      WEBHOOK_URL: http://127.0.0.1:5678/
+      N8N_SECURE_COOKIE: "false"
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:?Set N8N_ENCRYPTION_KEY in .env}
+      GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-Asia/Shanghai}
+      TZ: ${GENERIC_TIMEZONE:-Asia/Shanghai}
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      N8N_RUNNERS_ENABLED: "true"
+    volumes:
+      - facai_n8n_data:/home/node/.n8n
+
+volumes:
+  facai_n8n_data:

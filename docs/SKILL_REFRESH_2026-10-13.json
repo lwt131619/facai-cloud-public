@@ -1,0 +1,137 @@
+{
+  "schema": "facai.skill-refresh/1",
+  "at": "2026-10-14T01:00:31.782028+00:00",
+  "reingest": {
+    "admitted": [
+      "conversational-fullstack-builder",
+      "ios-native-app-business",
+      "model-fleet-status-probe",
+      "multi-agent-app-assembly",
+      "nl-to-mobile-app",
+      "prompt-optimizer-loop",
+      "redteam-intranet-methodology",
+      "visual-node-fullstack"
+    ],
+    "blocked": []
+  },
+  "crawl": {
+    "schema": "facai.case-ingest/1",
+    "at": "2026-10-14T01:00:44.068972+00:00",
+    "total": 8,
+    "registered": 8,
+    "updated": 0,
+    "skipped": 0,
+    "blocked": 0,
+    "results": [
+      {
+        "url": "https://www.easemate.ai/tw/ai-chat/ai-prompt-optimizer",
+        "decision": "registered",
+        "case_id": "c-c865c0de465b0a43",
+        "title": "AI 提示詞優化器：免費在線改善任何提示 - EaseMate AI"
+      },
+      {
+        "url": "https://featherless.ai/status",
+        "decision": "registered",
+        "case_id": "c-42e7ff6c48172ac7",
+        "title": "Featherless System Status - Featherless.ai"
+      },
+      {
+        "url": "https://moge.ai/zh/product/rork",
+        "decision": "registered",
+        "case_id": "c-55d28ae870191514",
+        "title": "Rork:极速移动应用生成器，将简单描述转化为功能完善、跨平台的 iOS 和 Android 应用。 - MOGE"
+      },
+      {
+        "url": "https://moge.ai/zh/product/whacka",
+        "decision": "registered",
+        "case_id": "c-2ebcd3b6d08bb5ae",
+        "title": "Whacka:一款对话式软件构建工具,可将纯文字指令转化为具备自动化托管的完整 Web 和移动应用。 - MOGE"
+      },
+      {
+        "url": "https://moge.ai/zh/product/ui-bakery",
+        "decision": "registered",
+        "case_id": "c-7f46e776a026e98a",
+        "title": "UI Bakery:低代码平台，快速构建内部工具、客户门户和业务应用，支持拖拽式界面与无缝数据集成。 - MOGE"
+      },
+      {
+        "url": "https://moge.ai/zh/product/catdoes",
+        "decision": "registered",
+        "case_id": "c-0e605b9da636ac47",
+        "title": "CatDoes:通过专业化Agent工作流将应用创意转化为生产就绪移动应用程序的对话式平台。 - MOGE"
+      },
+      {
+        "url": "https://moge.ai/zh/product/noodl",
+        "decision": "registered",
+        "case_id": "c-13201a283b998bf4",
+        "title": "Noodl:一个全栈低代码平台，能够快速创建具有广泛灵活性和集成能力的定制Web应用。 - MOGE"
+      },
+      {
+        "url": "https://moge.ai/zh/product/mwm-ai",
+        "decision": "registered",
+        "case_id": "c-f883c09a620fce04",
+        "title": "MWM AI:从提示到原生iOS应用业务——MWM AI在一个平台中处理代码生成、App Store发布、变现和增长。 - MOGE"
+      }
+    ]
+  },
+  "exercise": {
+    "exercised": 8,
+    "orphans": [],
+    "rows": [
+      {
+        "skill": "conversational-fullstack-builder",
+        "best_probe": "conversational-fullstack-builder",
+        "overlap": 0.2642,
+        "orphan": false
+      },
+      {
+        "skill": "ios-native-app-business",
+        "best_probe": "ios-native-app-business",
+        "overlap": 0.4286,
+        "orphan": false
+      },
+      {
+        "skill": "model-fleet-status-probe",
+        "best_probe": "model-fleet-status-probe",
+        "overlap": 0.3023,
+        "orphan": false
+      },
+      {
+        "skill": "multi-agent-app-assembly",
+        "best_probe": "multi-agent-app-assembly",
+        "overlap": 0.4583,
+        "orphan": false
+      },
+      {
+        "skill": "nl-to-mobile-app",
+        "best_probe": "nl-to-mobile-app",
+        "overlap": 0.4524,
+        "orphan": false
+      },
+      {
+        "skill": "prompt-optimizer-loop",
+        "best_probe": "prompt-optimizer-loop",
+        "overlap": 0.275,
+        "orphan": false
+      },
+      {
+        "skill": "redteam-intranet-methodology",
+        "best_probe": "model-fleet-status-probe",
+        "overlap": 0.0233,
+        "orphan": false
+      },
+      {
+        "skill": "visual-node-fullstack",
+        "best_probe": "visual-node-fullstack",
+        "overlap": 0.2889,
+        "orphan": false
+      }
+    ]
+  },
+  "invariant": {
+    "invariant": "remote_authority_below_local_owner",
+    "holds": true,
+    "violations": [],
+    "total": 8,
+    "open": 0
+  }
+}

@@ -1,0 +1,495 @@
+{
+  "target": "gobuster (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\gobuster)",
+  "origin": "https://github.com/OJ/gobuster",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 79 个文本文件（源码 54、其余 25），识别 54 面（源码档 15、文档/示例 DOC_ 降权 21、其余文件 18；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "cli/options.go:154",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s",
+      "evidence": "cli/options.go:154  urlInput = fmt.Sprintf(\"http://%s\", urlInput)\ncli/options.go:161  urlInput = fmt.Sprintf(\"http://%s\", urlInput)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/options.go:163",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%s",
+      "evidence": "cli/options.go:163  urlInput = fmt.Sprintf(\"https://%s\", urlInput)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/dns/dns.go:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://golang.org/pkg/net/#hdr-Name_Resolution",
+      "evidence": "cli/dns/dns.go:52  return errors.New(\"currently can not set custom dns resolver on windows. See https://golang.org/pkg/net/#hdr-Name_Resolution\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "cli/vhost/vhost.go:80",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/golang/go/issues/30775",
+      "evidence": "cli/vhost/vhost.go:80  return errors.New(\"VHOST mode does not work with a http proxy when using plain text http urls as golang strictly adheres to the http standard. This results in always sending the requests to the IP of the VHOST domain instead of the specifie"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobustergcs/gobustersgcs.go:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.google.com/storage/docs/naming-buckets",
+      "evidence": "gobustergcs/gobustersgcs.go:66  // https://cloud.google.com/storage/docs/naming-buckets"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobustergcs/gobustersgcs.go:89",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://storage.googleapis.com/storage/v1/b/%s/o?maxResults=%d",
+      "evidence": "gobustergcs/gobustersgcs.go:89  bucketURL := fmt.Sprintf(\"https://storage.googleapis.com/storage/v1/b/%s/o?maxResults=%d\", url.PathEscape(word), s.options.MaxFilesToList)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobustergcs/gobustersgcs.go:176",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://cloud.google.com/storage/docs/json_api/v1/status-codes",
+      "evidence": "gobustergcs/gobustersgcs.go:176  // https://cloud.google.com/storage/docs/json_api/v1/status-codes\ngobustergcs/gobustersgcs.go:187  // https://cloud.google.com/storage/docs/json_api/v1/status-codes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobustergcs/gobustersgcs.go:302",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html",
+      "evidence": "gobustergcs/gobustersgcs.go:302  // https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobustergcs/result.go:24",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://storage.googleapis.com/storage/v1/b/%s/o",
+      "evidence": "gobustergcs/result.go:24  c(buf, \"https://storage.googleapis.com/storage/v1/b/%s/o\", r.BucketName)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobusters3/gobusters3.go:88",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%s.s3.amazonaws.com/?max-keys=%d",
+      "evidence": "gobusters3/gobusters3.go:88  bucketURL := fmt.Sprintf(\"https://%s.s3.amazonaws.com/?max-keys=%d\", url.PathEscape(word), s.options.MaxFilesToList)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobusters3/gobusters3.go:173",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList",
+      "evidence": "gobusters3/gobusters3.go:173  // https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobusters3/gobusters3.go:293",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html",
+      "evidence": "gobusters3/gobusters3.go:293  // https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "gobusters3/result.go:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s.s3.amazonaws.com/",
+      "evidence": "gobusters3/result.go:24  c(buf, \"http://%s.s3.amazonaws.com/\", r.BucketName)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libgobuster/http.go:198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/26351716/how-to-keep-key-case-sensitive-in-request-header-using-golang",
+      "evidence": "libgobuster/http.go:198  // https://stackoverflow.com/questions/26351716/how-to-keep-key-case-sensitive-in-request-header-using-golang\nlibgobuster/http.go:207  // https://stackoverflow.com/questions/26351716/how-to-keep-key-case-sensitive-in-request-header-using-golang"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "libgobuster/useragents.go:2494",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://lucideer.com",
+      "evidence": "libgobuster/useragents.go:2494  \"Opera/9.61 (Windows NT 6.0; U; http://lucideer.com; en-GB) Presto/2.1.1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".gitattributes:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gitattributes/gitattributes/blob/master/Common.gitattributes",
+      "evidence": ".gitattributes:1  # https://github.com/gitattributes/gitattributes/blob/master/Common.gitattributes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".gitattributes:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gitattributes/gitattributes/blob/master/Go.gitattributes",
+      "evidence": ".gitattributes:87  # https://github.com/gitattributes/gitattributes/blob/master/Go.gitattributes"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".gitignore:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/github/gitignore/blob/main/Go.gitignore",
+      "evidence": ".gitignore:1  # https://github.com/github/gitignore/blob/main/Go.gitignore"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".gitignore:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore",
+      "evidence": ".gitignore:4  # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".golangci.yml:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://gist.github.com/maratori/47a4d00457a92aa426dbd48a18776322",
+      "evidence": ".golangci.yml:1  # based on https://gist.github.com/maratori/47a4d00457a92aa426dbd48a18776322"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".golangci.yml:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://developers.google.com/protocol-buffers/docs/reference/go/faq#modules",
+      "evidence": ".golangci.yml:75  desc: Use google.golang.org/protobuf instead, see https://developers.google.com/protocol-buffers/docs/reference/go/faq#modules"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".golangci.yml:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://go.dev/blog/slog",
+      "evidence": ".golangci.yml:85  desc: Use log/slog instead, see https://go.dev/blog/slog"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".golangci.yml:91",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://go.dev/blog/randv2",
+      "evidence": ".golangci.yml:91  desc: Use math/rand/v2 instead, see https://go.dev/blog/randv2"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".goreleaser.yaml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://goreleaser.com",
+      "evidence": ".goreleaser.yaml:2  # Make sure to check the documentation at https://goreleaser.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".goreleaser.yaml:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://goreleaser.com/static/schema.json",
+      "evidence": ".goreleaser.yaml:6  # yaml-language-server: $schema=https://goreleaser.com/static/schema.json"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "LICENSE:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/",
+      "evidence": "LICENSE:4  http://www.apache.org/licenses/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "LICENSE:196",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "LICENSE:196  http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://goreportcard.com/badge/github.com/OJ/gobuster/v3",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://goreportcard.com/report/github.com/OJ/gobuster/v3",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://img.shields.io/badge/License-Apache%202.0-blue.svg",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OJ/gobuster/blob/master/LICENSE",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/gobuster/backers/badge.svg",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster\nREADME.md:231  [![Backers on Open Collective](https://opencollective.com/gobuster/backers/badge.svg)](https://opencollective.com/gobuster) [![Sponsors on Open Collective](https://opencollective.com/gobuster/sponsors/badge.svg)](https://opencollective.com/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/gobuster",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster\nREADME.md:231  [![Backers on Open Collective](https://opencollective.com/gobuster/backers/badge.svg)](https://opencollective.com/gobuster) [![Sponsors on Open Collective](https://opencollective.com/gobuster/sponsors/badge.svg)](https://opencollective.com/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:3",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/gobuster/sponsors/badge.svg",
+      "evidence": "README.md:3  [![Go Report Card](https://goreportcard.com/badge/github.com/OJ/gobuster/v3)](https://goreportcard.com/report/github.com/OJ/gobuster/v3) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/OJ/gobuster\nREADME.md:231  [![Backers on Open Collective](https://opencollective.com/gobuster/backers/badge.svg)](https://opencollective.com/gobuster) [![Sponsors on Open Collective](https://opencollective.com/gobuster/sponsors/badge.svg)](https://opencollective.com/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:35",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "README.md:35  gobuster dir -u https://example.com -w /path/to/wordlist.txt\nREADME.md:41  gobuster vhost -u https://example.com -w /path/to/wordlist.txt\nREADME.md:70  docker run --rm -it ghcr.io/oj/gobuster:latest dir -u https://example.com -w /usr/share/wordlists/dirb/common.txt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:61",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OJ/gobuster/releases",
+      "evidence": "README.md:61  Download pre-compiled binaries from the [releases page](https://github.com/OJ/gobuster/releases)."
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:76",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OJ/gobuster.git",
+      "evidence": "README.md:76  git clone https://github.com/OJ/gobuster.git"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:213",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com?FUZZ=test",
+      "evidence": "README.md:213  gobuster fuzz -u https://example.com?FUZZ=test -w wordlist.txt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:220",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com?param=FUZZ",
+      "evidence": "README.md:220  gobuster fuzz -u https://example.com?param=FUZZ -w wordlist.txt"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:235",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/gobuster#backer",
+      "evidence": "README.md:235  If you're backing us already, you rock. If you're not, that's cool too! Want to back us? [Become a backer](https://opencollective.com/gobuster#backer)!"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:237",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/gobuster/backers.svg?width=890",
+      "evidence": "README.md:237  [![Backers](https://opencollective.com/gobuster/backers.svg?width=890)](https://opencollective.com/gobuster#backers)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:237",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencollective.com/gobuster#backers",
+      "evidence": "README.md:237  [![Backers](https://opencollective.com/gobuster/backers.svg?width=890)](https://opencollective.com/gobuster#backers)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:247",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://target.com",
+      "evidence": "README.md:247  gobuster dir -u https://target.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,js,txt,asp,aspx,jsp\nREADME.md:253  gobuster dir -u https://target.com -w admin-panels.txt -s 200,301,302,403"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:250",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://api.target.com",
+      "evidence": "README.md:250  gobuster dir -u https://api.target.com -w /usr/share/wordlists/dirb/common.txt -x json"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:333",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/danielmiessler/SecLists",
+      "evidence": "README.md:333  - **SecLists**: [https://github.com/danielmiessler/SecLists](https://github.com/danielmiessler/SecLists)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:334",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/fuzzdb-project/fuzzdb",
+      "evidence": "README.md:334  - **FuzzDB**: [https://github.com/fuzzdb-project/fuzzdb](https://github.com/fuzzdb-project/fuzzdb)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:335",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS",
+      "evidence": "README.md:335  - **Seclists DNS**: [https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS](https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS)"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:417",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/OJ/gobuster/pull/418",
+      "evidence": "README.md:417  - `no-fqdn` parameter on dns bruteforce to disable the use of the systems search domains. This should speed up the run if you have configured some search domains. [https://github.com/OJ/gobuster/pull/418](https://github.com/OJ/gobuster/pull"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "Taskfile.yml:62",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh",
+      "evidence": "Taskfile.yml:62  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b {{ .GOPATH }}/bin"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".devcontainer/devcontainer.json:1",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://aka.ms/devcontainer.json",
+      "evidence": ".devcontainer/devcontainer.json:1  // For format details, see https://aka.ms/devcontainer.json. For config options, see the"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".devcontainer/devcontainer.json:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/devcontainers/templates/tree/main/src/go",
+      "evidence": ".devcontainer/devcontainer.json:2  // README at: https://github.com/devcontainers/templates/tree/main/src/go"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".devcontainer/devcontainer.json:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://containers.dev/features",
+      "evidence": ".devcontainer/devcontainer.json:6  // Features to add to the dev container. More info: https://containers.dev/features."
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".github/dependabot.yml:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates",
+      "evidence": ".github/dependabot.yml:4  # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "vhs/gobuster_dir.tape:67",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8081",
+      "evidence": "vhs/gobuster_dir.tape:67  Type \"./gobuster dir -u http://localhost:8081 -w ./vhs/wordlist.txt\" Sleep 500ms  Enter"
+    }
+  ],
+  "reRooting": []
+}

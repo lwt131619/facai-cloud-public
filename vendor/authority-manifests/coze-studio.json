@@ -1,0 +1,1809 @@
+{
+  "target": "coze-studio (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\coze-studio)",
+  "origin": "https://github.com/coze-dev/coze-studio",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 233 个文本文件（源码 233、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": ".github/scripts/check-file-size.sh:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": ".github/scripts/check-file-size.sh:9  #     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/main.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/main.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/agent_run_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/agent_run_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/base.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/base.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/bot_open_api_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/bot_open_api_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/conversation_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/conversation_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/database_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/database_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/developer_api_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/developer_api_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/intelligence_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/intelligence_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/knowledge_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/knowledge_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/memory_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/memory_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/message_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/message_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/message_service_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/message_service_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/open_apiauth_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/open_apiauth_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/passport_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/passport_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/playground_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/playground_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/plugin_develop_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/plugin_develop_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/public_product_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/public_product_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/resource_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/resource_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/upload_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/upload_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/workflow_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/workflow_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/workflow_service_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/handler/coze/workflow_service_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/handler/coze/workflow_service_test.go:1041",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8888",
+      "evidence": "backend/api/handler/coze/workflow_service_test.go:1041  hReq.SetRequestURI(\"http://localhost:8888\" + \"/v1/workflow/stream_run\")\nbackend/api/handler/coze/workflow_service_test.go:1073  hReq.SetRequestURI(\"http://localhost:8888\" + \"/v1/workflow/stream_resume\")\nbackend/api/handler/coze/workflow_service_test.go:1115  hReq.SetRequestURI(\"http://localhost:8888\" + \"/v1/workflows/chat\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/internal/httputil/error_resp.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/internal/httputil/error_resp.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/ctx_cache.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/ctx_cache.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/host.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/host.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/i18n.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/i18n.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/log.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/log.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/openapi_auth.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/openapi_auth.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/request_inspector.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/request_inspector.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/middleware/session.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/middleware/session.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/model/conversation/conversation/conversation.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/model/conversation/conversation/conversation.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/model/conversation/conversation/conversation_service.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/model/conversation/conversation/conversation_service.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/model/data/knowledge/common.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/model/data/knowledge/common.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/model/data/knowledge/document.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/model/data/knowledge/document.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/model/data/knowledge/knowledge.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/model/data/knowledge/knowledge.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/model/data/knowledge/knowledge_svc.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/model/data/knowledge/knowledge_svc.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/router/register.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/router/register.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/router/coze/api.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/router/coze/api.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/api/router/coze/middleware.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/api/router/coze/middleware.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/application.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/application.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/app/app.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/app/app.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/app/convert.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/app/convert.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/app/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/app/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/app/model.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/app/model.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/base/appinfra/app_infra.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/base/appinfra/app_infra.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/base/ctxutil/api_auth.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/base/ctxutil/api_auth.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/base/ctxutil/request.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/base/ctxutil/request.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/base/ctxutil/session.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/base/ctxutil/session.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/connector/connector.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/connector/connector.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/connector/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/connector/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/agent_run.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/agent_run.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/build_chunk_event.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/build_chunk_event.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/conversation.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/conversation.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/message.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/message.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/openapi_agent_run.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:127",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/image.jpg",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:127  Content:     `{\"type\": \"image\", \"url\": \"https://example.com/image.jpg\"}`,\nbackend/application/conversation/openapi_agent_run_test.go:645  Content:     `[{\"type\": \"image\", \"file_url\": \"https://example.com/image.jpg\"}]`,\nbackend/application/conversation/openapi_agent_run_test.go:688  Content:     `[{\"type\": \"text\", \"text\": \"Here's an image:\"}, {\"type\": \"image\", \"file_url\": \"https://example.com/image.jpg\"}]`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:132",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/doc.pdf",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:132  Content:     `{\"type\": \"file\", \"name\": \"document.pdf\", \"url\": \"https://example.com/doc.pdf\"}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:478",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/audio.mp3",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:478  Content:     `{\"type\": \"audio\", \"url\": \"https://example.com/audio.mp3\"}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:483",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/video.mp4",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:483  Content:     `{\"type\": \"video\", \"url\": \"https://example.com/video.mp4\"}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:493",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:493  Content:     `{\"type\": \"link\", \"url\": \"https://example.com\"}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_agent_run_test.go:762",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/file.pdf",
+      "evidence": "backend/application/conversation/openapi_agent_run_test.go:762  Url:    \"https://example.com/file.pdf\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/conversation/openapi_message.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/conversation/openapi_message.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/knowledge/convertor.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/knowledge/convertor.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/knowledge/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/knowledge/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/knowledge/knowledge.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/knowledge/knowledge.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/memory/convertor.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/memory/convertor.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/memory/database.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/memory/database.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/memory/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/memory/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/memory/variables.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/memory/variables.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/modelmgr/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/modelmgr/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/modelmgr/modelmgr.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/modelmgr/modelmgr.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/openauth/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/openauth/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/openauth/openapiauth.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/openauth/openapiauth.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/permission/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/permission/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/api_management.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/api_management.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/auth.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/auth.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/info.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/info.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/lifecycle.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/lifecycle.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/playground.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/playground.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/plugin.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/plugin.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/plugin_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/plugin_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/plugin_test.go:96",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/icon.png",
+      "evidence": "backend/application/plugin/plugin_test.go:96  assert.Equal(t, \"https://example.com/icon.png\", product1.MetaInfo.IconURL)\nbackend/application/plugin/plugin_test.go:207  assert.Equal(t, \"https://example.com/icon.png\", product.MetaInfo.IconURL)\nbackend/application/plugin/plugin_test.go:223  LogoURL:             \"https://example.com/icon.png\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/plugin/registration.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/plugin/registration.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/prompt/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/prompt/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/prompt/prompt.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/prompt/prompt.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/search/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/search/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/search/project_pack.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/search/project_pack.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/search/project_search.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/search/project_search.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/search/resource_pack.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/search/resource_pack.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/search/resource_search.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/search/resource_search.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/shortcutcmd/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/shortcutcmd/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/shortcutcmd/shortcut_cmd.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/shortcutcmd/shortcut_cmd.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/create.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/create.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/duplicate.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/duplicate.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/get.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/get.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/image.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/image.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/publish.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/publish.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/singleagent/single_agent.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/singleagent/single_agent.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/template/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/template/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/template/template.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/template/template.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/upload/consts.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/upload/consts.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/upload/icon.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/upload/icon.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/user/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/user/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/user/user.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/user/user.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/chatflow.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/workflow/chatflow.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/chatflow_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/workflow/chatflow_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/chatflow_test.go:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/file",
+      "evidence": "backend/application/workflow/chatflow_test.go:83  File: &uploadentity.File{Url: \"https://example.com/file\"},\nbackend/application/workflow/chatflow_test.go:86  expected:  \"https://example.com/file\",\nbackend/application/workflow/chatflow_test.go:97  File: &uploadentity.File{Url: \"https://example.com/file\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/chatflow_test.go:372",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/image.png",
+      "evidence": "backend/application/workflow/chatflow_test.go:372  File: &uploadentity.File{Url: \"https://example.com/image.png\"},\nbackend/application/workflow/chatflow_test.go:380  ImageURL: &schema.ChatMessageImageURL{URL: \"https://example.com/image.png\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/chatflow_test.go:394",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/audio",
+      "evidence": "backend/application/workflow/chatflow_test.go:394  mockUpload.EXPECT().GetFile(gomock.Any(), &service.GetFileRequest{ID: 2}).Return(&service.GetFileResponse{File: &uploadentity.File{Url: \"https://example.com/audio\"}}, nil)\nbackend/application/workflow/chatflow_test.go:401  {Type: schema.ChatMessagePartTypeAudioURL, AudioURL: &schema.ChatMessageAudioURL{URL: \"https://example.com/audio\"}},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/chatflow_test.go:395",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/video",
+      "evidence": "backend/application/workflow/chatflow_test.go:395  mockUpload.EXPECT().GetFile(gomock.Any(), &service.GetFileRequest{ID: 3}).Return(&service.GetFileResponse{File: &uploadentity.File{Url: \"https://example.com/video\"}}, nil)\nbackend/application/workflow/chatflow_test.go:402  {Type: schema.ChatMessagePartTypeVideoURL, VideoURL: &schema.ChatMessageVideoURL{URL: \"https://example.com/video\"}},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/eventbus.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/workflow/eventbus.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/init.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/workflow/init.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/workflow.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/workflow/workflow.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/application/workflow/workflow_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/application/workflow/workflow_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/config.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/config.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/base/base.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/base/base.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/base/base.go:83",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.coze.cn",
+      "evidence": "backend/bizpkg/config/base/base.go:83  CozeSaasAPIBaseURL:    envkey.GetStringD(\"COZE_SAAS_API_BASE_URL\", \"https://api.coze.cn\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/base/base.go:109",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8888",
+      "evidence": "backend/bizpkg/config/base/base.go:109  return \"http://127.0.0.1:8888\", nil"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/knowledge/knowledge.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/knowledge/knowledge.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/builtin_conf.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/builtin_conf.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/deprecate_model_get.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/deprecate_model_get.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/extra.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/extra.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/mode_provider.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/mode_provider.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/model_get.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/model_get.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/model_meta.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/model_meta.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/model_param.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/model_param.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/model_save.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/model_save.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/config/modelmgr/modelmgr.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/config/modelmgr/modelmgr.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/debugutil/workflow_debug.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/debugutil/workflow_debug.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/debugutil/workflow_debug.go:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8888/work_flow?execute_id=%d&space_id=%d&workflow_id=%d&execute_mode=2",
+      "evidence": "backend/bizpkg/debugutil/workflow_debug.go:30  defaultURL := fmt.Sprintf(\"http://127.0.0.1:8888/work_flow?execute_id=%d&space_id=%d&workflow_id=%d&execute_mode=2\", executeID, spaceID, workflowID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/fileutil/fileutil.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/fileutil/fileutil.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/fileutil/pyutil.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/fileutil/pyutil.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/ark.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/ark.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/builtin.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/builtin.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/claude.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/claude.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/deepseek.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/deepseek.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/gemini.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/gemini.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/gemini.go:46",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://generativelanguage.googleapis.com/",
+      "evidence": "backend/bizpkg/llm/modelbuilder/gemini.go:46  BaseURL: \"https://generativelanguage.googleapis.com/\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/llm_params.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/llm_params.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/model_builder.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/model_builder.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/ollama.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/ollama.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/ollama.go:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:11434",
+      "evidence": "backend/bizpkg/llm/modelbuilder/ollama.go:42  BaseURL: \"http://127.0.0.1:11434\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/openai.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/openai.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/bizpkg/llm/modelbuilder/qwen.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/bizpkg/llm/modelbuilder/qwen.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agent/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agent/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agent/impl/single_agent.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agent/impl/single_agent.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agent/model/single_agent.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agent/model/single_agent.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agentrun/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agentrun/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agentrun/agentrunmock/agent_run_mock.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agentrun/agentrunmock/agent_run_mock.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agentrun/impl/agent_run.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agentrun/impl/agent_run.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/agentrun/model/agent_run.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/agentrun/model/agent_run.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/app/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/app/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/app/impl/app.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/app/impl/app.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/app/model/app.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/app/model/app.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/app/model/connector.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/app/model/connector.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/app/model/consts.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/app/model/consts.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/connector/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/connector/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/connector/impl/connector.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/connector/impl/connector.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/connector/model/connector.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/connector/model/connector.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/conversation/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/conversation/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/conversation/conversationmock/conversation_mock.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/conversation/conversationmock/conversation_mock.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/conversation/impl/conversation.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/conversation/impl/conversation.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/conversation/model/conversation.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/conversation/model/conversation.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/database/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/database/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/database/impl/database.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/database/impl/database.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/database/model/const.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/database/model/const.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/database/model/database.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/database/model/database.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/datacopy/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/datacopy/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/datacopy/impl/datacopy.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/datacopy/impl/datacopy.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/knowledge/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/knowledge/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/knowledge/impl/knowledge.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/knowledge/impl/knowledge.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/knowledge/model/knowledge.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/knowledge/model/knowledge.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/message/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/message/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/message/impl/message.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/message/impl/message.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/message/impl/message_test.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/message/impl/message_test.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/message/messagemock/message_mock.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/message/messagemock/message_mock.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/message/model/message.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/message/model/message.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/permission/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/permission/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/permission/impl/permission.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/permission/impl/permission.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/permission/model/permission.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/permission/model/permission.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/contract.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/contract.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/consts/consts.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/consts/consts.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/convert/auth.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/convert/auth.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/convert/format.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/convert/format.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/convert/http.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/convert/http.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/convert/param.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/convert/param.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/convert/plugin.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/convert/plugin.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/convert/api/api.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/convert/api/api.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/impl/plugin.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/impl/plugin.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/model/default.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/model/default.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/model/openapi.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/model/openapi.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/model/option.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/model/option.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/model/plugin.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/model/plugin.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/model/plugin_manifest.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/model/plugin_manifest.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "backend/crossdomain/plugin/model/plugin_method.go:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "backend/crossdomain/plugin/model/plugin_method.go:8  *     http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "reRooting": []
+}

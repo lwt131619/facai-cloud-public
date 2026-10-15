@@ -1,0 +1,8 @@
+fastapi>=0.110,<1
+uvicorn>=0.30,<1
+httpx>=0.27,<1
+pytest>=8,<10
+qrcode>=7.4,<9
+cryptography>=42
+# QR login encodes PNG with the stdlib. Do not call qrcode.make().save(format="PNG"):
+# that imports qrcode.image.pil and 500s unless this file also declares qrcode[pil].

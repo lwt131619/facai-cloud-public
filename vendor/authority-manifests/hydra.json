@@ -1,0 +1,1818 @@
+{
+  "target": "hydra (初扫收录实例 C:\\Users\\user\\Hydra)",
+  "origin": "本地路径 C:\\Users\\user\\Hydra",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 31 个文本文件（源码 4、其余 27），识别 201 面（源码档 1、文档/示例 DOC_ 降权 5、其余文件 195；截断=False/True，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra.sh:216",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://open-sez.me",
+      "evidence": "dpl4hydra.sh:216  SITE=\"${DPL_SITE:-https://open-sez.me}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CHANGES:152",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vanhauser-thc/thc-hydra",
+      "evidence": "CHANGES:152  * New web page: https://github.com/vanhauser-thc/thc-hydra\nCHANGES:258  ! Development moved to a public github repository: https://github.com/vanhauser-thc/thc-hydra"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CHANGES:630",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.0xbadc0de.be/?part=libssh",
+      "evidence": "CHANGES:630  you want to use ssh2! download from http://www.0xbadc0de.be/?part=libssh"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CHANGES:827",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://123.45.67.89:8080/",
+      "evidence": "CHANGES:827  following syntax is valid: HYDRA_PROXY_HTTP=\"http://123.45.67.89:8080/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CITATION.cff:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vanhauser-thc/thc-hydra",
+      "evidence": "CITATION.cff:13  url: \"https://github.com/vanhauser-thc/thc-hydra\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "Dockerfile:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vanhauser-thc/thc-hydra",
+      "evidence": "Dockerfile:6  org.opencontainers.image.url=\"https://github.com/vanhauser-thc/thc-hydra\" \\\nDockerfile:7  org.opencontainers.image.source=\"https://github.com/vanhauser-thc/thc-hydra\" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "Dockerfile:65",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/danielmiessler/SecLists/tarball",
+      "evidence": "Dockerfile:65  && curl -SL \"https://api.github.com/repos/danielmiessler/SecLists/tarball\" -o /tmp/seclists/src.tar.gz \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "INSTALL:27",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wiki.termux.com/wiki/Graphical_Environment",
+      "evidence": "INSTALL:27  https://wiki.termux.com/wiki/Graphical_Environment"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "INSTALL:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.oracle.com/database/technologies/instant-client/downloads.html",
+      "evidence": "INSTALL:31  https://www.oracle.com/database/technologies/instant-client/downloads.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "LICENSE:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fsf.org/",
+      "evidence": "LICENSE:4  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "LICENSE:646",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.gnu.org/licenses/",
+      "evidence": "LICENSE:646  along with this program.  If not, see <https://www.gnu.org/licenses/>.\nLICENSE:661  <https://www.gnu.org/licenses/>."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "LICENSE_OPENSSL:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.openssl.org",
+      "evidence": "LICENSE_OPENSSL:42  library (http://www.openssl.org), which otherwise wouldn't be allowed"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "LICENSE_OPENSSL:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.openssl.org/",
+      "evidence": "LICENSE_OPENSSL:83  *    for use in the OpenSSL Toolkit. (http://www.openssl.org/)\"\nLICENSE_OPENSSL:97  *    for use in the OpenSSL Toolkit (http://www.openssl.org/)\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vanhauser-thc/thc-hydra",
+      "evidence": "README:5  <vh@thc.org> https://github.com/vanhauser-thc/thc-hydra\nREADME:65  svn co https://github.com/vanhauser-thc/thc-hydra\nREADME:67  git clone https://github.com/vanhauser-thc/thc-hydra"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README:62",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/vanhauser-thc/thc-hydra/releases",
+      "evidence": "README:62  project page at https://github.com/vanhauser-thc/thc-hydra/releases"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README:88",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.libssh.org",
+      "evidence": "README:88  system,  get it from https://www.libssh.org, for ssh v1 support you also need"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README:319",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://123.45.67.89:8080/",
+      "evidence": "README:319  HYDRA_PROXY_HTTP=\"http://123.45.67.89:8080/\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README:320",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://login:password@123.45.67.89:8080/",
+      "evidence": "README:320  HYDRA_PROXY_HTTP=\"http://login:password@123.45.67.89:8080/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bfg.h:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.gnu.org/licenses/",
+      "evidence": "bfg.h:16  /*     along with bfgen. If not, see <http://www.gnu.org/licenses/>.          */"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "bfg.h:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://houbysoft.com/bfg/",
+      "evidence": "bfg.h:24  #define BF_WEBSITE \"http://houbysoft.com/bfg/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "configure:319",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.openssl.org",
+      "evidence": "configure:319  echo \"Get it from http://www.openssl.org\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "configure:871",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.sap.com/solutions/netweaver/linux/eval/index.asp",
+      "evidence": "configure:871  echo \"Get it from http://www.sap.com/solutions/netweaver/linux/eval/index.asp\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "configure:919",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.libssh.org",
+      "evidence": "configure:919  echo 'Get it from http://www.libssh.org'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "configure:1023",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.oracle.com/database/technologies/instant-client/downloads.html",
+      "evidence": "configure:1023  echo \"Get basic and sdk package from https://www.oracle.com/database/technologies/instant-client/downloads.html\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.254",
+      "evidence": "dpl4hydra_full.csv:3  2wire,2700HG B,4.25.19,http://192.168.1.254,,,,,\ndpl4hydra_full.csv:273  actiontec,V1000H,Telus,http://192.168.1.254,admin,telus,,,\ndpl4hydra_full.csv:1277  billion,BiPAC 5102,,http://192.168.1.254,admin,admin,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.138",
+      "evidence": "dpl4hydra_full.csv:5  2wire,2701HGV-W,All,http://10.0.0.138 or http://gateway.2wire.net or http://home,,(printed on the bottom of the device),Admin,,\ndpl4hydra_full.csv:4393  mikrotik,,2.9.27,http://10.0.0.138,admin,,,,\ndpl4hydra_full.csv:10069  thomson,SpeedTouch 530,,http://10.0.0.138,,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://gateway.2wire.net",
+      "evidence": "dpl4hydra_full.csv:5  2wire,2701HGV-W,All,http://10.0.0.138 or http://gateway.2wire.net or http://home,,(printed on the bottom of the device),Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://home",
+      "evidence": "dpl4hydra_full.csv:5  2wire,2701HGV-W,All,http://10.0.0.138 or http://gateway.2wire.net or http://home,,(printed on the bottom of the device),Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.1",
+      "evidence": "dpl4hydra_full.csv:30  3com,3CRWDR101A75,All,http://192.168.1.1,,admin,Admin,,\ndpl4hydra_full.csv:32  3com,3CRWE554G72,All,http://192.168.1.1,,admin,Admin,,\ndpl4hydra_full.csv:120  3com,OfficeConnect ADSL Wireless 11g Firewall Router,3CRWDR100-72,HTTP,,admin,Admin,http://192.168.1.1,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:111",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.0.1",
+      "evidence": "dpl4hydra_full.csv:111  3com,Netbuilder,,HTTP,Root,,Admin,http://10.1.0.1,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:194",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://80.1.64.217",
+      "evidence": "dpl4hydra_full.csv:194  3go,3GO11,All,http://80.1.64.217,administrator,246810,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:252",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.1",
+      "evidence": "dpl4hydra_full.csv:252  actiontec,GT701,,http://192.168.0.1,admin,,,,\ndpl4hydra_full.csv:275  actiontec,gt701,,http://192.168.0.1,admin,,,,\ndpl4hydra_full.csv:1349  broadmax,LinkMax HSA300A-2,,http://192.168.0.1,broadmax,broadmax,Admin,You need to put the IP as Gateway in TCPIP settings and 192.168.0.2 as your assigned IP.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:569",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.174",
+      "evidence": "dpl4hydra_full.csv:569  alliedtelesyn,windows xp,      AR410,http://192.168.1.174,admin,admin,user,HACK,\ndpl4hydra_full.csv:570  alliedtelesyn,windows xp,AR410,http://192.168.1.174,admin,admin,user,HACK,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:758",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.heise.de/security/news/meldung/44899",
+      "evidence": "dpl4hydra_full.csv:758  apc,USV Network Management Card,,SNMP,,TENmanUFactOryPOWER ,Admin,nachzulesen unter http://www.heise.de/security/news/meldung/44899 gruss HonkHase,\ndpl4hydra_full.csv:759  apc,USV Network Management Card,,SNMP,,TENmanUFactOryPOWER,Admin,nachzulesen unter http://www.heise.de/security/news/meldung/44899 gruss HonkHase,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:788",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.2.1",
+      "evidence": "dpl4hydra_full.csv:788  arcor,Easybox,all,http://192.168.2.1,root,123456,Root,,\ndpl4hydra_full.csv:1181  belkin,F5D5231-4,,http://192.168.2.1,,,Administration,,\ndpl4hydra_full.csv:1192  belkin,F5D7231-4,,http://192.168.2.1,,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:793",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://192.168.2.1",
+      "evidence": "dpl4hydra_full.csv:793  arlotto,SG205,,HTTP,admin,123456,https://192.168.2.1,,\ndpl4hydra_full.csv:794  arlotto,SG205,,https://192.168.2.1,admin,123456,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:853",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://router.asus.com",
+      "evidence": "dpl4hydra_full.csv:853  asus,RT-AC5300,,http://router.asus.com,admin,admin,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:880",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.100",
+      "evidence": "dpl4hydra_full.csv:880  atcom,AG-168FC,,http://192.168.1.100,,12345678,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1121",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<deviceIP",
+      "evidence": "dpl4hydra_full.csv:1121  barracudanetworks,Barracuda Spam Firewall 300,,http://<deviceIP>:8000,admin,admin,full admin access,,\ndpl4hydra_full.csv:1123  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://<deviceIP>:8080,admin,adminbn99,full admin access,,\ndpl4hydra_full.csv:1124  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://<deviceIP>:8080,guest,bnadmin99,guest access - some information disclosure,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1122",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://lt",
+      "evidence": "dpl4hydra_full.csv:1122  barracudanetworks,Barracuda Spam Firewall 300,,http://lt;deviceIPgt;:8000,admin,admin,full admin access,,\ndpl4hydra_full.csv:1125  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://lt;deviceIPgt;:8080,admin,adminbn99,full admin access,,\ndpl4hydra_full.csv:1126  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://lt;deviceIPgt;:8080,guest,bnadmin99,guest access - some information disclosure,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1216",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.2",
+      "evidence": "dpl4hydra_full.csv:1216  belkin,P74476au,,http://10.0.0.2,admin,password,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1383",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.11.1",
+      "evidence": "dpl4hydra_full.csv:1383  buffalo,Wireless Broadband Base Station-g ,WLA-G54 WBR-G54,HTTP,root,,Admin,http://192.168.11.1,\ndpl4hydra_full.csv:1385  buffalo,Wireless Broadband Base Station-g,WLA-G54 WBR-G54,HTTP,root,,Admin,http://192.168.11.1,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1430",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://server.com/ScriptName.cgi?load=login",
+      "evidence": "dpl4hydra_full.csv:1430  cgiworld,Poll It,2,HTTP,,protection,User/Admin over package,http://server.com/ScriptName.cgi?load=login,\ndpl4hydra_full.csv:1431  cgiworld,Poll It,2.0,HTTP,,protection,User/Admin over package,http://server.com/ScriptName.cgi?load=login,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1454",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.100.1",
+      "evidence": "dpl4hydra_full.csv:1454  cisco,2100 aka DPX2100,all versions (comcast-supplied),http://192.168.100.1,,W2402,,password case sensitive,\ndpl4hydra_full.csv:4495  motorola,SB5100,,http://192.168.100.1,,,Administration,,\ndpl4hydra_full.csv:4496  motorola,SB5120,,http://192.168.100.1,,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1621",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<ip-adress",
+      "evidence": "dpl4hydra_full.csv:1621  cnet,804-nf,,HTTP,admin,password,http://<ip-adress>,,\ndpl4hydra_full.csv:1623  cnet,804-nf,,http://<ip-adress> </ip-adress>,admin,password,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:1665",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.168.1",
+      "evidence": "dpl4hydra_full.csv:1665  compex,MMC543AHV,,http://192.168.168.1,admin,Password,Admin,,\ndpl4hydra_full.csv:1668  compex,NetPassage 15BR,,http://192.168.168.1,,password,Administration,,\ndpl4hydra_full.csv:1669  compex,NetPassage 18,,http://192.168.168.1,,password,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2112",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkrouter.local",
+      "evidence": "dpl4hydra_full.csv:2112  dlink,AC1750 Wireless,rev.B,http://dlinkrouter.local.,,(see notes),Admin,The default password is printed on a card that comes with the router in this revision.,\ndpl4hydra_full.csv:2230  dlink,DIR-505L,,http://dlinkrouter or http://dlinkrouter.local (Mac) or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_full.csv:2255  dlink,DIR-810L,,http://dlinkrouter or http://dlinkrouter.local or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2123",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.160.0.50",
+      "evidence": "dpl4hydra_full.csv:2123  dlink,DAP-1155,1.00,http://192.160.0.50,admin,admin,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2124",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkap.local",
+      "evidence": "dpl4hydra_full.csv:2124  dlink,DAP-1320,,http://dlinkap.local (see notes),Admin,,Admin,If there are multiple DAP-1320s,\ndpl4hydra_full.csv:2125  dlink,DAP-1650,,http://dlinkap.local. or http://192.168.0.50,Admin,,Admin,Wi-fi password will be the same as the router being extended,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2125",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.50",
+      "evidence": "dpl4hydra_full.csv:2125  dlink,DAP-1650,,http://dlinkap.local. or http://192.168.0.50,Admin,,Admin,Wi-fi password will be the same as the router being extended,\ndpl4hydra_full.csv:2128  dlink,DCS-2132L,,http://192.168.0.50,admin,,Admin,,\ndpl4hydra_full.csv:2324  dlink,DWL-1000AP+,,http://192.168.0.50,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2134",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.20",
+      "evidence": "dpl4hydra_full.csv:2134  dlink,DCS-5020L,,http://192.168.0.20,admin,,Admin,,\ndpl4hydra_full.csv:2137  dlink,DCS-5222L,,http://192.168.0.20,admin,,Admin,,\ndpl4hydra_full.csv:2139  dlink,DCS-930L,,http://192.168.0.20,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2146",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://192.168.0.1",
+      "evidence": "dpl4hydra_full.csv:2146  dlink,DFL-1600 firewall,,https://192.168.0.1,admin,admin,NetDefendOS Admin,,\ndpl4hydra_full.csv:2149  dlink,DFL-210 firewall,,https://192.168.0.1,admin,admin,NetDefendOS Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2153",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://my.firewall",
+      "evidence": "dpl4hydra_full.csv:2153  dlink,DFL-CP310 firewall,,http://my.firewall,admin,Management Interface Admin,,\ndpl4hydra_full.csv:2154  dlink,DFL-CP310 firewall,,http://my.firewall,admin,blank,Management Interface Admin,,\ndpl4hydra_full.csv:2155  dlink,DFL-CPG310 firewall,,http://my.firewall,admin,Management Interface Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2229",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0",
+      "evidence": "dpl4hydra_full.csv:2229  dlink,DIR-501,,http://192.168.0,1,admin,,2012-01-08,\ndpl4hydra_full.csv:2231  dlink,DIR-515,,http://192.168.0,1,admin,,2012-01-08,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2230",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkrouter",
+      "evidence": "dpl4hydra_full.csv:2230  dlink,DIR-505L,,http://dlinkrouter or http://dlinkrouter.local (Mac) or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_full.csv:2255  dlink,DIR-810L,,http://dlinkrouter or http://dlinkrouter.local or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_full.csv:2262  dlink,DIR-826L,,http://dlinkrouter or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2257",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkrouter.local./",
+      "evidence": "dpl4hydra_full.csv:2257  dlink,DIR-816L,,http://dlinkrouter.local./ or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_full.csv:2258  dlink,DIR-818LW,,http://dlinkrouter.local./ or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_full.csv:2259  dlink,DIR-820L,,http://dlinkrouter.local./ or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2278",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.40",
+      "evidence": "dpl4hydra_full.csv:2278  dlink,DSA-3100,All,http://192.168.0.40,admin,admin,Admin,,\ndpl4hydra_full.csv:2279  dlink,DSA-3100,All,http://192.168.0.40,manager,manager,User Management Options,,\ndpl4hydra_full.csv:2280  dlink,DSA-3200,All,http://192.168.0.40,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2284",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.1/",
+      "evidence": "dpl4hydra_full.csv:2284  dlink,DSL-2640B,DSL-2640B,http://192.168.1.1/,,,Telekom,,\ndpl4hydra_full.csv:7018  ovislink,evo-w301ar,1,http://192.168.1.1/,1234,1234,,,\ndpl4hydra_full.csv:10192  tplink,,TD-W8951ND,http://192.168.1.1/,admin,admin,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2298",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.1.1",
+      "evidence": "dpl4hydra_full.csv:2298  dlink,DSL-502T,,http://10.1.1.1,admin,admin,Admin,,\ndpl4hydra_full.csv:2300  dlink,DSL-504G,,http://10.1.1.1,admin,admin,Admin,also try IP 192.168.1.254,\ndpl4hydra_full.csv:2301  dlink,DSL-504T,,http://10.1.1.1,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2310",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.10.1",
+      "evidence": "dpl4hydra_full.csv:2310  dlink,DSR-1000,All,http://192.168.10.1,admin,admin,Admin,,\ndpl4hydra_full.csv:2311  dlink,DSR-1000N,All,http://192.168.10.1,admin,admin,Admin,,\ndpl4hydra_full.csv:2312  dlink,DSR-250N,All,http://192.168.10.1,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2325",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.50:2000",
+      "evidence": "dpl4hydra_full.csv:2325  dlink,DWL-1700AP,,http://192.168.0.50:2000,admin,root,,,\ndpl4hydra_full.csv:2326  dlink,DWL-1750,,http://192.168.0.50:2000,admin,root,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2333",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.30",
+      "evidence": "dpl4hydra_full.csv:2333  dlink,DWL-3150,,http://192.168.0.30,admin,,Administration,default SSID is 'dlink',\ndpl4hydra_full.csv:2345  dlink,DWL-810+,,http://192.168.0.30,admin,,Admin,,\ndpl4hydra_full.csv:2346  dlink,DWL-810,,http://192.168.0.30,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2335",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.199",
+      "evidence": "dpl4hydra_full.csv:2335  dlink,DWL-3200AP,,http://192.168.1.199,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2359",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.50/",
+      "evidence": "dpl4hydra_full.csv:2359  dlink,DWL-G700AP,,http://192.168.0.50/,admin,olinda,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2364",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.35",
+      "evidence": "dpl4hydra_full.csv:2364  dlink,DWL-G820,,http://192.168.0.35,admin,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2486",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.2.1/index.asp",
+      "evidence": "dpl4hydra_full.csv:2486  edimax,LT-6408n,3G-6408n,all versions,http://192.168.2.1/index.asp,admin,1234,web administration,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://172.14.1.57",
+      "evidence": "dpl4hydra_full.csv:2681  exindanetworks,1700,,Default login http://172.14.1.57,admin,exinda,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2786",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.14.50",
+      "evidence": "dpl4hydra_full.csv:2786  fujixerox,DocuPrint 3055,2.01E+11,http://10.0.14.50,,,admin,,\ndpl4hydra_full.csv:2787  fujixerox,DocuPrint 3055,200911121222,http://10.0.14.50,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:2790",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.support.xerox.com/SRVS/CGI-BIN/WEBCGI.EXE/",
+      "evidence": "dpl4hydra_full.csv:2790  fujixerox,Document Centre C450,,console,11111,x-admin,,http://www.support.xerox.com/SRVS/CGI-BIN/WEBCGI.EXE/,\ndpl4hydra_full.csv:10802  xerox,DocuCentre-II C6500,all versions,http,11111,x-admin,Admin,source http://www.support.xerox.com/SRVS/CGI-BIN/WEBCGI.EXE/,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3089",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://pocket.wifi",
+      "evidence": "dpl4hydra_full.csv:3089  huawei,E585u-82,,192.168.1.1 or http://pocket.wifi,Admin,Admin,Admin,Case sensitive,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3487",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.100",
+      "evidence": "dpl4hydra_full.csv:3487  infotec,ISC2525,System v1.67 / NIB v5.14 / WIM v1.10,http://192.168.0.100,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3488",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.102",
+      "evidence": "dpl4hydra_full.csv:3488  infotec,infotec IS 2416L,,http://192.168.1.102,,,admin,,\ndpl4hydra_full.csv:4284  mediatrix2102,,,http://192.168.1.102,admin,1234,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3544",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.10.10.35",
+      "evidence": "dpl4hydra_full.csv:3544  intellicom,Netbiter webSCADA WS100,All,http://10.10.10.35,admin,admin,HICP Network Configuration Service,,\ndpl4hydra_full.csv:3545  intellicom,Netbiter webSCADA WS200,All,http://10.10.10.35,admin,admin,HICP Network Configuration Service,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3590",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.5.100:8080/xWebGateway.cgi",
+      "evidence": "dpl4hydra_full.csv:3590  ipstar,240cm Dish and Indoor Unit,,http://192.168.5.100:8080/xWebGateway.cgi,ADMIN,operator,Admin,,\ndpl4hydra_full.csv:3591  ipstar,84cm Dish and Indoor Unit,,http://192.168.5.100:8080/xWebGateway.cgi,ADMIN,operator,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3658",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://118.98.171.65",
+      "evidence": "dpl4hydra_full.csv:3658  juniper,all mode,7.6R1.9,http://118.98.171.65,,,root,administrator juniper,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.192",
+      "evidence": "dpl4hydra_full.csv:3681  konicaminolta,204c,A08E-V100- 1,http://192.168.0.192,admin,,admn,accsess cannat password,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3702",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://xxx.xxx.xxx.xxx",
+      "evidence": "dpl4hydra_full.csv:3702  konicaminolta,C20,,http://xxx.xxx.xxx.xxx,Administrator,Administrator,from the login webpage,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3703",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.fixya.com/support/t888192-konica_minolta_bizbub_c253",
+      "evidence": "dpl4hydra_full.csv:3703  konicaminolta,C253,,Console,,12345678,admin,Tried what was listed at url and it worked on device :http://www.fixya.com/support/t888192-konica_minolta_bizbub_c253,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3726",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://172.16.68.19/",
+      "evidence": "dpl4hydra_full.csv:3726  konicaminolta,bizhub C10,1,http://172.16.68.19/,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3734",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://19.168.1.116",
+      "evidence": "dpl4hydra_full.csv:3734  konicaminolta,bizhub200,,http://19.168.1.116,01,1057,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3740",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.h-online.com/security/news/item/Dutch-ISP-finds-120-000-ADSL-accounts-with-default-passwords-1633549.html",
+      "evidence": "dpl4hydra_full.csv:3740  kpn,ADSL,,,(username),welkom01,Business ADSL Access,See http://www.h-online.com/security/news/item/Dutch-ISP-finds-120-000-ADSL-accounts-with-default-passwords-1633549.html,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3778",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.103",
+      "evidence": "dpl4hydra_full.csv:3778  kyocera,FS-C8020MFP,2KZ_2F00.004.019,http://192.168.1.103,Admin,Admin,,DeviceAdmin-2000,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3809",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://edmini",
+      "evidence": "dpl4hydra_full.csv:3809  lacie,Ethernet Disk Mini,all sizes,http://edmini,admin,admin,Administrator's Console,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3869",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.254",
+      "evidence": "dpl4hydra_full.csv:3869  levelone,WAP-3000,,http://192.168.0.254,admin,password,admin,,\ndpl4hydra_full.csv:4411  mikrotik,RB750,4.1,http://192.168.0.254,admin,,root,,\ndpl4hydra_full.csv:10022  telewell,TW-EA510,,http://192.168.0.254,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3906",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.245",
+      "evidence": "dpl4hydra_full.csv:3906  linksys,BEFW11S4,4,http://192.168.1.245,,,,,\ndpl4hydra_full.csv:4004  linksys,WAP200,,http://192.168.1.245,,admin,Admin,,\ndpl4hydra_full.csv:4005  linksys,WAP4400N,,http://192.168.1.245,,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3940",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.15.1",
+      "evidence": "dpl4hydra_full.csv:3940  linksys,RT31P2,,http://192.168.15.1,,admin,Administration,,\ndpl4hydra_full.csv:3941  linksys,RT31P2,,http://192.168.15.1,admin,admin,Administration,,\ndpl4hydra_full.csv:3943  linksys,RT31P2-AT,,http://192.168.15.1,,admin,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:3942",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.15.1/Voice_adminPage.htm",
+      "evidence": "dpl4hydra_full.csv:3942  linksys,RT31P2,,http://192.168.15.1/Voice_adminPage.htm,admin,admin,Voice Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4009",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.252",
+      "evidence": "dpl4hydra_full.csv:4009  linksys,WAP54A,,http://192.168.1.252,,admin,Web-Based Config Utility,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4018",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.246",
+      "evidence": "dpl4hydra_full.csv:4018  linksys,WAP55AG,1,2,http://192.168.1.246,,admin,,\ndpl4hydra_full.csv:4019  linksys,WAP55AG,1.0, 2.0 ,http://192.168.1.246,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4023",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.250",
+      "evidence": "dpl4hydra_full.csv:4023  linksys,WET610N,,http://192.168.1.250,admin,admin,Administration,,\ndpl4hydra_full.csv:10288  trendnet,TEW-510APB,,http://192.168.1.250,,admin,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4074",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.16.1",
+      "evidence": "dpl4hydra_full.csv:4074  linksys,WTR54GS,,http://192.168.16.1,,admin,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4283",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://x.x.x.x:8080",
+      "evidence": "dpl4hydra_full.csv:4283  mediatrix,2102,,http://x.x.x.x:8080,root,5678,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4398",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://189.150.32.11/",
+      "evidence": "dpl4hydra_full.csv:4398  mikrotik,MKE-3.28, 3.28 ,http://189.150.32.11/,admin,admin,root,,\ndpl4hydra_full.csv:4399  mikrotik,MKE-3.28,3.28,http://189.150.32.11/,admin,admin,root,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4420",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.254",
+      "evidence": "dpl4hydra_full.csv:4420  mikrotik,Windows 7,v5.22,http://10.0.0.254,admin,admin,admin,heheheheh,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4426",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.18.1",
+      "evidence": "dpl4hydra_full.csv:4426  mikrotik,webbox 4.11,webbox-4.11,http://192.168.18.1,admin,,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4433",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.11.1",
+      "evidence": "dpl4hydra_full.csv:4433  mikrotik,windows xp,2.9.34,http://10.1.11.1,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4482",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.3.148.115",
+      "evidence": "dpl4hydra_full.csv:4482  mobotix,m22-m,m22-m,http://10.3.148.115,admin,meinsm,Admin,admin,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:4747",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://routerlogin.net/",
+      "evidence": "dpl4hydra_full.csv:4747  netgear,WGR614,v5,http://192.168.0.1 or  http://routerlogin.net/,admin,password,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5182",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.81",
+      "evidence": "dpl4hydra_full.csv:5182  oce,tcs500, Windows XP, all models,12.3.0(1668),console, http://192.168.0.81,,\ndpl4hydra_full.csv:5183  oce,tcs500,Windows XP,all models,12.3.0(1668),console,http://192.168.0.81,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5188",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.xxx",
+      "evidence": "dpl4hydra_full.csv:5188  oki,B431dn,,http://192.168.1.xxx,root,123456,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5192",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.33",
+      "evidence": "dpl4hydra_full.csv:5192  oki,B710,all,http://192.168.1.33,root,aaaaaa,Administrator,,\ndpl4hydra_full.csv:5193  oki,B720,all,http://192.168.1.33,root,aaaaaa,Administrator,,\ndpl4hydra_full.csv:5195  oki,B730,all,http://192.168.1.33,root,aaaaaa,Administrator,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.50",
+      "evidence": "dpl4hydra_full.csv:5198  oki,C3450,,http://192.168.1.50,admin,heslo,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5199",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.51",
+      "evidence": "dpl4hydra_full.csv:5199  oki,C530dn,A1.02,http://192.168.1.51,root,aaaaaa,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5242",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.9",
+      "evidence": "dpl4hydra_full.csv:5242  oki,N22113B,A2.00,http://192.168.1.9,,noe,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:5246",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.200",
+      "evidence": "dpl4hydra_full.csv:5246  oki,c5750,n1.02,http://192.168.0.200,,,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7019",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.100.252",
+      "evidence": "dpl4hydra_full.csv:7019  ovislink,wl-1120ap,,http://192.168.100.252,super,super,,universal password,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7042",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.10",
+      "evidence": "dpl4hydra_full.csv:7042  panasonic,WV-NP240/244,V1.25-V1.50,http://192.168.0.10,admin,12345,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7200",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.52/",
+      "evidence": "dpl4hydra_full.csv:7200  proxim,ORINOCO AP-4000M,802.11A+B/G,http://192.168.1.52/,no se,no se ,no se,se me perdio el pass quiero recuperarlo,\ndpl4hydra_full.csv:7201  proxim,ORINOCO AP-4000M,802.11A+B/G,http://192.168.1.52/,no se,no se,no se,se me perdio el pass quiero recuperarlo,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7202",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://169.254.128.132",
+      "evidence": "dpl4hydra_full.csv:7202  proxim,ORiNOCO AP-600,,http://169.254.128.132,,public,Administration,,\ndpl4hydra_full.csv:7204  proxim,ORiNOCO AP-700,,http://169.254.128.132,,public,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7206",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.4/",
+      "evidence": "dpl4hydra_full.csv:7206  proxim,Orinoco AP-4000,802.11a/b/g,http://192.168.1.4/,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7329",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.92",
+      "evidence": "dpl4hydra_full.csv:7329  ricoh,Aficio MP 2510,all versions,http://192.168.0.92,,000000,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7348",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.135",
+      "evidence": "dpl4hydra_full.csv:7348  ricoh,Aficio SP C220N,,http://192.168.0.135,,,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7364",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.126.70/",
+      "evidence": "dpl4hydra_full.csv:7364  ricoh,MP 171,1,http://192.168.126.70/,admin,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7371",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://copier-ip",
+      "evidence": "dpl4hydra_full.csv:7371  ricoh,MP C3300,,http://copier-ip,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7376",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://157.88.149.100",
+      "evidence": "dpl4hydra_full.csv:7376  ricoh,NRG MP-301,,http://157.88.149.100,admin,odim,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7386",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.104",
+      "evidence": "dpl4hydra_full.csv:7386  ricoh,aficio 3224c,all models,,http://192.168.1.104,admin,420008,admin,reset password"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7522",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.1./",
+      "evidence": "dpl4hydra_full.csv:7522  scientificatlanta,2320,,http://192.168.0.1./,admin,W2402,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7534",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.100.1/_aslvl.asp",
+      "evidence": "dpl4hydra_full.csv:7534  scientificatlanta,EPC-2203,1,http://192.168.100.1/_aslvl.asp,admin,W2402,Change level 2,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:7545",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.100.1/",
+      "evidence": "dpl4hydra_full.csv:7545  scientificatlanta,SERVICE ELECTRIC CABLE (SECABLE),SERVICE ELECTRIC CABLE (SECABLE),http://192.168.100.1/,admin,W2402,Status,Status Page,\ndpl4hydra_full.csv:7548  scientificatlanta,epr2325r3,all,http://192.168.100.1/,,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9564",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bigpond.4g",
+      "evidence": "dpl4hydra_full.csv:9564  sierrawireless,AirCard 760S,Bigpond,10.0.0.138,admin,admin,Admin,also http://bigpond.4g,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9565",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://telstra.4g",
+      "evidence": "dpl4hydra_full.csv:9565  sierrawireless,AirCard 760S,Telstra,192.168.1.1,admin,admin,Admin,also http://telstra.4g,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9571",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://twc4gmobile",
+      "evidence": "dpl4hydra_full.csv:9571  sierrawireless,W801,Time Warner / Roadrunner,http://twc4gmobile,,password,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9715",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.10.1",
+      "evidence": "dpl4hydra_full.csv:9715  smc,SMCD3G-CCR,,http://10.1.10.1,cusadmin,highspeed,admin,Comcast small business modem,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9727",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.2.25",
+      "evidence": "dpl4hydra_full.csv:9727  smc,SMCWEBT-G,,http://192.168.2.25,,smcadmin,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9771",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.168.168:80/",
+      "evidence": "dpl4hydra_full.csv:9771  sonicwall,Most UTM Devices (TZ/PRO/NSA),,http://192.168.168.168:80/,admin,password,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9776",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://10.10.10.206",
+      "evidence": "dpl4hydra_full.csv:9776  sonicwall,TZ190,,https://10.10.10.206,admin,,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9864",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.200.1",
+      "evidence": "dpl4hydra_full.csv:9864  sweex,MO200,,http://192.168.200.1,sweex,mysweex,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:9994",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.tandberg.net/collateral/user_manuals/TANDBERG_8000_UserMan.pdf",
+      "evidence": "dpl4hydra_full.csv:9994  tandberg,Tandberg,8000,Multi,,TANDBERG,Admin,http://www.tandberg.net/collateral/user_manuals/TANDBERG_8000_UserMan.pdf,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10068",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://speedtouch.lan",
+      "evidence": "dpl4hydra_full.csv:10068  thomson,SpeedTouch 516,Most,192.168.1.254 or http://speedtouch.lan,Administrator,,Admin,,\ndpl4hydra_full.csv:10076  thomson,SpeedTouch 546,,http://192.168.1.254 or http://speedtouch.lan,Administrator,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10078",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.67",
+      "evidence": "dpl4hydra_full.csv:10078  thomson,SpeedTouch 576,1.7,http://192.168.1.67,blank,blank,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10098",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.254/",
+      "evidence": "dpl4hydra_full.csv:10098  thomson,TG782,,http://192.168.1.254/,,,admin,,\ndpl4hydra_full.csv:10104  thomson,xp,all versions,http://192.168.1.254/,administrator,,administrator,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10249",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tplinklogin.net",
+      "evidence": "dpl4hydra_full.csv:10249  tplink,TL-WR2543ND,,http://tplinklogin.net,admin,admin,,,\ndpl4hydra_full.csv:10253  tplink,TL-WR740N,,http://tplinklogin.net,admin,admin,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10286",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.10.100",
+      "evidence": "dpl4hydra_full.csv:10286  trendnet,TEW-450APB,C1.0R,http://192.168.10.100,admin,admin,Admin user,This is from the manual - the trendnet website advertises the default as 192.168.1.1 which doesn't work.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10305",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.3",
+      "evidence": "dpl4hydra_full.csv:10305  trendnet,TPL110AP,,http://10.0.0.3,admin,admin,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10312",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.10",
+      "evidence": "dpl4hydra_full.csv:10312  trendnet,tew-432brp,windows7,http://192.168.10,1,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10871",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.2.1",
+      "evidence": "dpl4hydra_full.csv:10871  xirrus,XR-1000H Series,,http://10.0.2.1,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10926",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.123.254",
+      "evidence": "dpl4hydra_full.csv:10926  zoom,IG-4165,,http://192.168.123.254,,admin,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10942",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.2",
+      "evidence": "dpl4hydra_full.csv:10942  zyxel,G-1000,,http://192.168.1.2,,1234,Administration,,\ndpl4hydra_full.csv:10944  zyxel,G-3000H,,http://192.168.1.2,,1234,Administration,,\ndpl4hydra_full.csv:10945  zyxel,G-560,,http://192.168.1.2,,1234,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10975",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.1:8080",
+      "evidence": "dpl4hydra_full.csv:10975  zyxel,P-964APR,,http://192.168.1.1:8080,user,1234,Administration,,\ndpl4hydra_full.csv:10976  zyxel,P-964CM,,http://192.168.1.1:8080,user,1234,Administration,,\ndpl4hydra_full.csv:10977  zyxel,P-964CR,,http://192.168.1.1:8080,user,1234,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_full.csv:10978",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1001",
+      "evidence": "dpl4hydra_full.csv:10978  zyxel,P-971M,,http://192.168.1001,webadmin,1234,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.254",
+      "evidence": "dpl4hydra_local.csv:3  2wire,2700HG B,4.25.19,http://192.168.1.254,,,,,\ndpl4hydra_local.csv:273  actiontec,V1000H,Telus,http://192.168.1.254,admin,telus,,,\ndpl4hydra_local.csv:1277  billion,BiPAC 5102,,http://192.168.1.254,admin,admin,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.138",
+      "evidence": "dpl4hydra_local.csv:5  2wire,2701HGV-W,All,http://10.0.0.138 or http://gateway.2wire.net or http://home,,(printed on the bottom of the device),Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://gateway.2wire.net",
+      "evidence": "dpl4hydra_local.csv:5  2wire,2701HGV-W,All,http://10.0.0.138 or http://gateway.2wire.net or http://home,,(printed on the bottom of the device),Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:5",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://home",
+      "evidence": "dpl4hydra_local.csv:5  2wire,2701HGV-W,All,http://10.0.0.138 or http://gateway.2wire.net or http://home,,(printed on the bottom of the device),Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.1",
+      "evidence": "dpl4hydra_local.csv:30  3com,3CRWDR101A75,All,http://192.168.1.1,,admin,Admin,,\ndpl4hydra_local.csv:32  3com,3CRWE554G72,All,http://192.168.1.1,,admin,Admin,,\ndpl4hydra_local.csv:120  3com,OfficeConnect ADSL Wireless 11g Firewall Router,3CRWDR100-72,HTTP,,admin,Admin,http://192.168.1.1,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:111",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.0.1",
+      "evidence": "dpl4hydra_local.csv:111  3com,Netbuilder,,HTTP,Root,,Admin,http://10.1.0.1,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:194",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://80.1.64.217",
+      "evidence": "dpl4hydra_local.csv:194  3go,3GO11,All,http://80.1.64.217,administrator,246810,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:252",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.1",
+      "evidence": "dpl4hydra_local.csv:252  actiontec,GT701,,http://192.168.0.1,admin,,,,\ndpl4hydra_local.csv:275  actiontec,gt701,,http://192.168.0.1,admin,,,,\ndpl4hydra_local.csv:1349  broadmax,LinkMax HSA300A-2,,http://192.168.0.1,broadmax,broadmax,Admin,You need to put the IP as Gateway in TCPIP settings and 192.168.0.2 as your assigned IP.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:569",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.174",
+      "evidence": "dpl4hydra_local.csv:569  alliedtelesyn,windows xp,      AR410,http://192.168.1.174,admin,admin,user,HACK,\ndpl4hydra_local.csv:570  alliedtelesyn,windows xp,AR410,http://192.168.1.174,admin,admin,user,HACK,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:758",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.heise.de/security/news/meldung/44899",
+      "evidence": "dpl4hydra_local.csv:758  apc,USV Network Management Card,,SNMP,,TENmanUFactOryPOWER ,Admin,nachzulesen unter http://www.heise.de/security/news/meldung/44899 gruss HonkHase,\ndpl4hydra_local.csv:759  apc,USV Network Management Card,,SNMP,,TENmanUFactOryPOWER,Admin,nachzulesen unter http://www.heise.de/security/news/meldung/44899 gruss HonkHase,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:788",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.2.1",
+      "evidence": "dpl4hydra_local.csv:788  arcor,Easybox,all,http://192.168.2.1,root,123456,Root,,\ndpl4hydra_local.csv:1181  belkin,F5D5231-4,,http://192.168.2.1,,,Administration,,\ndpl4hydra_local.csv:1192  belkin,F5D7231-4,,http://192.168.2.1,,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:793",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://192.168.2.1",
+      "evidence": "dpl4hydra_local.csv:793  arlotto,SG205,,HTTP,admin,123456,https://192.168.2.1,,\ndpl4hydra_local.csv:794  arlotto,SG205,,https://192.168.2.1,admin,123456,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:853",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://router.asus.com",
+      "evidence": "dpl4hydra_local.csv:853  asus,RT-AC5300,,http://router.asus.com,admin,admin,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:880",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.100",
+      "evidence": "dpl4hydra_local.csv:880  atcom,AG-168FC,,http://192.168.1.100,,12345678,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1121",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<deviceIP",
+      "evidence": "dpl4hydra_local.csv:1121  barracudanetworks,Barracuda Spam Firewall 300,,http://<deviceIP>:8000,admin,admin,full admin access,,\ndpl4hydra_local.csv:1123  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://<deviceIP>:8080,admin,adminbn99,full admin access,,\ndpl4hydra_local.csv:1124  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://<deviceIP>:8080,guest,bnadmin99,guest access - some information disclosure,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1122",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://lt",
+      "evidence": "dpl4hydra_local.csv:1122  barracudanetworks,Barracuda Spam Firewall 300,,http://lt;deviceIPgt;:8000,admin,admin,full admin access,,\ndpl4hydra_local.csv:1125  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://lt;deviceIPgt;:8080,admin,adminbn99,full admin access,,\ndpl4hydra_local.csv:1126  barracudanetworks,Barracuda Spam Firewall,3.3.01.001 to 3.3.03.053,http://lt;deviceIPgt;:8080,guest,bnadmin99,guest access - some information disclosure,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1216",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.2",
+      "evidence": "dpl4hydra_local.csv:1216  belkin,P74476au,,http://10.0.0.2,admin,password,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1383",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.11.1",
+      "evidence": "dpl4hydra_local.csv:1383  buffalo,Wireless Broadband Base Station-g ,WLA-G54 WBR-G54,HTTP,root,,Admin,http://192.168.11.1,\ndpl4hydra_local.csv:1385  buffalo,Wireless Broadband Base Station-g,WLA-G54 WBR-G54,HTTP,root,,Admin,http://192.168.11.1,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1430",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://server.com/ScriptName.cgi?load=login",
+      "evidence": "dpl4hydra_local.csv:1430  cgiworld,Poll It,2,HTTP,,protection,User/Admin over package,http://server.com/ScriptName.cgi?load=login,\ndpl4hydra_local.csv:1431  cgiworld,Poll It,2.0,HTTP,,protection,User/Admin over package,http://server.com/ScriptName.cgi?load=login,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1454",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.100.1",
+      "evidence": "dpl4hydra_local.csv:1454  cisco,2100 aka DPX2100,all versions (comcast-supplied),http://192.168.100.1,,W2402,,password case sensitive,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1621",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://<ip-adress",
+      "evidence": "dpl4hydra_local.csv:1621  cnet,804-nf,,HTTP,admin,password,http://<ip-adress>,,\ndpl4hydra_local.csv:1623  cnet,804-nf,,http://<ip-adress> </ip-adress>,admin,password,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:1665",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.168.1",
+      "evidence": "dpl4hydra_local.csv:1665  compex,MMC543AHV,,http://192.168.168.1,admin,Password,Admin,,\ndpl4hydra_local.csv:1668  compex,NetPassage 15BR,,http://192.168.168.1,,password,Administration,,\ndpl4hydra_local.csv:1669  compex,NetPassage 18,,http://192.168.168.1,,password,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2112",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkrouter.local",
+      "evidence": "dpl4hydra_local.csv:2112  dlink,AC1750 Wireless,rev.B,http://dlinkrouter.local.,,(see notes),Admin,The default password is printed on a card that comes with the router in this revision.,\ndpl4hydra_local.csv:2230  dlink,DIR-505L,,http://dlinkrouter or http://dlinkrouter.local (Mac) or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_local.csv:2255  dlink,DIR-810L,,http://dlinkrouter or http://dlinkrouter.local or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2123",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.160.0.50",
+      "evidence": "dpl4hydra_local.csv:2123  dlink,DAP-1155,1.00,http://192.160.0.50,admin,admin,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2124",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkap.local",
+      "evidence": "dpl4hydra_local.csv:2124  dlink,DAP-1320,,http://dlinkap.local (see notes),Admin,,Admin,If there are multiple DAP-1320s,\ndpl4hydra_local.csv:2125  dlink,DAP-1650,,http://dlinkap.local. or http://192.168.0.50,Admin,,Admin,Wi-fi password will be the same as the router being extended,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2125",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.50",
+      "evidence": "dpl4hydra_local.csv:2125  dlink,DAP-1650,,http://dlinkap.local. or http://192.168.0.50,Admin,,Admin,Wi-fi password will be the same as the router being extended,\ndpl4hydra_local.csv:2128  dlink,DCS-2132L,,http://192.168.0.50,admin,,Admin,,\ndpl4hydra_local.csv:2324  dlink,DWL-1000AP+,,http://192.168.0.50,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2134",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.20",
+      "evidence": "dpl4hydra_local.csv:2134  dlink,DCS-5020L,,http://192.168.0.20,admin,,Admin,,\ndpl4hydra_local.csv:2137  dlink,DCS-5222L,,http://192.168.0.20,admin,,Admin,,\ndpl4hydra_local.csv:2139  dlink,DCS-930L,,http://192.168.0.20,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2146",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://192.168.0.1",
+      "evidence": "dpl4hydra_local.csv:2146  dlink,DFL-1600 firewall,,https://192.168.0.1,admin,admin,NetDefendOS Admin,,\ndpl4hydra_local.csv:2149  dlink,DFL-210 firewall,,https://192.168.0.1,admin,admin,NetDefendOS Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2153",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://my.firewall",
+      "evidence": "dpl4hydra_local.csv:2153  dlink,DFL-CP310 firewall,,http://my.firewall,admin,Management Interface Admin,,\ndpl4hydra_local.csv:2154  dlink,DFL-CP310 firewall,,http://my.firewall,admin,blank,Management Interface Admin,,\ndpl4hydra_local.csv:2155  dlink,DFL-CPG310 firewall,,http://my.firewall,admin,Management Interface Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2229",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0",
+      "evidence": "dpl4hydra_local.csv:2229  dlink,DIR-501,,http://192.168.0,1,admin,,2012-01-08,\ndpl4hydra_local.csv:2231  dlink,DIR-515,,http://192.168.0,1,admin,,2012-01-08,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2230",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkrouter",
+      "evidence": "dpl4hydra_local.csv:2230  dlink,DIR-505L,,http://dlinkrouter or http://dlinkrouter.local (Mac) or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_local.csv:2255  dlink,DIR-810L,,http://dlinkrouter or http://dlinkrouter.local or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_local.csv:2262  dlink,DIR-826L,,http://dlinkrouter or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2257",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://dlinkrouter.local./",
+      "evidence": "dpl4hydra_local.csv:2257  dlink,DIR-816L,,http://dlinkrouter.local./ or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_local.csv:2258  dlink,DIR-818LW,,http://dlinkrouter.local./ or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,\ndpl4hydra_local.csv:2259  dlink,DIR-820L,,http://dlinkrouter.local./ or http://192.168.0.1,admin,,Admin,Default SSID and Wi-fi password are on the supplied info card.,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2278",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.40",
+      "evidence": "dpl4hydra_local.csv:2278  dlink,DSA-3100,All,http://192.168.0.40,admin,admin,Admin,,\ndpl4hydra_local.csv:2279  dlink,DSA-3100,All,http://192.168.0.40,manager,manager,User Management Options,,\ndpl4hydra_local.csv:2280  dlink,DSA-3200,All,http://192.168.0.40,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2284",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.1/",
+      "evidence": "dpl4hydra_local.csv:2284  dlink,DSL-2640B,DSL-2640B,http://192.168.1.1/,,,Telekom,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2298",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.1.1",
+      "evidence": "dpl4hydra_local.csv:2298  dlink,DSL-502T,,http://10.1.1.1,admin,admin,Admin,,\ndpl4hydra_local.csv:2300  dlink,DSL-504G,,http://10.1.1.1,admin,admin,Admin,also try IP 192.168.1.254,\ndpl4hydra_local.csv:2301  dlink,DSL-504T,,http://10.1.1.1,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2310",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.10.1",
+      "evidence": "dpl4hydra_local.csv:2310  dlink,DSR-1000,All,http://192.168.10.1,admin,admin,Admin,,\ndpl4hydra_local.csv:2311  dlink,DSR-1000N,All,http://192.168.10.1,admin,admin,Admin,,\ndpl4hydra_local.csv:2312  dlink,DSR-250N,All,http://192.168.10.1,admin,admin,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2325",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.50:2000",
+      "evidence": "dpl4hydra_local.csv:2325  dlink,DWL-1700AP,,http://192.168.0.50:2000,admin,root,,,\ndpl4hydra_local.csv:2326  dlink,DWL-1750,,http://192.168.0.50:2000,admin,root,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2333",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.30",
+      "evidence": "dpl4hydra_local.csv:2333  dlink,DWL-3150,,http://192.168.0.30,admin,,Administration,default SSID is 'dlink',\ndpl4hydra_local.csv:2345  dlink,DWL-810+,,http://192.168.0.30,admin,,Admin,,\ndpl4hydra_local.csv:2346  dlink,DWL-810,,http://192.168.0.30,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2335",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.199",
+      "evidence": "dpl4hydra_local.csv:2335  dlink,DWL-3200AP,,http://192.168.1.199,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2359",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.50/",
+      "evidence": "dpl4hydra_local.csv:2359  dlink,DWL-G700AP,,http://192.168.0.50/,admin,olinda,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2364",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.35",
+      "evidence": "dpl4hydra_local.csv:2364  dlink,DWL-G820,,http://192.168.0.35,admin,,Administration,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2486",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.2.1/index.asp",
+      "evidence": "dpl4hydra_local.csv:2486  edimax,LT-6408n,3G-6408n,all versions,http://192.168.2.1/index.asp,admin,1234,web administration,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://172.14.1.57",
+      "evidence": "dpl4hydra_local.csv:2681  exindanetworks,1700,,Default login http://172.14.1.57,admin,exinda,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2786",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.14.50",
+      "evidence": "dpl4hydra_local.csv:2786  fujixerox,DocuPrint 3055,2.01E+11,http://10.0.14.50,,,admin,,\ndpl4hydra_local.csv:2787  fujixerox,DocuPrint 3055,200911121222,http://10.0.14.50,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:2790",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.support.xerox.com/SRVS/CGI-BIN/WEBCGI.EXE/",
+      "evidence": "dpl4hydra_local.csv:2790  fujixerox,Document Centre C450,,console,11111,x-admin,,http://www.support.xerox.com/SRVS/CGI-BIN/WEBCGI.EXE/,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3089",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://pocket.wifi",
+      "evidence": "dpl4hydra_local.csv:3089  huawei,E585u-82,,192.168.1.1 or http://pocket.wifi,Admin,Admin,Admin,Case sensitive,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3487",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.100",
+      "evidence": "dpl4hydra_local.csv:3487  infotec,ISC2525,System v1.67 / NIB v5.14 / WIM v1.10,http://192.168.0.100,admin,,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3488",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.102",
+      "evidence": "dpl4hydra_local.csv:3488  infotec,infotec IS 2416L,,http://192.168.1.102,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3544",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.10.10.35",
+      "evidence": "dpl4hydra_local.csv:3544  intellicom,Netbiter webSCADA WS100,All,http://10.10.10.35,admin,admin,HICP Network Configuration Service,,\ndpl4hydra_local.csv:3545  intellicom,Netbiter webSCADA WS200,All,http://10.10.10.35,admin,admin,HICP Network Configuration Service,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3590",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.5.100:8080/xWebGateway.cgi",
+      "evidence": "dpl4hydra_local.csv:3590  ipstar,240cm Dish and Indoor Unit,,http://192.168.5.100:8080/xWebGateway.cgi,ADMIN,operator,Admin,,\ndpl4hydra_local.csv:3591  ipstar,84cm Dish and Indoor Unit,,http://192.168.5.100:8080/xWebGateway.cgi,ADMIN,operator,Admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3658",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://118.98.171.65",
+      "evidence": "dpl4hydra_local.csv:3658  juniper,all mode,7.6R1.9,http://118.98.171.65,,,root,administrator juniper,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.192",
+      "evidence": "dpl4hydra_local.csv:3681  konicaminolta,204c,A08E-V100- 1,http://192.168.0.192,admin,,admn,accsess cannat password,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3702",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://xxx.xxx.xxx.xxx",
+      "evidence": "dpl4hydra_local.csv:3702  konicaminolta,C20,,http://xxx.xxx.xxx.xxx,Administrator,Administrator,from the login webpage,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3703",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.fixya.com/support/t888192-konica_minolta_bizbub_c253",
+      "evidence": "dpl4hydra_local.csv:3703  konicaminolta,C253,,Console,,12345678,admin,Tried what was listed at url and it worked on device :http://www.fixya.com/support/t888192-konica_minolta_bizbub_c253,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3726",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://172.16.68.19/",
+      "evidence": "dpl4hydra_local.csv:3726  konicaminolta,bizhub C10,1,http://172.16.68.19/,,,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3734",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://19.168.1.116",
+      "evidence": "dpl4hydra_local.csv:3734  konicaminolta,bizhub200,,http://19.168.1.116,01,1057,,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3740",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.h-online.com/security/news/item/Dutch-ISP-finds-120-000-ADSL-accounts-with-default-passwords-1633549.html",
+      "evidence": "dpl4hydra_local.csv:3740  kpn,ADSL,,,(username),welkom01,Business ADSL Access,See http://www.h-online.com/security/news/item/Dutch-ISP-finds-120-000-ADSL-accounts-with-default-passwords-1633549.html,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3778",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.103",
+      "evidence": "dpl4hydra_local.csv:3778  kyocera,FS-C8020MFP,2KZ_2F00.004.019,http://192.168.1.103,Admin,Admin,,DeviceAdmin-2000,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3809",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://edmini",
+      "evidence": "dpl4hydra_local.csv:3809  lacie,Ethernet Disk Mini,all sizes,http://edmini,admin,admin,Administrator's Console,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3869",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.0.254",
+      "evidence": "dpl4hydra_local.csv:3869  levelone,WAP-3000,,http://192.168.0.254,admin,password,admin,,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "dpl4hydra_local.csv:3906",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://192.168.1.245",
+      "evidence": "dpl4hydra_local.csv:3906  linksys,BEFW11S4,4,http://192.168.1.245,,,,,"
+    }
+  ],
+  "reRooting": []
+}

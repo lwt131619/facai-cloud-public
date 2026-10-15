@@ -1,0 +1,47 @@
+// ── S9.5 实例 · 渗透测试 ──
+s = p.addSlide();
+s.background = { path: BG_PER[3] };
+s.addText("USE CASE · 渗透测试", { x: 0.6, y: 0.42, w: 8, h: 0.35, fontSize: 11, color: MUT, fontFace: MONO, charSpacing: 3, margin: 0 });
+s.addText("我不懂渗透。一句话，渗透结果直接上交。", { x: 0.6, y: 0.95, w: 12.1, h: 1.6, fontSize: 34, bold: true, color: TXT, fontFace: F, lineSpacing: 48, margin: 0 });
+s.addText("你说：“把目标站的安全底细摸清，漏洞全列出来。”", { x: 0.6, y: 2.75, w: 12.1, h: 0.5, fontSize: 15, color: CYAN2, fontFace: F, margin: 0 });
+const pen = ["目标圈定", "信息收集", "攻击面扫描", "漏洞验证", "利用证明", "报告上交"];
+pen.forEach((t, i) => {
+  const x = 0.6 + i * 2.13;
+  s.addShape(p.shapes.ROUNDED_RECTANGLE, { x, y: 3.5, w: 1.9, h: 0.75, fill: { color: PANEL }, line: { color: i === 5 ? GOLD : LINE, width: 1 }, rectRadius: 0.09 });
+  s.addText(`${i + 1} ${t}`, { x: x + 0.12, y: 3.5, w: 1.7, h: 0.75, valign: "middle", fontSize: 12, bold: i === 5, color: i === 5 ? GOLD : TXT, fontFace: F, margin: 0 });
+  if (i < 5) s.addText("→", { x: x + 1.9, y: 3.5, w: 0.24, h: 0.75, align: "center", valign: "middle", fontSize: 13, color: MUT, fontFace: F, margin: 0 });
+});
+const pdel = [["漏洞清单", "全部发现按危害定级"], ["复现步骤", "每一条可复验"], ["修复建议", "逐条给出堵法"], ["报告上交", "PDF/网页双格式"]];
+pdel.forEach((d, i) => {
+  const x = 0.6 + i * 3.22;
+  card(s, x, 4.6, 2.95, 1.0);
+  s.addText([{ text: d[0], options: { bold: true, color: CYAN2, breakLine: true } }, { text: d[1], options: { color: MUT } }],
+    { x: x + 0.25, y: 4.7, w: 2.5, h: 0.8, fontSize: 12.5, fontFace: F, lineSpacing: 17, margin: 0 });
+});
+s.addText("全自动 · 无人工 · 报告直接上交", { x: 0.6, y: 5.85, w: 9, h: 0.45, fontSize: 15, bold: true, color: GOLD, fontFace: F, margin: 0 });
+s.addText("＊限自有资产及已获书面授权的目标 · 遵守当地法律", { x: 0.6, y: 7.02, w: 6.5, h: 0.3, fontSize: 9, color: MUT, fontFace: F, margin: 0 });
+s.addText("whstapp.lol", { x: W - 3.0, y: 7.02, w: 2.4, h: 0.32, fontSize: 12, bold: true, color: CYAN, fontFace: MONO, align: "right", margin: 0 });
+
+// ── S9.6 实例 · 全渠道投放 ──
+s = p.addSlide();
+s.background = { path: BG_PER[6] };
+s.addText("USE CASE · 全渠道投放", { x: 0.6, y: 0.42, w: 8, h: 0.35, fontSize: 11, color: MUT, fontFace: MONO, charSpacing: 3, margin: 0 });
+s.addText("我不懂投放。一句话，全渠道拉满，为项目投递。", { x: 0.6, y: 0.95, w: 12.1, h: 1.6, fontSize: 34, bold: true, color: TXT, fontFace: F, lineSpacing: 48, margin: 0 });
+s.addText("你说：“帮我把项目推出去，能上的渠道全上。”", { x: 0.6, y: 2.7, w: 12.1, h: 0.5, fontSize: 15, color: CYAN2, fontFace: F, margin: 0 });
+const chans = ["网页", "微信", "Telegram", "WhatsApp", "LINE", "API 自动化"];
+chans.forEach((t, i) => {
+  const x = 0.6 + i * 2.13;
+  s.addShape(p.shapes.ROUNDED_RECTANGLE, { x, y: 3.45, w: 1.9, h: 0.7, fill: { color: PANEL }, line: { color: OK, width: 1 }, rectRadius: 0.09 });
+  s.addText(t, { x, y: 3.45, w: 1.9, h: 0.7, align: "center", valign: "middle", fontSize: 12.5, color: TXT, fontFace: F, margin: 0 });
+});
+const drops = [["文案生成", "多版本自动产出"], ["素材适配", "各渠道规格自动转换"], ["定时投放", "排期自动执行"], ["效果回收", "数据自动回传汇总"]];
+drops.forEach((d, i) => {
+  const x = 0.6 + i * 3.22;
+  card(s, x, 4.5, 2.95, 1.05);
+  s.addText([{ text: d[0], options: { bold: true, color: CYAN2, breakLine: true } }, { text: d[1], options: { color: MUT } }],
+    { x: x + 0.25, y: 4.62, w: 2.5, h: 0.85, fontSize: 12.5, fontFace: F, lineSpacing: 17, margin: 0 });
+});
+s.addText("一句话 · 全渠道 · 自动投递 · 数据回流", { x: 0.6, y: 5.9, w: 9, h: 0.45, fontSize: 15, bold: true, color: GOLD, fontFace: F, margin: 0 });
+s.addText("whstapp.lol", { x: W - 3.0, y: 7.02, w: 2.4, h: 0.32, fontSize: 12, bold: true, color: CYAN, fontFace: MONO, align: "right", margin: 0 });
+
+// ── S9.7 能力规模 ──

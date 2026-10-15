@@ -1,0 +1,252 @@
+{
+  "target": "asset-phish-server (初扫收录实例 C:\\Users\\user\\phish-server)",
+  "origin": "本地路径 C:\\Users\\user\\phish-server",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 56 个文本文件（源码 2、其余 54），识别 27 面（源码档 2、文档/示例 DOC_ 降权 7、其余文件 18；截断=False/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "sms_tools/smishing_attacker.py:155",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://localhost:3333/api/campaigns/?api_key=",
+      "evidence": "sms_tools/smishing_attacker.py:155  campaigns = requests.get('https://localhost:3333/api/campaigns/?api_key=' + gophish_settings['GOPHISH_API_KEY'], verify=False)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "tools/notify_service.py:32",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "tools/notify_service.py:32  result = subprocess.run("
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:83",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://localhost:3333",
+      "evidence": "README.md:83  - **Gophish管理后台**: `https://localhost:3333`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "README.md:84",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:80",
+      "evidence": "README.md:84  - **钓鱼服务器**: `http://localhost:80`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deploy.bat:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://localhost:3333",
+      "evidence": "deploy.bat:36  echo   Gophish管理后台: https://localhost:3333\ndeploy.bat:50  start https://localhost:3333"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "deploy.bat:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:80",
+      "evidence": "deploy.bat:37  echo   钓鱼服务器: http://localhost:80"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "email_templates/amazon-web-services-aws/amazon-web-services-aws-exclusive-100-amazon-gift-card-modified.html:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300",
+      "evidence": "email_templates/amazon-web-services-aws/amazon-web-services-aws-exclusive-100-amazon-gift-card-modified.html:10  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "email_templates/microsoft-teams/microsoft-teams-exclusive-microsoft-365-upgrade-offer-modified.html:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fonts.googleapis.com/css2?family=Roboto:wght@400",
+      "evidence": "email_templates/microsoft-teams/microsoft-teams-exclusive-microsoft-365-upgrade-offer-modified.html:8  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "email_templates/zoom/zoom-urgent-account-update-required-modified.html:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fonts.googleapis.com/css2?family=Roboto:wght@400",
+      "evidence": "email_templates/zoom/zoom-urgent-account-update-required-modified.html:9  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:20",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://i.imgur.com/FCNOpf4.png",
+      "evidence": "meet_tools/Gomeetphishing.html:20  <div style=\"width:100px;height:100px;margin-top:0px;margin-left:0px;display:inline-block;line-height:100px;font-size:50px;\"><img src=\"https://i.imgur.com/FCNOpf4.png\" /></div>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:131",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://meet.google.com/nullwin?hs=224",
+      "evidence": "meet_tools/Gomeetphishing.html:131  <td style=\"padding-bottom: 10px;font-family: Arial,Sans-serif;font-size: 13px;color: #222;margin: 0;\" valign=\"top\"><span><span><span><span content=\"meet.google.com/nullwin\"><span><span content=\"https://meet.google.com/nullwin?hs=224\"><span "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:131",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://meet.google.com/nullwin?hs%3D224&amp",
+      "evidence": "meet_tools/Gomeetphishing.html:131  <td style=\"padding-bottom: 10px;font-family: Arial,Sans-serif;font-size: 13px;color: #222;margin: 0;\" valign=\"top\"><span><span><span><span content=\"meet.google.com/nullwin\"><span><span content=\"https://meet.google.com/nullwin?hs=224\"><span "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:186",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://calendar.google.com/calendar/event?action%mZfMjAyMjA2MwOEBt%2saW9uaUBnbWFpbC5jb20xNTU2MDJkYmU0ODRmYjYzMjUxMTNhYjdkYzE0YjIxZTJiMzk0YTdk%26ctz%3DAmerica%252FChicago%252illinois%26hl%3Des%26es%3D1",
+      "evidence": "meet_tools/Gomeetphishing.html:186  <div style=\"float: right;font-weight: bold;font-size: 13px;display: block;\"><span><span><a data-saferedirecturl=\"https://www.google.com/url?q=https://calendar.google.com/calendar/event?action%mZfMjAyMjA2MwOEBt%2saW9uaUBnbWFpbC5jb20xNTU2MDJk"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:189",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://calendar.google.com/calendar/zQ3NmZfMjAyMjA2MTNUMTEwMDAwWiBqdWFucGNkMjAwOEBt%26rst%3D1%20xNTU2MDJkYmU0ODRmYjYzMjUxMTNhYjdkYzE0YjIxZTJiMzk0YTdk%26ctz%3DAmerica%252Fchicago%252Fillinois%26hl%3Des%26es%3D1",
+      "evidence": "meet_tools/Gomeetphishing.html:189  <p style=\"color:#222;font-size:13px;margin:0\"><span><span><span style=\"color:#888\">Going (<a href=\"{{.URL}}\" target=\"_blank\">nullwin@nullwin.com</a>)?&nbsp;&nbsp;&nbsp;</span><strong><span><span><a data-saferedirecturl=\"https://www.google.c"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:189",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://calendar.google.com/calendar/event?action%3DRESPOND%26eid%3DM3IybmxuMXU3cTQxc3BhNjhuM3NhMzQ3NmZfMjAyMjA2MTNUMTEwMDAwWiBqdWFucGNkMjAwOEBt%26rst%3D3%26tok%3DMjMjanBjYXN0aWdsaW9uaUBnbWFpbC5jb20xNTU2MDJkYmU0ODRmYjYzMjUxMTNhYjdkYzE0YjIxZTJiMzk0YTdk%26ctz%3DAmerica%252FChicago%252FIllinois%26hl%3Des%26es%3D",
+      "evidence": "meet_tools/Gomeetphishing.html:189  <p style=\"color:#222;font-size:13px;margin:0\"><span><span><span style=\"color:#888\">Going (<a href=\"{{.URL}}\" target=\"_blank\">nullwin@nullwin.com</a>)?&nbsp;&nbsp;&nbsp;</span><strong><span><span><a data-saferedirecturl=\"https://www.google.c"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:189",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://calendar.google.com/calendar/event?action%3DRESPOND%26eid%3DM3IybmxuMXU3cTQxc3BhNjhuM3NhMzQ3NmZfMjAyMjA2MTNUMTEwMDAwWiBqdWFucGNkMjAwOEBt%26rst%3D2%26tok%3DMjMjanBjYXN0aWdsaW9uaUBnbWFpbC5jb20xNTU2MDJkYmU0ODRTJiMzk0YTdk%26ctz%3DAmerica%252FChicago%252FIllionois%26hl%3Des%26es%3D1",
+      "evidence": "meet_tools/Gomeetphishing.html:189  <p style=\"color:#222;font-size:13px;margin:0\"><span><span><span style=\"color:#888\">Going (<a href=\"{{.URL}}\" target=\"_blank\">nullwin@nullwin.com</a>)?&nbsp;&nbsp;&nbsp;</span><strong><span><span><a data-saferedirecturl=\"https://www.google.c"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:189",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://calendar.google.com/calendar/event?action%3DVIEW%26eid%3DM3IybmxuMXU3cTQxc3BhNjhuM3NhMzQ3NmZfMjAyFucGNkMjAwOEBt%26tok%3DMjMjanBjYXN0aWdsaW9uaUBnbWFpbC5jb20xNTU2MDJkYmU0ODRmYjYzMjUxMTNhYjdkYzE0YjIxZTJiMzk0YTdk%26ctz%3DAmerica%252FChicago%252FIllinois%26hl%3Des%26es%3D1",
+      "evidence": "meet_tools/Gomeetphishing.html:189  <p style=\"color:#222;font-size:13px;margin:0\"><span><span><span style=\"color:#888\">Going (<a href=\"{{.URL}}\" target=\"_blank\">nullwin@nullwin.com</a>)?&nbsp;&nbsp;&nbsp;</span><strong><span><span><a data-saferedirecturl=\"https://www.google.c"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:194",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://calendar.google.com/calendar/",
+      "evidence": "meet_tools/Gomeetphishing.html:194  <p><span><span>Invitation from <a data-saferedirecturl=\"https://www.google.com/url?q=https://calendar.google.com/calendar/\" href=\"{{.URL}}\" target=\"_blank\">Google Calendar</a></span></span></p>\nmeet_tools/Gomeetphishing.html:198  <p><span><span>To stop receiving these emails, please log in to <a data-saferedirecturl=\"https://www.google.com/url?q=https://calendar.google.com/calendar/\" href=\"{{.URL}}\" target=\"_blank\">https://calendar.google.com/<wbr />calendar/</a> an"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://calendar.google.com/<wbr",
+      "evidence": "meet_tools/Gomeetphishing.html:198  <p><span><span>To stop receiving these emails, please log in to <a data-saferedirecturl=\"https://www.google.com/url?q=https://calendar.google.com/calendar/\" href=\"{{.URL}}\" target=\"_blank\">https://calendar.google.com/<wbr />calendar/</a> an"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "meet_tools/Gomeetphishing.html:200",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/url?q=https://support.google.com/calendar/answer/37135%23forwarding&amp",
+      "evidence": "meet_tools/Gomeetphishing.html:200  <p><span><span>Forwarding this invitation could allow any recipient to send a response to the organizer and be added to the guest list, or invite others regardless of their own invitation status, or to modify your RSVP. <a data-saferedirect"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "pages/phishedNotice.html:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
+      "evidence": "pages/phishedNotice.html:4  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "sms_tools/README.md:13",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/yashrao/SMS-Phishing-Attacker",
+      "evidence": "sms_tools/README.md:13  git clone https://github.com/yashrao/SMS-Phishing-Attacker\nsms_tools/README.md:30  git clone https://github.com/yashrao/SMS-Phishing-Attacker"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "sms_tools/README.md:61",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example-site.com/",
+      "evidence": "sms_tools/README.md:61  * {{URL}}: landing page URL (e.g. https://example-site.com/), SMS Phishing Attacker will automatically append the individual **Gophish Tracking ID for each user** so that Gophish can track the links"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "sms_tools/sample_config.ini:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://XXXXXXXX/",
+      "evidence": "sms_tools/sample_config.ini:13  GOPHISH_LANDING_PAGE_URL = http://XXXXXXXX/\nsms_tools/sample_config.ini:33  GOPHISH_LANDING_PAGE_URL = http://XXXXXXXX/"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "tools/EasyFish/README.MD:5",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.yuque.com/mingtian-gbdvz/easyfish",
+      "evidence": "tools/EasyFish/README.MD:5  > 使用说明参考：https://www.yuque.com/mingtian-gbdvz/easyfish"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "tools/EasyFish/README.MD:7",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mp.weixin.qq.com/s/B4jmpmwP-HSl1EsROhQhDA",
+      "evidence": "tools/EasyFish/README.MD:7  > 使用案例参考 杰龙师傅 的真实演练：https://mp.weixin.qq.com/s/B4jmpmwP-HSl1EsROhQhDA"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "tools/EasyFish/README.MD:11",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/bin-maker/EasyFish/assets/77133486/ea76335a-ed4d-42f5-b384-1d91ef18b8ed",
+      "evidence": "tools/EasyFish/README.MD:11  ![image](https://github.com/bin-maker/EasyFish/assets/77133486/ea76335a-ed4d-42f5-b384-1d91ef18b8ed)"
+    }
+  ],
+  "reRooting": []
+}

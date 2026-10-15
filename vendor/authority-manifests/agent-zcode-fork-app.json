@@ -1,0 +1,2704 @@
+{
+  "target": "agent-zcode-fork-app (初扫收录实例 G:\\Agents\\ZCode\\app)",
+  "origin": "本地路径 G:\\Agents\\ZCode\\app",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 124 个文本文件（源码 47、其余 77），识别 298 面（源码档 98、文档/示例 DOC_ 降权 33、其余文件 167；截断=False/True，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:36  info \"Install: /bin/bash -c \\\"\\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\\\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://deb.nodesource.com/setup_20.x",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:50  Linux)  info \"Install: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://nodejs.org/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:52  *)      info \"Install: https://nodejs.org/\" ;;\nresources/glm/packages/documents-plugin/skills/docx/setup.sh:67  *)      info \"Install: https://nodejs.org/\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:112",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.python.org/downloads/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:112  *)      info \"Install: https://www.python.org/downloads/\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:183",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/setup.sh:183  info \"  https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/env_check.sh:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/env_check.sh:13  required_on_demand() { local desc=\"$1\"; shift; if \"$@\" &>/dev/null; then $QUIET || echo \"on-demand OK: $desc\"; else $QUIET || echo \"on-demand MISSING: $desc — if a task needs it you MUST install it, not substitute it. FORBIDDEN: using Word/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:50  elif curl -s --connect-timeout 3 https://pypi.org > /dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:58  PIP_MIRROR_ARGS=\"-i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmmirror.com",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:59  NPM_MIRROR_ARGS=\"--registry https://registry.npmmirror.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:73  info \"Install: /bin/bash -c \\\"\\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\\\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://deb.nodesource.com/setup_20.x",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:87  linux) info \"Install: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:90",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/node/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:90  info \"China alt: https://npmmirror.com/mirrors/node/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:186",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://z-cdn.chatglm.cn/office-skill/fonts",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_mac_linux.sh:186  FONT_CDN_BASE=\"https://z-cdn.chatglm.cn/office-skill/fonts\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:193",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:193  W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'\nresources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:336  W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'\nresources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:416  W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:462",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:462  R_NS = \"http://schemas.openxmlformats.org/officeDocument/2006/relationships\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:667",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/XML/1998/namespace",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/add_toc_placeholders.py:667  instr.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:132",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/word/2023/wordml/word16du",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:132  \"http://schemas.microsoft.com/office/word/2023/wordml/word16du\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:141",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/word/2018/wordml/cex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:141  \"http://schemas.microsoft.com/office/word/2018/wordml/cex\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:150",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/word/2010/wordml",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:150  \"http://schemas.microsoft.com/office/word/2010/wordml\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:482",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:482  wrapper = f'<root xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">{xml_content}</root>'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1014",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/2011/relationships/people",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1014  rel_xml = f'<{prefix}Relationship Id=\"{next_rid}\" Type=\"http://schemas.microsoft.com/office/2011/relationships/people\" Target=\"people.xml\"/>'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1274",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1274  \"http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1279",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/2011/relationships/commentsExtended",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1279  \"http://schemas.microsoft.com/office/2011/relationships/commentsExtended\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1284",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/2016/09/relationships/commentsIds",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1284  \"http://schemas.microsoft.com/office/2016/09/relationships/commentsIds\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1289",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/2018/08/relationships/commentsExtensible",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/document.py:1289  \"http://schemas.microsoft.com/office/2018/08/relationships/commentsExtensible\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/fix_footer_fields.py:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/fix_footer_fields.py:38  W_NS = \"http://schemas.openxmlformats.org/wordprocessingml/2006/main\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/fix_footer_fields.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/fix_footer_fields.py:39  R_NS = \"http://schemas.openxmlformats.org/officeDocument/2006/relationships\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:37  \"w\": \"http://schemas.openxmlformats.org/wordprocessingml/2006/main\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:38  \"r\": \"http://schemas.openxmlformats.org/officeDocument/2006/relationships\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:39  \"wp\": \"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\",\nresources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:138  has_drawing = p.find(\".//{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}inline\", None) is not None"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:40",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/drawingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:40  \"a\": \"http://schemas.openxmlformats.org/drawingml/2006/main\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:41  \"pic\": \"http://schemas.openxmlformats.org/drawingml/2006/picture\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:329",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/package/2006/relationships",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/postcheck.py:329  rels_ns = 'http://schemas.openxmlformats.org/package/2006/relationships'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/env_check.sh:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/env_check.sh:17  required_on_demand() { local desc=\"$1\"; shift; if \"$@\" &>/dev/null; then $QUIET || echo \"on-demand OK: $desc\"; else $QUIET || echo \"on-demand MISSING: $desc — if a route needs it you MUST install it, not substitute it. FORBIDDEN: using Word"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:51",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:51  elif curl -s --connect-timeout 3 https://pypi.org > /dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:59  PIP_MIRROR_ARGS=\"-i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmmirror.com",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:60  NPM_MIRROR_ARGS=\"--registry https://registry.npmmirror.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/playwright/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:61  PLAYWRIGHT_HOST=\"https://npmmirror.com/mirrors/playwright/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:75  info \"Install: /bin/bash -c \\\"\\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\\\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:161",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://deb.nodesource.com/setup_20.x",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:161  linux) info \"Install: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:164",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/node/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:164  info \"China alt: https://npmmirror.com/mirrors/node/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:230",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:230  info \"     or: conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ && conda install tectonic\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:247",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:247  info \"  https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:274",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://z-cdn.chatglm.cn/office-skill/fonts",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/env_setup/setup_mac_linux.sh:274  FONT_CDN_BASE=\"https://z-cdn.chatglm.cn/office-skill/fonts\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/cover_render.py:107",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/cover_render.py:107  out = subprocess.run([\"fc-list\", pat, \"file\"], capture_output=True,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/cover_validate.js:57",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLAYWRIGHT_CHROMIUM_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/cover_validate.js:57  if (process.env.PLAYWRIGHT_CHROMIUM_PATH) candidates.unshift(process.env.PLAYWRIGHT_CHROMIUM_PATH);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:716",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:716  return f'<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 {w} {h}\" width=\"{w}\" height=\"{h}\">'\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:842  return f'<svg viewBox=\"0 0 {w} {h}\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%\">{svg_paths}</svg>'\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:1036  svg = f'<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 {vy} {w} {h}\" width=\"{w}\" height=\"{h}\">'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:2609",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+SC:wght@300",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:2609  font_url = \"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:2611",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://fonts.googleapis.com/css2?family=Inter:wght@300",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/design_engine.py:2611  font_url = \"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:25",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:25  const { execSync, spawnSync } = require('child_process');"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:40",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLAYWRIGHT_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:40  if (process.env.PLAYWRIGHT_PATH) roots.add(process.env.PLAYWRIGHT_PATH);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:41",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:41  if (process.env.NODE_PATH) {\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:42  process.env.NODE_PATH.split(path.delimiter).filter(Boolean).forEach(p => roots.add(p));"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:82",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLAYWRIGHT_CHROMIUM_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:82  if (process.env.PLAYWRIGHT_CHROMIUM_PATH) candidates.unshift(process.env.PLAYWRIGHT_CHROMIUM_PATH);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:194",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:194  await page.addStyleTag({ url: 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css' });"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:195",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:195  await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js' });"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:196",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:196  await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js' });"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:562",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PDF_SKIP_BROWSER_INSTALL",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2pdf-next.js:562  const canInstall = process.env.PDF_SKIP_BROWSER_INSTALL !== '1';"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:36",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:36  const { execSync, spawnSync } = require('child_process');"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:50",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLAYWRIGHT_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:50  if (process.env.PLAYWRIGHT_PATH) roots.add(process.env.PLAYWRIGHT_PATH);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:51",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:51  if (process.env.NODE_PATH) {\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:52  process.env.NODE_PATH.split(path.delimiter).filter(Boolean).forEach(p => roots.add(p));"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:85",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "PLAYWRIGHT_CHROMIUM_PATH",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/html2poster.js:85  if (process.env.PLAYWRIGHT_CHROMIUM_PATH) candidates.unshift(process.env.PLAYWRIGHT_CHROMIUM_PATH);"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:175",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:175  result = subprocess.run(\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:188  result = subprocess.run(\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:247  result = subprocess.run("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:460",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:460  print(\"  LibreOffice: PREFERRED \\u2192 Tsinghua mirror https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/\")\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:1844  \"(3) install it NOW — PREFERRED source is the Tsinghua TUNA mirror 'https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/': pick the subdirectory for this platform/arch (deb/x86_64, deb/aarch64, rpm/x86_64, mac/aarch64"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:466",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://drop-sh.fullyjustified.net",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:466  print(\"  Tectonic:    curl -fsSL https://drop-sh.fullyjustified.net | sh            # downloads LaTeX packages on first run\")\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:2134  print(\"  macOS (binary):    curl -sSL https://drop-sh.fullyjustified.net | sh\")\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:2140  print(\"  Binary download:   curl -sSL https://drop-sh.fullyjustified.net | sh\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:1033",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://z.ai",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:1033  '/Producer': 'http://z.ai',\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:1050  print(\"  Producer: http://z.ai\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:2147",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tectonic-typesetting.github.io/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/pdf.py:2147  print(\"  See: https://tectonic-typesetting.github.io/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:39",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:39  info \"Install: /bin/bash -c \\\"\\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\\\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:62",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.python.org/downloads/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:62  *)      info \"Install: https://www.python.org/downloads/\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:135",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://deb.nodesource.com/setup_20.x",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:135  Linux)  info \"Install on demand: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:137",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://nodejs.org/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:137  *)      info \"Install on demand: https://nodejs.org/\" ;;\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:152  *)      info \"Install on demand: https://nodejs.org/\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:203",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://drop-sh.fullyjustified.net",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:203  info \"     or: curl -fsSL https://drop-sh.fullyjustified.net | sh\" ;;\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:218  info \"     or: curl -fsSL https://drop-sh.fullyjustified.net | sh\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:236",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/setup.sh:236  info \"  https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:49  'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:125  return '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}' + tag\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:1009  if child.tag == '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt':"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:50  'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:1452",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/XML/1998/namespace",
+      "evidence": "resources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:1452  t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:1474  instrText.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')\nresources/glm/packages/pdf-plugin/skills/pdf/scripts/toc_validate.py:1526  t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/plugin-creator-plugin/skills/plugin-creator/scripts/validate-plugin.mjs:3",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "resources/glm/packages/plugin-creator-plugin/skills/plugin-creator/scripts/validate-plugin.mjs:3  import { spawn } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/setup.sh:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/setup.sh:36  info \"Install: /bin/bash -c \\\"\\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\\\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/setup.sh:58",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.python.org/downloads/",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/setup.sh:58  *)      info \"Install: https://www.python.org/downloads/\" ;;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/setup.sh:130",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/setup.sh:130  info \"  https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:193",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:193  subprocess.run(\nresources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:264  subprocess.run(\nresources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:274  result = subprocess.run(lo_cmd, capture_output=True, text=True)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:201",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://openoffice.org/2000/script",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:201  <script:module xmlns:script=\"http://openoffice.org/2000/script\" script:name=\"Module1\" script:language=\"StarBasic\">"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:244",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/xlsx.py:244  \"(3) install it NOW — PREFERRED source is the Tsinghua TUNA mirror 'https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/': pick the subdirectory for this platform/arch (deb/x86_64, deb/aarch64, rpm/x86_64, mac/aarch64"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/env_check.sh:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/env_check.sh:13  required_on_demand() { local desc=\"$1\"; shift; if \"$@\" &>/dev/null; then $QUIET || echo \"on-demand OK: $desc\"; else $QUIET || echo \"on-demand MISSING: $desc — if a task needs it you MUST install it, not substitute it. FORBIDDEN: using Excel"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:49  elif curl -s --connect-timeout 3 https://pypi.org > /dev/null 2>&1; then"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:57  PIP_MIRROR_ARGS=\"-i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:71  info \"Install: /bin/bash -c \\\"\\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\\\"\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:151",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/spreadsheets-plugin/skills/xlsx/env_setup/setup_mac_linux.sh:151  info \"  https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/\""
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:24",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:24  import { execFile as execFileCallback } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:37",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ZCODE_CUA_REPO",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:37  process.env.ZCODE_CUA_REPO ?? resolve(packageRoot, \"../../../../../zcode-cua\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:170",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:170  `^(\\\\s+\"${alias}\":\\\\s+\"git\\\\+https://dev\\\\.aminer\\\\.cn/codegeex/zcode-cua\\\\.git#)([0-9a-f]{40})(\"\\\\s*)$`,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:196",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "npm_execpath",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:196  npmExecpath: process.env.npm_execpath,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:211",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.aminer.cn/codegeex/zcode-cua.git",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/bump-zcode-cua-producer.mjs:211  repository: \"https://dev.aminer.cn/codegeex/zcode-cua.git\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/check-cua-baseline.mjs:50",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/check-cua-baseline.mjs:50  `^\\\\s+\"${alias}\":\\\\s+\"git\\\\+https://dev\\\\.aminer\\\\.cn/codegeex/zcode-cua\\\\.git#([0-9a-f]{40})\"\\\\s*$`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/check-cua-baseline.mjs:110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.aminer.cn/codegeex/zcode-cua.git",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/check-cua-baseline.mjs:110  if (provenance.repository !== \"https://dev.aminer.cn/codegeex/zcode-cua.git\") {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/check-version-coherence.mjs:62",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://...zcode-cua.git#vX.Y.Z",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/check-version-coherence.mjs:62  /** 从 `git+https://...zcode-cua.git#vX.Y.Z` 里抽出 `X.Y.Z`；非 git 锁返回 null。 */"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/sync-skill-from-zcode-cua.mjs:2",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/sync-skill-from-zcode-cua.mjs:2  import { execFile as execFileCallback } from \"node:child_process\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/sync-skill-from-zcode-cua.mjs:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ZCODE_CUA_REPO",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/sync-skill-from-zcode-cua.mjs:13  process.argv[2] ?? process.env.ZCODE_CUA_REPO ?? defaultRepositoryRoot,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/zcode-cua-plugin/scripts/sync-skill-from-zcode-cua.mjs:95",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.aminer.cn/codegeex/zcode-cua.git",
+      "evidence": "resources/glm/packages/zcode-cua-plugin/scripts/sync-skill-from-zcode-cua.mjs:95  repository: \"https://dev.aminer.cn/codegeex/zcode-cua.git\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1717",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chrome.google.com/webstore?hl=enCtrlPress",
+      "evidence": "locales/en-US.pak:1717  Chromiumen-US,enwindows-1252Times New RomanCourier NewConsolasArialComic Sans MSImpactCambria Math,Noto Sans JP,Noto Sans CJK JP,Meiryo,Yu Gothic,BIZ UDGothic,MS Gothic,Noto Serif JP,Noto Serif CJK JP,Yu Mincho,MS PMincho,Noto Sans KR,Noto "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1717",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://myactivity.google.com/",
+      "evidence": "locales/en-US.pak:1717  Chromiumen-US,enwindows-1252Times New RomanCourier NewConsolasArialComic Sans MSImpactCambria Math,Noto Sans JP,Noto Sans CJK JP,Meiryo,Yu Gothic,BIZ UDGothic,MS Gothic,Noto Serif JP,Noto Serif CJK JP,Yu Mincho,MS PMincho,Noto Sans KR,Noto "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1720",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://policies.google.com/",
+      "evidence": "locales/en-US.pak:1720  Learn about the data Google collects and why at <a href=\"https://policies.google.com/\" target=\"_blank\">policies.google.com</a>.this moduleYou’re seeing suggested files to help you easily get back to your most recent activity in Google Drive"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1726",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://safebrowsing.google.com/",
+      "evidence": "locales/en-US.pak:1726  You can manage settings from the card menu or see more options in Customize Chrome.JourneysShow all searches for $1Search for $1BookmarkedOpen all in new tab groupYou won't see this specific message againLet Google help you find discounts f"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1816",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chromebook?p=app_intent",
+      "evidence": "locales/en-US.pak:1816  other {Tasks done}}Tab closedWaiting for your helpWorking on your task…Task listCheck your tasksPausedGemini is working on your task…$1 - Gemini is working on your task…CameraLocationMicrophoneNotificationsPermissionsPermissions ($1)More se"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1842",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://myactivity.google.com/product/gemini?utm_source=geminiManage",
+      "evidence": "locales/en-US.pak:1842  other {{COUNT} items copied}}&Bookmarks&Bookmarks and listsShow all bookmarksBookmark this tab…Bookmark all tabs…Edit bookmark for this tab'$1' bookmark created.'$1' bookmark folder created.'$1' moved.'$1' moved into '$2'.You're sharing thi"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:1987",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://safebrowsing.google.com/safebrowsing/report_error/",
+      "evidence": "locales/en-US.pak:1987  other {Notifications not allowed for {NUM_SITES} sites}}Uses cookies to remember your preferences, even if you don’t visit those pagesSafe Browsing (protects you and your device from dangerous sites)Sends URLs of some pages you visit to Goo"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2014",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chrome.google.com/webstore/category/extensions",
+      "evidence": "locales/en-US.pak:2014  other {<$1 lines not shown>}}This extension can read and change your data on sites. You can control which sites the extension can access.Learn more about extension permissionsWarningsAllow this extension to read and change all your data on "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2045",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.example.comURL",
+      "evidence": "locales/en-US.pak:2045  other {$1 sent to $2}}$1 cancelled the transferWhat's NewKeep track of your passwords and manage them in one place.Search passwordsCheckupOffer to save passwords and passkeysSign in automatically$1 remembers how you signed in and automatica"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2087",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/?p=passkeys",
+      "evidence": "locales/en-US.pak:2087  other {Passwords for $1 ({COUNT})}}$1, see detailsRun password check?Saved passwords will appear here. <a href=\"#\" > Import passwords</a> to $1.Saved passwords will appear here. To import passwords to $1 for $2, <a href=\"#\" > select a CSV f"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2105",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/chrome/privacy/eula_text.htmlH&elpProfile",
+      "evidence": "locales/en-US.pak:2105  Press $1 to focus a bubble, then again to focus the element it is pointing to.I&nspectWith GeminiWith DevToolsGet image descriptions from Google?Yes, I'm in&Enable Live Caption&Disable Live Caption&Back&ForwardSave &as…&Print…&View page sou"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2156",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherEnabled",
+      "evidence": "locales/en-US.pak:2156  other {New passwords for this site}}Save your passwords?Store once. Use everywhereNever worry about your passwordsSave passwords securely in your Google Account, and you'll never have to type them againAccess your passwords whenever you're "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2156",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherUrlList",
+      "evidence": "locales/en-US.pak:2156  other {New passwords for this site}}Save your passwords?Store once. Use everywhereNever worry about your passwordsSave passwords securely in your Google Account, and you'll never have to type them againAccess your passwords whenever you're "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2157",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherExternalSitelistUrl",
+      "evidence": "locales/en-US.pak:2157  , <a href=\"https://chromeenterprise.google/policies/#BrowserSwitcherExternalSitelistUrl\" class=\"policy-prop\">{BrowserSwitcherExternalSitelistUrl}</a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2158",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherUseIeSitelist",
+      "evidence": "locales/en-US.pak:2158  and <a href=\"https://chromeenterprise.google/policies/#BrowserSwitcherUseIeSitelist\" class=\"policy-prop\">{BrowserSwitcherUseIeSitelist}</a>URLs matching these rules will be forced to open in a specific browser.RuleOpens inThe list of websit"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2158",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherExternalGreylistUrl",
+      "evidence": "locales/en-US.pak:2158  and <a href=\"https://chromeenterprise.google/policies/#BrowserSwitcherUseIeSitelist\" class=\"policy-prop\">{BrowserSwitcherUseIeSitelist}</a>URLs matching these rules will be forced to open in a specific browser.RuleOpens inThe list of websit"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2159",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherUrlGreylist",
+      "evidence": "locales/en-US.pak:2159  and <a href=\"https://chromeenterprise.google/policies/#BrowserSwitcherUrlGreylist\" class=\"policy-prop\">{BrowserSwitcherUrlGreylist}</a>URLs matching these rules won't trigger a browser switch and can be open in either $1 or $2.Export LBS po"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2271",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://passwords.google.comSaved",
+      "evidence": "locales/en-US.pak:2271  other {Show all}}SnoozeLocation access allowedLocation access deniedThis site can access your location.Always block $1 from accessing your locationContinue allowing this site to access your locationThis site has been blocked from accessing "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2451",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromestatus.com/features#browsers.chrome.status%3A%22Deprecated%22",
+      "evidence": "locales/en-US.pak:2451  not be using these flags in production.Flags that apply system-wide can only be set by the owner: $1UnavailableNo matching experimentsNot available on your platform.Reset acknowledged.Experiment enabledSearch featuresDeprecated FeaturesUnsu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2451",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/a/?p=browser_profile_details",
+      "evidence": "locales/en-US.pak:2451  not be using these flags in production.Flags that apply system-wide can only be set by the owner: $1UnavailableNo matching experimentsNot available on your platform.Reset acknowledged.Experiment enabledSearch featuresDeprecated FeaturesUnsu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2487",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "locales/en-US.pak:2487  This will otherwise be blocked by your privacy settings. This will allow the content you interacted with to work correctly, but may allow $1 to track your activity.$1 will know that you visited $2Learn more about embedded contentManage wind\nlocales/en-US.pak:2560  <li>Go to any website starting with <code>http://</code>, like <a href=\"http://example.com\" target=\"_blank\">http://example.com</a>.</li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2487",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com.Use",
+      "evidence": "locales/en-US.pak:2487  This will otherwise be blocked by your privacy settings. This will allow the content you interacted with to work correctly, but may allow $1 to track your activity.$1 will know that you visited $2Learn more about embedded contentManage wind"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2487",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/a/answer/9122284",
+      "evidence": "locales/en-US.pak:2487  This will otherwise be blocked by your privacy settings. This will allow the content you interacted with to work correctly, but may allow $1 to track your activity.$1 will know that you visited $2Learn more about embedded contentManage wind"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2558",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://</code",
+      "evidence": "locales/en-US.pak:2558  <p>Wi-Fi networks at places like cafes or airports need you to sign in. To see the sign-in page, visit a page that uses <code>http://</code>.</p>\nlocales/en-US.pak:2560  <li>Go to any website starting with <code>http://</code>, like <a href=\"http://example.com\" target=\"_blank\">http://example.com</a>.</li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2560",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com</a",
+      "evidence": "locales/en-US.pak:2560  <li>Go to any website starting with <code>http://</code>, like <a href=\"http://example.com\" target=\"_blank\">http://example.com</a>.</li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/en-US.pak:2583",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/answer/6098869",
+      "evidence": "locales/en-US.pak:2583  <li>Visit the <a href=\"https://support.google.com/chrome/answer/6098869\">Chrome help center</a> to learn how to permanently remove the software from your computer"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1634",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chrome.google.com/webstore?hl=zh-CNCtrl按",
+      "evidence": "locales/zh-CN.pak:1634  Chromiumzh-CN,zhGBK,Noto Sans SC,Noto Sans CJK SC,Microsoft YaHeiNSimsunConsolas,Noto Serif SC,Noto Serif CJK SC,SimsunKaiTiImpactCambria Math,Noto Sans JP,Noto Sans CJK JP,Meiryo,Yu Gothic,BIZ UDGothic,MS Gothic,Noto Serif JP,Noto Serif CJ"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1634",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://”或“https://”开头并重试。无法使用此链接。请检查是否有拼写错误，或者换个链接重试。复制链接涂鸦链接电子邮件Facebook分享涂鸦Twitter主题背景创建者：主题由贵单位设定您的管理员已设置默认主题，您无法更改。确定已隐藏$1此页面不会再显示$1关于此卡片隐藏$1一律不显示$1自定义卡片这项内容是系统根据您以前使用",
+      "evidence": "locales/zh-CN.pak:1634  Chromiumzh-CN,zhGBK,Noto Sans SC,Noto Sans CJK SC,Microsoft YaHeiNSimsunConsolas,Noto Serif SC,Noto Serif CJK SC,SimsunKaiTiImpactCambria Math,Noto Sans JP,Noto Sans CJK JP,Meiryo,Yu Gothic,BIZ UDGothic,MS Gothic,Noto Serif JP,Noto Serif CJ"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1634",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://myactivity.google.com/",
+      "evidence": "locales/zh-CN.pak:1634  Chromiumzh-CN,zhGBK,Noto Sans SC,Noto Sans CJK SC,Microsoft YaHeiNSimsunConsolas,Noto Serif SC,Noto Serif CJK SC,SimsunKaiTiImpactCambria Math,Noto Sans JP,Noto Sans CJK JP,Meiryo,Yu Gothic,BIZ UDGothic,MS Gothic,Noto Serif JP,Noto Serif CJ"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1637",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://policies.google.com/",
+      "evidence": "locales/zh-CN.pak:1637  如需了解 Google 会收集哪些数据及相应原因，请访问 <a href=\"https://policies.google.com/\" target=\"_blank\">policies.google.com</a>。this module系统会显示推荐的文件，方便您回到最近在 Google 云端硬盘中进行的活动。"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1643",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://safebrowsing.google.com/",
+      "evidence": "locales/zh-CN.pak:1643  您可从卡片菜单中管理设置，或者在“自定义 Chrome”部分中查看更多选项。历程显示“$1”的所有搜索结果搜索“$1”已加书签在新标签页分组中打开全部网址系统不会再显示这条特定消息让 Google 根据您购物车中的商品为您查找相符的折扣信息 - 移除推荐内容在 Google 中搜索或输入网址将此标签页静音应用显示应用未命名的文件夹已保存的标签页分组包含隐藏的已存标签页分组的菜单隐藏的已存标签页分组包含隐藏书签的菜单隐藏的书签通过以下方式拨打电话：安装“$1”书签文件夹按钮分隔"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1669",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chromebook?p=app_intent",
+      "evidence": "locales/zh-CN.pak:1669  $2您的组织可以查看和管理浏览数据，例如您的书签、历史记录和密码，但无法查看其他 Chromium 资料中的浏览数据欢迎使用 Chromium 个人资料谁在使用 Chromium？在 Chromium 中集中管理一切内容借助 Chromium 个人资料，您可将所有 Chromium 内容分门别类。您可为朋友和家人创建专属资料，或者将工作和娱乐用资料分开。借助 Chromium 资料，您可以将个人浏览内容和工作内容分开。立即添加新的资料。您可以根据不同的用途设置不同的 Chro"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1669",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://myactivity.google.com/product/gemini?utm_source=gemini管理关联的应用管理",
+      "evidence": "locales/zh-CN.pak:1669  $2您的组织可以查看和管理浏览数据，例如您的书签、历史记录和密码，但无法查看其他 Chromium 资料中的浏览数据欢迎使用 Chromium 个人资料谁在使用 Chromium？在 Chromium 中集中管理一切内容借助 Chromium 个人资料，您可将所有 Chromium 内容分门别类。您可为朋友和家人创建专属资料，或者将工作和娱乐用资料分开。借助 Chromium 资料，您可以将个人浏览内容和工作内容分开。立即添加新的资料。您可以根据不同的用途设置不同的 Chro"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1669",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://safebrowsing.google.com/safebrowsing/report_error/",
+      "evidence": "locales/zh-CN.pak:1669  $2您的组织可以查看和管理浏览数据，例如您的书签、历史记录和密码，但无法查看其他 Chromium 资料中的浏览数据欢迎使用 Chromium 个人资料谁在使用 Chromium？在 Chromium 中集中管理一切内容借助 Chromium 个人资料，您可将所有 Chromium 内容分门别类。您可为朋友和家人创建专属资料，或者将工作和娱乐用资料分开。借助 Chromium 资料，您可以将个人浏览内容和工作内容分开。立即添加新的资料。您可以根据不同的用途设置不同的 Chro"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1669",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chrome.google.com/webstore/category/extensions",
+      "evidence": "locales/zh-CN.pak:1669  $2您的组织可以查看和管理浏览数据，例如您的书签、历史记录和密码，但无法查看其他 Chromium 资料中的浏览数据欢迎使用 Chromium 个人资料谁在使用 Chromium？在 Chromium 中集中管理一切内容借助 Chromium 个人资料，您可将所有 Chromium 内容分门别类。您可为朋友和家人创建专属资料，或者将工作和娱乐用资料分开。借助 Chromium 资料，您可以将个人浏览内容和工作内容分开。立即添加新的资料。您可以根据不同的用途设置不同的 Chro"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1669",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.example.com网址长度超出了",
+      "evidence": "locales/zh-CN.pak:1669  $2您的组织可以查看和管理浏览数据，例如您的书签、历史记录和密码，但无法查看其他 Chromium 资料中的浏览数据欢迎使用 Chromium 个人资料谁在使用 Chromium？在 Chromium 中集中管理一切内容借助 Chromium 个人资料，您可将所有 Chromium 内容分门别类。您可为朋友和家人创建专属资料，或者将工作和娱乐用资料分开。借助 Chromium 资料，您可以将个人浏览内容和工作内容分开。立即添加新的资料。您可以根据不同的用途设置不同的 Chro"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1669",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/?p=passkeys",
+      "evidence": "locales/zh-CN.pak:1669  $2您的组织可以查看和管理浏览数据，例如您的书签、历史记录和密码，但无法查看其他 Chromium 资料中的浏览数据欢迎使用 Chromium 个人资料谁在使用 Chromium？在 Chromium 中集中管理一切内容借助 Chromium 个人资料，您可将所有 Chromium 内容分门别类。您可为朋友和家人创建专属资料，或者将工作和娱乐用资料分开。借助 Chromium 资料，您可以将个人浏览内容和工作内容分开。立即添加新的资料。您可以根据不同的用途设置不同的 Chro"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1670",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.google.com/chrome/privacy/eula_text.html帮助(&E",
+      "evidence": "locales/zh-CN.pak:1670  按 $1 可聚焦于某个气泡，再次按下可聚焦于它所指向的元素。检查(&N)使用 Gemini使用开发者工具要从 Google 获取图片说明吗？启用实时字幕(&E)停用实时字幕(&D)返回(&B)前进(&F)另存为(&A)…打印(&P)…查看网页源代码(&V)链接打开方式…配置…检查背景页(&B)在阅读模式下打开归档重新加载(&R)模拟浏览器重启重新加载应用(&R)翻译成$1(&T)退出全屏模式重新加载框架(&F)查看框架的源代码(&V)在新标签页中打开链接(&T)在新窗口中打开"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherEnabled",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://、https://",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherUrlList",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherExternalSitelistUrl",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherUseIeSitelist",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherExternalGreylistUrl",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromeenterprise.google/policies/#BrowserSwitcherUrlGreylist",
+      "evidence": "locales/zh-CN.pak:1681  $1继续操作有风险，请三思增强型安全浏览功能不信任此扩展程序。$1添加扩展程序添加应用添加主题背景询问家长的意见无法添加$1无法启用$1请让家长批准安装“$1”$1想安装一款能够执行以下操作的$2：批准请选择家长账号以寻求批准家长账号验证您是家长要允许使用此扩展程序，请输入密码。要允许$1日后在未经您批准的情况下安装扩展程序，请在设备上打开 Family Link 应用并更新$1的 Google Chrome 设置。输入密码密码不正确举报滥用行为举报“$1”的滥用行为 • {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1720",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://passwords.google.com已保存用于登录此网站的密码未保存任何用于登录此网站的密码已保存用于登录",
+      "evidence": "locales/zh-CN.pak:1720  不能以根用户身份运行 $1。请以普通用户的身份启动 $1。如果您出于开发目的，需要以根用户的身份运行 Chrome，请使用 --no-sandbox 标记重新运行 Chrome。警告：您的 $1设置存储在网络驱动器上。这可能会导致速度变慢、崩溃，甚至数据丢失。无法创建数据目录{NUM_TABS,plural, =1{$1 - 1 个标签页}other{$1 - # 个标签页}}登录即可查看从其他设备打开的标签页查看其他设备上的标签页历史记录(&H)正在现有的浏览器会话中打开。"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1747",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chromestatus.com/features#browsers.chrome.status%3A%22Deprecated%22",
+      "evidence": "locales/zh-CN.pak:1747  not be using these flags in production.Flags that apply system-wide can only be set by the owner: $1不受支持的实验No matching experiments在您的平台上不可用。已确认要重置。已启用实验搜索功能已被弃用的功能Unsupported features这些标记可以防止或还原破坏性更改，并且只能在有限的时间内使用。找不到任何相符的功能若要退出全屏模式，请按住 |$1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1747",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/a/?p=browser_profile_details",
+      "evidence": "locales/zh-CN.pak:1747  not be using these flags in production.Flags that apply system-wide can only be set by the owner: $1不受支持的实验No matching experiments在您的平台上不可用。已确认要重置。已启用实验搜索功能已被弃用的功能Unsupported features这些标记可以防止或还原破坏性更改，并且只能在有限的时间内使用。找不到任何相符的功能若要退出全屏模式，请按住 |$1"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1760",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com”或“https://example.com”。已停用代理，但是指定了明确的代理配置。代理已设为自动配置。代理配置已设置为使用",
+      "evidence": "locales/zh-CN.pak:1760  除非您主动允许，否则您的隐私设置会禁止上述操作。授予该权限后，您与之互动的内容将可正常运行，但 $1 可能将能够跟踪您的活动。$1 会知道您访问过 $2详细了解嵌入式内容管理您的所有显示屏上的窗口使用您计算机上的字体，以便您能够创作高保真内容了解您何时在主动使用此设备Use your accounts to login to websites下载多个文件滚动和缩放已分享的标签页中的内容能够安装 Web 应用查找并连接到本地网络上的任何设备访问本地网络中的其他设备访问此设备上的"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1760",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/a/answer/9122284",
+      "evidence": "locales/zh-CN.pak:1760  除非您主动允许，否则您的隐私设置会禁止上述操作。授予该权限后，您与之互动的内容将可正常运行，但 $1 可能将能够跟踪您的活动。$1 会知道您访问过 $2详细了解嵌入式内容管理您的所有显示屏上的窗口使用您计算机上的字体，以便您能够创作高保真内容了解您何时在主动使用此设备Use your accounts to login to websites下载多个文件滚动和缩放已分享的标签页中的内容能够安装 Web 应用查找并连接到本地网络上的任何设备访问本地网络中的其他设备访问此设备上的"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1770",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://</code",
+      "evidence": "locales/zh-CN.pak:1770  <p>咖啡馆或机场等地方的 Wi-Fi 网络会要求用户进行登录。您只需随意访问一个以 <code>http://</code> 开头的网页，即可看到登录页面。</p>\nlocales/zh-CN.pak:1772  <li>前往任意一个以 <code>http://</code> 开头的网站，例如 <a href=\"http://example.com\" target=\"_blank\">http://example.com</a>。</li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1772",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "locales/zh-CN.pak:1772  <li>前往任意一个以 <code>http://</code> 开头的网站，例如 <a href=\"http://example.com\" target=\"_blank\">http://example.com</a>。</li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1772",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com</a",
+      "evidence": "locales/zh-CN.pak:1772  <li>前往任意一个以 <code>http://</code> 开头的网站，例如 <a href=\"http://example.com\" target=\"_blank\">http://example.com</a>。</li>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "locales/zh-CN.pak:1795",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://support.google.com/chrome/answer/6098869",
+      "evidence": "locales/zh-CN.pak:1795  <li>访问 <a href=\"https://support.google.com/chrome/answer/6098869\">Chrome 帮助中心</a>，了解如何从您的计算机中永久移除该软件"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/app-update.yml:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9/update-disabled",
+      "evidence": "resources/app-update.yml:3  url: http://127.0.0.1:9/update-disabled"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/default.json:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://zhipu-ai.feishu.cn/share/base/form/shrcnrXlh93cJIUFYBFndnnL7pe",
+      "evidence": "resources/config/default.json:2  \"feedback_url\": \"https://zhipu-ai.feishu.cn/share/base/form/shrcnrXlh93cJIUFYBFndnnL7pe\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/default.json:5",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=47ag983c-8fcb-4d6d-814b-5395193a712c&qr_code=true",
+      "evidence": "resources/config/default.json:5  \"zh-CN\": \"https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=47ag983c-8fcb-4d6d-814b-5395193a712c&qr_code=true\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/default.json:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://discord.gg/z9aBcQXZQ3",
+      "evidence": "resources/config/default.json:6  \"en-US\": \"https://discord.gg/z9aBcQXZQ3\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://z.ai/manage-apikey/apikey-list",
+      "evidence": "resources/config/provider/zcode-builtin.json:16  \"apiKeyManagementUrl\": \"https://z.ai/manage-apikey/apikey-list\"\nresources/config/provider/zcode-builtin.json:38  \"apiKeyManagementUrl\": \"https://z.ai/manage-apikey/apikey-list\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:20",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.z.ai/api/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:20  \"baseUrl\": \"https://api.z.ai/api/anthropic\"\nresources/config/provider/zcode-builtin.json:708  \"baseUrl\": \"https://api.z.ai/api/anthropic\"\nresources/config/provider/zcode-builtin.json:729  \"baseUrl\": \"https://api.z.ai/api/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:42",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.z.ai/api/paas/v4",
+      "evidence": "resources/config/provider/zcode-builtin.json:42  \"baseUrl\": \"https://api.z.ai/api/paas/v4\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bigmodel.cn/coding-plan/personal/overview",
+      "evidence": "resources/config/provider/zcode-builtin.json:85  \"apiKeyManagementUrl\": \"https://bigmodel.cn/coding-plan/personal/overview\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:89",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://open.bigmodel.cn/api/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:89  \"baseUrl\": \"https://open.bigmodel.cn/api/anthropic\"\nresources/config/provider/zcode-builtin.json:771  \"baseUrl\": \"https://open.bigmodel.cn/api/anthropic\"\nresources/config/provider/zcode-builtin.json:792  \"baseUrl\": \"https://open.bigmodel.cn/api/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bigmodel.cn/usercenter/proj-mgmt/apikeys",
+      "evidence": "resources/config/provider/zcode-builtin.json:107  \"apiKeyManagementUrl\": \"https://bigmodel.cn/usercenter/proj-mgmt/apikeys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:111",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://open.bigmodel.cn/api/paas/v4",
+      "evidence": "resources/config/provider/zcode-builtin.json:111  \"baseUrl\": \"https://open.bigmodel.cn/api/paas/v4\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:154",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.kimi.com/console/api-keys",
+      "evidence": "resources/config/provider/zcode-builtin.json:154  \"apiKeyManagementUrl\": \"https://platform.kimi.com/console/api-keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:158",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.moonshot.cn/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:158  \"baseUrl\": \"https://api.moonshot.cn/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:183",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.minimaxi.com/console/access?tab=api-keys",
+      "evidence": "resources/config/provider/zcode-builtin.json:183  \"apiKeyManagementUrl\": \"https://platform.minimaxi.com/console/access?tab=api-keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:187",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.minimaxi.com/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:187  \"baseUrl\": \"https://api.minimaxi.com/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:214",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.deepseek.com/api_keys",
+      "evidence": "resources/config/provider/zcode-builtin.json:214  \"apiKeyManagementUrl\": \"https://platform.deepseek.com/api_keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:218",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.deepseek.com/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:218  \"baseUrl\": \"https://api.deepseek.com/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:236",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://bailian.console.aliyun.com/cn-beijing?tab=model",
+      "evidence": "resources/config/provider/zcode-builtin.json:236  \"apiKeyManagementUrl\": \"https://bailian.console.aliyun.com/cn-beijing?tab=model\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:240",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashscope.aliyuncs.com/apps/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:240  \"baseUrl\": \"https://dashscope.aliyuncs.com/apps/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:272",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://modelstudio.console.aliyun.com/ap-southeast-1?tab=dashboard",
+      "evidence": "resources/config/provider/zcode-builtin.json:272  \"apiKeyManagementUrl\": \"https://modelstudio.console.aliyun.com/ap-southeast-1?tab=dashboard\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:276",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json:276  \"baseUrl\": \"https://dashscope-intl.aliyuncs.com/compatible-mode/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:309",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.xiaomimimo.com/",
+      "evidence": "resources/config/provider/zcode-builtin.json:309  \"apiKeyManagementUrl\": \"https://platform.xiaomimimo.com/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:313",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.xiaomimimo.com/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:313  \"baseUrl\": \"https://api.xiaomimimo.com/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:331",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.openai.com/api-keys",
+      "evidence": "resources/config/provider/zcode-builtin.json:331  \"apiKeyManagementUrl\": \"https://platform.openai.com/api-keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:335",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json:335  \"baseUrl\": \"https://api.openai.com/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:364",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.anthropic.com/settings/keys",
+      "evidence": "resources/config/provider/zcode-builtin.json:364  \"apiKeyManagementUrl\": \"https://console.anthropic.com/settings/keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:368",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json:368  \"baseUrl\": \"https://api.anthropic.com/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:392",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.x.ai",
+      "evidence": "resources/config/provider/zcode-builtin.json:392  \"apiKeyManagementUrl\": \"https://console.x.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:396",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.x.ai/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json:396  \"baseUrl\": \"https://api.x.ai/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:414",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/keys",
+      "evidence": "resources/config/provider/zcode-builtin.json:414  \"apiKeyManagementUrl\": \"https://openrouter.ai/keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:418",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api",
+      "evidence": "resources/config/provider/zcode-builtin.json:418  \"baseUrl\": \"https://openrouter.ai/api\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:496",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencode.ai/auth",
+      "evidence": "resources/config/provider/zcode-builtin.json:496  \"apiKeyManagementUrl\": \"https://opencode.ai/auth\"\nresources/config/provider/zcode-builtin.json:534  \"apiKeyManagementUrl\": \"https://opencode.ai/auth\"\nresources/config/provider/zcode-builtin.json:565  \"apiKeyManagementUrl\": \"https://opencode.ai/auth\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:500",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://opencode.ai/zen/go/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json:500  \"baseUrl\": \"https://opencode.ai/zen/go/v1\"\nresources/config/provider/zcode-builtin.json:538  \"baseUrl\": \"https://opencode.ai/zen/go/v1\"\nresources/config/provider/zcode-builtin.json:569  \"baseUrl\": \"https://opencode.ai/zen/go/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:594",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://opencode.ai/zen/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json:594  \"baseUrl\": \"https://opencode.ai/zen/v1\"\nresources/config/provider/zcode-builtin.json:631  \"baseUrl\": \"https://opencode.ai/zen/v1\"\nresources/config/provider/zcode-builtin.json:669  \"baseUrl\": \"https://opencode.ai/zen/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:750",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://zcode.z.ai/api/v1/zcode-plan/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:750  \"baseUrl\": \"https://zcode.z.ai/api/v1/zcode-plan/anthropic\"\nresources/config/provider/zcode-builtin.json:813  \"baseUrl\": \"https://zcode.z.ai/api/v1/zcode-plan/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:835",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://zcode.z.ai/api/v1/off-peak/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json:835  \"baseUrl\": \"https://zcode.z.ai/api/v1/off-peak/anthropic\"\nresources/config/provider/zcode-builtin.json:857  \"baseUrl\": \"https://zcode.z.ai/api/v1/off-peak/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:3294",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencode",
+      "evidence": "resources/config/provider/zcode-builtin.json:3294  \"baseUrlMatch\": \"https://opencode\\\\.ai/zen/go/v1/?\",\nresources/config/provider/zcode-builtin.json:3327  \"baseUrlMatch\": \"https://opencode\\\\.ai/zen/go/v1/?\",\nresources/config/provider/zcode-builtin.json:3360  \"baseUrlMatch\": \"https://opencode\\\\.ai/zen/go/v1/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:4085",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter",
+      "evidence": "resources/config/provider/zcode-builtin.json:4085  \"baseUrlMatch\": \"https://openrouter\\\\.ai/api(?:/v1)?/?\",\nresources/config/provider/zcode-builtin.json:4164  \"baseUrlMatch\": \"https://openrouter\\\\.ai/api(?:/v1)?/?\",\nresources/config/provider/zcode-builtin.json:4277  \"baseUrlMatch\": \"https://openrouter\\\\.ai/api(?:/v1)?/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:4096",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api",
+      "evidence": "resources/config/provider/zcode-builtin.json:4096  \"baseUrlMatch\": \"https://api\\\\.z\\\\.ai/api/anthropic/?\",\nresources/config/provider/zcode-builtin.json:4133  \"baseUrlMatch\": \"(?:https://api\\\\.anthropic\\\\.com/v1)\",\nresources/config/provider/zcode-builtin.json:4143  \"baseUrlMatch\": \"(?:https://api\\\\.moonshot\\\\.cn/anthropic)\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:4108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://open",
+      "evidence": "resources/config/provider/zcode-builtin.json:4108  \"baseUrlMatch\": \"https://open\\\\.bigmodel\\\\.cn/api/anthropic/?\",\nresources/config/provider/zcode-builtin.json:4187  \"baseUrlMatch\": \"https://open\\\\.bigmodel\\\\.cn/api/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:4120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://zcode",
+      "evidence": "resources/config/provider/zcode-builtin.json:4120  \"baseUrlMatch\": \"https://zcode\\\\.z\\\\.ai/api/v1/zcode-plan/anthropic/?\",\nresources/config/provider/zcode-builtin.json:4198  \"baseUrlMatch\": \"https://zcode\\\\.z\\\\.ai/api/v1/zcode-plan/anthropic/?\",\nresources/config/provider/zcode-builtin.json:4209  \"baseUrlMatch\": \"https://zcode\\\\.z\\\\.ai/api/v1/off-peak/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:4360",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashscope",
+      "evidence": "resources/config/provider/zcode-builtin.json:4360  \"baseUrlMatch\": \"https://dashscope\\\\.aliyuncs\\\\.com/apps/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json:4370",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashscope-intl",
+      "evidence": "resources/config/provider/zcode-builtin.json:4370  \"baseUrlMatch\": \"https://dashscope-intl\\\\.aliyuncs\\\\.com/apps/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://z.ai/manage-apikey/apikey-list",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:16  \"apiKeyManagementUrl\": \"https://z.ai/manage-apikey/apikey-list\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:38  \"apiKeyManagementUrl\": \"https://z.ai/manage-apikey/apikey-list\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:20",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.z.ai/api/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:20  \"baseUrl\": \"https://api.z.ai/api/anthropic\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:708  \"baseUrl\": \"https://api.z.ai/api/anthropic\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:729  \"baseUrl\": \"https://api.z.ai/api/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:42",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.z.ai/api/paas/v4",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:42  \"baseUrl\": \"https://api.z.ai/api/paas/v4\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bigmodel.cn/coding-plan/personal/overview",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:85  \"apiKeyManagementUrl\": \"https://bigmodel.cn/coding-plan/personal/overview\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:89",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://open.bigmodel.cn/api/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:89  \"baseUrl\": \"https://open.bigmodel.cn/api/anthropic\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:771  \"baseUrl\": \"https://open.bigmodel.cn/api/anthropic\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:792  \"baseUrl\": \"https://open.bigmodel.cn/api/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bigmodel.cn/usercenter/proj-mgmt/apikeys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:107  \"apiKeyManagementUrl\": \"https://bigmodel.cn/usercenter/proj-mgmt/apikeys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:111",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://open.bigmodel.cn/api/paas/v4",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:111  \"baseUrl\": \"https://open.bigmodel.cn/api/paas/v4\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:154",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.kimi.com/console/api-keys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:154  \"apiKeyManagementUrl\": \"https://platform.kimi.com/console/api-keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:158",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.moonshot.cn/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:158  \"baseUrl\": \"https://api.moonshot.cn/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:183",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.minimaxi.com/console/access?tab=api-keys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:183  \"apiKeyManagementUrl\": \"https://platform.minimaxi.com/console/access?tab=api-keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:187",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.minimaxi.com/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:187  \"baseUrl\": \"https://api.minimaxi.com/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:214",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.deepseek.com/api_keys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:214  \"apiKeyManagementUrl\": \"https://platform.deepseek.com/api_keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:218",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.deepseek.com/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:218  \"baseUrl\": \"https://api.deepseek.com/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:236",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://bailian.console.aliyun.com/cn-beijing?tab=model",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:236  \"apiKeyManagementUrl\": \"https://bailian.console.aliyun.com/cn-beijing?tab=model\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:240",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashscope.aliyuncs.com/apps/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:240  \"baseUrl\": \"https://dashscope.aliyuncs.com/apps/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:272",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://modelstudio.console.aliyun.com/ap-southeast-1?tab=dashboard",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:272  \"apiKeyManagementUrl\": \"https://modelstudio.console.aliyun.com/ap-southeast-1?tab=dashboard\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:276",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:276  \"baseUrl\": \"https://dashscope-intl.aliyuncs.com/compatible-mode/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:309",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.xiaomimimo.com/",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:309  \"apiKeyManagementUrl\": \"https://platform.xiaomimimo.com/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:313",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.xiaomimimo.com/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:313  \"baseUrl\": \"https://api.xiaomimimo.com/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:331",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://platform.openai.com/api-keys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:331  \"apiKeyManagementUrl\": \"https://platform.openai.com/api-keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:335",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:335  \"baseUrl\": \"https://api.openai.com/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:364",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.anthropic.com/settings/keys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:364  \"apiKeyManagementUrl\": \"https://console.anthropic.com/settings/keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:368",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:368  \"baseUrl\": \"https://api.anthropic.com/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:392",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://console.x.ai",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:392  \"apiKeyManagementUrl\": \"https://console.x.ai\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:396",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.x.ai/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:396  \"baseUrl\": \"https://api.x.ai/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:414",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter.ai/keys",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:414  \"apiKeyManagementUrl\": \"https://openrouter.ai/keys\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:418",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:418  \"baseUrl\": \"https://openrouter.ai/api\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:496",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencode.ai/auth",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:496  \"apiKeyManagementUrl\": \"https://opencode.ai/auth\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:534  \"apiKeyManagementUrl\": \"https://opencode.ai/auth\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:565  \"apiKeyManagementUrl\": \"https://opencode.ai/auth\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:500",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://opencode.ai/zen/go/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:500  \"baseUrl\": \"https://opencode.ai/zen/go/v1\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:538  \"baseUrl\": \"https://opencode.ai/zen/go/v1\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:569  \"baseUrl\": \"https://opencode.ai/zen/go/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:594",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://opencode.ai/zen/v1",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:594  \"baseUrl\": \"https://opencode.ai/zen/v1\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:631  \"baseUrl\": \"https://opencode.ai/zen/v1\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:669  \"baseUrl\": \"https://opencode.ai/zen/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:750",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://zcode.z.ai/api/v1/zcode-plan/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:750  \"baseUrl\": \"https://zcode.z.ai/api/v1/zcode-plan/anthropic\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:813  \"baseUrl\": \"https://zcode.z.ai/api/v1/zcode-plan/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:835",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://zcode.z.ai/api/v1/off-peak/anthropic",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:835  \"baseUrl\": \"https://zcode.z.ai/api/v1/off-peak/anthropic\"\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:857  \"baseUrl\": \"https://zcode.z.ai/api/v1/off-peak/anthropic\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:3294",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://opencode",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:3294  \"baseUrlMatch\": \"https://opencode\\\\.ai/zen/go/v1/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:3327  \"baseUrlMatch\": \"https://opencode\\\\.ai/zen/go/v1/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:3360  \"baseUrlMatch\": \"https://opencode\\\\.ai/zen/go/v1/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4085",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://openrouter",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4085  \"baseUrlMatch\": \"https://openrouter\\\\.ai/api(?:/v1)?/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4164  \"baseUrlMatch\": \"https://openrouter\\\\.ai/api(?:/v1)?/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4277  \"baseUrlMatch\": \"https://openrouter\\\\.ai/api(?:/v1)?/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4096",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4096  \"baseUrlMatch\": \"https://api\\\\.z\\\\.ai/api/anthropic/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4133  \"baseUrlMatch\": \"(?:https://api\\\\.anthropic\\\\.com/v1)\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4143  \"baseUrlMatch\": \"(?:https://api\\\\.moonshot\\\\.cn/anthropic)\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://open",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4108  \"baseUrlMatch\": \"https://open\\\\.bigmodel\\\\.cn/api/anthropic/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4187  \"baseUrlMatch\": \"https://open\\\\.bigmodel\\\\.cn/api/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://zcode",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4120  \"baseUrlMatch\": \"https://zcode\\\\.z\\\\.ai/api/v1/zcode-plan/anthropic/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4198  \"baseUrlMatch\": \"https://zcode\\\\.z\\\\.ai/api/v1/zcode-plan/anthropic/?\",\nresources/config/provider/zcode-builtin.json.bak.20261003-215654:4209  \"baseUrlMatch\": \"https://zcode\\\\.z\\\\.ai/api/v1/off-peak/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4360",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashscope",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4360  \"baseUrlMatch\": \"https://dashscope\\\\.aliyuncs\\\\.com/apps/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4370",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dashscope-intl",
+      "evidence": "resources/config/provider/zcode-builtin.json.bak.20261003-215654:4370  \"baseUrlMatch\": \"https://dashscope-intl\\\\.aliyuncs\\\\.com/apps/anthropic/?\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/android-emulator-plugin/package.json:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://json.schemastore.org/package.json",
+      "evidence": "resources/glm/packages/android-emulator-plugin/package.json:2  \"$schema\": \"https://json.schemastore.org/package.json\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/browser-use-plugin/package.json:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://json.schemastore.org/package.json",
+      "evidence": "resources/glm/packages/browser-use-plugin/package.json:2  \"$schema\": \"https://json.schemastore.org/package.json\","
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/browser-use-plugin/docs/overview.md:23",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "resources/glm/packages/browser-use-plugin/docs/overview.md:23  await tab.goto(\"https://example.com\");"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/browser-use-plugin/docs/workflow.md:31",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "resources/glm/packages/browser-use-plugin/docs/workflow.md:31  const browser = await agent.browsers.getForUrl(\"https://example.com\");\nresources/glm/packages/browser-use-plugin/docs/workflow.md:33  await tab.goto(\"https://example.com\");"
+    },
+    {
+      "kind": "DOC_CONFIG",
+      "where": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:18",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "ZCODE_PLUGIN_ROOT",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:18  The `browser-client` module is the browser entry point and is available at `scripts/browser-client.mjs` under this plugin's root. Resolve that root only from `process.env.ZCODE_PLUGIN_ROOT` (with `CLAUDE_PLUGIN_ROOT` as a compatibility fall\nresources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:25  process.env.ZCODE_PLUGIN_ROOT ?? process.env.CLAUDE_PLUGIN_ROOT;"
+    },
+    {
+      "kind": "DOC_CONFIG",
+      "where": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:25",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CLAUDE_PLUGIN_ROOT",
+      "rule": "process.env",
+      "evidence": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:25  process.env.ZCODE_PLUGIN_ROOT ?? process.env.CLAUDE_PLUGIN_ROOT;"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:70",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/",
+      "evidence": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:70  const browser = await agent.browsers.getForUrl(\"https://example.com/\");"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:103",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://",
+      "evidence": "resources/glm/packages/browser-use-plugin/skills/control-browser/SKILL.md:103  await tab.goto(\"https://...\");"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/browser-use-plugin/skills/web-gui-tester/SKILL.md:157",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/screenshot.png",
+      "evidence": "resources/glm/packages/browser-use-plugin/skills/web-gui-tester/SKILL.md:157  - If the user does not explicitly specify another format, output an interleaved Markdown report with text and images directly by default, referencing images with standard Markdown image syntax, such as ![screenshot description](https://exam"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/package.json:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://json.schemastore.org/package.json",
+      "evidence": "resources/glm/packages/documents-plugin/package.json:2  \"$schema\": \"https://json.schemastore.org/package.json\","
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/SKILL.md:215",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/SKILL.md:215  (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, see below)\nresources/glm/packages/documents-plugin/skills/docx/SKILL.md:244  `https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/` — pick the"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/SKILL.md:247",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/SKILL.md:247  longer there, list `https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/` and take"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:96",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://z-cdn.chatglm.cn/office-skill/fonts/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:96  - **CDN base**: `https://z-cdn.chatglm.cn/office-skill/fonts/`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:134",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://z-cdn.chatglm.cn/office-skill/fonts/chinese/NotoSansSC%5Bwght%5D.ttf",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:134  curl -fSLO \"https://z-cdn.chatglm.cn/office-skill/fonts/chinese/NotoSansSC%5Bwght%5D.ttf\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:144",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://z-cdn.chatglm.cn/office-skill/fonts/$encoded",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:144  curl -fSLO \"https://z-cdn.chatglm.cn/office-skill/fonts/$encoded\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:167",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmmirror.com",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:167  npm install -g docx --registry https://registry.npmmirror.com\nresources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:181  npm install -g docx --registry https://registry.npmmirror.com"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:173",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:173  python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple \\\nresources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:182  python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn defusedxml"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:189",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/node/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:189  | Node.js | https://npmmirror.com/mirrors/node/ |"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:190",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/python/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:190  | Python | https://npmmirror.com/mirrors/python/ |"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:191",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:191  | LibreOffice | https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/ |\nresources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:200  - **Recommended base URL:** `https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:202",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:202  `https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/` and pick the newest"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:229",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/$LO_VER/deb/$LO_ARCH",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:229  BASE=\"https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/$LO_VER/deb/$LO_ARCH\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:250",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/$LO_VER/mac/$LO_ARCH",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:250  BASE=\"https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/$LO_VER/mac/$LO_ARCH\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:268",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/$LoVer/win/$LoArch",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup.md:268  $Base = \"https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/$LoVer/win/$LoArch\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.org",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:47  $null = Invoke-WebRequest -Uri \"https://pypi.org\" -TimeoutSec 3 -UseBasicParsing -ErrorAction Stop"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:56",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:56  $PipMirrorArgs = @(\"-i\", \"https://pypi.tuna.tsinghua.edu.cn/simple\", \"--trusted-host\", \"pypi.tuna.tsinghua.edu.cn\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmmirror.com",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:57  $NpmMirrorArgs = @(\"--registry\", \"https://registry.npmmirror.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://nodejs.org/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:74  Write-Info \"Install option 2: https://nodejs.org/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:77",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/node/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:77  Write-Info \"China alt: https://npmmirror.com/mirrors/node/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:131",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.python.org/downloads/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:131  Write-Info \"Install option 2: https://www.python.org/downloads/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:134",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://npmmirror.com/mirrors/python/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:134  Write-Info \"China alt: https://npmmirror.com/mirrors/python/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:189",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://z-cdn.chatglm.cn/office-skill/fonts",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/env_setup/setup_windows.ps1:189  $FontCdnBase = \"https://z-cdn.chatglm.cn/office-skill/fonts\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/references/docx-js-advanced.md:238",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/references/docx-js-advanced.md:238  > `https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/` (pick the"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/references/docx-js-core.md:290",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/references/docx-js-core.md:290  link: \"https://example.com\","
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:160",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:160  f'<Relationship Id=\"{next_rid}\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/image\" Target=\"media/image1.png\"/>')"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:170",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/drawingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:170  <a:graphic xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\">"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:171",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:171  <a:graphicData uri=\"http://schemas.openxmlformats.org/drawingml/2006/picture\">\nresources/glm/packages/documents-plugin/skills/docx/references/ooxml.md:172  <pic:pic xmlns:pic=\"http://schemas.openxmlformats.org/drawingml/2006/picture\">"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/comment.md:43",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/comment.md:43  <w:comments xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\""
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/comment.md:44",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/comment.md:44  xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\">"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/comment.md:71",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/comment.md:71  <Relationship Id=\"rIdComments\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments\" Target=\"comments.xml\"/>"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/edit.md:33",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/edit.md:33  > preserving styles and layout), tell them the package is large, then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under `.../libreoffice/\nresources/glm/packages/documents-plugin/skills/docx/routes/edit.md:90  > package is large (not a reason to skip), then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under `.../libreoffice/stable/`; package-mana"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/format.md:130",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/format.md:130  > say the package is large, then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under `.../libreoffice/stable/`; package-manager commands ar"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/read.md:45",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/read.md:45  ns = {\"w\": \"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"}\nresources/glm/packages/documents-plugin/skills/docx/routes/read.md:49  for t in tree.iter(\"{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t\"):"
+    },
+    {
+      "kind": "DOC_NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/routes/read.md:85",
+      "what": "初扫：文档/示例文件中的 URL 引用（DOC_REFERENCE——已清点、非运行时裁决点，不进 REMOTE_PROVIDER 误报池）",
+      "classification": "DOC_REFERENCE",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/routes/read.md:85  > laid out, which is the whole point of a visual check), say the package is large, then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2014/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2016/ink",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://schemas.microsoft.com/office/drawing/2017/model3d",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/2019/extlst",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://schemas.microsoft.com/office/word/2010/wordml",
+      "evidence": "resources/glm/packages/documents-plugin/skills/docx/scripts/templates/comments.xml:2  <w:comments xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx"
+    }
+  ],
+  "reRooting": []
+}

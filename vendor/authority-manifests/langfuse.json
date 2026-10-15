@@ -1,0 +1,1826 @@
+{
+  "target": "langfuse (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\langfuse)",
+  "origin": "https://github.com/langfuse/langfuse",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 506 个文本文件（源码 506、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "SHELL_EXEC",
+      "where": ".agents/skills/add-model-price/scripts/validate-pricing-file.test.mjs:5",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": ".agents/skills/add-model-price/scripts/validate-pricing-file.test.mjs:5  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".agents/skills/linear-context-handover/scripts/lf-context.sh:171",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/##",
+      "evidence": ".agents/skills/linear-context-handover/scripts/lf-context.sh:171  REPO=$(printf '%s' \"$ORIGIN\" | sed -e 's#^git@github.com:##' -e 's#^https://github.com/##' -e 's#\\.git$##')"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".agents/skills/linear-context-handover/scripts/lf-context.sh:318",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://linear.app/%s/issue/%s",
+      "evidence": ".agents/skills/linear-context-handover/scripts/lf-context.sh:318  printf '  %-12s https://linear.app/%s/issue/%s\\n' \"$id\" \"$SLUG\" \"$id\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".agents/skills/linear-context-handover/scripts/lf-context.sh:340",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.linear.app/graphql",
+      "evidence": ".agents/skills/linear-context-handover/scripts/lf-context.sh:340  curl -sS -X POST https://api.linear.app/graphql \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": ".agents/skills/pnpm-upgrade-package/scripts/check-release-age-window.mjs:72",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://registry.npmjs.org/${encodeURIComponent(name",
+      "evidence": ".agents/skills/pnpm-upgrade-package/scripts/check-release-age-window.mjs:72  `https://registry.npmjs.org/${encodeURIComponent(name)}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/scripts/smoke-image.sh:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.example",
+      "evidence": "ai-gateway/scripts/smoke-image.sh:7  -e LANGFUSE_AI_GATEWAY_WEB_URL=https://web.example \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/scripts/smoke-image.sh:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://$port/$route",
+      "evidence": "ai-gateway/scripts/smoke-image.sh:17  --retry-delay 1 --max-time 2 \"http://$port/$route\")\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/scripts/smoke-image.sh:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080/health",
+      "evidence": "ai-gateway/scripts/smoke-image.sh:23  docker exec \"$container\" sh -c 'wget -qO /dev/null http://localhost:8080/health || exit 1'"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/scripts/smoke-image.sh:26",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://$port/openai/v1/responses",
+      "evidence": "ai-gateway/scripts/smoke-image.sh:26  --max-time 2 -X POST \"http://$port/openai/v1/responses\")\" == 401 ]]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/test_support.rs:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "ai-gateway/src/test_support.rs:36  let url = format!(\"http://{}\", listener.local_addr().unwrap());"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/test_support.rs:103",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "ai-gateway/src/test_support.rs:103  \"base_url\": \"https://api.openai.com/v1\",\nai-gateway/src/test_support.rs:108  \"base_url\": \"https://api.openai.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/test_support.rs:113",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1",
+      "evidence": "ai-gateway/src/test_support.rs:113  \"base_url\": \"https://api.anthropic.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/http/tests.rs:144",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "ai-gateway/src/http/tests.rs:144  let url = format!(\"http://{}\", listener.local_addr().unwrap());\nai-gateway/src/http/tests.rs:731  let upstream_url = format!(\"http://{}\", upstream.local_addr().unwrap());"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/http/tests.rs:637",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://attacker.example/v1",
+      "evidence": "ai-gateway/src/http/tests.rs:637  body[\"connection\"][\"base_url\"] = \"https://attacker.example/v1\".into();"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/observability/client.rs:107",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "ai-gateway/src/observability/client.rs:107  let endpoint = format!(\"http://{}/\", listener.local_addr().unwrap());\nai-gateway/src/observability/client.rs:125  \"http://{}:unused@{}/private-content?token=secret-query\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/providers/tests.rs:950",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9",
+      "evidence": "ai-gateway/src/providers/tests.rs:950  \"http://127.0.0.1:9\".to_owned(),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/contracts.rs:37",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "ai-gateway/src/resolution/contracts.rs:37  Self::OpenAi => \"https://api.openai.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/contracts.rs:38",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1",
+      "evidence": "ai-gateway/src/resolution/contracts.rs:38  Self::Anthropic => \"https://api.anthropic.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "ai-gateway/src/resolution/tests.rs:47  let url = format!(\"http://{}\", listener.local_addr().unwrap());"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:101",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:101  \"base_url\": \"https://api.openai.com/v1\",\nai-gateway/src/resolution/tests.rs:502  (\"/connection/base_url\", json!(\"https://api.openai.com/v1\")),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:384",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:384  \"base_url\": \"https://api.anthropic.com/v1\",\nai-gateway/src/resolution/tests.rs:423  \"https://api.anthropic.com/v1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:503",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://api.anthropic.com/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:503  (\"/connection/base_url\", json!(\"http://api.anthropic.com/v1\")),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:506",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com.attacker.example/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:506  json!(\"https://api.anthropic.com.attacker.example/v1\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:510",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1/",
+      "evidence": "ai-gateway/src/resolution/tests.rs:510  json!(\"https://api.anthropic.com/v1/\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:555",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://attacker.example/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:555  (\"/connection/base_url\", json!(\"https://attacker.example/v1\")),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:558",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com.attacker.example/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:558  json!(\"https://api.openai.com.attacker.example/v1\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:560",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://api.openai.com/v1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:560  (\"/connection/base_url\", json!(\"http://api.openai.com/v1\")),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:563",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1?redirect=elsewhere",
+      "evidence": "ai-gateway/src/resolution/tests.rs:563  json!(\"https://api.openai.com/v1?redirect=elsewhere\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:693",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.example",
+      "evidence": "ai-gateway/src/resolution/tests.rs:693  ControlPlaneConfig::new(\"https://web.example\", key),\nai-gateway/src/resolution/tests.rs:710  \"https://web.example\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:699",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://web.example",
+      "evidence": "ai-gateway/src/resolution/tests.rs:699  \"http://web.example\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:700",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://user:password@web.example",
+      "evidence": "ai-gateway/src/resolution/tests.rs:700  \"https://user:password@web.example\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:701",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.example?query=true",
+      "evidence": "ai-gateway/src/resolution/tests.rs:701  \"https://web.example?query=true\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:702",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.example#fragment",
+      "evidence": "ai-gateway/src/resolution/tests.rs:702  \"https://web.example#fragment\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:711",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:3000",
+      "evidence": "ai-gateway/src/resolution/tests.rs:711  \"http://127.0.0.1:3000\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/src/resolution/tests.rs:712",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://[::1",
+      "evidence": "ai-gateway/src/resolution/tests.rs:712  \"http://[::1]:3000\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/tests/observability.rs:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{address",
+      "evidence": "ai-gateway/tests/observability.rs:66  url: format!(\"http://{address}\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "ai-gateway/tests/observability.rs:155",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "ai-gateway/tests/observability.rs:155  let endpoint = format!(\"http://{}\", listener.local_addr().unwrap());\nai-gateway/tests/observability.rs:352  let endpoint = format!(\"http://{}\", listener.local_addr().unwrap());"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "packages/in-app-agent-sandbox-runtime/src/server.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "packages/in-app-agent-sandbox-runtime/src/server.ts:1  import { spawn } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/in-app-agent-sandbox-runtime/tests/sandbox.test.ts:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:${hostPort",
+      "evidence": "packages/in-app-agent-sandbox-runtime/tests/sandbox.test.ts:41  baseUrl = `http://127.0.0.1:${hostPort}`;"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/langfuse-skills/scripts/sync-skills.mjs:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LANGFUSE_SKILLS_REF",
+      "rule": "process.env",
+      "evidence": "packages/langfuse-skills/scripts/sync-skills.mjs:10  const sourceRef = process.env.LANGFUSE_SKILLS_REF ?? \"main\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/scripts/sync-skills.mjs:12",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com/repos/langfuse/skills/contents/skills/langfuse/references?ref=${encodeURIComponent(sourceRef",
+      "evidence": "packages/langfuse-skills/scripts/sync-skills.mjs:12  `https://api.github.com/repos/langfuse/skills/contents/skills/langfuse/references?ref=${encodeURIComponent(sourceRef)}`;"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "packages/langfuse-skills/scripts/sync-skills.mjs:17",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "GITHUB_TOKEN",
+      "rule": "process.env",
+      "evidence": "packages/langfuse-skills/scripts/sync-skills.mjs:17  Authorization: process.env.GITHUB_TOKEN\npackages/langfuse-skills/scripts/sync-skills.mjs:18  ? `Bearer ${process.env.GITHUB_TOKEN}`"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:10  \"# Langfuse CI/CD\\n\\n## Checklist\\n\\n- [ ] Follow the [CI/CD docs page](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd) and the [langfuse/experiment-action README](https://github.com/langfuse/experiment-action)\\n- [ ] In"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/langfuse/experiment-action",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:10  \"# Langfuse CI/CD\\n\\n## Checklist\\n\\n- [ ] Follow the [CI/CD docs page](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd) and the [langfuse/experiment-action README](https://github.com/langfuse/experiment-action)\\n- [ ] In"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd#other-cicd-systems",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:10  \"# Langfuse CI/CD\\n\\n## Checklist\\n\\n- [ ] Follow the [CI/CD docs page](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd) and the [langfuse/experiment-action README](https://github.com/langfuse/experiment-action)\\n- [ ] In"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk#evaluators",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:10  \"# Langfuse CI/CD\\n\\n## Checklist\\n\\n- [ ] Follow the [CI/CD docs page](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd) and the [langfuse/experiment-action README](https://github.com/langfuse/experiment-action)\\n- [ ] In"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:10  \"# Langfuse CI/CD\\n\\n## Checklist\\n\\n- [ ] Follow the [CI/CD docs page](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd) and the [langfuse/experiment-action README](https://github.com/langfuse/experiment-action)\\n- [ ] In"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:17",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/api-and-data-platform/features/cli",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:17  \"# Langfuse CLI Reference\\n\\nDocumentation: https://langfuse.com/docs/api-and-data-platform/features/cli\\n\\n## Install\\n\\n```bash\\n# Run directly (recommended)\\nnpx langfuse-cli api <resource> <action>\\nbunx langfuse-cli api <resource> <act\npackages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:17  \"# Langfuse CLI Reference\\n\\nDocumentation: https://langfuse.com/docs/api-and-data-platform/features/cli\\n\\n## Install\\n\\n```bash\\n# Run directly (recommended)\\nnpx langfuse-cli api <resource> <action>\\nbunx langfuse-cli api <resource> <act\npackages/langfuse-skills/src/generated/skills.js:31  \"# Error Analysis\\n\\n## Primary Guide\\n\\n**1. Fetch the guide in this blogpost**\\n\\nhttps://langfuse.com/guides/cookbook/error-analysis-llm-applications.md\\n\\nIf fetch is not available query for langfuse.com error analysis guide\\n\\nRead it "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:17",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/api-and-data-platform/features/observations-api",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:17  \"# Langfuse CLI Reference\\n\\nDocumentation: https://langfuse.com/docs/api-and-data-platform/features/cli\\n\\n## Install\\n\\n```bash\\n# Run directly (recommended)\\nnpx langfuse-cli api <resource> <action>\\nbunx langfuse-cli api <resource> <act"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/academy/datasets",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:24  \"# Langfuse Dataset Construction\\n\\n## Primary Guide\\n\\nFollow the [Langfuse Academy datasets guide](https://langfuse.com/academy/datasets) as the human-readable source of truth for dataset design; fetch current docs before implementation.\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:31",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/guides/cookbook/error-analysis-llm-applications.md",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:31  \"# Error Analysis\\n\\n## Primary Guide\\n\\n**1. Fetch the guide in this blogpost**\\n\\nhttps://langfuse.com/guides/cookbook/error-analysis-llm-applications.md\\n\\nIf fetch is not available query for langfuse.com error analysis guide\\n\\nRead it "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://us.cloud.langfuse.com",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:31  \"# Error Analysis\\n\\n## Primary Guide\\n\\n**1. Fetch the guide in this blogpost**\\n\\nhttps://langfuse.com/guides/cookbook/error-analysis-llm-applications.md\\n\\nIf fetch is not available query for langfuse.com error analysis guide\\n\\nRead it "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://jp.cloud.langfuse.com",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:31  \"# Error Analysis\\n\\n## Primary Guide\\n\\n**1. Fetch the guide in this blogpost**\\n\\nhttps://langfuse.com/guides/cookbook/error-analysis-llm-applications.md\\n\\nIf fetch is not available query for langfuse.com error analysis guide\\n\\nRead it "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/<projectId",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:31  \"# Error Analysis\\n\\n## Primary Guide\\n\\n**1. Fetch the guide in this blogpost**\\n\\nhttps://langfuse.com/guides/cookbook/error-analysis-llm-applications.md\\n\\nIf fetch is not available query for langfuse.com error analysis guide\\n\\nRead it "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://us.cloud.langfuse.com/project/<projectId",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:31  \"# Error Analysis\\n\\n## Primary Guide\\n\\n**1. Fetch the guide in this blogpost**\\n\\nhttps://langfuse.com/guides/cookbook/error-analysis-llm-applications.md\\n\\nIf fetch is not available query for langfuse.com error analysis guide\\n\\nRead it "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/observability/features/observation-types",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/tracing",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/tracing-features/sessions",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/tracing-features/users",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/tracing-features/tags",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/scores/overview",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/observability/features/multi-modality",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/observability/best-practices",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:38",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/observability/features/agent-graphs",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:38  \"# Langfuse Observability\\n\\nInstrument LLM applications with Langfuse tracing, following best practices and tailored to your use case.\\n\\n## Workflow\\n\\n### 1. Assess Current State\\n\\nCheck the project:\\n\\n- Is Langfuse SDK installed?\\n- W"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:45",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:45  \"# Judge Calibration\\n\\n## 1. Prepare the calibration\\n\\nThe calibration data must:\\n\\n- match the information the judge receives in a real execution, based on a representative production trace, filter rules, and variable mappings;\\n- inclu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/evaluation/experiments/datasets",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:45  \"# Judge Calibration\\n\\n## 1. Prepare the calibration\\n\\nThe calibration data must:\\n\\n- match the information the judge receives in a real execution, based on a representative production trace, filter rules, and variable mappings;\\n- inclu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:45  \"# Judge Calibration\\n\\n## 1. Prepare the calibration\\n\\nThe calibration data must:\\n\\n- match the information the judge receives in a real execution, based on a representative production trace, filter rules, and variable mappings;\\n- inclu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:45",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/prompt-management/data-model",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:45  \"# Judge Calibration\\n\\n## 1. Prepare the calibration\\n\\nThe calibration data must:\\n\\n- match the information the judge receives in a real execution, based on a representative production trace, filter rules, and variable mappings;\\n- inclu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:45",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/administration/llm-connection",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:45  \"# Judge Calibration\\n\\n## 1. Prepare the calibration\\n\\nThe calibration data must:\\n\\n- match the information the judge receives in a real execution, based on a representative production trace, filter rules, and variable mappings;\\n- inclu"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:59",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/prompt-management/data-model#text-vs-chat-prompts",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:59  '# Langfuse Prompt Migration\\n\\nMigrate hardcoded prompts into Langfuse-managed prompts. The API mechanics (`create_prompt`, `get_prompt`, `.compile()`, linking to traces) are in the docs — fetch them at execution time.\\n\\n## Prerequisites\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/prompt-management/features/variables",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:59  '# Langfuse Prompt Migration\\n\\nMigrate hardcoded prompts into Langfuse-managed prompts. The API mechanics (`create_prompt`, `get_prompt`, `.compile()`, linking to traces) are in the docs — fetch them at execution time.\\n\\n## Prerequisites\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/faq/all/using-external-templating-libraries",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:59  '# Langfuse Prompt Migration\\n\\nMigrate hardcoded prompts into Langfuse-managed prompts. The API mechanics (`create_prompt`, `get_prompt`, `.compile()`, linking to traces) are in the docs — fetch them at execution time.\\n\\n## Prerequisites\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/prompt-management/features/composability",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:59  '# Langfuse Prompt Migration\\n\\nMigrate hardcoded prompts into Langfuse-managed prompts. The API mechanics (`create_prompt`, `get_prompt`, `.compile()`, linking to traces) are in the docs — fetch them at execution time.\\n\\n## Prerequisites\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/prompt-management/get-started",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:59  '# Langfuse Prompt Migration\\n\\nMigrate hardcoded prompts into Langfuse-managed prompts. The API mechanics (`create_prompt`, `get_prompt`, `.compile()`, linking to traces) are in the docs — fetch them at execution time.\\n\\n## Prerequisites\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:59",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/prompt-management/features/link-to-traces",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:59  '# Langfuse Prompt Migration\\n\\nMigrate hardcoded prompts into Langfuse-managed prompts. The API mechanics (`create_prompt`, `get_prompt`, `.compile()`, linking to traces) are in the docs — fetch them at execution time.\\n\\n## Prerequisites\\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/academy/evaluate/choosing-what-to-evaluate",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:66  \"# Setting up evals\\n\\nAct as a PM, analyst, teacher, and at the end, an executor. The bulk of the work consists of probing the user to really understand what they are looking for, and get a clear picture of what would serve them best. This"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/academy/evaluate/writing-evaluators",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:66  \"# Setting up evals\\n\\nAct as a PM, analyst, teacher, and at the end, an executor. The bulk of the work consists of probing the user to really understand what they are looking for, and get a clear picture of what would serve them best. This"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/langfuse/skills/discussions/new?category=ideas-improvements&title=<url-encoded",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:73  \"# Skill Feedback\\n\\nUse this only for feedback about the skill itself, not Langfuse the product or a user's application data.\\n\\n1. Draft concise feedback using the following structure:\\n  - **Describe your idea or feedback** (required)\\n "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/langfuse/skills/issues/new",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:73  \"# Skill Feedback\\n\\nUse this only for feedback about the skill itself, not Langfuse the product or a user's application data.\\n\\n1. Draft concise feedback using the following structure:\\n  - **Describe your idea or feedback** (required)\\n "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:80",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/academy/monitoring/capturing-signals",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:80  \"# User Feedback\\n\\n## Workflow\\n\\n### 1. Determine What Feedback to Capture\\n\\nIf the user has asked for something specific, go with that. Otherwise, look at the application and **present a few UX options** for how feedback could work, the"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:80",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/guides/user-feedback-loop",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:80  \"# User Feedback\\n\\n## Workflow\\n\\n### 1. Determine What Feedback to Capture\\n\\nIf the user has asked for something specific, go with that. Otherwise, look at the application and **present a few UX options** for how feedback could work, the"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/faq/all/upgrade-to-langfuse-v4",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/compatibility",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/observability/sdk/upgrade-path",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/integrations/native/opentelemetry/migration-to-v4",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/faq/all/deprecated-api-migration",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/faq/all/llm-as-a-judge-migration",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.reference.langfuse.com/#tag/evaluationrules",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.reference.langfuse.com/#tag/unstableevaluators",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/api-and-data-platform/features/export-to-blob-storage#upgrade-path",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/integrations/analytics/mixpanel#migrate-export-source",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/integrations/analytics/posthog#migrate-export-source",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/langfuse-skills/src/generated/skills.js:87",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/~/evals",
+      "evidence": "packages/langfuse-skills/src/generated/skills.js:87  \"# Langfuse v4 project migration\\n\\n## Sources of truth\\n\\nFetch only the pages needed for the surfaces found:\\n\\n- [V4 upgrade guide](https://langfuse.com/faq/all/upgrade-to-langfuse-v4) and [compatibility](https://langfuse.com/docs/compat"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "packages/native/index.js:56",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "packages/native/index.js:56  return require('child_process').execSync('ldd --version', { encoding: 'utf8' }).includes('musl')"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/native/index.js:64",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NAPI_RS_NATIVE_LIBRARY_PATH",
+      "rule": "process.env",
+      "evidence": "packages/native/index.js:64  if (process.env.NAPI_RS_NATIVE_LIBRARY_PATH) {\npackages/native/index.js:66  return require(process.env.NAPI_RS_NATIVE_LIBRARY_PATH);"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/native/index.js:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NAPI_RS_ENFORCE_VERSION_CHECK",
+      "rule": "process.env",
+      "evidence": "packages/native/index.js:80  if (bindingPackageVersion !== '0.0.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {\npackages/native/index.js:96  if (bindingPackageVersion !== '0.0.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {\npackages/native/index.js:117  if (bindingPackageVersion !== '0.0.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/native/index.js:554",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NAPI_RS_WASI_FLAVOR",
+      "rule": "process.env",
+      "evidence": "packages/native/index.js:554  const __napiWasiFlavor = process.env.NAPI_RS_WASI_FLAVOR"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/native/index.js:568",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NAPI_RS_FORCE_WASI",
+      "rule": "process.env",
+      "evidence": "packages/native/index.js:568  const forceWasiError = process.env.NAPI_RS_FORCE_WASI === 'error'\npackages/native/index.js:570  process.env.NAPI_RS_FORCE_WASI === 'true' ||"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/native/index.js:691",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/npm/cli/issues/4828",
+      "evidence": "packages/native/index.js:691  `npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). ` +"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/native/scripts/prepare-clickhouse-rs.sh:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/langfuse/langfuse",
+      "evidence": "packages/native/scripts/prepare-clickhouse-rs.sh:29  --user-agent 'langfuse-native-build/0.1 (https://github.com/langfuse/langfuse)' \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/native/scripts/prepare-clickhouse-rs.sh:30",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://crates.io/api/v1/crates/clickhouse/${crate_version",
+      "evidence": "packages/native/scripts/prepare-clickhouse-rs.sh:30  \"https://crates.io/api/v1/crates/clickhouse/${crate_version}/download\" \\"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/clickhouse/scripts/dev-tables.sh:131",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.google.com/document/d/1bvz3FUFn3T4rfJ_U1qIh36FcJGfUVQwdAIOAHa3wPnA",
+      "evidence": "packages/shared/clickhouse/scripts/dev-tables.sh:131  -- (https://docs.google.com/document/d/1bvz3FUFn3T4rfJ_U1qIh36FcJGfUVQwdAIOAHa3wPnA)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/clickhouse/scripts/down.sh:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/golang-migrate/migrate",
+      "evidence": "packages/shared/clickhouse/scripts/down.sh:19  echo \"Visit https://github.com/golang-migrate/migrate for more installation instructions.\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/clickhouse/scripts/drop.sh:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/golang-migrate/migrate",
+      "evidence": "packages/shared/clickhouse/scripts/drop.sh:19  echo \"Visit https://github.com/golang-migrate/migrate for more installation instructions.\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/clickhouse/scripts/up.sh:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/golang-migrate/migrate",
+      "evidence": "packages/shared/clickhouse/scripts/up.sh:41  echo \"Visit https://github.com/golang-migrate/migrate for more installation instructions.\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/cli-main.ts:62",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "packages/shared/scripts/seeder/cli-main.ts:62  const baseUrl = (process.env.NEXTAUTH_URL ?? \"http://localhost:3000\").replace("
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "packages/shared/scripts/seeder/cli-main.ts:62",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "NEXTAUTH_URL",
+      "rule": "process.env",
+      "evidence": "packages/shared/scripts/seeder/cli-main.ts:62  const baseUrl = (process.env.NEXTAUTH_URL ?? \"http://localhost:3000\").replace("
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/scripts/seeder/cli.ts:43",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LANGFUSE_LOG_LEVEL",
+      "rule": "process.env",
+      "evidence": "packages/shared/scripts/seeder/cli.ts:43  process.env.LANGFUSE_LOG_LEVEL = \"error\";"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/scripts/seeder/doctor.ts:315",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT",
+      "rule": "process.env",
+      "evidence": "packages/shared/scripts/seeder/doctor.ts:315  const endpoint = process.env.LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/doctor.ts:322",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:9090",
+      "evidence": "packages/shared/scripts/seeder/doctor.ts:322  fix: \"set LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT in .env (e.g. http://localhost:9090) if media/event upload tests are needed\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/seed-postgres.ts:80",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://static.langfuse.com/langfuse-dev%2Fexample-avatar.png",
+      "evidence": "packages/shared/scripts/seeder/seed-postgres.ts:80  image: \"https://static.langfuse.com/langfuse-dev%2Fexample-avatar.png\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "packages/shared/scripts/seeder/seed-postgres.ts:229",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "SEED_SECRET_KEY",
+      "rule": "process.env",
+      "evidence": "packages/shared/scripts/seeder/seed-postgres.ts:229  secret: process.env.SEED_SECRET_KEY ?? DEFAULT_SEED_API_KEY.secret, // eslint-disable-line turbo/no-undeclared-env-vars\npackages/shared/scripts/seeder/seed-postgres.ts:289  secret: process.env.SEED_SECRET_KEY ?? \"sk-lf-asdfghjkl\", // eslint-disable-line turbo/no-undeclared-env-vars"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "packages/shared/scripts/seeder/seed-postgres.ts:321",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENAI_API_KEY",
+      "rule": "process.env",
+      "evidence": "packages/shared/scripts/seeder/seed-postgres.ts:321  const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // eslint-disable-line turbo/no-undeclared-env-vars"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/scenarios/incident-session.ts:537",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://wiki.northwind.dev/postmortems/INC-4471",
+      "evidence": "packages/shared/scripts/seeder/scenarios/incident-session.ts:537  doc: \"https://wiki.northwind.dev/postmortems/INC-4471\",\npackages/shared/scripts/seeder/scenarios/incident-session.ts:694  \"📝 **Postmortem draft:** [INC-4471 — Checkout latency from DB pool exhaustion](https://wiki.northwind.dev/postmortems/INC-4471)\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/scenarios/incident-session.ts:666",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tracker.northwind.dev/PAY-1187",
+      "evidence": "packages/shared/scripts/seeder/scenarios/incident-session.ts:666  url: \"https://tracker.northwind.dev/PAY-1187\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/scenarios/incident-session.ts:682",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://tracker.northwind.dev/OBS-342",
+      "evidence": "packages/shared/scripts/seeder/scenarios/incident-session.ts:682  url: \"https://tracker.northwind.dev/OBS-342\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/scripts/seeder/scenarios/incident-session.ts:797",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://status.northwind.dev/incidents/q7kd2",
+      "evidence": "packages/shared/scripts/seeder/scenarios/incident-session.ts:797  url: \"https://status.northwind.dev/incidents/q7kd2\",\npackages/shared/scripts/seeder/scenarios/incident-session.ts:816  \"- Final update published on [status.northwind.dev](https://status.northwind.dev/incidents/q7kd2)\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/src/db.ts:68",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_ENV",
+      "rule": "process.env",
+      "evidence": "packages/shared/src/db.ts:68  if (process.env.NODE_ENV === \"development\") {"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/src/env.ts:701",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DOCKER_BUILD",
+      "rule": "process.env",
+      "evidence": "packages/shared/src/env.ts:701  process.env.DOCKER_BUILD === \"1\" // eslint-disable-line turbo/no-undeclared-env-vars"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/eventsTable.ts:32",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://langfuse.com/docs/api-and-data-platform/features/blob-storage-export-fields",
+      "evidence": "packages/shared/src/eventsTable.ts:32  * (https://langfuse.com/docs/api-and-data-platform/features/blob-storage-export-fields),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/src/features/analytics-integrations/export-source-policy.ts:67",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NEXT_PUBLIC_LANGFUSE_BLOB_EXPORT_CUTOFF",
+      "rule": "process.env",
+      "evidence": "packages/shared/src/features/analytics-integrations/export-source-policy.ts:67  process.env.NEXT_PUBLIC_LANGFUSE_BLOB_EXPORT_CUTOFF,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/src/features/analytics-integrations/export-source-policy.ts:72",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NEXT_PUBLIC_LANGFUSE_BLOB_EXPORTER_CUTOFF",
+      "rule": "process.env",
+      "evidence": "packages/shared/src/features/analytics-integrations/export-source-policy.ts:72  process.env.NEXT_PUBLIC_LANGFUSE_BLOB_EXPORTER_CUTOFF,"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "packages/shared/src/features/analytics-integrations/export-source-policy.ts:80",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NEXT_PUBLIC_LANGFUSE_ANALYTICS_EXPORTER_CUTOFF",
+      "rule": "process.env",
+      "evidence": "packages/shared/src/features/analytics-integrations/export-source-policy.ts:80  process.env.NEXT_PUBLIC_LANGFUSE_ANALYTICS_EXPORTER_CUTOFF,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/types.test.ts:196",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/monitors/mon_01",
+      "evidence": "packages/shared/src/features/monitors/types.test.ts:196  permalink: \"https://cloud.langfuse.com/project/proj_01/monitors/mon_01\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/types.test.ts:219",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/traces?dateRange=1779450930000-1779451230000",
+      "evidence": "packages/shared/src/features/monitors/types.test.ts:219  \"https://cloud.langfuse.com/project/proj_01/traces?dateRange=1779450930000-1779451230000\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/monitors/mon_01",
+      "evidence": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:10  permalink: \"https://cloud.langfuse.com/project/proj_01/monitors/mon_01\",\npackages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:50  url: \"https://cloud.langfuse.com/project/proj_01/monitors/mon_01\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/monitors/mon_01|High",
+      "evidence": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:37  text: \"*<https://cloud.langfuse.com/project/proj_01/monitors/mon_01|High error rate>*\",\npackages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:73  \"*<https://cloud.langfuse.com/project/proj_01/monitors/mon_01|High error rate>*\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:90",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/observations?dateRange=1779450930000-1779451230000",
+      "evidence": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:90  \"https://cloud.langfuse.com/project/proj_01/observations?dateRange=1779450930000-1779451230000\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:113",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/scores?dateRange=1779450930000-1779451230000",
+      "evidence": "packages/shared/src/features/monitors/processor/buildMonitorAlertSlackMessage.test.ts:113  \"https://cloud.langfuse.com/project/proj_01/scores?dateRange=1779450930000-1779451230000\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com",
+      "evidence": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:29  envMock.env.NEXTAUTH_URL = \"https://cloud.langfuse.com\";\npackages/shared/src/features/monitors/processor/buildPermalink.test.ts:51  envMock.env.NEXTAUTH_URL = \"https://cloud.langfuse.com\";\npackages/shared/src/features/monitors/processor/buildPermalink.test.ts:64  envMock.env.NEXTAUTH_URL = \"https://cloud.langfuse.com\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/alerts/mon_01",
+      "evidence": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:31  \"https://cloud.langfuse.com/project/proj_01/alerts/mon_01\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:53",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/observations?dateRange=${from.getTime(",
+      "evidence": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:53  `https://cloud.langfuse.com/project/proj_01/observations?dateRange=${from.getTime()}-${to.getTime()}`,\npackages/shared/src/features/monitors/processor/buildPermalink.test.ts:241  `https://cloud.langfuse.com/project/proj_01/observations?dateRange=${from.getTime()}-${to.getTime()}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:239",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/",
+      "evidence": "packages/shared/src/features/monitors/processor/buildPermalink.test.ts:239  envMock.env.NEXTAUTH_URL = \"https://cloud.langfuse.com/\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/features/monitors/scheduler/types.test.ts:135",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/monitors/mon_01",
+      "evidence": "packages/shared/src/features/monitors/scheduler/types.test.ts:135  permalink: \"https://cloud.langfuse.com/project/proj_01/monitors/mon_01\",\npackages/shared/src/features/monitors/scheduler/types.test.ts:232  permalink: \"https://cloud.langfuse.com/project/proj_01/monitors/mon_01\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/in-app-agent/schema.ts:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/ag-ui-protocol/ag-ui/pull/1637",
+      "evidence": "packages/shared/src/in-app-agent/schema.ts:13  // https://github.com/ag-ui-protocol/ag-ui/pull/1637 is merged, then remove"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/in-app-agent/server/modelProvider.test.ts:55",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com",
+      "evidence": "packages/shared/src/in-app-agent/server/modelProvider.test.ts:55  LANGFUSE_AI_BASE_URL: \"https://api.anthropic.com\",\npackages/shared/src/in-app-agent/server/modelProvider.test.ts:139  LANGFUSE_AI_BASE_URL: \"https://api.anthropic.com\",\npackages/shared/src/in-app-agent/server/modelProvider.test.ts:161  LANGFUSE_AI_BASE_URL: \"https://api.anthropic.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/in-app-agent/server/modelProvider.test.ts:65",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.anthropic.com/v1",
+      "evidence": "packages/shared/src/in-app-agent/server/modelProvider.test.ts:65  baseURL: \"https://api.anthropic.com/v1\",\npackages/shared/src/in-app-agent/server/modelProvider.test.ts:149  baseURL: \"https://api.anthropic.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/in-app-agent/server/modelProvider.test.ts:76",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://llm-exec.internal/v1",
+      "evidence": "packages/shared/src/in-app-agent/server/modelProvider.test.ts:76  LANGFUSE_AI_BASE_URL: \"https://llm-exec.internal/v1\",\npackages/shared/src/in-app-agent/server/modelProvider.test.ts:86  baseURL: \"https://llm-exec.internal/v1\",\npackages/shared/src/in-app-agent/server/modelProvider.test.ts:108  LANGFUSE_AI_BASE_URL: \"https://llm-exec.internal/v1\","
+    },
+    {
+      "kind": "INFERRED_CREDENTIAL",
+      "where": "packages/shared/src/in-app-agent/server/openaiCompatibility.ts:25",
+      "what": "初扫：openai SDK 客户端构造点——凭据经该 SDK 内部读取（inferred via openai，传递性凭据），应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "sdk": "openai",
+      "inferred": true,
+      "evidence": "packages/shared/src/in-app-agent/server/openaiCompatibility.ts:25  * toggle. Unset follows first-party OpenAI (`api.openai.com` / blank URL);"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/in-app-agent/server/systemPrompt.ts:42",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/langfuse/skills",
+      "evidence": "packages/shared/src/in-app-agent/server/systemPrompt.ts:42  The user should be made aware of the Langfuse skill: https://github.com/langfuse/skills"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/queues.test.ts:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/project/proj_01/monitors/mon_01",
+      "evidence": "packages/shared/src/server/queues.test.ts:17  permalink: \"https://cloud.langfuse.com/project/proj_01/monitors/mon_01\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/auth/customSsoProvider.test.ts:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://idp.example.com/oidc",
+      "evidence": "packages/shared/src/server/auth/customSsoProvider.test.ts:19  issuer: \"https://idp.example.com/oidc\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com",
+      "evidence": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:11  const baseUrl = options?.enterprise?.baseUrl ?? \"https://github.com\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:14",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.github.com",
+      "evidence": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:14  : \"https://api.github.com\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.github.com/en/rest/users/emails#list-email-addresses-for-the-authenticated-user",
+      "evidence": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:32  // See https://docs.github.com/en/rest/users/emails#list-email-addresses-for-the-authenticated-user"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:55",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/nextauthjs/next-auth/main/packages/next-auth/provider-logos/github.svg",
+      "evidence": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:55  logo: \"https://raw.githubusercontent.com/nextauthjs/next-auth/main/packages/next-auth/provider-logos/github.svg\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://raw.githubusercontent.com/nextauthjs/next-auth/main/packages/next-auth/provider-logos/github-dark.svg",
+      "evidence": "packages/shared/src/server/auth/gitHubEnterpriseProvider.ts:57  \"https://raw.githubusercontent.com/nextauthjs/next-auth/main/packages/next-auth/provider-logos/github-dark.svg\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/clickhouse/client.test.ts:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8123",
+      "evidence": "packages/shared/src/server/clickhouse/client.test.ts:8  CLICKHOUSE_URL: \"http://localhost:8123\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/clickhouse/client.test.ts:193",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://main:8123",
+      "evidence": "packages/shared/src/server/clickhouse/client.test.ts:193  const MAIN = \"http://main:8123\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/clickhouse/client.test.ts:194",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://read-replica:8123",
+      "evidence": "packages/shared/src/server/clickhouse/client.test.ts:194  const READ_REPLICA = \"http://read-replica:8123\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/clickhouse/client.test.ts:195",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://events-read-replica:8123",
+      "evidence": "packages/shared/src/server/clickhouse/client.test.ts:195  const EVENTS_READ_REPLICA = \"http://events-read-replica:8123\";"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "packages/shared/src/server/clickhouse/prepareMigrations.test.ts:1",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "child_process",
+      "evidence": "packages/shared/src/server/clickhouse/prepareMigrations.test.ts:1  import { spawnSync } from \"node:child_process\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/clickhouse/prepareMigrations.test.ts:140",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8123",
+      "evidence": "packages/shared/src/server/clickhouse/prepareMigrations.test.ts:140  CLICKHOUSE_URL: \"http://localhost:8123\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbAccessToken.test.ts:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://${AUTH0_DOMAIN",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbAccessToken.test.ts:12  const TOKEN_URL = `https://${AUTH0_DOMAIN}/oauth/token`;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbAccessToken.ts:125",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://${this.config.auth0Domain",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbAccessToken.ts:125  `https://${this.config.auth0Domain}/oauth/token`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://${AUTH0_DOMAIN",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:32  const TOKEN_URL = `https://${AUTH0_DOMAIN}/oauth/token`;"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:83",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://chb.example.com/api/v1",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:83  baseUrl: \"https://chb.example.com/api/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pay.example.com/s/1",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:110  onChb(jsonResponse(200, { portalUrl: \"https://pay.example.com/s/1\" }));\npackages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:475  onChb(jsonResponse(200, { portalUrl: \"https://pay.example.com/s/1\" }));\npackages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:482  ).resolves.toBe(\"https://pay.example.com/s/1\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:114",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cloud.langfuse.com/back",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:114  returnUrl: \"https://cloud.langfuse.com/back\",\npackages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:235  returnUrl: \"https://cloud.langfuse.com/back\",\npackages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:264  returnUrl: \"https://cloud.langfuse.com/back\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:185",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://chb.example.com/api/v1/attachedplan?fields=plan%2Cperiod%2Cpayment%2Cscheduled",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:185  \"https://chb.example.com/api/v1/attachedplan?fields=plan%2Cperiod%2Cpayment%2Cscheduled\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:228",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://pay.example.com/c/1",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:228  checkoutUrl: \"https://pay.example.com/c/1\",\npackages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:256  checkoutUrl: \"https://pay.example.com/c/1\",\npackages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:294  checkoutUrl: \"https://pay.example.com/c/1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:537",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://chb.example.com",
+      "evidence": "packages/shared/src/server/ee/clickhouseBilling/chbApiClient.test.ts:537  mocks.env.CLICKHOUSE_BILLING_BASE_URL = \"https://chb.example.com\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/evals/awsLambdaCodeEvalDispatcher.ts:243",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.aws.amazon.com/lambda/latest/dg/invocation-errors.html",
+      "evidence": "packages/shared/src/server/evals/awsLambdaCodeEvalDispatcher.ts:243  // https://docs.aws.amazon.com/lambda/latest/dg/invocation-errors.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/evals/codeEvalDispatcherTypes.ts:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators",
+      "evidence": "packages/shared/src/server/evals/codeEvalDispatcherTypes.ts:12  \"https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators\";"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/ingestion/types.ts:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html",
+      "evidence": "packages/shared/src/server/ingestion/types.ts:13  .max(800) // AWS S3 allows for 1024 bytes for object keys and we need enough room to construct the entire key/path. https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/instrumentation/index.ts:18",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#spankind",
+      "evidence": "packages/shared/src/server/instrumentation/index.ts:18  spanKind?: opentelemetry.SpanKind; // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#spankind"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/instrumentation/index.ts:19",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/overview.md#traces",
+      "evidence": "packages/shared/src/server/instrumentation/index.ts:19  rootSpan?: boolean; // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/overview.md#traces"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:188",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:188  url: \"https://api.openai.com/v1/chat/completions\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:248",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://dns-rebind.attacker.example/metadata?token=secret",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:248  \"http://dns-rebind.attacker.example/metadata?token=secret\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:290",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cdn.example.com/image.png",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:290  data: new URL(\"https://cdn.example.com/image.png\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:384",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://signed.example/media?secret=value",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:384  const url = new URL(\"https://signed.example/media?secret=value\");\npackages/shared/src/server/llm/llmText.test.ts:422  url: new URL(\"https://signed.example/media?secret=value\"),\npackages/shared/src/server/llm/llmText.test.ts:433  url: new URL(\"https://signed.example/media?secret=value\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:528",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openai-compatible.example.com/v1",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:528  baseURL: \"https://openai-compatible.example.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:555",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openai-proxy.example.com/v1",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:555  baseURL: \"https://openai-proxy.example.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/llmText.test.ts:580",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1",
+      "evidence": "packages/shared/src/server/llm/llmText.test.ts:580  baseURL: \"https://api.openai.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.test.ts:47",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://signed.example/${mediaId",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.test.ts:47  url: `https://signed.example/${mediaId}?signature=secret`,\npackages/shared/src/server/llm/mediaMessages.test.ts:120  url: `https://signed.example/${mediaId}`,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.test.ts:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://signed.example/image-1?signature=secret",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.test.ts:75  data: new URL(\"https://signed.example/image-1?signature=secret\"),\npackages/shared/src/server/llm/mediaMessages.test.ts:169  \"https://signed.example/image-1?signature=secret\",\npackages/shared/src/server/llm/mediaMessages.test.ts:237  url: \"https://signed.example/image-1?signature=secret\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.test.ts:81",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://signed.example/image-2?signature=secret",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.test.ts:81  data: new URL(\"https://signed.example/image-2?signature=secret\"),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.test.ts:182",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://browser-facing.example/image-1?signature=secret",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.test.ts:182  \"https://browser-facing.example/image-1?signature=secret\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.ts:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.openai.com/docs/guides/images-vision",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.ts:28  // OpenAI: https://platform.openai.com/docs/guides/images-vision"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.ts:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://platform.claude.com/docs/en/build-with-claude/vision",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.ts:29  // Anthropic: https://platform.claude.com/docs/en/build-with-claude/vision"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.ts:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ai.google.dev/gemini-api/docs/file-input-methods",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.ts:30  // Gemini: https://ai.google.dev/gemini-api/docs/file-input-methods"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/mediaMessages.ts:61",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/aws-samples/amazon-bedrock-samples/issues/684",
+      "evidence": "packages/shared/src/server/llm/mediaMessages.ts:61  // https://github.com/aws-samples/amazon-bedrock-samples/issues/684"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/nativeErrors.test.ts:20",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.example.com/v1/messages",
+      "evidence": "packages/shared/src/server/llm/nativeErrors.test.ts:20  url: \"https://api.example.com/v1/messages\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/types.ts:344",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://langfuse.com/docs/prompt-management/features/playground#openai-playground--anthropic-playground",
+      "evidence": "packages/shared/src/server/llm/types.ts:344  // NOTE: Update docs page when changing this! https://langfuse.com/docs/prompt-management/features/playground#openai-playground--anthropic-playground\npackages/shared/src/server/llm/types.ts:415  // NOTE: Update docs page when changing this! https://langfuse.com/docs/prompt-management/features/playground#openai-playground--anthropic-playground"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/types.ts:505",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://ai-gateway.vercel.sh/typesafe/v1",
+      "evidence": "packages/shared/src/server/llm/types.ts:505  baseURL: \"https://ai-gateway.vercel.sh/typesafe/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/types.ts:511",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "packages/shared/src/server/llm/types.ts:511  baseURL: \"https://openrouter.ai/api/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/types.ts:572",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/colinhacks/zod?tab=readme-ov-file#strict",
+      "evidence": "packages/shared/src/server/llm/types.ts:572  // https://github.com/colinhacks/zod?tab=readme-ov-file#strict"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/types.ts:619",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/langfuse/langfuse-js/blob/main/langfuse-core/src/index.ts",
+      "evidence": "packages/shared/src/server/llm/types.ts:619  // NOTE: These strings must be whitelisted in the TS SDK to allow ingestion of traces by Langfuse. Please mirror edits to this string in https://github.com/langfuse/langfuse-js/blob/main/langfuse-core/src/index.ts."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:170",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://accounts.google.com/o/oauth2/auth",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:170  auth_uri: \"https://accounts.google.com/o/oauth2/auth\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:171",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://oauth2.googleapis.com/token",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:171  token_uri: \"https://oauth2.googleapis.com/token\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:172",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://www.googleapis.com/oauth2/v1/certs",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:172  auth_provider_x509_cert_url: \"https://www.googleapis.com/oauth2/v1/certs\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:173",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com/cert",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:173  client_x509_cert_url: \"https://example.com/cert\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:238",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:238  expect(request.url).toBe(\"https://api.openai.com/v1/chat/completions\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:262",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.openai.com/v1/responses",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:262  expect(request.url).toBe(\"https://api.openai.com/v1/responses\");\npackages/shared/src/server/llm/ai-sdk/requestShape.test.ts:296  expect(calls[0]?.url).toBe(\"https://api.openai.com/v1/responses\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:321",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openai-compatible.example.com/v1",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:321  baseURL: \"https://openai-compatible.example.com/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:327",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openai-compatible.example.com/v1/chat/completions",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:327  \"https://openai-compatible.example.com/v1/chat/completions\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:345",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:345  baseURL: \"https://openrouter.ai/api/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:350",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://openrouter.ai./api/v1",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:350  baseURL: \"https://openrouter.ai./api/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:355",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://eu.openrouter.ai/api/v1",
+      "evidence": "packages/shared/src/server/llm/ai-sdk/requestShape.test.ts:355  baseURL: \"https://eu.openrouter.ai/api/v1\","
+    }
+  ],
+  "reRooting": []
+}

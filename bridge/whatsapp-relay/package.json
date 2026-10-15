@@ -1,0 +1,16 @@
+{
+  "name": "facai-whatsapp-relay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Baileys-based personal WhatsApp bridge for the Facai relay channel (operator's own account, unofficial integration at the operator's own risk).",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "6.7.24",
+    "pino": "^9.4.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

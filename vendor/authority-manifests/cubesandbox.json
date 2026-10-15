@@ -1,0 +1,1856 @@
+{
+  "target": "cubesandbox (初扫收录实例 C:\\Users\\user\\Documents\\Codex\\facai-cloud\\vendor\\cubesandbox)",
+  "origin": "https://github.com/TencentCloud/CubeSandbox",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 648 个文本文件（源码 648、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/benchmark.py:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/benchmark.py:23  E2B_API_URL        — base URL of the API server, e.g. http://localhost:3000\nCubeAPI/examples/benchmark.py:856  api_url = args.api_url or \"http://localhost:3000 (dry-run)\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/benchmark.py:152",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "COLORFGBG",
+      "rule": "os.environ.get",
+      "evidence": "CubeAPI/examples/benchmark.py:152  colorfgbg = os.environ.get(\"COLORFGBG\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/benchmark.py:161",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "TERM_LIGHT",
+      "rule": "os.environ.get",
+      "evidence": "CubeAPI/examples/benchmark.py:161  if os.environ.get(\"TERM_LIGHT\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/benchmark.py:859",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ.get",
+      "evidence": "CubeAPI/examples/benchmark.py:859  template_id = args.template or os.environ.get(\"CUBE_TEMPLATE_ID\", \"\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/benchmark.py:860",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ.get",
+      "evidence": "CubeAPI/examples/benchmark.py:860  api_url = (args.api_url or os.environ.get(\"E2B_API_URL\", \"\")).rstrip(\"/\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/benchmark.py:861",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ.get",
+      "evidence": "CubeAPI/examples/benchmark.py:861  api_key = args.api_key or os.environ.get(\"E2B_API_KEY\", \"\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/cmd.py:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/cmd.py:7  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/cmd.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/cmd.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/cmd.py:8",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/cmd.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/cmd.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/cmd.py:9  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/cmd.py:11",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/cmd.py:11  template_id = os.environ[\"CUBE_TEMPLATE_ID\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/create.py:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/create.py:7  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/create.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/create.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/create.py:8",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/create.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/create.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/create.py:9  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/create.py:11",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/create.py:11  template_id = os.environ[\"CUBE_TEMPLATE_ID\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/exec_code.py:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/exec_code.py:7  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/exec_code.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/exec_code.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/exec_code.py:8",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/exec_code.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/exec_code.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/exec_code.py:9  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/exec_code.py:11",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/exec_code.py:11  template_id = os.environ[\"CUBE_TEMPLATE_ID\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/list.py:8",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/list.py:8  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/list.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/list.py:9  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/list.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/list.py:9  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/list.py:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/list.py:10  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/pause.py:8",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/pause.py:8  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/pause.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/pause.py:9  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/pause.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/pause.py:9  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/pause.py:10",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/pause.py:10  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/pause.py:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/pause.py:12  template_id = os.environ[\"CUBE_TEMPLATE_ID\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/read.py:7",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/read.py:7  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/read.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/read.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/read.py:8",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/read.py:8  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/read.py:9",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/read.py:9  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/read.py:11",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/read.py:11  template_id = os.environ[\"CUBE_TEMPLATE_ID\"]"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeAPI/examples/test.py:11",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_KEY",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/test.py:11  # os.environ[\"E2B_API_KEY\"] = \"e2b_000000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/test.py:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/test.py:12  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/test.py:12",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "E2B_API_URL",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/test.py:12  # os.environ[\"E2B_API_URL\"] = \"http://localhost:3000\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/test.py:13",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SSL_CERT_FILE",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/test.py:13  # os.environ[\"SSL_CERT_FILE\"] = \"/root/.local/share/mkcert/rootCA.pem\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeAPI/examples/test.py:23",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_TEMPLATE_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeAPI/examples/test.py:23  TEMPLATE_ID = os.environ[\"CUBE_TEMPLATE_ID\"]"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/go/benchmark.go:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/go/benchmark.go:22  E2B_API_URL       — base URL of the Cube API Server, e.g. http://localhost:3000"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/examples/go/client.go:31",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:3000",
+      "evidence": "CubeAPI/examples/go/client.go:31  //\tE2B_API_URL   — base URL of the Cube API Server (e.g. http://localhost:3000)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/scripts/test-cube-api.sh:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:3000",
+      "evidence": "CubeAPI/scripts/test-cube-api.sh:6  #   CUBE_API_BASE=http://127.0.0.1:3000 ./test-cube-api.sh"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/scripts/test-cube-api.sh:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:3001",
+      "evidence": "CubeAPI/scripts/test-cube-api.sh:7  #   CUBE_API_BASE=http://127.0.0.1:3001 CREATE_SANDBOX=1 TEMPLATE_ID=wecom-ds-openclaw ./test-cube-api.sh\nCubeAPI/scripts/test-cube-api.sh:8  #   CUBE_API_BASE=http://127.0.0.1:3001 CREATE_AGENT=1 ./test-cube-api.sh\nCubeAPI/scripts/test-cube-api.sh:11  #   CUBE_API_BASE          Base URL, default http://127.0.0.1:3001"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/main.rs:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeAPI/src/main.rs:49  /// CubeMaster base URL (default: \"http://127.0.0.1:8089\")."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/main.rs:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.1:8089",
+      "evidence": "CubeAPI/src/main.rs:52  /// Example: \"http://10.0.0.1:8089\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/routes.rs:266",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:9",
+      "evidence": "CubeAPI/src/routes.rs:266  config.cubemaster_url = \"http://127.0.0.1:9\".to_string();"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/routes.rs:310",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{address",
+      "evidence": "CubeAPI/src/routes.rs:310  config.cubemaster_url = format!(\"http://{address}\");\nCubeAPI/src/routes.rs:431  config.cubemaster_url = format!(\"http://{address}\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/config/mod.rs:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.1:8080",
+      "evidence": "CubeAPI/src/config/mod.rs:25  /// CubeMaster base URL, e.g. \"http://10.0.0.1:8080\". Env var: CUBE_MASTER_ADDR (default \"http://127.0.0.1:8089\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/config/mod.rs:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeAPI/src/config/mod.rs:25  /// CubeMaster base URL, e.g. \"http://10.0.0.1:8080\". Env var: CUBE_MASTER_ADDR (default \"http://127.0.0.1:8089\")\nCubeAPI/src/config/mod.rs:94  std::env::var(\"CUBE_MASTER_ADDR\").unwrap_or_else(|_| \"http://127.0.0.1:8089\".to_string())"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/cubemaster/mod.rs:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.1:8080",
+      "evidence": "CubeAPI/src/cubemaster/mod.rs:49  /// Create a client pointing at `base_url` (e.g. `\"http://10.0.0.1:8080\"`)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/logging/http.rs:33",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://log-ingest.internal/api/logs",
+      "evidence": "CubeAPI/src/logging/http.rs:33  /// Full URL to POST batches to, e.g. `\"http://log-ingest.internal/api/logs\"`."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/logging/otlp.rs:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://otel-collector:4317",
+      "evidence": "CubeAPI/src/logging/otlp.rs:24  //!        .with_endpoint(\"http://otel-collector:4317\");"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/middleware/auth.rs:232",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "CubeAPI/src/middleware/auth.rs:232  format!(\"http://{}/auth\", addr)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/models/mod.rs:348",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://e2b.dev/docs/sandbox/auto-resume",
+      "evidence": "CubeAPI/src/models/mod.rs:348  /// see https://e2b.dev/docs/sandbox/auto-resume for the canonical reference."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/models/mod.rs:1186",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://other.example.com",
+      "evidence": "CubeAPI/src/models/mod.rs:1186  \"rewrite\": \"https://other.example.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/services/sandboxes.rs:1457",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "CubeAPI/src/services/sandboxes.rs:1457  CubeMasterClient::new(format!(\"http://{}\", addr), reqwest::Client::new()),\nCubeAPI/src/services/sandboxes.rs:3028  format!(\"http://{}\", addr)\nCubeAPI/src/services/sandboxes.rs:3111  format!(\"http://{}\", addr)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/services/sandboxes.rs:1871",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{address",
+      "evidence": "CubeAPI/src/services/sandboxes.rs:1871  CubeMasterClient::new(format!(\"http://{address}\"), reqwest::Client::new()),\nCubeAPI/src/services/sandboxes.rs:1993  CubeMasterClient::new(format!(\"http://{address}\"), reqwest::Client::new()),\nCubeAPI/src/services/sandboxes.rs:2063  CubeMasterClient::new(format!(\"http://{address}\"), reqwest::Client::new()),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/services/sandboxes.rs:2332",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "CubeAPI/src/services/sandboxes.rs:2332  \"https://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/services/sandboxes.rs:3275",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{addr",
+      "evidence": "CubeAPI/src/services/sandboxes.rs:3275  CubeMasterClient::new(format!(\"http://{addr}\"), reqwest::Client::new()),"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeAPI/src/services/templates.rs:671",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{",
+      "evidence": "CubeAPI/src/services/templates.rs:671  format!(\"http://{}\", addr)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/benchrun.go:427",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/benchrun.go:427  url := fmt.Sprintf(\"http://%s/cube/sandbox\", net.JoinHostPort(serverList[rand.Int()%len(serverList)], port))\nCubeMaster/cmd/cubemastercli/commands/cubebox/benchrun.go:522  url := fmt.Sprintf(\"http://%s/cube/sandbox\", net.JoinHostPort(serverList[rand.Int()%len(serverList)], port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/info.go:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/info",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/info.go:83  url = fmt.Sprintf(\"http://%s/cube/sandbox/info\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/info.go:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/info?requestID=%s&host_id=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/info.go:86  url = fmt.Sprintf(\"http://%s/cube/sandbox/info?requestID=%s&host_id=%s\", net.JoinHostPort(host, port), requestID, hostID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/info.go:88",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/info?requestID=%s&sandbox_id=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/info.go:88  url = fmt.Sprintf(\"http://%s/cube/sandbox/info?requestID=%s&sandbox_id=%s\", net.JoinHostPort(host, port), requestID, sandboxID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/list.go:291",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/list",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/list.go:291  url := fmt.Sprintf(\"http://%s/cube/sandbox/list\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/list.go:295",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/list?requestID=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/list.go:295  url := fmt.Sprintf(\"http://%s/cube/sandbox/list?requestID=%s\", net.JoinHostPort(host, port), req.RequestID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/list_info_test.go:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089/cube/sandbox/list",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/list_info_test.go:49  if want := \"http://127.0.0.1:8089/cube/sandbox/list\"; url != want {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/list_info_test.go:83",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089/cube/sandbox/list?requestID=req-2",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/list_info_test.go:83  \"http://127.0.0.1:8089/cube/sandbox/list?requestID=req-2\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/listinventory.go:77",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/listinventory",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/listinventory.go:77  url := fmt.Sprintf(\"http://%s/cube/listinventory\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/snapshot.go:447",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/snapshot.go:447  url := fmt.Sprintf(\"http://%s%s\", net.JoinHostPort(host, port), endpoint)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:438",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:438  url := fmt.Sprintf(\"http://%s/cube/template\", net.JoinHostPort(host, port))\nCubeMaster/cmd/cubemastercli/commands/cubebox/template.go:640  url := fmt.Sprintf(\"http://%s/cube/template\", net.JoinHostPort(host, port))\nCubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1230  url := fmt.Sprintf(\"http://%s/cube/template\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:509",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template?template_id=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:509  url := fmt.Sprintf(\"http://%s/cube/template?template_id=%s\", net.JoinHostPort(host, port), templateID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:591",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/preview",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:591  url := fmt.Sprintf(\"http://%s/cube/sandbox/preview\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:742",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/%s/alias",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:742  url := fmt.Sprintf(\"http://%s/cube/template/%s/alias\", net.JoinHostPort(host, port), templateID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:844",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/sandbox/commit",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:844  url := fmt.Sprintf(\"http://%s/cube/sandbox/commit\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:959",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/from-image",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:959  url := fmt.Sprintf(\"http://%s/cube/template/from-image\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1029",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/migrate",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1029  url := fmt.Sprintf(\"http://%s/cube/template/migrate\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1091",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/redo",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1091  url := fmt.Sprintf(\"http://%s/cube/template/redo\", net.JoinHostPort(host, port))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1395",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/from-image?job_id=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1395  url := fmt.Sprintf(\"http://%s/cube/template/from-image?job_id=%s\", net.JoinHostPort(host, port), jobID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1417",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/migrate?job_id=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1417  url := fmt.Sprintf(\"http://%s/cube/template/migrate?job_id=%s\", net.JoinHostPort(host, port), jobID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1589",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/cube/template/build/%s/status",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/template.go:1589  url := fmt.Sprintf(\"http://%s/cube/template/build/%s/status\", net.JoinHostPort(host, port), buildID)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/util.go:267",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s/internal/query?nodeId=%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/util.go:267  url := fmt.Sprintf(\"http://%s/internal/query?nodeId=%s\", net.JoinHostPort(host, port), \"ins_1\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/cmd/cubemastercli/commands/cubebox/volume.go:225",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s%s",
+      "evidence": "CubeMaster/cmd/cubemastercli/commands/cubebox/volume.go:225  urlStr := fmt.Sprintf(\"http://%s%s\", net.JoinHostPort(host, port), endpoint)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/integration/mock_util.go:86",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:%d",
+      "evidence": "CubeMaster/integration/mock_util.go:86  return fmt.Sprintf(\"http://localhost:%d\", config.GetConfig().Common.HttpPort) + url"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/base/config/config.go:92",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8089",
+      "evidence": "CubeMaster/pkg/base/config/config.go:92  // wildcard/loopback (e.g. `curl http://0.0.0.0:8089`), which is\nCubeMaster/pkg/base/config/config.go:1205  // http://0.0.0.0:8089`, `curl http://localhost:8089`): that value is"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/base/config/config.go:198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ip:8082",
+      "evidence": "CubeMaster/pkg/base/config/config.go:198  // AdminURLs optionally lists static admin base URLs (e.g. http://ip:8082)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/base/config/config.go:1205",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8089",
+      "evidence": "CubeMaster/pkg/base/config/config.go:1205  // http://0.0.0.0:8089`, `curl http://localhost:8089`): that value is"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin.go:139",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s:%d",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin.go:139  return []string{fmt.Sprintf(\"http://%s:%d\", host, port)}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.1:8082/",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:21  \" http://10.0.0.1:8082/ \","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.1:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:23  \"http://10.0.0.1:8082\",\nCubeMaster/pkg/cubeproxy/admin_test.go:29  if got[0] != \"http://10.0.0.1:8082\" || got[1] != \"http://10.0.0.2:8082\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.2:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:29  if got[0] != \"http://10.0.0.1:8082\" || got[1] != \"http://10.0.0.2:8082\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:43",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://a:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:43  return []string{\"http://a:8082\", \"http://b:8082\"}\nCubeMaster/pkg/cubeproxy/admin_test.go:106  listAdminURLsFn = func(context.Context, string) []string { return []string{\"http://a:8082\"} }"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:43",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://b:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:43  return []string{\"http://a:8082\", \"http://b:8082\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ok:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:74  return []string{\"http://ok:8082\", \"http://stale:8082\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:74",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://stale:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:74  return []string{\"http://ok:8082\", \"http://stale:8082\"}\nCubeMaster/pkg/cubeproxy/admin_test.go:78  if adminURL == \"http://stale:8082\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:178",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.1.1:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:178  cfg.CubeProxyConf.AdminURLs = []string{\"http://10.1.1.1:8082\", \"10.1.1.2:8082\"}\nCubeMaster/pkg/cubeproxy/admin_test.go:182  if len(got) != 2 || got[0] != \"http://10.1.1.1:8082\" || got[1] != \"http://10.1.1.2:8082\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/cubeproxy/admin_test.go:182",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.1.1.2:8082",
+      "evidence": "CubeMaster/pkg/cubeproxy/admin_test.go:182  if len(got) != 2 || got[0] != \"http://10.1.1.1:8082\" || got[1] != \"http://10.1.1.2:8082\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/nodemeta/cubeops_loader_test.go:183",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1",
+      "evidence": "CubeMaster/pkg/nodemeta/cubeops_loader_test.go:183  loader := NewCubeOpsLoader(\"http://127.0.0.1:1\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://9.135.79.34:8089",
+      "evidence": "CubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:45  if got, want := requestBaseURL(r), \"http://9.135.79.34:8089\"; got != want {\nCubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:53  t.Setenv(\"CUBE_MASTER_ADDR\", \"http://9.135.79.34:8089\")\nCubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:56  if got, want := requestBaseURL(r), \"http://9.135.79.34:8089\"; got != want {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:66",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:66  t.Setenv(\"CUBE_MASTER_ADDR\", \"http://127.0.0.1:8089\")\nCubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:76  t.Setenv(\"CUBE_MASTER_ADDR\", \"http://127.0.0.1:8089\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.8:8089",
+      "evidence": "CubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:70  if got, want := requestBaseURL(r), \"http://10.0.0.8:8089\"; got != want {\nCubeMaster/pkg/service/httpservice/cube/template_from_image_baseurl_test.go:88  if got, want := requestBaseURL(r), \"http://10.0.0.8:8089\"; got != want {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/service/httpservice/cube/template_from_image_redirect_test.go:246",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1/bucket/rfs-down.ext4?X-Amz-Signature=xyz",
+      "evidence": "CubeMaster/pkg/service/httpservice/cube/template_from_image_redirect_test.go:246  ArtifactURL: \"http://127.0.0.1:1/bucket/rfs-down.ext4?X-Amz-Signature=xyz\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/service/httpservice/cube/template_from_image_remote_retry_test.go:41",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://tc",
+      "evidence": "CubeMaster/pkg/service/httpservice/cube/template_from_image_remote_retry_test.go:41  if err := submitBuildJobWithRetry(context.Background(), \"http://tc\", \"job-1\", nil, \"\", \"\", nil); err != nil {\nCubeMaster/pkg/service/httpservice/cube/template_from_image_remote_retry_test.go:60  if err := submitBuildJobWithRetry(context.Background(), \"http://tc\", \"job-2\", nil, \"\", \"\", nil); err != nil {\nCubeMaster/pkg/service/httpservice/cube/template_from_image_remote_retry_test.go:74  err := submitBuildJobWithRetry(context.Background(), \"http://tc\", \"job-3\", nil, \"\", \"\", nil)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/service/sandbox/util_test.go:102",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://example.com",
+      "evidence": "CubeMaster/pkg/service/sandbox/util_test.go:102  \"https://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/tcclient/client_test.go:60",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:1",
+      "evidence": "CubeMaster/pkg/tcclient/client_test.go:60  c := NewClient(\"http://127.0.0.1:1\") // nothing listens here"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:338",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.228.161.10:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:338  {name: \"local ip with scheme and port\", baseURL: \"http://10.228.161.10:8080\", want: true},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:341",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master-a:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:341  {name: \"local hostname\", baseURL: \"http://master-a:8080\", want: true},\nCubeMaster/pkg/templatecenter/artifact_presence_test.go:382  MasterNodeIP: \"http://master-a:8080\",\nCubeMaster/pkg/templatecenter/artifact_presence_test.go:444  MasterNodeIP: \"http://master-a:8080\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:342",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://MASTER-A",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:342  {name: \"case insensitive hostname\", baseURL: \"http://MASTER-A\", want: true},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:343",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:343  {name: \"loopback\", baseURL: \"http://127.0.0.1:8080\", want: true},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:345",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.228.161.14:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:345  {name: \"peer master ip is foreign\", baseURL: \"http://10.228.161.14:8080\", want: false},\nCubeMaster/pkg/templatecenter/artifact_presence_test.go:409  MasterNodeIP: \"http://10.228.161.14:8080\",\nCubeMaster/pkg/templatecenter/artifact_presence_test.go:524  MasterNodeIP: \"http://10.228.161.14:8080\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:347",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cube-master-lb:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:347  {name: \"load balancer vip is foreign\", baseURL: \"http://cube-master-lb:8080\", want: false},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:348",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cubemaster.svc.cluster.local",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:348  {name: \"service dns name is foreign\", baseURL: \"https://cubemaster.svc.cluster.local\", want: false},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:349",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://[::1",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:349  {name: \"unparseable is foreign\", baseURL: \"http://[::1\", want: false},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:484",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://minio:9000/bucket/rfs-1.ext4?sig=1",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:484  ArtifactURL:  \"https://minio:9000/bucket/rfs-1.ext4?sig=1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:485",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://node-a:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:485  MasterNodeIP: \"http://node-a:8089\",\nCubeMaster/pkg/templatecenter/artifact_presence_test.go:493  MasterNodeIP: \"http://node-a:8089\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:501",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://node-b:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_presence_test.go:501  MasterNodeIP: \"http://node-b:8089\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:88",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cube-sandbox-master.cube-sandbox.svc.cluster.local:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:88  MasterNodeIP:  \"http://cube-sandbox-master.cube-sandbox.svc.cluster.local:8089\",\nCubeMaster/pkg/templatecenter/artifact_servability_test.go:203  MasterNodeIP:  \"http://cube-sandbox-master.cube-sandbox.svc.cluster.local:8089\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:133",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:133  MasterNodeIP:  \"http://master:8089\",\nCubeMaster/pkg/templatecenter/artifact_servability_test.go:161  MasterNodeIP:  \"http://master:8089\",\nCubeMaster/pkg/templatecenter/artifact_servability_test.go:186  MasterNodeIP:  \"http://master:8089\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:185",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://minio:9000/bucket/rfs-s3.ext4?sig=",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:185  ArtifactURL:   \"http://minio:9000/bucket/rfs-s3.ext4?sig=...\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:192",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://master:8089/cube/template/artifact/download?artifact_id=rfs-s3&token=tok-s3",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_servability_test.go:192  want := \"http://master:8089/cube/template/artifact/download?artifact_id=rfs-s3&token=tok-s3\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://s3/x",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:36  if !ArtifactUsesObjectStore(&models.RootfsArtifact{ArtifactURL: \"https://s3/x\"}) {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://minio:9000/bucket/",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:71  return \"https://minio:9000/bucket/\" + artifact.ArtifactID + \".ext4?X-Amz-Signature=fresh\", nil"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://minio:9000/bucket/rfs-9.ext4?X-Amz-Signature=stale",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:73  stored := \"https://minio:9000/bucket/rfs-9.ext4?X-Amz-Signature=stale\"\nCubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:84  stored := \"https://minio:9000/bucket/rfs-9.ext4?X-Amz-Signature=stale\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://minio:9000/bucket/rfs-9.ext4?X-Amz-Signature=fresh",
+      "evidence": "CubeMaster/pkg/templatecenter/artifact_url_refresh_test.go:75  want := \"https://minio:9000/bucket/rfs-9.ext4?X-Amz-Signature=fresh\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/image_job_reconciler_test.go:44",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/image_job_reconciler_test.go:44  \"master_node_ip\": \"http://master:8080\",\nCubeMaster/pkg/templatecenter/image_job_reconciler_test.go:72  \"master_node_ip\": \"http://master:8080\"\nCubeMaster/pkg/templatecenter/image_job_reconciler_test.go:102  \"master_node_ip\": \"http://master:8080\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/image_job_reconciler_test.go:45",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://s3.example.com/bucket/rfs-1?X-Amz-Signature=abc",
+      "evidence": "CubeMaster/pkg/templatecenter/image_job_reconciler_test.go:45  \"artifact_url\": \"https://s3.example.com/bucket/rfs-1?X-Amz-Signature=abc\",\nCubeMaster/pkg/templatecenter/image_job_reconciler_test.go:55  want := \"https://s3.example.com/bucket/rfs-1?X-Amz-Signature=abc\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/image_job_reconciler_test.go:108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://s3.example.com/bucket/rfs-3?X-Amz-Signature=abc",
+      "evidence": "CubeMaster/pkg/templatecenter/image_job_reconciler_test.go:108  result, err := remoteBuildResultFromResultJSON(mkPayload(\"https://s3.example.com/bucket/rfs-3?X-Amz-Signature=abc\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/remote_build_callback_test.go:29",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master:8080",
+      "evidence": "CubeMaster/pkg/templatecenter/remote_build_callback_test.go:29  MasterNodeIP:            \"http://master:8080\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:585",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master.example",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:585  }, \"http://master.example\")\nCubeMaster/pkg/templatecenter/template_image_test.go:639  got, err := generateTemplateCreateRequest(context.Background(), req, artifact, DockerImageConfig{}, \"http://master.example\")\nCubeMaster/pkg/templatecenter/template_image_test.go:696  got, err := generateTemplateCreateRequest(context.Background(), req, artifact, DockerImageConfig{}, \"http://master.example\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:604",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://master.example/cube/template/artifact/download?artifact_id=artifact-1&token=token-1",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:604  if got.Containers[0].Image.Annotations[constants.CubeAnnotationRootfsArtifactURL] != \"http://master.example/cube/template/artifact/download?artifact_id=artifact-1&token=token-1\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:636",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:636  MasterNodeIP:            \"http://0.0.0.0:8089\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:637",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://minio:9000/cube-volumes/artifact-s3.ext4?sig=stale",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:637  ArtifactURL:             \"http://minio:9000/cube-volumes/artifact-s3.ext4?sig=stale\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:643",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://master.example/cube/template/artifact/download?artifact_id=artifact-s3&token=token-s3",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:643  want := \"http://master.example/cube/template/artifact/download?artifact_id=artifact-s3&token=token-s3\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:664",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master-from-row:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:664  MasterNodeIP:            \"http://master-from-row:8089\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:665",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://minio:9000/cube-volumes/artifact-s3-row.ext4?sig=stale",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:665  ArtifactURL:             \"http://minio:9000/cube-volumes/artifact-s3-row.ext4?sig=stale\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:671",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://master-from-row:8089/cube/template/artifact/download?artifact_id=artifact-s3-row&token=token-s3-row",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:671  want := \"http://master-from-row:8089/cube/template/artifact/download?artifact_id=artifact-s3-row&token=token-s3-row\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_image_test.go:1818",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_image_test.go:1818  job, normalizedReq, submitErr := SubmitTemplateFromImageWithoutBuild(context.Background(), req, \"http://127.0.0.1:8089\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request.go:314",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request.go:314  // one-click historically ships CUBE_MASTER_ADDR=http://127.0.0.1:8089, and old"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request.go:315",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request.go:315  // artifact rows may carry a wildcard master_node_ip (http://0.0.0.0:8089) --"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request_test.go:11",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://cube-master.cube-system.svc:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request_test.go:11  t.Setenv(\"CUBE_MASTER_ADDR\", \"http://cube-master.cube-system.svc:8089\")\nCubeMaster/pkg/templatecenter/template_request_test.go:13  if got, want := effectiveArtifactDownloadBaseURL(\"http://fallback.example\", artifact), \"http://cube-master.cube-system.svc:8089\"; got != want {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request_test.go:12",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://0.0.0.0:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request_test.go:12  artifact := &models.RootfsArtifact{MasterNodeIP: \"http://0.0.0.0:8089\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request_test.go:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://fallback.example",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request_test.go:13  if got, want := effectiveArtifactDownloadBaseURL(\"http://fallback.example\", artifact), \"http://cube-master.cube-system.svc:8089\"; got != want {\nCubeMaster/pkg/templatecenter/template_request_test.go:22  if got, want := effectiveArtifactDownloadBaseURL(\"http://fallback.example\", artifact), \"http://10.0.0.8:8089\"; got != want {\nCubeMaster/pkg/templatecenter/template_request_test.go:30  if got, want := effectiveArtifactDownloadBaseURL(\"http://fallback.example\", artifact), \"http://fallback.example\"; got != want {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request_test.go:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request_test.go:19  t.Setenv(\"CUBE_MASTER_ADDR\", \"http://127.0.0.1:8089\")\nCubeMaster/pkg/templatecenter/template_request_test.go:28  t.Setenv(\"CUBE_MASTER_ADDR\", \"http://127.0.0.1:8089\")\nCubeMaster/pkg/templatecenter/template_request_test.go:44  artifact := &models.RootfsArtifact{MasterNodeIP: \"http://127.0.0.1:8089\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://master-from-row:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request_test.go:21  artifact := &models.RootfsArtifact{MasterNodeIP: \"http://master-from-row:8089\"}\nCubeMaster/pkg/templatecenter/template_request_test.go:29  artifact := &models.RootfsArtifact{MasterNodeIP: \"http://master-from-row:8089\"}\nCubeMaster/pkg/templatecenter/template_request_test.go:36  artifact := &models.RootfsArtifact{MasterNodeIP: \"http://master-from-row:8089\"}"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeMaster/pkg/templatecenter/template_request_test.go:22",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.8:8089",
+      "evidence": "CubeMaster/pkg/templatecenter/template_request_test.go:22  if got, want := effectiveArtifactDownloadBaseURL(\"http://fallback.example\", artifact), \"http://10.0.0.8:8089\"; got != want {\nCubeMaster/pkg/templatecenter/template_request_test.go:45  if got, want := effectiveArtifactDownloadBaseURL(\"\", artifact), \"http://10.0.0.8:8089\"; got != want {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeNet/cubevs/reaper.go:361",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cilium/ebpf/issues/9",
+      "evidence": "CubeNet/cubevs/reaper.go:361  //   - https://github.com/cilium/ebpf/issues/9"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeNet/cubevs/reaper.go:362",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/cilium/ebpf/pull/11",
+      "evidence": "CubeNet/cubevs/reaper.go:362  //   - https://github.com/cilium/ebpf/pull/11"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/cmd/cubeopscli/commands/node/util.go:85",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s%s",
+      "evidence": "CubeOps/cmd/cubeopscli/commands/node/util.go:85  return fmt.Sprintf(\"http://%s%s\", net.JoinHostPort(strings.Trim(host, \"[]\"), port), path)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/cmd/cubeopscli/commands/node/util_test.go:62",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://10.0.0.1:3010/internal/v1/nodes",
+      "evidence": "CubeOps/cmd/cubeopscli/commands/node/util_test.go:62  {\"10.0.0.1\", \"3010\", \"/internal/v1/nodes\", \"http://10.0.0.1:3010/internal/v1/nodes\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/cmd/cubeopscli/commands/node/util_test.go:63",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:8080/",
+      "evidence": "CubeOps/cmd/cubeopscli/commands/node/util_test.go:63  {\"localhost\", \"8080\", \"/\", \"http://localhost:8080/\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/cmd/cubeopscli/commands/node/util_test.go:64",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://[::1",
+      "evidence": "CubeOps/cmd/cubeopscli/commands/node/util_test.go:64  {\"[::1]\", \"3010\", \"/health\", \"http://[::1]:3010/health\"},\nCubeOps/cmd/cubeopscli/commands/node/util_test.go:65  {\"::1\", \"3010\", \"/health\", \"http://[::1]:3010/health\"},"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/config/config.go:204",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:8089",
+      "evidence": "CubeOps/internal/config/config.go:204  cfg.CubeMasterAddr = \"http://127.0.0.1:8089\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/config/config.go:207",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1:3000",
+      "evidence": "CubeOps/internal/config/config.go:207  cfg.CubeAPIURL = \"http://127.0.0.1:3000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/config/config_test.go:23",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://1.2.3.4:8089",
+      "evidence": "CubeOps/internal/config/config_test.go:23  cubemaster_addr: \"http://1.2.3.4:8089\"\nCubeOps/internal/config/config_test.go:47  if cfg.CubeMasterAddr != \"http://1.2.3.4:8089\" {\nCubeOps/internal/config/config_test.go:48  t.Errorf(\"CubeMasterAddr = %q, want http://1.2.3.4:8089\", cfg.CubeMasterAddr)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/config/config_test.go:115",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://minio:9000",
+      "evidence": "CubeOps/internal/config/config_test.go:115  endpoint: \"http://minio:9000\"\nCubeOps/internal/config/config_test.go:150  if cfg.S3.Endpoint != \"http://minio:9000\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/config/config_test.go:169",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://yaml:9000",
+      "evidence": "CubeOps/internal/config/config_test.go:169  endpoint: \"http://yaml:9000\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/config/config_test.go:177",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://env:9000",
+      "evidence": "CubeOps/internal/config/config_test.go:177  t.Setenv(\"CUBE_OPS_S3_ENDPOINT\", \"http://env:9000\")\nCubeOps/internal/config/config_test.go:187  if cfg.S3.Endpoint != \"http://env:9000\" {"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/cubemaster/client_test.go:164",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost:1",
+      "evidence": "CubeOps/internal/cubemaster/client_test.go:164  client := New(\"http://localhost:1\")\nCubeOps/internal/cubemaster/client_test.go:539  _, err := New(\"http://localhost:1\").CountNodeSandboxes(context.Background(), \"\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/handler/agenthub.go:349",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.deepseek.com",
+      "evidence": "CubeOps/internal/handler/agenthub.go:349  baseURL = \"https://api.deepseek.com\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/handler/agenthub.go:500",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1",
+      "evidence": "CubeOps/internal/handler/agenthub.go:500  proxyURL = \"http://127.0.0.1\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/handler/store_test.go:421",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:3010/cubeapi/v1",
+      "evidence": "CubeOps/internal/handler/store_test.go:421  if cfg[\"apiEndpoint\"] != \"http://127.0.0.1:3010/cubeapi/v1\" {\nCubeOps/internal/handler/store_test.go:422  t.Errorf(\"apiEndpoint = %v, want http://127.0.0.1:3010/cubeapi/v1\", cfg[\"apiEndpoint\"])"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/handler/store_test.go:424",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://127.0.0.1:3010/opsapi/v1",
+      "evidence": "CubeOps/internal/handler/store_test.go:424  if cfg[\"opsApiEndpoint\"] != \"http://127.0.0.1:3010/opsapi/v1\" {\nCubeOps/internal/handler/store_test.go:425  t.Errorf(\"opsApiEndpoint = %v, want http://127.0.0.1:3010/opsapi/v1\", cfg[\"opsApiEndpoint\"])"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/service/agenthub.go:343",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://18789-%s.%s",
+      "evidence": "CubeOps/internal/service/agenthub.go:343  gwURL := fmt.Sprintf(\"https://18789-%s.%s\", sandboxID, domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/service/agenthub.go:352",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%d-%s.%s",
+      "evidence": "CubeOps/internal/service/agenthub.go:352  return fmt.Sprintf(\"http://%d-%s.%s\", envPort, sandboxID, domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/service/openclaw.go:68",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1",
+      "evidence": "CubeOps/internal/service/openclaw.go:68  proxyURL = \"http://127.0.0.1\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:262",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_PORT",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:262  port = int(os.environ.get(\"OPENCLAW_PORT\", \"18789\"))\nCubeOps/internal/service/openclaw.go:335  port = int(os.environ.get(\"OPENCLAW_PORT\", \"18789\"))\nCubeOps/internal/service/openclaw.go:442  port = int(os.environ.get(\"OPENCLAW_PORT\", \"18789\"))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/service/openclaw.go:501",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://api.deepseek.com",
+      "evidence": "CubeOps/internal/service/openclaw.go:501  defaultLLMBaseURL        = \"https://api.deepseek.com\""
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1062",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_APPLY_SPEC",
+      "rule": "os.environ[]",
+      "evidence": "CubeOps/internal/service/openclaw.go:1062  spec = json.loads(base64.b64decode(os.environ[\"OPENCLAW_APPLY_SPEC\"]))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1084",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_EGRESS_CA_PEM",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1084  ca_pem = os.environ.get(\"CUBE_EGRESS_CA_PEM\", \"\").strip()"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1085",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_NODE_EXTRA_CA_CERTS",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1085  ca_path = Path(os.environ.get(\"OPENCLAW_NODE_EXTRA_CA_CERTS\", \"/root/.openclaw/cube-egress-ca.crt\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1089",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "NODE_EXTRA_CA_CERTS",
+      "rule": "os.environ[]",
+      "evidence": "CubeOps/internal/service/openclaw.go:1089  os.environ[\"NODE_EXTRA_CA_CERTS\"] = str(ca_path)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1154",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "CUBE_SANDBOX_NODE_IP",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1154  os.environ.get(\"CUBE_SANDBOX_NODE_IP\", \"\").strip(),"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1159",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_ALLOWED_ORIGINS",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1159  origins = os.environ.get(\"OPENCLAW_ALLOWED_ORIGINS\", \"*\")"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeOps/internal/service/openclaw.go:1162",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_DISABLE_DEVICE_AUTH",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1162  \"dangerouslyDisableDeviceAuth\": os.environ.get(\"OPENCLAW_DISABLE_DEVICE_AUTH\", \"true\").lower() == \"true\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeOps/internal/service/openclaw.go:1163",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_ALLOW_INSECURE_AUTH",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1163  \"allowInsecureAuth\": os.environ.get(\"OPENCLAW_ALLOW_INSECURE_AUTH\", \"true\").lower() == \"true\","
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1164",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_ALLOW_HOST_HEADER_ORIGIN_FALLBACK",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1164  \"dangerouslyAllowHostHeaderOriginFallback\": os.environ.get(\"OPENCLAW_ALLOW_HOST_HEADER_ORIGIN_FALLBACK\", \"true\").lower() == \"true\","
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeOps/internal/service/openclaw.go:1166",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_TOKEN_FILE",
+      "rule": "os.environ.get",
+      "evidence": "CubeOps/internal/service/openclaw.go:1166  token_file = Path(os.environ.get(\"OPENCLAW_TOKEN_FILE\", \"/var/log/openclaw.token\"))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeOps/internal/service/openclaw.go:1184",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_BOT_ID",
+      "rule": "os.environ[]",
+      "evidence": "CubeOps/internal/service/openclaw.go:1184  \"botId\": os.environ[\"OPENCLAW_BOT_ID\"],\nCubeOps/internal/service/openclaw.go:1192  \"botId\": os.environ[\"OPENCLAW_BOT_ID\"],"
+    },
+    {
+      "kind": "CREDENTIAL",
+      "where": "CubeOps/internal/service/openclaw.go:1185",
+      "what": "初扫：env 凭据键——应由 Facai Secret Broker 下发（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "env_key": "OPENCLAW_BOT_SECRET",
+      "rule": "os.environ[]",
+      "evidence": "CubeOps/internal/service/openclaw.go:1185  \"secret\": os.environ[\"OPENCLAW_BOT_SECRET\"],\nCubeOps/internal/service/openclaw.go:1193  \"secret\": os.environ[\"OPENCLAW_BOT_SECRET\"],"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/service/openclaw_test.go:22",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://llm.example.test/v1",
+      "evidence": "CubeOps/internal/service/openclaw_test.go:22  BaseURL:  \"https://llm.example.test/v1\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/store/agenthub.go:122",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://{port",
+      "evidence": "CubeOps/internal/store/agenthub.go:122  // Parse envPort from inst.EnvURL (format: http://{port}-{sandboxId}.{domain})."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/store/agenthub.go:691",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%d-%s.%s",
+      "evidence": "CubeOps/internal/store/agenthub.go:691  gatewayURL := fmt.Sprintf(\"https://%d-%s.%s\", gatewayPort, inst.SandboxID, domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/store/agenthub.go:696",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%d-%s.%s",
+      "evidence": "CubeOps/internal/store/agenthub.go:696  inst.EnvURL = fmt.Sprintf(\"http://%d-%s.%s\", envPort, inst.SandboxID, domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/warehouse/fetch.go:65",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/",
+      "evidence": "CubeOps/internal/warehouse/fetch.go:65  return \"https://github.com/\" + repo + \"/releases/download/\" + url.PathEscape(tag) + \"/\" + asset"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/warehouse/fetch.go:70",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://cnb.cool/",
+      "evidence": "CubeOps/internal/warehouse/fetch.go:70  return \"https://cnb.cool/\" + repo + \"/-/releases/download/\" + url.PathEscape(tag) + \"/\" + asset"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeOps/internal/warehouse/open_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://10.0.0.1:3010",
+      "evidence": "CubeOps/internal/warehouse/open_test.go:21  PublicURL:  \"http://10.0.0.1:3010\",\nCubeOps/internal/warehouse/open_test.go:52  PublicURL:  \"http://10.0.0.1:3010\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:75",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/spdk/spdk.git",
+      "evidence": "CubeS3lvol/setup_dep.sh:75  SPDK_REPO=\"${SPDK_REPO:-https://github.com/spdk/spdk.git}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:560",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/aws/s2n-tls.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:560  s2n-tls|v1.5.25|https://github.com/aws/s2n-tls.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:561",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-common.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:561  aws-c-common|v0.12.4|https://github.com/awslabs/aws-c-common.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:562",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-checksums.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:562  aws-checksums|v0.2.6|https://github.com/awslabs/aws-checksums.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:563",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-cal.git|-DUSE_OPENSSL=ON",
+      "evidence": "CubeS3lvol/setup_dep.sh:563  aws-c-cal|v0.9.2|https://github.com/awslabs/aws-c-cal.git|-DUSE_OPENSSL=ON"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:564",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-io.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:564  aws-c-io|v0.22.0|https://github.com/awslabs/aws-c-io.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:565",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-compression.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:565  aws-c-compression|v0.3.1|https://github.com/awslabs/aws-c-compression.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:566",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-http.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:566  aws-c-http|v0.10.4|https://github.com/awslabs/aws-c-http.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:567",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-sdkutils.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:567  aws-c-sdkutils|v0.2.4|https://github.com/awslabs/aws-c-sdkutils.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:568",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-auth.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:568  aws-c-auth|v0.9.1|https://github.com/awslabs/aws-c-auth.git|"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "CubeS3lvol/setup_dep.sh:569",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/awslabs/aws-c-s3.git|",
+      "evidence": "CubeS3lvol/setup_dep.sh:569  aws-c-s3|v0.8.7|https://github.com/awslabs/aws-c-s3.git|"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeS3lvol/scripts/rpc.py:44",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SPDK_RPC_PY",
+      "rule": "os.environ.get",
+      "evidence": "CubeS3lvol/scripts/rpc.py:44  env_rpc = _existing(os.environ.get('SPDK_RPC_PY', ''))"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "CubeS3lvol/scripts/rpc.py:48",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "SPDK_ROOT",
+      "rule": "os.environ.get",
+      "evidence": "CubeS3lvol/scripts/rpc.py:48  spdk_root = os.environ.get('SPDK_ROOT', '')"
+    }
+  ],
+  "reRooting": []
+}

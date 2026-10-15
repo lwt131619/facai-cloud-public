@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FACAI · 计费与充值</title>
+<style>
+  :root{--bg:#050b16;--panel:rgba(13,27,54,.72);--line:rgba(56,189,248,.16);
+    --cyan:#22d3ee;--cyan2:#67e8f9;--gold:#f5c451;--txt:#dbeafe;--mut:#64748b;--ok:#34d399;--err:#fca5a5}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(1100px 600px at 70% -10%,#0b1c3f 0%,var(--bg) 55%) fixed,var(--bg);
+    color:var(--txt);font-family:"Segoe UI",system-ui,"Microsoft YaHei",sans-serif;min-height:100vh;padding:26px 18px}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:24px;display:flex;gap:10px;align-items:center}
+  h1 img{width:30px;height:30px;border-radius:8px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:18px;background:var(--panel);
+    backdrop-filter:blur(10px);padding:20px}
+  .card h3{font-size:12px;letter-spacing:.2em;color:var(--mut);font-weight:600;margin-bottom:14px}
+  .price{display:flex;gap:12px}
+  .price .p{flex:1;border:1px solid var(--line);border-radius:14px;padding:14px;
+    background:linear-gradient(180deg,rgba(34,211,238,.07),transparent)}
+  .price .p b{font-size:26px;color:var(--cyan2)}
+  .price .p.out b{color:var(--gold)}
+  .price .p small{display:block;color:var(--mut);margin-top:4px;font-size:11.5px}
+  .balance{font-size:34px;font-weight:800;color:var(--ok)}
+  .balance small{font-size:13px;color:var(--mut);font-weight:400}
+  label{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+  input{width:100%;background:#040a18;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;color:var(--txt);font-size:14px}
+  button{margin-top:14px;width:100%;padding:12px;border:0;border-radius:12px;cursor:pointer;
+    background:linear-gradient(90deg,var(--cyan),#3b82f6);color:#04121f;font-weight:700;font-size:14px}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--cyan2);font-weight:400}
+  .addr{word-break:break-all;font-size:12.5px;color:#93c5fd;background:#040a18;
+    border:1px dashed var(--line);border-radius:10px;padding:10px;margin-top:6px}
+  .msg{margin-top:10px;font-size:12.5px;min-height:16px}
+  .msg.ok{color:var(--ok)} .msg.err{color:var(--err)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  th{color:var(--mut);text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);font-size:11px}
+  td{padding:8px;border-bottom:1px dashed rgba(56,189,248,.1)}
+  .tag{font-size:10.5px;padding:3px 8px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}
+  .tag.ok{color:var(--ok);border-color:rgba(52,211,153,.4)}
+  .tag.run{color:var(--cyan2);border-color:rgba(34,211,238,.5)}
+  .tag.warn{color:var(--gold);border-color:rgba(245,196,81,.4)}
+  .tag.err{color:var(--err);border-color:rgba(252,165,165,.4)}
+  a.back{color:var(--cyan2);font-size:13px;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><img src="/static/icon-192.png" alt="FACAI"> 计费与充值 <a class="back" href="/">← 返回控制台</a></h1>
+
+  <div class="grid">
+    <div class="card">
+      <h3>计费标准（FACAI 定价）</h3>
+      <div class="price">
+        <div class="p"><b id="pin">$95</b><small>输入 / 每 100 万 tokens</small></div>
+        <div class="p out"><b id="pout">$218</b><small>输出 / 每 100 万 tokens</small></div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--mut);line-height:1.8">
+        任务完成后按真实 input/output tokens 结算；只有合计的记录按输出价保守估算并标注。
+        余额不足 402 拦截，充值入账即恢复。</p>
+    </div>
+    <div class="card">
+      <h3>我的余额</h3>
+      <div class="balance" id="balance">--<small> USDT</small></div>
+      <p style="margin-top:8px;font-size:12px;color:var(--mut)" id="spendline">本月消耗 --</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>充值 · USDT-TRC20</h3>
+      <label>收款地址（TRC20）</label>
+      <div class="addr" id="addr">加载中…</div>
+      <label>充值金额（USDT，单笔 ≥ $100）</label>
+      <input id="amount" type="number" min="100" step="1" placeholder="例如 200">
+      <label>转账完成后填入交易哈希（txid）</label>
+      <input id="txid" placeholder="链上 txid（可在提交后补填）">
+      <button onclick="submitRecharge()">提交充值请求</button>
+      <div class="msg" id="remsg"></div>
+      <p style="margin-top:10px;font-size:11.5px;color:var(--mut);line-height:1.7">
+        流程：①转账到收款地址 → ②填金额提交请求（5 分钟窗口）→ ③补填 txid → ④链上检测到账自动入账，
+        或管理员核准。入账后余额立即恢复。</p>
+    </div>
+    <div class="card">
+      <h3>我的充值记录</h3>
+      <table id="retable"><thead><tr><th>金额</th><th>状态</th><th>创建</th></tr></thead><tbody></tbody></table>
+      <div class="msg" id="relistmsg"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const api='/api/v1';
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function req(path,opt){
+  const r=await fetch(api+path,{credentials:'same-origin',...opt});
+  if(r.status===401){location='/login?next=/static/billing.html';throw 0}
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.detail||('HTTP '+r.status));
+  return j;
+}
+const ZH={PENDING:'检测中',APPROVED:'已到账',REJECTED:'已驳回',EXPIRED:'已过期'};
+async function loadMe(){
+  try{
+    const me=await req('/billing/me');
+    const lim=me.monthly_limit_usd||0, spend=me.estimated_cost?.usd??me.spend?.cost_usd??0;
+    document.getElementById('balance').innerHTML=(lim>0?Math.max(lim-spend,0).toFixed(2):'0')+'<small> USDT 可用</small>';
+    document.getElementById('spendline').textContent='月度额度 '+lim.toFixed(2)+' · 本月消耗 '+spend.toFixed(2);
+    document.getElementById('pin').textContent='$'+me.pricing.input_per_mtok_usd;
+    document.getElementById('pout').textContent='$'+me.pricing.output_per_mtok_usd;
+  }catch(e){if(e!==0)document.getElementById('spendline').textContent=e.message}
+}
+async function loadAddress(){
+  try{
+    const d=await req('/billing/deposit-address');
+    document.getElementById('addr').textContent=d.address||d.note||'未配置';
+  }catch(e){document.getElementById('addr').textContent=e.message||'加载失败'}
+}
+async function loadMine(){
+  try{
+    const list=await req('/billing/recharges/mine');
+    const rows=Array.isArray(list)?list:(list.recharges||[]);
+    const tb=document.querySelector('#retable tbody');tb.innerHTML='';
+    for(const r of rows.slice(0,8)){
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>$${esc(r.amount_usd)}</td>
+        <td><span class="tag ${r.status==='APPROVED'?'ok':r.status==='PENDING'?'run':r.status==='REJECTED'?'err':'warn'}">${esc(ZH[r.status]||r.status)}</span></td>
+        <td style="color:var(--mut)">${esc((r.created_at||'').slice(0,16).replace('T',' '))}</td>`;
+      tb.appendChild(tr);
+    }
+    if(!rows.length)document.getElementById('relistmsg').textContent='暂无充值记录';
+  }catch(e){document.getElementById('relistmsg').textContent=e.message||''}
+}
+async function submitRecharge(){
+  const el=document.getElementById('remsg');el.className='msg';el.textContent='提交中…';
+  try{
+    const amount=parseFloat(document.getElementById('amount').value);
+    const txid=document.getElementById('txid').value.trim();
+    const r=await req('/billing/recharges',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({amount_usd:amount})});
+    if(txid)await req(`/billing/recharges/${r.id}/tx`,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({txid})});
+    el.className='msg ok';el.textContent='已提交，链上检测中——到账后余额自动更新。';
+    loadMine();
+  }catch(e){el.className='msg err';el.textContent=e.message||'提交失败'}
+}
+(async()=>{try{await loadMe()}catch(e){} try{await loadAddress()}catch(e){} try{await loadMine()}catch(e){}})();
+</script>
+</body>
+</html>

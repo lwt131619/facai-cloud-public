@@ -1,0 +1,18 @@
+[Unit]
+Description=Facai daily database backup (online VACUUM INTO snapshot)
+After=network-online.target facai-cloud.service
+
+[Service]
+Type=oneshot
+User=facai
+Group=facai
+WorkingDirectory=/opt/facai-cloud
+EnvironmentFile=/etc/facai-cloud/facai.env
+ExecStart=/opt/facai-cloud/.venv/bin/python -m facai.ops.backup_db
+
+# Hardening: the unit runs as the unprivileged service user and the only path it
+# may write is the data dir (it creates data/backups there via VACUUM INTO).
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/facai-cloud/data

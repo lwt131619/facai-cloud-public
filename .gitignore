@@ -1,0 +1,22 @@
+data/
+__pycache__/
+*.pyc
+.pytest_cache/
+work/
+.env
+*.env
+!*.env.example
+*.tar.gz
+*.sqlite3
+
+# whatsapp bridge
+bridge/whatsapp-relay/node_modules/
+bridge/whatsapp-relay/wa-auth/
+bridge/whatsapp-relay/wa-qr.txt
+bridge/whatsapp-relay/package-lock.json
+
+# electron packaging artifacts
+packaging/app/node_modules/
+packaging/app/dist/
+.zcode/
+*.bak-*

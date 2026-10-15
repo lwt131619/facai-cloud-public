@@ -1,0 +1,1809 @@
+{
+  "target": "asset-phish-clones (初扫收录实例 C:\\Users\\user\\phish-clones)",
+  "origin": "本地路径 C:\\Users\\user\\phish-clones",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 236 个文本文件（源码 236、其余 0），识别 200 面（源码档 200、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 200）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "advanced/Goreport/GoReport.py:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ip:port",
+      "evidence": "advanced/Goreport/GoReport.py:8  and host (e.g. https://ip:port) in a ``gophish.config`` file for the connection."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/Goreport/lib/goreport.py:293",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ipinfo.io/{ip",
+      "evidence": "advanced/Goreport/lib/goreport.py:293  ipinfo_url = f\"https://ipinfo.io/{ip}?token={self.IPINFO_TOKEN}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/Goreport/lib/goreport.py:308",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://maps.googleapis.com/maps/api/geocode/json?latlng={lat",
+      "evidence": "advanced/Goreport/lib/goreport.py:308  google_maps_url = f\"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lon}&sensor=false&key={self.GEOLOCATE_TOKEN}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/branding.go:143",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://login.microsoftonline.com/common/GetCredentialType",
+      "evidence": "advanced/PhishHook/controllers/branding.go:143  req, err := http.NewRequest(\"POST\", \"https://login.microsoftonline.com/common/GetCredentialType\", bytes.NewReader(reqBody))"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/branding.go:151",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://login.microsoftonline.com",
+      "evidence": "advanced/PhishHook/controllers/branding.go:151  req.Header.Set(\"Origin\", \"https://login.microsoftonline.com\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/branding.go:152",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://login.microsoftonline.com/",
+      "evidence": "advanced/PhishHook/controllers/branding.go:152  req.Header.Set(\"Referer\", \"https://login.microsoftonline.com/\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/phish.go:145",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%s",
+      "evidence": "advanced/PhishHook/controllers/phish.go:145  log.Infof(\"Starting phishing server at https://%s\", ps.config.ListenURL)\nadvanced/PhishHook/controllers/phish.go:177  log.Infof(\"Starting phishing server with Let's Encrypt at https://%s\", ps.config.Domain)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/phish.go:148",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s",
+      "evidence": "advanced/PhishHook/controllers/phish.go:148  log.Infof(\"Starting phishing server at http://%s\", ps.config.ListenURL)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/phish_test.go:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://localhost.localdomain",
+      "evidence": "advanced/PhishHook/controllers/phish_test.go:32  URL:           \"http://localhost.localdomain\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/phish_test.go:371",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/{{.RId",
+      "evidence": "advanced/PhishHook/controllers/phish_test.go:371  RedirectURL: \"http://example.com/{{.RId}}\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/phish_test.go:408",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/%s",
+      "evidence": "advanced/PhishHook/controllers/phish_test.go:408  expectedURL := fmt.Sprintf(\"http://example.com/%s\", result.RId)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/route.go:106",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://%s",
+      "evidence": "advanced/PhishHook/controllers/route.go:106  log.Infof(\"Starting admin server at https://%s\", as.config.ListenURL)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/route.go:110",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://%s",
+      "evidence": "advanced/PhishHook/controllers/route.go:110  log.Infof(\"Starting admin server at http://%s\", as.config.ListenURL)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/controllers/api/import_test.go:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://169.254.169.254/latest/meta-data/",
+      "evidence": "advanced/PhishHook/controllers/api/import_test.go:34  metadataURL := \"http://169.254.169.254/latest/meta-data/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/dialer/dialer.go:73",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.agwa.name/blog/post/preventing_server_side_request_forgery_in_golang",
+      "evidence": "advanced/PhishHook/dialer/dialer.go:73  // https://www.agwa.name/blog/post/preventing_server_side_request_forgery_in_golang"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/evasion/behavioral.go:52",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://endpoints.office.com/endpoints/worldwide",
+      "evidence": "advanced/PhishHook/evasion/behavioral.go:52  // Source: https://endpoints.office.com/endpoints/worldwide (updated 2026-01)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/evasion/turnstile.go:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      "evidence": "advanced/PhishHook/evasion/turnstile.go:18  TurnstileVerifyEndpoint = \"https://challenges.cloudflare.com/turnstile/v0/siteverify\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/evasion/turnstile.go:277",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+      "evidence": "advanced/PhishHook/evasion/turnstile.go:277  <script src=\"https://challenges.cloudflare.com/turnstile/v0/api.js\" async defer></script>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/evasion/turnstile.go:298",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.cloudflare.com",
+      "evidence": "advanced/PhishHook/evasion/turnstile.go:298  Protected by <a href=\"https://www.cloudflare.com\" target=\"_blank\">Cloudflare</a>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/imap/imap.go:165",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/jordan-wright/email/issues/106",
+      "evidence": "advanced/PhishHook/imap/imap.go:165  //Remove CR characters, see https://github.com/jordan-wright/email/issues/106"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/mailer/mailer.go:177",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gophish/gophish/issues/787",
+      "evidence": "advanced/PhishHook/mailer/mailer.go:177  // different error (see https://github.com/gophish/gophish/issues/787)."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/middleware/middleware.go:34",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/gorilla/mux/pull/36#issuecomment-25849172",
+      "evidence": "advanced/PhishHook/middleware/middleware.go:34  // Example taken from https://github.com/gorilla/mux/pull/36#issuecomment-25849172"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/middleware/ratelimit/doc.go:14",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.alexedwards.net/blog/how-to-rate-limit-http-requests",
+      "evidence": "advanced/PhishHook/middleware/ratelimit/doc.go:14  // https://www.alexedwards.net/blog/how-to-rate-limit-http-requests"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment.go:30",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "advanced/PhishHook/models/attachment.go:30  BaseURL:     \"http://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment.go:71",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/16946978/how-to-unzip-io-readcloser",
+      "evidence": "advanced/PhishHook/models/attachment.go:71  // See https://stackoverflow.com/questions/16946978/how-to-unzip-io-readcloser"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment.go:101",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/68287630/disable-url-encoding-for-includepicture-in-microsoft-word",
+      "evidence": "advanced/PhishHook/models/attachment.go:101  // See https://stackoverflow.com/questions/68287630/disable-url-encoding-for-includepicture-in-microsoft-word"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment.go:114",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.joeshaw.org/dont-defer-close-on-writable-files/",
+      "evidence": "advanced/PhishHook/models/attachment.go:114  zipWriter.Close() // Don't use defer when writing files https://www.joeshaw.org/dont-defer-close-on-writable-files/\nadvanced/PhishHook/models/attachment.go:127  zipWriter.Close() // Don't use defer when writing files https://www.joeshaw.org/dont-defer-close-on-writable-files/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment_test.go:24",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://testurl.com",
+      "evidence": "advanced/PhishHook/models/attachment_test.go:24  BaseURL:     \"http://testurl.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment_test.go:25",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://testurl.com/?rid=1234567",
+      "evidence": "advanced/PhishHook/models/attachment_test.go:25  URL:         \"http://testurl.com/?rid=1234567\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/attachment_test.go:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://testurl.local/track?rid=1234567",
+      "evidence": "advanced/PhishHook/models/attachment_test.go:26  TrackingURL: \"http://testurl.local/track?rid=1234567\",\nadvanced/PhishHook/models/attachment_test.go:27  Tracker:     \"<img alt='' style='display: none' src='http://testurl.local/track?rid=1234567'/>\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/email_request_test.go:112",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1/{{.Email",
+      "evidence": "advanced/PhishHook/models/email_request_test.go:112  URL:      \"http://127.0.0.1/{{.Email}}\",\nadvanced/PhishHook/models/email_request_test.go:143  URL:      \"http://127.0.0.1/{{.Email}}\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/email_request_test.go:157",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1/%s?%s=%s",
+      "evidence": "advanced/PhishHook/models/email_request_test.go:157  expectedURL := fmt.Sprintf(\"http://127.0.0.1/%s?%s=%s\", req.Email, RecipientParameter, req.RId)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/maillog_test.go:290",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1/{{.Email",
+      "evidence": "advanced/PhishHook/models/maillog_test.go:290  campaign.URL = \"http://127.0.0.1/{{.Email}}/\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/maillog_test.go:295",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://127.0.0.1/%s/?%s=%s",
+      "evidence": "advanced/PhishHook/models/maillog_test.go:295  expectedURL := fmt.Sprintf(\"http://127.0.0.1/%s/?%s=%s\", result.Email, RecipientParameter, result.RId)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/page_test.go:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "advanced/PhishHook/models/page_test.go:21  RedirectURL: \"http://example.com\",\nadvanced/PhishHook/models/page_test.go:28  c.Assert(p.RedirectURL, check.Equals, \"http://example.com\")\nadvanced/PhishHook/models/page_test.go:110  RedirectURL: \"http://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/page_test.go:139",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/{{.INVALIDTAG",
+      "evidence": "advanced/PhishHook/models/page_test.go:139  p.RedirectURL = \"http://example.com/{{.INVALIDTAG}}\""
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/template_context.go:48",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "advanced/PhishHook/models/template_context.go:48  // This will create a URL in the form of http://example.com\nadvanced/PhishHook/models/template_context.go:112  BaseURL:     \"http://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/models/template_context_test.go:32",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com",
+      "evidence": "advanced/PhishHook/models/template_context_test.go:32  URL:         \"http://example.com\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/campaign_results.js:266",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://example.com/login",
+      "evidence": "advanced/PhishHook/static/js/src/app/campaign_results.js:266  inputPlaceholder: \"http://example.com/login\","
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/campaigns.js:312",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://miles-by-motorcycle.com/static/bootstrap-modal/index.html",
+      "evidence": "advanced/PhishHook/static/js/src/app/campaigns.js:312  // Code based on http://miles-by-motorcycle.com/static/bootstrap-modal/index.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/campaigns.js:334",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/19305821/multiple-modals-overlay",
+      "evidence": "advanced/PhishHook/static/js/src/app/campaigns.js:334  // Scrollbar fix - https://stackoverflow.com/questions/19305821/multiple-modals-overlay"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/groups.js:57",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://datatables.net/manual/tech-notes/3#destroy",
+      "evidence": "advanced/PhishHook/static/js/src/app/groups.js:57  destroy: true, // Destroy any other instantiated table - http://datatables.net/manual/tech-notes/3#destroy"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/landing_pages.js:193",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://miles-by-motorcycle.com/static/bootstrap-modal/index.html",
+      "evidence": "advanced/PhishHook/static/js/src/app/landing_pages.js:193  // Code based on http://miles-by-motorcycle.com/static/bootstrap-modal/index.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/landing_pages.js:230",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/19305821/multiple-modals-overlay",
+      "evidence": "advanced/PhishHook/static/js/src/app/landing_pages.js:230  // Scrollbar fix - https://stackoverflow.com/questions/19305821/multiple-modals-overlay"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/sending_profiles.js:144",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://datatables.net/manual/tech-notes/3#destroy",
+      "evidence": "advanced/PhishHook/static/js/src/app/sending_profiles.js:144  destroy: true, // Destroy any other instantiated table - http://datatables.net/manual/tech-notes/3#destroy"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/sending_profiles.js:265",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://miles-by-motorcycle.com/static/bootstrap-modal/index.html",
+      "evidence": "advanced/PhishHook/static/js/src/app/sending_profiles.js:265  // Code based on http://miles-by-motorcycle.com/static/bootstrap-modal/index.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/sending_profiles.js:302",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/19305821/multiple-modals-overlay",
+      "evidence": "advanced/PhishHook/static/js/src/app/sending_profiles.js:302  // Scrollbar fix - https://stackoverflow.com/questions/19305821/multiple-modals-overlay"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/templates.js:357",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://miles-by-motorcycle.com/static/bootstrap-modal/index.html",
+      "evidence": "advanced/PhishHook/static/js/src/app/templates.js:357  // Code based on http://miles-by-motorcycle.com/static/bootstrap-modal/index.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/app/templates.js:394",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://stackoverflow.com/questions/19305821/multiple-modals-overlay",
+      "evidence": "advanced/PhishHook/static/js/src/app/templates.js:394  // Scrollbar fix - https://stackoverflow.com/questions/19305821/multiple-modals-overlay"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/bootstrap-datetime.js:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/Eonasdan/bootstrap-datetimepicker",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/bootstrap-datetime.js:4  https://github.com/Eonasdan/bootstrap-datetimepicker"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/dataTables.bootstrap.js:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://datatables.net/manual/styling/bootstrap",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/dataTables.bootstrap.js:10  * controls using Bootstrap. See http://datatables.net/manual/styling/bootstrap"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/datetime-moment.js:4",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://momentjs.com",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/datetime-moment.js:4  * [Moment.js](http://momentjs.com) to create automatic type detection and"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/highcharts.js:8",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/2000/svg",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/highcharts.js:8  (function(M,S){\"object\"===typeof module&&module.exports?module.exports=M.document?S(M):S:M.Highcharts=S(M)})(\"undefined\"!==typeof window?window:this,function(M){M=function(){var a=window,C=a.document,A=a.navigator&&a.navigator.userAgent||\"\"\nadvanced/PhishHook/static/js/src/vendor/highcharts.js:9  version:\"5.0.14\",deg2rad:2*Math.PI/360,doc:C,hasBidiBug:l,hasTouch:C&&void 0!==C.documentElement.ontouchstart,isMS:E,isWebKit:/AppleWebKit/.test(A),isFirefox:f,isTouchDevice:/(Mobile|Android|Windows Phone)/.test(A),SVG_NS:\"http://www.w3.org"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/highcharts.js:76",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.w3.org/1999/xlink",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/highcharts.js:76  x.element.setAttributeNS(\"http://www.w3.org/1999/xlink\",\"href\",a):x.element.setAttribute(\"hc-svg-href\",a);return x},symbol:function(a,h,c,w,p,q){var x=this,d,n=/^url\\((.*?)\\)$/,g=n.test(a),z=!g&&(this.symbols[a]?a:\"circle\"),G=z&&this.symbol"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/highcharts.js:116",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://code.highcharts.com/5.0.14/gfx/vml-radial-gradient.png",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/highcharts.js:116  decimalPoint:\".\",numericSymbols:\"kMGTPE\".split(\"\"),resetZoom:\"Reset zoom\",resetZoomTitle:\"Reset zoom level 1:1\",thousandsSep:\" \"},global:{useUTC:!0,VMLRadialGradientURL:\"http://code.highcharts.com/5.0.14/gfx/vml-radial-gradient.png\"},chart:"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/highcharts.js:120",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.highcharts.com",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/highcharts.js:120  whiteSpace:\"nowrap\"}},credits:{enabled:!0,href:\"http://www.highcharts.com\",position:{align:\"right\",x:-10,verticalAlign:\"bottom\",y:-5},style:{cursor:\"pointer\",color:\"#999999\",fontSize:\"9px\"},text:\"Highcharts.com\"}};a.setOptions=function(r){a"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/blueimp/jQuery-File-Upload",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:3  * https://github.com/blueimp/jQuery-File-Upload"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://blueimp.net",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:6  * https://blueimp.net"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.opensource.org/licenses/MIT",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:9  * http://www.opensource.org/licenses/MIT"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:37",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://viljamis.com/blog/2012/file-upload-support-on-mobile/",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.fileupload.js:37  // http://viljamis.com/blog/2012/file-upload-support-on-mobile/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/blueimp/jQuery-File-Upload",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:3  * https://github.com/blueimp/jQuery-File-Upload"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://blueimp.net",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:6  * https://blueimp.net"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.opensource.org/licenses/MIT",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:9  * http://www.opensource.org/licenses/MIT"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:193",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/blueimp/jQuery-File-Upload/wiki/Setup#content-type-negotiation",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.iframe-transport.js:193  // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup#content-type-negotiation"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:2",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://jqueryui.com",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:2  * http://jqueryui.com\nadvanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:24  * http://jqueryui.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:28",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://jquery.org/license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:28  * http://jquery.org/license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:30",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://api.jqueryui.com/jQuery.widget/",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:30  * http://api.jqueryui.com/jQuery.widget/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:49",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bugs.jquery.com/ticket/8235",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:49  // http://bugs.jquery.com/ticket/8235"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:311",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://bugs.jquery.com/ticket/9413",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/jquery.ui.widget.js:311  // http://bugs.jquery.com/ticket/9413"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ckeditor.com/license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:3  * For licensing, see LICENSE.md or http://ckeditor.com/license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:13",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ckeditor.com/builder",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:13  * (1) http://ckeditor.com/builder"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ckeditor.com/builder/7d68d09d45afae7321be6132f4405c11",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:16  * (2) http://ckeditor.com/builder/7d68d09d45afae7321be6132f4405c11"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:19",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ckeditor.com/builder/download/7d68d09d45afae7321be6132f4405c11",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/build-config.js:19  * (3) http://ckeditor.com/builder/download/7d68d09d45afae7321be6132f4405c11"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/ckeditor.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/ckeditor.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license\nadvanced/PhishHook/static/js/src/vendor/ckeditor/ckeditor.js:536  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/ckeditor.js:21",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/docs/ckeditor4/latest/guide/dev_errors.html#",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/ckeditor.js:21  CKEDITOR.on(\"log\",function(a){if(window.console&&window.console.log){var d=console[a.data.type]?a.data.type:\"log\",b=a.data.errorCode;if(a=a.data.additionalData)console[d](\"[CKEDITOR] Error code: \"+b+\".\",a);else console[d](\"[CKEDITOR] Error "
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/config.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/config.js:3  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/config.js:9",
+      "what": "初扫：硬编码 http(s) 端点常量——命中模型/推送类关键词，初判远端裁决（remoteAuthorityDependency=true，待人工复核）",
+      "classification": "REMOTE_PROVIDER",
+      "remoteAuthorityDependency": true,
+      "endpoint": "http://docs.ckeditor.com/#!/api/CKEDITOR.config",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/config.js:9  // http://docs.ckeditor.com/#!/api/CKEDITOR.config"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/styles.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/styles.js:3  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/styles.js:16",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/docs/ckeditor4/latest/guide/dev_styles.html#style-rules",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/styles.js:16  // For more information refer to: https://ckeditor.com/docs/ckeditor4/latest/guide/dev_styles.html#style-rules"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/styles.js:129",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dev.ckeditor.com/ticket/16664",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/styles.js:129  // is no option to create two styles with the same name for different widget types. See https://dev.ckeditor.com/ticket/16664."
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/adapters/jquery.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/adapters/jquery.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/lang/en.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ckeditor.com/license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/lang/en.js:3  For licensing, see LICENSE.md or http://ckeditor.com/license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/af.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/af.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/az.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/az.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/da.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/da.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/de.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/de.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/el.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/el.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/en-au.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/en-au.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/en.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/en.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/es-mx.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/es-mx.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/es.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/es.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/et.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/et.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/he.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/he.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/id.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/id.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/it.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/it.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/km.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/km.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/no.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/no.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/oc.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/oc.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/si.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/si.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/th.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/th.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/clipboard/dialogs/paste.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/clipboard/dialogs/paste.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/dialog/dialogDefinition.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/dialog/dialogDefinition.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/image/dialogs/image.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/image/dialogs/image.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/anchor.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/anchor.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/link.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/link.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/link.js:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://‎",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/link.js:9  f||a.hidePage(\"upload\"));for(f=0;f<b.length;f++){var h=a.getContentElement(\"info\",b[f]);h&&(h=h.getElement().getParent().getParent(),b[f]==r+\"Options\"?h.show():h.hide())}a.layout()},setup:function(a){this.setValue(a.type||\"url\")},commit:fun"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/link.js:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://‎",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/link/dialogs/link.js:9  f||a.hidePage(\"upload\"));for(f=0;f<b.length;f++){var h=a.getContentElement(\"info\",b[f]);h&&(h=h.getElement().getParent().getParent(),b[f]==r+\"Options\"?h.show():h.hide())}a.layout()},setup:function(a){this.setValue(a.type||\"url\")},commit:fun"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/pastefromword/filter/default.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/pastefromword/filter/default.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/specialchar.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/specialchar.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/af.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/af.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ar.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ar.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/az.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/az.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/bg.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/bg.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ca.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ca.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/cs.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/cs.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/cy.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/cy.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/da.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/da.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/de.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/de.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/el.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/el.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en-au.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en-au.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en-ca.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en-ca.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/en.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/eo.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/eo.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/es-mx.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/es-mx.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/es.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/es.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/et.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/et.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/eu.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/eu.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fa.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fa.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fi.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fi.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fr.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/fr.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/gl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/gl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/he.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/he.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/hr.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/hr.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/hu.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/hu.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/id.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/id.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/it.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/it.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ja.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ja.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/km.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/km.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ko.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ko.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ku.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ku.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/lt.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/lt.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/lv.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/lv.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/nb.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/nb.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/nl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/nl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/no.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/no.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/oc.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/oc.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/pl.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/pl.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/pt.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/pt.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ro.js:3",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://ckeditor.com/legal/ckeditor-oss-license",
+      "evidence": "advanced/PhishHook/static/js/src/vendor/ckeditor/plugins/specialchar/dialogs/lang/ro.js:3  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license"
+    }
+  ],
+  "reRooting": []
+}

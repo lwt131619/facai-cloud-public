@@ -1,0 +1,734 @@
+{
+  "target": "agent-goose-fork-app (初扫收录实例 G:\\Agents\\Goose\\app)",
+  "origin": "本地路径 G:\\Agents\\Goose\\app",
+  "managementClass": "T2 PARTIALLY_MANAGED —— 初判：收录流水线启发式初扫产物，未经人工复核与 re-root；管理级别以 Verifier 判定为准（见收录报告 verification 段）",
+  "summary": "初扫（启发式，非人工清单）：先扫源码扩展名、扫完且配额未满才扫其余文件；扫描 57 个文本文件（源码 57、其余 0），识别 80 面（源码档 80、文档/示例 DOC_ 降权 0、其余文件 0；截断=True/False，每档上限 80）；分类规则：模型/推送端点→REMOTE_PROVIDER、env 凭据→CREDENTIAL LOCAL_BROKERABLE、子进程→SHELL_EXEC LOCAL_BROKERABLE、SDK 客户端构造→INFERRED_CREDENTIAL LOCAL_BROKERABLE（inferred via <SDK>）、文档/示例 URL 引用→DOC_REFERENCE（不进 REMOTE_PROVIDER 误报池）、其余 UNKNOWN；reRooting 留空待人工。",
+  "surfaces": [
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/119891",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:17  # Breakpoint: https://github.com/python/cpython/pull/119891\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1307  # Breakpoint: https://github.com/python/cpython/pull/119891\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4046  # PR: https://github.com/python/cpython/pull/119891"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:157",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/116129",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:157  # Breakpoint: https://github.com/python/cpython/pull/116129"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:259",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/21515",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:259  # Breakpoint: https://github.com/python/cpython/pull/21515\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3708  # Breakpoint: https://github.com/python/cpython/pull/21515\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3921  # Breakpoint: https://github.com/python/cpython/pull/21515"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:279",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/27342",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:279  # Breakpoint: https://github.com/python/cpython/pull/27342"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:301",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/31841",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:301  # Breakpoint: https://github.com/python/cpython/pull/31841"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:390",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/30530",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:390  # Breakpoint: https://github.com/python/cpython/pull/30530"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:396",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue46342",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:396  # See https://bugs.python.org/issue46342"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:461",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/29334",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:461  # Breakpoint: https://github.com/python/cpython/pull/29334"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:622",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/118681",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:622  # Breakpoint: https://github.com/python/cpython/pull/118681"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:722",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/issues/127647",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:722  # https://github.com/python/cpython/issues/127647"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:903",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/113401",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:903  # Breakpoint: https://github.com/python/cpython/pull/113401"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:964",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/112717",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:964  # Breakpoint: https://github.com/python/cpython/pull/112717"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1139",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.python.org/issue42059",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1139  # keyword with old-style TypedDict().  See https://bugs.python.org/issue42059"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1398",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/104891",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1398  # Breakpoint: https://github.com/python/cpython/pull/104891"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1608",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/30304",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1608  # Breakpoint: https://github.com/python/cpython/pull/30304"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1630",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/typing_extensions/issues/310",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1630  # see https://github.com/python/typing_extensions/issues/310"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1681",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/25298",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:1681  # Breakpoint: https://github.com/python/cpython/pull/25298"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2066",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/typing_extensions/issues/661",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2066  # in the class body (https://github.com/python/typing_extensions/issues/661)\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2628  # (https://github.com/python/typing_extensions/issues/661)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2250",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/30969",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2250  # Breakpoint: https://github.com/python/cpython/pull/30969"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2588",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/104048",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2588  # Breakpoint: https://github.com/python/cpython/pull/104048"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2882",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/99958",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:2882  # Breakpoint: https://github.com/python/cpython/pull/99958"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3014",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/138210",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3014  # Breakpoint: https://github.com/python/cpython/pull/138210"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3143",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/99247",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3143  # Breakpoint: https://github.com/python/cpython/pull/99247"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3159",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/23702",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3159  # Breakpoint: https://github.com/python/cpython/pull/23702"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3236",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/27515",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3236  # Breakpoint: https://github.com/python/cpython/pull/27515"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3430",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/105609",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3430  # Breakpoint: https://github.com/python/cpython/pull/105609"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3506",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/95915",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3506  # Breakpoint: https://github.com/python/cpython/pull/95915"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3655",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/30268",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3655  # Breakpoint: https://github.com/python/cpython/pull/30268"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3720",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/149172",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3720  # Breakpoint: https://github.com/python/cpython/pull/149172"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3725",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/103764",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3725  # Breakpoint: https://github.com/python/cpython/pull/103764"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3749",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/blob/986a4e1b6fcae7fe7a1d0a26aea446107dd58dd2/Objects/genericaliasobject.c#L568-L582",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:3749  # Copied and pasted from https://github.com/python/cpython/blob/986a4e1b6fcae7fe7a1d0a26aea446107dd58dd2/Objects/genericaliasobject.c#L568-L582,"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4038",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/124415",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4038  # PR: https://github.com/python/cpython/pull/124415"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4062",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://docs.python.org/3/library/inspect.html#inspect.get_annotations",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4062  https://docs.python.org/3/library/inspect.html#inspect.get_annotations"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4410",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python/cpython/pull/133602",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/typing_extensions.py:4410  # Breakpoint: https://github.com/python/cpython/pull/133602"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/AvifImagePlugin.py:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python-pillow/Pillow/issues/569",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/AvifImagePlugin.py:17  # to Image.open (see https://github.com/python-pillow/Pillow/issues/569)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/BlpImagePlugin.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/BlpImagePlugin.py:7  https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/BmpImagePlugin.py:146",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://msdn.microsoft.com/en-us/library/windows/desktop/dd183376(v=vs.85",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/BmpImagePlugin.py:146  # https://msdn.microsoft.com/en-us/library/windows/desktop/dd183376(v=vs.85).aspx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/BmpImagePlugin.py:148",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python-pillow/Pillow/issues/1293",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/BmpImagePlugin.py:148  # https://github.com/python-pillow/Pillow/issues/1293"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/DdsImagePlugin.py:6",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.archive.org/web/20170802060935/http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_compression_s3tc.txt",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/DdsImagePlugin.py:6  https://web.archive.org/web/20170802060935/http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_compression_s3tc.txt"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/DdsImagePlugin.py:10",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/DdsImagePlugin.py:10  https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:61",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_call",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:61  subprocess.check_call([\"gs\", \"--version\"], stdout=subprocess.DEVNULL)\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:159  subprocess.check_call(command, startupinfo=startupinfo)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:148",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://bugs.ghostscript.com/show_bug.cgi?id=698272",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:148  # showpage (see https://bugs.ghostscript.com/show_bug.cgi?id=698272)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:314",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577413_pgfId-1035096",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:314  # https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577413_pgfId-1035096"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:392",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://web.archive.org/web/20160528181353/http://partners.adobe.com/public/developer/en/ps/5002.EPSF_Spec.pdf",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/EpsImagePlugin.py:392  # https://web.archive.org/web/20160528181353/http://partners.adobe.com/public/developer/en/ps/5002.EPSF_Spec.pdf"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/FtexImagePlugin.py:7",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/FtexImagePlugin.py:7  https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GbrImagePlugin.py:17",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/GNOME/gimp/blob/mainline/devel-docs/gbr.txt",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GbrImagePlugin.py:17  # See https://github.com/GNOME/gimp/blob/mainline/devel-docs/gbr.txt for"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:888",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.check_call",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:888  subprocess.check_call("
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:896",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:896  quant_proc = subprocess.Popen(\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:899  togif_proc = subprocess.Popen("
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:1058",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/GifImagePlugin.py:1058  # https://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:18",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://code.google.com/archive/p/casadebender/wikis/Win32IconImagePlugin.wiki",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:18  # https://code.google.com/archive/p/casadebender/wikis/Win32IconImagePlugin.wiki\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:336  https://code.google.com/archive/p/casadebender/wikis/Win32IconImagePlugin.wiki"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:26",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.apache.org/licenses/LICENSE-2.0",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:26  #     https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:35",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/ICO_(file_format",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:35  #   * https://en.wikipedia.org/wiki/ICO_(file_format)"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:36",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://msdn.microsoft.com/en-us/library/ms997538.aspx",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/IcoImagePlugin.py:36  #   * https://msdn.microsoft.com/en-us/library/ms997538.aspx"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/Image.py:817",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python-pillow/Pillow/issues/350",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/Image.py:817  # See: https://github.com/python-pillow/Pillow/issues/350"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageCms.py:51",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.cazabon.com",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageCms.py:51  https://www.cazabon.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageCms.py:53",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.cazabon.com/pyCMS",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageCms.py:53  pyCMS home page:  https://www.cazabon.com/pyCMS"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageCms.py:54",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.littlecms.com",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageCms.py:54  littleCMS home page:  https://www.littlecms.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageColor.py:169",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://drafts.csswg.org/css-color-4/",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageColor.py:169  # X11 colour table from https://drafts.csswg.org/css-color-4/, with"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageEnhance.py:9",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://www.graficaobscura.com/interp/index.html",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageEnhance.py:9  # at http://www.graficaobscura.com/interp/index.html"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFilter.py:179",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.mia.uni-saarland.de/Publications/gwosdek-ssvm11.pdf",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFilter.py:179  <https://www.mia.uni-saarland.de/Publications/gwosdek-ssvm11.pdf>"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFilter.py:242",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/Unsharp_masking#Digital_unsharp_masking",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFilter.py:242  .. _digital unsharp masking: https://en.wikipedia.org/wiki/Unsharp_masking#Digital_unsharp_masking"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:368",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:368  https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:422  https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:491  https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:376",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.w3.org/International/articles/language-tags/",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:376  <https://www.w3.org/International/articles/language-tags/>`_\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:430  <https://www.w3.org/International/articles/language-tags/>`_\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:501  <https://www.w3.org/International/articles/language-tags/>`_"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:701",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://savannah.nongnu.org/bugs/?56186",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:701  # https://savannah.nongnu.org/bugs/?56186"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:875",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "WINDIR",
+      "rule": "os.environ.get",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:875  windir = os.environ.get(\"WINDIR\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:879",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XDG_DATA_HOME",
+      "rule": "os.environ.get",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:879  data_home = os.environ.get(\"XDG_DATA_HOME\")"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:887",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "XDG_DATA_DIRS",
+      "rule": "os.environ.get",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:887  data_dirs = os.environ.get(\"XDG_DATA_DIRS\")"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:1070",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://dotcolon.net/fonts/aileron",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageFont.py:1070  https://dotcolon.net/fonts/aileron, with a more limited character set."
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:52",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:52  retcode = subprocess.call(args)\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:66  retcode = subprocess.call(args)\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:133  retcode = subprocess.call(args)"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:155",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.run",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:155  p = subprocess.run(\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:204  p = subprocess.run(args, capture_output=True)"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:189",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "WAYLAND_DISPLAY",
+      "rule": "os.getenv",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:189  if os.getenv(\"WAYLAND_DISPLAY\"):"
+    },
+    {
+      "kind": "CONFIG",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:191",
+      "what": "初扫：env 配置键（未识别凭据语义，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "env_key": "DISPLAY",
+      "rule": "os.getenv",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageGrab.py:191  elif os.getenv(\"DISPLAY\"):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageOps.py:553",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://www.cazabon.com",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageOps.py:553  # https://www.cazabon.com"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageQt.py:198",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python-pillow/Pillow/issues/1370",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageQt.py:198  # Fixes https://github.com/python-pillow/Pillow/issues/1370"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:120",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "os.system",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:120  os.system(self.get_command(path, **options))  # nosec"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:146",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.Popen",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:146  subprocess.Popen(\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:182  subprocess.Popen(\n自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:225  subprocess.Popen([\"xdg-open\", path])"
+    },
+    {
+      "kind": "SHELL_EXEC",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:177",
+      "what": "初扫：子进程/shell 调用点——可由 Facai Broker 收口（LOCAL_BROKERABLE）",
+      "classification": "LOCAL_BROKERABLE",
+      "remoteAuthorityDependency": false,
+      "call": "subprocess.call",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/ImageShow.py:177  subprocess.call([\"open\", \"-a\", \"Preview.app\", path])"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/Jpeg2KImagePlugin.py:345",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://github.com/python-pillow/Pillow/issues/4343",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/Jpeg2KImagePlugin.py:345  # https://github.com/python-pillow/Pillow/issues/4343 found that the"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/JpegImagePlugin.py:108",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "http://ns.adobe.com/xap/1.0/",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/JpegImagePlugin.py:108  elif marker == 0xFFE1 and s.startswith(b\"http://ns.adobe.com/xap/1.0/\\x00\"):"
+    },
+    {
+      "kind": "NETWORK",
+      "where": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/JpegImagePlugin.py:335",
+      "what": "初扫：硬编码 http(s) 端点常量（未命中模型/推送类关键词，初判 UNKNOWN）",
+      "classification": "UNKNOWN",
+      "remoteAuthorityDependency": false,
+      "endpoint": "https://en.wikipedia.org/wiki/JPEG",
+      "evidence": "自动抓  GLM/AutoClaw2/resources/vendor/python/Lib/site-packages/PIL/JpegImagePlugin.py:335  # Magic number was taken from https://en.wikipedia.org/wiki/JPEG"
+    }
+  ],
+  "reRooting": []
+}
